@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ceramic Coating Certificado | Cartagena Boat Detailing</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Revestimiento cerámico nano-cristalino certificado. Protección hidrofóbica duradera con garantía. Máxima durabilidad en Cartagena."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="index.html#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="index.html#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="index.html#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="index.html#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="index.html#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
+      style="
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(10, 25, 47, 0.85),
+            rgba(10, 25, 47, 0.7)
+          ),
+          url(&quot;https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=800&fit=crop&quot;);
+      "
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+        <div
+          class="absolute bottom-10 left-10 w-80 h-80 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="ph ph-droplet text-4xl text-gold-400"></i>
+            <span class="text-gold-400 font-semibold uppercase tracking-wider"
+              >Tecnología Certificada</span
+            >
+          </div>
+          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+            Ceramic Coating <span class="text-gold-400">Certificado</span>
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl">
+            Revestimiento cerámico nano-cristalino de última tecnología.
+            Protección hidrofóbica duradera, resistente a químicos marinos y
+            rayos UV. De 5 a 10 años de máxima protección.
+          </p>
+          <a
+            href="#proceso"
+            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-white transition"
+          >
+            Conocer el Proceso <i class="ph ph-arrow-down ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            ¿Qué es Ceramic Coating?
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <p class="text-slate-700 font-light text-lg mb-6">
+                El Ceramic Coating es un revestimiento líquido de tecnología
+                cerámica nano-cristalina que se adhiere permanentemente a la
+                superficie de la pintura, creando una capa protectora
+                extremadamente dura e hidrofóbica.
+              </p>
+
+              <ul class="space-y-4">
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Hidrofóbico Extremo
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Repele agua, sal marina y contaminantes. El agua forma
+                      perlas que se deslizan inmediatamente
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Dureza Nano-Cristalina
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Capa superficial ultra dura que resiste rayado y fricción.
+                      Protección física superior
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Adhesión Permanente
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Se adhiere a nivel molecular. No se pela, descasca ni se
+                      despega
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-sm p-12 text-white flex items-center justify-center relative overflow-hidden"
+            >
+              <div class="absolute inset-0 opacity-20"></div>
+              <i
+                class="ph ph-droplet text-9xl text-gold-400 opacity-40 relative z-10"
+              ></i>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-slate-50 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Resistencia Química
+              </h3>
+              <p class="text-slate-700 font-light">
+                Resiste ácidos marinos, sal marina, queroseno, limpiadoras
+                alcalinas y productos químicos agresivos. Durabilidad comprobada
+                en ambiente marino tropical.
+              </p>
+            </div>
+            <div class="bg-slate-50 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Brillo y Acabado
+              </h3>
+              <p class="text-slate-700 font-light">
+                Aumenta el brillo original de la pintura entre 20-30%. Acabado
+                profundo y espejo que destaca la pintura como nueva.
+              </p>
+            </div>
+            <div class="bg-slate-50 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Mantenimiento Fácil
+              </h3>
+              <p class="text-slate-700 font-light">
+                Superficies más fáciles de limpiar. Contaminantes se deslizan
+                con facilidad. Requiere 1/10 del esfuerzo de limpieza
+                tradicional.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="proceso" class="py-24 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            Proceso de Aplicación
+          </h2>
+
+          <div class="space-y-8 mb-16">
+            <!-- Step 1 -->
+            <div class="flex gap-8">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 font-serif text-2xl font-bold"
+                >
+                  1
+                </div>
+              </div>
+              <div class="pt-2">
+                <h3 class="font-semibold text-xl text-navy-900 mb-2">
+                  Lavado Técnico Profundo
+                </h3>
+                <p class="text-slate-700 font-light mb-3">
+                  Eliminación completa de contaminantes marinos (sal, calcio,
+                  algas). Uso de soluciones descontaminantes especializadas.
+                  Enjuague perfecto para garantizar adhesión óptima.
+                </p>
+                <p class="text-slate-600 text-sm">
+                  <strong>Duración:</strong> 4-6 horas
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex gap-8">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 font-serif text-2xl font-bold"
+                >
+                  2
+                </div>
+              </div>
+              <div class="pt-2">
+                <h3 class="font-semibold text-xl text-navy-900 mb-2">
+                  Corrección de Pintura (Opcional)
+                </h3>
+                <p class="text-slate-700 font-light mb-3">
+                  Pulido profesional para corregir defectos superficiales,
+                  oxidación leve y imperfecciones. Preparación de superficie
+                  para máxima adhesión cerámica.
+                </p>
+                <p class="text-slate-600 text-sm">
+                  <strong>Duración:</strong> 4-8 horas (según necesidad)
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-8">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 font-serif text-2xl font-bold"
+                >
+                  3
+                </div>
+              </div>
+              <div class="pt-2">
+                <h3 class="font-semibold text-xl text-navy-900 mb-2">
+                  Aplicación Cerámica
+                </h3>
+                <p class="text-slate-700 font-light mb-3">
+                  Aplicación de coating cerámico profesional en capas
+                  controladas. Técnica de cruce entrecruzado para cobertura
+                  homogénea. Tiempos de secado precisos entre capas.
+                </p>
+                <p class="text-slate-600 text-sm">
+                  <strong>Duración:</strong> 6-10 horas (2-3 capas)
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-8">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 font-serif text-2xl font-bold"
+                >
+                  4
+                </div>
+              </div>
+              <div class="pt-2">
+                <h3 class="font-semibold text-xl text-navy-900 mb-2">
+                  Curado y Burnishing
+                </h3>
+                <p class="text-slate-700 font-light mb-3">
+                  Curado controlado de la cerámica para dureza máxima.
+                  Burnishing (pulido suave) para revelar brillo extremo y
+                  acabado espejo. Inspección final de uniformidad.
+                </p>
+                <p class="text-slate-600 text-sm">
+                  <strong>Duración:</strong> 3-4 horas
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex gap-8">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 font-serif text-2xl font-bold"
+                >
+                  5
+                </div>
+              </div>
+              <div class="pt-2">
+                <h3 class="font-semibold text-xl text-navy-900 mb-2">
+                  Instrucciones de Mantenimiento
+                </h3>
+                <p class="text-slate-700 font-light mb-3">
+                  Protocolo de cuidado detallado: primer lavado después de 7
+                  días, productos recomendados, frecuencia de sellos anuales.
+                  Plan de inspección profesional.
+                </p>
+                <p class="text-slate-600 text-sm">
+                  <strong>Duración:</strong> Consulta 30 minutos
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 border-l-4 border-gold-400 p-6 rounded-sm">
+            <p class="text-slate-800 font-light">
+              <strong>Nota importante:</strong> No lavar la embarcación durante
+              7 días después de la aplicación. Evitar agua de lluvia si es
+              posible. La cerámica continúa curando durante 72 horas y alcanza
+              dureza máxima después de 2 semanas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Duration Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            Durabilidad y Garantía
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-slate-50 border-l-4 border-gold-400 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Ceramic Standard
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                <strong>Duración:</strong> 2-3 años
+              </p>
+              <p class="text-slate-700 font-light text-sm">
+                Ideal para uso moderado. Buena protección en clima tropical.
+                Requiere mantenimiento anual.
+              </p>
+            </div>
+
+            <div
+              class="bg-slate-50 border-l-4 border-gold-400 p-8 rounded-sm relative"
+            >
+              <div
+                class="absolute -top-3 -right-3 bg-gold-400 text-navy-900 px-3 py-1 rounded-full text-xs font-semibold"
+              >
+                RECOMENDADO
+              </div>
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Ceramic Premium
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                <strong>Duración:</strong> 5-7 años
+              </p>
+              <p class="text-slate-700 font-light text-sm">
+                La mejor relación precio-rendimiento. Protección óptima para
+                embarcaciones de uso frecuente en Cartagena.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 border-l-4 border-gold-400 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Ceramic Pro
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                <strong>Duración:</strong> 7-10 años
+              </p>
+              <p class="text-slate-700 font-light text-sm">
+                Máxima protección y durabilidad. Incluye tratamientos
+                complementarios y garantía extendida.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-navy-900 text-white rounded-sm p-12">
+            <h3 class="font-serif text-2xl mb-6">Garantía Incluida</h3>
+            <ul class="space-y-3 text-slate-100">
+              <li class="flex items-start gap-3">
+                <i
+                  class="ph ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+                ></i>
+                <span
+                  ><strong>Garantía de 1-3 años</strong> según produto, contra
+                  defectos de aplicación</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <i
+                  class="ph ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+                ></i>
+                <span
+                  ><strong>Cobertura de reparación</strong> profesional incluida
+                  bajo términos</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <i
+                  class="ph ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+                ></i>
+                <span
+                  ><strong>Plan de mantenimiento</strong> recomendado con
+                  inspecciones anuales</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <i
+                  class="ph ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+                ></i>
+                <span
+                  ><strong>Sellos y retoques</strong> disponibles a costo
+                  profesional</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maintenance -->
+    <section class="py-24 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            Plan de Mantenimiento
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Monthly -->
+            <div class="bg-white p-8 rounded-sm border border-slate-200">
+              <h3
+                class="font-semibold text-navy-900 text-xl mb-4 flex items-center gap-2"
+              >
+                <span class="text-gold-400">📅</span> Lavado Mensual
+              </h3>
+              <ul class="space-y-2 text-slate-700 font-light ml-8">
+                <li>• Lavado suave con jabón neutro marino</li>
+                <li>• Secado con toalla de microfibra</li>
+                <li>• Aplicación de protector hidrofóbico (opcional)</li>
+              </ul>
+            </div>
+
+            <!-- Quarterly -->
+            <div class="bg-white p-8 rounded-sm border border-slate-200">
+              <h3
+                class="font-semibold text-navy-900 text-xl mb-4 flex items-center gap-2"
+              >
+                <span class="text-gold-400">🔄</span> Inspección Trimestral
+              </h3>
+              <ul class="space-y-2 text-slate-700 font-light ml-8">
+                <li>• Evaluación visual de hidrofobicidad</li>
+                <li>• Limpieza de zonas salinas críticas</li>
+                <li>• Retoque menor si es necesario</li>
+              </ul>
+            </div>
+
+            <!-- Annual -->
+            <div class="bg-white p-8 rounded-sm border border-slate-200">
+              <h3
+                class="font-semibold text-navy-900 text-xl mb-4 flex items-center gap-2"
+              >
+                <span class="text-gold-400">⭐</span> Sellado Anual Profesional
+              </h3>
+              <ul class="space-y-2 text-slate-700 font-light ml-8">
+                <li>• Inspección profesional completa</li>
+                <li>• Aplicación de sello cerámico adicional</li>
+                <li>• Pulido y recuperación de brillo</li>
+                <li>• Renovación de protección hidrofóbica</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-navy-900 text-white relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="font-serif text-4xl mb-6">
+            Transforma el Brillo de tu Embarcación
+          </h2>
+          <p class="text-lg text-slate-300 font-light mb-8">
+            Descubre la diferencia de un revestimiento cerámico certificado.
+            Agenda tu inspección gratuita hoy.
+          </p>
+          <a
+            href="index.html#contacto"
+            class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-white transition"
+          >
+            Agendar Inspección Gratuita
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  CARTAGENA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
+          </div>
+
+          <!-- Services Quick Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF Protection</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Restauración Gelcoat</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Empresa
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog & Recursos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#reseñas"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Reseñas de Clientes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contacto"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <ul class="space-y-3 text-xs font-light">
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-phone text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">+57 300 123 4567</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-anchors text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">Marina Manzanillo, Cartagena</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-300"
+          >
+            <p>
+              &copy; 2024 Cartagena Boat Detailing. Todos los derechos
+              reservados.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Términos & Condiciones</a
+              >
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Privacidad</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Main Scripts -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

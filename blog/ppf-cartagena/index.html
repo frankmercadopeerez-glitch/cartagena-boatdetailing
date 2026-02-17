@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Protegiendo tu Embarcación en Cartagena | Blog | Cartagena Boat Detailing
+    </title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Guía completa sobre Paint Protection Film (PPF) y cómo proteger tu inversión en embarcaciones contra elementos marinos en Cartagena."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../../css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="../../index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="../../ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="../../ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="../../gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="../../engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="../../boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="../../bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="../../paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="../../interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="../../anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="../../technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="../../about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="../../blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="../../index.html#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="../../index.html#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="../../index.html#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="../../about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="../../blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="../../index.html#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="../../index.html#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section
+      class="pt-32 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white"
+    >
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <span
+            class="inline-block text-xs font-bold text-gold-400 mb-4 uppercase tracking-wider"
+          >
+            PPF | Protección Marina
+          </span>
+          <h1 class="font-serif text-5xl mb-6 leading-tight">
+            Protegiendo tu Embarcación en Cartagena
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8">
+            Guía completa sobre Paint Protection Film (PPF) y cómo proteger tu
+            inversión contra elementos marinos, sal y rayos UV en el clima
+            tropical de Cartagena.
+          </p>
+          <div class="flex items-center gap-4 text-sm text-slate-400">
+            <span
+              ><i class="ph ph-calendar text-gold-400"></i> 15 de febrero,
+              2026</span
+            >
+            <span
+              ><i class="ph ph-clock text-gold-400"></i> 8 min de lectura</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <!-- Featured Image -->
+          <img
+            src="https://images.unsplash.com/photo-1552053831-71594a27c62d?w=1200&h=600&fit=crop"
+            alt="PPF Protection Film"
+            class="w-full h-96 object-cover rounded-sm mb-12"
+          />
+
+          <!-- Article Body -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="font-serif text-3xl text-navy-900 mb-6">
+              El Desafío del Ambiente Marino
+            </h2>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Cartagena ofrece un paraíso náutico incomparable, pero el ambiente
+              marino tropical presenta desafíos únicos para el mantenimiento de
+              embarcaciones. La combinación de sal, humedad constante, rayos UV
+              intensos y altas temperaturas puede deteriorar rápidamente la
+              pintura y superficies de tu yate.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              ¿Qué es PPF?
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Paint Protection Film (PPF) es una película de poliuretano
+              termoplástico transparente que se aplica sobre superficies
+              pintadas para crear una barrera protectora invisible.
+              Originalmente desarrollado para aplicaciones aeroespaciales y
+              militares, el PPF ha evolucionado hasta convertirse en la solución
+              premium para protección náutica.
+            </p>
+
+            <div
+              class="bg-slate-50 p-8 rounded-sm my-12 border-l-4 border-gold-400"
+            >
+              <h4 class="font-semibold text-navy-900 mb-3 text-xl">
+                Beneficios Clave del PPF
+              </h4>
+              <ul class="space-y-3 text-slate-700">
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Protección UV:</strong> Bloquea el 99% de rayos
+                    ultravioleta, previniendo decoloración</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Resistencia a la Sal:</strong> Barrera impermeable
+                    contra corrosión marina</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Auto-Reparación:</strong> Arañazos menores
+                    desaparecen con calor del sol</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Garantía de por Vida:</strong> Inversión protegida
+                    durante toda la vida útil del yate</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Aplicación Profesional en Cartagena
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              La aplicación de PPF requiere un ambiente controlado y técnicos
+              certificados. En Cartagena Boat Detailing, trabajamos
+              exclusivamente en instalaciones cubiertas en Marina Manzanillo
+              para garantizar condiciones óptimas libres de polvo y
+              contaminantes marinos.
+            </p>
+
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Nuestro proceso incluye preparación de superficie mediante lavado
+              técnico especializado, corrección de pintura si es necesaria,
+              aplicación con solución de instalación sin burbujas, y curado de
+              48 horas antes de exposición al agua salada.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Zonas Críticas para Proteger
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              En embarcaciones, las áreas más vulnerables incluyen la proa
+              (impacto continuo con agua y spray salino), bordes de cubierta,
+              capó del motor fuera de borda, pasarelas de acero inoxidable, y
+              áreas de alto contacto como barandillas y escaleras.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              ROI: ¿Vale la Pena?
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Un repintado completo de yate en Cartagena puede costar entre
+              $5,000 y $15,000 USD dependiendo del tamaño. El PPF, con un costo
+              del 30-40% de un repintado, previene ese gasto durante décadas.
+              Además, mantiene el valor de reventa al preservar la pintura
+              original de fábrica en condición prístina.
+            </p>
+
+            <div class="bg-navy-900 text-white p-8 rounded-sm my-12">
+              <h4 class="font-serif text-2xl text-gold-400 mb-4">
+                Consultoría Gratuita
+              </h4>
+              <p class="text-slate-300 mb-6">
+                Agenda una inspección sin costo en Marina Manzanillo.
+                Evaluaremos tu embarcación y crearemos un plan de protección
+                personalizado.
+              </p>
+              <a
+                href="../../index.html#contacto"
+                class="inline-block bg-gold-400 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-gold-500 transition"
+              >
+                Agendar Inspección
+              </a>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Mantenimiento Post-Instalación
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              El PPF requiere mantenimiento mínimo. Se recomienda lavado regular
+              con agua dulce después de navegación, aplicación de sellador
+              cerámico cada 6 meses para máxima protección UV, y inspección
+              anual para verificar adhesión en bordes. Evita químicos abrasivos
+              y usa únicamente productos pH neutro.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Conclusión
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              En el ambiente marino de Cartagena, el PPF no es un lujo sino una
+              necesidad para propietarios que buscan proteger su inversión a
+              largo plazo. Con garantía de por vida, propiedades de
+              auto-reparación y protección comprobada contra elementos
+              tropicales, el PPF ofrece la solución más completa para
+              preservación náutica premium.
+            </p>
+          </div>
+
+          <!-- Author Section -->
+          <div class="border-t border-slate-200 pt-8 mt-12">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-16 h-16 rounded-full bg-navy-900 flex items-center justify-center"
+              >
+                <i class="ph ph-user text-gold-400 text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900">
+                  Equipo Cartagena Boat Detailing
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Especialistas en protección y restauración náutica
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="py-16 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="font-serif text-3xl text-navy-900 mb-8">
+            Artículos Relacionados
+          </h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <a
+              href="../ceramic-comparativa/index.html"
+              class="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop"
+                alt="Ceramic Coating"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <span class="text-xs font-bold text-gold-400 uppercase"
+                  >Ceramic Coating</span
+                >
+                <h4 class="font-serif text-xl text-navy-900 mt-2 mb-3">
+                  Ceramic Coating vs. Soluciones Tradicionales
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Comparativa detallada entre revestimientos cerámicos...
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  CARTAGENA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
+          </div>
+
+          <!-- Services Quick Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF Protection</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Restauración Gelcoat</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Empresa
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog & Recursos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#reseñas"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Reseñas de Clientes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#contacto"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <ul class="space-y-3 text-xs font-light">
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-phone text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">+57 300 123 4567</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-anchors text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">Marina Manzanillo, Cartagena</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-300"
+          >
+            <p>
+              &copy; 2024 Cartagena Boat Detailing. Todos los derechos
+              reservados.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Términos & Condiciones</a
+              >
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Privacidad</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+  </body>
+</html>

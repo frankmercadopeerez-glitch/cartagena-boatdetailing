@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Restauración de Gelcoat: Proces Profesional | Blog | Cartagena Boat
+      Detailing
+    </title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Guía técnica completa sobre restauración profesional de gelcoat: proceso paso a paso, productos recomendados, y expectativas reales."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../../css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="../../index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="../../ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="../../ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="../../gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="../../engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="../../boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="../../bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="../../paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="../../interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="../../anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="../../technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="../../about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="../../blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="../../index.html#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="../../index.html#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="../../index.html#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="../../about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="../../blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="../../index.html#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="../../index.html#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section
+      class="pt-32 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white"
+    >
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <span
+            class="inline-block text-xs font-bold text-gold-400 mb-4 uppercase tracking-wider"
+          >
+            Restauración | Gelcoat
+          </span>
+          <h1 class="font-serif text-5xl mb-6 leading-tight">
+            Restauración de Gelcoat: Del Oxidado al Showroom
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8">
+            Proceso técnico paso a paso para restaurar gelcoat deteriorado.
+            Aprende cuándo restaurar vs. repintar, productos profesionales, y
+            expectativas reales de resultados.
+          </p>
+          <div class="flex items-center gap-4 text-sm text-slate-400">
+            <span
+              ><i class="ph ph-calendar text-gold-400"></i> 15 de febrero,
+              2026</span
+            >
+            <span
+              ><i class="ph ph-clock text-gold-400"></i> 10 min de lectura</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <!-- Featured Image -->
+          <img
+            src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&h=600&fit=crop"
+            alt="Gelcoat Restoration"
+            class="w-full h-96 object-cover rounded-sm mb-12"
+          />
+
+          <!-- Article Body -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="font-serif text-3xl text-navy-900 mb-6">
+              ¿Qué es el Gelcoat y Por Qué Se Deteriora?
+            </h2>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              El gelcoat es una resina de poliéster pigmentada que forma la capa
+              exterior de la fibra de vidrio en la mayoría de embarcaciones. Con
+              espesor típico de 0.4-0.6mm (400-600 micrones), protege la
+              estructura laminada subyacente de agua, UV y abrasión mecánica. A
+              diferencia de pintura que se aplica sobre superficie, el gelcoat
+              se moldea simultáneamente con el casco durante fabricación.
+            </p>
+
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Con el tiempo y exposición a elementos—especialmente radiación UV
+              intensa del trópico—el gelcoat experimenta degradación molecular
+              gradual: los enlaces de resina se rompen, pigmentos se
+              descomponen, y la superficie pierde lustre original. En Cartagena,
+              este proceso se acelera 3-4x comparado con climas templados debido
+              a radiación UV elevada (índice 11-12) y temperatura constante de
+              28°C que acelera reacciones químicas.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Identificando Problemas Comunes de Gelcoat
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+              <div class="bg-slate-50 p-6 rounded-sm border-t-4 border-red-500">
+                <h4 class="font-semibold text-navy-900 mb-3">
+                  Oxidación ("Chalking")
+                </h4>
+                <p class="text-sm text-slate-700 mb-3">
+                  La degradación UV rompe enlaces superficiales, dejando polvo
+                  blanco cuando pasas la mano. Primeras etapas: recuperable.
+                  Avanzada: requiere compound agresivo.
+                </p>
+                <p class="text-xs text-slate-600 italic">
+                  Recuperabilidad: 90-100% si profundidad <50 micrones
+                </p>
+              </div>
+
+              <div
+                class="bg-slate-50 p-6 rounded-sm border-t-4 border-orange-500"
+              >
+                <h4 class="font-semibold text-navy-900 mb-3">Decoloración</h4>
+                <p class="text-sm text-slate-700 mb-3">
+                  Pigmentos orgánicos se descomponen: blancos amarillean,
+                  colores oscuros se apagan. Más común en gelcoat blanco
+                  (titanio dioxide fotocatalítico).
+                </p>
+                <p class="text-xs text-slate-600 italic">
+                  Recuperabilidad: 60-80% con pulido profundo
+                </p>
+              </div>
+
+              <div
+                class="bg-slate-50 p-6 rounded-sm border-t-4 border-yellow-500"
+              >
+                <h4 class="font-semibold text-navy-900 mb-3">
+                  Micro-Grietas (Crazing)
+                </h4>
+                <p class="text-sm text-slate-700 mb-3">
+                  Red de grietas superficiales causadas por flexión del casco,
+                  expansión térmica o impacto. Si no penetran la fibra:
+                  reparable con relleno.
+                </p>
+                <p class="text-xs text-slate-600 italic">
+                  Recuperabilidad: Depende de profundidad - evaluación caso por
+                  caso
+                </p>
+              </div>
+
+              <div
+                class="bg-slate-50 p-6 rounded-sm border-t-4 border-purple-500"
+              >
+                <h4 class="font-semibold text-navy-900 mb-3">
+                  Blisters (Osmosis)
+                </h4>
+                <p class="text-sm text-slate-700 mb-3">
+                  Ampollas bajo superficie causadas por penetración de agua que
+                  reacciona con resina. Requiere tratamiento especializado, no
+                  solo pulido.
+                </p>
+                <p class="text-xs text-slate-600 italic">
+                  Recuperabilidad: Requiere lijado profundo y tratamiento
+                  osmosis
+                </p>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Evaluación: ¿Restaurar o Repintar?
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              La decisión crítica antes de iniciar trabajo: algunos gelcoats
+              están más allá de restauración viable y requieren repintado
+              completo. Aquí el criterio profesional:
+            </p>
+
+            <div class="overflow-x-auto my-8">
+              <table class="w-full border-collapse text-sm">
+                <thead>
+                  <tr class="bg-navy-900 text-white">
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Condición
+                    </th>
+                    <th class="border border-slate-300 px-4 py-3 text-center">
+                      Restaurable
+                    </th>
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Razón
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Oxidación leve (superficie opaca, chalking mínimo)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-green-600 font-bold"
+                    >
+                      ✓ SÍ
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Solo afecta 20-40 micrones superficiales
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Oxidación severa (superficie completamente mate, chalk
+                      pesado)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-orange-600 font-bold"
+                    >
+                      ⚠ MARGINAL
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Requiere compound agresivo, puede adelgazar gelcoat
+                      riesgosamente
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Decoloración moderada (amarillamiento, color apagado)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-green-600 font-bold"
+                    >
+                      ✓ SÍ
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Pulido revelará pigmentos más profundos
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Crazing superficial (grietas <0.1mm)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-green-600 font-bold"
+                    >
+                      ✓ SÍ
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Relleno + pulido elimina visibilidad
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Crazing profundo (exposición de fibra)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-red-600 font-bold"
+                    >
+                      ✗ NO
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Requiere relleno estructural + repintado completo
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Blisters/osmosis activa
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-red-600 font-bold"
+                    >
+                      ✗ NO
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Necesita tratamiento de osmosis previo (lijado profundo,
+                      secado, barrera epóxica)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Gelcoat ya pulido múltiples veces (espesor <200 micrones)
+                    </td>
+                    <td
+                      class="border border-slate-300 px-4 py-3 text-center text-red-600 font-bold"
+                    >
+                      ✗ NO
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Riesgo de penetrar fibra (strikethrough)
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bg-gold-400 p-6 rounded-sm my-8 text-navy-900">
+              <p class="font-semibold mb-2">
+                <i class="ph ph-warning text-xl mr-2"></i>Regla de Oro:
+              </p>
+              <p class="text-sm">
+                Si puedes sentir imperfecciones con uña o gelcoat tiene zonas
+                donde fibra es visible, la restauración por pulido NO resolverá
+                el problema. Se requiere reparación estructural + repintado.
+              </p>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Proceso de Restauración: 8 Pasos Profesionales
+            </h3>
+
+            <div class="space-y-8 my-10">
+              <!-- Step 1 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  1
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Lavado y Descontaminación
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Lavado profundo con detergente marino pH-neutro para
+                    eliminar sal, suciedad orgánica y contaminantes. Seguido de
+                    clay bar (barra de arcilla) para remover contaminantes
+                    adheridos: savia de árboles, alquitrán, residuos
+                    industriales que bloquean acceso de compound a gelcoat.
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Productos:</strong> Shampoo marina pH 7-8, Clay Bar
+                    Medium Grade, Quick Detailer como lubricante
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  2
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Enmascarado de Áreas Sensibles
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Proteger herrajes metálicos, vinilos, ventanas con tape de
+                    alta adherencia. El compound puede manchar metal pulido y es
+                    difícil de remover de texturas porosas.
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Productos:</strong> 3M Precision Masking Tape 2080,
+                    papel protector para cubrir áreas grandes
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  3
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Compound Agresivo (Corte Inicial)
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Aplicación de compound de corte pesado con pulidora rotativa
+                    (1500-2000 RPM) y pad de lana. Este paso remueve 30-60
+                    micrones de gelcoat oxidado, revelando material fresco
+                    debajo. Trabajar en secciones de 60x60cm con presión
+                    moderada constante.
+                  </p>
+                  <p class="text-sm text-slate-600 italic mb-2">
+                    <strong>Productos:</strong> 3M Perfect-It Rubbing Compound
+                    (05954), Meguiar's M100 Pro Speed Compound
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Equipo:</strong> Makita 9227C (7"), Lake Country
+                    Wool Pad 7.5"
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  4
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Compound Medio (Refinamiento)
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Después de corte inicial, superficie tiene holograms (marcas
+                    circulares) del paso anterior. Compound medio con pad de
+                    espuma naranja/amarillo (1200-1500 RPM) refina la superficie
+                    removiendo scratches del paso agresivo mientras continúa
+                    cortando oxidación residual.
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Productos:</strong> Meguiar's M205 Ultra Pro
+                    Finishing Polish, 3M Perfect-It Ultrafina SE Compound
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  5
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Polish Fino (Creación de Brillo)
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Polish final de acabado con pad de espuma suave negra/azul
+                    (900-1200 RPM). Este paso no corta gelcoat, solo refina
+                    microscópicamente superficie para maximizar reflexión de
+                    luz. Esencial para lograr brillo wet-look (aspecto mojado).
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Productos:</strong> Meguiar's M210 Ultra Pro
+                    Finishing Polish, 3M Perfect-It Ultrafina Polish
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  6
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Panel Wipe (Limpieza Pre-Protección)
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Limpiar residuos de polish con dilución IPA (isopropil
+                    alcohol) 10-15% en agua destilada. Esto asegura superficie
+                    completamente limpia sin aceites que interfieran con
+                    adherencia de protección.
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Alternativas:</strong> CarPro Eraser, Gyeon Prep
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 7 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  7
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Aplicación de Protección
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Gelcoat recién pulido es poroso y vulnerable. Aplicar
+                    protección inmediatamente: ceramic coating (2-5 años de
+                    durabilidad), sellador sintético (6-12 meses), o cera (1-3
+                    meses). Para yates en Cartagena, ceramic coating justifica
+                    inversión por UV extremo.
+                  </p>
+                  <p class="text-sm text-slate-600 italic">
+                    <strong>Recomendados:</strong> Gtechniq Marine Ceramic C1,
+                    FeynLab Ceramic Lite, Collinite 885 (cera económica)
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 8 -->
+              <div class="flex gap-4">
+                <div
+                  class="flex-shrink-0 w-12 h-12 bg-navy-900 text-gold-400 rounded-full flex items-center justify-center font-bold text-xl"
+                >
+                  8
+                </div>
+                <div>
+                  <h4 class="font-semibold text-navy-900 text-xl mb-2">
+                    Inspección Final y Documentación
+                  </h4>
+                  <p class="text-slate-700 mb-3">
+                    Inspeccionar bajo luz directa solar y luz LED de trabajo
+                    para detectar holograms residuales o áreas perdidas.
+                    Fotografiar antes/después para documentar transformación.
+                    Educar propietario sobre mantenimiento correcto.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Expectativas Reales: Antes y Después
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Es crítico establecer expectativas realistas con clientes. La
+              restauración de gelcoat NO es magia—tiene limitaciones basadas en
+              condición inicial:
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+              <div class="bg-green-50 border-l-4 border-green-600 p-6">
+                <h4 class="font-semibold text-green-900 mb-3">
+                  ✓ Qué SÍ Logra la Restauración
+                </h4>
+                <ul class="space-y-2 text-sm text-green-800">
+                  <li>• Eliminar 90-100% de oxidación superficial</li>
+                  <li>• Restaurar brillo original (showroom finish)</li>
+                  <li>• Remover micro-scratches y swirl marks</li>
+                  <li>• Mejorar profundidad de color 70-90%</li>
+                  <li>• Eliminar visualmente crazing superficial (<0.05mm)</li>
+                  <li>
+                    • Homogenizar tono de gelcoat (excepto decoloración severa
+                    penetrante)
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bg-red-50 border-l-4 border-red-600 p-6">
+                <h4 class="font-semibold text-red-900 mb-3">
+                  ✗ Qué NO Logra la Restauración
+                </h4>
+                <ul class="space-y-2 text-sm text-red-800">
+                  <li>• Reparar grietas estructurales profundas</li>
+                  <li>• Eliminar decoloración química interna del gelcoat</li>
+                  <li>
+                    • Corregir blisters/osmosis (requiere tratamiento
+                    específico)
+                  </li>
+                  <li>• Rellenar abolladuras o daño por impacto</li>
+                  <li>• Cambiar color original del gelcoat</li>
+                  <li>
+                    • Restaurar gelcoat <200 micrones restantes (riesgo de
+                    strikethrough)
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              DIY vs. Restauración Profesional
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Propietarios experimentados pueden realizar mantenimiento
+              preventivo (polish ligero anual), pero restauración de oxidación
+              severa requiere habilidad técnica y equipo específico:
+            </p>
+
+            <div class="overflow-x-auto my-8">
+              <table class="w-full border-collapse text-sm">
+                <thead>
+                  <tr class="bg-navy-900 text-white">
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Aspecto
+                    </th>
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      DIY
+                    </th>
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Profesional
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Costo (35' boat)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      $200-400 (productos + pad rental)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      $800-2,500 (según condición)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Tiempo inversión
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      40-80 horas (aprendizaje incluido)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      3-7 días (equipo de 2)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Calidad resultado
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      70-85% potencial (curva aprendizaje)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      95-100% (experiencia + equipo óptimo)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Riesgo
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Medio-Alto (burn-through, holograms permanentes)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Bajo (técnicos experimentados)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Garantía
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">Ninguna</td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      6-12 meses en aplicación correcta
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bg-navy-900 text-white p-8 rounded-sm my-12">
+              <h4 class="font-serif text-2xl text-gold-400 mb-4">
+                Restauración Profesional de Gelcoat
+              </h4>
+              <p class="text-slate-300 mb-6">
+                Cartagena Boat Detailing ofrece servicio completo de
+                restauración gelcoat con proceso de 8 pasos, garantía de
+                satisfacción, y opción de protección cerámica de 5 años. Incluye
+                evaluación gratuita y presupuesto sin compromiso.
+              </p>
+              <a
+                href="../../gelcoat.html"
+                class="inline-block bg-gold-400 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-gold-500 transition"
+              >
+                Más Info Sobre Servicio Gelcoat
+              </a>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Mantenimiento Post-Restauración
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Una restauración profesional puede costar $800-2,500 dependiendo
+              de tamaño y condición. Proteger esa inversión con mantenimiento
+              adecuado extiende resultados:
+            </p>
+
+            <h4 class="font-semibold text-navy-900 mb-3 mt-8">
+              Protocolo de Mantenimiento Mensual
+            </h4>
+            <ol class="list-decimal pl-6 space-y-3 text-slate-700 text-lg mb-8">
+              <li>
+                <strong>Lavado con Shampoo pH-Neutro:</strong> Evitar
+                detergentes domésticos que degradan protección
+              </li>
+              <li>
+                <strong>Secado con Microfibra:</strong> Prevenir water spots de
+                agua dura (común en Cartagena)
+              </li>
+              <li>
+                <strong>Spray Detailer Semanal:</strong> Mantener hidrofobicidad
+                de ceramic coating o sellador
+              </li>
+              <li>
+                <strong>Inspección Visual:</strong> Detectar nuevos scratches o
+                contaminación temprana
+              </li>
+              <li>
+                <strong>Re-aplicar Protección:</strong> Ceramic topper cada 6
+                meses, cera cada 2-3 meses (según producto)
+              </li>
+            </ol>
+
+            <div class="bg-gold-400 p-6 rounded-sm my-8 text-navy-900">
+              <h4 class="font-semibold text-lg mb-3">
+                Vida Útil Esperada Post-Restauración
+              </h4>
+              <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <p class="font-bold mb-1">Con Ceramic Coating</p>
+                  <p>3-5 años brillo óptimo</p>
+                </div>
+                <div>
+                  <p class="font-bold mb-1">Con Sellador Sintético</p>
+                  <p>12-18 meses brillo excelente</p>
+                </div>
+                <div>
+                  <p class="font-bold mb-1">Sin Protección</p>
+                  <p>3-6 meses antes de re-oxidación</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Conclusión: Inversión en Longevidad
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              La restauración profesional de gelcoat no es gasto—es inversión en
+              preservación de valor. Una embarcación con gelcoat oxidado pierde
+              15-25% de valor de mercado comparado con condición showroom.
+              Considerando que restauración completa cuesta $800-2,500 mientras
+              repintado profesional cuesta $8,000-15,000, restaurar gelcoat
+              tempranamente (antes de daño irreversible) es decisión financiera
+              inteligente.
+            </p>
+
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              En el clima agresivo de Cartagena, la clave es intervenir
+              proactivamente: restaurar cuando aparezcan primeros signos de
+              oxidación (superficie opaca, pérdida de brillo), no esperar hasta
+              oxidación severa que compromete espesor de gelcoat. Un programa de
+              mantenimiento preventivo combinado con restauración cada 3-5 años
+              mantiene tu embarcación en condición óptima indefinidamente,
+              maximizando disfrute y retorno de inversión.
+            </p>
+          </div>
+
+          <!-- Author Section -->
+          <div class="border-t border-slate-200 pt-8 mt-12">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-16 h-16 rounded-full bg-navy-900 flex items-center justify-center"
+              >
+                <i class="ph ph-user text-gold-400 text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900">
+                  Equipo Cartagena Boat Detailing
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Certificados en restauración de gelcoat y aplicación de
+                  coatings marinos
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="py-16 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="font-serif text-3xl text-navy-900 mb-8">
+            Artículos Relacionados
+          </h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <a
+              href="../ceramic-comparativa/index.html"
+              class="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop"
+                alt="Ceramic Coating"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <span class="text-xs font-bold text-gold-400 uppercase"
+                  >Ceramic Coating</span
+                >
+                <h4 class="font-serif text-xl text-navy-900 mt-2 mb-3">
+                  Ceramic vs. Soluciones Tradicionales
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Comparativa científica de protección cerámica...
+                </p>
+              </div>
+            </a>
+            <a
+              href="../mantenimiento-tropical/index.html"
+              class="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=300&fit=crop"
+                alt="Maintenance"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <span class="text-xs font-bold text-gold-400 uppercase"
+                  >Mantenimiento</span
+                >
+                <h4 class="font-serif text-xl text-navy-900 mt-2 mb-3">
+                  Mantenimiento Preventivo en Clima Tropical
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Estrategias esenciales para el Caribe colombiano...
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  CARTAGENA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
+          </div>
+
+          <!-- Services Quick Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF Protection</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Restauración Gelcoat</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Empresa
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog & Recursos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#reseñas"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Reseñas de Clientes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#contacto"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <ul class="space-y-3 text-xs font-light">
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-phone text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">+57 300 123 4567</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-anchors text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">Marina Manzanillo, Cartagena</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-300"
+          >
+            <p>
+              &copy; 2024 Cartagena Boat Detailing. Todos los derechos
+              reservados.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Términos & Condiciones</a
+              >
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Privacidad</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+  </body>
+</html>

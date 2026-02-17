@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Ceramic Coating vs. Soluciones Tradicionales | Blog | Cartagena Boat
+      Detailing
+    </title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Comparativa detallada entre revestimientos cerámicos de última generación y métodos tradicionales de protección náutica."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../../css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="../../index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="../../ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="../../ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="../../gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="../../engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="../../boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="../../bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="../../paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="../../interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="../../anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="../../technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="../../about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="../../blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="../../index.html#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="../../index.html#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="../../index.html#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="../../about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="../../blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="../../index.html#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="../../index.html#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section
+      class="pt-32 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white"
+    >
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <span
+            class="inline-block text-xs font-bold text-gold-400 mb-4 uppercase tracking-wider"
+          >
+            Ceramic Coating | Durabilidad
+          </span>
+          <h1 class="font-serif text-5xl mb-6 leading-tight">
+            Ceramic Coating vs. Soluciones Tradicionales
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8">
+            Comparativa detallada entre revestimientos cerámicos de última
+            generación y métodos tradicionales de protección. Descubre por qué
+            la tecnología cerámica es superior.
+          </p>
+          <div class="flex items-center gap-4 text-sm text-slate-400">
+            <span
+              ><i class="ph ph-calendar text-gold-400"></i> 10 de febrero,
+              2026</span
+            >
+            <span
+              ><i class="ph ph-clock text-gold-400"></i> 10 min de lectura</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <!-- Featured Image -->
+          <img
+            src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=600&fit=crop"
+            alt="Ceramic Coating Application"
+            class="w-full h-96 object-cover rounded-sm mb-12"
+          />
+
+          <!-- Article Body -->
+          <div class="prose prose-lg max-w-none">
+            <h2 class="font-serif text-3xl text-navy-900 mb-6">
+              La Evolución de la Protección Náutica
+            </h2>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Durante décadas, los propietarios de embarcaciones han confiado en
+              ceras, selladores y pulidos para proteger sus inversiones. Sin
+              embargo, la tecnología de revestimiento cerámico ha revolucionado
+              completamente el panorama de la protección marina, ofreciendo
+              durabilidad y rendimiento sin precedentes.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Tabla Comparativa: Ceramic vs. Tradicional
+            </h3>
+            <div class="overflow-x-auto my-8">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-navy-900 text-white">
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Característica
+                    </th>
+                    <th class="border border-slate-300 px-4 py-3 text-left">
+                      Cera/Sellador
+                    </th>
+                    <th
+                      class="border border-slate-300 px-4 py-3 text-left bg-gold-400 text-navy-900"
+                    >
+                      Ceramic Coating
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Durabilidad
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">2-3 meses</td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>2-5 años</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Resistencia Química
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Baja (pH 5-9)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>Alta (pH 2-13)</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Dureza de Superficie
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">2H-3H</td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>9H (nano-cerámica)</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Hidrofobicidad
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      Moderada (90°)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>Extrema (110-120°)</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Protección UV
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">30-40%</td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>95-99%</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Costo Inicial
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">$50-100</td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      $800-2,500
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-3 font-semibold">
+                      Costo Anual (5 años)
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3">
+                      $600-1,200
+                    </td>
+                    <td class="border border-slate-300 px-4 py-3 bg-slate-50">
+                      <strong>$160-500</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              ¿Qué es el Ceramic Coating?
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              El revestimiento cerámico es un polímero líquido compuesto de
+              nanopartículas de dióxido de silicio (SiO2) y/o dióxido de titanio
+              (TiO2) que crea un enlace molecular permanente con la pintura. Una
+              vez curado, forma una capa protectora ultra-dura de 2-3 micrones
+              de espesor.
+            </p>
+
+            <div
+              class="bg-slate-50 p-8 rounded-sm my-12 border-l-4 border-gold-400"
+            >
+              <h4 class="font-semibold text-navy-900 mb-3 text-xl">
+                Ventajas Científicas del Ceramic Coating
+              </h4>
+              <ul class="space-y-3 text-slate-700">
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Enlace Covalente:</strong> Se fusiona químicamente
+                    con la pintura (vs. cera que solo se asienta sobre
+                    superficie)</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Estructura Nano-Cristalina:</strong> Forma una red
+                    molecular impermeable a contaminantes de más de 1nm</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Hidrofobia Permanente:</strong> Ángulo de contacto
+                    (°) se mantiene estable durante toda la vida útil</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="ph ph-check-circle text-gold-400 text-xl mt-1"></i>
+                  <span
+                    ><strong>Resistencia Térmica:</strong> Soporta hasta 750°C
+                    sin degradación (ideal para áreas de motor)</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Soluciones Tradicionales: Limitaciones
+            </h3>
+
+            <h4 class="font-semibold text-navy-900 mb-3 mt-8">
+              Ceras (Carnauba, Sintéticas)
+            </h4>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Las ceras proporcionan brillo temporal pero carecen de
+              durabilidad. En ambiente marino, la sal y temperatura degradan la
+              cera en 4-6 semanas. Requieren reaplicación constante (cada 2-3
+              meses), lo cual es costoso en tiempo y dinero a largo plazo.
+            </p>
+
+            <h4 class="font-semibold text-navy-900 mb-3 mt-8">
+              Selladores Acrílicos
+            </h4>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Los selladores acrílicos ofrecen mayor durabilidad que las ceras
+              (3-4 meses) pero siguen siendo vulnerables a químicos marinos. No
+              proporcionan protección contra rayado y su hidrofobicidad
+              disminuye rápidamente con exposición al sol tropical.
+            </p>
+
+            <h4 class="font-semibold text-navy-900 mb-3 mt-8">
+              Pulidos Abrasivos
+            </h4>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              El pulido elimina capas microscópicas de clear coat cada vez que
+              se aplica. Realizarlo frecuentemente puede adelgazar el clear coat
+              hasta el punto de requerir repintado completo (típicamente después
+              de 10-15 pulidos agresivos).
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Rendimiento en Ambiente Marino
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              En Cartagena, las condiciones marinas son especialmente exigentes.
+              La sal actúa como catalizador de oxidación, acelerando el
+              deterioro. Los rayos UV a 11° de latitud tienen intensidad máxima.
+              Humedad relativa del 80-90% crea ambiente ideal para corrosión.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+              <div class="bg-navy-900 text-white p-6 rounded-sm">
+                <h5 class="font-serif text-xl text-gold-400 mb-3">
+                  Cera Tradicional en Cartagena
+                </h5>
+                <ul class="space-y-2 text-sm text-slate-300">
+                  <li>• Degradación en 3-4 semanas</li>
+                  <li>• Requiere reaplicación 6x/año</li>
+                  <li>• Costo anual: $600-800</li>
+                  <li>• Protección UV: 30%</li>
+                  <li>• Mano de obra intensiva</li>
+                </ul>
+              </div>
+              <div class="bg-gold-400 text-navy-900 p-6 rounded-sm">
+                <h5 class="font-serif text-xl mb-3">
+                  Ceramic Coating en Cartagena
+                </h5>
+                <ul class="space-y-2 text-sm font-semibold">
+                  <li>✓ Durabilidad: 2-5 años</li>
+                  <li>✓ Mantenimiento: lavado simple</li>
+                  <li>✓ Costo 5 años: $800-1,500</li>
+                  <li>✓ Protección UV: 99%</li>
+                  <li>✓ Aplicación única</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Proceso de Aplicación Profesional
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              A diferencia de la cera que cualquier persona puede aplicar, el
+              ceramic coating requiere instalación profesional certificada. Las
+              etapas incluyen:
+            </p>
+
+            <ol class="list-decimal pl-6 space-y-4 text-slate-700 text-lg mb-8">
+              <li>
+                <strong>Lavado Técnico de 2 Etapas:</strong> Descontaminación
+                química + física para superficie 100% limpia
+              </li>
+              <li>
+                <strong>Corrección de Pintura:</strong> Eliminación de defectos,
+                oxidación y arañazos mediante pulido multi-etapa
+              </li>
+              <li>
+                <strong>Panel Wipe con IPA:</strong> Isopropanol al 10% para
+                remover aceites residuales
+              </li>
+              <li>
+                <strong>Aplicación del Coating:</strong> Movimientos cruzados
+                con aplicadores de microfibra en ambiente controlado 20-25°C
+              </li>
+              <li>
+                <strong>Leveling:</strong> Remoción de excesos en ventana de 2-5
+                minutos
+              </li>
+              <li>
+                <strong>Curado Gradual:</strong> 24 horas inicial + 7 días
+                curado completo antes de exposición marina
+              </li>
+            </ol>
+
+            <div class="bg-navy-900 text-white p-8 rounded-sm my-12">
+              <h4 class="font-serif text-2xl text-gold-400 mb-4">
+                Consultoría y Cotización Gratuita
+              </h4>
+              <p class="text-slate-300 mb-6">
+                Evaluaremos tu embarcación y recomendaremos el sistema cerámico
+                ideal para tus necesidades. Instalaciones en ambiente controlado
+                en Marina Manzanillo.
+              </p>
+              <a
+                href="../../index.html#contacto"
+                class="inline-block bg-gold-400 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-gold-500 transition"
+              >
+                Agendar Inspección
+              </a>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Sistemas Cerámicos Recomendados
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Utilizamos sistemas certificados marinos de Gyeon Marine, Ceramic
+              Pro 9H, y Gtechniq Marine. Cada sistema ofrece diferentes niveles
+              de dureza (7H-10H), hidrofobicidad (110-120°) y durabilidad (2-5
+              años con garantía escrita).
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Mantenimiento del Ceramic Coating
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Uno de los mayores beneficios es el mantenimiento simplificado.
+              Solo requiere lavado con jabón pH neutro cada 2-3 semanas,
+              enjuague con agua dulce después de navegación en agua salada, y
+              aplicación opcional de spray booster cada 3-6 meses para máximo
+              brillo.
+            </p>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              ¿Cuándo Elegir Cada Opción?
+            </h3>
+            <div class="space-y-4 text-slate-700 text-lg">
+              <p>
+                <strong>Elige Cera/Sellador si:</strong> Tu embarcación es de
+                uso esporádico (menos de 10 días/año), tienes presupuesto
+                limitado, disfrutas el proceso de detailing manual, o planeas
+                vender en menos de 1 año.
+              </p>
+
+              <p>
+                <strong>Elige Ceramic Coating si:</strong> Usas tu yate
+                regularmente, buscas máxima protección contra ambiente marino,
+                valoras tu tiempo, quieres garantía escrita de durabilidad, o
+                planeas mantener la embarcación por 3+ años.
+              </p>
+            </div>
+
+            <h3 class="font-serif text-2xl text-navy-900 mb-4 mt-12">
+              Conclusión: ROI a Largo Plazo
+            </h3>
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              Aunque el costo inicial del ceramic coating es mayor, el retorno
+              de inversión es indiscutible. En 5 años, ahorrarás entre
+              $2,000-4,000 en productos y mano de obra comparado con
+              mantenimiento tradicional. Más importante aún, preservarás el
+              valor de reventa de tu embarcación manteniendo la pintura en
+              condición prístina.
+            </p>
+
+            <p class="text-slate-700 font-light text-lg mb-6 leading-relaxed">
+              La tecnología cerámica representa la próxima generación de
+              protección náutica. En el ambiente marino exigente de Cartagena,
+              no es solo una mejora incremental sobre métodos tradicionales—es
+              un salto tecnológico que redefine lo que significa proteger una
+              inversión marina.
+            </p>
+          </div>
+
+          <!-- Author Section -->
+          <div class="border-t border-slate-200 pt-8 mt-12">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-16 h-16 rounded-full bg-navy-900 flex items-center justify-center"
+              >
+                <i class="ph ph-user text-gold-400 text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900">
+                  Equipo Cartagena Boat Detailing
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Especialistas en protección y restauración náutica
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="py-16 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="font-serif text-3xl text-navy-900 mb-8">
+            Artículos Relacionados
+          </h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <a
+              href="../ppf-cartagena/index.html"
+              class="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1552053831-71594a27c62d?w=600&h=300&fit=crop"
+                alt="PPF Protection"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <span class="text-xs font-bold text-gold-400 uppercase"
+                  >PPF</span
+                >
+                <h4 class="font-serif text-xl text-navy-900 mt-2 mb-3">
+                  Protegiendo tu Embarcación en Cartagena
+                </h4>
+                <p class="text-slate-600 text-sm">
+                  Guía completa sobre Paint Protection Film...
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  CARTAGENA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
+          </div>
+
+          <!-- Services Quick Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF Protection</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Restauración Gelcoat</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Empresa
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="../../about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog & Recursos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#reseñas"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Reseñas de Clientes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../index.html#contacto"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <ul class="space-y-3 text-xs font-light">
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-phone text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">+57 300 123 4567</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-anchors text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">Marina Manzanillo, Cartagena</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-300"
+          >
+            <p>
+              &copy; 2024 Cartagena Boat Detailing. Todos los derechos
+              reservados.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Términos & Condiciones</a
+              >
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Privacidad</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+  </body>
+</html>

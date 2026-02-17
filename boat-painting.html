@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pintura Completa de Botes | Cartagena Boat Detailing</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Servicio profesional de pintura completa para embarcaciones. Restauración de gelcoat, aplicación de pintura marina de alta calidad en Cartagena."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="index.html#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="index.html#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="index.html#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="index.html#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="index.html#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
+      style="
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(10, 25, 47, 0.85),
+            rgba(10, 25, 47, 0.7)
+          ),
+          url(&quot;https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop&quot;);
+      "
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="ph ph-paint-brush text-4xl text-gold-400"></i>
+            <span class="text-gold-400 font-semibold uppercase tracking-wider"
+              >Renovación Completa</span
+            >
+          </div>
+          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+            Pintura Completa de <span class="text-gold-400">Botes</span>
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl">
+            Servicio integral de repintado profesional para embarcaciones.
+            Restauramos el gelcoat y aplicamos sistemas de pintura marina de
+            alta calidad con acabados duraderos y garantía de 3-5 años.
+          </p>
+          <a
+            href="#proceso"
+            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-white transition"
+          >
+            Ver Proceso Completo <i class="ph ph-arrow-down ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            Pintura Marina Profesional
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <p class="text-slate-700 font-light text-lg mb-6">
+                Nuestro servicio de pintura completa va mucho más allá de
+                simplemente aplicar una capa de pintura. Es un proceso técnico
+                de restauración que incluye preparación de superficie,
+                reparación de daños, imprimación marina especializada y
+                aplicación de sistemas de pintura de dos componentes.
+              </p>
+
+              <ul class="space-y-4">
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Sistemas de Pintura Premium
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Awlgrip, International, Epifanes de grado marino
+                      profesional
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Garantía de 3-5 Años
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Cobertura contra decoloración, agrietamiento y descamación
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Acabado Showroom
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Brillo espejo con protección UV superior para clima
+                      tropical
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-cover bg-center rounded-sm h-96 shadow-2xl"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1566473965047-6c5de9997f59?w=600&h=400&fit=crop&quot;);
+              "
+            >
+              <div class="h-full bg-black/20"></div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-navy-900 text-white p-8 rounded-sm">
+              <h3 class="font-serif text-2xl mb-4">Cascos Completos</h3>
+              <p class="font-light text-slate-300">
+                Repintado integral de cascos de fibra de vidrio con preparación
+                total de superficie y sistema completo de pintura.
+              </p>
+            </div>
+            <div class="bg-navy-900 text-white p-8 rounded-sm">
+              <h3 class="font-serif text-2xl mb-4">Superestructuras</h3>
+              <p class="font-light text-slate-300">
+                Pintura de flybridge, cabinas, torres de pesca y todas las
+                estructuras superiores.
+              </p>
+            </div>
+            <div class="bg-navy-900 text-white p-8 rounded-sm">
+              <h3 class="font-serif text-2xl mb-4">Cambio de Color</h3>
+              <p class="font-light text-slate-300">
+                Transformación completa del esquema de color de tu embarcación
+                con igualación profesional.
+              </p>
+            </div>
+          </div>
+
+          <h3 id="proceso" class="font-serif text-3xl text-navy-900 mb-8">
+            Proceso de Pintura
+          </h3>
+          <div
+            class="bg-blue-50 border-l-4 border-gold-400 p-6 rounded-sm mb-12"
+          >
+            <p class="text-slate-800 font-light">
+              <strong>Importante:</strong> El proceso de pintura completa
+              requiere varado en astillero y toma entre 3-6 semanas dependiendo
+              del tamaño y condición de la embarcación. Coordinamos todo el
+              proceso con Marina Manzanillo.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Inspección y Evaluación (1-2 días)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Evaluación completa de la condición del gelcoat existente,
+                  identificación de áreas problemáticas (ampollas osmóticas,
+                  delaminación, grietas) y cotización detallada del trabajo
+                  necesario.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Preparación de Superficie (5-10 días)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Lijado completo del gelcoat existente con lijadoras orbitales
+                  y a mano en áreas complejas. Reparación de daños estructurales
+                  con resina epóxica y fibra de vidrio. Masillado de
+                  imperfecciones y lijado fino progresivo (80, 120, 220 grit).
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Enmascarado Profesional (1-2 días)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Protección meticulosa de todas las áreas no pintadas:
+                  herrajes, ventanas, líneas de agua, nombre del bote.
+                  Aplicación de papel y cinta de pintor de calidad profesional.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Imprimación Epóxica (2-3 capas)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Aplicación de primer epóxico de barrera alta-build en 2-3
+                  capas para sellado completo del sustrato. Lijado fino entre
+                  capas (320 grit). Tiempo de curado: 24-48 horas.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Aplicación de Pintura Base (3-4 capas)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Aplicación con pistola HVLP de pintura marina de dos
+                  componentes en 3-4 capas cruzadas para cobertura uniforme.
+                  Lijado húmedo fino entre capas (600 grit). Cada capa requiere
+                  12-24 horas de curado.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                6
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Clear Coat Protector (2 capas)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Aplicación de barniz transparente de poliuretano con filtros
+                  UV en 2 capas finales para máxima protección y brillo
+                  duradero. Curado completo: 7-14 días.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                7
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Pulido Final y Entrega
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Pulido completo del acabado con pulidora rotativa y compuestos
+                  de corte fino. Encerado protector y limpieza total de la
+                  embarcación para entrega showroom.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-24 bg-navy-900 text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="font-serif text-4xl mb-8">
+          Garantía Profesional de <span class="text-gold-400">3-5 Años</span>
+        </h2>
+        <p class="text-slate-300 font-light text-lg max-w-3xl mx-auto mb-12">
+          Todas nuestras pinturas completas incluyen garantía escrita contra
+          defectos de aplicación, decoloración prematura y falla del sistema de
+          pintura. La garantía cubre mano de obra y materiales, respaldada por
+          los fabricantes de pintura (Awlgrip/International).
+        </p>
+        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div class="bg-navy-800 p-8 rounded-sm">
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">3 Años</h3>
+            <p class="text-slate-300 text-sm">
+              Sistema estándar de pintura marina. Ideal para embarcaciones de
+              uso recreativo moderado.
+            </p>
+          </div>
+          <div class="bg-navy-800 p-8 rounded-sm border-2 border-gold-400">
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">4 Años</h3>
+            <p class="text-slate-300 text-sm">
+              Sistema premium con clear coat mejorado. Recomendado para
+              embarcaciones de uso frecuente.
+            </p>
+          </div>
+          <div class="bg-navy-800 p-8 rounded-sm">
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">5 Años</h3>
+            <p class="text-slate-300 text-sm">
+              Sistema Awlgrip profesional. Máxima durabilidad para yates de lujo
+              y uso intensivo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="font-serif text-4xl text-navy-900 mb-6">
+          Renueva Tu Embarcación Completamente
+        </h2>
+        <p class="text-slate-600 font-light mb-8 max-w-2xl mx-auto">
+          Agenda una inspección gratuita y recibe una cotización detallada.
+          También ofrecemos financiamiento para proyectos grandes.
+        </p>
+        <a
+          href="index.html#contacto"
+          class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition"
+        >
+          Solicitar Cotización Gratuita
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <h3 class="font-serif text-white text-xl mb-4">
+              Cartagena Boat Detailing
+            </h3>
+            <p class="font-light text-sm">
+              Especialistas en protección y restauración de embarcaciones en
+              Cartagena.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-4">Servicios</h4>
+            <ul class="space-y-2 text-sm font-light">
+              <li>
+                <a href="ppf.html" class="hover:text-gold-400 transition"
+                  >PPF</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ceramic-coating.html"
+                  class="hover:text-gold-400 transition"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="boat-painting.html"
+                  class="hover:text-gold-400 transition"
+                  >Pintura Completa</a
+                >
+              </li>
+              <li>
+                <a href="services.html" class="hover:text-gold-400 transition"
+                  >Ver Todos</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-4">Compañía</h4>
+            <ul class="space-y-2 text-sm font-light">
+              <li>
+                <a href="about.html" class="hover:text-gold-400 transition"
+                  >Nosotros</a
+                >
+              </li>
+              <li>
+                <a href="blog.html" class="hover:text-gold-400 transition"
+                  >Blog</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-4">Contacto</h4>
+            <div class="space-y-2 text-sm font-light">
+              <p>
+                <a
+                  href="tel:+573001234567"
+                  class="hover:text-gold-400 transition"
+                  >+57 300 123 4567</a
+                >
+              </p>
+              <p>
+                <a
+                  href="mailto:info@boatdetailing.com"
+                  class="hover:text-gold-400 transition"
+                  >info@boatdetailing.com</a
+                >
+              </p>
+              <p class="text-xs mt-4">Cartagena, Colombia</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-slate-700 pt-8 text-center text-sm font-light"
+        >
+          <p>
+            &copy; 2024 Cartagena Boat Detailing. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

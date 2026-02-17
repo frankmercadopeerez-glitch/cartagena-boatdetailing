@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulido de Pintura | Cartagena Boat Detailing</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Servicio profesional de pulido y abrillantado para embarcaciones. Restauración del brillo original, eliminación de oxidación y rayones en Cartagena."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Lato", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+            colors: {
+              navy: {
+                900: "#0a192f",
+                800: "#112240",
+              },
+              gold: {
+                400: "#d4af37",
+                500: "#c5a028",
+                600: "#b08d1e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #0a192f 0%,
+          rgba(10, 25, 47, 0.4) 50%,
+          rgba(10, 25, 47, 0.1) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >CARTAGENA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <div class="submenu-item nav-dropdown-link relative">
+                Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa de Botes</a
+                  >
+                  <a
+                    href="bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                  <a
+                    href="paint-polishing.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pulido de Pintura</a
+                  >
+                </div>
+              </div>
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores & Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
+            </div>
+          </div>
+          <a
+            href="about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
+          <a
+            href="#reseñas"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Reseñas</a
+          >
+          <a
+            href="#contacto"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >
+            Agendar Cita
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="#soluciones"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="#reseñas"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Reseñas</a
+        >
+        <a
+          href="#contacto"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Agendar Cita</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
+      style="
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(10, 25, 47, 0.85),
+            rgba(10, 25, 47, 0.7)
+          ),
+          url(&quot;https://images.unsplash.com/photo-1609841945596-e20499cd6157?w=1200&h=800&fit=crop&quot;);
+      "
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="ph ph-sparkle text-4xl text-gold-400"></i>
+            <span class="text-gold-400 font-semibold uppercase tracking-wider"
+              >Brillo Espejo</span
+            >
+          </div>
+          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+            Pulido Profesional de <span class="text-gold-400">Pintura</span>
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl">
+            Restauración del brillo original de tu embarcación mediante
+            corrección de pintura en múltiples etapas. Eliminamos oxidación,
+            rayones, manchas de agua y hologramas para obtener un acabado espejo
+            showroom.
+          </p>
+          <a
+            href="#proceso"
+            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-white transition"
+          >
+            Descubre el Proceso <i class="ph ph-arrow-down ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12">
+            Corrección de Pintura Multi-Etapa
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <p class="text-slate-700 font-light text-lg mb-6">
+                El pulido profesional es un arte técnico que requiere
+                conocimiento profundo de tipos de pinturas marinas, técnicas de
+                máquina rotativa y dual-action, y selección correcta de
+                compuestos abrasivos. No es simplemente "encerar" el bote.
+              </p>
+
+              <ul class="space-y-4">
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Eliminación de Oxidación
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Removemos la capa opaca y tiza que se forma por el clima
+                      tropical
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Corrección de Rayones
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Nivelación de arañazos superficiales y medios con
+                      compounding
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start gap-4">
+                  <i
+                    class="ph ph-check-circle text-gold-400 text-2xl flex-shrink-0 mt-1"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold text-navy-900 mb-1">
+                      Brillo Espejo Final
+                    </h4>
+                    <p class="text-slate-600 text-sm">
+                      Acabado showroom con reflectividad del 95%+ y profundidad
+                      de color
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-cover bg-center rounded-sm h-96 shadow-2xl"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&quot;);
+              "
+            >
+              <div class="h-full bg-black/20"></div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-slate-50 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Nivel 1: Refrescante
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                Pulido ligero en una etapa. Ideal para embarcaciones con buen
+                estado que solo necesitan recuperar brillo y eliminar oxidación
+                leve.
+              </p>
+              <p class="text-gold-400 font-semibold">Duración: 1-2 días</p>
+            </div>
+            <div class="bg-navy-900 text-white p-8 rounded-sm">
+              <h3 class="font-serif text-2xl mb-4">Nivel 2: Restauración</h3>
+              <p class="font-light text-slate-300 mb-4">
+                Corrección en dos etapas (corte + pulido). Elimina rayones
+                moderados, manchas de agua y swirl marks. El más popular.
+              </p>
+              <p class="text-gold-400 font-semibold">Duración: 3-4 días</p>
+            </div>
+            <div class="bg-slate-50 p-8 rounded-sm">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Nivel 3: Completa
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                Corrección profunda en 3-4 etapas. Para gelcoat severamente
+                oxidado o dañado. Incluye wet-sanding en casos necesarios.
+              </p>
+              <p class="text-gold-400 font-semibold">Duración: 5-7 días</p>
+            </div>
+          </div>
+
+          <h3 id="proceso" class="font-serif text-3xl text-navy-900 mb-8">
+            Proceso de Pulido Profesional
+          </h3>
+          <div
+            class="bg-blue-50 border-l-4 border-gold-400 p-6 rounded-sm mb-12"
+          >
+            <p class="text-slate-800 font-light">
+              <strong>Nota Técnica:</strong> El pulido profesional remueve entre
+              1-3 micras de gelcoat. Un gelcoat típico tiene 500-800 micras de
+              espesor, permitiendo múltiples pulidos durante la vida de la
+              embarcación sin comprometer la estructura.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Inspección con Paint Meter
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Medimos el espesor del gelcoat/pintura con medidor digital en
+                  múltiples puntos. Esto determina cuánta corrección es segura
+                  realizar sin adelgazar excesivamente la capa protectora.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Lavado Técnico Previo
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Descontaminación química completa con clay bar, IronX y lavado
+                  a presión. Superficie debe estar 100% limpia antes de pulir
+                  para evitar rayones adicionales.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Etapa 1: Compounding (Corte Pesado)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Uso de pulidora rotativa con pad de corte y compound agresivo
+                  (3M Fast Cut o Meguiar's M100). Removemos oxidación profunda y
+                  rayones hasta 3-4/10 en profundidad. Velocidad: 1500-2000 RPM
+                  con presión firme.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Etapa 2: Polish (Corte Medio)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Pulidora dual-action con polish de corte medio para refinar
+                  marcas dejadas por el compound y eliminar hologramas. Esto
+                  recupera el 70-80% del brillo final.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Etapa 3: Finishing Polish (Abrillantado Final)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Polish de acabado ultra-fino con pad suave en pulidora
+                  dual-action. Este paso crítico logra el brillo espejo y
+                  profundidad de color. Velocidad baja y múltiples pasadas
+                  cruzadas.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                6
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Limpieza con IPA (Isopropyl Alcohol)
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Limpiamos toda la superficie con solución de alcohol
+                  isopropílico al 50% para eliminar aceites residuales de los
+                  compuestos. Esto revela el verdadero acabado logrado.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+              >
+                7
+              </div>
+              <div>
+                <h4 class="font-semibold text-navy-900 mb-2 text-lg">
+                  Protección: Cera o Ceramic Coating
+                </h4>
+                <p class="text-slate-700 font-light">
+                  Aplicación de cera marina premium (Collinite 850) para
+                  protección de 3-6 meses O aplicación de Ceramic Coating para
+                  protección de 2-5 años. El Ceramic Coating es altamente
+                  recomendado después de corrección completa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before/After Types Section -->
+    <section class="py-24 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 mb-12 text-center">
+            Problemas que Corregimos
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 rounded-sm shadow-lg">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Oxidación del Gelcoat
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                La exposición UV constante en Cartagena causa que el gelcoat se
+                "entize" (chalking). El brillo desaparece y la superficie se ve
+                blancuzca/opaca. Nuestro proceso de corrección remueve esta capa
+                oxidada revelando el color original vibrante.
+              </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-sm shadow-lg">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Swirl Marks (Hologramas)
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                Marcas circulares microscópicas causadas por lavados incorrectos
+                o pulidos previos con técnica deficiente. Solo visibles bajo luz
+                directa del sol. Los eliminamos con técnica de cross-hatching y
+                pads foam de alta calidad.
+              </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-sm shadow-lg">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Water Spots (Manchas de Agua)
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                Manchas minerales que quedan cuando el agua se evapora bajo el
+                sol. El agua de Cartagena es dura y deja depósitos calcificados
+                que graban la pintura. Requieren compounding o acid etching para
+                removerse.
+              </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-sm shadow-lg">
+              <h3 class="font-serif text-2xl text-navy-900 mb-4">
+                Rayones Superficiales
+              </h3>
+              <p class="text-slate-700 font-light mb-4">
+                Arañazos de cuerdas, defensas, muelle y limpieza incorrecta. Si
+                no penetran el clear coat (rayones superficiales hasta nivel 3-4
+                de 10), se pueden nivelar completamente con corrección de
+                pintura dejando superficie perfecta.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="py-24 bg-navy-900 text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="font-serif text-4xl mb-8">
+          Resultados <span class="text-gold-400">Garantizados</span>
+        </h2>
+        <p class="text-slate-300 font-light text-lg max-w-3xl mx-auto mb-12">
+          Garantizamos el brillo espejo por 3-6 meses (con cera) o 2-5 años (con
+          Ceramic Coating). Si el acabado no cumple tus expectativas, repulimos
+          las áreas problemáticas sin costo adicional.
+        </p>
+        <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div class="bg-navy-800 p-6 rounded-sm">
+            <h3 class="font-serif text-3xl text-gold-400 mb-2">95%+</h3>
+            <p class="text-slate-300 text-sm">Reflectividad del Gelcoat</p>
+          </div>
+          <div class="bg-navy-800 p-6 rounded-sm">
+            <h3 class="font-serif text-3xl text-gold-400 mb-2">100%</h3>
+            <p class="text-slate-300 text-sm">Oxidación Removida</p>
+          </div>
+          <div class="bg-navy-800 p-6 rounded-sm">
+            <h3 class="font-serif text-3xl text-gold-400 mb-2">3-7 Días</h3>
+            <p class="text-slate-300 text-sm">Tiempo de Proceso</p>
+          </div>
+          <div class="bg-navy-800 p-6 rounded-sm">
+            <h3 class="font-serif text-3xl text-gold-400 mb-2">2-5 Años</h3>
+            <p class="text-slate-300 text-sm">Duración con Ceramic</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="font-serif text-4xl text-navy-900 mb-6">
+          Recupera el Brillo Showroom de Tu Embarcación
+        </h2>
+        <p class="text-slate-600 font-light mb-8 max-w-2xl mx-auto">
+          Ofrecemos inspección gratuita y cotización detallada. Incluye medición
+          de espesor de pintura y evaluación fotográfica del estado actual.
+        </p>
+        <a
+          href="index.html#contacto"
+          class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition"
+        >
+          Solicitar Inspección Gratuita
+        </a>
+      </div>
+    </section>
+
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  CARTAGENA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
+          </div>
+
+          <!-- Services Quick Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF Protection</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#soluciones"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Restauración Gelcoat</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Empresa
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog & Recursos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#reseñas"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Reseñas de Clientes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contacto"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <ul class="space-y-3 text-xs font-light">
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-phone text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">+57 300 123 4567</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  class="ph-fill ph-anchors text-gold-400 mt-0.5 flex-shrink-0"
+                ></i>
+                <span class="text-slate-300">Marina Manzanillo, Cartagena</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-white/10 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-300"
+          >
+            <p>
+              &copy; 2024 Cartagena Boat Detailing. Todos los derechos
+              reservados.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Términos & Condiciones</a
+              >
+              <a href="#" class="hover:text-gold-400 transition-colors"
+                >Privacidad</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
