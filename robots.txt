@@ -1,0 +1,103 @@
+# ==============================================
+# Robots.txt - Cartagena Boat Detailing
+# Detailing y Mantenimiento Naval en Cartagena, Colombia
+# https://cartagenaboatdetailing.com
+# ==============================================
+
+# Reglas generales para todos los robots
+User-agent: *
+Allow: /
+Allow: /images/
+
+# Recursos que no necesitan ser indexados
+Disallow: /css/
+Disallow: /js/
+Disallow: /*.css$
+Disallow: /*.js$
+
+# Archivos de configuración
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.git/
+
+# Sitemap principal
+Sitemap: https://cartagenaboatdetailing.com/sitemap.xml
+
+# ==============================================
+# GOOGLE - Configuración optimizada
+# ==============================================
+User-agent: Googlebot
+Allow: /
+Allow: /images/*.webp
+Allow: /images/*.jpg
+Allow: /images/*.png
+
+# Permitir recursos para renderizado
+User-agent: Googlebot-Image
+Allow: /images/
+
+# ==============================================
+# BING - Configuración optimizada
+# ==============================================
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: msnbot
+Allow: /
+Crawl-delay: 1
+
+# ==============================================
+# OTROS BOTS DE BÚSQUEDA
+# ==============================================
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# ==============================================
+# BOTS DE REDES SOCIALES - Permitir para previews
+# ==============================================
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# ==============================================
+# BLOQUEAR BOTS MALICIOSOS O NO DESEADOS
+# ==============================================
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ==============================================
+# INFORMACIÓN DE CONTACTO
+# Cartagena Boat Detailing
+# Marina Manzanillo, Cartagena de Indias, Colombia
+# Tel: +57 300 123 4567
+# ==============================================

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- ========================================
+       CARTAGENA BOAT DETAILING - SITEMAP
+       Detailing Naval en Cartagena, Colombia
+       ======================================== -->
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/header.webp</image:loc>
+      <image:title>Cartagena Boat Detailing - Detailing Naval Premium</image:title>
+      <image:caption>Servicio de detailing y mantenimiento naval en Cartagena, Colombia</image:caption>
+      <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
+    </image:image>
+  </url>
+  
+  <!-- Páginas Principales -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/about.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cartagenaboatdetailing.com/services.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cartagenaboatdetailing.com/blog.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ========================================
+       PÁGINAS DE SERVICIOS - ALTA PRIORIDAD
+       ======================================== -->
+  
+  <!-- PPF - Paint Protection Film -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/ppf.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/brillo.webp</image:loc>
+      <image:title>PPF Paint Protection Film para botes en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Ceramic Coating -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/ceramic-coating.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/polichado.webp</image:loc>
+      <image:title>Ceramic Coating para embarcaciones en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Restauración Gelcoat -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/gelcoat.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:title>Restauración de gelcoat en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Pintura de Botes -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/boat-painting.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/pintura.webp</image:loc>
+      <image:title>Pintura profesional de botes en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Pintura de Motores -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/engine-painting.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/motores.webp</image:loc>
+      <image:title>Pintura de motores marinos en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Pintura de Casco / Antifouling -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/bottom-paint.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Pulido de Pintura -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/paint-polishing.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/polichado.webp</image:loc>
+      <image:title>Pulido de botes en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Control Anticorrosivo -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/anti-corrosion.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Interiores y Tapicería -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/interior-detailing.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/cojineria.webp</image:loc>
+      <image:title>Limpieza de interiores de botes en Cartagena</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Lavado Técnico -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/technical-wash.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://cartagenaboatdetailing.com/images/limpieza.webp</image:loc>
+      <image:title>Lavado técnico de embarcaciones en Cartagena</image:title>
+    </image:image>
+  </url>
+
+  <!-- ========================================
+       ARTÍCULOS DEL BLOG
+       ======================================== -->
+  <url>
+    <loc>https://cartagenaboatdetailing.com/blog/ceramic-comparativa/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cartagenaboatdetailing.com/blog/mantenimiento-tropical/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cartagenaboatdetailing.com/blog/ppf-cartagena/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cartagenaboatdetailing.com/blog/restauracion-gelcoat/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
