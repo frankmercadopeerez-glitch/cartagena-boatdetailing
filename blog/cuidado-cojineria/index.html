@@ -244,9 +244,53 @@
           >
             Contacto
           </a>
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-white focus:outline-none"
+          >
+            <i class="ph ph-list text-3xl"></i>
+          </button>
         </div>
       </div>
-    </nav>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-navy-900 z-[60] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
+      >
+        <button
+          id="close-menu-btn"
+          class="absolute top-6 right-6 text-white/50 hover:text-white"
+        >
+          <i class="ph ph-x text-3xl"></i>
+        </button>
+        <a
+          href="../../index.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Inicio</a
+        >
+        <a
+          href="../../services.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Servicios</a
+        >
+        <a
+          href="../../blog.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Blog</a
+        >
+        <a
+          href="../../about.html"
+          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+          >Nosotros</a
+        >
+        <a
+          href="../../index.html#contact"
+          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+          >Contacto</a
+        >
+      </div>
 
     <!-- Blog Article Container -->
     <div class="bg-gradient-to-b from-navy-900 to-navy-800 text-white py-12">

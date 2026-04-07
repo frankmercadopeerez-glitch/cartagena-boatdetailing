@@ -38,6 +38,7 @@ function initMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const closeMenuBtn = document.getElementById("close-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
+  const navbar = document.getElementById("navbar");
   const mobileLinks = document.querySelectorAll(".mobile-link");
 
   if (!mobileMenuBtn || !mobileMenu) return;
@@ -46,8 +47,10 @@ function initMobileMenu() {
     const isClosed = mobileMenu.classList.contains("translate-x-full");
     if (isClosed) {
       mobileMenu.classList.remove("translate-x-full");
+      if (navbar) navbar.classList.add("pointer-events-none");
     } else {
       mobileMenu.classList.add("translate-x-full");
+      if (navbar) navbar.classList.remove("pointer-events-none");
     }
   }
 
