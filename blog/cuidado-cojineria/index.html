@@ -624,5 +624,35 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      // Mobile Menu Logic
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const closeMenuBtn = document.getElementById("close-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const navbar = document.querySelector("nav");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      function toggleMenu() {
+        const isClosed = mobileMenu.classList.contains("translate-x-full");
+        if (isClosed) {
+          mobileMenu.classList.remove("translate-x-full");
+          if (navbar) navbar.classList.add("hidden");
+        } else {
+          mobileMenu.classList.add("translate-x-full");
+          if (navbar) navbar.classList.remove("hidden");
+        }
+      }
+
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener("click", toggleMenu);
+      }
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener("click", toggleMenu);
+      }
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", toggleMenu);
+      });
+    </script>
   </body>
 </html>

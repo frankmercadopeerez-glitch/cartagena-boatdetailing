@@ -47,10 +47,10 @@ function initMobileMenu() {
     const isClosed = mobileMenu.classList.contains("translate-x-full");
     if (isClosed) {
       mobileMenu.classList.remove("translate-x-full");
-      if (navbar) navbar.classList.add("pointer-events-none");
+      if (navbar) navbar.classList.add("hidden");
     } else {
       mobileMenu.classList.add("translate-x-full");
-      if (navbar) navbar.classList.remove("pointer-events-none");
+      if (navbar) navbar.classList.remove("hidden");
     }
   }
 
