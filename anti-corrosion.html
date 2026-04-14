@@ -237,45 +237,46 @@
           <i class="ph ph-list text-3xl"></i>
         </button>
       </div>
-
-      <!-- Mobile Menu Overlay -->
-      <div
-        id="mobile-menu"
-        class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8"
-      >
-        <button
-          id="close-menu-btn"
-          class="absolute top-6 right-6 text-white/50 hover:text-white"
-        >
-          <i class="ph ph-x text-3xl"></i>
-        </button>
-        <a
-          href="index.html#soluciones"
-          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-          >Servicios</a
-        >
-        <a
-          href="about.html"
-          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-          >Sobre Nosotros</a
-        >
-        <a
-          href="blog.html"
-          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-          >Blog</a
-        >
-        <a
-          href="index.html#reseñas"
-          class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-          >Reseñas</a
-        >
-        <a
-          href="index.html#contacto"
-          class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
-          >Agendar Cita</a
-        >
-      </div>
     </nav>
+
+    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+      style="opacity: 1; visibility: visible"
+    >
+      <button
+        id="close-menu-btn"
+        class="absolute top-6 right-6 text-white/50 hover:text-white"
+      >
+        <i class="ph ph-x text-3xl"></i>
+      </button>
+      <a
+        href="index.html#soluciones"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Servicios</a
+      >
+      <a
+        href="about.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Sobre Nosotros</a
+      >
+      <a
+        href="blog.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Blog</a
+      >
+      <a
+        href="index.html#reseñas"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Reseñas</a
+      >
+      <a
+        href="index.html#contacto"
+        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+        >Agendar Cita</a
+      >
+    </div>
 
     <section
       class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"

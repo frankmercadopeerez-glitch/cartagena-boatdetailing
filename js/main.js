@@ -45,9 +45,13 @@ function initMobileMenu() {
   function toggleMenu() {
     const isClosed = mobileMenu.classList.contains("translate-x-full");
     if (isClosed) {
+      // Abrir menú
       mobileMenu.classList.remove("translate-x-full");
+      mobileMenu.classList.remove("pointer-events-none");
     } else {
+      // Cerrar menú
       mobileMenu.classList.add("translate-x-full");
+      mobileMenu.classList.add("pointer-events-none");
     }
   }
 
