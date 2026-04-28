@@ -36,6 +36,7 @@
     </script>
     <style>
       :root {
+        --sat: env(safe-area-inset-top, 0px);
         --sab: env(safe-area-inset-bottom, 0px);
       }
       body {
@@ -45,6 +46,9 @@
           -apple-system,
           sans-serif;
         background: #f4f6f9;
+      }
+      /* Nav absorbe el safe-area del notch en PWA standalone */
+      nav#main-nav {
         padding-top: env(safe-area-inset-top, 0px);
       }
       .glass-card {
@@ -210,6 +214,7 @@
     <!-- APP -->
     <div id="main-app" class="hidden">
       <nav
+        id="main-nav"
         style="background-color: #050b14"
         class="text-white shadow-lg sticky top-0 z-20"
       >
