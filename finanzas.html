@@ -2,12 +2,25 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>CBD Finanzas</title>
-    <!-- No indexar en buscadores -->
     <meta name="robots" content="noindex, nofollow" />
 
-    <!-- Firebase SDK (compatible con JS clásico) -->
+    <!-- PWA instalable en iOS y Android -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="CBD Finanzas" />
+    <meta name="theme-color" content="#050B14" />
+    <link rel="manifest" href="finanzas-manifest.json" />
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -28,6 +41,10 @@
       };
     </script>
     <style>
+      :root {
+        --sat: env(safe-area-inset-top, 0px);
+        --sab: env(safe-area-inset-bottom, 0px);
+      }
       body {
         font-family:
           "Inter",
@@ -35,6 +52,7 @@
           -apple-system,
           sans-serif;
         background-color: #f4f6f9;
+        padding-top: var(--sat);
       }
       .glass-card {
         background: white;
@@ -42,6 +60,67 @@
         box-shadow:
           0 4px 6px -1px rgba(0, 0, 0, 0.1),
           0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.5rem;
+      }
+      input[type="date"] {
+        -webkit-appearance: none;
+        appearance: none;
+        color: #1e293b;
+      }
+
+      /* AI loading overlay */
+      #ai-overlay {
+        display: none;
+      }
+      #ai-overlay.active {
+        display: flex;
+      }
+
+      /* Botones tipo toggle */
+      .toggle-btn {
+        transition: all 0.15s ease;
+      }
+      .toggle-btn.active-green {
+        border-color: #22c55e;
+        background: #f0fdf4;
+        color: #15803d;
+        font-weight: 700;
+      }
+      .toggle-btn.active-red {
+        border-color: #ef4444;
+        background: #fef2f2;
+        color: #b91c1c;
+        font-weight: 700;
+      }
+      .toggle-btn.active-blue {
+        border-color: #3b82f6;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+      .toggle-btn.active-indigo {
+        border-color: #6366f1;
+        background: #eef2ff;
+        color: #4338ca;
+        font-weight: 700;
+      }
+      .toggle-btn.inactive {
+        border-color: #e2e8f0;
+        background: white;
+        color: #94a3b8;
+      }
+
+      /* Banner iOS */
+      #ios-banner {
+        display: none;
+        padding-bottom: calc(1rem + var(--sab));
       }
     </style>
   </head>
