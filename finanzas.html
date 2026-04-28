@@ -604,7 +604,7 @@
                 type="submit"
                 id="btn-submit"
                 class="w-full text-white font-bold py-3.5 px-4 rounded-lg transition flex items-center justify-center gap-2 text-sm"
-                style="background-color: #b8904d"
+                style="background-color: #1a365d"
               >
                 <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
               </button>
@@ -633,10 +633,10 @@
                 ></i>
                 Movimientos
               </h2>
-              <div class="flex gap-2 flex-wrap">
+              <div class="flex gap-2 flex-wrap items-center">
                 <select
                   id="filter-proyecto"
-                  class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none max-w-[140px]"
+                  class="text-sm rounded-lg border border-slate-300 bg-white py-2 pl-2 pr-7 focus:outline-none max-w-[160px]"
                 >
                   <option value="">Todos</option>
                 </select>
@@ -648,6 +648,25 @@
                   <option value="ingreso">Ingresos</option>
                   <option value="gasto">Gastos</option>
                 </select>
+                <!-- Filtro categoría multi-selección -->
+                <div class="relative" id="cat-filter-wrap">
+                  <button
+                    type="button"
+                    onclick="toggleCatDropdown()"
+                    id="cat-filter-btn"
+                    class="text-sm rounded-lg border border-slate-300 bg-white py-2 pl-2 pr-6 focus:outline-none flex items-center gap-1 relative whitespace-nowrap"
+                  >
+                    <span id="cat-filter-label">Categorías</span>
+                    <span
+                      class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"
+                      >▾</span
+                    >
+                  </button>
+                  <div
+                    id="cat-dropdown"
+                    class="hidden absolute right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-30 p-2 w-56 max-h-60 overflow-y-auto"
+                  ></div>
+                </div>
               </div>
             </div>
             <div id="tx-cards" class="sm:hidden space-y-2"></div>
@@ -744,7 +763,8 @@
 
       let db = null,
         auth = null,
-        transactions = [];
+        transactions = [],
+        filterCats = new Set();
       const todayStr = new Date().toISOString().split("T")[0];
 
       // Mes activo
@@ -1212,7 +1232,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         const btnSubmit = document.getElementById("btn-submit");
         btnSubmit.innerHTML =
           '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
-        btnSubmit.style.backgroundColor = "#B8904D";
+        btnSubmit.style.backgroundColor = "#1a365d";
         document.getElementById("btn-cancelar-edicion").classList.add("hidden");
         lucide.createIcons();
       }
@@ -1245,6 +1265,74 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           ? "Ver menos"
           : "Ver todos los proyectos";
         renderAll();
+      }
+
+      // FILTRO CATEGORIAS
+      function toggleCatDropdown() {
+        const dd = document.getElementById("cat-dropdown");
+        if (dd.classList.contains("hidden")) {
+          buildCatDropdown();
+          dd.classList.remove("hidden");
+        } else {
+          dd.classList.add("hidden");
+        }
+      }
+
+      function buildCatDropdown() {
+        const tipo = document.getElementById("filter-tipo").value;
+        let cats = [];
+        if (!tipo || tipo === "ingreso") cats = cats.concat(CATS.ingreso);
+        if (!tipo || tipo === "gasto") cats = cats.concat(CATS.gasto);
+        cats = [...new Set(cats)];
+        const dd = document.getElementById("cat-dropdown");
+        dd.innerHTML = "";
+        // Botón "Todas"
+        const allBtn = document.createElement("button");
+        allBtn.type = "button";
+        allBtn.className =
+          "w-full text-left text-xs px-2 py-1.5 rounded hover:bg-slate-100 text-slate-500 font-semibold mb-1";
+        allBtn.textContent = "Todas las categorías";
+        allBtn.onclick = () => {
+          filterCats.clear();
+          updateCatLabel();
+          buildCatDropdown();
+          renderAll();
+        };
+        dd.appendChild(allBtn);
+        // Divisor
+        const hr = document.createElement("hr");
+        hr.className = "border-slate-100 mb-1";
+        dd.appendChild(hr);
+        // Una fila por categoría
+        cats.forEach((cat) => {
+          const sel = filterCats.has(cat);
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className =
+            "w-full text-left text-xs px-2 py-1.5 rounded flex items-center gap-2 " +
+            (sel
+              ? "bg-blue-50 text-blue-700 font-semibold"
+              : "hover:bg-slate-50 text-slate-700");
+          btn.innerHTML =
+            `<span class="w-3.5 h-3.5 border rounded flex-shrink-0 flex items-center justify-center text-[9px] ${sel ? "bg-blue-500 border-blue-500 text-white" : "border-slate-300"}">${sel ? "✓" : ""}</span>` +
+            cat;
+          btn.onclick = () => {
+            if (filterCats.has(cat)) filterCats.delete(cat);
+            else filterCats.add(cat);
+            updateCatLabel();
+            buildCatDropdown();
+            renderAll();
+          };
+          dd.appendChild(btn);
+        });
+      }
+
+      function updateCatLabel() {
+        const lbl = document.getElementById("cat-filter-label");
+        if (filterCats.size === 0) lbl.textContent = "Categorías";
+        else if (filterCats.size === 1)
+          lbl.textContent = [...filterCats][0].split(" /")[0].trim();
+        else lbl.textContent = filterCats.size + " categ.";
       }
 
       // RENDER
@@ -1345,6 +1433,8 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           displayed = displayed.filter((t) => t.proyecto === filterProy);
         if (filterTipo)
           displayed = displayed.filter((t) => t.tipo === filterTipo);
+        if (filterCats.size > 0)
+          displayed = displayed.filter((t) => filterCats.has(t.categoria));
         const sorted = [...displayed].sort((a, b) => {
           const fa = (a.fecha || "") + (a.hora || "");
           const fb = (b.fecha || "") + (b.hora || "");
@@ -1436,9 +1526,18 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
       document
         .getElementById("filter-proyecto")
         .addEventListener("change", renderAll);
-      document
-        .getElementById("filter-tipo")
-        .addEventListener("change", renderAll);
+      document.getElementById("filter-tipo").addEventListener("change", () => {
+        filterCats.clear();
+        updateCatLabel();
+        buildCatDropdown();
+        renderAll();
+      });
+      document.addEventListener("click", (e) => {
+        const wrap = document.getElementById("cat-filter-wrap");
+        if (wrap && !wrap.contains(e.target))
+          document.getElementById("cat-dropdown").classList.add("hidden");
+      });
+      buildCatDropdown();
       lucide.createIcons();
     </script>
   </body>
