@@ -54,8 +54,8 @@
       /* Cuando hay safe area real, el inner div no necesita tanto padding top */
       @supports (padding-top: env(safe-area-inset-top)) {
         nav#main-nav .nav-inner {
-          padding-top: 0.25rem;
-          padding-bottom: 0.25rem;
+          padding-top: 0.1rem;
+          padding-bottom: 0.1rem;
         }
       }
       .glass-card {
@@ -65,13 +65,14 @@
           0 4px 6px -1px rgba(0, 0, 0, 0.1),
           0 2px 4px -1px rgba(0, 0, 0, 0.06);
       }
-      select {
+      select,
+      #cat-filter-btn {
         appearance: none;
         -webkit-appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 0.75rem center;
-        padding-right: 2.5rem;
+        padding-right: 2.5rem !important;
       }
       input[type="date"] {
         -webkit-appearance: none;
@@ -226,11 +227,16 @@
         class="text-white shadow-lg sticky top-0 z-20"
       >
         <div
-          class="nav-inner max-w-7xl mx-auto px-4 py-1 md:py-3 flex justify-between items-center"
+          class="nav-inner max-w-7xl mx-auto px-4 py-0.5 md:py-3 flex justify-between items-center"
         >
           <div class="flex items-center gap-2">
-            <i data-lucide="anchor" class="w-5 h-5" style="color: #b8904d"></i>
-            <span class="text-base font-bold uppercase tracking-wider"
+            <i
+              data-lucide="anchor"
+              class="w-4 h-4 md:w-5 md:h-5"
+              style="color: #b8904d"
+            ></i>
+            <span
+              class="text-sm md:text-base font-bold uppercase tracking-wider"
               >CBD Finanzas</span
             >
           </div>
@@ -654,9 +660,9 @@
                     type="button"
                     onclick="toggleCatDropdown()"
                     id="cat-filter-btn"
-                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer leading-tight"
+                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer"
                   >
-                    <span id="cat-filter-label">Categorías</span> ▾
+                    <span id="cat-filter-label">Categorías</span>
                   </button>
                 </div>
               </div>
@@ -1337,6 +1343,19 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           };
           dd.appendChild(btn);
         });
+        // Reposicionar si el dropdown ya está visible
+        if (!dd.classList.contains("hidden")) {
+          const filterBtn = document.getElementById("cat-filter-btn");
+          const r = filterBtn.getBoundingClientRect();
+          dd.style.top = r.bottom + 4 + "px";
+          dd.style.left = r.left + "px";
+          dd.style.right = "auto";
+          const ddr = dd.getBoundingClientRect();
+          if (ddr.right > window.innerWidth - 8) {
+            dd.style.left = "auto";
+            dd.style.right = window.innerWidth - r.right + "px";
+          }
+        }
       }
 
       function updateCatLabel() {
