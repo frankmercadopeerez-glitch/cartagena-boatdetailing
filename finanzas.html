@@ -2,12 +2,18 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>CBD Finanzas</title>
     <meta name="robots" content="noindex, nofollow" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-mobile-web-app-title" content="CBD Finanzas" />
     <meta name="theme-color" content="#050B14" />
     <link rel="manifest" href="finanzas-manifest.json" />
@@ -18,86 +24,228 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
       tailwind.config = {
-        theme: { extend: { colors: { navy: { 900:"#050B14",800:"#112238",700:"#1A365D" }, gold: { 500:"#B8904D" } } } }
+        theme: {
+          extend: {
+            colors: {
+              navy: { 900: "#050B14", 800: "#112238", 700: "#1A365D" },
+              gold: { 500: "#B8904D" },
+            },
+          },
+        },
       };
     </script>
     <style>
-      :root { --sab: env(safe-area-inset-bottom,0px); }
-      body { font-family: "Inter",system-ui,-apple-system,sans-serif; background:#f4f6f9; padding-top: env(safe-area-inset-top,0px); }
-      .glass-card { background:white; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06); }
-      select { appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right .75rem center; padding-right:2.5rem; }
-      input[type="date"] { -webkit-appearance:none; appearance:none; color:#1e293b; }
-      #ai-overlay { display:none; }
-      #ai-overlay.active { display:flex; }
-      #ios-banner { display:none; padding-bottom:calc(1rem + var(--sab)); }
-      .toggle-btn { transition:all .15s ease; }
-      .toggle-btn.active-green { border-color:#22c55e; background:#f0fdf4; color:#15803d; font-weight:700; }
-      .toggle-btn.active-red   { border-color:#ef4444; background:#fef2f2; color:#b91c1c; font-weight:700; }
-      .toggle-btn.active-blue  { border-color:#3b82f6; background:#eff6ff; color:#1d4ed8; font-weight:700; }
-      .toggle-btn.active-indigo{ border-color:#6366f1; background:#eef2ff; color:#4338ca; font-weight:700; }
-      .toggle-btn.inactive     { border-color:#e2e8f0; background:white;   color:#94a3b8; }
-      #proyecto-dropdown li { padding:.6rem 1rem; cursor:pointer; font-size:.875rem; color:#1e293b; }
-      #proyecto-dropdown li:hover { background:#f1f5f9; }
+      :root {
+        --sab: env(safe-area-inset-bottom, 0px);
+      }
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #f4f6f9;
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      .glass-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.5rem;
+      }
+      input[type="date"] {
+        -webkit-appearance: none;
+        appearance: none;
+        color: #1e293b;
+      }
+      #ai-overlay {
+        display: none;
+      }
+      #ai-overlay.active {
+        display: flex;
+      }
+      #ios-banner {
+        display: none;
+        padding-bottom: calc(1rem + var(--sab));
+      }
+      .toggle-btn {
+        transition: all 0.15s ease;
+      }
+      .toggle-btn.active-green {
+        border-color: #22c55e;
+        background: #f0fdf4;
+        color: #15803d;
+        font-weight: 700;
+      }
+      .toggle-btn.active-red {
+        border-color: #ef4444;
+        background: #fef2f2;
+        color: #b91c1c;
+        font-weight: 700;
+      }
+      .toggle-btn.active-blue {
+        border-color: #3b82f6;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+      .toggle-btn.active-indigo {
+        border-color: #6366f1;
+        background: #eef2ff;
+        color: #4338ca;
+        font-weight: 700;
+      }
+      .toggle-btn.inactive {
+        border-color: #e2e8f0;
+        background: white;
+        color: #94a3b8;
+      }
+      #proyecto-dropdown li {
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        color: #1e293b;
+      }
+      #proyecto-dropdown li:hover {
+        background: #f1f5f9;
+      }
     </style>
   </head>
   <body class="text-slate-800">
-
     <!-- OVERLAY IA -->
-    <div id="ai-overlay" class="fixed inset-0 z-50 bg-black/70 flex-col items-center justify-center gap-4 text-white">
-      <div class="w-14 h-14 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+    <div
+      id="ai-overlay"
+      class="fixed inset-0 z-50 bg-black/70 flex-col items-center justify-center gap-4 text-white"
+    >
+      <div
+        class="w-14 h-14 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"
+      ></div>
       <p class="text-lg font-semibold">Analizando imagen con IA...</p>
       <p class="text-sm text-slate-300">Gemini esta extrayendo los datos</p>
     </div>
 
     <!-- BANNER iOS -->
-    <div id="ios-banner" class="fixed bottom-0 left-0 right-0 z-40 flex items-start gap-3 p-4" style="background-color:#112238;">
-      <i data-lucide="share" class="w-5 h-5 mt-0.5 flex-shrink-0" style="color:#B8904D"></i>
+    <div
+      id="ios-banner"
+      class="fixed bottom-0 left-0 right-0 z-40 flex items-start gap-3 p-4"
+      style="background-color: #112238"
+    >
+      <i
+        data-lucide="share"
+        class="w-5 h-5 mt-0.5 flex-shrink-0"
+        style="color: #b8904d"
+      ></i>
       <div class="flex-1 text-white text-sm leading-relaxed">
-        <strong class="block mb-0.5">Instalar CBD Finanzas en tu iPhone:</strong>
-        <span>1. Toca <strong>Compartir</strong> (icono cuadrado con flecha) en Safari</span><br>
-        <span>2. Selecciona <strong>"Agregar a pantalla de inicio"</strong></span>
+        <strong class="block mb-0.5"
+          >Instalar CBD Finanzas en tu iPhone:</strong
+        >
+        <span
+          >1. Toca <strong>Compartir</strong> (icono cuadrado con flecha) en
+          Safari</span
+        ><br />
+        <span
+          >2. Selecciona <strong>"Agregar a pantalla de inicio"</strong></span
+        >
       </div>
-      <button onclick="document.getElementById('ios-banner').style.display='none';sessionStorage.setItem('iosDismissed','1')" class="text-slate-400 hover:text-white flex-shrink-0">
+      <button
+        onclick="
+          document.getElementById('ios-banner').style.display = 'none';
+          localStorage.setItem('iosDismissed', '1');
+        "
+        class="text-slate-400 hover:text-white flex-shrink-0"
+      >
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <!-- LOGIN -->
-    <div id="lock-screen" class="fixed inset-0 z-30 flex items-center justify-center" style="background-color:#050B14">
+    <div
+      id="lock-screen"
+      class="fixed inset-0 z-30 flex items-center justify-center"
+      style="background-color: #050b14"
+    >
       <div class="text-center p-8 max-w-sm w-full mx-4">
         <div class="flex justify-center mb-4">
-          <i data-lucide="anchor" class="w-16 h-16" style="color:#B8904D"></i>
+          <i data-lucide="anchor" class="w-16 h-16" style="color: #b8904d"></i>
         </div>
         <h1 class="text-white text-2xl font-bold mb-1">CBD Finanzas</h1>
-        <p class="text-slate-400 mb-8 text-sm">Panel Privado - Cartagena Boat Detailing</p>
-        <input type="email" id="auth-email" placeholder="Correo electronico"
+        <p class="text-slate-400 mb-8 text-sm">
+          Panel Privado - Cartagena Boat Detailing
+        </p>
+        <input
+          type="email"
+          id="auth-email"
+          placeholder="Correo electronico"
           class="block w-full rounded-lg border p-3 text-center mb-3 focus:outline-none"
-          style="background-color:#112238;border-color:#334155;color:white" />
-        <input type="password" id="auth-password" placeholder="Contrasena"
+          style="background-color: #112238; border-color: #334155; color: white"
+        />
+        <input
+          type="password"
+          id="auth-password"
+          placeholder="Contrasena"
           class="block w-full rounded-lg border p-3 text-center mb-4 focus:outline-none"
-          style="background-color:#112238;border-color:#334155;color:white" />
-        <button onclick="loginWithEmail()" id="login-btn"
+          style="background-color: #112238; border-color: #334155; color: white"
+        />
+        <button
+          onclick="loginWithEmail()"
+          id="login-btn"
           class="w-full text-white font-bold py-3 px-4 rounded-lg transition"
-          style="background-color:#B8904D">Ingresar</button>
+          style="background-color: #b8904d"
+        >
+          Ingresar
+        </button>
         <p id="pin-error" class="text-red-400 mt-3 text-sm hidden"></p>
       </div>
     </div>
 
     <!-- APP -->
     <div id="main-app" class="hidden">
-
-      <nav style="background-color:#050B14" class="text-white shadow-lg sticky top-0 z-20">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <nav
+        style="background-color: #050b14"
+        class="text-white shadow-lg sticky top-0 z-20"
+      >
+        <div
+          class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
+        >
           <div class="flex items-center gap-2">
-            <i data-lucide="anchor" class="w-5 h-5" style="color:#B8904D"></i>
-            <span class="text-base font-bold uppercase tracking-wider">CBD Finanzas</span>
+            <i data-lucide="anchor" class="w-5 h-5" style="color: #b8904d"></i>
+            <span class="text-base font-bold uppercase tracking-wider"
+              >CBD Finanzas</span
+            >
           </div>
           <div class="flex items-center gap-3">
-            <span id="sync-status" class="text-xs flex items-center gap-1 text-yellow-400">
+            <span
+              id="sync-status"
+              class="text-xs flex items-center gap-1 text-yellow-400"
+            >
               <i data-lucide="loader" class="w-3.5 h-3.5"></i>
               <span class="hidden sm:inline">Conectando...</span>
             </span>
-            <button onclick="logout()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+            <button
+              id="btn-install-ios"
+              onclick="
+                document.getElementById('ios-banner').style.display = 'flex';
+                lucide.createIcons();
+              "
+              class="hidden text-xs font-semibold text-yellow-400 hover:text-yellow-300 flex items-center gap-1"
+              title="Instalar como app"
+            >
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Instalar</span>
+            </button>
+            <button
+              onclick="logout()"
+              class="text-xs text-slate-400 hover:text-white flex items-center gap-1"
+            >
               <i data-lucide="log-out" class="w-4 h-4"></i>
               <span class="hidden sm:inline">Salir</span>
             </button>
@@ -106,15 +254,24 @@
       </nav>
 
       <div class="max-w-7xl mx-auto p-3 sm:p-6 lg:p-8 pb-28">
-
         <!-- Selector de mes -->
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-1">
-            <button onclick="cambiarMes(-1)" class="p-1.5 rounded-lg hover:bg-slate-200 transition">
+            <button
+              onclick="cambiarMes(-1)"
+              class="p-1.5 rounded-lg hover:bg-slate-200 transition"
+            >
               <i data-lucide="chevron-left" class="w-5 h-5 text-slate-600"></i>
             </button>
-            <span id="mes-label" class="text-base font-bold text-slate-700 min-w-[140px] text-center capitalize"></span>
-            <button onclick="cambiarMes(1)" id="btn-mes-sig" class="p-1.5 rounded-lg hover:bg-slate-200 transition">
+            <span
+              id="mes-label"
+              class="text-base font-bold text-slate-700 min-w-[140px] text-center capitalize"
+            ></span>
+            <button
+              onclick="cambiarMes(1)"
+              id="btn-mes-sig"
+              class="p-1.5 rounded-lg hover:bg-slate-200 transition"
+            >
               <i data-lucide="chevron-right" class="w-5 h-5 text-slate-600"></i>
             </button>
           </div>
@@ -125,22 +282,50 @@
         <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
           <div class="glass-card p-2 sm:p-6 border-l-4 border-green-500">
             <p class="text-xs font-medium text-slate-500">Ingresos</p>
-            <p class="font-bold text-green-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap" style="font-size:clamp(.75rem,3vw,1.875rem)" id="kpi-ingresos">$0</p>
+            <p
+              class="font-bold text-green-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
+              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
+              id="kpi-ingresos"
+            >
+              $0
+            </p>
           </div>
           <div class="glass-card p-2 sm:p-6 border-l-4 border-red-500">
             <p class="text-xs font-medium text-slate-500">Gastos</p>
-            <p class="font-bold text-red-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap" style="font-size:clamp(.75rem,3vw,1.875rem)" id="kpi-gastos">$0</p>
+            <p
+              class="font-bold text-red-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
+              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
+              id="kpi-gastos"
+            >
+              $0
+            </p>
           </div>
-          <div class="glass-card p-2 sm:p-6 border-l-4 border-yellow-400" style="background-color:#050B14">
+          <div
+            class="glass-card p-2 sm:p-6 border-l-4 border-yellow-400"
+            style="background-color: #050b14"
+          >
             <p class="text-xs font-medium text-yellow-400">Profit</p>
-            <p class="font-bold text-white mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap" style="font-size:clamp(.75rem,3vw,1.875rem)" id="kpi-profit">$0</p>
+            <p
+              class="font-bold text-white mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
+              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
+              id="kpi-profit"
+            >
+              $0
+            </p>
           </div>
         </div>
 
         <!-- Resumen por Proyecto -->
         <div class="glass-card p-4 sm:p-6 mb-5">
-          <h2 class="text-base font-bold mb-3 flex items-center" style="color:#1A365D">
-            <i data-lucide="bar-chart-2" class="w-5 h-5 mr-2" style="color:#B8904D"></i>
+          <h2
+            class="text-base font-bold mb-3 flex items-center"
+            style="color: #1a365d"
+          >
+            <i
+              data-lucide="bar-chart-2"
+              class="w-5 h-5 mr-2"
+              style="color: #b8904d"
+            ></i>
             <span id="summary-title">Resumen del mes</span>
           </h2>
           <div id="summary-cards" class="sm:hidden space-y-3"></div>
@@ -148,61 +333,134 @@
             <table class="min-w-full divide-y divide-slate-200">
               <thead class="bg-slate-50">
                 <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Proyecto</th>
-                  <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase">Ingresos</th>
-                  <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase">Gastos</th>
-                  <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase">Profit</th>
-                  <th class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase">Margen</th>
+                  <th
+                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                  >
+                    Proyecto
+                  </th>
+                  <th
+                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                  >
+                    Ingresos
+                  </th>
+                  <th
+                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                  >
+                    Gastos
+                  </th>
+                  <th
+                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                  >
+                    Profit
+                  </th>
+                  <th
+                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                  >
+                    Margen
+                  </th>
                 </tr>
               </thead>
-              <tbody id="summary-body" class="bg-white divide-y divide-slate-200"></tbody>
+              <tbody
+                id="summary-body"
+                class="bg-white divide-y divide-slate-200"
+              ></tbody>
             </table>
           </div>
-          <button id="btn-ver-mas" onclick="toggleVerMas()" class="hidden mt-3 text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-            <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i><span id="ver-mas-texto">Ver todos los proyectos</span>
+          <button
+            id="btn-ver-mas"
+            onclick="toggleVerMas()"
+            class="hidden mt-3 text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+          >
+            <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i
+            ><span id="ver-mas-texto">Ver todos los proyectos</span>
           </button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-
           <!-- FORMULARIO -->
           <div class="glass-card p-4 sm:p-6 lg:col-span-1">
             <div class="flex items-center justify-between mb-4">
-              <h2 class="text-base font-bold flex items-center" style="color:#1A365D">
-                <i data-lucide="plus-circle" class="w-5 h-5 mr-2" style="color:#B8904D"></i>
+              <h2
+                class="text-base font-bold flex items-center"
+                style="color: #1a365d"
+              >
+                <i
+                  data-lucide="plus-circle"
+                  class="w-5 h-5 mr-2"
+                  style="color: #b8904d"
+                ></i>
                 Nuevo Registro
               </h2>
               <div class="flex gap-2">
-                <button type="button" onclick="document.getElementById('factura-camara').click()"
+                <button
+                  type="button"
+                  onclick="document.getElementById('factura-camara').click()"
                   class="flex items-center gap-1 text-xs font-semibold text-white px-2.5 py-2 rounded-lg"
-                  style="background-color:#1A365D" title="Tomar foto">
+                  style="background-color: #1a365d"
+                  title="Tomar foto"
+                >
                   <i data-lucide="camera" class="w-4 h-4"></i>
                 </button>
-                <button type="button" onclick="document.getElementById('factura-galeria').click()"
+                <button
+                  type="button"
+                  onclick="document.getElementById('factura-galeria').click()"
                   class="flex items-center gap-1 text-xs font-semibold text-white px-2.5 py-2 rounded-lg"
-                  style="background-color:#1A365D" title="Subir de galeria">
+                  style="background-color: #1a365d"
+                  title="Subir de galeria"
+                >
                   <i data-lucide="image" class="w-4 h-4"></i>
                 </button>
               </div>
-              <input type="file" id="factura-camara" accept="image/*" capture="environment" class="hidden" onchange="escanearFactura(this)" />
-              <input type="file" id="factura-galeria" accept="image/*" class="hidden" onchange="escanearFactura(this)" />
+              <input
+                type="file"
+                id="factura-camara"
+                accept="image/*"
+                capture="environment"
+                class="hidden"
+                onchange="escanearFactura(this)"
+              />
+              <input
+                type="file"
+                id="factura-galeria"
+                accept="image/*"
+                class="hidden"
+                onchange="escanearFactura(this)"
+              />
             </div>
 
             <form id="tx-form" class="space-y-3">
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Fecha</label>
-                <input type="date" id="tx-fecha" class="block w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:outline-none focus:border-yellow-500 bg-white" />
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Fecha</label
+                >
+                <input
+                  type="date"
+                  id="tx-fecha"
+                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:outline-none focus:border-yellow-500 bg-white"
+                />
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Tipo</label>
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Tipo</label
+                >
                 <div class="grid grid-cols-2 gap-2">
-                  <button type="button" id="btn-ingreso" onclick="setTipo('ingreso')"
-                    class="toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    id="btn-ingreso"
+                    onclick="setTipo('ingreso')"
+                    class="toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2"
+                  >
                     <i data-lucide="trending-up" class="w-4 h-4"></i> Ingreso
                   </button>
-                  <button type="button" id="btn-gasto" onclick="setTipo('gasto')"
-                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    id="btn-gasto"
+                    onclick="setTipo('gasto')"
+                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2"
+                  >
                     <i data-lucide="trending-down" class="w-4 h-4"></i> Gasto
                   </button>
                 </div>
@@ -210,47 +468,101 @@
               </div>
 
               <div id="campo-proyecto">
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">
-                  Proyecto / Cliente <span id="proyecto-opcional" class="normal-case font-normal text-slate-400">(requerido)</span>
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                >
+                  Proyecto / Cliente
+                  <span
+                    id="proyecto-opcional"
+                    class="normal-case font-normal text-slate-400"
+                    >(requerido)</span
+                  >
                 </label>
                 <div class="relative">
-                  <input type="text" id="tx-proyecto" placeholder="Ej. Yate Oceana 74 Ft" autocomplete="off"
-                    oninput="filtrarProyectos(this.value)" onfocus="mostrarProyectos()"
-                    class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500" />
-                  <ul id="proyecto-dropdown" class="absolute z-10 left-0 right-0 mt-1 bg-white rounded-lg border border-slate-200 shadow-lg hidden max-h-48 overflow-y-auto"></ul>
+                  <input
+                    type="text"
+                    id="tx-proyecto"
+                    placeholder="Ej. Yate Oceana 74 Ft"
+                    autocomplete="off"
+                    oninput="filtrarProyectos(this.value)"
+                    onfocus="mostrarProyectos()"
+                    class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
+                  />
+                  <ul
+                    id="proyecto-dropdown"
+                    class="absolute z-10 left-0 right-0 mt-1 bg-white rounded-lg border border-slate-200 shadow-lg hidden max-h-48 overflow-y-auto"
+                  ></ul>
                 </div>
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Descripcion</label>
-                <input type="text" id="tx-descripcion" placeholder="Ej. Anticipo 50% PPF casco"
-                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500" />
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Descripcion</label
+                >
+                <input
+                  type="text"
+                  id="tx-descripcion"
+                  placeholder="Ej. Anticipo 50% PPF casco"
+                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
+                />
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Categoria</label>
-                <select id="tx-categoria" class="block w-full rounded-lg border border-slate-300 bg-white p-3 text-sm focus:outline-none focus:border-yellow-500"></select>
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Categoria</label
+                >
+                <select
+                  id="tx-categoria"
+                  class="block w-full rounded-lg border border-slate-300 bg-white p-3 text-sm focus:outline-none focus:border-yellow-500"
+                ></select>
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Monto (COP)</label>
-                <input type="number" id="tx-monto" placeholder="Ej. 3000000" required min="1" inputmode="numeric"
-                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500" />
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Monto (COP)</label
+                >
+                <input
+                  type="number"
+                  id="tx-monto"
+                  placeholder="Ej. 3000000"
+                  required
+                  min="1"
+                  inputmode="numeric"
+                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
+                />
               </div>
 
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Medio de pago</label>
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Medio de pago</label
+                >
                 <div class="grid grid-cols-3 gap-2">
-                  <button type="button" onclick="setMedio('Efectivo')" id="btn-efectivo"
-                    class="toggle-btn active-green py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1">
+                  <button
+                    type="button"
+                    onclick="setMedio('Efectivo')"
+                    id="btn-efectivo"
+                    class="toggle-btn active-green py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
                     <i data-lucide="banknote" class="w-4 h-4"></i>Efectivo
                   </button>
-                  <button type="button" onclick="setMedio('Transferencia')" id="btn-transferencia"
-                    class="toggle-btn inactive py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1">
+                  <button
+                    type="button"
+                    onclick="setMedio('Transferencia')"
+                    id="btn-transferencia"
+                    class="toggle-btn inactive py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
                     <i data-lucide="building-2" class="w-4 h-4"></i>Cuenta
                   </button>
-                  <button type="button" onclick="setMedio('Nequi')" id="btn-nequi"
-                    class="toggle-btn inactive py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1">
+                  <button
+                    type="button"
+                    onclick="setMedio('Nequi')"
+                    id="btn-nequi"
+                    class="toggle-btn inactive py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
                     <i data-lucide="smartphone" class="w-4 h-4"></i>Nequi
                   </button>
                 </div>
@@ -258,19 +570,36 @@
               </div>
 
               <div id="campo-receptor">
-                <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide">Lo recibe</label>
+                <label
+                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
+                  >Lo recibe</label
+                >
                 <div class="grid grid-cols-2 gap-2">
-                  <button type="button" onclick="setReceptor('Cristian')" id="btn-cristian"
-                    class="toggle-btn active-blue py-3 rounded-lg border-2 text-sm font-semibold">Cristian</button>
-                  <button type="button" onclick="setReceptor('Frank')" id="btn-frank"
-                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm font-semibold">Frank</button>
+                  <button
+                    type="button"
+                    onclick="setReceptor('Cristian')"
+                    id="btn-cristian"
+                    class="toggle-btn active-blue py-3 rounded-lg border-2 text-sm font-semibold"
+                  >
+                    Cristian
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setReceptor('Frank')"
+                    id="btn-frank"
+                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm font-semibold"
+                  >
+                    Frank
+                  </button>
                 </div>
                 <input type="hidden" id="tx-receptor" value="Cristian" />
               </div>
 
-              <button type="submit"
+              <button
+                type="submit"
                 class="w-full text-white font-bold py-3.5 px-4 rounded-lg transition flex items-center justify-center gap-2 text-sm"
-                style="background-color:#B8904D">
+                style="background-color: #b8904d"
+              >
                 <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
               </button>
             </form>
@@ -279,15 +608,28 @@
           <!-- MOVIMIENTOS -->
           <div class="glass-card p-4 sm:p-6 lg:col-span-2">
             <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
-              <h2 class="text-base font-bold flex items-center" style="color:#1A365D">
-                <i data-lucide="list" class="w-5 h-5 mr-2" style="color:#B8904D"></i>
+              <h2
+                class="text-base font-bold flex items-center"
+                style="color: #1a365d"
+              >
+                <i
+                  data-lucide="list"
+                  class="w-5 h-5 mr-2"
+                  style="color: #b8904d"
+                ></i>
                 Movimientos
               </h2>
               <div class="flex gap-2 flex-wrap">
-                <select id="filter-proyecto" class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none max-w-[140px]">
+                <select
+                  id="filter-proyecto"
+                  class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none max-w-[140px]"
+                >
                   <option value="">Todos</option>
                 </select>
-                <select id="filter-tipo" class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none">
+                <select
+                  id="filter-tipo"
+                  class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none"
+                >
                   <option value="">Todo</option>
                   <option value="ingreso">Ingresos</option>
                   <option value="gasto">Gastos</option>
@@ -299,17 +641,48 @@
               <table class="min-w-full divide-y divide-slate-200 text-sm">
                 <thead class="bg-slate-50">
                   <tr>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Fecha/Hora</th>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Proyecto</th>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Descripcion</th>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Categoria</th>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Medio</th>
-                    <th class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase">Receptor</th>
-                    <th class="px-3 py-3 text-right text-xs font-medium text-slate-500 uppercase">Monto</th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Fecha/Hora
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Proyecto
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Descripcion
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Categoria
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Medio
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Receptor
+                    </th>
+                    <th
+                      class="px-3 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                    >
+                      Monto
+                    </th>
                     <th class="px-3 py-3"></th>
                   </tr>
                 </thead>
-                <tbody id="tx-table-body" class="bg-white divide-y divide-slate-200"></tbody>
+                <tbody
+                  id="tx-table-body"
+                  class="bg-white divide-y divide-slate-200"
+                ></tbody>
               </table>
             </div>
           </div>
@@ -319,324 +692,612 @@
 
     <script>
       const CATS = {
-        ingreso: ["Anticipo","Saldo Final","Detailing - Pulida y Encerado","Ceramic Coating","PPF (Paint Protection Film)","Pintura de Fondo / Bottom Paint","Pintura de Motor","Pintura General / Gelcoat","Lavado Tecnico","Detailing Interior","Anti-corrosion","Otros Ingresos"],
-        gasto:   ["Materiales / Insumos","Herramientas / Equipos","Mano de Obra","ARL / Seguro","Logistica / Transporte","Arriendo / Local","Publicidad","Otros Gastos"],
+        ingreso: [
+          "Anticipo",
+          "Saldo Final",
+          "Detailing - Pulida y Encerado",
+          "Ceramic Coating",
+          "PPF (Paint Protection Film)",
+          "Pintura de Fondo / Bottom Paint",
+          "Pintura de Motor",
+          "Pintura General / Gelcoat",
+          "Lavado Tecnico",
+          "Detailing Interior",
+          "Anti-corrosion",
+          "Otros Ingresos",
+        ],
+        gasto: [
+          "Materiales / Insumos",
+          "Herramientas / Equipos",
+          "Mano de Obra",
+          "ARL / Seguro",
+          "Logistica / Transporte",
+          "Arriendo / Local",
+          "Publicidad",
+          "Otros Gastos",
+        ],
       };
       const FIREBASE_CONFIG = {
-        apiKey:"AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
-        authDomain:"finanzas-boat-detailing.firebaseapp.com",
-        projectId:"finanzas-boat-detailing",
-        storageBucket:"finanzas-boat-detailing.firebasestorage.app",
-        messagingSenderId:"340884942708",
-        appId:"1:340884942708:web:13ebbc1d6a189a30d4c621",
+        apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
+        authDomain: "finanzas-boat-detailing.firebaseapp.com",
+        projectId: "finanzas-boat-detailing",
+        storageBucket: "finanzas-boat-detailing.firebasestorage.app",
+        messagingSenderId: "340884942708",
+        appId: "1:340884942708:web:13ebbc1d6a189a30d4c621",
       };
       const GEMINI_KEY = "AIzaSyDAHWp1dOUQ5vtVXkX4txr-rTg0X4yth0I";
 
-      let db=null, auth=null, transactions=[];
+      let db = null,
+        auth = null,
+        transactions = [];
       const todayStr = new Date().toISOString().split("T")[0];
 
       // Mes activo
       const nowD = new Date();
       let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() }; // 0-indexed
 
-      const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+      const MESES = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
 
       function cambiarMes(delta) {
         mesSel.m += delta;
-        if (mesSel.m > 11) { mesSel.m = 0; mesSel.y++; }
-        if (mesSel.m < 0)  { mesSel.m = 11; mesSel.y--; }
+        if (mesSel.m > 11) {
+          mesSel.m = 0;
+          mesSel.y++;
+        }
+        if (mesSel.m < 0) {
+          mesSel.m = 11;
+          mesSel.y--;
+        }
         actualizarMesLabel();
         renderAll();
       }
 
       function actualizarMesLabel() {
-        document.getElementById("mes-label").textContent = MESES[mesSel.m] + " " + mesSel.y;
-        const esHoy = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        document.getElementById("btn-mes-sig").style.opacity = esHoy ? "0.3" : "1";
+        document.getElementById("mes-label").textContent =
+          MESES[mesSel.m] + " " + mesSel.y;
+        const esHoy =
+          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        document.getElementById("btn-mes-sig").style.opacity = esHoy
+          ? "0.3"
+          : "1";
         document.getElementById("btn-mes-sig").disabled = esHoy;
-        document.getElementById("summary-title").textContent = "Resumen - " + MESES[mesSel.m];
+        document.getElementById("summary-title").textContent =
+          "Resumen - " + MESES[mesSel.m];
       }
 
       function txDelMes(list) {
-        const prefix = mesSel.y + "-" + String(mesSel.m+1).padStart(2,"0");
-        return list.filter(t => (t.fecha||"").startsWith(prefix));
+        const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
+        return list.filter((t) => (t.fecha || "").startsWith(prefix));
       }
 
       // AUTH
       function loginWithEmail() {
-        const email=document.getElementById("auth-email").value.trim();
-        const pw=document.getElementById("auth-password").value;
-        const errEl=document.getElementById("pin-error");
-        const btn=document.getElementById("login-btn");
-        if(!email||!pw){errEl.textContent="Ingresa tu correo y contrasena.";errEl.classList.remove("hidden");return;}
-        btn.disabled=true;btn.textContent="Verificando...";
-        auth.signInWithEmailAndPassword(email,pw).catch(()=>{
-          btn.disabled=false;btn.textContent="Ingresar";
-          errEl.textContent="Correo o contrasena incorrectos.";errEl.classList.remove("hidden");
-          setTimeout(()=>errEl.classList.add("hidden"),4000);
+        const email = document.getElementById("auth-email").value.trim();
+        const pw = document.getElementById("auth-password").value;
+        const errEl = document.getElementById("pin-error");
+        const btn = document.getElementById("login-btn");
+        if (!email || !pw) {
+          errEl.textContent = "Ingresa tu correo y contrasena.";
+          errEl.classList.remove("hidden");
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = "Verificando...";
+        auth.signInWithEmailAndPassword(email, pw).catch(() => {
+          btn.disabled = false;
+          btn.textContent = "Ingresar";
+          errEl.textContent = "Correo o contrasena incorrectos.";
+          errEl.classList.remove("hidden");
+          setTimeout(() => errEl.classList.add("hidden"), 4000);
         });
       }
-      function logout(){if(auth)auth.signOut();}
-      document.getElementById("auth-password").addEventListener("keydown",e=>{if(e.key==="Enter")loginWithEmail();});
+      function logout() {
+        if (auth) auth.signOut();
+      }
+      document
+        .getElementById("auth-password")
+        .addEventListener("keydown", (e) => {
+          if (e.key === "Enter") loginWithEmail();
+        });
 
       // INIT
-      function initApp(){
+      function initApp() {
         firebase.initializeApp(FIREBASE_CONFIG);
-        auth=firebase.auth(); db=firebase.firestore();
-        auth.onAuthStateChanged(user=>{
-          if(user){
+        auth = firebase.auth();
+        db = firebase.firestore();
+        auth.onAuthStateChanged((user) => {
+          if (user) {
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
-            document.getElementById("tx-fecha").value=todayStr;
+            document.getElementById("tx-fecha").value = todayStr;
             actualizarMesLabel();
-            setTipo("ingreso"); setMedio("Efectivo"); setReceptor("Cristian");
-            const ss=document.getElementById("sync-status");
-            ss.className="text-xs flex items-center gap-1 text-green-400";
-            ss.innerHTML='<i data-lucide="cloud" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Sincronizado</span>';
+            setTipo("ingreso");
+            setMedio("Efectivo");
+            setReceptor("Cristian");
+            const ss = document.getElementById("sync-status");
+            ss.className = "text-xs flex items-center gap-1 text-green-400";
+            ss.innerHTML =
+              '<i data-lucide="cloud" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Sincronizado</span>';
             lucide.createIcons();
-            // Banner iOS
-            if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone&&!sessionStorage.getItem("iosDismissed")){
-              document.getElementById("ios-banner").style.display="flex";
-              lucide.createIcons();
+            // Banner iOS — show install button in nav always; banner if not dismissed
+            if (
+              /iphone|ipad|ipod/i.test(navigator.userAgent) &&
+              !window.navigator.standalone
+            ) {
+              const btn = document.getElementById("btn-install-ios");
+              if (btn) btn.classList.remove("hidden");
+              if (!localStorage.getItem("iosDismissed")) {
+                document.getElementById("ios-banner").style.display = "flex";
+                lucide.createIcons();
+              }
             }
-            db.collection("transacciones").orderBy("fecha","desc").onSnapshot(async snap=>{
-              transactions=snap.docs.map(d=>({id:d.id,...d.data()}));
-              if(transactions.length===0) await seedData();
-              renderAll();
-            },err=>console.error("Firestore:",err));
+            db.collection("transacciones")
+              .orderBy("fecha", "desc")
+              .onSnapshot(
+                async (snap) => {
+                  transactions = snap.docs.map((d) => ({
+                    id: d.id,
+                    ...d.data(),
+                  }));
+                  if (transactions.length === 0) await seedData();
+                  renderAll();
+                },
+                (err) => console.error("Firestore:", err),
+              );
           } else {
             document.getElementById("lock-screen").classList.remove("hidden");
             document.getElementById("main-app").classList.add("hidden");
-            document.getElementById("login-btn").disabled=false;
-            document.getElementById("login-btn").textContent="Ingresar";
+            document.getElementById("login-btn").disabled = false;
+            document.getElementById("login-btn").textContent = "Ingresar";
           }
         });
       }
       initApp();
 
       // TIPO
-      function setTipo(tipo){
-        document.getElementById("tx-tipo").value=tipo;
-        const bi=document.getElementById("btn-ingreso"),bg=document.getElementById("btn-gasto");
-        const cp=document.getElementById("campo-proyecto"),cr=document.getElementById("campo-receptor");
-        const opc=document.getElementById("proyecto-opcional");
-        if(tipo==="ingreso"){
-          bi.className="toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          bg.className="toggle-btn inactive     py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          cp.classList.remove("hidden"); cr.classList.remove("hidden");
-          document.getElementById("tx-proyecto").required=true;
-          opc.textContent="(requerido)";
+      function setTipo(tipo) {
+        document.getElementById("tx-tipo").value = tipo;
+        const bi = document.getElementById("btn-ingreso"),
+          bg = document.getElementById("btn-gasto");
+        const cp = document.getElementById("campo-proyecto"),
+          cr = document.getElementById("campo-receptor");
+        const opc = document.getElementById("proyecto-opcional");
+        if (tipo === "ingreso") {
+          bi.className =
+            "toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+          bg.className =
+            "toggle-btn inactive     py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+          cp.classList.remove("hidden");
+          cr.classList.remove("hidden");
+          document.getElementById("tx-proyecto").required = true;
+          opc.textContent = "(requerido)";
         } else {
-          bg.className="toggle-btn active-red py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          bi.className="toggle-btn inactive   py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          cp.classList.remove("hidden"); cr.classList.add("hidden");
-          document.getElementById("tx-proyecto").required=false;
-          opc.textContent="(opcional)";
+          bg.className =
+            "toggle-btn active-red py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+          bi.className =
+            "toggle-btn inactive   py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+          cp.classList.remove("hidden");
+          cr.classList.add("hidden");
+          document.getElementById("tx-proyecto").required = false;
+          opc.textContent = "(opcional)";
         }
-        const sel=document.getElementById("tx-categoria"); sel.innerHTML="";
-        CATS[tipo].forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+        const sel = document.getElementById("tx-categoria");
+        sel.innerHTML = "";
+        CATS[tipo].forEach((c) => {
+          const o = document.createElement("option");
+          o.value = c;
+          o.textContent = c;
+          sel.appendChild(o);
+        });
         lucide.createIcons();
       }
 
       // MEDIO
-      function setMedio(m){
-        document.getElementById("tx-medio").value=m;
-        ["efectivo","transferencia","nequi"].forEach(k=>{
-          const btn=document.getElementById("btn-"+k);
-          btn.className=btn.className.replace(/\s*(active-\w+|inactive)\s*/g," ").trim()+(m.toLowerCase()===k?" active-green":" inactive");
+      function setMedio(m) {
+        document.getElementById("tx-medio").value = m;
+        ["efectivo", "transferencia", "nequi"].forEach((k) => {
+          const btn = document.getElementById("btn-" + k);
+          btn.className =
+            btn.className.replace(/\s*(active-\w+|inactive)\s*/g, " ").trim() +
+            (m.toLowerCase() === k ? " active-green" : " inactive");
         });
       }
 
       // RECEPTOR
-      function setReceptor(nombre){
-        document.getElementById("tx-receptor").value=nombre;
-        const bc=document.getElementById("btn-cristian"),bf=document.getElementById("btn-frank");
-        bc.className=bc.className.replace(/\s*(active-\w+|inactive)\s*/g," ").trim()+(nombre==="Cristian"?" active-blue":" inactive");
-        bf.className=bf.className.replace(/\s*(active-\w+|inactive)\s*/g," ").trim()+(nombre==="Frank"?" active-indigo":" inactive");
+      function setReceptor(nombre) {
+        document.getElementById("tx-receptor").value = nombre;
+        const bc = document.getElementById("btn-cristian"),
+          bf = document.getElementById("btn-frank");
+        bc.className =
+          bc.className.replace(/\s*(active-\w+|inactive)\s*/g, " ").trim() +
+          (nombre === "Cristian" ? " active-blue" : " inactive");
+        bf.className =
+          bf.className.replace(/\s*(active-\w+|inactive)\s*/g, " ").trim() +
+          (nombre === "Frank" ? " active-indigo" : " inactive");
       }
 
       // DROPDOWN PROYECTOS (ultimos 5 usados)
       function getRecentProjects(query) {
-        const all=[...new Set(transactions.filter(t=>t.proyecto).map(t=>t.proyecto))];
+        const all = [
+          ...new Set(
+            transactions.filter((t) => t.proyecto).map((t) => t.proyecto),
+          ),
+        ];
         // Ordenar por ultima aparicion
-        const byDate={};
-        transactions.forEach(t=>{if(t.proyecto){if(!byDate[t.proyecto]||t.fecha>byDate[t.proyecto])byDate[t.proyecto]=t.fecha;}});
-        const sorted=all.sort((a,b)=>(byDate[b]||"").localeCompare(byDate[a]||""));
-        const top5=sorted.slice(0,5);
-        if(!query) return top5;
-        return top5.filter(p=>p.toLowerCase().includes(query.toLowerCase()));
+        const byDate = {};
+        transactions.forEach((t) => {
+          if (t.proyecto) {
+            if (!byDate[t.proyecto] || t.fecha > byDate[t.proyecto])
+              byDate[t.proyecto] = t.fecha;
+          }
+        });
+        const sorted = all.sort((a, b) =>
+          (byDate[b] || "").localeCompare(byDate[a] || ""),
+        );
+        const top5 = sorted.slice(0, 5);
+        if (!query) return top5;
+        return top5.filter((p) =>
+          p.toLowerCase().includes(query.toLowerCase()),
+        );
       }
-      function mostrarProyectos(){
-        const list=getRecentProjects("");
+      function mostrarProyectos() {
+        const list = getRecentProjects("");
         renderDropdown(list);
       }
-      function filtrarProyectos(q){
-        const list=getRecentProjects(q);
+      function filtrarProyectos(q) {
+        const list = getRecentProjects(q);
         renderDropdown(list);
       }
-      function renderDropdown(list){
-        const dd=document.getElementById("proyecto-dropdown");
-        if(!list.length){dd.classList.add("hidden");return;}
-        dd.innerHTML="";
-        list.forEach(p=>{
-          const li=document.createElement("li");
-          li.textContent=p;
-          li.onclick=()=>{document.getElementById("tx-proyecto").value=p;dd.classList.add("hidden");};
+      function renderDropdown(list) {
+        const dd = document.getElementById("proyecto-dropdown");
+        if (!list.length) {
+          dd.classList.add("hidden");
+          return;
+        }
+        dd.innerHTML = "";
+        list.forEach((p) => {
+          const li = document.createElement("li");
+          li.textContent = p;
+          li.onclick = () => {
+            document.getElementById("tx-proyecto").value = p;
+            dd.classList.add("hidden");
+          };
           dd.appendChild(li);
         });
         dd.classList.remove("hidden");
       }
-      document.addEventListener("click",e=>{
-        if(!document.getElementById("campo-proyecto").contains(e.target))
+      document.addEventListener("click", (e) => {
+        if (!document.getElementById("campo-proyecto").contains(e.target))
           document.getElementById("proyecto-dropdown").classList.add("hidden");
       });
 
       // GEMINI VISION
-      async function escanearFactura(input){
-        const file=input.files[0]; if(!file) return;
+      async function escanearFactura(input) {
+        const file = input.files[0];
+        if (!file) return;
         document.getElementById("ai-overlay").classList.add("active");
         try {
-          const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});
-          const prompt=`Eres un asistente contable. Analiza esta imagen (factura, recibo, o comprobante colombiano).
-Responde SOLO con JSON valido sin markdown:
-{"monto":<entero sin puntos ni simbolos>,"descripcion":"<que se compro, max 60 chars>","fecha":"<YYYY-MM-DD o null>","categoria":"<una de: Materiales / Insumos | Herramientas / Equipos | Mano de Obra | ARL / Seguro | Logistica / Transporte | Otros Gastos>"}
-Usa el total final como monto.`;
-          const resp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
-            {method:"POST",headers:{"Content-Type":"application/json"},
-             body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:file.type||"image/jpeg",data:base64}}]}]})});
-          if(!resp.ok) throw new Error("API "+resp.status);
-          const data=await resp.json();
-          const raw=data.candidates?.[0]?.content?.parts?.[0]?.text||"";
-          const parsed=JSON.parse(raw.replace(/```json|```/g,"").trim());
-          setTipo("gasto");
-          if(parsed.monto)       document.getElementById("tx-monto").value=parsed.monto;
-          if(parsed.descripcion) document.getElementById("tx-descripcion").value=parsed.descripcion;
-          if(parsed.fecha)       document.getElementById("tx-fecha").value=parsed.fecha;
-          if(parsed.categoria){
-            const sel=document.getElementById("tx-categoria");
-            for(const opt of sel.options){if(opt.value===parsed.categoria){sel.value=parsed.categoria;break;}}
+          const base64 = await new Promise((res, rej) => {
+            const r = new FileReader();
+            r.onload = () => res(r.result.split(",")[1]);
+            r.onerror = rej;
+            r.readAsDataURL(file);
+          });
+          const mime =
+            file.type && file.type.startsWith("image/")
+              ? file.type
+              : "image/jpeg";
+          const prompt = `Eres un asistente contable. Analiza esta imagen (factura, recibo o comprobante de pago colombiano).
+Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markdown, sin explicaciones:
+{"monto":<numero entero, total final de la factura sin puntos ni simbolos>,"descripcion":"<descripcion corta de lo comprado, maximo 60 caracteres>","fecha":"<fecha en formato YYYY-MM-DD, o null si no se ve>","categoria":"<elige UNA de estas opciones exactas: Materiales / Insumos | Herramientas / Equipos | Mano de Obra | ARL / Seguro | Logistica / Transporte | Otros Gastos>"}`;
+          const resp = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    parts: [
+                      { text: prompt },
+                      { inline_data: { mime_type: mime, data: base64 } },
+                    ],
+                  },
+                ],
+                generationConfig: {
+                  temperature: 0,
+                  topP: 1,
+                  maxOutputTokens: 512,
+                },
+              }),
+            },
+          );
+          if (!resp.ok) {
+            const errBody = await resp.text();
+            throw new Error("API " + resp.status + ": " + errBody);
           }
-          document.getElementById("tx-form").scrollIntoView({behavior:"smooth",block:"start"});
-        } catch(err){
-          console.error("Gemini:",err);
-          alert("No pude leer la imagen automaticamente. Verifica que sea clara e intenta de nuevo.");
+          const data = await resp.json();
+          const raw = (
+            data.candidates?.[0]?.content?.parts?.[0]?.text || ""
+          ).trim();
+          // Extract JSON object robustly — find first { to last }
+          const start = raw.indexOf("{"),
+            end = raw.lastIndexOf("}");
+          if (start === -1 || end === -1)
+            throw new Error("No JSON in response: " + raw);
+          const parsed = JSON.parse(raw.slice(start, end + 1));
+          setTipo("gasto");
+          if (parsed.monto)
+            document.getElementById("tx-monto").value = parsed.monto;
+          if (parsed.descripcion)
+            document.getElementById("tx-descripcion").value =
+              parsed.descripcion;
+          if (parsed.fecha && parsed.fecha != "null")
+            document.getElementById("tx-fecha").value = parsed.fecha;
+          if (parsed.categoria) {
+            const sel = document.getElementById("tx-categoria");
+            for (const opt of sel.options) {
+              if (opt.value === parsed.categoria) {
+                sel.value = parsed.categoria;
+                break;
+              }
+            }
+          }
+          document
+            .getElementById("tx-form")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (err) {
+          console.error("Gemini error:", err);
+          alert(
+            "Error al analizar la imagen.\n\nDetalle: " +
+              err.message +
+              "\n\nIntenta con una foto mas clara o escribe los datos manualmente.",
+          );
         } finally {
           document.getElementById("ai-overlay").classList.remove("active");
-          input.value="";
+          input.value = "";
         }
       }
 
       // SEED
-      async function seedData(){
-        const hora=new Date().toTimeString().slice(0,5);
-        const seed=[
-          {fecha:todayStr,hora,tipo:"ingreso",proyecto:"Yate Oceana 74 Ft",descripcion:"Anticipo 50% - Saldo pendiente $3.000.000 al finalizar",categoria:"Anticipo",monto:3000000,medio:"Efectivo",receptor:"Cristian"},
-          {fecha:todayStr,hora,tipo:"gasto",proyecto:"",descripcion:"Compra herramientas - Peliculadora 7m 1300W + Maleta",categoria:"Herramientas / Equipos",monto:677800,medio:"Transferencia",receptor:""},
-          {fecha:todayStr,hora,tipo:"gasto",proyecto:"Yate Oceana 74 Ft",descripcion:"Insumos detailing Yate Oceana 74 Ft",categoria:"Materiales / Insumos",monto:131000,medio:"Efectivo",receptor:""},
-          {fecha:todayStr,hora,tipo:"gasto",proyecto:"",descripcion:"ARL Nivel de Riesgo 5 - 1 trabajador",categoria:"ARL / Seguro",monto:140000,medio:"Transferencia",receptor:""},
-          {fecha:todayStr,hora,tipo:"gasto",proyecto:"Yate Oceana 74 Ft",descripcion:"Combustible y traslado al muelle",categoria:"Logistica / Transporte",monto:45000,medio:"Efectivo",receptor:""},
+      async function seedData() {
+        const hora = new Date().toTimeString().slice(0, 5);
+        const seed = [
+          {
+            fecha: todayStr,
+            hora,
+            tipo: "ingreso",
+            proyecto: "Yate Oceana 74 Ft",
+            descripcion:
+              "Anticipo 50% - Saldo pendiente $3.000.000 al finalizar",
+            categoria: "Anticipo",
+            monto: 3000000,
+            medio: "Efectivo",
+            receptor: "Cristian",
+          },
+          {
+            fecha: todayStr,
+            hora,
+            tipo: "gasto",
+            proyecto: "",
+            descripcion: "Compra herramientas - Peliculadora 7m 1300W + Maleta",
+            categoria: "Herramientas / Equipos",
+            monto: 677800,
+            medio: "Transferencia",
+            receptor: "",
+          },
+          {
+            fecha: todayStr,
+            hora,
+            tipo: "gasto",
+            proyecto: "Yate Oceana 74 Ft",
+            descripcion: "Insumos detailing Yate Oceana 74 Ft",
+            categoria: "Materiales / Insumos",
+            monto: 131000,
+            medio: "Efectivo",
+            receptor: "",
+          },
+          {
+            fecha: todayStr,
+            hora,
+            tipo: "gasto",
+            proyecto: "",
+            descripcion: "ARL Nivel de Riesgo 5 - 1 trabajador",
+            categoria: "ARL / Seguro",
+            monto: 140000,
+            medio: "Transferencia",
+            receptor: "",
+          },
+          {
+            fecha: todayStr,
+            hora,
+            tipo: "gasto",
+            proyecto: "Yate Oceana 74 Ft",
+            descripcion: "Combustible y traslado al muelle",
+            categoria: "Logistica / Transporte",
+            monto: 45000,
+            medio: "Efectivo",
+            receptor: "",
+          },
         ];
-        for(const tx of seed) await db.collection("transacciones").add(tx);
+        for (const tx of seed) await db.collection("transacciones").add(tx);
       }
 
       // CRUD
-      async function saveTransaction(tx){ await db.collection("transacciones").add(tx); }
-      async function deleteTransaction(id){
-        if(!confirm("Eliminar este registro?\nEsta accion no se puede deshacer.")) return;
+      async function saveTransaction(tx) {
+        await db.collection("transacciones").add(tx);
+      }
+      async function deleteTransaction(id) {
+        if (
+          !confirm("Eliminar este registro?\nEsta accion no se puede deshacer.")
+        )
+          return;
         await db.collection("transacciones").doc(id).delete();
       }
 
       // FORMATO
-      const fmt=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n);
-      const fmtDate=s=>s?s.split("-").reverse().join("/"):"--";
+      const fmt = (n) =>
+        new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          maximumFractionDigits: 0,
+        }).format(n);
+      const fmtDate = (s) => (s ? s.split("-").reverse().join("/") : "--");
 
       // VER MAS
-      let verMasAbierto=false;
-      function toggleVerMas(){
-        verMasAbierto=!verMasAbierto;
-        document.getElementById("ver-mas-texto").textContent=verMasAbierto?"Ver menos":"Ver todos los proyectos";
+      let verMasAbierto = false;
+      function toggleVerMas() {
+        verMasAbierto = !verMasAbierto;
+        document.getElementById("ver-mas-texto").textContent = verMasAbierto
+          ? "Ver menos"
+          : "Ver todos los proyectos";
         renderAll();
       }
 
       // RENDER
-      function renderAll(){
-        const mes=txDelMes(transactions);
-        const filterProy=document.getElementById("filter-proyecto").value;
-        const filterTipo=document.getElementById("filter-tipo").value;
+      function renderAll() {
+        const mes = txDelMes(transactions);
+        const filterProy = document.getElementById("filter-proyecto").value;
+        const filterTipo = document.getElementById("filter-tipo").value;
 
         // Rellenar selector proyecto
-        const projects=[...new Set(mes.filter(t=>t.proyecto).map(t=>t.proyecto))].sort();
-        const filterEl=document.getElementById("filter-proyecto");
-        const cur=filterEl.value;
-        filterEl.innerHTML='<option value="">Todos</option>';
-        projects.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;if(p===cur)o.selected=true;filterEl.appendChild(o);});
+        const projects = [
+          ...new Set(mes.filter((t) => t.proyecto).map((t) => t.proyecto)),
+        ].sort();
+        const filterEl = document.getElementById("filter-proyecto");
+        const cur = filterEl.value;
+        filterEl.innerHTML = '<option value="">Todos</option>';
+        projects.forEach((p) => {
+          const o = document.createElement("option");
+          o.value = p;
+          o.textContent = p;
+          if (p === cur) o.selected = true;
+          filterEl.appendChild(o);
+        });
 
         // KPIs del mes
-        const totalIngresos=mes.filter(t=>t.tipo==="ingreso").reduce((s,t)=>s+t.monto,0);
-        const totalGastos  =mes.filter(t=>t.tipo==="gasto").reduce((s,t)=>s+t.monto,0);
-        const profit=totalIngresos-totalGastos;
-        document.getElementById("kpi-ingresos").textContent=fmt(totalIngresos);
-        document.getElementById("kpi-gastos").textContent  =fmt(totalGastos);
-        document.getElementById("kpi-profit").textContent  =fmt(profit);
-        document.getElementById("kpi-profit").style.color  =profit>=0?"#4ade80":"#f87171";
+        const totalIngresos = mes
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = mes
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
+        const profit = totalIngresos - totalGastos;
+        document.getElementById("kpi-ingresos").textContent =
+          fmt(totalIngresos);
+        document.getElementById("kpi-gastos").textContent = fmt(totalGastos);
+        document.getElementById("kpi-profit").textContent = fmt(profit);
+        document.getElementById("kpi-profit").style.color =
+          profit >= 0 ? "#4ade80" : "#f87171";
 
         // Resumen proyectos del mes
-        const projMap={};
-        mes.forEach(t=>{
-          if(t.tipo==="ingreso"&&t.proyecto){if(!projMap[t.proyecto])projMap[t.proyecto]={ingresos:0,gastos:0};projMap[t.proyecto].ingresos+=t.monto;}
-          if(t.tipo==="gasto"  &&t.proyecto){if(!projMap[t.proyecto])projMap[t.proyecto]={ingresos:0,gastos:0};projMap[t.proyecto].gastos+=t.monto;}
+        const projMap = {};
+        mes.forEach((t) => {
+          if (t.tipo === "ingreso" && t.proyecto) {
+            if (!projMap[t.proyecto])
+              projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
+            projMap[t.proyecto].ingresos += t.monto;
+          }
+          if (t.tipo === "gasto" && t.proyecto) {
+            if (!projMap[t.proyecto])
+              projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
+            projMap[t.proyecto].gastos += t.monto;
+          }
         });
-        const sinProy=mes.filter(t=>t.tipo==="gasto"&&!t.proyecto).reduce((s,t)=>s+t.monto,0);
-        if(sinProy>0) projMap["Operacion General"]={ingresos:0,gastos:sinProy};
-        const entries=Object.entries(projMap).sort((a,b)=>(b[1].ingresos-b[1].gastos)-(a[1].ingresos-a[1].gastos));
-        const MAX_ROWS=5;
-        const visible=verMasAbierto?entries:entries.slice(0,MAX_ROWS);
-        const hayMas=entries.length>MAX_ROWS;
-        const btnVerMas=document.getElementById("btn-ver-mas");
-        if(hayMas){btnVerMas.classList.remove("hidden");}else{btnVerMas.classList.add("hidden");}
+        const sinProy = mes
+          .filter((t) => t.tipo === "gasto" && !t.proyecto)
+          .reduce((s, t) => s + t.monto, 0);
+        if (sinProy > 0)
+          projMap["Operacion General"] = { ingresos: 0, gastos: sinProy };
+        const entries = Object.entries(projMap).sort(
+          (a, b) => b[1].ingresos - b[1].gastos - (a[1].ingresos - a[1].gastos),
+        );
+        const MAX_ROWS = 5;
+        const visible = verMasAbierto ? entries : entries.slice(0, MAX_ROWS);
+        const hayMas = entries.length > MAX_ROWS;
+        const btnVerMas = document.getElementById("btn-ver-mas");
+        if (hayMas) {
+          btnVerMas.classList.remove("hidden");
+        } else {
+          btnVerMas.classList.add("hidden");
+        }
 
-        const sc=document.getElementById("summary-cards"); sc.innerHTML="";
-        visible.forEach(([proj,v])=>{
-          const p=v.ingresos-v.gastos,margin=v.ingresos>0?((p/v.ingresos)*100).toFixed(0)+"%":"--";
-          const div=document.createElement("div");
-          div.className="rounded-xl border-l-4 p-3 bg-slate-50 "+(p>=0?"border-green-400":"border-red-400");
-          div.innerHTML=`<div class="flex justify-between items-center mb-2"><span class="font-semibold text-slate-800 text-sm">${proj}</span><span class="text-xs font-bold px-2 py-0.5 rounded-full ${p>=0?"bg-green-100 text-green-700":"bg-red-100 text-red-700"}">${margin}</span></div><div class="grid grid-cols-3 gap-1 text-center"><div><p class="text-xs text-slate-400">Ingreso</p><p class="text-sm font-bold text-green-600">${fmt(v.ingresos)}</p></div><div><p class="text-xs text-slate-400">Gasto</p><p class="text-sm font-bold text-red-600">${fmt(v.gastos)}</p></div><div><p class="text-xs text-slate-400">Profit</p><p class="text-sm font-bold ${p>=0?"text-green-700":"text-red-700"}">${fmt(p)}</p></div></div>`;
+        const sc = document.getElementById("summary-cards");
+        sc.innerHTML = "";
+        visible.forEach(([proj, v]) => {
+          const p = v.ingresos - v.gastos,
+            margin =
+              v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) + "%" : "--";
+          const div = document.createElement("div");
+          div.className =
+            "rounded-xl border-l-4 p-3 bg-slate-50 " +
+            (p >= 0 ? "border-green-400" : "border-red-400");
+          div.innerHTML = `<div class="flex justify-between items-center mb-2"><span class="font-semibold text-slate-800 text-sm">${proj}</span><span class="text-xs font-bold px-2 py-0.5 rounded-full ${p >= 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">${margin}</span></div><div class="grid grid-cols-3 gap-1 text-center"><div><p class="text-xs text-slate-400">Ingreso</p><p class="text-sm font-bold text-green-600">${fmt(v.ingresos)}</p></div><div><p class="text-xs text-slate-400">Gasto</p><p class="text-sm font-bold text-red-600">${fmt(v.gastos)}</p></div><div><p class="text-xs text-slate-400">Profit</p><p class="text-sm font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</p></div></div>`;
           sc.appendChild(div);
         });
-        const sb=document.getElementById("summary-body"); sb.innerHTML="";
-        visible.forEach(([proj,v])=>{
-          const p=v.ingresos-v.gastos,margin=v.ingresos>0?((p/v.ingresos)*100).toFixed(0):0;
-          const tr=document.createElement("tr"); tr.className="hover:bg-slate-50";
-          tr.innerHTML=`<td class="px-4 py-3 text-sm font-medium text-slate-800">${proj}</td><td class="px-4 py-3 text-sm text-right text-green-600 font-semibold">${fmt(v.ingresos)}</td><td class="px-4 py-3 text-sm text-right text-red-600 font-semibold">${fmt(v.gastos)}</td><td class="px-4 py-3 text-sm text-right font-bold ${p>=0?"text-green-700":"text-red-700"}">${fmt(p)}</td><td class="px-4 py-3 text-right"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${p>=0?"bg-green-100 text-green-800":"bg-red-100 text-red-800"}">${margin}%</span></td>`;
+        const sb = document.getElementById("summary-body");
+        sb.innerHTML = "";
+        visible.forEach(([proj, v]) => {
+          const p = v.ingresos - v.gastos,
+            margin = v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) : 0;
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50";
+          tr.innerHTML = `<td class="px-4 py-3 text-sm font-medium text-slate-800">${proj}</td><td class="px-4 py-3 text-sm text-right text-green-600 font-semibold">${fmt(v.ingresos)}</td><td class="px-4 py-3 text-sm text-right text-red-600 font-semibold">${fmt(v.gastos)}</td><td class="px-4 py-3 text-sm text-right font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</td><td class="px-4 py-3 text-right"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${p >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${margin}%</span></td>`;
           sb.appendChild(tr);
         });
 
         // Movimientos
-        let displayed=mes;
-        if(filterProy) displayed=displayed.filter(t=>t.proyecto===filterProy);
-        if(filterTipo) displayed=displayed.filter(t=>t.tipo===filterTipo);
-        const sorted=[...displayed].sort((a,b)=>{
-          const fa=(a.fecha||"")+(a.hora||"");
-          const fb=(b.fecha||"")+(b.hora||"");
+        let displayed = mes;
+        if (filterProy)
+          displayed = displayed.filter((t) => t.proyecto === filterProy);
+        if (filterTipo)
+          displayed = displayed.filter((t) => t.tipo === filterTipo);
+        const sorted = [...displayed].sort((a, b) => {
+          const fa = (a.fecha || "") + (a.hora || "");
+          const fb = (b.fecha || "") + (b.hora || "");
           return fb.localeCompare(fa);
         });
 
-        const tc=document.getElementById("tx-cards"); tc.innerHTML="";
-        if(sorted.length===0) tc.innerHTML='<p class="text-center py-8 text-slate-400 text-sm">No hay movimientos este mes.</p>';
-        sorted.forEach(tx=>{
-          const isIn=tx.tipo==="ingreso";
-          const div=document.createElement("div");
-          div.className="rounded-xl border p-3 "+(isIn?"border-green-200 bg-green-50":"border-red-100 bg-red-50");
-          div.innerHTML=`<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora?" "+tx.hora:""}</span>${tx.proyecto?`<span class="text-xs font-semibold text-slate-600">${tx.proyecto}</span>`:""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion||tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn?"bg-green-200 text-green-800":"bg-red-200 text-red-800"}">${tx.categoria}</span>${tx.medio?`<span class="text-xs text-slate-500">- ${tx.medio}</span>`:""} ${tx.receptor?`<span class="text-xs font-semibold text-blue-600">-> ${tx.receptor}</span>`:""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn?"text-green-600":"text-red-600"}">${isIn?"+":"-"} ${fmt(tx.monto)}</span><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+        const tc = document.getElementById("tx-cards");
+        tc.innerHTML = "";
+        if (sorted.length === 0)
+          tc.innerHTML =
+            '<p class="text-center py-8 text-slate-400 text-sm">No hay movimientos este mes.</p>';
+        sorted.forEach((tx) => {
+          const isIn = tx.tipo === "ingreso";
+          const div = document.createElement("div");
+          div.className =
+            "rounded-xl border p-3 " +
+            (isIn
+              ? "border-green-200 bg-green-50"
+              : "border-red-100 bg-red-50");
+          div.innerHTML = `<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora ? " " + tx.hora : ""}</span>${tx.proyecto ? `<span class="text-xs font-semibold text-slate-600">${tx.proyecto}</span>` : ""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion || tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}">${tx.categoria}</span>${tx.medio ? `<span class="text-xs text-slate-500">- ${tx.medio}</span>` : ""} ${tx.receptor ? `<span class="text-xs font-semibold text-blue-600">-> ${tx.receptor}</span>` : ""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"} ${fmt(tx.monto)}</span><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
           tc.appendChild(div);
         });
 
-        const tb=document.getElementById("tx-table-body"); tb.innerHTML="";
-        if(sorted.length===0) tb.innerHTML='<tr><td colspan="8" class="text-center py-10 text-slate-400">No hay movimientos este mes.</td></tr>';
-        sorted.forEach(tx=>{
-          const isIn=tx.tipo==="ingreso";
-          const tr=document.createElement("tr"); tr.className="hover:bg-slate-50 transition";
-          tr.innerHTML=`<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora||""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-800">${tx.proyecto||"--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${tx.descripcion||""}">${tx.descripcion||"--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn?"bg-green-100 text-green-800":"bg-red-100 text-red-800"}">${tx.categoria}</span></td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio||"--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-blue-600">${tx.receptor||"--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn?"text-green-600":"text-red-600"}">${isIn?"+":"-"} ${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>`;
+        const tb = document.getElementById("tx-table-body");
+        tb.innerHTML = "";
+        if (sorted.length === 0)
+          tb.innerHTML =
+            '<tr><td colspan="8" class="text-center py-10 text-slate-400">No hay movimientos este mes.</td></tr>';
+        sorted.forEach((tx) => {
+          const isIn = tx.tipo === "ingreso";
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50 transition";
+          tr.innerHTML = `<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora || ""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-800">${tx.proyecto || "--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${tx.descripcion || ""}">${tx.descripcion || "--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span></td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-blue-600">${tx.receptor || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"} ${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></td>`;
           tb.appendChild(tr);
         });
 
@@ -644,36 +1305,54 @@ Usa el total final como monto.`;
       }
 
       // SUBMIT
-      document.getElementById("tx-form").addEventListener("submit",async e=>{
-        e.preventDefault();
-        const tipo   =document.getElementById("tx-tipo").value;
-        const monto  =parseFloat(document.getElementById("tx-monto").value);
-        const proyecto=document.getElementById("tx-proyecto").value.trim();
-        if(!monto||monto<=0) return;
-        if(tipo==="ingreso"&&!proyecto){document.getElementById("tx-proyecto").focus();return;}
-        const hora=new Date().toTimeString().slice(0,5);
-        const tx={
-          fecha: document.getElementById("tx-fecha").value||todayStr,
-          hora,
-          tipo, proyecto,
-          descripcion: document.getElementById("tx-descripcion").value.trim(),
-          categoria:   document.getElementById("tx-categoria").value,
-          monto,
-          medio:       document.getElementById("tx-medio").value,
-          receptor:    tipo==="ingreso"?document.getElementById("tx-receptor").value:"",
-        };
-        const btn=e.target.querySelector("button[type=submit]");
-        btn.disabled=true; btn.innerHTML="Guardando...";
-        await saveTransaction(tx);
-        btn.disabled=false; btn.innerHTML='<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
-        e.target.reset();
-        document.getElementById("tx-fecha").value=todayStr;
-        setTipo("ingreso"); setMedio("Efectivo"); setReceptor("Cristian");
-        lucide.createIcons();
-      });
+      document
+        .getElementById("tx-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const tipo = document.getElementById("tx-tipo").value;
+          const monto = parseFloat(document.getElementById("tx-monto").value);
+          const proyecto = document.getElementById("tx-proyecto").value.trim();
+          if (!monto || monto <= 0) return;
+          if (tipo === "ingreso" && !proyecto) {
+            document.getElementById("tx-proyecto").focus();
+            return;
+          }
+          const hora = new Date().toTimeString().slice(0, 5);
+          const tx = {
+            fecha: document.getElementById("tx-fecha").value || todayStr,
+            hora,
+            tipo,
+            proyecto,
+            descripcion: document.getElementById("tx-descripcion").value.trim(),
+            categoria: document.getElementById("tx-categoria").value,
+            monto,
+            medio: document.getElementById("tx-medio").value,
+            receptor:
+              tipo === "ingreso"
+                ? document.getElementById("tx-receptor").value
+                : "",
+          };
+          const btn = e.target.querySelector("button[type=submit]");
+          btn.disabled = true;
+          btn.innerHTML = "Guardando...";
+          await saveTransaction(tx);
+          btn.disabled = false;
+          btn.innerHTML =
+            '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
+          e.target.reset();
+          document.getElementById("tx-fecha").value = todayStr;
+          setTipo("ingreso");
+          setMedio("Efectivo");
+          setReceptor("Cristian");
+          lucide.createIcons();
+        });
 
-      document.getElementById("filter-proyecto").addEventListener("change",renderAll);
-      document.getElementById("filter-tipo").addEventListener("change",renderAll);
+      document
+        .getElementById("filter-proyecto")
+        .addEventListener("change", renderAll);
+      document
+        .getElementById("filter-tipo")
+        .addEventListener("change", renderAll);
       lucide.createIcons();
     </script>
   </body>
