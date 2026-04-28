@@ -726,7 +726,8 @@
         messagingSenderId: "340884942708",
         appId: "1:340884942708:web:13ebbc1d6a189a30d4c621",
       };
-      const GEMINI_KEY = "AIzaSyB-Q4ctfbEp2MtaggPUC4R8UmsQ-VqUjr8";
+      const GROQ_KEY =
+        "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";
 
       let db = null,
         auth = null,
@@ -985,7 +986,7 @@
           document.getElementById("proyecto-dropdown").classList.add("hidden");
       });
 
-      // GEMINI VISION
+      // GROQ VISION
       async function escanearFactura(input) {
         const file = input.files[0];
         if (!file) return;
@@ -1005,24 +1006,29 @@
 Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markdown, sin explicaciones:
 {"monto":<numero entero, total final de la factura sin puntos ni simbolos>,"descripcion":"<descripcion corta de lo comprado, maximo 60 caracteres>","fecha":"<fecha en formato YYYY-MM-DD, o null si no se ve>","categoria":"<elige UNA de estas opciones exactas: Materiales / Insumos | Herramientas / Equipos | Mano de Obra | ARL / Seguro | Logistica / Transporte | Otros Gastos>"}`;
           const resp = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+            "https://api.groq.com/openai/v1/chat/completions",
             {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + GROQ_KEY,
+              },
               body: JSON.stringify({
-                contents: [
+                model: "meta-llama/llama-4-scout-17b-16e-instruct",
+                temperature: 0,
+                max_tokens: 512,
+                messages: [
                   {
-                    parts: [
-                      { text: prompt },
-                      { inline_data: { mime_type: mime, data: base64 } },
+                    role: "user",
+                    content: [
+                      { type: "text", text: prompt },
+                      {
+                        type: "image_url",
+                        image_url: { url: `data:${mime};base64,${base64}` },
+                      },
                     ],
                   },
                 ],
-                generationConfig: {
-                  temperature: 0,
-                  topP: 1,
-                  maxOutputTokens: 512,
-                },
               }),
             },
           );
@@ -1031,14 +1037,11 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             throw new Error("API " + resp.status + ": " + errBody);
           }
           const data = await resp.json();
-          const raw = (
-            data.candidates?.[0]?.content?.parts?.[0]?.text || ""
-          ).trim();
-          // Extract JSON object robustly — find first { to last }
+          const raw = (data.choices?.[0]?.message?.content || "").trim();
           const start = raw.indexOf("{"),
             end = raw.lastIndexOf("}");
           if (start === -1 || end === -1)
-            throw new Error("No JSON in response: " + raw);
+            throw new Error("No JSON en respuesta: " + raw);
           const parsed = JSON.parse(raw.slice(start, end + 1));
           setTipo("gasto");
           if (parsed.monto)
@@ -1046,7 +1049,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           if (parsed.descripcion)
             document.getElementById("tx-descripcion").value =
               parsed.descripcion;
-          if (parsed.fecha && parsed.fecha != "null")
+          if (parsed.fecha && parsed.fecha !== "null")
             document.getElementById("tx-fecha").value = parsed.fecha;
           if (parsed.categoria) {
             const sel = document.getElementById("tx-categoria");
@@ -1061,7 +1064,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             .getElementById("tx-form")
             .scrollIntoView({ behavior: "smooth", block: "start" });
         } catch (err) {
-          console.error("Gemini error:", err);
+          console.error("Groq error:", err);
           alert(
             "Error al analizar la imagen.\n\nDetalle: " +
               err.message +
