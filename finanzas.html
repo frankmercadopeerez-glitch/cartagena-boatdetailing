@@ -660,7 +660,7 @@
                     type="button"
                     onclick="toggleCatDropdown()"
                     id="cat-filter-btn"
-                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer"
+                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer text-left"
                   >
                     <span id="cat-filter-label">Categorías</span>
                   </button>
@@ -1338,7 +1338,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             if (filterCats.has(cat)) filterCats.delete(cat);
             else filterCats.add(cat);
             updateCatLabel();
-            buildCatDropdown(); // reconstruye con checkmarks actualizados, dropdown sigue visible
+            document.getElementById("cat-dropdown").classList.add("hidden");
             renderAll();
           };
           dd.appendChild(btn);
