@@ -564,7 +564,7 @@
               <div id="campo-receptor">
                 <label
                   class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Lo recibe</label
+                  ><span id="label-receptor">Lo recibe</span></label
                 >
                 <div class="grid grid-cols-2 gap-2">
                   <button
@@ -886,15 +886,17 @@
           cr.classList.remove("hidden");
           document.getElementById("tx-proyecto").required = true;
           opc.textContent = "(requerido)";
+          document.getElementById("label-receptor").textContent = "Lo recibe";
         } else {
           bg.className =
             "toggle-btn active-red py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
           bi.className =
             "toggle-btn inactive   py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
           cp.classList.remove("hidden");
-          cr.classList.add("hidden");
+          cr.classList.remove("hidden");
           document.getElementById("tx-proyecto").required = false;
           opc.textContent = "(opcional)";
+          document.getElementById("label-receptor").textContent = "Quién paga";
         }
         const sel = document.getElementById("tx-categoria");
         sel.innerHTML = "";
@@ -1157,6 +1159,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         document.getElementById("tx-monto").value = tx.monto || "";
         setMedio(tx.medio || "Efectivo");
         if (tx.tipo === "ingreso") setReceptor(tx.receptor || "Cristian");
+        else setReceptor(tx.receptor || "Cristian");
         // Update submit button & show cancel
         const btnSubmit = document.getElementById("btn-submit");
         btnSubmit.innerHTML =
@@ -1376,10 +1379,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             categoria: document.getElementById("tx-categoria").value,
             monto,
             medio: document.getElementById("tx-medio").value,
-            receptor:
-              tipo === "ingreso"
-                ? document.getElementById("tx-receptor").value
-                : "",
+            receptor: document.getElementById("tx-receptor").value,
           };
           const btn = e.target.querySelector("button[type=submit]");
           btn.disabled = true;
