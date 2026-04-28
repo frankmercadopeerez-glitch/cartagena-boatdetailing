@@ -51,6 +51,13 @@
       nav#main-nav {
         padding-top: env(safe-area-inset-top, 0px);
       }
+      /* Cuando hay safe area real, el inner div no necesita tanto padding top */
+      @supports (padding-top: env(safe-area-inset-top)) {
+        nav#main-nav .nav-inner {
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+        }
+      }
       .glass-card {
         background: white;
         border-radius: 12px;
@@ -219,7 +226,7 @@
         class="text-white shadow-lg sticky top-0 z-20"
       >
         <div
-          class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
+          class="nav-inner max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
         >
           <div class="flex items-center gap-2">
             <i data-lucide="anchor" class="w-5 h-5" style="color: #b8904d"></i>
@@ -530,12 +537,13 @@
                   >Monto (COP)</label
                 >
                 <input
-                  type="number"
+                  type="text"
                   id="tx-monto"
-                  placeholder="Ej. 3000000"
+                  placeholder="Ej. 3.000.000"
                   required
-                  min="1"
                   inputmode="numeric"
+                  autocomplete="off"
+                  oninput="formatMontoInput(this)"
                   class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
                 />
               </div>
@@ -993,7 +1001,23 @@
           document.getElementById("proyecto-dropdown").classList.add("hidden");
       });
 
-      // GROQ VISION
+      // FORMATO MONTO EN TIEMPO REAL
+      function formatMontoInput(el) {
+        // Quitar todo excepto digitos
+        const raw = el.value.replace(/\D/g, "");
+        // Formatear con puntos de miles
+        el.value = raw ? parseInt(raw, 10).toLocaleString("es-CO") : "";
+      }
+      function getMontoValue() {
+        const raw = document
+          .getElementById("tx-monto")
+          .value.replace(/\D/g, "");
+        return raw ? parseFloat(raw) : 0;
+      }
+      function setMontoValue(num) {
+        const el = document.getElementById("tx-monto");
+        el.value = num ? parseInt(num, 10).toLocaleString("es-CO") : "";
+      }
       async function escanearFactura(input) {
         const file = input.files[0];
         if (!file) return;
@@ -1051,8 +1075,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             throw new Error("No JSON en respuesta: " + raw);
           const parsed = JSON.parse(raw.slice(start, end + 1));
           setTipo("gasto");
-          if (parsed.monto)
-            document.getElementById("tx-monto").value = parsed.monto;
+          if (parsed.monto) setMontoValue(parsed.monto);
           if (parsed.descripcion)
             document.getElementById("tx-descripcion").value =
               parsed.descripcion;
@@ -1161,7 +1184,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         document.getElementById("tx-proyecto").value = tx.proyecto || "";
         document.getElementById("tx-descripcion").value = tx.descripcion || "";
         document.getElementById("tx-categoria").value = tx.categoria || "";
-        document.getElementById("tx-monto").value = tx.monto || "";
+        if (tx.monto) setMontoValue(tx.monto);
         setMedio(tx.medio || "Efectivo");
         if (tx.tipo === "ingreso") setReceptor(tx.receptor || "Cristian");
         else setReceptor(tx.receptor || "Cristian");
@@ -1367,7 +1390,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const tipo = document.getElementById("tx-tipo").value;
-          const monto = parseFloat(document.getElementById("tx-monto").value);
+          const monto = getMontoValue();
           const proyecto = document.getElementById("tx-proyecto").value.trim();
           if (!monto || monto <= 0) return;
           if (tipo === "ingreso" && !proyecto) {
