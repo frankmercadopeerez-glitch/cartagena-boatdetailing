@@ -54,8 +54,8 @@
       /* Cuando hay safe area real, el inner div no necesita tanto padding top */
       @supports (padding-top: env(safe-area-inset-top)) {
         nav#main-nav .nav-inner {
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
         }
       }
       .glass-card {
@@ -226,7 +226,7 @@
         class="text-white shadow-lg sticky top-0 z-20"
       >
         <div
-          class="nav-inner max-w-7xl mx-auto px-4 py-2 md:py-3 flex justify-between items-center"
+          class="nav-inner max-w-7xl mx-auto px-4 py-1 md:py-3 flex justify-between items-center"
         >
           <div class="flex items-center gap-2">
             <i data-lucide="anchor" class="w-5 h-5" style="color: #b8904d"></i>
@@ -1268,7 +1268,15 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         const dd = document.getElementById("cat-dropdown");
         if (dd.classList.contains("hidden")) {
           buildCatDropdown();
+          dd.style.left = "0";
+          dd.style.right = "auto";
           dd.classList.remove("hidden");
+          // Evitar que el dropdown salga de la pantalla
+          const rect = dd.getBoundingClientRect();
+          if (rect.right > window.innerWidth - 8) {
+            dd.style.left = "auto";
+            dd.style.right = "0";
+          }
         } else {
           dd.classList.add("hidden");
         }
@@ -1288,10 +1296,11 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         allBtn.className =
           "w-full text-left text-xs px-2 py-1.5 rounded hover:bg-slate-100 text-slate-500 font-semibold mb-1";
         allBtn.textContent = "Todas las categorías";
-        allBtn.onclick = () => {
+        allBtn.onclick = (e) => {
+          e.stopPropagation();
           filterCats.clear();
           updateCatLabel();
-          buildCatDropdown();
+          document.getElementById("cat-dropdown").classList.add("hidden");
           renderAll();
         };
         dd.appendChild(allBtn);
@@ -1312,11 +1321,12 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           btn.innerHTML =
             `<span class="w-3.5 h-3.5 border rounded flex-shrink-0 flex items-center justify-center text-[9px] ${sel ? "bg-blue-500 border-blue-500 text-white" : "border-slate-300"}">${sel ? "✓" : ""}</span>` +
             cat;
-          btn.onclick = () => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
             if (filterCats.has(cat)) filterCats.delete(cat);
             else filterCats.add(cat);
             updateCatLabel();
-            buildCatDropdown();
+            buildCatDropdown(); // reconstruye con checkmarks actualizados, dropdown sigue visible
             renderAll();
           };
           dd.appendChild(btn);
