@@ -649,19 +649,15 @@
                   <option value="gasto">Gastos</option>
                 </select>
                 <!-- Filtro categoría multi-selección -->
-                <div class="relative" id="cat-filter-wrap">
+                <div id="cat-filter-wrap">
                   <button
                     type="button"
                     onclick="toggleCatDropdown()"
                     id="cat-filter-btn"
-                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none"
+                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer leading-tight"
                   >
                     <span id="cat-filter-label">Categorías</span> ▾
                   </button>
-                  <div
-                    id="cat-dropdown"
-                    class="hidden absolute left-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-30 p-2 w-56 max-h-60 overflow-y-auto"
-                  ></div>
                 </div>
               </div>
             </div>
@@ -718,6 +714,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Dropdown categorías fuera del flujo para evitar desalineamiento -->
+    <div
+      id="cat-dropdown"
+      class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 w-56 max-h-60 overflow-y-auto"
+    ></div>
 
     <script>
       const CATS = {
@@ -1268,14 +1270,18 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         const dd = document.getElementById("cat-dropdown");
         if (dd.classList.contains("hidden")) {
           buildCatDropdown();
-          dd.style.left = "0";
+          // Posicionar el dropdown anclado al botón con position fixed
+          const btn = document.getElementById("cat-filter-btn");
+          const r = btn.getBoundingClientRect();
+          dd.style.top = r.bottom + 4 + "px";
+          dd.style.left = r.left + "px";
           dd.style.right = "auto";
           dd.classList.remove("hidden");
-          // Evitar que el dropdown salga de la pantalla
-          const rect = dd.getBoundingClientRect();
-          if (rect.right > window.innerWidth - 8) {
+          // Corregir si se sale por la derecha
+          const ddr = dd.getBoundingClientRect();
+          if (ddr.right > window.innerWidth - 8) {
             dd.style.left = "auto";
-            dd.style.right = "0";
+            dd.style.right = window.innerWidth - r.right + "px";
           }
         } else {
           dd.classList.add("hidden");
