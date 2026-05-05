@@ -243,6 +243,31 @@
           padding: 0.75rem 0.9rem;
         }
       }
+      #toast {
+        position: fixed;
+        bottom: 5rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(4rem);
+        z-index: 60;
+        background: #14532d;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border-radius: 2rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        box-shadow: 0 8px 24px rgba(5, 11, 20, 0.4);
+        border: 1px solid rgba(34, 197, 94, 0.5);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      #toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      #toast.toast-success { background: #14532d; border-color: #22c55e; }
+      #toast.toast-delete  { background: #7f1d1d; border-color: #ef4444; }
     </style>
   </head>
   <body class="text-slate-800 antialiased min-h-screen">
@@ -533,6 +558,7 @@
               >
                 0%
               </p>
+              <p class="text-xs mt-1" id="g-margen-note"></p>
             </div>
           </div>
         </div>
@@ -740,9 +766,15 @@
                   >Ver todos los meses</span
                 >
               </label>
-              <span id="todos-meses-count" class="text-xs text-slate-400 hidden"
-                >0 registros totales</span
-              >
+              <div class="flex items-center gap-3">
+                <span id="todos-meses-count" class="text-xs text-slate-400 hidden">0 registros totales</span>
+                <button
+                  onclick="exportarCSV()"
+                  class="flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-700 px-3 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition"
+                >
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i> CSV
+                </button>
+              </div>
             </div>
             <div class="flex flex-wrap gap-2 items-center mb-4">
               <select
@@ -959,6 +991,17 @@
                 <div>
                   <label
                     class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Hora</label
+                  >
+                  <input
+                    type="time"
+                    id="tx-hora"
+                    class="block w-full rounded-xl border border-slate-200 p-3 text-sm text-slate-800 focus:outline-none bg-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
                     >Tipo</label
                   >
                   <div class="grid grid-cols-2 gap-2">
@@ -1148,6 +1191,8 @@
       class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 w-56 max-h-64 overflow-y-auto"
     ></div>
 
+    <div id="toast"></div>
+
     <script>
       const CATS = {
         ingreso: [
@@ -1209,6 +1254,16 @@
         "Noviembre",
         "Diciembre",
       ];
+
+      // ── Toast ────────────────────────────────────────────
+      let toastTimer;
+      function showToast(msg, type = "success") {
+        const t = document.getElementById("toast");
+        clearTimeout(toastTimer);
+        t.textContent = msg;
+        t.className = "show toast-" + type;
+        toastTimer = setTimeout(() => { t.className = ""; }, 2800);
+      }
 
       // ── Tabs ──────────────────────────────────────────────
       let currentTab = "resumen";
@@ -1302,6 +1357,7 @@
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
             document.getElementById("tx-fecha").value = todayStr;
+            document.getElementById("tx-hora").value = new Date().toTimeString().slice(0, 5);
             // Show FAB (starts on resumen tab, not nuevo)
             const fab = document.getElementById("fab-nuevo");
             if (fab) fab.classList.remove("hidden");
@@ -1557,6 +1613,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         if (!tx) return;
         editandoId = id;
         document.getElementById("tx-fecha").value = tx.fecha || todayStr;
+        document.getElementById("tx-hora").value = tx.hora || "";
         setTipo(tx.tipo || "ingreso");
         document.getElementById("tx-proyecto").value = tx.proyecto || "";
         document.getElementById("tx-descripcion").value = tx.descripcion || "";
@@ -1577,6 +1634,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         editandoId = null;
         document.getElementById("tx-form").reset();
         document.getElementById("tx-fecha").value = todayStr;
+        document.getElementById("tx-hora").value = new Date().toTimeString().slice(0, 5);
         setTipo("ingreso");
         setMedio("Efectivo");
         setReceptor("Cristian");
@@ -1593,6 +1651,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         )
           return;
         await db.collection("transacciones").doc(id).delete();
+        showToast("Registro eliminado", "delete");
       }
 
       // ── Format ────────────────────────────────────────────
@@ -1711,6 +1770,52 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         updateCatLabel();
         renderMovimientos();
       }
+      function filtrarPorProyecto(proyecto) {
+        showTab("movimientos");
+        document.getElementById("filter-tipo").value = "";
+        document.getElementById("filter-proyecto").value = proyecto;
+        filterCats.clear();
+        updateCatLabel();
+        renderMovimientos();
+      }
+      function exportarCSV() {
+        const todosMeses = document.getElementById("toggle-todos-meses").checked;
+        const pool = todosMeses ? transactions : txDelMes(transactions);
+        const filterProy = document.getElementById("filter-proyecto").value;
+        const filterTipo = document.getElementById("filter-tipo").value;
+        const filterSemana = document.getElementById("filter-semana").value;
+        let displayed = pool;
+        if (filterProy) displayed = displayed.filter((t) => t.proyecto === filterProy);
+        if (filterTipo) displayed = displayed.filter((t) => t.tipo === filterTipo);
+        if (!todosMeses && filterSemana) displayed = displayed.filter((t) => getSemana(t.fecha) === filterSemana);
+        if (filterCats.size > 0) displayed = displayed.filter((t) => filterCats.has(t.categoria));
+        const sorted = [...displayed].sort((a, b) =>
+          ((b.fecha || "") + (b.hora || "")).localeCompare((a.fecha || "") + (a.hora || ""))
+        );
+        const headers = ["Fecha","Hora","Tipo","Proyecto","Descripcion","Categoria","Monto","Medio","Persona"];
+        const rows = sorted.map((t) => [
+          t.fecha || "",
+          t.hora || "",
+          t.tipo || "",
+          (t.proyecto || "").replace(/,/g, ";"),
+          (t.descripcion || "").replace(/,/g, ";"),
+          (t.categoria || "").replace(/,/g, ";"),
+          t.monto || 0,
+          t.medio || "",
+          t.receptor || "",
+        ]);
+        const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
+        const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "CBD-Finanzas-" + MESES[mesSel.m] + "-" + mesSel.y + ".csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("CSV exportado ✓");
+      }
 
       // ── Publicidad widget ─────────────────────────────────
       function renderPubWidget(mes) {
@@ -1762,6 +1867,15 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         document.getElementById("g-margen").textContent = margen + "%";
         document.getElementById("g-margen").style.color =
           profit >= 0 ? "#93c5fd" : "#f87171";
+        const noteEl = document.getElementById("g-margen-note");
+        if (noteEl) {
+          const m = parseFloat(margen);
+          noteEl.textContent =
+            profit < 0 ? "⚠ Gastos superan ingresos"
+            : m < 20   ? "Margen ajustado"
+                       : "Margen saludable ✓";
+          noteEl.style.color = profit < 0 ? "#f87171" : m < 20 ? "#fbbf24" : "#86efac";
+        }
       }
 
       function renderKPIs(mes) {
@@ -1789,11 +1903,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         mes = mes || txDelMes(transactions);
         const projMap = {};
         mes.forEach((t) => {
-          const key =
-            t.tipo === "gasto" && !t.proyecto
-              ? "Operación General"
-              : t.proyecto || null;
-          if (!key) return;
+          const key = t.proyecto || (t.tipo === "gasto" ? "Operación General" : "Sin Proyecto");
           if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
           else projMap[key].gastos += t.monto;
@@ -1815,8 +1925,10 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) + "%" : "--";
           const div = document.createElement("div");
           div.className =
-            "rounded-xl border-l-4 p-3 bg-slate-50 " +
+            "rounded-xl border-l-4 p-3 bg-slate-50 cursor-pointer hover:shadow-md transition " +
             (p >= 0 ? "border-green-400" : "border-red-400");
+          div.title = "Ver movimientos de " + proj;
+          div.onclick = () => filtrarPorProyecto(proj);
           div.innerHTML = `<div class="flex justify-between items-center mb-2"><span class="font-semibold text-slate-800 text-sm">${proj}</span><span class="text-xs font-bold px-2 py-0.5 rounded-full ${p >= 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">${margin}</span></div><div class="grid grid-cols-3 gap-1 text-center"><div><p class="text-xs text-slate-400">Ingreso</p><p class="text-sm font-bold text-green-600">${fmt(v.ingresos)}</p></div><div><p class="text-xs text-slate-400">Gasto</p><p class="text-sm font-bold text-red-600">${fmt(v.gastos)}</p></div><div><p class="text-xs text-slate-400">Profit</p><p class="text-sm font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</p></div></div>`;
           sc.appendChild(div);
         });
@@ -1833,7 +1945,9 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           const margin =
             v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) : 0;
           const tr = document.createElement("tr");
-          tr.className = "hover:bg-slate-50 transition";
+          tr.className = "hover:bg-slate-50 transition cursor-pointer";
+          tr.title = "Ver movimientos de " + proj;
+          tr.onclick = () => filtrarPorProyecto(proj);
           tr.innerHTML = `<td class="px-4 py-3 text-sm font-medium text-slate-700">${proj}</td><td class="px-4 py-3 text-sm text-right text-green-600 font-semibold">${fmt(v.ingresos)}</td><td class="px-4 py-3 text-sm text-right text-red-600 font-semibold">${fmt(v.gastos)}</td><td class="px-4 py-3 text-sm text-right font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</td><td class="px-4 py-3 text-right"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${p >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${margin}%</span></td>`;
           sb.appendChild(tr);
         });
@@ -2240,11 +2354,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         // Top proyectos por profit (progress bars)
         const projMap = {};
         mes.forEach((t) => {
-          const key =
-            t.tipo === "gasto" && !t.proyecto
-              ? "Operación General"
-              : t.proyecto || null;
-          if (!key) return;
+          const key = t.proyecto || (t.tipo === "gasto" ? "Operación General" : "Sin Proyecto");
           if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
           else projMap[key].gastos += t.monto;
@@ -2291,7 +2401,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             document.getElementById("tx-proyecto").focus();
             return;
           }
-          const hora = new Date().toTimeString().slice(0, 5);
+          const hora = document.getElementById("tx-hora").value || new Date().toTimeString().slice(0, 5);
           const tx = {
             fecha: document.getElementById("tx-fecha").value || todayStr,
             hora,
@@ -2306,6 +2416,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           const btn = e.target.querySelector("button[type=submit]");
           btn.disabled = true;
           btn.innerHTML = "Guardando...";
+          const wasEditing = !!editandoId;
           if (editandoId) {
             await db.collection("transacciones").doc(editandoId).update(tx);
             editandoId = null;
@@ -2320,10 +2431,12 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             .classList.add("hidden");
           e.target.reset();
           document.getElementById("tx-fecha").value = todayStr;
+          document.getElementById("tx-hora").value = new Date().toTimeString().slice(0, 5);
           setTipo("ingreso");
           setMedio("Efectivo");
           setReceptor("Cristian");
           lucide.createIcons();
+          showToast(wasEditing ? "Cambios guardados ✓" : "Registro guardado ✓");
           showTab("resumen");
         });
 
@@ -2346,6 +2459,11 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
       });
       buildCatDropdown();
       lucide.createIcons();
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
     </script>
   </body>
 </html>
