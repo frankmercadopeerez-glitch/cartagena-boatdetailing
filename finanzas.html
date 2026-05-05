@@ -520,49 +520,42 @@
 
         <!-- PUBLICIDAD WIDGET - compact -->
         <div class="pub-widget px-4 py-3 mb-5">
-          <div class="flex items-center gap-3 flex-wrap">
-            <div class="flex items-center gap-2.5 flex-1 min-w-0">
-              <div
-                class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style="background: rgba(245, 158, 11, 0.15)"
-              >
-                <i data-lucide="megaphone" class="w-4 h-4 text-yellow-400"></i>
-              </div>
-              <div class="min-w-0">
-                <p
-                  class="text-xs font-semibold text-yellow-400 uppercase tracking-widest leading-none mb-0.5"
-                >
-                  Publicidad
-                </p>
-                <p
-                  class="text-xs text-slate-400 leading-none truncate"
-                  id="pub-semana-label"
-                >
-                  Esta semana
-                </p>
-              </div>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+              style="background: rgba(245, 158, 11, 0.15)"
+            >
+              <i data-lucide="megaphone" class="w-4 h-4 text-yellow-400"></i>
             </div>
-            <div class="flex items-center gap-4">
-              <div>
-                <p
-                  class="text-white font-bold text-base leading-none"
-                  id="pub-monto-semana"
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span
+                  class="text-xs font-semibold text-yellow-400 uppercase tracking-widest"
+                  >Publicidad</span
                 >
-                  $0
-                </p>
-                <p class="text-xs text-slate-500 mt-0.5" id="pub-count-semana">
-                  0 registros
-                </p>
+                <span
+                  class="text-xs text-slate-400 truncate"
+                  id="pub-semana-label"
+                  >Esta semana</span
+                >
               </div>
-              <div>
-                <p class="text-xs text-slate-400 leading-none mb-0.5">Año</p>
-                <p
-                  class="text-sm font-bold leading-none"
+              <div class="flex items-center gap-3 mt-1 flex-wrap">
+                <span
+                  class="text-white font-bold text-sm leading-none"
+                  id="pub-monto-semana"
+                  >$0</span
+                >
+                <span class="text-xs text-slate-500" id="pub-count-semana"
+                  >0 registros</span
+                >
+                <span class="text-slate-600 text-xs">·</span>
+                <span class="text-xs text-slate-400">Año:</span
+                ><span
+                  class="text-xs font-bold ml-0.5"
                   style="color: #b8904d"
                   id="pub-total-anio"
+                  >$0</span
                 >
-                  $0
-                </p>
               </div>
             </div>
             <div class="flex gap-2 flex-shrink-0">
@@ -576,7 +569,7 @@
               </button>
               <button
                 onclick="abrirGastoPublicidad()"
-                class="text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition"
+                class="text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition whitespace-nowrap"
                 style="
                   background: rgba(184, 144, 77, 0.2);
                   border: 1px solid rgba(184, 144, 77, 0.45);
@@ -1925,25 +1918,86 @@
         showToast("CSV exportado ✓");
       }
 
+      // ── Publicidad helpers ────────────────────────────────
+      function getSemanaActual() {
+        const hoy = new Date();
+        const dow = hoy.getDay(); // 0=Dom
+        const diffMon = dow === 0 ? -6 : 1 - dow;
+        const lunes = new Date(hoy);
+        lunes.setDate(hoy.getDate() + diffMon);
+        const domingo = new Date(lunes);
+        domingo.setDate(lunes.getDate() + 6);
+        const toISO = (d) => d.toISOString().split("T")[0];
+        return { desde: toISO(lunes), hasta: toISO(domingo) };
+      }
+      function onCategoriaChange() {
+        const cat = document.getElementById("tx-categoria").value;
+        const campo = document.getElementById("campo-pub-semana");
+        if (!campo) return;
+        campo.classList.toggle("hidden", cat !== "Publicidad");
+        if (cat === "Publicidad") {
+          const { desde, hasta } = getSemanaActual();
+          const desdeEl = document.getElementById("pub-desde");
+          const hastaEl = document.getElementById("pub-hasta");
+          if (desdeEl && !desdeEl.value) desdeEl.value = desde;
+          if (hastaEl && !hastaEl.value) hastaEl.value = hasta;
+          lucide.createIcons();
+        }
+      }
+      function abrirGastoPublicidad() {
+        showTab("nuevo");
+        setTipo("gasto");
+        setTimeout(() => {
+          document.getElementById("tx-categoria").value = "Publicidad";
+          onCategoriaChange();
+        }, 30);
+      }
+
       // ── Publicidad widget ─────────────────────────────────
-      function renderPubWidget(mes) {
-        const pubMes = mes.filter(
+      function renderPubWidget() {
+        const allPub = transactions.filter(
           (t) => t.tipo === "gasto" && t.categoria === "Publicidad",
         );
-        const totalPubMes = pubMes.reduce((s, t) => s + t.monto, 0);
-        const yearPrefix = String(mesSel.y) + "-";
-        const pubAnio = transactions.filter(
-          (t) =>
-            t.tipo === "gasto" &&
-            t.categoria === "Publicidad" &&
-            (t.fecha || "").startsWith(yearPrefix),
-        );
-        const totalPubAnio = pubAnio.reduce((s, t) => s + t.monto, 0);
-        document.getElementById("pub-monto-mes").textContent = fmt(totalPubMes);
-        document.getElementById("pub-count-mes").textContent =
-          pubMes.length + (pubMes.length === 1 ? " registro" : " registros");
-        document.getElementById("pub-total-anio").textContent =
-          fmt(totalPubAnio);
+        // Semana actual lunes-domingo
+        const { desde: semDesde, hasta: semHasta } = getSemanaActual();
+        // Un registro cuenta esta semana si:
+        // - tiene pub_desde/pub_hasta y su rango toca esta semana, O
+        // - no tiene pub_desde y su fecha cae dentro de esta semana
+        const inSemana = allPub.filter((t) => {
+          if (t.pub_desde && t.pub_hasta) {
+            return t.pub_hasta >= semDesde && t.pub_desde <= semHasta;
+          }
+          const d = t.fecha || "";
+          return d >= semDesde && d <= semHasta;
+        });
+        const totalSemana = inSemana.reduce((s, t) => s + t.monto, 0);
+        const countSemana = inSemana.length;
+        // Label del rango: usa el de la entrada más reciente con rango explícito,
+        // o si no, el rango de la semana actual
+        const fmtD = (iso) => {
+          const d = new Date(iso + "T12:00:00");
+          return d.getDate() + " " + MESES[d.getMonth()].slice(0, 3);
+        };
+        const withRange = allPub
+          .filter((t) => t.pub_desde && t.pub_hasta)
+          .sort((a, b) => b.pub_hasta.localeCompare(a.pub_hasta));
+        let rangeLabel;
+        if (withRange.length > 0) {
+          rangeLabel =
+            fmtD(withRange[0].pub_desde) + " – " + fmtD(withRange[0].pub_hasta);
+        } else {
+          rangeLabel = fmtD(semDesde) + " – " + fmtD(semHasta);
+        }
+        const yearPrefix = String(new Date().getFullYear()) + "-";
+        const totalAnio = allPub
+          .filter((t) => (t.fecha || "").startsWith(yearPrefix))
+          .reduce((s, t) => s + t.monto, 0);
+        document.getElementById("pub-semana-label").textContent = rangeLabel;
+        document.getElementById("pub-monto-semana").textContent =
+          fmt(totalSemana);
+        document.getElementById("pub-count-semana").textContent =
+          countSemana + (countSemana === 1 ? " registro" : " registros");
+        document.getElementById("pub-total-anio").textContent = fmt(totalAnio);
       }
 
       // ── Render All ────────────────────────────────────────
