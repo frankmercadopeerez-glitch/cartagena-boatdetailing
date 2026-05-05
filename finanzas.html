@@ -604,7 +604,10 @@
 
         <!-- TABS CARD -->
         <div class="glass-card mb-5">
-          <div class="flex border-b border-slate-100 overflow-x-auto">
+          <div
+            class="flex border-b border-slate-100"
+            style="overflow-x:auto;overflow-y:hidden;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch"
+          >
             <button
               onclick="showTab('resumen')"
               id="tab-resumen"
@@ -1139,6 +1142,21 @@
       class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 w-56 max-h-64 overflow-y-auto"
     ></div>
 
+    <!-- Banner datos demo -->
+    <div id="seed-banner" class="hidden fixed bottom-0 left-0 right-0 z-40 p-3 sm:p-4" style="background:#7f1d1d;border-top:2px solid #ef4444">
+      <div class="max-w-2xl mx-auto flex items-start gap-3">
+        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-300 flex-shrink-0 mt-0.5"></i>
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-sm font-bold">Se detectaron <span id="seed-count">0</span> registros demo en Firestore</p>
+          <p class="text-red-300 text-xs mt-0.5 leading-relaxed">Estos datos de prueba están inflando tus gastos globales. Toca "Eliminar" para limpiarlos.</p>
+        </div>
+        <div class="flex gap-2 flex-shrink-0 ml-2">
+          <button onclick="eliminarDatosDemo()" class="text-xs font-bold px-3 py-2 rounded-xl bg-red-500 hover:bg-red-400 text-white transition whitespace-nowrap">Eliminar ahora</button>
+          <button onclick="document.getElementById('seed-banner').classList.add('hidden')" class="text-red-300 hover:text-white px-2 py-2 text-lg leading-none">×</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       const CATS = {
         ingreso: [
@@ -1324,6 +1342,7 @@
                     id: d.id,
                     ...d.data(),
                   }));
+                  detectarDatosDemo();
                   renderAll();
                 },
                 (err) => console.error("Firestore:", err),
@@ -1539,6 +1558,37 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           document.getElementById("ai-overlay").classList.remove("active");
           input.value = "";
         }
+      }
+
+      // ── Datos demo detection / cleanup ────────────────────
+      const SEED_DESCS = [
+        "Anticipo 50% - Saldo pendiente $3.000.000 al finalizar",
+        "Compra herramientas - Peliculadora 7m 1300W + Maleta",
+        "Insumos detailing Yate Oceana 74 Ft",
+        "ARL Nivel de Riesgo 5 - 1 trabajador",
+        "Combustible y traslado al muelle",
+      ];
+      function detectarDatosDemo() {
+        const found = transactions.filter(t => SEED_DESCS.includes(t.descripcion));
+        const banner = document.getElementById("seed-banner");
+        if (!banner) return;
+        if (found.length > 0) {
+          document.getElementById("seed-count").textContent = found.length;
+          banner.classList.remove("hidden");
+          lucide.createIcons();
+        } else {
+          banner.classList.add("hidden");
+        }
+      }
+      async function eliminarDatosDemo() {
+        const found = transactions.filter(t => SEED_DESCS.includes(t.descripcion));
+        if (!found.length) return;
+        const btn = document.querySelector("#seed-banner button");
+        if (btn) { btn.disabled = true; btn.textContent = "Eliminando..."; }
+        for (const tx of found) {
+          await db.collection("transacciones").doc(tx.id).delete();
+        }
+        // banner will hide automatically via onSnapshot → detectarDatosDemo()
       }
 
       // ── CRUD ──────────────────────────────────────────────
@@ -1839,7 +1889,10 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         const track = document.getElementById("toggle-track");
         const thumb = document.getElementById("toggle-thumb");
         if (track) track.style.background = todosMeses ? "#1A365D" : "#e2e8f0";
-        if (thumb) thumb.style.transform = todosMeses ? "translateX(1.25rem)" : "translateX(0)";
+        if (thumb)
+          thumb.style.transform = todosMeses
+            ? "translateX(1.25rem)"
+            : "translateX(0)";
 
         const pool = todosMeses ? transactions : txDelMes(transactions);
 
@@ -1847,7 +1900,8 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         const countEl = document.getElementById("todos-meses-count");
         if (countEl) {
           countEl.classList.toggle("hidden", !todosMeses);
-          if (todosMeses) countEl.textContent = transactions.length + " registros totales";
+          if (todosMeses)
+            countEl.textContent = transactions.length + " registros totales";
         }
 
         const filterProy = document.getElementById("filter-proyecto").value;
