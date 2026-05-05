@@ -455,28 +455,84 @@
         </div>
 
         <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
-        <div class="rounded-2xl mb-5 p-4 sm:p-5" style="background:linear-gradient(135deg,#050B14 0%,#112238 100%);border:1px solid rgba(184,144,77,0.2)">
+        <div
+          class="rounded-2xl mb-5 p-4 sm:p-5"
+          style="
+            background: linear-gradient(135deg, #050b14 0%, #112238 100%);
+            border: 1px solid rgba(184, 144, 77, 0.2);
+          "
+        >
           <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="globe" class="w-4 h-4" style="color:#B8904D"></i>
-            <span class="text-xs font-bold uppercase tracking-widest" style="color:#B8904D">Balance Global Acumulado</span>
-            <span class="text-xs text-slate-500 ml-auto">Todos los registros históricos</span>
+            <i data-lucide="globe" class="w-4 h-4" style="color: #b8904d"></i>
+            <span
+              class="text-xs font-bold uppercase tracking-widest"
+              style="color: #b8904d"
+              >Balance Global Acumulado</span
+            >
+            <span class="text-xs text-slate-500 ml-auto"
+              >Todos los registros históricos</span
+            >
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Total Ingresos</p>
-              <p class="font-bold text-green-400 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-ingresos">$0</p>
+              <p
+                class="text-xs font-semibold uppercase tracking-wide mb-1"
+                style="color: rgba(255, 255, 255, 0.4)"
+              >
+                Total Ingresos
+              </p>
+              <p
+                class="font-bold text-green-400 leading-tight"
+                style="font-size: clamp(0.85rem, 3.5vw, 1.4rem)"
+                id="g-ingresos"
+              >
+                $0
+              </p>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Total Gastos</p>
-              <p class="font-bold text-red-400 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-gastos">$0</p>
+              <p
+                class="text-xs font-semibold uppercase tracking-wide mb-1"
+                style="color: rgba(255, 255, 255, 0.4)"
+              >
+                Total Gastos
+              </p>
+              <p
+                class="font-bold text-red-400 leading-tight"
+                style="font-size: clamp(0.85rem, 3.5vw, 1.4rem)"
+                id="g-gastos"
+              >
+                $0
+              </p>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Profit Total</p>
-              <p class="font-bold leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem);color:#B8904D" id="g-profit">$0</p>
+              <p
+                class="text-xs font-semibold uppercase tracking-wide mb-1"
+                style="color: rgba(255, 255, 255, 0.4)"
+              >
+                Profit Total
+              </p>
+              <p
+                class="font-bold leading-tight"
+                style="font-size: clamp(0.85rem, 3.5vw, 1.4rem); color: #b8904d"
+                id="g-profit"
+              >
+                $0
+              </p>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Margen Global</p>
-              <p class="font-bold text-blue-300 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-margen">0%</p>
+              <p
+                class="text-xs font-semibold uppercase tracking-wide mb-1"
+                style="color: rgba(255, 255, 255, 0.4)"
+              >
+                Margen Global
+              </p>
+              <p
+                class="font-bold text-blue-300 leading-tight"
+                style="font-size: clamp(0.85rem, 3.5vw, 1.4rem)"
+                id="g-margen"
+              >
+                0%
+              </p>
             </div>
           </div>
         </div>
@@ -502,28 +558,45 @@
               <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
             </button>
           </div>
-          <span class="text-xs text-slate-400 font-medium">Detalle mensual</span>
+          <span class="text-xs text-slate-400 font-medium"
+            >Detalle mensual</span
+          >
         </div>
 
         <!-- KPIs MENSUALES -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
           <div class="kpi-card border-l-4 border-green-400">
-            <p class="kpi-label">Ingresos <span class="normal-case font-normal text-slate-300">· mes</span></p>
+            <p class="kpi-label">
+              Ingresos
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
             <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
             <i data-lucide="trending-up" class="kpi-icon"></i>
           </div>
           <div class="kpi-card border-l-4 border-red-400">
-            <p class="kpi-label">Gastos <span class="normal-case font-normal text-slate-300">· mes</span></p>
+            <p class="kpi-label">
+              Gastos
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
             <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
             <i data-lucide="trending-down" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card" style="background:#f0fdf4;border-left:4px solid #22c55e">
-            <p class="kpi-label">Profit <span class="normal-case font-normal text-slate-300">· mes</span></p>
+          <div
+            class="kpi-card"
+            style="background: #f0fdf4; border-left: 4px solid #22c55e"
+          >
+            <p class="kpi-label">
+              Profit
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
             <p class="kpi-value" id="kpi-profit">$0</p>
             <i data-lucide="bar-chart-2" class="kpi-icon"></i>
           </div>
           <div class="kpi-card border-l-4 border-blue-400">
-            <p class="kpi-label">Margen <span class="normal-case font-normal text-slate-300">· mes</span></p>
+            <p class="kpi-label">
+              Margen
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
             <p class="kpi-value text-blue-600" id="kpi-margen">0%</p>
             <i data-lucide="percent" class="kpi-icon"></i>
           </div>
@@ -635,6 +708,33 @@
 
           <!-- TAB MOVIMIENTOS -->
           <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
+            <div class="flex items-center justify-between mb-3">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <div class="relative">
+                  <input
+                    type="checkbox"
+                    id="toggle-todos-meses"
+                    class="sr-only"
+                    onchange="renderMovimientos()"
+                  />
+                  <div
+                    id="toggle-track"
+                    class="w-10 h-5 rounded-full transition"
+                    style="background: #e2e8f0"
+                  ></div>
+                  <div
+                    id="toggle-thumb"
+                    class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform"
+                  ></div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500"
+                  >Ver todos los meses</span
+                >
+              </label>
+              <span id="todos-meses-count" class="text-xs text-slate-400 hidden"
+                >0 registros totales</span
+              >
+            </div>
             <div class="flex flex-wrap gap-2 items-center mb-4">
               <select
                 id="filter-proyecto"
@@ -1012,6 +1112,27 @@
     </div>
     <!-- /main-app -->
 
+    <!-- FAB Nuevo Registro -->
+    <button
+      onclick="showTab('nuevo')"
+      id="fab-nuevo"
+      class="hidden fixed z-30 flex items-center gap-2 shadow-2xl transition-all active:scale-95"
+      style="
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        right: 1.25rem;
+        background: linear-gradient(135deg, #1a365d, #0d2540);
+        color: white;
+        padding: 0.9rem 1.4rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border: 2px solid rgba(184, 144, 77, 0.5);
+      "
+    >
+      <i data-lucide="plus" class="w-5 h-5" style="color: #b8904d"></i>
+      Nuevo Registro
+    </button>
+
     <!-- Cat dropdown (fixed, outside flow) -->
     <div
       id="cat-dropdown"
@@ -1092,6 +1213,9 @@
             .getElementById("tab-" + t)
             .classList.toggle("active", t === tab);
         });
+        // FAB: hide on "nuevo" tab, show on all others
+        const fab = document.getElementById("fab-nuevo");
+        if (fab) fab.classList.toggle("hidden", tab === "nuevo");
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
         lucide.createIcons();
@@ -1169,6 +1293,9 @@
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
             document.getElementById("tx-fecha").value = todayStr;
+            // Show FAB (starts on resumen tab, not nuevo)
+            const fab = document.getElementById("fab-nuevo");
+            if (fab) fab.classList.remove("hidden");
             actualizarMesLabel();
             setTipo("ingreso");
             setMedio("Efectivo");
@@ -1197,7 +1324,6 @@
                     id: d.id,
                     ...d.data(),
                   }));
-                  if (transactions.length === 0) await seedData();
                   renderAll();
                 },
                 (err) => console.error("Firestore:", err),
@@ -1415,70 +1541,6 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         }
       }
 
-      // ── Seed ─────────────────────────────────────────────
-      async function seedData() {
-        const hora = new Date().toTimeString().slice(0, 5);
-        const seed = [
-          {
-            fecha: todayStr,
-            hora,
-            tipo: "ingreso",
-            proyecto: "Yate Oceana 74 Ft",
-            descripcion:
-              "Anticipo 50% - Saldo pendiente $3.000.000 al finalizar",
-            categoria: "Anticipo",
-            monto: 3000000,
-            medio: "Efectivo",
-            receptor: "Cristian",
-          },
-          {
-            fecha: todayStr,
-            hora,
-            tipo: "gasto",
-            proyecto: "",
-            descripcion: "Compra herramientas - Peliculadora 7m 1300W + Maleta",
-            categoria: "Herramientas / Equipos",
-            monto: 677800,
-            medio: "Transferencia",
-            receptor: "",
-          },
-          {
-            fecha: todayStr,
-            hora,
-            tipo: "gasto",
-            proyecto: "Yate Oceana 74 Ft",
-            descripcion: "Insumos detailing Yate Oceana 74 Ft",
-            categoria: "Materiales / Insumos",
-            monto: 131000,
-            medio: "Efectivo",
-            receptor: "",
-          },
-          {
-            fecha: todayStr,
-            hora,
-            tipo: "gasto",
-            proyecto: "",
-            descripcion: "ARL Nivel de Riesgo 5 - 1 trabajador",
-            categoria: "ARL / Seguro",
-            monto: 140000,
-            medio: "Transferencia",
-            receptor: "",
-          },
-          {
-            fecha: todayStr,
-            hora,
-            tipo: "gasto",
-            proyecto: "Yate Oceana 74 Ft",
-            descripcion: "Combustible y traslado al muelle",
-            categoria: "Logistica / Transporte",
-            monto: 45000,
-            medio: "Efectivo",
-            receptor: "",
-          },
-        ];
-        for (const tx of seed) await db.collection("transacciones").add(tx);
-      }
-
       // ── CRUD ──────────────────────────────────────────────
       let editandoId = null;
       function editTransaction(id) {
@@ -1674,29 +1736,44 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
       }
 
       function renderGlobalKPIs() {
-        const totalIngresos = transactions.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
-        const totalGastos   = transactions.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
+        const totalIngresos = transactions
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = transactions
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
-        const margen = totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
+        const margen =
+          totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent   = fmt(totalGastos);
-        document.getElementById("g-profit").textContent   = fmt(profit);
-        document.getElementById("g-profit").style.color   = profit >= 0 ? "#B8904D" : "#f87171";
-        document.getElementById("g-margen").textContent   = margen + "%";
-        document.getElementById("g-margen").style.color   = profit >= 0 ? "#93c5fd" : "#f87171";
+        document.getElementById("g-gastos").textContent = fmt(totalGastos);
+        document.getElementById("g-profit").textContent = fmt(profit);
+        document.getElementById("g-profit").style.color =
+          profit >= 0 ? "#B8904D" : "#f87171";
+        document.getElementById("g-margen").textContent = margen + "%";
+        document.getElementById("g-margen").style.color =
+          profit >= 0 ? "#93c5fd" : "#f87171";
       }
 
       function renderKPIs(mes) {
-        const totalIngresos = mes.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
-        const totalGastos   = mes.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
+        const totalIngresos = mes
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = mes
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
-        const margen = totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
-        document.getElementById("kpi-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("kpi-gastos").textContent   = fmt(totalGastos);
-        document.getElementById("kpi-profit").textContent   = fmt(profit);
-        document.getElementById("kpi-profit").style.color   = profit >= 0 ? "#16a34a" : "#dc2626";
-        document.getElementById("kpi-margen").textContent   = margen + "%";
-        document.getElementById("kpi-margen").style.color   = profit >= 0 ? "#2563eb" : "#dc2626";
+        const margen =
+          totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
+        document.getElementById("kpi-ingresos").textContent =
+          fmt(totalIngresos);
+        document.getElementById("kpi-gastos").textContent = fmt(totalGastos);
+        document.getElementById("kpi-profit").textContent = fmt(profit);
+        document.getElementById("kpi-profit").style.color =
+          profit >= 0 ? "#16a34a" : "#dc2626";
+        document.getElementById("kpi-margen").textContent = margen + "%";
+        document.getElementById("kpi-margen").style.color =
+          profit >= 0 ? "#2563eb" : "#dc2626";
       }
 
       function renderResumen(mes) {
@@ -1755,13 +1832,30 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
       }
 
       function renderMovimientos() {
-        const mes = txDelMes(transactions);
+        const todosMesesEl = document.getElementById("toggle-todos-meses");
+        const todosMeses = todosMesesEl && todosMesesEl.checked;
+
+        // Update toggle visuals
+        const track = document.getElementById("toggle-track");
+        const thumb = document.getElementById("toggle-thumb");
+        if (track) track.style.background = todosMeses ? "#1A365D" : "#e2e8f0";
+        if (thumb) thumb.style.transform = todosMeses ? "translateX(1.25rem)" : "translateX(0)";
+
+        const pool = todosMeses ? transactions : txDelMes(transactions);
+
+        // Count display
+        const countEl = document.getElementById("todos-meses-count");
+        if (countEl) {
+          countEl.classList.toggle("hidden", !todosMeses);
+          if (todosMeses) countEl.textContent = transactions.length + " registros totales";
+        }
+
         const filterProy = document.getElementById("filter-proyecto").value;
         const filterTipo = document.getElementById("filter-tipo").value;
         const filterSemana = document.getElementById("filter-semana").value;
 
         const projects = [
-          ...new Set(mes.filter((t) => t.proyecto).map((t) => t.proyecto)),
+          ...new Set(pool.filter((t) => t.proyecto).map((t) => t.proyecto)),
         ].sort();
         const filterEl = document.getElementById("filter-proyecto");
         const cur = filterEl.value;
@@ -1774,12 +1868,12 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           filterEl.appendChild(o);
         });
 
-        let displayed = mes;
+        let displayed = pool;
         if (filterProy)
           displayed = displayed.filter((t) => t.proyecto === filterProy);
         if (filterTipo)
           displayed = displayed.filter((t) => t.tipo === filterTipo);
-        if (filterSemana)
+        if (!todosMeses && filterSemana)
           displayed = displayed.filter(
             (t) => getSemana(t.fecha) === filterSemana,
           );
