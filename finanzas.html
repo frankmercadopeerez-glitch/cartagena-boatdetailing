@@ -17,11 +17,16 @@
     <meta name="apple-mobile-web-app-title" content="CBD Finanzas" />
     <meta name="theme-color" content="#050B14" />
     <link rel="manifest" href="finanzas-manifest.json" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -30,6 +35,7 @@
               navy: { 900: "#050B14", 800: "#112238", 700: "#1A365D" },
               gold: { 500: "#B8904D" },
             },
+            fontFamily: { sans: ["Poppins", "system-ui", "sans-serif"] },
           },
         },
       };
@@ -40,18 +46,12 @@
         --sab: env(safe-area-inset-bottom, 0px);
       }
       body {
-        font-family:
-          "Inter",
-          system-ui,
-          -apple-system,
-          sans-serif;
-        background: #f4f6f9;
+        font-family: "Poppins", system-ui, sans-serif;
+        background: #f1f5f9;
       }
-      /* Nav absorbe el safe-area del notch en PWA standalone */
       nav#main-nav {
         padding-top: env(safe-area-inset-top, 0px);
       }
-      /* Cuando hay safe area real, el inner div no necesita tanto padding top */
       @supports (padding-top: env(safe-area-inset-top)) {
         nav#main-nav .nav-inner {
           padding-top: 0.1rem;
@@ -59,35 +59,92 @@
         }
       }
       .glass-card {
-        background: white;
-        border-radius: 12px;
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
         box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 1px 2px rgba(0, 0, 0, 0.04);
       }
-      select,
-      #cat-filter-btn {
-        appearance: none;
-        -webkit-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 0.75rem center;
-        padding-right: 2.5rem !important;
+      .glass-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+        transition: box-shadow 0.2s;
       }
-      input[type="date"] {
-        -webkit-appearance: none;
-        appearance: none;
-        color: #1e293b;
+      .kpi-card {
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        padding: 1rem 1.25rem;
+        position: relative;
+        overflow: hidden;
       }
-      #ai-overlay {
-        display: none;
+      .kpi-card .kpi-icon {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.06;
+        width: 3.2rem;
+        height: 3.2rem;
       }
-      #ai-overlay.active {
-        display: flex;
+      .kpi-card .kpi-label {
+        font-size: 0.67rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #94a3b8;
       }
-      #ios-banner {
-        display: none;
-        padding-bottom: calc(1rem + var(--sab));
+      .kpi-card .kpi-value {
+        font-size: clamp(0.85rem, 3.5vw, 1.6rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-top: 0.15rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .kpi-card.kpi-dark {
+        background: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        border-color: transparent;
+      }
+      .kpi-card.kpi-dark .kpi-label {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .kpi-card.kpi-dark .kpi-value {
+        color: #b8904d;
+      }
+      .tab-btn {
+        position: relative;
+        color: #64748b;
+        font-weight: 500;
+        font-size: 0.82rem;
+        padding: 0.65rem 1rem;
+        transition: color 0.15s;
+        white-space: nowrap;
+        border-radius: 0;
+      }
+      .tab-btn::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: transparent;
+        border-radius: 2px 2px 0 0;
+        transition: background 0.15s;
+      }
+      .tab-btn:hover {
+        color: #1a365d;
+        background: #f8fafc;
+      }
+      .tab-btn.active {
+        color: #1a365d;
+        font-weight: 600;
+      }
+      .tab-btn.active::after {
+        background: #b8904d;
       }
       .toggle-btn {
         transition: all 0.15s ease;
@@ -121,6 +178,36 @@
         background: white;
         color: #94a3b8;
       }
+      select,
+      #cat-filter-btn {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.5rem !important;
+      }
+      input[type="date"] {
+        -webkit-appearance: none;
+        appearance: none;
+        color: #1e293b;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #1a365d;
+        box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+      }
+      #ai-overlay {
+        display: none;
+      }
+      #ai-overlay.active {
+        display: flex;
+      }
+      #ios-banner {
+        display: none;
+        padding-bottom: calc(1rem + var(--sab));
+      }
       #proyecto-dropdown li {
         padding: 0.6rem 1rem;
         cursor: pointer;
@@ -130,10 +217,36 @@
       #proyecto-dropdown li:hover {
         background: #f1f5f9;
       }
+      .pub-widget {
+        background: linear-gradient(135deg, #0d2540 0%, #050b14 100%);
+        border-radius: 14px;
+        border: 1px solid rgba(184, 144, 77, 0.25);
+        box-shadow: 0 4px 20px rgba(5, 11, 20, 0.3);
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      @media (max-width: 640px) {
+        .tab-btn {
+          padding: 0.5rem 0.7rem;
+          font-size: 0.73rem;
+        }
+        .kpi-card {
+          padding: 0.75rem 0.9rem;
+        }
+      }
     </style>
   </head>
-  <body class="text-slate-800">
-    <!-- OVERLAY IA -->
+  <body class="text-slate-800 antialiased min-h-screen">
+    <!-- AI OVERLAY -->
     <div
       id="ai-overlay"
       class="fixed inset-0 z-50 bg-black/70 flex-col items-center justify-center gap-4 text-white"
@@ -142,10 +255,10 @@
         class="w-14 h-14 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"
       ></div>
       <p class="text-lg font-semibold">Analizando imagen con IA...</p>
-      <p class="text-sm text-slate-300">Gemini esta extrayendo los datos</p>
+      <p class="text-sm text-slate-300">Extrayendo datos del comprobante</p>
     </div>
 
-    <!-- BANNER iOS -->
+    <!-- iOS BANNER -->
     <div
       id="ios-banner"
       class="fixed bottom-0 left-0 right-0 z-40 flex items-start gap-3 p-4"
@@ -160,10 +273,7 @@
         <strong class="block mb-0.5"
           >Instalar CBD Finanzas en tu iPhone:</strong
         >
-        <span
-          >1. Toca <strong>Compartir</strong> (icono cuadrado con flecha) en
-          Safari</span
-        ><br />
+        <span>1. Toca <strong>Compartir</strong> en Safari</span><br />
         <span
           >2. Selecciona <strong>"Agregar a pantalla de inicio"</strong></span
         >
@@ -173,7 +283,7 @@
           document.getElementById('ios-banner').style.display = 'none';
           localStorage.setItem('iosDismissed', '1');
         "
-        class="text-slate-400 hover:text-white flex-shrink-0"
+        class="text-slate-400 hover:text-white"
       >
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
@@ -183,35 +293,49 @@
     <div
       id="lock-screen"
       class="fixed inset-0 z-30 flex items-center justify-center"
-      style="background-color: #050b14"
+      style="background: #050b14"
     >
       <div class="text-center p-8 max-w-sm w-full mx-4">
-        <div class="flex justify-center mb-4">
-          <i data-lucide="anchor" class="w-16 h-16" style="color: #b8904d"></i>
+        <div class="flex justify-center mb-5">
+          <div
+            class="w-20 h-20 rounded-2xl flex items-center justify-center"
+            style="
+              background: rgba(184, 144, 77, 0.15);
+              border: 1px solid rgba(184, 144, 77, 0.3);
+            "
+          >
+            <i
+              data-lucide="anchor"
+              class="w-10 h-10"
+              style="color: #b8904d"
+            ></i>
+          </div>
         </div>
-        <h1 class="text-white text-2xl font-bold mb-1">CBD Finanzas</h1>
-        <p class="text-slate-400 mb-8 text-sm">
-          Panel Privado - Cartagena Boat Detailing
+        <h1 class="text-white text-2xl font-bold mb-1 tracking-wide">
+          CBD Finanzas
+        </h1>
+        <p class="text-slate-500 mb-8 text-sm">
+          Panel Privado · Cartagena Boat Detailing
         </p>
         <input
           type="email"
           id="auth-email"
-          placeholder="Correo electronico"
-          class="block w-full rounded-lg border p-3 text-center mb-3 focus:outline-none"
-          style="background-color: #112238; border-color: #334155; color: white"
+          placeholder="Correo electrónico"
+          class="block w-full rounded-xl border p-3 text-center mb-3 text-sm focus:outline-none"
+          style="background: #112238; border-color: #1e3a5f; color: white"
         />
         <input
           type="password"
           id="auth-password"
-          placeholder="Contrasena"
-          class="block w-full rounded-lg border p-3 text-center mb-4 focus:outline-none"
-          style="background-color: #112238; border-color: #334155; color: white"
+          placeholder="Contraseña"
+          class="block w-full rounded-xl border p-3 text-center mb-5 text-sm focus:outline-none"
+          style="background: #112238; border-color: #1e3a5f; color: white"
         />
         <button
           onclick="loginWithEmail()"
           id="login-btn"
-          class="w-full text-white font-bold py-3 px-4 rounded-lg transition"
-          style="background-color: #b8904d"
+          class="w-full text-white font-semibold py-3 px-4 rounded-xl text-sm tracking-wide transition"
+          style="background: linear-gradient(135deg, #b8904d, #d4a85e)"
         >
           Ingresar
         </button>
@@ -219,25 +343,32 @@
       </div>
     </div>
 
-    <!-- APP -->
+    <!-- MAIN APP -->
     <div id="main-app" class="hidden">
+      <!-- NAV -->
       <nav
         id="main-nav"
-        style="background-color: #050b14"
-        class="text-white shadow-lg sticky top-0 z-20"
+        style="background: #050b14"
+        class="text-white shadow-xl sticky top-0 z-20 border-b border-white/5"
       >
         <div
-          class="nav-inner max-w-7xl mx-auto px-4 py-0.5 md:py-3 flex justify-between items-center"
+          class="nav-inner max-w-7xl mx-auto px-4 py-2 md:py-3 flex justify-between items-center"
         >
-          <div class="flex items-center gap-2">
-            <i
-              data-lucide="anchor"
-              class="w-4 h-4 md:w-5 md:h-5"
-              style="color: #b8904d"
-            ></i>
+          <div class="flex items-center gap-2.5">
+            <div
+              class="w-7 h-7 rounded-lg flex items-center justify-center"
+              style="background: rgba(184, 144, 77, 0.2)"
+            >
+              <i
+                data-lucide="anchor"
+                class="w-4 h-4"
+                style="color: #b8904d"
+              ></i>
+            </div>
             <span
-              class="text-sm md:text-base font-bold uppercase tracking-wider"
-              >CBD Finanzas</span
+              class="text-sm md:text-base font-semibold tracking-wider"
+              style="color: #e2e8f0"
+              >CBD <span style="color: #b8904d">Finanzas</span></span
             >
           </div>
           <div class="flex items-center gap-3">
@@ -255,14 +386,13 @@
                 lucide.createIcons();
               "
               class="hidden text-xs font-semibold text-yellow-400 hover:text-yellow-300 flex items-center gap-1"
-              title="Instalar como app"
             >
               <i data-lucide="download" class="w-4 h-4"></i>
-              <span>Instalar</span>
+              <span class="hidden sm:inline">Instalar</span>
             </button>
             <button
               onclick="logout()"
-              class="text-xs text-slate-400 hover:text-white flex items-center gap-1"
+              class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
             >
               <i data-lucide="log-out" class="w-4 h-4"></i>
               <span class="hidden sm:inline">Salir</span>
@@ -271,439 +401,294 @@
         </div>
       </nav>
 
-      <div class="max-w-7xl mx-auto p-3 sm:p-6 lg:p-8 pb-28">
-        <!-- Selector de mes -->
+      <div class="max-w-7xl mx-auto p-3 sm:p-5 lg:p-7 pb-28">
+        <!-- PUBLICIDAD WIDGET -->
+        <div
+          class="pub-widget p-4 mb-5 flex flex-wrap items-center justify-between gap-3"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background: rgba(245, 158, 11, 0.15)"
+            >
+              <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
+            </div>
+            <div>
+              <p
+                class="text-xs font-semibold text-yellow-400 uppercase tracking-widest"
+              >
+                Publicidad
+              </p>
+              <p
+                class="text-white font-bold text-lg leading-tight"
+                id="pub-monto-mes"
+              >
+                $0
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5 flex-wrap">
+            <div class="text-center">
+              <p class="text-xs text-slate-400">Este mes</p>
+              <p class="text-sm font-bold text-white" id="pub-count-mes">
+                0 registros
+              </p>
+            </div>
+            <div class="text-center">
+              <p class="text-xs text-slate-400">Acumulado año</p>
+              <p
+                class="text-sm font-bold"
+                style="color: #b8904d"
+                id="pub-total-anio"
+              >
+                $0
+              </p>
+            </div>
+            <button
+              onclick="filtrarPorPublicidad()"
+              class="text-xs font-semibold px-3 py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center gap-1"
+              style="border-color: rgba(184, 144, 77, 0.4)"
+            >
+              <i data-lucide="filter" class="w-3.5 h-3.5"></i> Ver movimientos
+            </button>
+          </div>
+        </div>
+
+        <!-- MES SELECTOR -->
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-1">
             <button
               onclick="cambiarMes(-1)"
-              class="p-1.5 rounded-lg hover:bg-slate-200 transition"
+              class="p-2 rounded-xl hover:bg-white hover:shadow transition"
             >
-              <i data-lucide="chevron-left" class="w-5 h-5 text-slate-600"></i>
+              <i data-lucide="chevron-left" class="w-4 h-4 text-slate-500"></i>
             </button>
             <span
               id="mes-label"
-              class="text-base font-bold text-slate-700 min-w-[140px] text-center capitalize"
+              class="text-base font-bold text-slate-700 min-w-[150px] text-center capitalize px-2"
             ></span>
             <button
               onclick="cambiarMes(1)"
               id="btn-mes-sig"
-              class="p-1.5 rounded-lg hover:bg-slate-200 transition"
+              class="p-2 rounded-xl hover:bg-white hover:shadow transition"
             >
-              <i data-lucide="chevron-right" class="w-5 h-5 text-slate-600"></i>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
             </button>
           </div>
-          <span class="text-xs text-slate-400">Ciclo mensual</span>
+          <span class="text-xs text-slate-400 font-medium">Ciclo mensual</span>
         </div>
 
         <!-- KPIs -->
-        <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
-          <div class="glass-card p-2 sm:p-6 border-l-4 border-green-500">
-            <p class="text-xs font-medium text-slate-500">Ingresos</p>
-            <p
-              class="font-bold text-green-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
-              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
-              id="kpi-ingresos"
-            >
-              $0
-            </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+          <div class="kpi-card border-l-4 border-green-400">
+            <p class="kpi-label">Ingresos</p>
+            <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
+            <i data-lucide="trending-up" class="kpi-icon"></i>
           </div>
-          <div class="glass-card p-2 sm:p-6 border-l-4 border-red-500">
-            <p class="text-xs font-medium text-slate-500">Gastos</p>
-            <p
-              class="font-bold text-red-600 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
-              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
-              id="kpi-gastos"
-            >
-              $0
-            </p>
+          <div class="kpi-card border-l-4 border-red-400">
+            <p class="kpi-label">Gastos</p>
+            <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
+            <i data-lucide="trending-down" class="kpi-icon"></i>
           </div>
-          <div
-            class="glass-card p-2 sm:p-6 border-l-4 border-yellow-400"
-            style="background-color: #050b14"
-          >
-            <p class="text-xs font-medium text-yellow-400">Profit</p>
-            <p
-              class="font-bold text-white mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap"
-              style="font-size: clamp(0.75rem, 3vw, 1.875rem)"
-              id="kpi-profit"
-            >
-              $0
-            </p>
+          <div class="kpi-card kpi-dark">
+            <p class="kpi-label">Profit</p>
+            <p class="kpi-value" id="kpi-profit" style="color: #b8904d">$0</p>
+            <i data-lucide="bar-chart-2" class="kpi-icon"></i>
+          </div>
+          <div class="kpi-card border-l-4 border-blue-400">
+            <p class="kpi-label">Margen</p>
+            <p class="kpi-value text-blue-600" id="kpi-margen">0%</p>
+            <i data-lucide="percent" class="kpi-icon"></i>
           </div>
         </div>
 
-        <!-- Resumen por Proyecto -->
-        <div class="glass-card p-4 sm:p-6 mb-5">
-          <h2
-            class="text-base font-bold mb-3 flex items-center"
-            style="color: #1a365d"
-          >
-            <i
-              data-lucide="bar-chart-2"
-              class="w-5 h-5 mr-2"
-              style="color: #b8904d"
-            ></i>
-            <span id="summary-title">Resumen del mes</span>
-          </h2>
-          <div id="summary-cards" class="sm:hidden space-y-3"></div>
-          <div class="hidden sm:block overflow-x-auto">
-            <table class="min-w-full divide-y divide-slate-200">
-              <thead class="bg-slate-50">
-                <tr>
-                  <th
-                    class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase"
-                  >
-                    Proyecto
-                  </th>
-                  <th
-                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
-                  >
-                    Ingresos
-                  </th>
-                  <th
-                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
-                  >
-                    Gastos
-                  </th>
-                  <th
-                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
-                  >
-                    Profit
-                  </th>
-                  <th
-                    class="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase"
-                  >
-                    Margen
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                id="summary-body"
-                class="bg-white divide-y divide-slate-200"
-              ></tbody>
-            </table>
+        <!-- TABS CARD -->
+        <div class="glass-card mb-5">
+          <div class="flex border-b border-slate-100 overflow-x-auto">
+            <button
+              onclick="showTab('resumen')"
+              id="tab-resumen"
+              class="tab-btn active"
+            >
+              <span class="flex items-center gap-1.5"
+                ><i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i
+                >Resumen</span
+              >
+            </button>
+            <button
+              onclick="showTab('movimientos')"
+              id="tab-movimientos"
+              class="tab-btn"
+            >
+              <span class="flex items-center gap-1.5"
+                ><i data-lucide="list" class="w-3.5 h-3.5"></i>Movimientos</span
+              >
+            </button>
+            <button
+              onclick="showTab('estadisticas')"
+              id="tab-estadisticas"
+              class="tab-btn"
+            >
+              <span class="flex items-center gap-1.5"
+                ><i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i
+                >Estadísticas</span
+              >
+            </button>
+            <button onclick="showTab('nuevo')" id="tab-nuevo" class="tab-btn">
+              <span class="flex items-center gap-1.5"
+                ><i data-lucide="plus-circle" class="w-3.5 h-3.5"></i
+                >Nuevo</span
+              >
+            </button>
           </div>
-          <button
-            id="btn-ver-mas"
-            onclick="toggleVerMas()"
-            class="hidden mt-3 text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
-          >
-            <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i
-            ><span id="ver-mas-texto">Ver todos los proyectos</span>
-          </button>
-        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <!-- FORMULARIO -->
-          <div class="glass-card p-4 sm:p-6 lg:col-span-1">
+          <!-- TAB RESUMEN -->
+          <div id="panel-resumen" class="p-4 sm:p-6">
             <div class="flex items-center justify-between mb-4">
               <h2
-                class="text-base font-bold flex items-center"
-                style="color: #1a365d"
+                class="text-sm font-semibold text-slate-700 flex items-center gap-2"
               >
                 <i
-                  data-lucide="plus-circle"
-                  class="w-5 h-5 mr-2"
+                  data-lucide="bar-chart-2"
+                  class="w-4 h-4"
                   style="color: #b8904d"
                 ></i>
-                Nuevo Registro
+                <span id="summary-title">Resumen del mes</span>
               </h2>
-              <div class="flex gap-2">
-                <button
-                  type="button"
-                  onclick="document.getElementById('factura-camara').click()"
-                  class="flex items-center gap-1 text-xs font-semibold text-white px-2.5 py-2 rounded-lg"
-                  style="background-color: #1a365d"
-                  title="Tomar foto"
-                >
-                  <i data-lucide="camera" class="w-4 h-4"></i>
-                </button>
-                <button
-                  type="button"
-                  onclick="document.getElementById('factura-galeria').click()"
-                  class="flex items-center gap-1 text-xs font-semibold text-white px-2.5 py-2 rounded-lg"
-                  style="background-color: #1a365d"
-                  title="Subir de galeria"
-                >
-                  <i data-lucide="image" class="w-4 h-4"></i>
-                </button>
-              </div>
-              <input
-                type="file"
-                id="factura-camara"
-                accept="image/*"
-                capture="environment"
-                class="hidden"
-                onchange="escanearFactura(this)"
-              />
-              <input
-                type="file"
-                id="factura-galeria"
-                accept="image/*"
-                class="hidden"
-                onchange="escanearFactura(this)"
-              />
-            </div>
-
-            <form id="tx-form" class="space-y-3">
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Fecha</label
-                >
-                <input
-                  type="date"
-                  id="tx-fecha"
-                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:outline-none focus:border-yellow-500 bg-white"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Tipo</label
-                >
-                <div class="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    id="btn-ingreso"
-                    onclick="setTipo('ingreso')"
-                    class="toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2"
-                  >
-                    <i data-lucide="trending-up" class="w-4 h-4"></i> Ingreso
-                  </button>
-                  <button
-                    type="button"
-                    id="btn-gasto"
-                    onclick="setTipo('gasto')"
-                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2"
-                  >
-                    <i data-lucide="trending-down" class="w-4 h-4"></i> Gasto
-                  </button>
-                </div>
-                <input type="hidden" id="tx-tipo" value="ingreso" />
-              </div>
-
-              <div id="campo-proyecto">
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                >
-                  Proyecto / Cliente
-                  <span
-                    id="proyecto-opcional"
-                    class="normal-case font-normal text-slate-400"
-                    >(requerido)</span
-                  >
-                </label>
-                <div class="relative">
-                  <input
-                    type="text"
-                    id="tx-proyecto"
-                    placeholder="Ej. Yate Oceana 74 Ft"
-                    autocomplete="off"
-                    oninput="filtrarProyectos(this.value)"
-                    onfocus="mostrarProyectos()"
-                    class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
-                  />
-                  <ul
-                    id="proyecto-dropdown"
-                    class="absolute z-10 left-0 right-0 mt-1 bg-white rounded-lg border border-slate-200 shadow-lg hidden max-h-48 overflow-y-auto"
-                  ></ul>
-                </div>
-              </div>
-
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Descripcion</label
-                >
-                <input
-                  type="text"
-                  id="tx-descripcion"
-                  placeholder="Ej. Anticipo 50% PPF casco"
-                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Categoria</label
-                >
-                <select
-                  id="tx-categoria"
-                  class="block w-full rounded-lg border border-slate-300 bg-white p-3 text-sm focus:outline-none focus:border-yellow-500"
-                ></select>
-              </div>
-
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Monto (COP)</label
-                >
-                <input
-                  type="text"
-                  id="tx-monto"
-                  placeholder="Ej. 3.000.000"
-                  required
-                  inputmode="numeric"
-                  autocomplete="off"
-                  oninput="formatMontoInput(this)"
-                  class="block w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:border-yellow-500"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  >Medio de pago</label
-                >
-                <div class="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onclick="setMedio('Efectivo')"
-                    id="btn-efectivo"
-                    class="toggle-btn active-green py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1"
-                  >
-                    <i data-lucide="banknote" class="w-4 h-4"></i>Efectivo
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setMedio('Transferencia')"
-                    id="btn-transferencia"
-                    class="toggle-btn inactive py-2 rounded-lg border-2 text-xs font-semibold flex flex-col items-center gap-1"
-                  >
-                    <i data-lucide="building-2" class="w-4 h-4"></i>Cuenta
-                  </button>
-                </div>
-                <input type="hidden" id="tx-medio" value="Efectivo" />
-              </div>
-
-              <div id="campo-receptor">
-                <label
-                  class="block text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wide"
-                  ><span id="label-receptor">Lo recibe</span></label
-                >
-                <div class="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onclick="setReceptor('Cristian')"
-                    id="btn-cristian"
-                    class="toggle-btn active-blue py-3 rounded-lg border-2 text-sm font-semibold"
-                  >
-                    Cristian
-                  </button>
-                  <button
-                    type="button"
-                    onclick="setReceptor('Frank')"
-                    id="btn-frank"
-                    class="toggle-btn inactive py-3 rounded-lg border-2 text-sm font-semibold"
-                  >
-                    Frank
-                  </button>
-                </div>
-                <input type="hidden" id="tx-receptor" value="Cristian" />
-              </div>
-
               <button
-                type="submit"
-                id="btn-submit"
-                class="w-full text-white font-bold py-3.5 px-4 rounded-lg transition flex items-center justify-center gap-2 text-sm"
-                style="background-color: #1a365d"
+                id="btn-ver-mas"
+                onclick="toggleVerMas()"
+                class="hidden text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
               >
-                <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
+                <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i
+                ><span id="ver-mas-texto">Ver todos</span>
               </button>
-              <button
-                type="button"
-                id="btn-cancelar-edicion"
-                onclick="cancelarEdicion()"
-                class="hidden w-full font-bold py-3 px-4 rounded-lg border-2 border-slate-300 text-slate-600 hover:bg-slate-100 transition flex items-center justify-center gap-2 text-sm"
-              >
-                <i data-lucide="x" class="w-4 h-4"></i> Cancelar edicion
-              </button>
-            </form>
-          </div>
-
-          <!-- MOVIMIENTOS -->
-          <div class="glass-card p-4 sm:p-6 lg:col-span-2">
-            <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
-              <h2
-                class="text-base font-bold flex items-center"
-                style="color: #1a365d"
-              >
-                <i
-                  data-lucide="list"
-                  class="w-5 h-5 mr-2"
-                  style="color: #b8904d"
-                ></i>
-                Movimientos
-              </h2>
-              <div class="flex gap-2 flex-wrap items-center">
-                <select
-                  id="filter-proyecto"
-                  class="text-sm rounded-lg border border-slate-300 bg-white py-2 pl-2 pr-7 focus:outline-none max-w-[160px]"
-                >
-                  <option value="">Todos</option>
-                </select>
-                <select
-                  id="filter-tipo"
-                  class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none"
-                >
-                  <option value="">Todo</option>
-                  <option value="ingreso">Ingresos</option>
-                  <option value="gasto">Gastos</option>
-                </select>
-                <!-- Filtro categoría multi-selección -->
-                <div id="cat-filter-wrap">
-                  <button
-                    type="button"
-                    onclick="toggleCatDropdown()"
-                    id="cat-filter-btn"
-                    class="text-sm rounded-lg border border-slate-300 bg-white p-2 focus:outline-none cursor-pointer text-left"
-                  >
-                    <span id="cat-filter-label">Categorías</span>
-                  </button>
-                </div>
-              </div>
             </div>
-            <div id="tx-cards" class="sm:hidden space-y-2"></div>
-            <div class="hidden sm:block overflow-x-auto">
-              <table class="min-w-full divide-y divide-slate-200 text-sm">
-                <thead class="bg-slate-50">
+            <div id="summary-cards" class="sm:hidden space-y-3"></div>
+            <div
+              class="hidden sm:block overflow-x-auto rounded-xl border border-slate-100"
+            >
+              <table class="min-w-full divide-y divide-slate-100 text-sm">
+                <thead style="background: #f8fafc">
                   <tr>
                     <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
-                    >
-                      Fecha/Hora
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                      class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wide"
                     >
                       Proyecto
                     </th>
                     <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
                     >
-                      Descripcion
+                      Ingresos
                     </th>
                     <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
                     >
-                      Categoria
+                      Gastos
                     </th>
                     <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
+                    >
+                      Profit
+                    </th>
+                    <th
+                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
+                    >
+                      Margen
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="summary-body"
+                  class="bg-white divide-y divide-slate-50"
+                ></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB MOVIMIENTOS -->
+          <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
+            <div class="flex flex-wrap gap-2 items-center mb-4">
+              <select
+                id="filter-proyecto"
+                class="text-xs rounded-xl border border-slate-200 bg-white py-2 pl-3 pr-8 focus:outline-none font-medium text-slate-600"
+              >
+                <option value="">Todos los proyectos</option>
+              </select>
+              <select
+                id="filter-tipo"
+                class="text-xs rounded-xl border border-slate-200 bg-white p-2 focus:outline-none font-medium text-slate-600"
+              >
+                <option value="">Ingresos y Gastos</option>
+                <option value="ingreso">Solo Ingresos</option>
+                <option value="gasto">Solo Gastos</option>
+              </select>
+              <select
+                id="filter-semana"
+                class="text-xs rounded-xl border border-slate-200 bg-white p-2 focus:outline-none font-medium text-slate-600"
+              >
+                <option value="">Todas las semanas</option>
+                <option value="1">Semana 1 (días 1-7)</option>
+                <option value="2">Semana 2 (días 8-14)</option>
+                <option value="3">Semana 3 (días 15-21)</option>
+                <option value="4">Semana 4 (días 22-31)</option>
+              </select>
+              <div id="cat-filter-wrap">
+                <button
+                  type="button"
+                  onclick="toggleCatDropdown()"
+                  id="cat-filter-btn"
+                  class="text-xs rounded-xl border border-slate-200 bg-white p-2 focus:outline-none cursor-pointer font-medium text-slate-600"
+                >
+                  <span id="cat-filter-label">Categorías</span>
+                </button>
+              </div>
+              <button
+                onclick="limpiarFiltros()"
+                class="text-xs text-slate-400 hover:text-slate-600 flex items-center gap-1 px-2 py-2 transition"
+              >
+                <i data-lucide="x" class="w-3 h-3"></i> Limpiar
+              </button>
+            </div>
+            <div id="tx-cards" class="sm:hidden space-y-2"></div>
+            <div
+              class="hidden sm:block overflow-x-auto rounded-xl border border-slate-100"
+            >
+              <table class="min-w-full divide-y divide-slate-100 text-sm">
+                <thead style="background: #f8fafc">
+                  <tr>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                    >
+                      Fecha
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                    >
+                      Proyecto
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                    >
+                      Descripción
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                    >
+                      Categoría
+                    </th>
+                    <th
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
                     >
                       Medio
                     </th>
                     <th
-                      class="px-3 py-3 text-left text-xs font-medium text-slate-500 uppercase"
+                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
                     >
                       Persona
                     </th>
                     <th
-                      class="px-3 py-3 text-right text-xs font-medium text-slate-500 uppercase"
+                      class="px-3 py-3 text-right text-xs font-semibold text-slate-400 uppercase"
                     >
                       Monto
                     </th>
@@ -712,19 +697,298 @@
                 </thead>
                 <tbody
                   id="tx-table-body"
-                  class="bg-white divide-y divide-slate-200"
+                  class="bg-white divide-y divide-slate-50"
                 ></tbody>
               </table>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Dropdown categorías fuera del flujo para evitar desalineamiento -->
+          <!-- TAB ESTADÍSTICAS -->
+          <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <div class="glass-card p-4">
+                <p
+                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+                >
+                  Ingresos vs Gastos · Últimos 6 meses
+                </p>
+                <div style="height: 220px">
+                  <canvas id="chart-mensual"></canvas>
+                </div>
+              </div>
+              <div class="glass-card p-4">
+                <p
+                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+                >
+                  Gastos por categoría ·
+                  <span id="chart-cat-mes-label">este mes</span>
+                </p>
+                <div id="chart-cat-wrap" style="height: 220px">
+                  <canvas id="chart-categorias"></canvas>
+                </div>
+              </div>
+              <div class="glass-card p-4">
+                <p
+                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+                >
+                  Flujo semanal del mes
+                </p>
+                <div style="height: 200px">
+                  <canvas id="chart-semanal"></canvas>
+                </div>
+              </div>
+              <div class="glass-card p-4">
+                <p
+                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+                >
+                  Medios de pago · este mes
+                </p>
+                <div id="chart-medios-wrap" style="height: 200px">
+                  <canvas id="chart-medios"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="glass-card p-4">
+              <p
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4"
+              >
+                Top proyectos por profit · este mes
+              </p>
+              <div id="top-proyectos" class="space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- TAB NUEVO -->
+          <div id="panel-nuevo" class="p-4 sm:p-6 hidden">
+            <div class="max-w-lg mx-auto">
+              <div class="flex items-center justify-between mb-5">
+                <h2
+                  class="text-sm font-semibold text-slate-700 flex items-center gap-2"
+                >
+                  <i
+                    data-lucide="plus-circle"
+                    class="w-4 h-4"
+                    style="color: #b8904d"
+                  ></i>
+                  Nuevo Registro
+                </h2>
+                <div class="flex gap-2">
+                  <button
+                    type="button"
+                    onclick="document.getElementById('factura-camara').click()"
+                    class="flex items-center gap-1.5 text-xs font-semibold text-white px-3 py-2 rounded-xl transition"
+                    style="background: #1a365d"
+                  >
+                    <i data-lucide="camera" class="w-3.5 h-3.5"></i
+                    ><span class="hidden sm:inline">Foto</span>
+                  </button>
+                  <button
+                    type="button"
+                    onclick="document.getElementById('factura-galeria').click()"
+                    class="flex items-center gap-1.5 text-xs font-semibold text-white px-3 py-2 rounded-xl transition"
+                    style="background: #1a365d"
+                  >
+                    <i data-lucide="image" class="w-3.5 h-3.5"></i
+                    ><span class="hidden sm:inline">Galería</span>
+                  </button>
+                </div>
+                <input
+                  type="file"
+                  id="factura-camara"
+                  accept="image/*"
+                  capture="environment"
+                  class="hidden"
+                  onchange="escanearFactura(this)"
+                />
+                <input
+                  type="file"
+                  id="factura-galeria"
+                  accept="image/*"
+                  class="hidden"
+                  onchange="escanearFactura(this)"
+                />
+              </div>
+              <form id="tx-form" class="space-y-4">
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Fecha</label
+                  >
+                  <input
+                    type="date"
+                    id="tx-fecha"
+                    class="block w-full rounded-xl border border-slate-200 p-3 text-sm text-slate-800 focus:outline-none bg-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Tipo</label
+                  >
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      id="btn-ingreso"
+                      onclick="setTipo('ingreso')"
+                      class="toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                    >
+                      <i data-lucide="trending-up" class="w-4 h-4"></i>Ingreso
+                    </button>
+                    <button
+                      type="button"
+                      id="btn-gasto"
+                      onclick="setTipo('gasto')"
+                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                    >
+                      <i data-lucide="trending-down" class="w-4 h-4"></i>Gasto
+                    </button>
+                  </div>
+                  <input type="hidden" id="tx-tipo" value="ingreso" />
+                </div>
+                <div id="campo-proyecto">
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Proyecto / Cliente
+                    <span
+                      id="proyecto-opcional"
+                      class="normal-case font-normal text-slate-400 ml-1"
+                      >(requerido)</span
+                    ></label
+                  >
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="tx-proyecto"
+                      placeholder="Ej. Yate Oceana 74 Ft"
+                      autocomplete="off"
+                      oninput="filtrarProyectos(this.value)"
+                      onfocus="mostrarProyectos()"
+                      class="block w-full rounded-xl border border-slate-200 p-3 text-sm focus:outline-none"
+                    />
+                    <ul
+                      id="proyecto-dropdown"
+                      class="absolute z-10 left-0 right-0 mt-1 bg-white rounded-xl border border-slate-200 shadow-xl hidden max-h-48 overflow-y-auto"
+                    ></ul>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Descripción</label
+                  >
+                  <input
+                    type="text"
+                    id="tx-descripcion"
+                    placeholder="Ej. Anticipo 50% PPF casco"
+                    class="block w-full rounded-xl border border-slate-200 p-3 text-sm focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Categoría</label
+                  >
+                  <select
+                    id="tx-categoria"
+                    class="block w-full rounded-xl border border-slate-200 bg-white p-3 text-sm focus:outline-none"
+                  ></select>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Monto (COP)</label
+                  >
+                  <input
+                    type="text"
+                    id="tx-monto"
+                    placeholder="Ej. 3.000.000"
+                    required
+                    inputmode="numeric"
+                    autocomplete="off"
+                    oninput="formatMontoInput(this)"
+                    class="block w-full rounded-xl border border-slate-200 p-3 text-sm focus:outline-none font-semibold text-slate-800"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    >Medio de pago</label
+                  >
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onclick="setMedio('Efectivo')"
+                      id="btn-efectivo"
+                      class="toggle-btn active-green py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                    >
+                      <i data-lucide="banknote" class="w-4 h-4"></i>Efectivo
+                    </button>
+                    <button
+                      type="button"
+                      onclick="setMedio('Transferencia')"
+                      id="btn-transferencia"
+                      class="toggle-btn inactive py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                    >
+                      <i data-lucide="building-2" class="w-4 h-4"></i>Cuenta
+                    </button>
+                  </div>
+                  <input type="hidden" id="tx-medio" value="Efectivo" />
+                </div>
+                <div id="campo-receptor">
+                  <label
+                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                    ><span id="label-receptor">Lo recibe</span></label
+                  >
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onclick="setReceptor('Cristian')"
+                      id="btn-cristian"
+                      class="toggle-btn active-blue py-3 rounded-xl border-2 text-sm font-semibold"
+                    >
+                      Cristian
+                    </button>
+                    <button
+                      type="button"
+                      onclick="setReceptor('Frank')"
+                      id="btn-frank"
+                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm font-semibold"
+                    >
+                      Frank
+                    </button>
+                  </div>
+                  <input type="hidden" id="tx-receptor" value="Cristian" />
+                </div>
+                <button
+                  type="submit"
+                  id="btn-submit"
+                  class="w-full text-white font-semibold py-3.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-sm tracking-wide"
+                  style="background: linear-gradient(135deg, #1a365d, #0d2540)"
+                >
+                  <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
+                </button>
+                <button
+                  type="button"
+                  id="btn-cancelar-edicion"
+                  onclick="cancelarEdicion()"
+                  class="hidden w-full font-semibold py-3 px-4 rounded-xl border-2 border-slate-200 text-slate-500 hover:bg-slate-50 transition flex items-center justify-center gap-2 text-sm"
+                >
+                  <i data-lucide="x" class="w-4 h-4"></i> Cancelar edición
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /tabs card -->
+      </div>
+      <!-- /main container -->
+    </div>
+    <!-- /main-app -->
+
+    <!-- Cat dropdown (fixed, outside flow) -->
     <div
       id="cat-dropdown"
-      class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 w-56 max-h-60 overflow-y-auto"
+      class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-50 p-2 w-56 max-h-64 overflow-y-auto"
     ></div>
 
     <script>
@@ -754,6 +1018,7 @@
           "Otros Gastos",
         ],
       };
+
       const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
         authDomain: "finanzas-boat-detailing.firebaseapp.com",
@@ -762,6 +1027,7 @@
         messagingSenderId: "340884942708",
         appId: "1:340884942708:web:13ebbc1d6a189a30d4c621",
       };
+
       const GROQ_KEY =
         "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";
 
@@ -770,11 +1036,8 @@
         transactions = [],
         filterCats = new Set();
       const todayStr = new Date().toISOString().split("T")[0];
-
-      // Mes activo
       const nowD = new Date();
-      let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() }; // 0-indexed
-
+      let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() };
       const MESES = [
         "Enero",
         "Febrero",
@@ -790,6 +1053,24 @@
         "Diciembre",
       ];
 
+      // ── Tabs ──────────────────────────────────────────────
+      let currentTab = "resumen";
+      function showTab(tab) {
+        currentTab = tab;
+        ["resumen", "movimientos", "estadisticas", "nuevo"].forEach((t) => {
+          document
+            .getElementById("panel-" + t)
+            .classList.toggle("hidden", t !== tab);
+          document
+            .getElementById("tab-" + t)
+            .classList.toggle("active", t === tab);
+        });
+        if (tab === "estadisticas") renderCharts();
+        if (tab === "movimientos") renderMovimientos();
+        lucide.createIcons();
+      }
+
+      // ── Mes ───────────────────────────────────────────────
       function cambiarMes(delta) {
         mesSel.m += delta;
         if (mesSel.m > 11) {
@@ -803,33 +1084,32 @@
         actualizarMesLabel();
         renderAll();
       }
-
       function actualizarMesLabel() {
         document.getElementById("mes-label").textContent =
           MESES[mesSel.m] + " " + mesSel.y;
         const esHoy =
           mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        document.getElementById("btn-mes-sig").style.opacity = esHoy
-          ? "0.3"
-          : "1";
-        document.getElementById("btn-mes-sig").disabled = esHoy;
+        const btn = document.getElementById("btn-mes-sig");
+        btn.style.opacity = esHoy ? "0.3" : "1";
+        btn.disabled = esHoy;
         document.getElementById("summary-title").textContent =
-          "Resumen - " + MESES[mesSel.m];
+          "Resumen · " + MESES[mesSel.m] + " " + mesSel.y;
+        const lbl = document.getElementById("chart-cat-mes-label");
+        if (lbl) lbl.textContent = MESES[mesSel.m].toLowerCase();
       }
-
       function txDelMes(list) {
         const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
         return list.filter((t) => (t.fecha || "").startsWith(prefix));
       }
 
-      // AUTH
+      // ── Auth ──────────────────────────────────────────────
       function loginWithEmail() {
         const email = document.getElementById("auth-email").value.trim();
         const pw = document.getElementById("auth-password").value;
         const errEl = document.getElementById("pin-error");
         const btn = document.getElementById("login-btn");
         if (!email || !pw) {
-          errEl.textContent = "Ingresa tu correo y contrasena.";
+          errEl.textContent = "Ingresa tu correo y contraseña.";
           errEl.classList.remove("hidden");
           return;
         }
@@ -838,7 +1118,7 @@
         auth.signInWithEmailAndPassword(email, pw).catch(() => {
           btn.disabled = false;
           btn.textContent = "Ingresar";
-          errEl.textContent = "Correo o contrasena incorrectos.";
+          errEl.textContent = "Correo o contraseña incorrectos.";
           errEl.classList.remove("hidden");
           setTimeout(() => errEl.classList.add("hidden"), 4000);
         });
@@ -852,7 +1132,7 @@
           if (e.key === "Enter") loginWithEmail();
         });
 
-      // INIT
+      // ── Init ──────────────────────────────────────────────
       function initApp() {
         firebase.initializeApp(FIREBASE_CONFIG);
         auth = firebase.auth();
@@ -871,13 +1151,12 @@
             ss.innerHTML =
               '<i data-lucide="cloud" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Sincronizado</span>';
             lucide.createIcons();
-            // Banner iOS — show install button in nav always; banner if not dismissed
             if (
               /iphone|ipad|ipod/i.test(navigator.userAgent) &&
               !window.navigator.standalone
             ) {
-              const btn = document.getElementById("btn-install-ios");
-              if (btn) btn.classList.remove("hidden");
+              const installBtn = document.getElementById("btn-install-ios");
+              if (installBtn) installBtn.classList.remove("hidden");
               if (!localStorage.getItem("iosDismissed")) {
                 document.getElementById("ios-banner").style.display = "flex";
                 lucide.createIcons();
@@ -906,31 +1185,25 @@
       }
       initApp();
 
-      // TIPO
+      // ── Tipo / Medio / Receptor ───────────────────────────
       function setTipo(tipo) {
         document.getElementById("tx-tipo").value = tipo;
         const bi = document.getElementById("btn-ingreso"),
           bg = document.getElementById("btn-gasto");
-        const cp = document.getElementById("campo-proyecto"),
-          cr = document.getElementById("campo-receptor");
         const opc = document.getElementById("proyecto-opcional");
         if (tipo === "ingreso") {
           bi.className =
-            "toggle-btn active-green py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+            "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           bg.className =
-            "toggle-btn inactive     py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          cp.classList.remove("hidden");
-          cr.classList.remove("hidden");
+            "toggle-btn inactive     py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("tx-proyecto").required = true;
           opc.textContent = "(requerido)";
           document.getElementById("label-receptor").textContent = "Lo recibe";
         } else {
           bg.className =
-            "toggle-btn active-red py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
+            "toggle-btn active-red  py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           bi.className =
-            "toggle-btn inactive   py-3 rounded-lg border-2 text-sm flex items-center justify-center gap-2";
-          cp.classList.remove("hidden");
-          cr.classList.remove("hidden");
+            "toggle-btn inactive    py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("tx-proyecto").required = false;
           opc.textContent = "(opcional)";
           document.getElementById("label-receptor").textContent = "Quién paga";
@@ -945,8 +1218,6 @@
         });
         lucide.createIcons();
       }
-
-      // MEDIO
       function setMedio(m) {
         document.getElementById("tx-medio").value = m;
         ["efectivo", "transferencia"].forEach((k) => {
@@ -956,8 +1227,6 @@
             (m.toLowerCase() === k ? " active-green" : " inactive");
         });
       }
-
-      // RECEPTOR
       function setReceptor(nombre) {
         document.getElementById("tx-receptor").value = nombre;
         const bc = document.getElementById("btn-cristian"),
@@ -970,37 +1239,34 @@
           (nombre === "Frank" ? " active-indigo" : " inactive");
       }
 
-      // DROPDOWN PROYECTOS (ultimos 5 usados)
+      // ── Proyectos dropdown ────────────────────────────────
       function getRecentProjects(query) {
         const all = [
           ...new Set(
             transactions.filter((t) => t.proyecto).map((t) => t.proyecto),
           ),
         ];
-        // Ordenar por ultima aparicion
         const byDate = {};
         transactions.forEach((t) => {
-          if (t.proyecto) {
-            if (!byDate[t.proyecto] || t.fecha > byDate[t.proyecto])
-              byDate[t.proyecto] = t.fecha;
-          }
+          if (
+            t.proyecto &&
+            (!byDate[t.proyecto] || t.fecha > byDate[t.proyecto])
+          )
+            byDate[t.proyecto] = t.fecha;
         });
-        const sorted = all.sort((a, b) =>
-          (byDate[b] || "").localeCompare(byDate[a] || ""),
-        );
-        const top5 = sorted.slice(0, 5);
-        if (!query) return top5;
-        return top5.filter((p) =>
+        const sorted = all
+          .sort((a, b) => (byDate[b] || "").localeCompare(byDate[a] || ""))
+          .slice(0, 8);
+        if (!query) return sorted;
+        return sorted.filter((p) =>
           p.toLowerCase().includes(query.toLowerCase()),
         );
       }
       function mostrarProyectos() {
-        const list = getRecentProjects("");
-        renderDropdown(list);
+        renderDropdown(getRecentProjects(""));
       }
       function filtrarProyectos(q) {
-        const list = getRecentProjects(q);
-        renderDropdown(list);
+        renderDropdown(getRecentProjects(q));
       }
       function renderDropdown(list) {
         const dd = document.getElementById("proyecto-dropdown");
@@ -1021,15 +1287,14 @@
         dd.classList.remove("hidden");
       }
       document.addEventListener("click", (e) => {
-        if (!document.getElementById("campo-proyecto").contains(e.target))
+        const cp = document.getElementById("campo-proyecto");
+        if (cp && !cp.contains(e.target))
           document.getElementById("proyecto-dropdown").classList.add("hidden");
       });
 
-      // FORMATO MONTO EN TIEMPO REAL
+      // ── Monto ─────────────────────────────────────────────
       function formatMontoInput(el) {
-        // Quitar todo excepto digitos
         const raw = el.value.replace(/\D/g, "");
-        // Formatear con puntos de miles
         el.value = raw ? parseInt(raw, 10).toLocaleString("es-CO") : "";
       }
       function getMontoValue() {
@@ -1039,9 +1304,12 @@
         return raw ? parseFloat(raw) : 0;
       }
       function setMontoValue(num) {
-        const el = document.getElementById("tx-monto");
-        el.value = num ? parseInt(num, 10).toLocaleString("es-CO") : "";
+        document.getElementById("tx-monto").value = num
+          ? parseInt(num, 10).toLocaleString("es-CO")
+          : "";
       }
+
+      // ── Escanear factura ──────────────────────────────────
       async function escanearFactura(input) {
         const file = input.files[0];
         if (!file) return;
@@ -1053,13 +1321,12 @@
             r.onerror = rej;
             r.readAsDataURL(file);
           });
-          const mime =
-            file.type && file.type.startsWith("image/")
-              ? file.type
-              : "image/jpeg";
+          const mime = file.type?.startsWith("image/")
+            ? file.type
+            : "image/jpeg";
           const prompt = `Eres un asistente contable. Analiza esta imagen (factura, recibo o comprobante de pago colombiano).
 Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markdown, sin explicaciones:
-{"monto":<numero entero, total final de la factura sin puntos ni simbolos>,"descripcion":"<descripcion corta de lo comprado, maximo 60 caracteres>","fecha":"<fecha en formato YYYY-MM-DD, o null si no se ve>","categoria":"<elige UNA de estas opciones exactas: Materiales / Insumos | Herramientas / Equipos | Mano de Obra | ARL / Seguro | Logistica / Transporte | Otros Gastos>"}`;
+{"monto":<numero entero>,"descripcion":"<descripcion corta maximo 60 caracteres>","fecha":"<YYYY-MM-DD o null>","categoria":"<una de: Materiales / Insumos | Herramientas / Equipos | Mano de Obra | ARL / Seguro | Logistica / Transporte | Publicidad | Otros Gastos>"}`;
           const resp = await fetch(
             "https://api.groq.com/openai/v1/chat/completions",
             {
@@ -1087,16 +1354,13 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
               }),
             },
           );
-          if (!resp.ok) {
-            const errBody = await resp.text();
-            throw new Error("API " + resp.status + ": " + errBody);
-          }
+          if (!resp.ok)
+            throw new Error("API " + resp.status + ": " + (await resp.text()));
           const data = await resp.json();
           const raw = (data.choices?.[0]?.message?.content || "").trim();
           const start = raw.indexOf("{"),
             end = raw.lastIndexOf("}");
-          if (start === -1 || end === -1)
-            throw new Error("No JSON en respuesta: " + raw);
+          if (start === -1 || end === -1) throw new Error("No JSON: " + raw);
           const parsed = JSON.parse(raw.slice(start, end + 1));
           setTipo("gasto");
           if (parsed.monto) setMontoValue(parsed.monto);
@@ -1114,23 +1378,17 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
               }
             }
           }
-          document
-            .getElementById("tx-form")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
+          showTab("nuevo");
         } catch (err) {
           console.error("Groq error:", err);
-          alert(
-            "Error al analizar la imagen.\n\nDetalle: " +
-              err.message +
-              "\n\nIntenta con una foto mas clara o escribe los datos manualmente.",
-          );
+          alert("Error al analizar la imagen.\n\n" + err.message);
         } finally {
           document.getElementById("ai-overlay").classList.remove("active");
           input.value = "";
         }
       }
 
-      // SEED
+      // ── Seed ─────────────────────────────────────────────
       async function seedData() {
         const hora = new Date().toTimeString().slice(0, 5);
         const seed = [
@@ -1194,15 +1452,12 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         for (const tx of seed) await db.collection("transacciones").add(tx);
       }
 
-      // CRUD
-      // EDIT MODE
+      // ── CRUD ──────────────────────────────────────────────
       let editandoId = null;
-
       function editTransaction(id) {
         const tx = transactions.find((t) => t.id === id);
         if (!tx) return;
         editandoId = id;
-        // Populate form
         document.getElementById("tx-fecha").value = tx.fecha || todayStr;
         setTipo(tx.tipo || "ingreso");
         document.getElementById("tx-proyecto").value = tx.proyecto || "";
@@ -1210,22 +1465,16 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         document.getElementById("tx-categoria").value = tx.categoria || "";
         if (tx.monto) setMontoValue(tx.monto);
         setMedio(tx.medio || "Efectivo");
-        if (tx.tipo === "ingreso") setReceptor(tx.receptor || "Cristian");
-        else setReceptor(tx.receptor || "Cristian");
-        // Update submit button & show cancel
+        setReceptor(tx.receptor || "Cristian");
         const btnSubmit = document.getElementById("btn-submit");
         btnSubmit.innerHTML =
           '<i data-lucide="pencil" class="w-4 h-4"></i> Guardar Cambios';
-        btnSubmit.style.backgroundColor = "#1A365D";
         document
           .getElementById("btn-cancelar-edicion")
           .classList.remove("hidden");
         lucide.createIcons();
-        document
-          .getElementById("tx-form")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
+        showTab("nuevo");
       }
-
       function cancelarEdicion() {
         editandoId = null;
         document.getElementById("tx-form").reset();
@@ -1233,26 +1482,22 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         setTipo("ingreso");
         setMedio("Efectivo");
         setReceptor("Cristian");
-        const btnSubmit = document.getElementById("btn-submit");
-        btnSubmit.innerHTML =
+        document.getElementById("btn-submit").innerHTML =
           '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
-        btnSubmit.style.backgroundColor = "#1a365d";
         document.getElementById("btn-cancelar-edicion").classList.add("hidden");
         lucide.createIcons();
       }
-
-      async function saveTransaction(tx) {
-        await db.collection("transacciones").add(tx);
-      }
       async function deleteTransaction(id) {
         if (
-          !confirm("Eliminar este registro?\nEsta accion no se puede deshacer.")
+          !confirm(
+            "¿Eliminar este registro?\nEsta acción no se puede deshacer.",
+          )
         )
           return;
         await db.collection("transacciones").doc(id).delete();
       }
 
-      // FORMATO
+      // ── Format ────────────────────────────────────────────
       const fmt = (n) =>
         new Intl.NumberFormat("es-CO", {
           style: "currency",
@@ -1260,30 +1505,35 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           maximumFractionDigits: 0,
         }).format(n);
       const fmtDate = (s) => (s ? s.split("-").reverse().join("/") : "--");
+      function getSemana(fechaStr) {
+        const dia = parseInt((fechaStr || "").split("-")[2] || "1", 10);
+        if (dia <= 7) return "1";
+        if (dia <= 14) return "2";
+        if (dia <= 21) return "3";
+        return "4";
+      }
 
-      // VER MAS
+      // ── Ver más ───────────────────────────────────────────
       let verMasAbierto = false;
       function toggleVerMas() {
         verMasAbierto = !verMasAbierto;
         document.getElementById("ver-mas-texto").textContent = verMasAbierto
           ? "Ver menos"
-          : "Ver todos los proyectos";
-        renderAll();
+          : "Ver todos";
+        renderResumen();
       }
 
-      // FILTRO CATEGORIAS
+      // ── Cat dropdown ──────────────────────────────────────
       function toggleCatDropdown() {
         const dd = document.getElementById("cat-dropdown");
         if (dd.classList.contains("hidden")) {
           buildCatDropdown();
-          // Posicionar el dropdown anclado al botón con position fixed
           const btn = document.getElementById("cat-filter-btn");
           const r = btn.getBoundingClientRect();
           dd.style.top = r.bottom + 4 + "px";
           dd.style.left = r.left + "px";
           dd.style.right = "auto";
           dd.classList.remove("hidden");
-          // Corregir si se sale por la derecha
           const ddr = dd.getBoundingClientRect();
           if (ddr.right > window.innerWidth - 8) {
             dd.style.left = "auto";
@@ -1293,7 +1543,6 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           dd.classList.add("hidden");
         }
       }
-
       function buildCatDropdown() {
         const tipo = document.getElementById("filter-tipo").value;
         let cats = [];
@@ -1302,7 +1551,6 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         cats = [...new Set(cats)];
         const dd = document.getElementById("cat-dropdown");
         dd.innerHTML = "";
-        // Botón "Todas"
         const allBtn = document.createElement("button");
         allBtn.type = "button";
         allBtn.className =
@@ -1312,15 +1560,13 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           e.stopPropagation();
           filterCats.clear();
           updateCatLabel();
-          document.getElementById("cat-dropdown").classList.add("hidden");
-          renderAll();
+          dd.classList.add("hidden");
+          renderMovimientos();
         };
         dd.appendChild(allBtn);
-        // Divisor
         const hr = document.createElement("hr");
         hr.className = "border-slate-100 mb-1";
         dd.appendChild(hr);
-        // Una fila por categoría
         cats.forEach((cat) => {
           const sel = filterCats.has(cat);
           const btn = document.createElement("button");
@@ -1338,26 +1584,12 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             if (filterCats.has(cat)) filterCats.delete(cat);
             else filterCats.add(cat);
             updateCatLabel();
-            document.getElementById("cat-dropdown").classList.add("hidden");
-            renderAll();
+            dd.classList.add("hidden");
+            renderMovimientos();
           };
           dd.appendChild(btn);
         });
-        // Reposicionar si el dropdown ya está visible
-        if (!dd.classList.contains("hidden")) {
-          const filterBtn = document.getElementById("cat-filter-btn");
-          const r = filterBtn.getBoundingClientRect();
-          dd.style.top = r.bottom + 4 + "px";
-          dd.style.left = r.left + "px";
-          dd.style.right = "auto";
-          const ddr = dd.getBoundingClientRect();
-          if (ddr.right > window.innerWidth - 8) {
-            dd.style.left = "auto";
-            dd.style.right = window.innerWidth - r.right + "px";
-          }
-        }
       }
-
       function updateCatLabel() {
         const lbl = document.getElementById("cat-filter-label");
         if (filterCats.size === 0) lbl.textContent = "Categorías";
@@ -1365,20 +1597,142 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           lbl.textContent = [...filterCats][0].split(" /")[0].trim();
         else lbl.textContent = filterCats.size + " categ.";
       }
+      function limpiarFiltros() {
+        document.getElementById("filter-proyecto").value = "";
+        document.getElementById("filter-tipo").value = "";
+        document.getElementById("filter-semana").value = "";
+        filterCats.clear();
+        updateCatLabel();
+        renderMovimientos();
+      }
+      function filtrarPorPublicidad() {
+        showTab("movimientos");
+        document.getElementById("filter-tipo").value = "gasto";
+        filterCats.clear();
+        filterCats.add("Publicidad");
+        updateCatLabel();
+        renderMovimientos();
+      }
 
-      // RENDER
+      // ── Publicidad widget ─────────────────────────────────
+      function renderPubWidget(mes) {
+        const pubMes = mes.filter(
+          (t) => t.tipo === "gasto" && t.categoria === "Publicidad",
+        );
+        const totalPubMes = pubMes.reduce((s, t) => s + t.monto, 0);
+        const yearPrefix = String(mesSel.y) + "-";
+        const pubAnio = transactions.filter(
+          (t) =>
+            t.tipo === "gasto" &&
+            t.categoria === "Publicidad" &&
+            (t.fecha || "").startsWith(yearPrefix),
+        );
+        const totalPubAnio = pubAnio.reduce((s, t) => s + t.monto, 0);
+        document.getElementById("pub-monto-mes").textContent = fmt(totalPubMes);
+        document.getElementById("pub-count-mes").textContent =
+          pubMes.length + (pubMes.length === 1 ? " registro" : " registros");
+        document.getElementById("pub-total-anio").textContent =
+          fmt(totalPubAnio);
+      }
+
+      // ── Render All ────────────────────────────────────────
       function renderAll() {
+        const mes = txDelMes(transactions);
+        renderKPIs(mes);
+        renderPubWidget(mes);
+        renderResumen(mes);
+        if (currentTab === "movimientos") renderMovimientos();
+        if (currentTab === "estadisticas") renderCharts();
+      }
+
+      function renderKPIs(mes) {
+        const totalIngresos = mes
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = mes
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
+        const profit = totalIngresos - totalGastos;
+        const margen =
+          totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
+        document.getElementById("kpi-ingresos").textContent =
+          fmt(totalIngresos);
+        document.getElementById("kpi-gastos").textContent = fmt(totalGastos);
+        document.getElementById("kpi-profit").textContent = fmt(profit);
+        document.getElementById("kpi-profit").style.color =
+          profit >= 0 ? "#4ade80" : "#f87171";
+        document.getElementById("kpi-margen").textContent = margen + "%";
+        document.getElementById("kpi-margen").style.color =
+          profit >= 0 ? "#3b82f6" : "#f87171";
+      }
+
+      function renderResumen(mes) {
+        mes = mes || txDelMes(transactions);
+        const projMap = {};
+        mes.forEach((t) => {
+          const key =
+            t.tipo === "gasto" && !t.proyecto
+              ? "Operación General"
+              : t.proyecto || null;
+          if (!key) return;
+          if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
+          if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
+          else projMap[key].gastos += t.monto;
+        });
+        const entries = Object.entries(projMap).sort(
+          (a, b) => b[1].ingresos - b[1].gastos - (a[1].ingresos - a[1].gastos),
+        );
+        const MAX_ROWS = 5;
+        const visible = verMasAbierto ? entries : entries.slice(0, MAX_ROWS);
+        document
+          .getElementById("btn-ver-mas")
+          .classList.toggle("hidden", entries.length <= MAX_ROWS);
+
+        const sc = document.getElementById("summary-cards");
+        sc.innerHTML = "";
+        visible.forEach(([proj, v]) => {
+          const p = v.ingresos - v.gastos;
+          const margin =
+            v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) + "%" : "--";
+          const div = document.createElement("div");
+          div.className =
+            "rounded-xl border-l-4 p-3 bg-slate-50 " +
+            (p >= 0 ? "border-green-400" : "border-red-400");
+          div.innerHTML = `<div class="flex justify-between items-center mb-2"><span class="font-semibold text-slate-800 text-sm">${proj}</span><span class="text-xs font-bold px-2 py-0.5 rounded-full ${p >= 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">${margin}</span></div><div class="grid grid-cols-3 gap-1 text-center"><div><p class="text-xs text-slate-400">Ingreso</p><p class="text-sm font-bold text-green-600">${fmt(v.ingresos)}</p></div><div><p class="text-xs text-slate-400">Gasto</p><p class="text-sm font-bold text-red-600">${fmt(v.gastos)}</p></div><div><p class="text-xs text-slate-400">Profit</p><p class="text-sm font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</p></div></div>`;
+          sc.appendChild(div);
+        });
+
+        const sb = document.getElementById("summary-body");
+        sb.innerHTML = "";
+        if (visible.length === 0) {
+          sb.innerHTML =
+            '<tr><td colspan="5" class="text-center py-10 text-slate-400 text-sm">No hay movimientos este mes.<br><span class="text-xs text-slate-300">Agrega registros desde la pestaña "Nuevo"</span></td></tr>';
+          return;
+        }
+        visible.forEach(([proj, v]) => {
+          const p = v.ingresos - v.gastos;
+          const margin =
+            v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) : 0;
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50 transition";
+          tr.innerHTML = `<td class="px-4 py-3 text-sm font-medium text-slate-700">${proj}</td><td class="px-4 py-3 text-sm text-right text-green-600 font-semibold">${fmt(v.ingresos)}</td><td class="px-4 py-3 text-sm text-right text-red-600 font-semibold">${fmt(v.gastos)}</td><td class="px-4 py-3 text-sm text-right font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</td><td class="px-4 py-3 text-right"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${p >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${margin}%</span></td>`;
+          sb.appendChild(tr);
+        });
+        lucide.createIcons();
+      }
+
+      function renderMovimientos() {
         const mes = txDelMes(transactions);
         const filterProy = document.getElementById("filter-proyecto").value;
         const filterTipo = document.getElementById("filter-tipo").value;
+        const filterSemana = document.getElementById("filter-semana").value;
 
-        // Rellenar selector proyecto
         const projects = [
           ...new Set(mes.filter((t) => t.proyecto).map((t) => t.proyecto)),
         ].sort();
         const filterEl = document.getElementById("filter-proyecto");
         const cur = filterEl.value;
-        filterEl.innerHTML = '<option value="">Todos</option>';
+        filterEl.innerHTML = '<option value="">Todos los proyectos</option>';
         projects.forEach((p) => {
           const o = document.createElement("option");
           o.value = p;
@@ -1387,96 +1741,30 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           filterEl.appendChild(o);
         });
 
-        // KPIs del mes
-        const totalIngresos = mes
-          .filter((t) => t.tipo === "ingreso")
-          .reduce((s, t) => s + t.monto, 0);
-        const totalGastos = mes
-          .filter((t) => t.tipo === "gasto")
-          .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos;
-        document.getElementById("kpi-ingresos").textContent =
-          fmt(totalIngresos);
-        document.getElementById("kpi-gastos").textContent = fmt(totalGastos);
-        document.getElementById("kpi-profit").textContent = fmt(profit);
-        document.getElementById("kpi-profit").style.color =
-          profit >= 0 ? "#4ade80" : "#f87171";
-
-        // Resumen proyectos del mes
-        const projMap = {};
-        mes.forEach((t) => {
-          if (t.tipo === "ingreso" && t.proyecto) {
-            if (!projMap[t.proyecto])
-              projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
-            projMap[t.proyecto].ingresos += t.monto;
-          }
-          if (t.tipo === "gasto" && t.proyecto) {
-            if (!projMap[t.proyecto])
-              projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
-            projMap[t.proyecto].gastos += t.monto;
-          }
-        });
-        const sinProy = mes
-          .filter((t) => t.tipo === "gasto" && !t.proyecto)
-          .reduce((s, t) => s + t.monto, 0);
-        if (sinProy > 0)
-          projMap["Operacion General"] = { ingresos: 0, gastos: sinProy };
-        const entries = Object.entries(projMap).sort(
-          (a, b) => b[1].ingresos - b[1].gastos - (a[1].ingresos - a[1].gastos),
-        );
-        const MAX_ROWS = 5;
-        const visible = verMasAbierto ? entries : entries.slice(0, MAX_ROWS);
-        const hayMas = entries.length > MAX_ROWS;
-        const btnVerMas = document.getElementById("btn-ver-mas");
-        if (hayMas) {
-          btnVerMas.classList.remove("hidden");
-        } else {
-          btnVerMas.classList.add("hidden");
-        }
-
-        const sc = document.getElementById("summary-cards");
-        sc.innerHTML = "";
-        visible.forEach(([proj, v]) => {
-          const p = v.ingresos - v.gastos,
-            margin =
-              v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) + "%" : "--";
-          const div = document.createElement("div");
-          div.className =
-            "rounded-xl border-l-4 p-3 bg-slate-50 " +
-            (p >= 0 ? "border-green-400" : "border-red-400");
-          div.innerHTML = `<div class="flex justify-between items-center mb-2"><span class="font-semibold text-slate-800 text-sm">${proj}</span><span class="text-xs font-bold px-2 py-0.5 rounded-full ${p >= 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">${margin}</span></div><div class="grid grid-cols-3 gap-1 text-center"><div><p class="text-xs text-slate-400">Ingreso</p><p class="text-sm font-bold text-green-600">${fmt(v.ingresos)}</p></div><div><p class="text-xs text-slate-400">Gasto</p><p class="text-sm font-bold text-red-600">${fmt(v.gastos)}</p></div><div><p class="text-xs text-slate-400">Profit</p><p class="text-sm font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</p></div></div>`;
-          sc.appendChild(div);
-        });
-        const sb = document.getElementById("summary-body");
-        sb.innerHTML = "";
-        visible.forEach(([proj, v]) => {
-          const p = v.ingresos - v.gastos,
-            margin = v.ingresos > 0 ? ((p / v.ingresos) * 100).toFixed(0) : 0;
-          const tr = document.createElement("tr");
-          tr.className = "hover:bg-slate-50";
-          tr.innerHTML = `<td class="px-4 py-3 text-sm font-medium text-slate-800">${proj}</td><td class="px-4 py-3 text-sm text-right text-green-600 font-semibold">${fmt(v.ingresos)}</td><td class="px-4 py-3 text-sm text-right text-red-600 font-semibold">${fmt(v.gastos)}</td><td class="px-4 py-3 text-sm text-right font-bold ${p >= 0 ? "text-green-700" : "text-red-700"}">${fmt(p)}</td><td class="px-4 py-3 text-right"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${p >= 0 ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${margin}%</span></td>`;
-          sb.appendChild(tr);
-        });
-
-        // Movimientos
         let displayed = mes;
         if (filterProy)
           displayed = displayed.filter((t) => t.proyecto === filterProy);
         if (filterTipo)
           displayed = displayed.filter((t) => t.tipo === filterTipo);
+        if (filterSemana)
+          displayed = displayed.filter(
+            (t) => getSemana(t.fecha) === filterSemana,
+          );
         if (filterCats.size > 0)
           displayed = displayed.filter((t) => filterCats.has(t.categoria));
-        const sorted = [...displayed].sort((a, b) => {
-          const fa = (a.fecha || "") + (a.hora || "");
-          const fb = (b.fecha || "") + (b.hora || "");
-          return fb.localeCompare(fa);
-        });
+
+        const sorted = [...displayed].sort((a, b) =>
+          ((b.fecha || "") + (b.hora || "")).localeCompare(
+            (a.fecha || "") + (a.hora || ""),
+          ),
+        );
 
         const tc = document.getElementById("tx-cards");
         tc.innerHTML = "";
-        if (sorted.length === 0)
+        if (sorted.length === 0) {
           tc.innerHTML =
-            '<p class="text-center py-8 text-slate-400 text-sm">No hay movimientos este mes.</p>';
+            '<p class="text-center py-8 text-slate-400 text-sm">No hay movimientos con estos filtros.</p>';
+        }
         sorted.forEach((tx) => {
           const isIn = tx.tipo === "ingreso";
           const div = document.createElement("div");
@@ -1485,27 +1773,372 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             (isIn
               ? "border-green-200 bg-green-50"
               : "border-red-100 bg-red-50");
-          div.innerHTML = `<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora ? " " + tx.hora : ""}</span>${tx.proyecto ? `<span class="text-xs font-semibold text-slate-600">${tx.proyecto}</span>` : ""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion || tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}">${tx.categoria}</span>${tx.medio ? `<span class="text-xs text-slate-500">- ${tx.medio}</span>` : ""} ${tx.receptor ? `<span class="text-xs font-semibold text-blue-600">-> ${tx.receptor}</span>` : ""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"} ${fmt(tx.monto)}</span><div class="flex gap-2"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-blue-500" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500" title="Eliminar"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div></div>`;
+          div.innerHTML = `<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora ? " · " + tx.hora : ""}</span>${tx.proyecto ? `<span class="text-xs font-semibold text-slate-600 bg-white px-1.5 py-0.5 rounded-md border border-slate-200">${tx.proyecto}</span>` : ""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion || tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span>${tx.medio ? `<span class="text-xs text-slate-400">${tx.medio}</span>` : ""}${tx.receptor ? `<span class="text-xs font-semibold text-blue-600">→ ${tx.receptor}</span>` : ""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</span><div class="flex gap-2"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-blue-500 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div></div>`;
           tc.appendChild(div);
         });
 
         const tb = document.getElementById("tx-table-body");
         tb.innerHTML = "";
-        if (sorted.length === 0)
+        if (sorted.length === 0) {
           tb.innerHTML =
-            '<tr><td colspan="8" class="text-center py-10 text-slate-400">No hay movimientos este mes.</td></tr>';
+            '<tr><td colspan="8" class="text-center py-10 text-slate-400">No hay movimientos con estos filtros.</td></tr>';
+        }
         sorted.forEach((tx) => {
           const isIn = tx.tipo === "ingreso";
           const tr = document.createElement("tr");
           tr.className = "hover:bg-slate-50 transition";
-          tr.innerHTML = `<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora || ""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-800">${tx.proyecto || "--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${tx.descripcion || ""}">${tx.descripcion || "--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span></td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-blue-600">${tx.receptor || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"} ${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><div class="flex items-center justify-center gap-2"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-blue-500 p-1" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1" title="Eliminar"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td>`;
+          tr.innerHTML = `<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora || ""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-700">${tx.proyecto || "--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${(tx.descripcion || "").replace(/"/g, "&quot;")}">${tx.descripcion || "--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span></td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-blue-600">${tx.receptor || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><div class="flex items-center justify-center gap-1"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-blue-500 p-1 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td>`;
           tb.appendChild(tr);
         });
-
         lucide.createIcons();
       }
 
-      // SUBMIT
+      // ── Charts ────────────────────────────────────────────
+      let charts = {};
+      function destroyChart(id) {
+        if (charts[id]) {
+          charts[id].destroy();
+          delete charts[id];
+        }
+      }
+
+      function getMonthRange(months) {
+        const result = [];
+        for (let i = months - 1; i >= 0; i--) {
+          let m = mesSel.m - i,
+            y = mesSel.y;
+          if (m < 0) {
+            m += 12;
+            y--;
+          }
+          result.push({
+            y,
+            m,
+            label: MESES[m].slice(0, 3) + " '" + String(y).slice(2),
+          });
+        }
+        return result;
+      }
+
+      function renderCharts() {
+        const mes = txDelMes(transactions);
+
+        // Chart 1 — Ingresos vs Gastos últimos 6 meses
+        destroyChart("mensual");
+        const range = getMonthRange(6);
+        const ingsArr = [],
+          gastArr = [],
+          lblArr = [];
+        range.forEach(({ y, m, label }) => {
+          const prefix = y + "-" + String(m + 1).padStart(2, "0");
+          const txM = transactions.filter((t) =>
+            (t.fecha || "").startsWith(prefix),
+          );
+          ingsArr.push(
+            txM
+              .filter((t) => t.tipo === "ingreso")
+              .reduce((s, t) => s + t.monto, 0),
+          );
+          gastArr.push(
+            txM
+              .filter((t) => t.tipo === "gasto")
+              .reduce((s, t) => s + t.monto, 0),
+          );
+          lblArr.push(label);
+        });
+        const ctx1 = document.getElementById("chart-mensual").getContext("2d");
+        charts["mensual"] = new Chart(ctx1, {
+          type: "bar",
+          data: {
+            labels: lblArr,
+            datasets: [
+              {
+                label: "Ingresos",
+                data: ingsArr,
+                backgroundColor: "rgba(34,197,94,0.8)",
+                borderRadius: 6,
+                borderSkipped: false,
+              },
+              {
+                label: "Gastos",
+                data: gastArr,
+                backgroundColor: "rgba(239,68,68,0.8)",
+                borderRadius: 6,
+                borderSkipped: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  font: { family: "Poppins", size: 11 },
+                  boxWidth: 12,
+                  padding: 16,
+                },
+              },
+            },
+            scales: {
+              y: {
+                ticks: {
+                  callback: (v) =>
+                    "$" +
+                    (v >= 1e6
+                      ? (v / 1e6).toFixed(1) + "M"
+                      : (v / 1e3).toFixed(0) + "k"),
+                  font: { size: 10 },
+                },
+                grid: { color: "#f1f5f9" },
+              },
+              x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+            },
+          },
+        });
+
+        // Chart 2 — Gastos por categoría (donut)
+        destroyChart("categorias");
+        const wrap2 = document.getElementById("chart-cat-wrap");
+        wrap2.innerHTML = '<canvas id="chart-categorias"></canvas>';
+        const gastoCats = {};
+        mes
+          .filter((t) => t.tipo === "gasto")
+          .forEach((t) => {
+            gastoCats[t.categoria] = (gastoCats[t.categoria] || 0) + t.monto;
+          });
+        const catEntries = Object.entries(gastoCats).sort(
+          (a, b) => b[1] - a[1],
+        );
+        const CAT_COLORS = [
+          "#3b82f6",
+          "#ef4444",
+          "#f59e0b",
+          "#22c55e",
+          "#8b5cf6",
+          "#ec4899",
+          "#06b6d4",
+          "#f97316",
+          "#14b8a6",
+          "#64748b",
+        ];
+        if (catEntries.length > 0) {
+          const ctx2 = document
+            .getElementById("chart-categorias")
+            .getContext("2d");
+          charts["categorias"] = new Chart(ctx2, {
+            type: "doughnut",
+            data: {
+              labels: catEntries.map(([k]) => k),
+              datasets: [
+                {
+                  data: catEntries.map(([, v]) => v),
+                  backgroundColor: CAT_COLORS,
+                  borderWidth: 2,
+                  borderColor: "#fff",
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "60%",
+              plugins: {
+                legend: {
+                  position: "right",
+                  labels: {
+                    font: { family: "Poppins", size: 10 },
+                    boxWidth: 10,
+                    padding: 8,
+                  },
+                },
+                tooltip: { callbacks: { label: (ctx) => " " + fmt(ctx.raw) } },
+              },
+            },
+          });
+        } else {
+          wrap2.innerHTML =
+            '<p class="text-center text-slate-400 text-sm flex items-center justify-center h-full">Sin gastos este mes</p>';
+        }
+
+        // Chart 3 — Flujo semanal (línea)
+        destroyChart("semanal");
+        const semanasLbl = [
+          "Sem 1 (1-7)",
+          "Sem 2 (8-14)",
+          "Sem 3 (15-21)",
+          "Sem 4 (22-31)",
+        ];
+        const ingSem = [0, 0, 0, 0],
+          gastSem = [0, 0, 0, 0];
+        mes.forEach((t) => {
+          const i = parseInt(getSemana(t.fecha), 10) - 1;
+          if (t.tipo === "ingreso") ingSem[i] += t.monto;
+          else gastSem[i] += t.monto;
+        });
+        const ctx3 = document.getElementById("chart-semanal").getContext("2d");
+        charts["semanal"] = new Chart(ctx3, {
+          type: "line",
+          data: {
+            labels: semanasLbl,
+            datasets: [
+              {
+                label: "Ingresos",
+                data: ingSem,
+                borderColor: "#22c55e",
+                backgroundColor: "rgba(34,197,94,0.1)",
+                tension: 0.35,
+                fill: true,
+                pointRadius: 5,
+                pointBackgroundColor: "#22c55e",
+                borderWidth: 2,
+              },
+              {
+                label: "Gastos",
+                data: gastSem,
+                borderColor: "#ef4444",
+                backgroundColor: "rgba(239,68,68,0.07)",
+                tension: 0.35,
+                fill: true,
+                pointRadius: 5,
+                pointBackgroundColor: "#ef4444",
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  font: { family: "Poppins", size: 11 },
+                  boxWidth: 12,
+                  padding: 16,
+                },
+              },
+            },
+            scales: {
+              y: {
+                ticks: {
+                  callback: (v) =>
+                    "$" +
+                    (v >= 1e6
+                      ? (v / 1e6).toFixed(1) + "M"
+                      : (v / 1e3).toFixed(0) + "k"),
+                  font: { size: 10 },
+                },
+                grid: { color: "#f1f5f9" },
+              },
+              x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+            },
+          },
+        });
+
+        // Chart 4 — Medios de pago
+        destroyChart("medios");
+        const wrap4 = document.getElementById("chart-medios-wrap");
+        wrap4.innerHTML = '<canvas id="chart-medios"></canvas>';
+        const medioMap = {};
+        mes.forEach((t) => {
+          const k = t.medio || "No especificado";
+          medioMap[k] = (medioMap[k] || 0) + t.monto;
+        });
+        const medioEntries = Object.entries(medioMap);
+        if (medioEntries.length > 0) {
+          const ctx4 = document.getElementById("chart-medios").getContext("2d");
+          charts["medios"] = new Chart(ctx4, {
+            type: "bar",
+            data: {
+              labels: medioEntries.map(([k]) => k),
+              datasets: [
+                {
+                  label: "Total",
+                  data: medioEntries.map(([, v]) => v),
+                  backgroundColor: [
+                    "rgba(26,54,93,0.85)",
+                    "rgba(184,144,77,0.85)",
+                    "rgba(100,116,139,0.8)",
+                  ],
+                  borderRadius: 8,
+                  borderSkipped: false,
+                },
+              ],
+            },
+            options: {
+              indexAxis: "y",
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: (ctx) => " " + fmt(ctx.raw) } },
+              },
+              scales: {
+                x: {
+                  ticks: {
+                    callback: (v) =>
+                      "$" +
+                      (v >= 1e6
+                        ? (v / 1e6).toFixed(1) + "M"
+                        : (v / 1e3).toFixed(0) + "k"),
+                    font: { size: 10 },
+                  },
+                  grid: { color: "#f1f5f9" },
+                },
+                y: {
+                  ticks: { font: { size: 11, family: "Poppins" } },
+                  grid: { display: false },
+                },
+              },
+            },
+          });
+        } else {
+          wrap4.innerHTML =
+            '<p class="text-center text-slate-400 text-sm flex items-center justify-center h-full">Sin datos este mes</p>';
+        }
+
+        // Top proyectos por profit (progress bars)
+        const projMap = {};
+        mes.forEach((t) => {
+          const key =
+            t.tipo === "gasto" && !t.proyecto
+              ? "Operación General"
+              : t.proyecto || null;
+          if (!key) return;
+          if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
+          if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
+          else projMap[key].gastos += t.monto;
+        });
+        const projSorted = Object.entries(projMap)
+          .map(([k, v]) => ({
+            name: k,
+            profit: v.ingresos - v.gastos,
+            ingresos: v.ingresos,
+            gastos: v.gastos,
+          }))
+          .sort((a, b) => b.profit - a.profit);
+        const maxAbs =
+          projSorted.length > 0
+            ? Math.max(...projSorted.map((p) => Math.abs(p.profit)), 1)
+            : 1;
+        const tp = document.getElementById("top-proyectos");
+        tp.innerHTML = "";
+        if (projSorted.length === 0) {
+          tp.innerHTML =
+            '<p class="text-slate-400 text-sm text-center py-4">Sin datos este mes</p>';
+          return;
+        }
+        projSorted.slice(0, 7).forEach((p) => {
+          const pct = (Math.abs(p.profit) / maxAbs) * 100;
+          const pos = p.profit >= 0;
+          const div = document.createElement("div");
+          div.className = "flex items-center gap-3";
+          div.innerHTML = `<div class="flex-1 min-w-0"><div class="flex items-center justify-between mb-1.5"><span class="text-xs font-semibold text-slate-700 truncate">${p.name}</span><div class="flex items-center gap-3 flex-shrink-0 ml-2"><span class="text-xs text-slate-400">${fmt(p.ingresos)} / ${fmt(p.gastos)}</span><span class="text-xs font-bold ${pos ? "text-green-600" : "text-red-600"}">${pos ? "+" : ""}${fmt(p.profit)}</span></div></div><div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full transition-all duration-500" style="width:${pct}%;background:${pos ? "#22c55e" : "#ef4444"}"></div></div></div>`;
+          tp.appendChild(div);
+        });
+      }
+
+      // ── Submit ────────────────────────────────────────────
       document
         .getElementById("tx-form")
         .addEventListener("submit", async (e) => {
@@ -1537,12 +2170,11 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
             await db.collection("transacciones").doc(editandoId).update(tx);
             editandoId = null;
           } else {
-            await saveTransaction(tx);
+            await db.collection("transacciones").add(tx);
           }
           btn.disabled = false;
           btn.innerHTML =
             '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
-          btn.style.backgroundColor = "#B8904D";
           document
             .getElementById("btn-cancelar-edicion")
             .classList.add("hidden");
@@ -1552,17 +2184,21 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
           setMedio("Efectivo");
           setReceptor("Cristian");
           lucide.createIcons();
+          showTab("resumen");
         });
 
       document
         .getElementById("filter-proyecto")
-        .addEventListener("change", renderAll);
+        .addEventListener("change", renderMovimientos);
       document.getElementById("filter-tipo").addEventListener("change", () => {
         filterCats.clear();
         updateCatLabel();
         buildCatDropdown();
-        renderAll();
+        renderMovimientos();
       });
+      document
+        .getElementById("filter-semana")
+        .addEventListener("change", renderMovimientos);
       document.addEventListener("click", (e) => {
         const wrap = document.getElementById("cat-filter-wrap");
         if (wrap && !wrap.contains(e.target))
