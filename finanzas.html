@@ -454,6 +454,33 @@
           </div>
         </div>
 
+        <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
+        <div class="rounded-2xl mb-5 p-4 sm:p-5" style="background:linear-gradient(135deg,#050B14 0%,#112238 100%);border:1px solid rgba(184,144,77,0.2)">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="globe" class="w-4 h-4" style="color:#B8904D"></i>
+            <span class="text-xs font-bold uppercase tracking-widest" style="color:#B8904D">Balance Global Acumulado</span>
+            <span class="text-xs text-slate-500 ml-auto">Todos los registros históricos</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Total Ingresos</p>
+              <p class="font-bold text-green-400 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-ingresos">$0</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Total Gastos</p>
+              <p class="font-bold text-red-400 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-gastos">$0</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Profit Total</p>
+              <p class="font-bold leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem);color:#B8904D" id="g-profit">$0</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Margen Global</p>
+              <p class="font-bold text-blue-300 leading-tight" style="font-size:clamp(0.85rem,3.5vw,1.4rem)" id="g-margen">0%</p>
+            </div>
+          </div>
+        </div>
+
         <!-- MES SELECTOR -->
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-1">
@@ -475,28 +502,28 @@
               <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
             </button>
           </div>
-          <span class="text-xs text-slate-400 font-medium">Ciclo mensual</span>
+          <span class="text-xs text-slate-400 font-medium">Detalle mensual</span>
         </div>
 
-        <!-- KPIs -->
+        <!-- KPIs MENSUALES -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
           <div class="kpi-card border-l-4 border-green-400">
-            <p class="kpi-label">Ingresos</p>
+            <p class="kpi-label">Ingresos <span class="normal-case font-normal text-slate-300">· mes</span></p>
             <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
             <i data-lucide="trending-up" class="kpi-icon"></i>
           </div>
           <div class="kpi-card border-l-4 border-red-400">
-            <p class="kpi-label">Gastos</p>
+            <p class="kpi-label">Gastos <span class="normal-case font-normal text-slate-300">· mes</span></p>
             <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
             <i data-lucide="trending-down" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card kpi-dark">
-            <p class="kpi-label">Profit</p>
-            <p class="kpi-value" id="kpi-profit" style="color: #b8904d">$0</p>
+          <div class="kpi-card" style="background:#f0fdf4;border-left:4px solid #22c55e">
+            <p class="kpi-label">Profit <span class="normal-case font-normal text-slate-300">· mes</span></p>
+            <p class="kpi-value" id="kpi-profit">$0</p>
             <i data-lucide="bar-chart-2" class="kpi-icon"></i>
           </div>
           <div class="kpi-card border-l-4 border-blue-400">
-            <p class="kpi-label">Margen</p>
+            <p class="kpi-label">Margen <span class="normal-case font-normal text-slate-300">· mes</span></p>
             <p class="kpi-value text-blue-600" id="kpi-margen">0%</p>
             <i data-lucide="percent" class="kpi-icon"></i>
           </div>
@@ -1638,6 +1665,7 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
       // ── Render All ────────────────────────────────────────
       function renderAll() {
         const mes = txDelMes(transactions);
+        renderGlobalKPIs();
         renderKPIs(mes);
         renderPubWidget(mes);
         renderResumen(mes);
@@ -1645,25 +1673,30 @@ Devuelve UNICAMENTE un objeto JSON valido, sin ningun texto adicional, sin markd
         if (currentTab === "estadisticas") renderCharts();
       }
 
-      function renderKPIs(mes) {
-        const totalIngresos = mes
-          .filter((t) => t.tipo === "ingreso")
-          .reduce((s, t) => s + t.monto, 0);
-        const totalGastos = mes
-          .filter((t) => t.tipo === "gasto")
-          .reduce((s, t) => s + t.monto, 0);
+      function renderGlobalKPIs() {
+        const totalIngresos = transactions.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
+        const totalGastos   = transactions.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
-        const margen =
-          totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
-        document.getElementById("kpi-ingresos").textContent =
-          fmt(totalIngresos);
-        document.getElementById("kpi-gastos").textContent = fmt(totalGastos);
-        document.getElementById("kpi-profit").textContent = fmt(profit);
-        document.getElementById("kpi-profit").style.color =
-          profit >= 0 ? "#4ade80" : "#f87171";
-        document.getElementById("kpi-margen").textContent = margen + "%";
-        document.getElementById("kpi-margen").style.color =
-          profit >= 0 ? "#3b82f6" : "#f87171";
+        const margen = totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
+        document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
+        document.getElementById("g-gastos").textContent   = fmt(totalGastos);
+        document.getElementById("g-profit").textContent   = fmt(profit);
+        document.getElementById("g-profit").style.color   = profit >= 0 ? "#B8904D" : "#f87171";
+        document.getElementById("g-margen").textContent   = margen + "%";
+        document.getElementById("g-margen").style.color   = profit >= 0 ? "#93c5fd" : "#f87171";
+      }
+
+      function renderKPIs(mes) {
+        const totalIngresos = mes.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
+        const totalGastos   = mes.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
+        const profit = totalIngresos - totalGastos;
+        const margen = totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
+        document.getElementById("kpi-ingresos").textContent = fmt(totalIngresos);
+        document.getElementById("kpi-gastos").textContent   = fmt(totalGastos);
+        document.getElementById("kpi-profit").textContent   = fmt(profit);
+        document.getElementById("kpi-profit").style.color   = profit >= 0 ? "#16a34a" : "#dc2626";
+        document.getElementById("kpi-margen").textContent   = margen + "%";
+        document.getElementById("kpi-margen").style.color   = profit >= 0 ? "#2563eb" : "#dc2626";
       }
 
       function renderResumen(mes) {
