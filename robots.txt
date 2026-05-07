@@ -1,6 +1,6 @@
 # ==============================================
 # Robots.txt - Cartagena Boat Detailing
-# Detailing y Mantenimiento Naval en Cartagena, Colombia
+# Detailing y Estética Naval en Cartagena, Colombia
 # https://cartagenaboatdetailing.com
 # ==============================================
 

@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Tarjetas de Presentación · Cartagena Boat Detailing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --navy: #0a192f;
+        --gold: #d4af37;
+        --gold-dim: rgba(212, 175, 55, 0.13);
+        --gold-bdr: rgba(212, 175, 55, 0.45);
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background: #dde1e9;
+      }
+
+      /* ── Controls (hidden on print) ─────────────────── */
+      .controls {
+        background: var(--navy);
+        color: #fff;
+        padding: 28px 20px;
+        text-align: center;
+        border-bottom: 3px solid var(--gold);
+      }
+
+      .controls h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+
+      .controls .subtitle {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.58);
+        letter-spacing: 0.5px;
+        margin-bottom: 18px;
+      }
+
+      .instructions {
+        display: inline-block;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        border-radius: 6px;
+        padding: 12px 22px;
+        margin-bottom: 18px;
+      }
+
+      .instructions ol {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 2;
+        padding-left: 20px;
+      }
+
+      .instructions strong {
+        color: var(--gold);
+      }
+
+      .btn-print {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        padding: 13px 38px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: "Lato", sans-serif;
+        cursor: pointer;
+        border-radius: 4px;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+      }
+
+      .btn-print:hover {
+        background: #b08d1e;
+        transform: translateY(-1px);
+      }
+      .btn-print:active {
+        transform: translateY(0);
+      }
+
+      /* ── Sheet label ─────────────────────────────────── */
+      .sheet-label {
+        width: 210mm;
+        margin: 22px auto 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #555;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sheet-label::before {
+        content: "";
+        width: 3px;
+        height: 14px;
+        background: var(--gold);
+        border-radius: 2px;
+      }
+
+      .sheet-label span {
+        background: #fff;
+        padding: 3px 10px;
+        border-radius: 3px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
+      }
+
+      /* ── Print sheet ─────────────────────────────────── */
+      .sheet {
+        width: 210mm;
+        margin: 0 auto 32px;
+        background: #fff;
+        padding: 14mm 15mm;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.14);
+        display: grid;
+        grid-template-columns: repeat(2, 85mm);
+        grid-template-rows: repeat(4, 54mm);
+        gap: 5mm;
+        justify-content: center;
+      }
+
+      /* ═══════════════════════════════════
+       CARD FRONT  (85 × 54 mm)
+    ═══════════════════════════════════ */
+      .card-front {
+        width: 85mm;
+        height: 54mm;
+        background: var(--navy);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5mm 6mm 4.5mm;
+        border: 0.5px dashed #c0c0c0; /* cut guide */
+      }
+
+      /* decorative ring – top right */
+      .card-front::before {
+        content: "";
+        position: absolute;
+        top: -9mm;
+        right: -9mm;
+        width: 26mm;
+        height: 26mm;
+        border-radius: 50%;
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        pointer-events: none;
+      }
+
+      /* decorative glow – bottom left */
+      .card-front::after {
+        content: "";
+        position: absolute;
+        bottom: -12mm;
+        left: -12mm;
+        width: 32mm;
+        height: 32mm;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.07);
+        pointer-events: none;
+      }
+
+      .cf-top {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cf-icon {
+        font-size: 20pt;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .cf-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5mm;
+      }
+
+      .cf-pre {
+        font-size: 5pt;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.52);
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+      }
+
+      .cf-name {
+        font-family: "Playfair Display", serif;
+        font-size: 13.5pt;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.3px;
+        line-height: 1;
+      }
+
+      .cf-middle {
+        position: relative;
+        z-index: 1;
+      }
+
+      .cf-divider {
+        width: 16mm;
+        height: 0.5mm;
+        background: linear-gradient(to right, var(--gold), transparent);
+        margin-bottom: 2mm;
+      }
+
+      .cf-tagline {
+        font-size: 5.5pt;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.48);
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+      }
+
+      .cf-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cf-tag {
+        font-size: 4.5pt;
+        font-weight: 700;
+        color: var(--gold);
+        background: var(--gold-dim);
+        border: 0.4px solid var(--gold-bdr);
+        padding: 0.8mm 2mm;
+        border-radius: 0.8mm;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      /* ═══════════════════════════════════
+       CARD BACK  (85 × 54 mm)
+    ═══════════════════════════════════ */
+      .card-back {
+        width: 85mm;
+        height: 54mm;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        border: 0.5px dashed #c0c0c0; /* cut guide */
+      }
+
+      /* faint boat watermark */
+      .card-back::before {
+        content: "⛵";
+        position: absolute;
+        bottom: -1mm;
+        right: 22mm;
+        font-size: 32pt;
+        opacity: 0.04;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* gold-to-navy side accent bar */
+      .cb-bar {
+        width: 3mm;
+        min-width: 3mm;
+        background: linear-gradient(
+          to bottom,
+          var(--gold) 0%,
+          var(--navy) 100%
+        );
+        flex-shrink: 0;
+        z-index: 1;
+      }
+
+      /* main contact content */
+      .cb-content {
+        flex: 1;
+        padding: 4mm 2.5mm 4mm 3.5mm;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cb-biz-name {
+        font-family: "Playfair Display", serif;
+        font-size: 7.5pt;
+        font-weight: 700;
+        color: var(--navy);
+        white-space: nowrap;
+        border-bottom: 0.4px solid rgba(212, 175, 55, 0.55);
+        padding-bottom: 1.5mm;
+        margin-bottom: 2mm;
+      }
+
+      .cb-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 1.8mm;
+        flex: 1;
+      }
+
+      .cb-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 2mm;
+        min-width: 0;
+      }
+
+      .cb-lbl {
+        font-size: 4.5pt;
+        font-weight: 700;
+        color: #b08d1e;
+        background: rgba(212, 175, 55, 0.12);
+        padding: 0.5mm 1.5mm;
+        border-radius: 0.5mm;
+        white-space: nowrap;
+        flex-shrink: 0;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        line-height: 1.6;
+        margin-top: 0.3mm;
+      }
+
+      .cb-val {
+        font-size: 5.5pt;
+        color: #1a1a1a;
+        line-height: 1.4;
+        word-break: break-all;
+        min-width: 0;
+      }
+
+      /* QR code panel */
+      .cb-qr {
+        width: 23mm;
+        min-width: 23mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3.5mm 3mm 3.5mm 1mm;
+        gap: 2mm;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cb-qr img {
+        width: 18mm;
+        height: 18mm;
+        display: block;
+        border: 0.6mm solid var(--gold);
+        padding: 1mm;
+      }
+
+      .cb-qr-caption {
+        font-size: 4pt;
+        color: #999;
+        text-align: center;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        line-height: 1.4;
+      }
+
+      /* ═══════════════════════════════════
+       PRINT STYLES
+    ═══════════════════════════════════ */
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+
+        @page {
+          size: A4 portrait;
+          margin: 0;
+        }
+
+        body {
+          background: #fff;
+        }
+
+        .controls,
+        .sheet-label {
+          display: none !important;
+        }
+
+        .sheet {
+          margin: 0 !important;
+          padding: 13mm 15mm;
+          box-shadow: none;
+          page-break-after: always;
+          break-after: page;
+          width: 210mm;
+          height: 297mm;
+          align-content: center;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Controls (screen only) ───────────────────────── -->
+    <div class="controls">
+      <h1>⛵ Tarjetas de Presentación</h1>
+      <p class="subtitle">
+        Cartagena Boat Detailing &nbsp;·&nbsp; A4 · 8 tarjetas por hoja
+      </p>
+      <div class="instructions">
+        <ol>
+          <li>Haz clic en <strong>"Imprimir"</strong> y elige tu impresora</li>
+          <li>Imprime la <strong>Hoja 1</strong> (Frente) primero</li>
+          <li>
+            Voltea el papel e imprime la <strong>Hoja 2</strong> (Reverso)
+          </li>
+          <li>
+            Corta por las <strong>líneas punteadas</strong> &rarr; 8 tarjetas
+            listas
+          </li>
+        </ol>
+      </div>
+      <br />
+      <button class="btn-print" onclick="window.print()">
+        🖨️ &nbsp;Imprimir tarjetas
+      </button>
+    </div>
+
+    <!-- ── Sheet 1 · Front ───────────────────────────────── -->
+    <p class="sheet-label">
+      <span>Hoja 1 &nbsp;·&nbsp; Frente de las tarjetas</span>
+    </p>
+    <div class="sheet" id="sheet-front"></div>
+
+    <!-- ── Sheet 2 · Back ────────────────────────────────── -->
+    <p class="sheet-label">
+      <span>Hoja 2 &nbsp;·&nbsp; Reverso de las tarjetas</span>
+    </p>
+    <div class="sheet" id="sheet-back"></div>
+
+    <script>
+      /* ── Card templates ── */
+      const FRONT = `
+    <div class="card-front">
+      <div class="cf-top">
+        <span class="cf-icon">⛵</span>
+        <div class="cf-brand">
+          <span class="cf-pre">Cartagena</span>
+          <span class="cf-name">Boat Detailing</span>
+        </div>
+      </div>
+      <div class="cf-middle">
+        <div class="cf-divider"></div>
+        <p class="cf-tagline">Especialistas en Estética Naval</p>
+      </div>
+      <div class="cf-tags">
+        <span class="cf-tag">PPF</span>
+        <span class="cf-tag">Cristal Líquido</span>
+        <span class="cf-tag">Pintura Naval</span>
+        <span class="cf-tag">Gelcoat</span>
+        <span class="cf-tag">Detailing Interior</span>
+        <span class="cf-tag">Anticorrosión</span>
+      </div>
+    </div>`;
+
+      const BACK = `
+    <div class="card-back">
+      <div class="cb-bar"></div>
+      <div class="cb-content">
+        <div class="cb-biz-name">Cartagena Boat Detailing</div>
+        <div class="cb-contacts">
+          <div class="cb-item">
+            <span class="cb-lbl">Tel</span>
+            <span class="cb-val">+57 304 430 1112</span>
+          </div>
+          <div class="cb-item">
+            <span class="cb-lbl">Mail</span>
+            <span class="cb-val">info@cartagenaboatdetailing.com</span>
+          </div>
+          <div class="cb-item">
+            <span class="cb-lbl">Ubic</span>
+            <span class="cb-val">Marina Manzanillo, Cartagena de Indias</span>
+          </div>
+          <div class="cb-item">
+            <span class="cb-lbl">Web</span>
+            <span class="cb-val">cartagenaboatdetailing.com</span>
+          </div>
+          <div class="cb-item">
+            <span class="cb-lbl">IG/FB</span>
+            <span class="cb-val">@cartagenaboatdetailing</span>
+          </div>
+        </div>
+      </div>
+      <div class="cb-qr">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fwa.me%2F573044301112%3Ftext%3DHola%252C%2Bescane%25C3%25A9%2Bsu%2Btarjeta%2By%2Bquiero%2Bcotizar%2Bun%2Bservicio%2Bpara%2Bmi%2Bembarcaci%25C3%25B3n&color=0a192f&bgcolor=ffffff&margin=4"
+          alt="WhatsApp Cartagena Boat Detailing"
+          loading="eager"
+        >
+        <p class="cb-qr-caption">Escanéame<br>y cotiza</p>
+      </div>
+    </div>`;
+
+      /* ── Populate sheets with 8 cards each ── */
+      const front = document.getElementById("sheet-front");
+      const back = document.getElementById("sheet-back");
+
+      for (let i = 0; i < 8; i++) {
+        front.innerHTML += FRONT;
+        back.innerHTML += BACK;
+      }
+    </script>
+  </body>
+</html>
