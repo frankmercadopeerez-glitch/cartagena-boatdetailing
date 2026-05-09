@@ -1,7 +1,7 @@
-{
+﻿{
   "name": "CBD Finanzas",
   "short_name": "CBD Finanzas",
-  "description": "Panel financiero privado - Cartagena Boat Detailing",
+  "description": "Panel financiero privado - Colombia Boat Detailing",
   "start_url": "/finanzas.html",
   "display": "standalone",
   "background_color": "#050B14",

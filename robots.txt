@@ -1,5 +1,5 @@
-# ==============================================
-# Robots.txt - Cartagena Boat Detailing
+﻿# ==============================================
+# Robots.txt - Colombia Boat Detailing
 # Detailing y Estética Naval en Cartagena, Colombia
 # https://cartagenaboatdetailing.com
 # ==============================================
@@ -97,7 +97,7 @@ Disallow: /
 
 # ==============================================
 # INFORMACIÓN DE CONTACTO
-# Cartagena Boat Detailing
+# Colombia Boat Detailing
 # Marina Manzanillo, Cartagena de Indias, Colombia
 # Tel: +57 300 123 4567
 # ==============================================
