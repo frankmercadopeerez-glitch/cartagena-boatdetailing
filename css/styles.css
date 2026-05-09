@@ -295,7 +295,13 @@
   }
 }
 
-/* Smooth Scroll Behavior */
+/* Smooth Scroll Behavior & No Horizontal Overflow */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -860,6 +866,9 @@ html {
   pointer-events: none;
   z-index: 0;
   animation: aurora-drift 14s ease-in-out infinite;
+  /* Prevent orbs from causing horizontal scroll */
+  max-width: 100vw;
+  overflow: hidden;
 }
 .aurora-orb-gold {
   background: radial-gradient(
