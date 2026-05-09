@@ -664,3 +664,346 @@ html {
     height: 54px;
   }
 }
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║   PREMIUM UPGRADE — 2026                            ║
+   ║   Shimmer · Glow · Motion · Depth                   ║
+   ╚══════════════════════════════════════════════════════╝ */
+
+/* ── Keyframes ─────────────────────────────────────── */
+
+@keyframes shimmer-sweep {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+
+@keyframes gold-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 16px rgba(212, 175, 55, 0.35),
+      0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 38px rgba(212, 175, 55, 0.65),
+      0 4px 28px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes line-shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 210%;
+  }
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(28px, -22px) scale(1.06);
+  }
+  66% {
+    transform: translate(-14px, 16px) scale(0.96);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ── Gold shimmer text ─────────────────────────────── */
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #b08d1e,
+    #d4af37,
+    #f5e17a,
+    #d4af37,
+    #b08d1e
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4.5s linear infinite;
+}
+
+/* ── Light-sweep shine on hover ────────────────────── */
+.shine-on-hover {
+  position: relative;
+  overflow: hidden;
+}
+.shine-on-hover::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.13) 50%,
+    transparent 100%
+  );
+  transform: skewX(-14deg);
+  pointer-events: none;
+}
+.shine-on-hover:hover::after {
+  animation: shimmer-sweep 0.7s ease forwards;
+}
+
+/* ── Glowing CTA button ────────────────────────────── */
+.btn-glow {
+  animation: gold-breathe 3.2s ease-in-out infinite;
+}
+.btn-glow:hover {
+  animation: none;
+  box-shadow:
+    0 0 44px rgba(212, 175, 55, 0.85),
+    0 8px 30px rgba(0, 0, 0, 0.35) !important;
+  transform: translateY(-2px) scale(1.025) !important;
+}
+
+/* ── Animated gold separator ───────────────────────── */
+.gold-separator {
+  position: relative;
+  width: 96px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.gold-separator::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+  animation: line-shine 2.8s ease-in-out infinite;
+}
+
+/* ── Process step pulse ring ───────────────────────── */
+.step-pulse {
+  position: relative;
+}
+.step-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.55);
+  animation: pulse-ring 2.6s ease-out infinite;
+  pointer-events: none;
+}
+
+/* ── Hero badge ────────────────────────────────────── */
+.hero-badge {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  backdrop-filter: blur(14px) !important;
+  box-shadow:
+    0 0 22px rgba(212, 175, 55, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ── Aurora orbs (decorative glows) ───────────────── */
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  animation: aurora-drift 14s ease-in-out infinite;
+}
+.aurora-orb-gold {
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.14) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Stat numbers glow ─────────────────────────────── */
+.stat-glow {
+  transition: filter 0.35s ease;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.25));
+}
+.stat-glow:hover {
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.6));
+}
+
+/* ── Image container hover zoom ────────────────────── */
+.hero-img-hover {
+  overflow: hidden;
+  border-radius: inherit;
+}
+.hero-img-hover img {
+  transition: transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  will-change: transform;
+}
+.hero-img-hover:hover img {
+  transform: scale(1.05) !important;
+}
+
+/* ── Enhanced service cards ────────────────────────── */
+.service-card {
+  position: relative;
+  overflow: hidden;
+}
+.service-card:hover {
+  transform: translateY(-7px) !important;
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(212, 175, 55, 0.12),
+    0 0 40px rgba(212, 175, 55, 0.08) !important;
+}
+
+/* ── Upgraded glass nav ────────────────────────────── */
+.glass-nav {
+  background: rgba(10, 25, 47, 0.93) !important;
+  backdrop-filter: blur(22px) saturate(190%) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.14) !important;
+  box-shadow: 0 4px 36px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* ── Nav dropdown glow ─────────────────────────────── */
+.nav-dropdown-content {
+  border-color: rgba(212, 175, 55, 0.25) !important;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(212, 175, 55, 0.1) !important;
+}
+
+/* ── Enhanced review cards ─────────────────────────── */
+.review-card:hover {
+  border-color: rgba(212, 175, 55, 0.28) !important;
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.13),
+    0 0 0 1px rgba(212, 175, 55, 0.15) !important;
+}
+.review-card:hover .ph-fill.ph-star {
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.55));
+}
+
+/* ── Blog preview cards ────────────────────────────── */
+.blog-preview-card:hover {
+  transform: translateY(-7px) !important;
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.13),
+    0 0 0 1px rgba(212, 175, 55, 0.1) !important;
+}
+.blog-preview-card img {
+  transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+.blog-preview-card:hover img {
+  transform: scale(1.07) !important;
+}
+
+/* ── FAQ items hover ───────────────────────────────── */
+.faq-item:hover {
+  border-color: rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.06) !important;
+}
+
+/* ── Premium scrollbar ─────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0a192f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #d4af37, #b08d1e);
+  border-radius: 3px;
+}
+
+/* ── Footer anchor glow ────────────────────────────── */
+footer a:hover {
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+/* ── Float slow utility ────────────────────────────── */
+.float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+/* ── Section label decoration ──────────────────────── */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: #d4af37;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+/* ── Responsive: disable heavy animations on mobile ── */
+@media (max-width: 768px) {
+  .aurora-orb {
+    display: none;
+  }
+  .btn-glow {
+    animation: none;
+  }
+  .hero-img-hover img {
+    transition-duration: 0.5s !important;
+  }
+}
