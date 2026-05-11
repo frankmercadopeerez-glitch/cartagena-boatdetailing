@@ -143,6 +143,12 @@
 
       .reviews-carousel-wrapper {
         width: 100%;
+        overflow: hidden; /* must stay on its own, separate from mask */
+      }
+
+      /* Mask wrapper is a child so mask-image doesn't interfere with overflow clip */
+      .reviews-mask-inner {
+        width: 100%;
         mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
       }
@@ -616,7 +622,7 @@
     </header>
 
     <!-- Servicios Destacados -->
-    <section class="py-20 bg-slate-50">
+    <section class="py-20 bg-slate-50 overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
           <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold">Lo Que Hacemos</span>
@@ -800,7 +806,7 @@
     </div>
 
     <!-- HIGH-END SERVICES GRID (A la Carte) -->
-    <section id="soluciones" class="py-24 bg-navy-900 text-white relative nautical-grid">
+    <section id="soluciones" class="py-24 bg-navy-900 text-white relative nautical-grid overflow-hidden">
       <!-- Aurora orbs -->
       <div class="aurora-orb aurora-orb-gold" style="width:700px;height:700px;top:-30%;right:-10%;opacity:0.8;animation-delay:2s;"></div>
       <div class="aurora-orb aurora-orb-gold" style="width:450px;height:450px;bottom:-10%;left:-5%;opacity:0.6;animation-delay:7s;"></div>
@@ -948,7 +954,7 @@
     </section>
 
     <!-- EDUCATIONAL SECTION: Why Professional Detailing? -->
-    <section id="experiencia" class="py-24 bg-slate-50">
+    <section id="experiencia" class="py-24 bg-slate-50 overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row gap-16 items-center">
           <div class="md:w-1/2">
@@ -1049,7 +1055,7 @@
     </div>
 
     <!-- Process -->
-    <section id="proceso" class="py-24 bg-white border-t border-slate-100">
+    <section id="proceso" class="py-24 bg-white border-t border-slate-100 overflow-hidden">
       <div class="container mx-auto px-6 text-center">
         <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
           >Método de Trabajo</span
@@ -1138,7 +1144,8 @@
       </div>
 
       <!-- Infinite Scroll Carousel -->
-      <div class="reviews-carousel-wrapper overflow-hidden">
+      <div class="reviews-carousel-wrapper">
+        <div class="reviews-mask-inner">
         <div class="reviews-track flex gap-8 animate-scroll-left">
           <!-- Review Card 1 -->
           <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
@@ -1357,9 +1364,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!-- /reviews-mask-inner -->
+      </div><!-- /reviews-carousel-wrapper -->
     <!-- Blog Preview Section -->
-    <section id="blog-preview" class="py-24 bg-slate-50 relative">
+    <section id="blog-preview" class="py-24 bg-slate-50 relative overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
           <h2
@@ -1514,7 +1522,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-white relative">
+    <section id="faq" class="py-24 bg-white relative overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
           <h2
@@ -1812,7 +1820,7 @@
       </svg>
     </div>
 
-    <section id="contacto" class="py-24 bg-navy-900 relative rope-border">
+    <section id="contacto" class="py-24 bg-navy-900 relative rope-border overflow-hidden">
       <div class="container mx-auto px-6 relative z-10">
         <div
           class="max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden flex flex-col md:flex-row"
@@ -2012,7 +2020,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-navy-900 text-slate-300 py-12 nautical-grid rope-border">
+    <footer class="bg-navy-900 text-slate-300 py-12 nautical-grid rope-border overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <!-- Brand -->
