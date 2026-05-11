@@ -383,3 +383,202 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialize counters when page loads
 initCounters();
+
+// =============================================
+// NAVAL PARTICLES — Ocean Atmosphere Effect
+// =============================================
+function initNavalParticles() {
+  const canvas = document.getElementById("naval-particles");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let animationId;
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+
+  // Particle types: bubble, star, sparkle
+  function createParticle() {
+    const types = ["bubble", "star", "sparkle"];
+    const type = types[Math.floor(Math.random() * types.length)];
+    return {
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * 20,
+      size: Math.random() * 3 + 0.5,
+      speedY: -(Math.random() * 0.6 + 0.2),
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.4 + 0.1,
+      type,
+      life: 1,
+      decay: Math.random() * 0.002 + 0.001,
+      hue: Math.random() > 0.7 ? "#d4af37" : "rgba(255,255,255,",
+    };
+  }
+
+  function drawParticle(p) {
+    ctx.save();
+    ctx.globalAlpha = p.opacity * p.life;
+
+    if (p.type === "bubble") {
+      ctx.strokeStyle =
+        p.hue === "#d4af37" ? "#d4af37" : "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.stroke();
+    } else if (p.type === "star") {
+      ctx.fillStyle =
+        p.hue === "#d4af37" ? "rgba(212,175,55,0.7)" : "rgba(255,255,255,0.6)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // sparkle — 4-point star
+      ctx.fillStyle = "rgba(212,175,55,0.5)";
+      ctx.translate(p.x, p.y);
+      for (let i = 0; i < 4; i++) {
+        ctx.rotate(Math.PI / 2);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(p.size * 0.4, p.size * 1.8);
+        ctx.lineTo(0, p.size * 1.2);
+        ctx.lineTo(-p.size * 0.4, p.size * 1.8);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Maintain particle count
+    while (particles.length < 60) {
+      particles.push(createParticle());
+    }
+
+    particles = particles.filter((p) => p.life > 0);
+
+    particles.forEach((p) => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.life -= p.decay;
+      drawParticle(p);
+    });
+
+    animationId = requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Pause when not visible for performance
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationId);
+    } else {
+      animate();
+    }
+  });
+}
+
+// =============================================
+// WAVE CURSOR RIPPLE
+// =============================================
+function initWaveRipple() {
+  document.querySelectorAll(".water-ripple").forEach((el) => {
+    el.addEventListener("click", function (e) {
+      const rect = el.getBoundingClientRect();
+      const ripple = document.createElement("span");
+      const size = Math.max(rect.width, rect.height) * 2;
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${e.clientX - rect.left - size / 2}px;
+        top: ${e.clientY - rect.top - size / 2}px;
+        background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 60%);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: scale(0);
+        animation: ripple-wave 0.8s ease-out forwards;
+        z-index: 0;
+      `;
+
+      // Inject keyframe if not exists
+      if (!document.getElementById("ripple-wave-style")) {
+        const style = document.createElement("style");
+        style.id = "ripple-wave-style";
+        style.textContent = `@keyframes ripple-wave {
+          to { transform: scale(1); opacity: 0; }
+        }`;
+        document.head.appendChild(style);
+      }
+
+      el.style.position = "relative";
+      el.style.overflow = "hidden";
+      el.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 900);
+    });
+  });
+}
+
+// =============================================
+// TILT EFFECT ON CARDS (naval "rocking" feel)
+// =============================================
+function initCardTilt() {
+  const cards = document.querySelectorAll(".service-card, .nautical-card");
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", function (e) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener("mouseleave", function () {
+      card.style.transform = "";
+    });
+  });
+}
+
+// =============================================
+// SONAR PULSE on stat elements
+// =============================================
+function initSonarPulse() {
+  const stats = document.querySelectorAll(".stat-glow");
+  stats.forEach((stat) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = "float-slow 4s ease-in-out infinite";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(stat);
+  });
+}
+
+// Initialize all naval effects
+document.addEventListener("DOMContentLoaded", () => {
+  initNavalParticles();
+  initWaveRipple();
+  initCardTilt();
+  initSonarPulse();
+});

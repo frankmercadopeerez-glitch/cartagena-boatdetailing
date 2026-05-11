@@ -498,10 +498,41 @@
           class="w-full h-full object-cover"
         />
         <div class="hero-overlay absolute inset-0"></div>
+        <!-- Deep sea dark vignette -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, transparent 40%, rgba(5,15,35,0.55) 100%);"></div>
       </div>
+
+      <!-- Naval Particles Canvas -->
+      <canvas id="naval-particles" class="absolute inset-0 z-[1]" style="width:100%;height:100%;"></canvas>
+
       <!-- Aurora orbs -->
       <div class="aurora-orb aurora-orb-gold" style="width:500px;height:500px;top:-10%;right:-5%;animation-delay:0s;"></div>
       <div class="aurora-orb aurora-orb-gold" style="width:360px;height:360px;bottom:10%;left:-5%;animation-delay:5s;"></div>
+
+      <!-- Compass Rose decorative -->
+      <div class="compass-rose" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;color:#d4af37;">
+          <circle cx="100" cy="100" r="95" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+          <circle cx="100" cy="100" r="70" stroke="currentColor" stroke-width="0.3" opacity="0.4"/>
+          <circle cx="100" cy="100" r="45" stroke="currentColor" stroke-width="0.3" opacity="0.3"/>
+          <!-- Cardinal directions -->
+          <polygon points="100,5 106,95 100,85 94,95" fill="currentColor" opacity="0.7"/>
+          <polygon points="100,195 106,105 100,115 94,105" fill="currentColor" opacity="0.4"/>
+          <polygon points="5,100 95,94 85,100 95,106" fill="currentColor" opacity="0.4"/>
+          <polygon points="195,100 105,94 115,100 105,106" fill="currentColor" opacity="0.4"/>
+          <!-- Tick marks -->
+          <g opacity="0.4" stroke="currentColor" stroke-width="0.5">
+            <line x1="100" y1="8" x2="100" y2="18"/>
+            <line x1="100" y1="182" x2="100" y2="192"/>
+            <line x1="8" y1="100" x2="18" y2="100"/>
+            <line x1="182" y1="100" x2="192" y2="100"/>
+          </g>
+          <text x="100" y="28" text-anchor="middle" fill="currentColor" font-size="10" font-family="serif" opacity="0.7">N</text>
+          <text x="100" y="182" text-anchor="middle" fill="currentColor" font-size="8" font-family="serif" opacity="0.5">S</text>
+          <text x="24" y="104" text-anchor="middle" fill="currentColor" font-size="8" font-family="serif" opacity="0.5">W</text>
+          <text x="178" y="104" text-anchor="middle" fill="currentColor" font-size="8" font-family="serif" opacity="0.5">E</text>
+        </svg>
+      </div>
 
       <div class="container mx-auto px-6 relative z-10 text-center">
         <div
@@ -520,6 +551,15 @@
           <span class="italic text-gold-400 font-normal text-gold-shimmer">Marine Care</span>
         </h1>
 
+        <!-- Nautical coordinate decoration -->
+        <div class="flex items-center justify-center gap-3 mb-4 opacity-50">
+          <span class="text-white/50 text-xs tracking-[0.3em] font-mono">10°23'N</span>
+          <div class="wind-indicator"></div>
+          <span class="text-white/50 text-xs tracking-[0.3em] font-mono">75°28'W</span>
+          <div class="wind-indicator" style="animation-delay:1s;"></div>
+          <span class="text-white/50 text-xs tracking-[0.3em] font-mono">MARINA MANZANILLO</span>
+        </div>
+
         <p
           class="text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed tracking-wide"
         >
@@ -537,7 +577,7 @@
             href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Cartagena%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
             target="_blank"
             rel="noopener noreferrer"
-            class="group relative px-10 py-4 bg-white text-navy-900 font-bold text-sm tracking-widest uppercase overflow-hidden transition-all hover:bg-gold-400 hover:text-white shadow-xl"
+            class="group relative px-10 py-4 bg-white text-navy-900 font-bold text-sm tracking-widest uppercase overflow-hidden transition-all hover:bg-gold-400 hover:text-white shadow-xl btn-wake water-ripple"
           >
             <span class="relative z-10 flex items-center gap-2"
               >Agendar Inspección
@@ -555,9 +595,21 @@
         </div>
       </div>
 
+      <!-- Wave SVG overlays at bottom -->
+      <div class="hero-wave-container wave-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="rgba(10,25,47,0.5)"/>
+        </svg>
+      </div>
+      <div class="hero-wave-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+          <path d="M0,45 C180,15 360,75 540,45 C720,15 900,75 1080,45 C1260,15 1350,65 1440,45 L1440,90 L0,90 Z" fill="#0a192f"/>
+        </svg>
+      </div>
+
       <!-- Scroll Down Indicator -->
       <div
-        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+        class="absolute bottom-24 left-1/2 transform -translate-x-1/2 animate-bounce z-10"
       >
         <i class="ph-light ph-arrow-down text-white text-3xl opacity-50"></i>
       </div>
@@ -649,15 +701,22 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="services.html" class="inline-flex items-center border-2 border-navy-900 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition duration-300">
+          <a href="services.html" class="inline-flex items-center border-2 border-navy-900 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition duration-300 btn-wake water-ripple">
             Ver Todos los Servicios <i class="ph ph-arrow-right ml-2"></i>
           </a>
         </div>
       </div>
     </section>
 
+    <!-- Wave divider -->
+    <div class="ocean-divider" style="background:#f8fafc;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <path d="M0,35 C360,70 720,0 1080,35 C1260,52 1360,28 1440,35 L1440,70 L0,70 Z" fill="white"/>
+      </svg>
+    </div>
+
     <!-- Intro / Value Proposition -->
-    <section class="py-24 bg-white relative overflow-hidden">
+    <section class="py-24 bg-white relative overflow-hidden ocean-texture">
       <div class="container mx-auto px-6 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-20">
           <div class="lg:w-1/2">
@@ -692,14 +751,17 @@
               calidad nunca antes vistos en la región.
             </p>
 
+            <!-- Knot divider -->
+            <div class="knot-divider"><span>⚓</span></div>
+
             <div class="grid grid-cols-2 gap-8 border-t border-slate-100 pt-8">
-              <div>
+              <div class="depth-counter">
                 <h4 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">Lifetime</h4>
                 <p class="text-xs text-slate-400 uppercase tracking-widest">
                   Garantía en PPF
                 </p>
               </div>
-              <div>
+              <div class="depth-counter">
                 <h4 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">
                   Manzanillo
                 </h4>
@@ -711,18 +773,34 @@
           </div>
 
           <div class="lg:w-1/2 relative hero-img-hover">
+            <!-- Porthole-style image frame -->
+            <div style="position:absolute;top:-12px;right:-12px;bottom:-12px;left:-12px;border:1px solid rgba(212,175,55,0.15);pointer-events:none;z-index:1;"></div>
+            <div style="position:absolute;top:-6px;right:-6px;bottom:-6px;left:-6px;border:1px solid rgba(212,175,55,0.08);pointer-events:none;z-index:1;"></div>
             <img
               src="images/header%20(2).webp"
               alt="Detailing Process"
-              class="shadow-2xl w-full"
+              class="shadow-2xl w-full relative z-0"
             />
+            <!-- Sonar rings decoration -->
+            <div class="sonar-rings" style="bottom:-60px;right:-60px;">
+              <div class="sonar-ring" style="width:80px;height:80px;"></div>
+              <div class="sonar-ring" style="width:140px;height:140px;"></div>
+              <div class="sonar-ring" style="width:200px;height:200px;"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Wave divider -->
+    <div class="ocean-divider" style="background:white;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <path d="M0,20 C240,60 480,0 720,30 C960,60 1200,10 1440,30 L1440,70 L0,70 Z" fill="#0a192f"/>
+      </svg>
+    </div>
+
     <!-- HIGH-END SERVICES GRID (A la Carte) -->
-    <section id="soluciones" class="py-24 bg-navy-900 text-white relative">
+    <section id="soluciones" class="py-24 bg-navy-900 text-white relative nautical-grid">
       <!-- Aurora orbs -->
       <div class="aurora-orb aurora-orb-gold" style="width:700px;height:700px;top:-30%;right:-10%;opacity:0.8;animation-delay:2s;"></div>
       <div class="aurora-orb aurora-orb-gold" style="width:450px;height:450px;bottom:-10%;left:-5%;opacity:0.6;animation-delay:7s;"></div>
@@ -962,6 +1040,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Wave divider: Services → Process -->
+    <div class="ocean-divider" style="background:#0a192f;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <path d="M0,30 C180,65 360,5 540,35 C720,65 900,10 1080,40 C1260,65 1360,20 1440,30 L1440,70 L0,70 Z" fill="white"/>
+      </svg>
+    </div>
 
     <!-- Process -->
     <section id="proceso" class="py-24 bg-white border-t border-slate-100">
@@ -1720,7 +1805,14 @@
       </div>
     </section>
 
-    <section id="contacto" class="py-24 bg-navy-900 relative">
+    <!-- Wave divider: FAQ → Contact -->
+    <div class="ocean-divider" style="background:white;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
+        <path d="M0,50 C200,10 400,70 600,40 C800,10 1000,60 1200,30 C1300,15 1380,50 1440,40 L1440,70 L0,70 Z" fill="#0a192f"/>
+      </svg>
+    </div>
+
+    <section id="contacto" class="py-24 bg-navy-900 relative rope-border">
       <div class="container mx-auto px-6 relative z-10">
         <div
           class="max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden flex flex-col md:flex-row"
@@ -1920,7 +2012,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-navy-900 text-slate-300 py-12">
+    <footer class="bg-navy-900 text-slate-300 py-12 nautical-grid rope-border">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <!-- Brand -->
