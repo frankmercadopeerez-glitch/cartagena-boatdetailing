@@ -197,10 +197,11 @@
       }
 
       .cf-icon {
-        font-size: 20pt;
-        line-height: 1;
+        width: 20pt;
+        height: 20pt;
         flex-shrink: 0;
-        filter: grayscale(1) brightness(2.2) contrast(1.1) drop-shadow(0 0 2px rgba(255,255,255,0.6));
+        color: #b8c4d4;
+        filter: drop-shadow(0 0 2.5px rgba(180,196,220,0.65)) drop-shadow(0 1px 1px rgba(0,0,0,0.4));
       }
 
       .cf-brand {
@@ -476,7 +477,16 @@
       const FRONT = `
     <div class="card-front">
       <div class="cf-top">
-        <span class="cf-icon">⛵</span>
+        <svg class="cf-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor">
+          <!-- mast -->
+          <rect x="15" y="1" width="2" height="22" rx="1"/>
+          <!-- main sail -->
+          <path d="M14 4 L3 24 L14 24 Z"/>
+          <!-- jib -->
+          <path d="M18 8 L29 24 L18 24 Z" opacity="0.75"/>
+          <!-- hull (no water) -->
+          <path d="M4 25 L28 25 L25.5 30 L6.5 30 Z" rx="1"/>
+        </svg>
         <div class="cf-brand">
           <span class="cf-pre">COLOMBIA</span>
           <span class="cf-name">Boat Detailing</span>
