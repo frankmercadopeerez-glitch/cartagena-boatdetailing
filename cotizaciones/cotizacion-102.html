@@ -40,8 +40,16 @@
         font-size: 13px;
         background: #dce4ef;
         background-image:
-          radial-gradient(circle at 20% 20%, rgba(17, 34, 56, 0.18) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(5, 11, 20, 0.22) 0%, transparent 50%);
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(17, 34, 56, 0.18) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(5, 11, 20, 0.22) 0%,
+            transparent 50%
+          );
         color: var(--text-color);
         padding: 28px 16px 40px;
         min-height: 100vh;
@@ -60,9 +68,9 @@
         border-radius: 2px;
         overflow: hidden;
         box-shadow:
-          0 2px 4px rgba(0,0,0,0.04),
-          0 12px 40px rgba(5,11,20,0.18),
-          0 0 0 1px rgba(184,144,77,0.2);
+          0 2px 4px rgba(0, 0, 0, 0.04),
+          0 12px 40px rgba(5, 11, 20, 0.18),
+          0 0 0 1px rgba(184, 144, 77, 0.2);
       }
 
       /* ── HEADER ── */
@@ -404,7 +412,7 @@
       }
 
       .total-row.grand-total span:first-child {
-        color: rgba(255,255,255,0.75);
+        color: rgba(255, 255, 255, 0.75);
         font-weight: 600;
         font-size: 11px;
         text-transform: uppercase;
@@ -419,7 +427,7 @@
       }
 
       .total-row.grand-total .pending-inline {
-        color: rgba(212,170,106,0.7);
+        color: rgba(212, 170, 106, 0.7);
         font-size: 11px;
         font-style: italic;
       }
@@ -515,7 +523,7 @@
         margin-top: 8px;
         padding: 7px 10px;
         border-left: 2px solid var(--accent-color);
-        background: rgba(255,255,255,0.06);
+        background: rgba(255, 255, 255, 0.06);
         font-size: 10.5px;
         line-height: 1.5;
       }
@@ -549,7 +557,6 @@
   </head>
   <body>
     <div class="invoice-container">
-
       <!-- ── HEADER ── -->
       <header>
         <div class="brand-info">
@@ -565,7 +572,6 @@
       </header>
 
       <div class="body-pad">
-
         <!-- ── CLIENTE ── -->
         <div class="client-section">
           <div class="client-col">
@@ -584,19 +590,21 @@
 
         <!-- ── AVISO PRECIOS PENDIENTES ── -->
         <div class="pending-notice">
-          <strong>📋 Nota sobre esta cotización:</strong> Los ítems de cambio de acrílicos
-          requieren inspección presencial y toma de medidas exactas antes de fijar precio definitivo.
-          Los valores correspondientes están marcados como <strong>"Por cotizar"</strong> y serán
-          confirmados tras visita técnica. Los demás ítems tienen precio fijo confirmado.
+          <strong>📋 Nota sobre esta cotización:</strong> Los ítems de cambio de
+          acrílicos requieren inspección presencial y toma de medidas exactas
+          antes de fijar precio definitivo. Los valores correspondientes están
+          marcados como <strong>"Por cotizar"</strong> y serán confirmados tras
+          visita técnica. Los demás ítems tienen precio fijo confirmado.
         </div>
 
         <!-- ── LOGÍSTICA ── -->
         <div class="info-box">
           <strong>⚓ Logística del servicio:</strong> Los trabajos se realizarán
-          <strong>en las instalaciones del Club Náutico de Cartagena</strong>, en el puesto de
-          atraque actual, sin necesidad de traslado. La pintura de cubierta y el polarizado
-          pueden ejecutarse de forma simultánea con previo plan de trabajo coordinado.
-          Tiempo estimado de ejecución una vez confirmados todos los precios:
+          <strong>en las instalaciones del Club Náutico de Cartagena</strong>,
+          en el puesto de atraque actual, sin necesidad de traslado. La pintura
+          de cubierta y el polarizado pueden ejecutarse de forma simultánea con
+          previo plan de trabajo coordinado. Tiempo estimado de ejecución una
+          vez confirmados todos los precios:
           <strong>8 a 10 días hábiles.</strong>
         </div>
 
@@ -611,7 +619,6 @@
             </tr>
           </thead>
           <tbody>
-
             <!-- ÍTEM 1 — POLARIZADO -->
             <tr>
               <td>
@@ -620,19 +627,23 @@
                   Polarizado de Parabrisas — Lámina Naval Anti-UV
                 </div>
                 <div class="item-desc">
-                  Instalación de lámina de polarizado de alta calidad para uso náutico
-                  sobre el parabrisas del yate. La lámina seleccionada bloquea hasta el
-                  <strong>99% de la radiación UV</strong> y reduce el calor interior,
-                  protegiendo el tablero, la tapicería y los equipos electrónicos del
-                  efecto invernadero del sol del Caribe.<br /><br />
-                  La aplicación se realiza sobre <strong>5 m²</strong> de superficie
-                  de vidrio, con preparación previa de la superficie (limpieza, desengrase
-                  y acondicionamiento), garantizando una instalación sin burbujas,
-                  manchas ni bordes levantados.
+                  Instalación de lámina de polarizado de alta calidad para uso
+                  náutico sobre el parabrisas del yate. La lámina seleccionada
+                  bloquea hasta el
+                  <strong>99% de la radiación UV</strong> y reduce el calor
+                  interior, protegiendo el tablero, la tapicería y los equipos
+                  electrónicos del efecto invernadero del sol del Caribe.<br /><br />
+                  La aplicación se realiza sobre <strong>5 m²</strong> de
+                  superficie de vidrio, con preparación previa de la superficie
+                  (limpieza, desengrase y acondicionamiento), garantizando una
+                  instalación sin burbujas, manchas ni bordes levantados.
                   <ul>
                     <li>Área a tratar: <strong>5 m²</strong></li>
                     <li>Precio por m²: <strong>$ 300.000 COP</strong></li>
-                    <li>La lámina incluye garantía de fábrica contra burbujeo y despegue.</li>
+                    <li>
+                      La lámina incluye garantía de fábrica contra burbujeo y
+                      despegue.
+                    </li>
                   </ul>
                 </div>
               </td>
@@ -650,19 +661,25 @@
                   Pintura de Cubierta de Popa
                 </div>
                 <div class="item-desc">
-                  Preparación completa y pintura de la cubierta de popa del yate.
-                  El proceso incluye: lijado y limpieza profunda de la superficie existente,
-                  aplicación de sellador de base compatible con fibra de vidrio,
-                  y pintura de acabado con <strong>esmalte náutico antideslizante</strong>
-                  formulado para resistir la exposición continua al sol, la sal y la humedad
+                  Preparación completa y pintura de la cubierta de popa del
+                  yate. El proceso incluye: lijado y limpieza profunda de la
+                  superficie existente, aplicación de sellador de base
+                  compatible con fibra de vidrio, y pintura de acabado con
+                  <strong>esmalte náutico antideslizante</strong> formulado para
+                  resistir la exposición continua al sol, la sal y la humedad
                   del entorno marino de Cartagena.<br /><br />
-                  El resultado es una cubierta de popa renovada visualmente, con mejor
-                  adherencia al caminar y mayor resistencia al deterioro por exposición
-                  UV y marina.
+                  El resultado es una cubierta de popa renovada visualmente, con
+                  mejor adherencia al caminar y mayor resistencia al deterioro
+                  por exposición UV y marina.
                   <ul>
-                    <li>Preparación de superficie, lijado y sellado incluidos.</li>
+                    <li>
+                      Preparación de superficie, lijado y sellado incluidos.
+                    </li>
                     <li>Pintura antideslizante náutica de alta durabilidad.</li>
-                    <li>Color a definir con el cliente antes de iniciar el trabajo.</li>
+                    <li>
+                      Color a definir con el cliente antes de iniciar el
+                      trabajo.
+                    </li>
                     <li>Tiempo de ejecución estimado: 2 a 3 días hábiles.</li>
                   </ul>
                 </div>
@@ -680,18 +697,22 @@
                   Cambio de Acrílicos — Parte Superior del Yate
                 </div>
                 <div class="item-desc">
-                  Retiro y reemplazo de los acrílicos (ventanas fijas o escotillas)
-                  ubicados en la parte superior de la embarcación. Los acrílicos
-                  náuticos se deterioran con los años por la exposición UV,
-                  tornándose amarillos, opacos o agrietados, afectando tanto la
-                  estética como la hermeticidad de la embarcación.<br /><br />
-                  El reemplazo se realizará con <strong>acrílico náutico certificado</strong>
-                  (Plexiglas® o equivalente marino), cortado a medida exacta, con
-                  sellado perimetral con silicona 3M™ Marine Grade para garantizar
+                  Retiro y reemplazo de los acrílicos (ventanas fijas o
+                  escotillas) ubicados en la parte superior de la embarcación.
+                  Los acrílicos náuticos se deterioran con los años por la
+                  exposición UV, tornándose amarillos, opacos o agrietados,
+                  afectando tanto la estética como la hermeticidad de la
+                  embarcación.<br /><br />
+                  El reemplazo se realizará con
+                  <strong>acrílico náutico certificado</strong> (Plexiglas® o
+                  equivalente marino), cortado a medida exacta, con sellado
+                  perimetral con silicona 3M™ Marine Grade para garantizar
                   impermeabilidad total.<br /><br />
-                  <strong style="color: var(--pending-color);">⚠ Precio sujeto a medición presencial.</strong>
-                  El valor definitivo depende de la cantidad de unidades, las dimensiones
-                  exactas y el tipo de acrílico seleccionado.
+                  <strong style="color: var(--pending-color)"
+                    >⚠ Precio sujeto a medición presencial.</strong
+                  >
+                  El valor definitivo depende de la cantidad de unidades, las
+                  dimensiones exactas y el tipo de acrílico seleccionado.
                 </div>
               </td>
               <td>
@@ -707,24 +728,27 @@
                   Cambio de Acrílico Color Roble — Parte Interna
                 </div>
                 <div class="item-desc">
-                  Reemplazo de los paneles o láminas de acrílico interior con acabado
-                  <strong>color roble</strong>, utilizados en el mobiliario, divisiones
-                  o revestimientos interiores del yate. Este tipo de acrílico decorativo
-                  proporciona un acabado cálido y elegante que imita la veta de la madera
-                  sin los problemas de mantenimiento de la madera natural en ambiente marino
+                  Reemplazo de los paneles o láminas de acrílico interior con
+                  acabado
+                  <strong>color roble</strong>, utilizados en el mobiliario,
+                  divisiones o revestimientos interiores del yate. Este tipo de
+                  acrílico decorativo proporciona un acabado cálido y elegante
+                  que imita la veta de la madera sin los problemas de
+                  mantenimiento de la madera natural en ambiente marino
                   (hinchamiento, podredumbre, decoloración por humedad).<br /><br />
-                  Los paneles nuevos se cortarán a medida exacta y se instalarán con
-                  fijaciones apropiadas para uso náutico.<br /><br />
-                  <strong style="color: var(--pending-color);">⚠ Precio sujeto a medición presencial.</strong>
-                  El valor final depende del área total a cubrir, el grosor del panel
-                  y la complejidad de los cortes y ensambles necesarios.
+                  Los paneles nuevos se cortarán a medida exacta y se instalarán
+                  con fijaciones apropiadas para uso náutico.<br /><br />
+                  <strong style="color: var(--pending-color)"
+                    >⚠ Precio sujeto a medición presencial.</strong
+                  >
+                  El valor final depende del área total a cubrir, el grosor del
+                  panel y la complejidad de los cortes y ensambles necesarios.
                 </div>
               </td>
               <td>
                 <span class="price-pending">Por cotizar</span>
               </td>
             </tr>
-
           </tbody>
         </table>
 
@@ -747,13 +771,19 @@
               <span>Acrílico roble interior:</span>
               <span>Por cotizar</span>
             </div>
-            <div class="total-row" style="background:#f8fafc; font-weight:600;">
+            <div
+              class="total-row"
+              style="background: #f8fafc; font-weight: 600"
+            >
               <span>Subtotal confirmado:</span>
               <span>$ 6.500.000</span>
             </div>
             <div class="total-row grand-total">
               <span>Total del proyecto:</span>
-              <span>$ 6.500.000 <span class="pending-inline">+ acrílicos p.d.</span></span>
+              <span
+                >$ 6.500.000
+                <span class="pending-inline">+ acrílicos p.d.</span></span
+              >
             </div>
           </div>
         </div>
@@ -766,15 +796,17 @@
               <img
                 src="images/sea-devil/sea-devil-1.jpg"
                 alt="Sea Devil - Vista exterior"
-                onerror="this.style.display='none'"
+                onerror="this.style.display = 'none'"
               />
-              <p class="photo-caption">Vista exterior del yate — estado actual</p>
+              <p class="photo-caption">
+                Vista exterior del yate — estado actual
+              </p>
             </div>
             <div>
               <img
                 src="images/sea-devil/sea-devil-2.jpg"
                 alt="Sea Devil - Cubierta"
-                onerror="this.style.display='none'"
+                onerror="this.style.display = 'none'"
               />
               <p class="photo-caption">Cubierta — zona a pintar en popa</p>
             </div>
@@ -782,17 +814,21 @@
               <img
                 src="images/sea-devil/sea-devil-3.jpg"
                 alt="Sea Devil - Parabrisas"
-                onerror="this.style.display='none'"
+                onerror="this.style.display = 'none'"
               />
-              <p class="photo-caption">Parabrisas — área de polarizado (5 m²)</p>
+              <p class="photo-caption">
+                Parabrisas — área de polarizado (5 m²)
+              </p>
             </div>
             <div>
               <img
                 src="images/sea-devil/sea-devil-4.jpg"
                 alt="Sea Devil - Detalle"
-                onerror="this.style.display='none'"
+                onerror="this.style.display = 'none'"
               />
-              <p class="photo-caption">Detalle de la embarcación — áreas de intervención</p>
+              <p class="photo-caption">
+                Detalle de la embarcación — áreas de intervención
+              </p>
             </div>
           </div>
         </div>
@@ -802,41 +838,70 @@
           <div class="warranty-box">
             <h4>Garantías por servicio</h4>
             <ul>
-              <li><strong>Polarizado:</strong> Garantía de fábrica contra despegue y burbujeo. No limpiar con elementos abrasivos ni solventes.</li>
-              <li><strong>Pintura cubierta:</strong> 6 meses contra descascaramiento bajo uso normal. Evitar detergentes industriales y presión directa de hidrolavadora.</li>
-              <li><strong>Acrílicos:</strong> Garantía de 1 año en instalación y sellado. La silicona de sellado aplica los mismos cuidados que la cotización #098 (sin desoxidantes, sin solventes).</li>
+              <li>
+                <strong>Polarizado:</strong> Garantía de fábrica contra despegue
+                y burbujeo. No limpiar con elementos abrasivos ni solventes.
+              </li>
+              <li>
+                <strong>Pintura cubierta:</strong> 6 meses contra
+                descascaramiento bajo uso normal. Evitar detergentes
+                industriales y presión directa de hidrolavadora.
+              </li>
+              <li>
+                <strong>Acrílicos:</strong> Garantía de 1 año en instalación y
+                sellado. La silicona de sellado aplica los mismos cuidados que
+                la cotización #098 (sin desoxidantes, sin solventes).
+              </li>
             </ul>
-            <p style="margin-top: 8px; font-size: 10.5px;">
-              📱 Se entrega guía digital de cuidado por cada servicio al momento de la entrega.
+            <p style="margin-top: 8px; font-size: 10.5px">
+              📱 Se entrega guía digital de cuidado por cada servicio al momento
+              de la entrega.
             </p>
           </div>
 
           <div class="terms-section">
             <h4>Condiciones y pagos</h4>
             <ul>
-              <li>Servicios prestados en el Club Náutico de Cartagena, puesto de atraque actual.</li>
-              <li>Precio de acrílicos confirmado tras visita técnica de medición (sin costo).</li>
-              <li>Color de pintura de cubierta a definir con el cliente antes de iniciar.</li>
-              <li>Anticipo del <strong>50%</strong> del valor confirmado para programar trabajos; saldo 50% contra entrega a satisfacción.</li>
+              <li>
+                Servicios prestados en el Club Náutico de Cartagena, puesto de
+                atraque actual.
+              </li>
+              <li>
+                Precio de acrílicos confirmado tras visita técnica de medición
+                (sin costo).
+              </li>
+              <li>
+                Color de pintura de cubierta a definir con el cliente antes de
+                iniciar.
+              </li>
+              <li>
+                Anticipo del <strong>50%</strong> del valor confirmado para
+                programar trabajos; saldo 50% contra entrega a satisfacción.
+              </li>
               <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
             </ul>
             <div class="payment-info">
-              El enlace de pago del anticipo será compartido vía WhatsApp una vez
-              confirmado el servicio y los precios de los acrílicos.
+              El enlace de pago del anticipo será compartido vía WhatsApp una
+              vez confirmado el servicio y los precios de los acrílicos.
             </div>
           </div>
         </div>
-
-      </div><!-- /body-pad -->
+      </div>
+      <!-- /body-pad -->
 
       <footer>
         <p>
           <strong>Cartagena Boat Detailing</strong> |
-          <a href="https://cartagena-boatdetailing.vercel.app" target="_blank">cartagena-boatdetailing.vercel.app</a>
+          <a href="https://cartagena-boatdetailing.vercel.app" target="_blank"
+            >cartagena-boatdetailing.vercel.app</a
+          >
         </p>
-        <p>Gracias por confiar en los especialistas para el cuidado de sus embarcaciones.</p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
       </footer>
-
-    </div><!-- /invoice-container -->
+    </div>
+    <!-- /invoice-container -->
   </body>
 </html>
