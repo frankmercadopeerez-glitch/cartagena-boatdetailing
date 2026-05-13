@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #098 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .info-box {
+        font-size: 11.6px;
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      .included-note {
+        font-size: 10.8px;
+        color: var(--secondary-color);
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+        padding: 6px 8px;
+        margin-bottom: 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1px;
+      }
+
+      .original-price {
+        color: var(--text-color);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .original-price .strike {
+        color: var(--discount-color);
+        text-decoration: line-through;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      /* Totals */
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 430px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        font-size: 18px;
+      }
+
+      /* Photo Gallery */
+      .photo-section {
+        margin-top: 10px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 10px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      .photo-caption strong {
+        color: var(--accent-color);
+        font-style: normal;
+      }
+
+      /* Bottom grid */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        margin-bottom: 4px;
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 14px;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .payment-info {
+        margin-top: 5px;
+        padding: 6px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      footer {
+        margin-top: 10px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 6px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+          margin: 0;
+          padding: 16px 16px 10px;
+        }
+
+        .section-title,
+        .client-section,
+        .info-box,
+        table,
+        .totals-section,
+        .photo-grid,
+        .bottom-grid,
+        footer {
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-098</p>
+          <p><strong>Fecha:</strong> 06/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Sr. Edward Ramanan</strong></p>
+          <p>Propietario — Yate "SEA DEVIL"</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Embarcación "SEA DEVIL" — Sea Ray 45 Pies</p>
+          <p>Club Náutico de Cartagena</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>⚓ Logística del servicio:</strong> Todo el trabajo se realizará
+        <strong>en el mismo lugar donde se encuentra el yate</strong>, en las
+        instalaciones del Club Náutico de Cartagena, sin necesidad de traslado
+        de la embarcación. Contamos con
+        <strong>disponibilidad para iniciar esta misma semana.</strong> Tiempo
+        estimado de ejecución: <strong>5 a 6 días hábiles.</strong>
+      </div>
+
+      <h3 class="section-title">Plan de Detailing Integral — Sea Devil</h3>
+      <p class="included-note">
+        Incluido sin costo adicional: Tratamiento y Blindaje de Cojinería
+        "VinylShield Pro-UV" (valor referencial $700.000).
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción del servicio</th>
+            <th>Valor inversión (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-title">
+                1. Pulido Integral a Máquina (Obra Muerta y Superestructura)
+              </div>
+              <div class="item-desc">
+                Servicio completo de corrección y recuperación de brillo en toda
+                la superficie exterior del casco (obra muerta) y la
+                superestructura de fibra de vidrio. Utilizamos de manera
+                exclusiva el sistema abrasivo y de refino de la
+                <strong>línea 3M™ Náutica</strong>, el estándar más alto de la
+                industria marina. El proceso elimina porosidad, micro-rayaduras,
+                marcas de agua salada y oxidación superficial, devolviendo al
+                gelcoat su profundidad y brillo originales.
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 3.800.000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                2. Tratamiento y Blindaje de Cojinería "VinylShield Pro-UV"
+              </div>
+              <div class="item-desc">
+                Hidratación profunda y aplicación de un polímero protector
+                hidrofóbico sobre toda la cojinería de vinilo del yate. Crea una
+                barrera invisible que bloquea los rayos UV (evitando
+                decoloración y cuarteos), repele la humedad y previene manchas
+                por salitre y bronceadores.
+                <strong
+                  >Se incluye sin costo adicional con la contratación del
+                  plan.</strong
+                >
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="original-price"
+                  >Valor referencial: <span class="strike">$700.000</span></span
+                >
+                <span class="special-price">Incluido</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Pulido Integral 3M™ (obra muerta + superestructura):</span>
+            <span>$ 3.800.000</span>
+          </div>
+          <div class="total-row">
+            <span>VinylShield Pro-UV (incluido):</span>
+            <span>$ 0</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total del proyecto:</span>
+            <span>$ 3.800.000 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro Fotográfico — Estado Actual</h3>
+        <div class="photo-grid">
+          <div>
+            <img
+              src="images/sea-devil/sea-devil-1.jpg"
+              alt="Sea Devil - Vista exterior de babor"
+            />
+            <p class="photo-caption">
+              Vista exterior de babor — casco y superestructura
+            </p>
+          </div>
+          <div>
+            <img
+              src="images/sea-devil/sea-devil-2.jpg"
+              alt="Sea Devil - Cubierta de proa"
+            />
+            <p class="photo-caption">Cubierta de proa — gelcoat a tratar</p>
+          </div>
+          <div>
+            <img
+              src="images/sea-devil/sea-devil-3.jpg"
+              alt="Sea Devil - Cockpit y cojinería de popa"
+            />
+            <p class="photo-caption">
+              Cockpit de popa — cojinería a tratar con VinylShield
+            </p>
+          </div>
+          <div>
+            <img
+              src="images/sea-devil/sea-devil-4.jpg"
+              alt="Sea Devil - Costado con parches de gelcoat"
+            />
+            <p class="photo-caption">
+              Costado — se aprecian parches en el gelcoat del casco.
+              <strong>Nota:</strong> el pulido mejorará el brillo general, pero
+              <strong style="color: #b83232; font-style: normal"
+                >no garantizamos la eliminación de los parches</strong
+              >, ya que corresponden a intervenciones previas en el gelcoat.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Garantía de brillo — 6 meses</h4>
+          <p>
+            Garantizamos el mantenimiento del brillo por
+            <strong>6 meses</strong> siempre que se sigan las indicaciones de
+            cuidado. Para conservar el acabado es indispensable:
+          </p>
+          <ul style="margin: 8px 0 8px 16px; font-size: 11px">
+            <li>
+              Lavar con <strong>shampú náutico neutro</strong> (ej. 3M Marine
+              Wash, Star Brite Boat Wash).
+            </li>
+            <li>
+              Usar <strong>esponjas suaves o paños de microfibra</strong> —
+              nunca cepillos duros ni esponjas abrasivas.
+            </li>
+            <li>
+              Evitar
+              <strong
+                >detergentes industriales, desengrasantes fuertes o
+                límpidos</strong
+              >.
+            </li>
+            <li>
+              No usar
+              <strong>hidrolavadora de alta presión</strong> directamente sobre
+              el gelcoat.
+            </li>
+          </ul>
+          <p style="margin-top: 6px">
+            📱 <strong>Guía digital de cuidado:</strong> Al finalizar el trabajo
+            se entrega a la tripulación una guía digital completa para el
+            mantenimiento y conservación del brillo de la embarcación.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>
+              Servicio prestado en el Club Náutico de Cartagena, en el puesto de
+              atraque actual.
+            </li>
+            <li>Disponibilidad inmediata para iniciar esta misma semana.</li>
+            <li>
+              Anticipo del 50% para programar trabajos; saldo 50% contra entrega
+              a satisfacción.
+            </li>
+            <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+          </ul>
+          <div class="payment-info">
+            El enlace de pago del anticipo será compartido vía WhatsApp una vez
+            confirmado el servicio.
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

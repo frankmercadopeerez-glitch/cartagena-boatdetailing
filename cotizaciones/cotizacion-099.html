@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #099 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --accent-light: #d4aa6a;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        background: #dce4ef;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(17, 34, 56, 0.18) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(5, 11, 20, 0.22) 0%,
+            transparent 50%
+          );
+        color: var(--text-color);
+        padding: 28px 16px 40px;
+        min-height: 100vh;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      /* ── CONTAINER ── */
+      .invoice-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow:
+          0 2px 4px rgba(0, 0, 0, 0.04),
+          0 12px 40px rgba(5, 11, 20, 0.18),
+          0 0 0 1px rgba(184, 144, 77, 0.2);
+      }
+
+      /* ── HEADER ── */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        min-height: 90px;
+      }
+
+      .brand-info {
+        background: var(--primary-color);
+        background-image: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        padding: 22px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-info::before {
+        content: "⚓";
+        position: absolute;
+        right: -10px;
+        bottom: -18px;
+        font-size: 80px;
+        opacity: 0.06;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .brand-info h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 9.5px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 600;
+      }
+
+      .quote-info {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+        padding: 20px 22px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 230px;
+      }
+
+      .quote-info h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary-color);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        font-size: 11.5px;
+        margin-bottom: 2px;
+        font-weight: 400;
+      }
+
+      .quote-info p strong {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* ── CLIENT SECTION ── */
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 0;
+        margin: 20px 24px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .client-section > div {
+        padding: 14px 18px;
+        flex: 1;
+      }
+
+      .client-section > div:first-child {
+        border-right: 1px solid var(--border-color);
+        background: #f8fafc;
+      }
+
+      .client-section h3 {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .client-section p strong {
+        font-size: 13.5px;
+        font-weight: 700;
+      }
+
+      /* ── BANNERS ── */
+      .success-banner {
+        font-size: 11.5px;
+        background: rgba(31, 122, 74, 0.07);
+        border-top: 2px solid var(--ok-color);
+        border-bottom: 1px solid rgba(31, 122, 74, 0.2);
+        padding: 10px 24px;
+        color: var(--text-color);
+        line-height: 1.55;
+      }
+
+      .success-banner span {
+        font-weight: 700;
+        color: var(--ok-color);
+      }
+
+      /* ── BODY PADDING ── */
+      .doc-body {
+        padding: 0 24px 20px;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 20px 0 6px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .section-title::before {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 16px;
+        background: var(--accent-color);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .included-note {
+        font-size: 11px;
+        color: var(--secondary-color);
+        background: linear-gradient(
+          to right,
+          rgba(184, 144, 77, 0.08),
+          transparent
+        );
+        border-left: 3px solid var(--accent-color);
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        border-radius: 0 2px 2px 0;
+      }
+
+      /* ── TABLE ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: var(--primary-color);
+        color: rgba(255, 255, 255, 0.9);
+        text-align: left;
+        padding: 9px 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px;
+        vertical-align: top;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #fafbfc;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .item-desc {
+        font-size: 11.5px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      .item-desc ul {
+        margin: 8px 0 8px 18px;
+      }
+
+      .item-desc li {
+        margin-bottom: 4px;
+      }
+
+      .item-meta {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 1px dashed var(--border-color);
+        font-style: italic;
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 3px;
+        padding-left: 16px;
+        min-width: 130px;
+      }
+
+      .original-price {
+        color: var(--text-light);
+        font-size: 10.5px;
+        font-weight: 500;
+      }
+
+      .original-price .strike {
+        color: var(--discount-color);
+        text-decoration: line-through;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 15px;
+        white-space: nowrap;
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      /* ── TOTALS ── */
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin: 16px 0 8px;
+      }
+
+      .totals-box {
+        width: 420px;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 14px;
+        font-size: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .total-row:last-child {
+        border-bottom: none;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        font-weight: 600;
+      }
+
+      .grand-total {
+        background: var(--primary-color);
+        color: #ffffff;
+        padding: 12px 14px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .grand-total span:last-child {
+        font-size: 17px;
+        color: var(--accent-light);
+      }
+
+      /* ── PHOTO GALLERY ── */
+      .photo-section {
+        margin-top: 20px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .photo-grid > div {
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 9.5px;
+        color: var(--text-light);
+        text-align: center;
+        padding: 6px 8px;
+        background: #f8fafc;
+        font-style: italic;
+        line-height: 1.45;
+      }
+
+      .photo-caption strong {
+        color: var(--accent-color);
+        font-style: normal;
+      }
+
+      /* ── BOTTOM GRID ── */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 14px 16px;
+        font-size: 11.5px;
+        border-radius: 2px;
+      }
+
+      .warranty-box {
+        background: #f4fdf7;
+        border: 1px solid rgba(31, 122, 74, 0.25);
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .warranty-box h4 {
+        color: var(--ok-color);
+      }
+
+      .warranty-box p {
+        line-height: 1.6;
+        color: #2d4a38;
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        background-image: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        color: #cbd5e0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 15px;
+        line-height: 1.7;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .terms-section strong {
+        color: #e2e8f0;
+      }
+
+      .payment-info {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 10.5px;
+        border-radius: 0 2px 2px 0;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #f8fafc;
+        border-top: 2px solid var(--accent-color);
+        padding: 14px 24px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      footer strong {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      /* ── PRINT ── */
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+          margin: 0;
+        }
+
+        .section-title,
+        .client-section,
+        .success-banner,
+        table,
+        .totals-section,
+        .photo-grid,
+        .bottom-grid,
+        footer {
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-099</p>
+          <p><strong>Fecha:</strong> 07/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Sr. Miguel Gutierrez</strong></p>
+          <p>Propietario — Bote "ROMA"</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Embarcación "ROMA" — 34 Pies</p>
+          <p>Taller de pintura (Manzanillo)</p>
+        </div>
+      </div>
+
+      <div class="success-banner">
+        <span>✅ PLANIMETRÍA CONFIRMADA:</span> Tras la visita técnica y toma de
+        medidas exactas realizada el <strong>Sábado 24 de Abril</strong>, se
+        confirma un área total de cobertura de
+        <strong>32 metros cuadrados</strong>. Este documento refleja el precio
+        cerrado final para el proyecto.
+      </div>
+
+      <div class="doc-body">
+        <h3 class="section-title">Paquete Full Armor 360° — Bote Roma</h3>
+        <p class="included-note">
+          Incluido sin costo adicional: Tratamiento y Blindaje de Cojinería
+          "VinylShield Pro-UV" (valor referencial $800.000).
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Descripción del servicio</th>
+              <th>Valor inversión (COP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="item-title">
+                  1. Paquete Full Armor 360°: PPF Cerámico (Tope de Gama)
+                </div>
+                <div class="item-desc">
+                  Suministro e instalación profesional de <strong>32 m²</strong>
+                  de película de protección PPF con recubrimiento cerámico
+                  infundido desde fábrica. Garantiza máxima hidrofobia
+                  (repelencia al agua y salitre) y un nivel de brillo extremo.
+                  <br /><br />
+                  <strong>El paquete integral incluye cobertura en:</strong>
+                  <ul>
+                    <li>
+                      <strong>Módulo Casco (Obra Muerta):</strong> Costados de
+                      Babor y Estribor desde la línea de flotación hasta la
+                      borda. Blindaje total contra rayones de defensas (fender
+                      rash).
+                    </li>
+                    <li>
+                      <strong>Módulo Consola:</strong> Toda la consola central
+                      protegida (frontal, laterales, pantallas y panel de
+                      interruptores).
+                    </li>
+                    <li>
+                      <strong>Módulo Motores:</strong> Carcasa superior completa
+                      (Cowling) de los dos motores Yamaha 300hp.
+                    </li>
+                    <li>
+                      <strong>Módulo Popa:</strong> Inclusión de la mesa de popa
+                      para garantizar que toda el área social esté resguardada.
+                    </li>
+                  </ul>
+                  <em>
+                    *Sincronización Operativa: Nuestro equipo ingresará a
+                    realizar la instalación inmediatamente después de que
+                    finalicen los trabajos de pintura actuales, garantizando que
+                    el bote quede blindado y sellado como nuevo desde el día
+                    cero.
+                  </em>
+                </div>
+                <div class="item-meta">
+                  🛡️ Garantía de por vida por defectos de instalación | 10 Años
+                  de Garantía de Material
+                </div>
+                <div class="item-meta" style="margin-top: 4px">
+                  ⏱️ Tiempo de instalación: 2 días hábiles (tras curado de
+                  pintura).
+                </div>
+              </td>
+              <td>
+                <div class="price-container">
+                  <span class="special-price">$ 20.000.000</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="item-title">
+                  2. Tratamiento y Blindaje de Cojinería "VinylShield Pro-UV"
+                </div>
+                <div class="item-desc">
+                  Hidratación profunda y aplicación de un polímero protector
+                  hidrofóbico sobre toda la cojinería de vinilo del bote. Crea
+                  una barrera invisible que bloquea los rayos UV (evitando
+                  decoloración y cuarteos), repele la humedad y previene manchas
+                  por salitre y bronceadores.
+                  <strong>
+                    Se incluye sin costo adicional con la contratación del
+                    paquete.
+                  </strong>
+                </div>
+              </td>
+              <td>
+                <div class="price-container">
+                  <span class="original-price">
+                    Valor referencial:
+                    <span class="strike">$ 800.000</span>
+                  </span>
+                  <span class="special-price">Incluido</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="totals-section">
+          <div class="totals-box">
+            <div class="total-row">
+              <span>PPF Cerámico Full Armor 360° (32 m²):</span>
+              <span>$ 20.000.000</span>
+            </div>
+            <div class="total-row">
+              <span>VinylShield Pro-UV (incluido):</span>
+              <span>$ 0</span>
+            </div>
+            <div class="total-row grand-total">
+              <span>Total del proyecto:</span>
+              <span>$ 20.000.000 COP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <h3 class="section-title">Registro Fotográfico — Estado Actual</h3>
+          <div class="photo-grid">
+            <div>
+              <img
+                src="images/roma/roma-1.jpg"
+                alt="Roma - Consola central con timón"
+              />
+              <p class="photo-caption">
+                Consola central con timón y panel de instrumentos — será
+                protegida en su totalidad: frontal, laterales, pantallas y panel
+                de interruptores.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/roma/roma-2.jpg"
+                alt="Roma - Compartimento de proa"
+              />
+              <p class="photo-caption">
+                Compartimento de proa y área de cubierta superior — incluidos en
+                la cobertura del PPF Cerámico.
+              </p>
+            </div>
+            <div>
+              <img src="images/roma/roma-3.jpg" alt="Roma - Mesa de popa" />
+              <p class="photo-caption">
+                Mesa de popa — área social que quedará completamente blindada,
+                garantizando que toda la zona de entretenimiento esté
+                resguardada desde el día cero.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/roma/roma-4.jpg"
+                alt="Roma - Medición planimétrica del casco"
+              />
+              <p class="photo-caption">
+                Planimetría confirmada del casco (obra muerta) — medidas tomadas
+                in situ: <strong>10,34 m de largo</strong>. Base del cálculo de
+                los 32 m² totales.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/roma/roma-5.jpg"
+                alt="Roma - Vista lateral completa del casco"
+              />
+              <p class="photo-caption">
+                Vista lateral completa del casco sobre el remolque en el taller
+                de Manzanillo — costado de estribor listo para recibir el PPF
+                (<strong>10,36 m</strong> medidos en campo).
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/roma/roma-6.jpg"
+                alt="Roma - Tapas de motores Yamaha 300hp"
+              />
+              <p class="photo-caption">
+                Tapas (cowling) de los dos motores Yamaha 300hp retiradas del
+                bote — quedarán completamente protegidas con PPF Cerámico,
+                evitando rayones y la degradación UV sobre el gelcoat.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="warranty-box">
+            <h4>Garantía del material PPF Cerámico</h4>
+            <p>
+              Garantía de <strong>por vida</strong> exclusiva por defectos de
+              instalación (desprendimientos prematuros, burbujas no curadas).
+              Adicionalmente, se otorgan <strong>10 años de garantía</strong> de
+              fábrica sobre la película PPF, cubriendo amarillamiento, pérdida
+              de adhesión y degradación UV.
+            </p>
+            <p style="margin-top: 8px">
+              📱 <strong>Guía digital de cuidado:</strong> Al finalizar la
+              instalación se entrega a la tripulación una guía digital completa
+              para el mantenimiento y conservación del PPF Cerámico.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h4>Condiciones y pagos</h4>
+            <ul>
+              <li>Precio final cerrado a todo costo (32 m²).</li>
+              <li>
+                Anticipo del <strong>50% ($10.000.000 COP)</strong> para apartar
+                la fecha de instalación.
+              </li>
+              <li>
+                Saldo del <strong>50% restante ($10.000.000 COP)</strong> al
+                finalizar la instalación y entrega a satisfacción.
+              </li>
+              <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+            </ul>
+            <div class="payment-info">
+              El enlace de pago del anticipo será compartido vía WhatsApp una
+              vez confirmado el servicio.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end doc-body -->
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

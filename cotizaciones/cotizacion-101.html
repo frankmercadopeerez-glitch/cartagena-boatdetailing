@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #101 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --accent-light: #d4aa6a;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+        --optional-color: #1a5fa8;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        background: #dce4ef;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(17, 34, 56, 0.18) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(5, 11, 20, 0.22) 0%,
+            transparent 50%
+          );
+        color: var(--text-color);
+        padding: 28px 16px 40px;
+        min-height: 100vh;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      /* ── CONTAINER ── */
+      .invoice-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow:
+          0 2px 4px rgba(0, 0, 0, 0.04),
+          0 12px 40px rgba(5, 11, 20, 0.18),
+          0 0 0 1px rgba(184, 144, 77, 0.2);
+      }
+
+      /* ── HEADER ── */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        min-height: 90px;
+      }
+
+      .brand-info {
+        background: var(--primary-color);
+        background-image: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        padding: 22px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-info::before {
+        content: "⛵";
+        position: absolute;
+        right: -10px;
+        bottom: -18px;
+        font-size: 80px;
+        opacity: 0.06;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .brand-info h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 9.5px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 600;
+      }
+
+      .quote-info {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+        padding: 20px 22px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 230px;
+      }
+
+      .quote-info h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary-color);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        font-size: 11.5px;
+        margin-bottom: 2px;
+        font-weight: 400;
+      }
+
+      .quote-info p strong {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* ── CLIENT SECTION ── */
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 0;
+        margin: 20px 24px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .client-section > div {
+        padding: 14px 18px;
+        flex: 1;
+      }
+
+      .client-section > div:first-child {
+        border-right: 1px solid var(--border-color);
+        background: #f8fafc;
+      }
+
+      .client-section h3 {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .client-section p strong {
+        font-size: 13.5px;
+        font-weight: 700;
+      }
+
+      /* ── BANNERS ── */
+      .info-banner {
+        font-size: 11.5px;
+        background: rgba(17, 34, 56, 0.05);
+        border-top: 2px solid var(--accent-color);
+        border-bottom: 1px solid rgba(184, 144, 77, 0.2);
+        padding: 10px 24px;
+        color: var(--text-color);
+        line-height: 1.55;
+      }
+
+      .info-banner span {
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      /* ── BODY PADDING ── */
+      .doc-body {
+        padding: 0 24px 20px;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 20px 0 6px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .section-title::before {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 16px;
+        background: var(--accent-color);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .included-note {
+        font-size: 11px;
+        color: var(--secondary-color);
+        background: linear-gradient(
+          to right,
+          rgba(184, 144, 77, 0.08),
+          transparent
+        );
+        border-left: 3px solid var(--accent-color);
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        border-radius: 0 2px 2px 0;
+      }
+
+      /* ── TABLE ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: var(--primary-color);
+        color: rgba(255, 255, 255, 0.9);
+        text-align: left;
+        padding: 9px 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px;
+        vertical-align: top;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #fafbfc;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .item-desc {
+        font-size: 11.5px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      .item-desc ul {
+        margin: 8px 0 8px 18px;
+      }
+
+      .item-desc li {
+        margin-bottom: 4px;
+      }
+
+      .item-meta {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 1px dashed var(--border-color);
+        font-style: italic;
+      }
+
+      /* ── OPTIONAL BADGE ── */
+      .optional-badge {
+        display: inline-block;
+        background: rgba(26, 95, 168, 0.1);
+        border: 1px solid rgba(26, 95, 168, 0.35);
+        color: var(--optional-color);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-bottom: 6px;
+      }
+
+      .optional-row td {
+        background: rgba(26, 95, 168, 0.03) !important;
+        border-left: 3px solid rgba(26, 95, 168, 0.3);
+      }
+
+      /* ── MAINTENANCE BOX ── */
+      .maintenance-box {
+        margin-top: 10px;
+        padding: 10px 12px;
+        background: rgba(26, 95, 168, 0.06);
+        border: 1px solid rgba(26, 95, 168, 0.2);
+        border-radius: 2px;
+        font-size: 11px;
+        color: var(--secondary-color);
+        line-height: 1.6;
+      }
+
+      .maintenance-box strong {
+        color: var(--optional-color);
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 3px;
+        padding-left: 16px;
+        min-width: 130px;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 15px;
+        white-space: nowrap;
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .price-label {
+        font-size: 9.5px;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 600;
+      }
+
+      /* ── TOTALS ── */
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin: 16px 0 8px;
+      }
+
+      .totals-box {
+        width: 420px;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 14px;
+        font-size: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .total-row:last-child {
+        border-bottom: none;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        font-weight: 600;
+      }
+
+      .total-row.optional-line {
+        background: rgba(26, 95, 168, 0.04);
+        color: var(--optional-color);
+        font-style: italic;
+      }
+
+      .total-row.optional-line span:last-child {
+        color: var(--optional-color);
+      }
+
+      .grand-total {
+        background: var(--primary-color);
+        color: #ffffff;
+        padding: 12px 14px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .grand-total span:last-child {
+        font-size: 17px;
+        color: var(--accent-light);
+      }
+
+      /* ── PHOTO GALLERY ── */
+      .photo-section {
+        margin-top: 20px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .photo-grid > div {
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 9.5px;
+        color: var(--text-light);
+        text-align: center;
+        padding: 6px 8px;
+        background: #f8fafc;
+        font-style: italic;
+        line-height: 1.45;
+      }
+
+      .photo-caption strong {
+        color: var(--accent-color);
+        font-style: normal;
+      }
+
+      /* ── BOTTOM GRID ── */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 14px 16px;
+        font-size: 11.5px;
+        border-radius: 2px;
+      }
+
+      .warranty-box {
+        background: #f4fdf7;
+        border: 1px solid rgba(31, 122, 74, 0.25);
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .warranty-box h4 {
+        color: var(--ok-color);
+      }
+
+      .warranty-box p {
+        line-height: 1.6;
+        color: #2d4a38;
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        background-image: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        color: #cbd5e0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 15px;
+        line-height: 1.7;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .terms-section strong {
+        color: #e2e8f0;
+      }
+
+      .payment-info {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 10.5px;
+        border-radius: 0 2px 2px 0;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #f8fafc;
+        border-top: 2px solid var(--accent-color);
+        padding: 14px 24px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      footer strong {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      /* ── PRINT ── */
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+          margin: 0;
+        }
+
+        .section-title,
+        .client-section,
+        .info-banner,
+        table,
+        .totals-section,
+        .photo-grid,
+        .bottom-grid,
+        footer {
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-101</p>
+          <p><strong>Fecha:</strong> 07/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Sr. Alex</strong></p>
+          <p>Propietario — Velero "BLUE FREEDOM"</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Bavaria 46 Pies — Velero "Blue Freedom"</p>
+          <p>Duración estimada: 3 – 4 días hábiles</p>
+        </div>
+      </div>
+
+      <div class="info-banner">
+        <span>⛵ ESPECIFICACIONES TÉCNICAS:</span> Velero Bavaria de
+        <strong>46 pies</strong>. Servicio de pulido integral con productos
+        <strong>3M Náutico de alta gama</strong> — todo el gelcoat, cromo,
+        exteriores e interiores del velero quedarán con acabado de exhibición.
+      </div>
+
+      <div class="doc-body">
+        <h3 class="section-title">Pulido Integral — Velero Blue Freedom</h3>
+        <p class="included-note">
+          Todos los productos utilizados son de línea náutica profesional
+          <strong>3M</strong>: compuestos de corte, pulidores y selladores
+          marinos de la más alta gama disponible en el mercado.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Descripción del servicio</th>
+              <th>Valor inversión (COP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="item-title">
+                  1. Pulido y protección integral — Velero completo
+                </div>
+                <div class="item-desc">
+                  Intervención completa de
+                  <strong>todas las superficies pulibles del velero</strong>
+                  con productos náuticos profesionales
+                  <strong>3M de alta gama</strong>: casco exterior (babor,
+                  estribor, proa y popa), cubierta, cabina, interiores
+                  accesibles y toda superficie de gelcoat. Si brilla, lo
+                  trabajamos. <br /><br />
+                  <strong
+                    >Incluye pulido especializado de todos los cromos:</strong
+                  >
+                  accesorios, herrajes, pasamanos, winches y elementos metálicos
+                  del velero, devolviendo su brillo original y protegiéndolos
+                  contra la corrosión salina.
+                  <br /><br />
+                  Proceso de tres etapas con productos
+                  <strong>3M Náutico</strong>: desengrase profundo, compuesto de
+                  corte marino para eliminar oxidación y microrayones, y
+                  sellador marino de alto brillo para máxima protección y
+                  acabado espejo.
+                </div>
+                <div class="item-meta">
+                  🛡️ Productos 3M Náutico profesional — línea de alta gama
+                  exclusiva para embarcaciones.
+                </div>
+                <div class="item-meta" style="margin-top: 4px">
+                  ⏱️ Tiempo de ejecución: 3 – 4 días hábiles.
+                </div>
+              </td>
+              <td>
+                <div class="price-container">
+                  <span class="special-price">$ 4.200.000</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- OPCIONAL: Cristal Líquido -->
+            <tr class="optional-row">
+              <td>
+                <div class="optional-badge">★ Servicio opcional</div>
+                <div class="item-title">
+                  2. Cristal Líquido — Recubrimiento Hidrofóbico Permanente
+                </div>
+                <div class="item-desc">
+                  Tecnología de recubrimiento de
+                  <strong>cristal líquido</strong> aplicada sobre todas las
+                  superficies del velero tras el pulido. Crea una barrera
+                  invisible de máxima dureza que vuelve el gelcoat
+                  <strong>completamente hidrofóbico</strong>: el agua, el
+                  salitre y la suciedad resbalan sin adherirse, manteniendo el
+                  velero siempre brillante sin esfuerzo. <br /><br />
+                  <strong>Beneficios del cristal líquido:</strong>
+                  <ul>
+                    <li>
+                      Hidrofobicidad extrema — el agua rueda en gotas perfectas.
+                    </li>
+                    <li>Brillo espejo permanente en todas las superficies.</li>
+                    <li>
+                      Protección contra rayos UV, salitre y agentes marinos.
+                    </li>
+                    <li>Resistencia a microrayones y abrasión.</li>
+                    <li>
+                      Facilita la limpieza: basta un enjuague para quedar
+                      impecable.
+                    </li>
+                  </ul>
+                </div>
+                <div class="maintenance-box">
+                  <strong
+                    >Mantenimiento trimestral recomendado — $ 900.000
+                    COP</strong
+                  ><br />
+                  Aplicación de refuerzo cada 3 meses para que el cristal
+                  líquido nunca pierda su efecto hidrofóbico ni su brillo en
+                  ninguna de las superficies del velero. El mantenimiento
+                  incluye inspección completa y retoque de zonas de mayor
+                  exposición.
+                </div>
+                <div class="item-meta" style="margin-top: 8px">
+                  ✨ Opcional contratado junto al pulido para aprovechar que el
+                  casco ya está preparado y limpio.
+                </div>
+              </td>
+              <td>
+                <div class="price-container">
+                  <span class="price-label">Opcional</span>
+                  <span class="special-price">$ 5.000.000</span>
+                  <span class="price-label" style="margin-top: 4px"
+                    >Mtto. trimestral</span
+                  >
+                  <span
+                    class="special-price"
+                    style="font-size: 13px; color: var(--optional-color)"
+                    >$ 900.000</span
+                  >
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="totals-section">
+          <div class="totals-box">
+            <div class="total-row">
+              <span>Pulido y protección integral (velero completo):</span>
+              <span>$ 4.200.000</span>
+            </div>
+            <div class="total-row grand-total">
+              <span>Total del proyecto:</span>
+              <span>$ 4.200.000 COP</span>
+            </div>
+            <div class="total-row optional-line">
+              <span>+ Opcional: Cristal Líquido:</span>
+              <span>$ 5.000.000 COP</span>
+            </div>
+            <div class="total-row optional-line">
+              <span>+ Mantenimiento trimestral:</span>
+              <span>$ 900.000 COP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <h3 class="section-title">Registro Fotográfico — Blue Freedom</h3>
+          <div class="photo-grid">
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(1).jpeg"
+                alt="Blue Freedom - Foto 1"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                Vista general del velero <strong>Blue Freedom</strong> — Bavaria
+                46 pies, atracado en puerto.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(2).jpeg"
+                alt="Blue Freedom - Foto 2"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                Costado del velero — se aprecia la
+                <strong>ausencia total de brillo</strong> en el gelcoat, oxidado
+                por la exposición marina. Área principal de intervención.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(3).jpeg"
+                alt="Blue Freedom - Foto 3"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                <strong>Popa del Blue Freedom</strong> — vista trasera del
+                velero donde se aprecia el gelcoat sin brillo.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(4).jpeg"
+                alt="Blue Freedom - Foto 4"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                Cubierta y cabina — gelcoat sin brillo, opaco por la exposición
+                al sol y al salitre. Toda esta área será intervenida.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(5).jpeg"
+                alt="Blue Freedom - Foto 5"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                Cubierta lateral — superficie completamente
+                <strong>sin brillo</strong>, mate por oxidación superficial. El
+                pulido integral devuelve el acabado espejo original.
+              </p>
+            </div>
+            <div>
+              <img
+                src="images/blue-freedom/bluefreedom%20(6).jpeg"
+                alt="Blue Freedom - Foto 6"
+                onerror="
+                  this.style.background = '#f0f4f8';
+                  this.style.height = '180px';
+                "
+              />
+              <p class="photo-caption">
+                Cubierta superior con escotilla — gelcoat opaco, sin brillo. Con
+                el tratamiento <strong>3M Náutico</strong>
+                quedará como nuevo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="warranty-box">
+            <h4>Garantía de brillo — 6 meses</h4>
+            <p>
+              Garantizamos el mantenimiento del brillo por
+              <strong>6 meses</strong> siempre que se sigan las indicaciones de
+              cuidado. Para conservar el acabado es indispensable:
+            </p>
+            <ul style="margin: 8px 0 8px 16px; font-size: 11px">
+              <li>
+                Lavar con <strong>shampú náutico neutro</strong> (ej. 3M Marine
+                Wash, Star Brite Boat Wash).
+              </li>
+              <li>
+                Usar <strong>esponjas suaves o paños de microfibra</strong> —
+                nunca cepillos duros ni esponjas abrasivas.
+              </li>
+              <li>
+                Evitar
+                <strong
+                  >detergentes industriales, desengrasantes fuertes o
+                  límpidos</strong
+                >.
+              </li>
+              <li>
+                No usar
+                <strong>hidrolavadora de alta presión</strong> directamente
+                sobre el gelcoat.
+              </li>
+            </ul>
+            <p style="margin-top: 6px">
+              📱 <strong>Guía digital de cuidado:</strong> Al finalizar el
+              trabajo se entrega a la tripulación una guía digital completa para
+              el mantenimiento y conservación del brillo del velero.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h4>Condiciones y pagos</h4>
+            <ul>
+              <li>Precio cerrado que incluye mano de obra e insumos.</li>
+              <li>
+                Anticipo del <strong>50% ($2.100.000 COP)</strong> para
+                confirmar la fecha de inicio.
+              </li>
+              <li>
+                Saldo del <strong>50% restante ($2.100.000 COP)</strong> al
+                finalizar y entrega a satisfacción.
+              </li>
+              <li>
+                Si se contrata el cristal líquido, se liquida junto al saldo
+                final.
+              </li>
+              <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+            </ul>
+            <div class="payment-info">
+              El enlace de pago del anticipo será compartido vía WhatsApp una
+              vez confirmado el servicio.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end doc-body -->
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
