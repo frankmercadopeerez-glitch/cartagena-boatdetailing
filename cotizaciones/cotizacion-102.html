@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #102 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --accent-light: #d4aa6a;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+        --pending-color: #7a5c1e;
+        --pending-bg: rgba(184, 144, 77, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        background: #dce4ef;
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(17, 34, 56, 0.18) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(5, 11, 20, 0.22) 0%, transparent 50%);
+        color: var(--text-color);
+        padding: 28px 16px 40px;
+        min-height: 100vh;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      /* ── CONTAINER ── */
+      .invoice-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow:
+          0 2px 4px rgba(0,0,0,0.04),
+          0 12px 40px rgba(5,11,20,0.18),
+          0 0 0 1px rgba(184,144,77,0.2);
+      }
+
+      /* ── HEADER ── */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        min-height: 90px;
+      }
+
+      .brand-info {
+        background: var(--primary-color);
+        background-image: linear-gradient(135deg, #050b14 0%, #112238 100%);
+        padding: 22px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-info::before {
+        content: "⚓";
+        position: absolute;
+        right: -10px;
+        bottom: -18px;
+        font-size: 80px;
+        opacity: 0.06;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .brand-info h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 9.5px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 600;
+      }
+
+      .quote-info {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+        padding: 20px 22px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 230px;
+      }
+
+      .quote-info h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--primary-color);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        font-size: 11.5px;
+        margin-bottom: 2px;
+      }
+
+      .quote-info p strong {
+        color: var(--text-color);
+      }
+
+      /* ── BODY PADDING ── */
+      .body-pad {
+        padding: 22px 28px 26px;
+      }
+
+      /* ── CLIENT SECTION ── */
+      .client-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      .client-col {
+        padding: 12px 16px;
+      }
+
+      .client-col:first-child {
+        border-right: 1px solid var(--border-color);
+      }
+
+      .client-col h3 {
+        font-size: 9px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .client-col p {
+        color: var(--primary-color);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .client-col .client-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary-color);
+        font-family: "Playfair Display", Georgia, serif;
+        margin-bottom: 2px;
+      }
+
+      /* ── PENDING NOTICE ── */
+      .pending-notice {
+        background: var(--pending-bg);
+        border: 1px solid rgba(184, 144, 77, 0.4);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 3px;
+        padding: 10px 14px;
+        font-size: 11.5px;
+        color: var(--secondary-color);
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .pending-notice strong {
+        color: var(--pending-color);
+      }
+
+      /* ── INFO BOX ── */
+      .info-box {
+        font-size: 11.5px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--secondary-color);
+        border-radius: 3px;
+        padding: 10px 14px;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 14px;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 0 0 10px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ── TABLE ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 14px;
+      }
+
+      thead tr {
+        background: var(--primary-color);
+      }
+
+      th {
+        color: #ffffff;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      th:last-child {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px;
+        vertical-align: top;
+      }
+
+      td:last-child {
+        text-align: right;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #fafbfc;
+      }
+
+      .item-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: var(--primary-color);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        border-radius: 50%;
+        margin-right: 6px;
+        flex-shrink: 0;
+        vertical-align: middle;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      .item-desc {
+        font-size: 11.5px;
+        color: var(--text-color);
+        line-height: 1.65;
+        padding-left: 26px;
+      }
+
+      .item-desc ul {
+        margin: 5px 0 3px 16px;
+      }
+
+      .item-desc li {
+        margin-bottom: 3px;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      /* ── PRICE BADGES ── */
+      .price-confirmed {
+        font-weight: 800;
+        font-size: 15px;
+        color: var(--primary-color);
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .price-pending {
+        display: inline-block;
+        background: var(--pending-bg);
+        border: 1px solid rgba(184, 144, 77, 0.5);
+        color: var(--pending-color);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 3px;
+      }
+
+      .price-unit {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 2px;
+      }
+
+      /* ── TOTALS ── */
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+
+      .totals-box {
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 7px 14px;
+        font-size: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .total-row:last-child {
+        border-bottom: none;
+      }
+
+      .total-row span:first-child {
+        color: var(--text-light);
+      }
+
+      .total-row span:last-child {
+        font-weight: 600;
+        color: var(--text-color);
+        white-space: nowrap;
+      }
+
+      .total-row.pending-row span:last-child {
+        color: var(--pending-color);
+        font-style: italic;
+      }
+
+      .total-row.grand-total {
+        background: var(--primary-color);
+        padding: 10px 14px;
+      }
+
+      .total-row.grand-total span:first-child {
+        color: rgba(255,255,255,0.75);
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .total-row.grand-total span:last-child {
+        color: var(--accent-light);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 17px;
+        font-weight: 700;
+      }
+
+      .total-row.grand-total .pending-inline {
+        color: rgba(212,170,106,0.7);
+        font-size: 11px;
+        font-style: italic;
+      }
+
+      /* ── PHOTO SECTION ── */
+      .photo-section {
+        margin-bottom: 20px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 185px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 10px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      /* ── BOTTOM GRID ── */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 14px;
+        font-size: 11px;
+      }
+
+      .warranty-box h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .warranty-box ul {
+        margin-left: 14px;
+        line-height: 1.7;
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        border-radius: 3px;
+        padding: 14px;
+        font-size: 11px;
+        color: #e2e8f0;
+      }
+
+      .terms-section h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--accent-color);
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .terms-section ul {
+        margin-left: 14px;
+        line-height: 1.7;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 10px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255,255,255,0.06);
+        font-size: 10.5px;
+        line-height: 1.5;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border-color);
+        padding: 12px 28px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+
+      footer a {
+        color: var(--accent-color);
+        text-decoration: none;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+
+      <!-- ── HEADER ── -->
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>Cotización de Servicios</h2>
+          <p><strong>Número:</strong> CBD-2026-102</p>
+          <p><strong>Fecha:</strong> 13/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="body-pad">
+
+        <!-- ── CLIENTE ── -->
+        <div class="client-section">
+          <div class="client-col">
+            <h3>Preparado para</h3>
+            <p class="client-name">Sra. Angélica Oviedo</p>
+            <p>C.C. 1127586453</p>
+            <p>Propietaria — Yate <strong>"SEA DEVIL"</strong></p>
+          </div>
+          <div class="client-col">
+            <h3>Detalle del proyecto</h3>
+            <p><strong>Embarcación:</strong> SEA DEVIL — Sea Ray 45 Pies</p>
+            <p><strong>Ubicación:</strong> Club Náutico de Cartagena</p>
+            <p><strong>Tipo:</strong> Renovación interior y exterior</p>
+          </div>
+        </div>
+
+        <!-- ── AVISO PRECIOS PENDIENTES ── -->
+        <div class="pending-notice">
+          <strong>📋 Nota sobre esta cotización:</strong> Los ítems de cambio de acrílicos
+          requieren inspección presencial y toma de medidas exactas antes de fijar precio definitivo.
+          Los valores correspondientes están marcados como <strong>"Por cotizar"</strong> y serán
+          confirmados tras visita técnica. Los demás ítems tienen precio fijo confirmado.
+        </div>
+
+        <!-- ── LOGÍSTICA ── -->
+        <div class="info-box">
+          <strong>⚓ Logística del servicio:</strong> Los trabajos se realizarán
+          <strong>en las instalaciones del Club Náutico de Cartagena</strong>, en el puesto de
+          atraque actual, sin necesidad de traslado. La pintura de cubierta y el polarizado
+          pueden ejecutarse de forma simultánea con previo plan de trabajo coordinado.
+          Tiempo estimado de ejecución una vez confirmados todos los precios:
+          <strong>8 a 10 días hábiles.</strong>
+        </div>
+
+        <!-- ── TABLA DE SERVICIOS ── -->
+        <h3 class="section-title">Plan de Renovación — Sea Devil</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Descripción del servicio</th>
+              <th>Valor inversión (COP)</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- ÍTEM 1 — POLARIZADO -->
+            <tr>
+              <td>
+                <div class="item-title">
+                  <span class="item-num">1</span>
+                  Polarizado de Parabrisas — Lámina Naval Anti-UV
+                </div>
+                <div class="item-desc">
+                  Instalación de lámina de polarizado de alta calidad para uso náutico
+                  sobre el parabrisas del yate. La lámina seleccionada bloquea hasta el
+                  <strong>99% de la radiación UV</strong> y reduce el calor interior,
+                  protegiendo el tablero, la tapicería y los equipos electrónicos del
+                  efecto invernadero del sol del Caribe.<br /><br />
+                  La aplicación se realiza sobre <strong>5 m²</strong> de superficie
+                  de vidrio, con preparación previa de la superficie (limpieza, desengrase
+                  y acondicionamiento), garantizando una instalación sin burbujas,
+                  manchas ni bordes levantados.
+                  <ul>
+                    <li>Área a tratar: <strong>5 m²</strong></li>
+                    <li>Precio por m²: <strong>$ 300.000 COP</strong></li>
+                    <li>La lámina incluye garantía de fábrica contra burbujeo y despegue.</li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="price-confirmed">$ 1.500.000</div>
+                <div class="price-unit">5 m² × $300.000</div>
+              </td>
+            </tr>
+
+            <!-- ÍTEM 2 — PINTURA CUBIERTA DE POPA -->
+            <tr>
+              <td>
+                <div class="item-title">
+                  <span class="item-num">2</span>
+                  Pintura de Cubierta de Popa
+                </div>
+                <div class="item-desc">
+                  Preparación completa y pintura de la cubierta de popa del yate.
+                  El proceso incluye: lijado y limpieza profunda de la superficie existente,
+                  aplicación de sellador de base compatible con fibra de vidrio,
+                  y pintura de acabado con <strong>esmalte náutico antideslizante</strong>
+                  formulado para resistir la exposición continua al sol, la sal y la humedad
+                  del entorno marino de Cartagena.<br /><br />
+                  El resultado es una cubierta de popa renovada visualmente, con mejor
+                  adherencia al caminar y mayor resistencia al deterioro por exposición
+                  UV y marina.
+                  <ul>
+                    <li>Preparación de superficie, lijado y sellado incluidos.</li>
+                    <li>Pintura antideslizante náutica de alta durabilidad.</li>
+                    <li>Color a definir con el cliente antes de iniciar el trabajo.</li>
+                    <li>Tiempo de ejecución estimado: 2 a 3 días hábiles.</li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="price-confirmed">$ 5.000.000</div>
+              </td>
+            </tr>
+
+            <!-- ÍTEM 3 — ACRÍLICOS PARTE SUPERIOR -->
+            <tr>
+              <td>
+                <div class="item-title">
+                  <span class="item-num">3</span>
+                  Cambio de Acrílicos — Parte Superior del Yate
+                </div>
+                <div class="item-desc">
+                  Retiro y reemplazo de los acrílicos (ventanas fijas o escotillas)
+                  ubicados en la parte superior de la embarcación. Los acrílicos
+                  náuticos se deterioran con los años por la exposición UV,
+                  tornándose amarillos, opacos o agrietados, afectando tanto la
+                  estética como la hermeticidad de la embarcación.<br /><br />
+                  El reemplazo se realizará con <strong>acrílico náutico certificado</strong>
+                  (Plexiglas® o equivalente marino), cortado a medida exacta, con
+                  sellado perimetral con silicona 3M™ Marine Grade para garantizar
+                  impermeabilidad total.<br /><br />
+                  <strong style="color: var(--pending-color);">⚠ Precio sujeto a medición presencial.</strong>
+                  El valor definitivo depende de la cantidad de unidades, las dimensiones
+                  exactas y el tipo de acrílico seleccionado.
+                </div>
+              </td>
+              <td>
+                <span class="price-pending">Por cotizar</span>
+              </td>
+            </tr>
+
+            <!-- ÍTEM 4 — ACRÍLICO ROBLE INTERIOR -->
+            <tr>
+              <td>
+                <div class="item-title">
+                  <span class="item-num">4</span>
+                  Cambio de Acrílico Color Roble — Parte Interna
+                </div>
+                <div class="item-desc">
+                  Reemplazo de los paneles o láminas de acrílico interior con acabado
+                  <strong>color roble</strong>, utilizados en el mobiliario, divisiones
+                  o revestimientos interiores del yate. Este tipo de acrílico decorativo
+                  proporciona un acabado cálido y elegante que imita la veta de la madera
+                  sin los problemas de mantenimiento de la madera natural en ambiente marino
+                  (hinchamiento, podredumbre, decoloración por humedad).<br /><br />
+                  Los paneles nuevos se cortarán a medida exacta y se instalarán con
+                  fijaciones apropiadas para uso náutico.<br /><br />
+                  <strong style="color: var(--pending-color);">⚠ Precio sujeto a medición presencial.</strong>
+                  El valor final depende del área total a cubrir, el grosor del panel
+                  y la complejidad de los cortes y ensambles necesarios.
+                </div>
+              </td>
+              <td>
+                <span class="price-pending">Por cotizar</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- ── TOTALES ── -->
+        <div class="totals-section">
+          <div class="totals-box">
+            <div class="total-row">
+              <span>Polarizado parabrisas (5 m²):</span>
+              <span>$ 1.500.000</span>
+            </div>
+            <div class="total-row">
+              <span>Pintura cubierta de popa:</span>
+              <span>$ 5.000.000</span>
+            </div>
+            <div class="total-row pending-row">
+              <span>Acrílicos parte superior:</span>
+              <span>Por cotizar</span>
+            </div>
+            <div class="total-row pending-row">
+              <span>Acrílico roble interior:</span>
+              <span>Por cotizar</span>
+            </div>
+            <div class="total-row" style="background:#f8fafc; font-weight:600;">
+              <span>Subtotal confirmado:</span>
+              <span>$ 6.500.000</span>
+            </div>
+            <div class="total-row grand-total">
+              <span>Total del proyecto:</span>
+              <span>$ 6.500.000 <span class="pending-inline">+ acrílicos p.d.</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── GALERÍA FOTOGRÁFICA ── -->
+        <div class="photo-section">
+          <h3 class="section-title">Registro Fotográfico — Sea Devil</h3>
+          <div class="photo-grid">
+            <div>
+              <img
+                src="images/sea-devil/sea-devil-1.jpg"
+                alt="Sea Devil - Vista exterior"
+                onerror="this.style.display='none'"
+              />
+              <p class="photo-caption">Vista exterior del yate — estado actual</p>
+            </div>
+            <div>
+              <img
+                src="images/sea-devil/sea-devil-2.jpg"
+                alt="Sea Devil - Cubierta"
+                onerror="this.style.display='none'"
+              />
+              <p class="photo-caption">Cubierta — zona a pintar en popa</p>
+            </div>
+            <div>
+              <img
+                src="images/sea-devil/sea-devil-3.jpg"
+                alt="Sea Devil - Parabrisas"
+                onerror="this.style.display='none'"
+              />
+              <p class="photo-caption">Parabrisas — área de polarizado (5 m²)</p>
+            </div>
+            <div>
+              <img
+                src="images/sea-devil/sea-devil-4.jpg"
+                alt="Sea Devil - Detalle"
+                onerror="this.style.display='none'"
+              />
+              <p class="photo-caption">Detalle de la embarcación — áreas de intervención</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── GARANTÍAS Y CONDICIONES ── -->
+        <div class="bottom-grid">
+          <div class="warranty-box">
+            <h4>Garantías por servicio</h4>
+            <ul>
+              <li><strong>Polarizado:</strong> Garantía de fábrica contra despegue y burbujeo. No limpiar con elementos abrasivos ni solventes.</li>
+              <li><strong>Pintura cubierta:</strong> 6 meses contra descascaramiento bajo uso normal. Evitar detergentes industriales y presión directa de hidrolavadora.</li>
+              <li><strong>Acrílicos:</strong> Garantía de 1 año en instalación y sellado. La silicona de sellado aplica los mismos cuidados que la cotización #098 (sin desoxidantes, sin solventes).</li>
+            </ul>
+            <p style="margin-top: 8px; font-size: 10.5px;">
+              📱 Se entrega guía digital de cuidado por cada servicio al momento de la entrega.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h4>Condiciones y pagos</h4>
+            <ul>
+              <li>Servicios prestados en el Club Náutico de Cartagena, puesto de atraque actual.</li>
+              <li>Precio de acrílicos confirmado tras visita técnica de medición (sin costo).</li>
+              <li>Color de pintura de cubierta a definir con el cliente antes de iniciar.</li>
+              <li>Anticipo del <strong>50%</strong> del valor confirmado para programar trabajos; saldo 50% contra entrega a satisfacción.</li>
+              <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+            </ul>
+            <div class="payment-info">
+              El enlace de pago del anticipo será compartido vía WhatsApp una vez
+              confirmado el servicio y los precios de los acrílicos.
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /body-pad -->
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          <a href="https://cartagena-boatdetailing.vercel.app" target="_blank">cartagena-boatdetailing.vercel.app</a>
+        </p>
+        <p>Gracias por confiar en los especialistas para el cuidado de sus embarcaciones.</p>
+      </footer>
+
+    </div><!-- /invoice-container -->
+  </body>
+</html>
