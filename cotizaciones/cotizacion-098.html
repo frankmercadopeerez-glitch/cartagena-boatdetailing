@@ -34,8 +34,8 @@
       }
 
       @page {
-        size: A4;
-        margin: 10mm;
+        size: legal portrait;
+        margin: 12mm 14mm;
       }
 
       body {
@@ -367,19 +367,50 @@
         .invoice-container {
           max-width: 100%;
           box-shadow: none;
+          border-top-width: 5px;
           margin: 0;
-          padding: 16px 16px 10px;
+          padding: 14px 16px 10px;
         }
 
-        .section-title,
+        /* ── Página 1: encabezado, tabla, totales ─────────────── */
+        /* ── Página 2: fotos, garantías, condiciones, footer ──── */
+        .photo-section {
+          page-break-before: always;
+        }
+
+        /* Evitar cortes dentro de bloques clave */
         .client-section,
         .info-box,
-        table,
+        .included-note,
         .totals-section,
-        .photo-grid,
         .bottom-grid,
         footer {
           page-break-inside: avoid;
+        }
+
+        tr {
+          page-break-inside: avoid;
+        }
+
+        /* Reducir tamaño de ítem-desc para que la tabla quepa en pág 1 */
+        .item-desc {
+          font-size: 10.5px;
+          line-height: 1.45;
+        }
+
+        /* Fotos más compactas en pág 2 */
+        .photo-grid img {
+          height: 155px;
+        }
+
+        /* Fotos inline (celda ancha silicona) */
+        .photo-grid div[style] img {
+          height: 155px !important;
+        }
+
+        /* Garantías y condiciones alineadas a la página */
+        .bottom-grid {
+          margin-top: 8px;
         }
       }
     </style>
@@ -632,7 +663,7 @@
               alt="Sea Devil - Proa del yate a pulir"
             />
             <p class="photo-caption">
-              Proa — área principal de pulido integral con sistema 3M™
+              Proa — área principal de pulido integral con sistema Menzerna
             </p>
           </div>
           <!-- Celda ancha: dos fotos de silicona lado a lado -->
