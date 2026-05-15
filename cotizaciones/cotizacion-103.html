@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #103 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .info-box {
+        font-size: 11.6px;
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1px;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .original-price {
+        color: var(--text-color);
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .original-price .strike {
+        color: var(--discount-color);
+        text-decoration: line-through;
+      }
+
+      /* Totals */
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 430px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        font-size: 18px;
+      }
+
+      /* Photo Gallery */
+      .photo-section {
+        margin-top: 10px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 10px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      .photo-caption strong {
+        color: var(--accent-color);
+        font-style: normal;
+      }
+
+      /* Bottom grid */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        margin-bottom: 4px;
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 14px;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .payment-info {
+        margin-top: 5px;
+        padding: 6px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      footer {
+        margin-top: 10px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 6px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+          border-top-width: 5px;
+          margin: 0;
+          padding: 14px 16px 10px;
+        }
+
+        .photo-section {
+          page-break-before: always;
+        }
+
+        .client-section,
+        .info-box,
+        .totals-section,
+        .bottom-grid,
+        footer {
+          page-break-inside: avoid;
+        }
+
+        tr {
+          page-break-inside: avoid;
+        }
+
+        .item-desc {
+          font-size: 10.5px;
+          line-height: 1.45;
+        }
+
+        .photo-grid img {
+          height: 155px;
+        }
+
+        .bottom-grid {
+          margin-top: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-103</p>
+          <p><strong>Fecha:</strong> 15/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Por definir</strong></p>
+          <p>Propietario embarcación CP-07-2208</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Embarcación CP-07-2208 — San Andrés Islas</p>
+          <p>Pintura exterior integral — traslado a Cartagena</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>⚓ Alcance y condiciones del proyecto:</strong>
+        La embarcación se encuentra actualmente en
+        <strong>San Andrés Islas</strong> y deberá ser trasladada a Cartagena de
+        Indias para la ejecución de los trabajos, gestión y costo de transporte
+        a cargo del propietario. La presente cotización fue elaborada con base
+        en <strong>registro fotográfico</strong>; aún no se ha realizado
+        inspección técnica en sitio. El precio cotizado cubre el
+        <strong
+          >trabajo completo de pintura en el exterior de la embarcación</strong
+        >
+        — incluyendo cualquier masillado, corrección de irregularidades y
+        trabajo adicional que se identifique una vez el bote esté en taller.
+        <strong>No se incluyen trabajos interiores</strong> de ningún tipo,
+        únicamente el exterior.
+      </div>
+
+      <h3 class="section-title">Plan de pintura exterior integral</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción del servicio</th>
+            <th>Valor inversión (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- PREPARACIÓN DE SUPERFICIE -->
+          <tr>
+            <td>
+              <div class="item-title">
+                1. Preparación y limpieza integral de superficie
+              </div>
+              <div class="item-desc">
+                Desmontaje de accesorios necesarios, lavado a presión y
+                desengrase profundo de toda la carrocería exterior. Lijado
+                general para eliminar pintura suelta, oxidación superficial y
+                contaminantes adheridos. Aplicación de primer/sellador de
+                adherencia en zonas que lo requieran para garantizar una base
+                óptima antes de cualquier aplicación de pintura o masilla.
+                <strong
+                  >Esta etapa es determinante para la durabilidad y calidad
+                  final de todo el trabajo.</strong
+                >
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 7.500.000</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- MASILLADO -->
+          <tr>
+            <td>
+              <div class="item-title">
+                2. Masillado, corrección de irregularidades y nivelación
+              </div>
+              <div class="item-desc">
+                Aplicación de masilla poliéster náutica en todas las zonas con
+                golpes, hundimientos, grietas o imperfecciones visibles,
+                especialmente en la parte superior de la embarcación según lo
+                solicitado por el propietario. Lijado progresivo con
+                granulometrías de 80 hasta 400 para lograr una superficie
+                completamente plana y uniforme.
+                <strong
+                  >El precio cubre el volumen total de masilla que sea necesario
+                  aplicar</strong
+                >, sin cargo adicional por material o mano de obra de esta
+                etapa.
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 5.600.000</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- PINTURA GENERAL -->
+          <tr>
+            <td>
+              <div class="item-title">
+                3. Pintura general exterior — casco y superestructura
+              </div>
+              <div class="item-desc">
+                Aplicación de pintura de acabado de grado náutico en todo el
+                exterior de la embarcación: casco (obra muerta), cubierta
+                superior, cabina y superestructura. Se aplican las manos
+                necesarias para obtener cobertura uniforme, color sólido y
+                acabado libre de marcas de rodillo, corridas o variaciones de
+                tono. El color final se define con el propietario antes de
+                iniciar esta etapa.
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
+                  <li>
+                    Pintura poliuretánica de alto brillo resistente a UV y agua
+                    salada.
+                  </li>
+                  <li>
+                    Mínimo 2 manos de base + 2 manos de acabado en todas las
+                    superficies.
+                  </li>
+                  <li>
+                    Enmascarado y protección de ventanas, cromados y accesorios.
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 19.000.000</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ANTIFOULING -->
+          <tr>
+            <td>
+              <div class="item-title">
+                4. Pintura antifouling — obra viva / fondo
+              </div>
+              <div class="item-desc">
+                Aplicación de pintura antifouling de alta eficacia en la obra
+                viva (zona sumergida del casco). Previene la adherencia de
+                organismos marinos (algas, percebes, mejillones) que deterioran
+                el casco, aumentan el consumo de combustible y reducen la
+                velocidad de la embarcación. Se aplica sobre superficie limpia y
+                previamente imprimada.
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
+                  <li>
+                    Producto de fórmula de auto-pulimento (SPC) de larga
+                    duración.
+                  </li>
+                  <li>Aplicación de 2 manos para cobertura óptima.</li>
+                  <li>Incluye línea de flotación demarcada y uniforme.</li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 8.000.000</span>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ACABADO Y BRILLO -->
+          <tr>
+            <td>
+              <div class="item-title">5. Acabado, pulido y brillo final</div>
+              <div class="item-desc">
+                Una vez curada la pintura, se realiza un proceso de pulido y
+                abrillantado técnico en todas las superficies pintadas para
+                eliminar cualquier imperfección de aplicación (marcas leves,
+                polvo incorporado, variaciones de textura) y obtener un acabado
+                de alto brillo, liso y uniforme. Aplicación final de sellante
+                protector que refuerza la resistencia ante los rayos UV del
+                trópico y el ambiente marino del Caribe.
+                <strong
+                  >Este proceso garantiza el resultado estético final y prolonga
+                  significativamente la vida útil de la pintura.</strong
+                >
+              </div>
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 8.000.000</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Preparación y limpieza de superficie:</span>
+            <span>$ 7.500.000</span>
+          </div>
+          <div class="total-row">
+            <span>Masillado y corrección de irregularidades:</span>
+            <span>$ 5.600.000</span>
+          </div>
+          <div class="total-row">
+            <span>Pintura general exterior:</span>
+            <span>$ 19.000.000</span>
+          </div>
+          <div class="total-row">
+            <span>Antifouling — obra viva:</span>
+            <span>$ 8.000.000</span>
+          </div>
+          <div class="total-row">
+            <span>Acabado, pulido y brillo final:</span>
+            <span>$ 8.000.000</span>
+          </div>
+          <div
+            class="total-row"
+            style="
+              margin-top: 6px;
+              padding-top: 6px;
+              border-top: 1px solid var(--border-color);
+            "
+          >
+            <span>Subtotal antes de IVA:</span>
+            <span>$ 48.100.000</span>
+          </div>
+          <div class="total-row" style="color: var(--text-light)">
+            <span>IVA 19%:</span>
+            <span>$ 9.139.000</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total del proyecto:</span>
+            <span>$ 57.239.000 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-section">
+        <h3 class="section-title">
+          Registro fotográfico — Estado actual de la embarcación
+        </h3>
+        <div class="photo-grid">
+          <div>
+            <img
+              src="images/cp-07-2208/cp-07-2208-1.jpg"
+              alt="CP-07-2208 - Vista lateral en San Andrés"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
+            />
+            <p class="photo-caption">
+              Vista lateral — embarcación CP-07-2208 en
+              <strong>San Andrés Islas</strong>
+            </p>
+          </div>
+          <div>
+            <img
+              src="images/cp-07-2208/cp-07-2208-2.jpg"
+              alt="CP-07-2208 - Proceso de varada en Cartagena"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
+            />
+            <p class="photo-caption">
+              Proceso de varada —
+              <strong>superficie exterior a intervenir</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Alcance y garantía del trabajo</h4>
+          <p>
+            La cotización cubre la totalidad del trabajo de pintura exterior,
+            incluyendo masillado y correcciones adicionales que se identifiquen
+            en taller. <strong>No se generarán cobros extra</strong> por
+            material de masilla ni mano de obra asociada a preparación de
+            superficie.
+          </p>
+          <ul style="margin: 8px 0 8px 16px; font-size: 11px">
+            <li>
+              Tiempo estimado de ejecución:
+              <strong>30 días hábiles</strong>, considerando tiempos de secado y
+              curado del gelcoat y pintura de acabado.
+            </li>
+            <li>
+              El color de acabado se define con el propietario antes de iniciar
+              la etapa de pintura general.
+            </li>
+            <li>
+              Cotización elaborada con base en registro fotográfico. El precio
+              final es firme e incluye cualquier ajuste por condiciones reales
+              del bote.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>
+              <strong>Traslado de la embarcación</strong> desde San Andrés a
+              Cartagena, costos y logística a cargo del propietario.
+            </li>
+            <li>
+              Anticipo del 50% para iniciar trabajos; saldo 50% contra entrega a
+              satisfacción.
+            </li>
+            <li>
+              Tiempo estimado: <strong>30 días hábiles</strong> desde el ingreso
+              al taller en Cartagena.
+            </li>
+            <li>
+              Los costos de acceso de personal a instalaciones portuarias o
+              marinas corren por cuenta del contratante.
+            </li>
+            <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+          </ul>
+          <div class="payment-info">
+            El enlace de pago del anticipo será compartido vía WhatsApp una vez
+            confirmado el servicio.
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
