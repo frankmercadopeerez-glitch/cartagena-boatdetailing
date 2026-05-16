@@ -302,6 +302,35 @@
         color: var(--text-light);
       }
 
+      .photo-section {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 3px;
+        border: 1px solid var(--border-color);
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 9.5px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        line-height: 1.3;
+      }
+
       @media print {
         body {
           background: #fff;
@@ -364,6 +393,23 @@
           <p>Yate <strong>MARIAJE</strong> — Prestige 560 — 56 pies</p>
           <p>Pulido integral total — Condominio Marina de Barú</p>
         </div>
+      </div>
+
+      <div class="info-box">
+        <strong>🔍 Inspección técnica realizada (16/05/2026):</strong>
+        Se realizó inspección visual completa del yate <strong>MARIAJE</strong>
+        en sus instalaciones en el <strong>Condominio Marina de Barú</strong>.
+        El gelcoat se encuentra en <strong>buen estado estructural</strong>:
+        sin fisuras, sin pérdida de material ni manchas profundas irreversibles.
+        Se identificaron las siguientes condiciones de superficie:
+        <strong>oxidación superficial generalizada</strong> en techos del
+        hardtop y flybridge (zonas de mayor exposición solar directa),
+        <strong>pérdida de brillo por deposión de salitre</strong> en casco,
+        costados y proa, y <strong>opacidad leve en superficies plásticas</strong>
+        y accesorios. El nivel de afectación es completamente recuperable con
+        el sistema de correción abrasiva y pulido de la línea
+        <strong>3M Marine</strong>. Con base en esta inspección, se presenta
+        la siguiente cotización.
       </div>
 
       <h3 class="section-title">Plan de pulido integral total — MARIAJE</h3>
@@ -463,6 +509,36 @@
           <div class="total-row grand-total">
             <span>Valor antes de IVA:</span>
             <span>$ 4.000.000 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotográfico — Inspección 16/05/2026</h3>
+        <div class="photo-grid">
+          <div>
+            <img src="images/mariaje/mariaje-1.jpeg" alt="MARIAJE — Vista lateral" onerror="this.style.display='none'" />
+            <p class="photo-caption">Vista lateral — casco y superestructura, condición general</p>
+          </div>
+          <div>
+            <img src="images/mariaje/mariaje-2.jpeg" alt="MARIAJE — Techo hardtop interior" onerror="this.style.display='none'" />
+            <p class="photo-caption">Techo hardtop (cara inferior) — <strong>oxidación y marcas de agua</strong> visibles</p>
+          </div>
+          <div>
+            <img src="images/mariaje/mariaje-3.jpeg" alt="MARIAJE — Flybridge superior" onerror="this.style.display='none'" />
+            <p class="photo-caption">Cubierta flybridge — <strong>pérdida de brillo por exposición UV directa</strong></p>
+          </div>
+          <div>
+            <img src="images/mariaje/mariaje-4.jpeg" alt="MARIAJE — Proa y cubierta" onerror="this.style.display='none'" />
+            <p class="photo-caption">Proa y cubierta delantera — estado de fibra y líneas de diseño</p>
+          </div>
+          <div>
+            <img src="images/mariaje/mariaje-5.jpeg" alt="MARIAJE — Hardtop con parlantes" onerror="this.style.display='none'" />
+            <p class="photo-caption">Hardtop superior — <strong>opacidad superficial</strong> en zona de mayor exposición</p>
+          </div>
+          <div>
+            <img src="images/mariaje/mariaje-6.jpeg" alt="MARIAJE — Popa" onerror="this.style.display='none'" />
+            <p class="photo-caption">Popa — plataforma, deck de teca y acceso — estado general bueno</p>
           </div>
         </div>
       </div>
