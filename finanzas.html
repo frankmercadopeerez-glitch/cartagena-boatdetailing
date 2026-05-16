@@ -2110,7 +2110,7 @@
         const saldo = saldoIng - saldoGas;
         const saldoEl = document.getElementById("kpi-saldo");
         saldoEl.textContent =
-          (saldo >= 0 ? "" : "-") + "$ " + fmt(Math.abs(saldo));
+          (saldo >= 0 ? "" : "-") + fmt(Math.abs(saldo));
         saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
         const esHoy =
           mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
