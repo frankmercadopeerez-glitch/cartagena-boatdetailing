@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #104 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --discount-color: #b83232;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .info-box {
+        font-size: 11.6px;
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      .item-desc strong {
+        color: var(--primary-color);
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1px;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 430px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        font-size: 18px;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        margin-bottom: 4px;
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 14px;
+      }
+
+      .terms-section li {
+        margin-bottom: 3px;
+      }
+
+      .payment-info {
+        margin-top: 5px;
+        padding: 6px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      footer {
+        margin-top: 10px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 6px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          box-shadow: none;
+          border-top-width: 5px;
+          margin: 0;
+          padding: 14px 16px 10px;
+        }
+
+        .client-section,
+        .info-box,
+        .totals-section,
+        .bottom-grid,
+        footer {
+          page-break-inside: avoid;
+        }
+
+        tr {
+          page-break-inside: avoid;
+        }
+
+        .item-desc {
+          font-size: 10.5px;
+          line-height: 1.45;
+        }
+
+        .bottom-grid {
+          margin-top: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-104</p>
+          <p><strong>Fecha:</strong> 16/05/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Por definir</strong></p>
+          <p>Propietario yate Mariaje</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Yate <strong>Mariaje</strong> — Prestige 560 — 56 pies</p>
+          <p>Pulido exterior integral — Marina de Barú</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>⚓ Alcance del servicio:</strong>
+        Cotización para pulido exterior integral del yate
+        <strong>Mariaje</strong> (Prestige 560, 56 pies), ubicado en el
+        <strong>Condominio Marina de Barú</strong>. El servicio contempla
+        únicamente superficies exteriores. No se incluyen trabajos de
+        cojinería ni interiores.
+      </div>
+
+      <h3 class="section-title">Plan de pulido exterior integral</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción del servicio</th>
+            <th>Valor antes de IVA (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DESCONTAMINACIÓN -->
+          <tr>
+            <td>
+              <div class="item-title">1. Descontaminación y lavado técnico</div>
+              <div class="item-desc">
+                Lavado a presión y desengrase completo del exterior del yate.
+                Eliminación de salitre acumulado, residuos orgánicos, manchas
+                de combustible y contaminantes adheridos a la fibra. Se
+                prepara toda la superficie para garantizar que el pulido
+                posterior actúe directamente sobre la fibra sin interferencia
+                de suciedad o contaminantes.
+              </div>
+            </td>
+            <td rowspan="3">
+              <div class="price-container" style="padding-top: 4px">
+                <span class="special-price">$ 4.000.000</span>
+                <span
+                  style="
+                    font-size: 10px;
+                    color: var(--text-light);
+                    text-align: right;
+                    margin-top: 4px;
+                  "
+                  >Valor antes de IVA</span
+                >
+              </div>
+            </td>
+          </tr>
+
+          <!-- CORRECCIÓN DE PINTURA -->
+          <tr>
+            <td>
+              <div class="item-title">
+                2. Corrección y pulido con sistema 3M Marine
+              </div>
+              <div class="item-desc">
+                Aplicación del sistema náutico de tres etapas de
+                <strong>3M Marine</strong> en toda la fibra exterior:
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
+                  <li>
+                    <strong>3M Marine Compound (paso 1):</strong> corte
+                    abrasivo para eliminar oxidación superficial,
+                    micro-rayaduras y marcas de agua salada. Restituye la
+                    capa superior de la fibra.
+                  </li>
+                  <li>
+                    <strong>3M Marine Finesse-It II (paso 2):</strong> pulido
+                    de acabado para nivelar la superficie y aumentar la
+                    reflexión de la luz, logrando un brillo profundo y
+                    uniforme.
+                  </li>
+                  <li>
+                    <strong>3M Marine Wax / Scotchgard Marine (paso 3):</strong>
+                    sellado y protección de la fibra tratada con cera/sellante
+                    de grado marino, resistente a rayos UV y agua salada.
+                  </li>
+                </ul>
+                El trabajo se ejecuta con pulidora de doble acción orbital para
+                proteger la integridad de la fibra y garantizar acabado
+                homogéneo de proa a popa.
+              </div>
+            </td>
+          </tr>
+
+          <!-- DETALLADO FINAL -->
+          <tr>
+            <td>
+              <div class="item-title">3. Detallado final y revisión</div>
+              <div class="item-desc">
+                Limpieza de accesorios, cromados y superficies plásticas
+                exteriores. Aplicación de protector UV en partes plásticas
+                para evitar opacidad. Revisión final de toda la embarcación
+                para asegurar uniformidad de brillo y acabado libre de
+                marcas o zonas sin tratar. El yate queda listo con brillo
+                tipo espejo en toda la superficie exterior.
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row grand-total">
+            <span>Valor antes de IVA:</span>
+            <span>$ 4.000.000 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Alcance y garantía del trabajo</h4>
+          <p>
+            El servicio cubre la totalidad de las superficies exteriores de
+            fibra del yate <strong>Mariaje</strong>. El equipo de trabajo
+            está conformado por <strong>2 técnicos especializados</strong>
+            en detailing náutico.
+          </p>
+          <ul style="margin: 8px 0 8px 16px; font-size: 11px">
+            <li>
+              <strong>Garantía de brillo: 6 meses</strong> bajo condiciones
+              normales de uso marino en el Caribe.
+            </li>
+            <li>
+              Todos los productos utilizados son de la
+              <strong>línea 3M Marine</strong>, certificados para uso en
+              embarcaciones de fibra de vidrio y gelcoat.
+            </li>
+            <li>
+              El precio es fijo e incluye materiales y mano de obra
+              completa.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>
+              Anticipo del 50% para iniciar trabajos; saldo 50% contra
+              entrega a satisfacción.
+            </li>
+            <li>
+              Los costos de ingreso del personal a las instalaciones de
+              <strong>Marina de Barú</strong> corren por cuenta del
+              cliente. El equipo está conformado por
+              <strong>2 personas</strong>.
+            </li>
+            <li>
+              Cotización elaborada con base en las especificaciones del
+              yate. El precio es firme.
+            </li>
+          </ul>
+          <div class="payment-info">
+            La información de pago será compartida una vez aprobada la
+            cotización.
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>
+          Gracias por confiar en los especialistas para el cuidado de sus
+          embarcaciones.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
