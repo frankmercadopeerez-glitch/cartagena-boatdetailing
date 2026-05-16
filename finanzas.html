@@ -625,6 +625,39 @@
           >
         </div>
 
+        <!-- SALDO ACUMULADO EN CUENTA -->
+        <div
+          class="kpi-card mb-3"
+          style="
+            background: linear-gradient(135deg, #050b14 0%, #112238 100%);
+            border-left: 4px solid #b8904d;
+            border-color: rgba(184, 144, 77, 0.35);
+          "
+        >
+          <div class="flex items-center justify-between">
+            <div style="flex: 1; min-width: 0">
+              <p class="kpi-label" style="color: rgba(255,255,255,0.45)">
+                Saldo acumulado en cuenta
+              </p>
+              <p
+                class="kpi-value"
+                id="kpi-saldo"
+                style="color: #22c55e"
+              >$0</p>
+            </div>
+            <i
+              data-lucide="wallet"
+              class="w-9 h-9 flex-shrink-0 ml-3"
+              style="color: #b8904d; opacity: 0.45"
+            ></i>
+          </div>
+          <p
+            class="text-xs mt-1"
+            id="kpi-saldo-label"
+            style="color: rgba(255,255,255,0.3)"
+          >acumulado hasta hoy</p>
+        </div>
+
         <!-- KPIs MENSUALES -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
           <div class="kpi-card border-l-4 border-green-400">
@@ -2064,6 +2097,25 @@
         document.getElementById("kpi-margen").textContent = margen + "%";
         document.getElementById("kpi-margen").style.color =
           profit >= 0 ? "#2563eb" : "#dc2626";
+
+        // Saldo acumulado hasta fin del mes seleccionado
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
+          .toISOString().split("T")[0];
+        const txHasta = transactions.filter((t) => (t.fecha || "") <= lastDay);
+        const saldoIng = txHasta
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const saldoGas = txHasta
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
+        const saldo = saldoIng - saldoGas;
+        const saldoEl = document.getElementById("kpi-saldo");
+        saldoEl.textContent = (saldo >= 0 ? "" : "-") + "$ " + fmt(Math.abs(saldo));
+        saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
+        const esHoy = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        document.getElementById("kpi-saldo-label").textContent = esHoy
+          ? "saldo actual en cuenta"
+          : "acumulado hasta fin de " + MESES[mesSel.m].toLowerCase() + " " + mesSel.y;
       }
 
       function renderResumen(mes) {
