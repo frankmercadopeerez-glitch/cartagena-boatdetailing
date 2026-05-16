@@ -636,14 +636,10 @@
         >
           <div class="flex items-center justify-between">
             <div style="flex: 1; min-width: 0">
-              <p class="kpi-label" style="color: rgba(255,255,255,0.45)">
+              <p class="kpi-label" style="color: rgba(255, 255, 255, 0.45)">
                 Saldo acumulado en cuenta
               </p>
-              <p
-                class="kpi-value"
-                id="kpi-saldo"
-                style="color: #22c55e"
-              >$0</p>
+              <p class="kpi-value" id="kpi-saldo" style="color: #22c55e">$0</p>
             </div>
             <i
               data-lucide="wallet"
@@ -654,8 +650,10 @@
           <p
             class="text-xs mt-1"
             id="kpi-saldo-label"
-            style="color: rgba(255,255,255,0.3)"
-          >acumulado hasta hoy</p>
+            style="color: rgba(255, 255, 255, 0.3)"
+          >
+            acumulado hasta hoy
+          </p>
         </div>
 
         <!-- KPIs MENSUALES -->
@@ -2100,7 +2098,8 @@
 
         // Saldo acumulado hasta fin del mes seleccionado
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
-          .toISOString().split("T")[0];
+          .toISOString()
+          .split("T")[0];
         const txHasta = transactions.filter((t) => (t.fecha || "") <= lastDay);
         const saldoIng = txHasta
           .filter((t) => t.tipo === "ingreso")
@@ -2110,12 +2109,17 @@
           .reduce((s, t) => s + t.monto, 0);
         const saldo = saldoIng - saldoGas;
         const saldoEl = document.getElementById("kpi-saldo");
-        saldoEl.textContent = (saldo >= 0 ? "" : "-") + "$ " + fmt(Math.abs(saldo));
+        saldoEl.textContent =
+          (saldo >= 0 ? "" : "-") + "$ " + fmt(Math.abs(saldo));
         saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
-        const esHoy = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        const esHoy =
+          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         document.getElementById("kpi-saldo-label").textContent = esHoy
           ? "saldo actual en cuenta"
-          : "acumulado hasta fin de " + MESES[mesSel.m].toLowerCase() + " " + mesSel.y;
+          : "acumulado hasta fin de " +
+            MESES[mesSel.m].toLowerCase() +
+            " " +
+            mesSel.y;
       }
 
       function renderResumen(mes) {
