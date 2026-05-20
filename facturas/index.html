@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facturas - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #050b14;
+        --secondary: #0d1e33;
+        --accent: #b8904d;
+        --accent-light: #d4aa6a;
+        --text: #e8edf5;
+        --text-muted: #7a8fa8;
+        --card-bg: #0b1829;
+        --card-border: #1a3050;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background: var(--primary);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background: linear-gradient(135deg, #050b14 0%, #0d1e33 100%);
+        border-bottom: 1px solid rgba(184, 144, 77, 0.3);
+        padding: 24px 32px;
+      }
+
+      .brand h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.6rem;
+        color: #fff;
+      }
+
+      .brand p {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+
+      main {
+        flex: 1;
+        max-width: 1120px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 40px 20px 60px;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 14px;
+      }
+
+      .section-heading p {
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .section-heading h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.5rem;
+      }
+
+      .count-badge {
+        background: var(--accent);
+        color: #050b14;
+        font-size: 0.72rem;
+        font-weight: 700;
+        border-radius: 20px;
+        padding: 5px 12px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+      }
+
+      .card-top {
+        background: var(--secondary);
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-badge {
+        display: inline-block;
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--accent-light);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 4px;
+        padding: 4px 8px;
+      }
+
+      .card-body {
+        padding: 18px;
+      }
+
+      .card-title {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.2rem;
+        color: #fff;
+      }
+
+      .card-subtitle {
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+      }
+
+      .meta {
+        margin-top: 14px;
+        display: grid;
+        gap: 7px;
+      }
+
+      .meta-row {
+        display: flex;
+        gap: 10px;
+        font-size: 0.8rem;
+      }
+
+      .meta-row .label {
+        width: 64px;
+        font-size: 0.66rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+
+      .meta-row .value {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .meta-row .value.price {
+        color: var(--accent-light);
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--text-muted);
+        border-top: 1px solid var(--card-border);
+        padding: 18px;
+        font-size: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>Cartagena Boat Detailing</h1>
+        <p>Los expertos en estetica naval</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="section-heading">
+        <div>
+          <p>Registro contable</p>
+          <h2>Facturas de venta emitidas</h2>
+        </div>
+        <span class="count-badge" id="invoice-count">1</span>
+      </div>
+
+      <div class="cards-grid" id="cards">
+        <a class="card" href="factura-001.html">
+          <div class="card-top">
+            <span class="card-badge">FVE-2026-001</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Pedro Bustos Delgado</h3>
+            <p class="card-subtitle">Factura de venta pagada al 100%</p>
+
+            <div class="meta">
+              <div class="meta-row">
+                <span class="label">Fecha</span>
+                <span class="value">19 / 05 / 2026</span>
+              </div>
+              <div class="meta-row">
+                <span class="label">Cliente</span>
+                <span class="value">CC 79.839.323</span>
+              </div>
+              <div class="meta-row">
+                <span class="label">Total</span>
+                <span class="value price">$ 4.000.000 COP</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      Cartagena Boat Detailing - Registro interno de facturas de venta
+    </footer>
+  </body>
+</html>

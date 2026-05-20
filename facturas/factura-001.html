@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factura FVE-2026-001 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .info-box {
+        font-size: 11.6px;
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 430px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .payment-status {
+        margin-top: 8px;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-left: 4px solid var(--ok-color);
+        padding: 9px 10px;
+        font-size: 11.6px;
+      }
+
+      .payment-status strong {
+        color: #14532d;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .terms-section ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+        .invoice-container {
+          box-shadow: none;
+          border-top-width: 6px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container {
+          padding: 16px;
+        }
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+        .quote-info {
+          text-align: left;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+        .totals-box {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>FACTURA DE VENTA</h2>
+          <p><strong>Numero:</strong> FVE-2026-001</p>
+          <p><strong>Fecha de emision:</strong> 19/05/2026</p>
+          <p><strong>Estado:</strong> Pagada</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Facturar a nombre de</h3>
+          <p><strong>Pedro Bustos Delgado</strong></p>
+          <p>CC: 79.839.323</p>
+        </div>
+        <div>
+          <h3>Detalle del servicio</h3>
+          <p>Servicio integral de detailing naval</p>
+          <p>Trabajo ejecutado y entregado a satisfaccion del cliente</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Resumen comercial:</strong>
+        Factura correspondiente a trabajos realizados de lavado tecnico,
+        correccion de gelcoat y pulido con sistema 3M Marine, incluyendo
+        detallado final y sellado protector. El dinero fue recibido
+        satisfactoriamente por Cartagena Boat Detailing.
+      </div>
+
+      <h3 class="section-title">Trabajos realizados</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripcion del servicio</th>
+            <th>Valor (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-title">1. Lavado tecnico y descontaminacion</div>
+              <div class="item-desc">
+                Lavado de superficies, retiro de salitre, grasas y residuos
+                adheridos para preparar la embarcacion.
+              </div>
+            </td>
+            <td><span class="special-price">$ 800.000</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                2. Correccion de superficie y pulido 3M Marine
+              </div>
+              <div class="item-desc">
+                Correccion abrasiva controlada, recuperacion de brillo y
+                nivelacion visual en casco y superficies tratadas.
+              </div>
+            </td>
+            <td><span class="special-price">$ 2.400.000</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                3. Detallado final y sellado protector
+              </div>
+              <div class="item-desc">
+                Acabado final, limpieza de detalles y aplicacion de sellado para
+                proteccion en ambiente marino.
+              </div>
+            </td>
+            <td><span class="special-price">$ 800.000</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <span>$ 4.000.000</span>
+          </div>
+          <div class="total-row">
+            <span>Descuentos:</span>
+            <span>$ 0</span>
+          </div>
+          <div class="total-row">
+            <span>Impuestos:</span>
+            <span>$ 0</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total factura:</span>
+            <span>$ 4.000.000 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-status">
+        <strong>Pago recibido satisfactoriamente:</strong><br />
+        - Anticipo recibido en efectivo: <strong>$ 1.000.000 COP</strong><br />
+        - Pago final recibido por transferencia a la cuenta de ahorros de
+        Colombia Boat Detailing: <strong>$ 3.000.000 COP</strong><br />
+        - Saldo pendiente: <strong>$ 0 COP</strong>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Observaciones</h4>
+          <p>
+            Trabajo entregado conforme al alcance comercial acordado con el
+            cliente y recibido a satisfaccion. Documento de control interno para
+            trazabilidad de la venta.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h4>Soporte de pago</h4>
+          <ul>
+            <li>Anticipo: pago en efectivo registrado.</li>
+            <li>
+              Saldo final: transferencia por $ 3.000.000 COP a cuenta de ahorros
+              de Colombia Boat Detailing.
+            </li>
+            <li>Operacion cerrada y sin valores pendientes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>Documento generado el 19/05/2026.</p>
+      </footer>
+    </div>
+  </body>
+</html>
