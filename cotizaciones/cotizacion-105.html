@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #105 - Cartagena Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .info-box {
+        font-size: 11.6px;
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong {
+        color: var(--secondary-color);
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 430px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .photo-section {
+        margin-top: 8px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        height: 170px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 10.5px;
+        color: var(--text-light);
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul,
+      .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container {
+          padding: 16px;
+        }
+
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+
+        .quote-info {
+          text-align: left;
+        }
+
+        .photo-grid,
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .totals-box {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Cartagena Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACION DE SERVICIOS</h2>
+          <p><strong>Numero:</strong> CBD-2026-105</p>
+          <p><strong>Fecha:</strong> 20/05/2026</p>
+          <p><strong>Validez:</strong> 15 dias</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Propietario Yate Azimut 46 pies</strong></p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Yate Azimut 46 pies - Trabajo en marina</p>
+          <p>Pulido general + restauracion y brillo de metales</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Alcance tecnico:</strong>
+        Se cotiza un proceso integral para recuperar brillo y presentacion del
+        yate Azimut 46 pies, incluyendo preparacion de superficies, pulido
+        general de gelcoat y tratamiento de todos los metales visibles
+        (pasamanos, herrajes y accesorios inoxidables).
+      </div>
+
+      <h3 class="section-title">Plan de trabajo propuesto</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripcion del servicio</th>
+            <th>Valor inversion (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-title">1. Lavado tecnico y descontaminacion</div>
+              <div class="item-desc">
+                Lavado profundo de casco y superestructura, retiro de salitre,
+                contaminantes y suciedad adherida para dejar la superficie lista
+                para el proceso de correccion.
+              </div>
+            </td>
+            <td><span class="special-price">$ 1.200.000</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">2. Pulido general exterior</div>
+              <div class="item-desc">
+                Correccion de oxidacion superficial y opacidad, con sistema de
+                pulido marino en varias etapas para recuperar reflejo uniforme y
+                acabado de alto brillo en casco y superficies exteriores.
+              </div>
+            </td>
+            <td><span class="special-price">$ 4.200.000</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">3. Restauracion y pulido de metales</div>
+              <div class="item-desc">
+                Pulido de pasamanos, herrajes y piezas metalicas, eliminando
+                opacidad y manchas para devolver acabado limpio y brillante.
+              </div>
+            </td>
+            <td><span class="special-price">$ 1.600.000</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Lavado tecnico y descontaminacion:</span>
+            <span>$ 1.200.000</span>
+          </div>
+          <div class="total-row">
+            <span>Pulido general exterior:</span>
+            <span>$ 4.200.000</span>
+          </div>
+          <div class="total-row">
+            <span>Restauracion y pulido de metales:</span>
+            <span>$ 1.600.000</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total del proyecto:</span>
+            <span>$ 7.000.000 COP</span>
+          </div>
+          <div
+            style="font-size: 10px; color: var(--text-light); margin-top: 2px"
+          >
+            Valor antes de IVA. Si el cliente requiere facturacion electronica,
+            se adicionara el IVA vigente.
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotografico de referencia</h3>
+        <div class="photo-grid">
+          <div>
+            <img
+              src="images/azimut-46/azimut-46-1.jpg"
+              alt="Azimut 46 vista general"
+              onerror="this.style.display = 'none'"
+            />
+            <p class="photo-caption">Vista general del yate en marina.</p>
+          </div>
+          <div>
+            <img
+              src="images/azimut-46/azimut-46-2.jpg"
+              alt="Azimut 46 detalle de costado"
+              onerror="this.style.display = 'none'"
+            />
+            <p class="photo-caption">Detalle de superficies a pulir.</p>
+          </div>
+          <div>
+            <img
+              src="images/azimut-46/azimut-46-3.jpg"
+              alt="Azimut 46 cubierta"
+              onerror="this.style.display = 'none'"
+            />
+            <p class="photo-caption">Cubierta y pasamanos metalicos.</p>
+          </div>
+          <div>
+            <img
+              src="images/azimut-46/azimut-46-4.jpg"
+              alt="Azimut 46 metales"
+              onerror="this.style.display = 'none'"
+            />
+            <p class="photo-caption">Zona de metales y acabados.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Tiempos estimados</h4>
+          <ul>
+            <li>
+              Tiempo de ejecucion estimado: <strong>4 a 5 dias habiles</strong>
+              en marina, sujeto a condiciones climaticas favorables.
+            </li>
+            <li>
+              Equipo tecnico especializado para trabajo continuo y entrega a
+              satisfaccion.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo del 50% para programar trabajos.</li>
+            <li>Saldo 50% contra entrega a satisfaccion.</li>
+            <li>
+              Los costos de ingreso del trabajador/personal externo a la marina
+              <strong>corren por cuenta del cliente</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Cartagena Boat Detailing</strong> |
+          cartagena-boatdetailing.vercel.app
+        </p>
+        <p>Gracias por confiar en los especialistas en estetica naval.</p>
+      </footer>
+    </div>
+  </body>
+</html>
