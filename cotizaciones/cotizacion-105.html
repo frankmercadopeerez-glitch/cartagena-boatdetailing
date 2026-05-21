@@ -348,6 +348,48 @@
           width: 100%;
         }
       }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 10mm;
+        }
+
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+        }
+
+        .table-section-header {
+          break-after: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
+        }
+
+        .totals-section,
+        .rec-box,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        .photo-grid > div {
+          break-inside: avoid;
+        }
+      }
     </style>
   </head>
   <body>
@@ -877,8 +919,8 @@
           <div
             style="font-size: 10px; color: var(--text-light); margin-top: 4px"
           >
-            Si el cliente requiere facturacion electronica, se adicionara el
-            IVA vigente.
+            Si el cliente requiere facturacion electronica, se adicionara el IVA
+            vigente.
           </div>
         </div>
       </div>
