@@ -132,13 +132,6 @@
         color: var(--secondary-color);
       }
 
-      .info-box.alert {
-        background: rgba(184, 144, 77, 0.07);
-        border-left: 3px solid var(--accent-color);
-        border-radius: 0;
-        margin-bottom: 6px;
-      }
-
       .section-title {
         font-family: Georgia, "Times New Roman", serif;
         font-size: 15px;
@@ -148,13 +141,34 @@
         margin: 10px 0 6px;
       }
 
-      .included-note {
-        font-size: 10.8px;
-        color: var(--secondary-color);
+      .photo-section {
+        margin: 8px 0 6px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .photo-card {
+        border: 1px solid var(--border-color);
         background: #f8fafc;
-        border-left: 3px solid var(--accent-color);
-        padding: 6px 8px;
-        margin-bottom: 6px;
+        overflow: hidden;
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-card span {
+        display: block;
+        padding: 5px 6px;
+        font-size: 10px;
+        color: var(--text-light);
       }
 
       table {
@@ -227,7 +241,48 @@
         white-space: nowrap;
       }
 
-      /* Totals */
+      .optional-section {
+        margin-top: 10px;
+      }
+
+      .optional-box {
+        border: 1px solid rgba(184, 144, 77, 0.35);
+        background: rgba(184, 144, 77, 0.08);
+        padding: 10px;
+      }
+
+      .optional-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+        margin-bottom: 6px;
+      }
+
+      .optional-header h4 {
+        font-size: 12px;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .optional-price {
+        color: var(--primary-color);
+        font-size: 16px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .optional-body {
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.55;
+      }
+
+      .optional-body ul {
+        margin: 5px 0 0 16px;
+      }
+
       .totals-section {
         display: flex;
         justify-content: flex-end;
@@ -267,7 +322,6 @@
         font-size: 18px;
       }
 
-      /* Bottom grid */
       .bottom-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -347,8 +401,9 @@
 
         .client-section,
         .info-box,
-        .included-note,
+        .photo-section,
         .totals-section,
+        .optional-section,
         .bottom-grid,
         footer {
           page-break-inside: avoid;
@@ -401,138 +456,220 @@
         <strong>⚓ Prueba técnica realizada el 21/05/2026:</strong> durante la
         revisión inicial el gelcoat de los costados se veía muy oxidado y había
         duda sobre la recuperación del brillo. Sin embargo, la prueba técnica
-        realizada hoy confirmó que <strong>sí es posible recuperar el brillo
-        original del gelcoat</strong> mediante corrección mecánica, pulido de
-        terminación y sellado protector. Para ejecutar el trabajo es necesario
+        realizada hoy confirmó que
+        <strong>sí es posible recuperar el brillo original del gelcoat</strong>
+        mediante corrección mecánica, pulido de terminación y sellado protector.
+        Para ejecutar el trabajo es necesario
         <strong>sacar el bote del agua</strong>, y el tiempo estimado de
         intervención es de <strong>4 días</strong>.
       </div>
 
-      <h3 class="section-title">Servicios aprobados (cotización renovada)</h3>
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotográfico del bote</h3>
+        <div class="photo-grid">
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(1).jpeg"
+              alt="Gracia De Dios 21 - vista interior"
+            />
+            <span>Vista general de interior y cojinería</span>
+          </div>
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(2).jpeg"
+              alt="Gracia De Dios 21 - motores desgaste frontal"
+            />
+            <span>Motores con desgaste visible en pintura</span>
+          </div>
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(3).jpeg"
+              alt="Gracia De Dios 21 - motores lateral"
+            />
+            <span>Detalle lateral de motores y herrajes</span>
+          </div>
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(4).jpeg"
+              alt="Gracia De Dios 21 - motor y espejo"
+            />
+            <span>Estado actual de carcazas y tapas</span>
+          </div>
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(5).jpeg"
+              alt="Gracia De Dios 21 - motores detalle"
+            />
+            <span>Referencia de desgaste en pintura externa</span>
+          </div>
+          <div class="photo-card">
+            <img
+              src="images/gracia-de-dios-21/graciadedios%20(6).jpeg"
+              alt="Gracia De Dios 21 - conjunto de motores"
+            />
+            <span>Conjunto de motores para restauración</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Servicios aprobados</h3>
 
       <table>
         <thead>
           <tr>
             <th>Descripción del servicio</th>
             <th>Valor inversión (COP)</th>
+          </tr>
         </thead>
         <tbody>
-                  <div class="item-title">
-                    1. Restauración integral de gelcoat y brillo - Gracia De Dios
-                    21
-                  </div>
+          <tr>
+            <td>
               <div class="item-title">
-                    Restauración técnica enfocada en recuperar el brillo del gelcoat
-                    en costados, cubiertas y zonas expuestas al sol y al salitre.<br />
+                1. Restauración integral de gelcoat y brillo - Gracia De Dios 21
               </div>
               <div class="item-desc">
-                        <strong>Izado y preparación:</strong> el bote debe sacarse
-                        del agua para trabajar correctamente sobre el casco.
+                Restauración técnica enfocada en recuperar el brillo del gelcoat
+                en costados, cubiertas y zonas expuestas al sol y al salitre.<br />
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
                   <li>
-                    <strong>Descontaminación:</strong> limpieza profunda para
-                        <strong>Lavado técnico y descontaminación:</strong> limpieza
-                        profunda con shampoo náutico neutro y desengrasante marino
-                        para remover salitre, hollín, grasa y residuos adheridos.
-                    abrillantado técnico en interior y exterior, aplicando el
-                    sistema náutico de corte, pulido y terminado para lograr
-                        <strong>Corrección del gelcoat:</strong> aplicación de
-                        compuesto de corte náutico y sistema de pulido por etapas
-                        para eliminar oxidación, marcas de agua y opacidad en los
-                        costados.
-                      </li>
-                      <li>
-                        <strong>Abrillantado y terminación:</strong> pulimento fino
-                        de acabado para recuperar brillo uniforme y profundidad en
-                        el color del gelcoat.
-                      </li>
-                      <li>
-                        <strong>Protección final:</strong> sellador marino con
-                        protección UV e hidrorrepelencia para prolongar el brillo y
-                        retrasar la reoxidación.
-                    <strong>Interior:</strong> tratamiento de cojinería en
-                    vinilo con desmanchado técnico, hidratación profunda y
-                    protección UV (incluido en el precio).
+                    <strong>Izado y preparación:</strong> el bote debe sacarse
+                    del agua para trabajar correctamente sobre el casco.
+                  </li>
+                  <li>
+                    <strong>Lavado técnico y descontaminación:</strong> limpieza
+                    profunda con shampoo náutico neutro y desengrasante marino
+                    para remover salitre, hollín, grasa y residuos adheridos.
+                  </li>
+                  <li>
+                    <strong>Corrección del gelcoat:</strong> aplicación de
+                    compuesto de corte náutico y sistema de pulido por etapas
+                    para eliminar oxidación, marcas de agua y opacidad en los
+                    costados.
+                  </li>
+                  <li>
+                    <strong>Abrillantado y terminación:</strong> pulimento fino
+                    de acabado para recuperar brillo uniforme y profundidad en
+                    el color del gelcoat.
+                  </li>
+                  <li>
+                    <strong>Protección final:</strong> sellador marino con
+                    protección UV e hidrorrepelencia para prolongar el brillo y
+                    retrasar la reoxidación.
                   </li>
                 </ul>
               </div>
-                <span class="original-price" style="white-space: nowrap"
-                    <span
-                      class="original-price"
-                      style="font-size: 10px; color: var(--text-light)"
-                    >
-                      Valor antes de IVA
-                    </span>
-                  >Tarifa regular: <span class="strike">$ 3.500.000</span></span
+            </td>
+            <td>
+              <div class="price-container">
+                <span class="special-price">$ 3.280.000</span>
+                <span
+                  class="original-price"
+                  style="font-size: 10px; color: var(--text-light)"
                 >
-                <span class="special-price">$ 2.800.000</span>
+                  Valor antes de IVA
+                </span>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
 
-              border-top: 1px solid var(--border-color);
-                <span>$ 3.280.000</span>
-          >
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
             <span>Subtotal:</span>
-            <span>$ 6.233.333</span>
-                <span>$ 623.200</span>
+            <span>$ 3.280.000</span>
+          </div>
           <div class="total-row" style="color: var(--text-light)">
             <span>IVA 19%:</span>
-            <span>$ 1.184.333</span>
-                <span>$ 3.903.200 COP</span>
+            <span>$ 623.200</span>
+          </div>
           <div class="total-row grand-total">
             <span>Total con IVA:</span>
-            <span>$ 7.417.666 COP</span>
+            <span>$ 3.903.200 COP</span>
           </div>
         </div>
       </div>
-              <h4>Garantía y cuidado</h4>
+
+      <div class="optional-section">
+        <div class="optional-box">
+          <div class="optional-header">
+            <h4>Servicio opcional no incluido en el total</h4>
+            <span class="optional-price">$ 2.400.000</span>
+          </div>
+          <div class="optional-body">
+            <strong>Pintura y restauración de motores</strong> para que queden
+            como nuevos, desmontando todas las piezas plásticas, preparando las
+            superficies, aplicando pintura técnica marina y reinstalando las
+            calcomanías originales para conservar la apariencia de fábrica.
+            <br /><br />
+            Durante la inspección notamos que la pintura de los motores está muy
+            desgastada y, para que se note un cambio real, lo ideal es que los
+            motores se vean como nuevos.
+            <ul>
+              <li>Desmontaje de piezas plásticas y protecciones externas.</li>
+              <li>Limpieza, lijado técnico y preparación de superficies.</li>
+              <li>
+                Aplicación de primer, pintura marina y terminado protector.
+              </li>
+              <li>
+                Reinstalación de calcomanías originales y piezas plásticas.
+              </li>
+              <li>Acabado visual uniforme para dejar los motores renovados.</li>
+            </ul>
+            <strong>
+              Este valor es adicional, no se suma al total de la cotización
+              actual y queda sujeto a aprobación.
+            </strong>
+          </div>
+        </div>
+      </div>
+
       <div class="bottom-grid">
-                Se otorga garantía de <strong>6 meses</strong> sobre el brillo
-                recuperado del gelcoat. Para conservar el acabado, lavar únicamente
-                con shampoo náutico neutro, paños de microfibra y cepillos de cerdas
-                suaves. El uso de detergentes industriales, desengrasantes agresivos
-                o cepillos duros deteriora la protección y puede afectar la
-                garantía.
-            náutico neutro y cepillos de cerdas suaves. El uso de detergentes
-            industriales o cepillos duros deteriora la protección y anula la
+        <div class="warranty-box">
+          <h4>Garantía y cuidado</h4>
+          <p>
+            Se otorga garantía de <strong>6 meses</strong> sobre el brillo
+            recuperado del gelcoat. Para conservar el acabado, lavar únicamente
+            con shampoo náutico neutro, paños de microfibra y cepillos de cerdas
+            suaves. El uso de detergentes industriales, desengrasantes agresivos
+            o cepillos duros deteriora la protección y puede afectar la
             garantía.
           </p>
-                del gelcoat y del brillo restaurado.
+          <p style="margin-top: 6px">
             📱 <strong>Guía digital de cuidado:</strong> Al finalizar los
             trabajos se entrega una guía digital completa para el mantenimiento
-            de cada embarcación de la flota.
+            del gelcoat y del brillo restaurado.
           </p>
         </div>
 
         <div class="terms-section">
-                  Anticipo del 50% para programar trabajos:
-                  <strong>$ 1.951.600 COP</strong>; saldo 50% contra entrega a
-                  satisfacción: <strong>$ 1.951.600 COP</strong>.
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>
               Anticipo del 50% para programar trabajos:
-              <strong>$ 3.708.833 COP</strong>; saldo 50% contra entrega a
-                  El trabajo requiere sacar el bote del agua para ejecutar la
-                  corrección del gelcoat en costados y superficies exteriores.
-              Inicio de ejecución: <strong>Zeus III</strong> (pulido y
-                <li>
-                  Tiempo estimado de ejecución: <strong>4 días</strong> de trabajo
-                  efectivo.
-                </li>
-                <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
-              posterior, una vez finalicen los trabajos de fibra de vidrio.
-                  Los costos de acceso de personal externo a las instalaciones de la
-                  marina (permisos, tarifas administrativas u otros cargos definidos
-                  por la administración del lugar)
+              <strong>$ 1.951.600 COP</strong>; saldo 50% contra entrega a
+              satisfacción: <strong>$ 1.951.600 COP</strong>.
+            </li>
+            <li>
+              El trabajo requiere sacar el bote del agua para ejecutar la
+              corrección del gelcoat en costados y superficies exteriores.
+            </li>
+            <li>
+              Tiempo estimado de ejecución: <strong>4 días</strong> de trabajo
+              efectivo.
+            </li>
+            <li>Pagos procesados por plataforma <strong>Bold</strong>.</li>
+            <li>
               Los costos de acceso de personal externo a las instalaciones de la
               marina (permisos, tarifas administrativas u otros cargos definidos
               por la administración del lugar)
               <strong>corren por cuenta del contratante</strong>.
-                El enlace de pago se enviará por WhatsApp una vez aprobada la
-                cotización.
+            </li>
           </ul>
           <div class="payment-info">
-            El enlace de pago será compartido vía WhatsApp.
+            El enlace de pago se enviará por WhatsApp una vez aprobada la
+            cotización.
           </div>
         </div>
       </div>
