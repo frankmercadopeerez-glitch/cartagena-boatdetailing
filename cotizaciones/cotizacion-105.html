@@ -292,6 +292,25 @@
         color: var(--text-light);
       }
 
+      .table-section-header td {
+        background: var(--secondary-color);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 6px 8px;
+        text-align: left !important;
+      }
+
+      .pending-price {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 12px;
+        white-space: nowrap;
+        font-style: italic;
+      }
+
       @media (max-width: 760px) {
         .invoice-container {
           padding: 16px;
@@ -339,17 +358,21 @@
         </div>
         <div>
           <h3>Detalle del proyecto</h3>
-          <p>Yate HAYA (Azimut 46 pies) - Trabajo en marina</p>
-          <p>Pulido general + restauracion y brillo de metales</p>
+          <p>Yate HAYA (Azimut 46 pies) — Proyecto integral de renovacion</p>
+          <p>Detailing · Pinturas · Acrilicos · Pisos · Reparaciones · Iluminacion</p>
         </div>
       </div>
 
       <div class="info-box">
         <strong>Alcance tecnico:</strong>
-        Se cotiza un proceso integral para recuperar brillo y presentacion del
-        yate HAYA (Azimut 46 pies), incluyendo preparacion de superficies, pulido
-        general de gelcoat y tratamiento de todos los metales visibles
-        (pasamanos, herrajes y accesorios inoxidables).
+        Se cotiza un proyecto integral de renovacion y mejoras para el yate
+        HAYA (Azimut 46 pies), cubriendo: detailing y pulido 3M Marine con
+        reparacion de gelcoat, antifouling negro de obra viva, pintura de
+        radares y franjas decorativas, fabricacion e instalacion de acrilicos,
+        suministro e instalacion de pisos adhesivos tipo teca, reparaciones en
+        fibra de vidrio y gelcoat, y sistema de iluminacion con luces de
+        cortesia y subacuaticas. Los valores de iluminacion y reparacion
+        adicional de gelcoat se confirmaran por separado.
       </div>
 
       <h3 class="section-title">Plan de trabajo propuesto</h3>
@@ -358,10 +381,14 @@
         <thead>
           <tr>
             <th>Descripcion del servicio</th>
-            <th>Valor del proyecto (COP)</th>
+            <th style="width: 155px">Valor (antes de IVA)</th>
           </tr>
         </thead>
         <tbody>
+          <!-- DETAILING Y PULIDO -->
+          <tr class="table-section-header">
+            <td colspan="2">Detailing, pulido y restauracion de superficies</td>
+          </tr>
           <tr>
             <td>
               <div class="item-title">1. Lavado tecnico y descontaminacion</div>
@@ -373,6 +400,9 @@
             </td>
             <td rowspan="3" style="vertical-align: top; padding-top: 12px">
               <div class="special-price">$ 3.680.000</div>
+              <div style="font-size: 10px; color: var(--text-light); margin-top: 4px">
+                Paquete items 1–3
+              </div>
             </td>
           </tr>
           <tr>
@@ -419,10 +449,252 @@
                 acero inoxidable. Se aplican productos especializados para
                 remover opacidad, manchas de agua salada y oxidacion superficial
                 en piezas metalicas. Cada elemento queda con acabado brillante,
-                limpio y uniforme. Al finalizar, el yate presenta una imagen
-                integral de alto nivel tanto en gelcoat como en metalurgia
-                visible.
+                limpio y uniforme.
               </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                4. Reparacion adicional de gelcoat — zonas infladas por humedad
+                y detalles puntuales
+              </div>
+              <div class="item-desc">
+                Tratamiento de las zonas del gelcoat con ampollamiento o
+                inflamiento causado por absorcion de humedad (osmosis). Se abre,
+                seca y repara cada burbuja; se aplica masa de fibra donde sea
+                necesario, se nivela con gelcoat de color y se integra al
+                pulido general. Cubre ademas rayaduras profundas, golpes y
+                cualquier detalle puntual que requiera reparacion previa para
+                lograr un acabado final homogeneo de proa a popa.
+              </div>
+            </td>
+            <td>
+              <div class="pending-price">Por confirmar</div>
+            </td>
+          </tr>
+
+          <!-- PINTURA Y ANTIFOULING -->
+          <tr class="table-section-header">
+            <td colspan="2">Pintura y antifouling</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">5. Antifouling negro — obra viva</div>
+              <div class="item-desc">
+                Proceso completo de preparacion y aplicacion de antifouling
+                negro en la obra viva del yate HAYA: lijado de las capas
+                existentes y retiro total de contaminacion hasta llegar a
+                primer. Aplicacion de base intermedia de adherencia. Finalmente,
+                aplicacion de antifouling negro de alta durabilidad para
+                proteger el casco contra incrustaciones biologicas marinas
+                (algas, cracas, mejillones), alargando la vida util del casco y
+                mejorando el rendimiento en navegacion.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 11.800.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">6. Pintura de radares y accesorios en negro</div>
+              <div class="item-desc">
+                Preparacion de superficie y pintura en negro de los radares,
+                soportes y accesorios de cubierta. Acabado uniforme y
+                profesional que armoniza con la estetica general del yate.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 900.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                7. Franjas negras estribor y babor — alrededor de ventanas
+              </div>
+              <div class="item-desc">
+                Pintura de franjas decorativas en negro alto solido a lo largo
+                de estribor y babor, enmarcando las ventanas. Preparacion de
+                superficie, enmascarado preciso y aplicacion en acabado negro
+                solido de alta durabilidad marino.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 800.000</div>
+            </td>
+          </tr>
+
+          <!-- ACRILICOS -->
+          <tr class="table-section-header">
+            <td colspan="2">Fabricacion e instalacion de acrilicos</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                8. Acrilico negro humo — brisas del puente de mando
+              </div>
+              <div class="item-desc">
+                Fabricacion e instalacion de acrilico en color negro humo
+                (ahumado) para las brisas del puente de mando. Material de
+                policarbonato o acrilico de grado marino con alta resistencia a
+                rayos UV, corte a medida y sellado perimetral para garantizar
+                hermeticidad y acabado estetico de alto nivel.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 4.200.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                9. Acrilico escotilla de proa — area superior del camarote
+              </div>
+              <div class="item-desc">
+                Fabricacion e instalacion de acrilico para la escotilla de proa
+                ubicada en el area superior del camarote. Corte a medida,
+                sellado hermético con producto marino y acabado limpio que
+                garantiza estanqueidad.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 700.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                10. Acrilicos puertas de entrada en popa — estribor y babor
+                (2 unidades)
+              </div>
+              <div class="item-desc">
+                Fabricacion e instalacion de dos acrilicos para las puertas de
+                acceso en popa: uno en costado estribor y uno en costado babor.
+                Corte preciso a medida, instalacion con herrajes y sellado
+                perimetral marino.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 800.000</div>
+            </td>
+          </tr>
+
+          <!-- PISOS TECA -->
+          <tr class="table-section-header">
+            <td colspan="2">Pisos adhesivos tipo teca</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                11. Suministro de pisos adhesivos tipo teca (11 laminas)
+              </div>
+              <div class="item-desc">
+                Venta de 11 laminas de pisos adhesivos en patron y color teca,
+                material de grado marino con alta resistencia al agua salada,
+                rayos UV y uso continuo. Laminas suministradas listas para
+                instalacion profesional.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 7.480.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                12. Instalacion de pisos adhesivos — puente de mando, escalera,
+                zona social popa y plataforma
+              </div>
+              <div class="item-desc">
+                Instalacion profesional de los pisos adhesivos tipo teca en las
+                areas indicadas: puente de mando, escalera de acceso, zona
+                social en popa y plataforma de bano. Preparacion de superficie,
+                desengrase, corte preciso a medida y adhesion permanente.
+                Incluye adhesivos y materiales de instalacion.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 3.400.000</div>
+            </td>
+          </tr>
+
+          <!-- REPARACIONES FIBRA Y GELCOAT -->
+          <tr class="table-section-header">
+            <td colspan="2">Reparaciones en fibra de vidrio y gelcoat</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                13. Pintura de plataforma popa en gelcoat + reparacion en fibra
+              </div>
+              <div class="item-desc">
+                Pintura del area afectada de la plataforma en popa aplicando
+                gelcoat segun muestra de color del yate HAYA. Incluye
+                reparacion previa de la superficie en fibra de vidrio donde sea
+                necesario, garantizando resultado liso, homogeneo y color
+                uniforme con el resto del yate.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 1.800.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                14. Reparacion de fibra y pintura — pieza pasa cabo de popa
+              </div>
+              <div class="item-desc">
+                Reparacion de la pieza pasa cabo ubicada en la popa: trabajo de
+                fibra de vidrio para restituir la estructura y aplicacion de
+                gelcoat o pintura de terminacion para devolver la estetica
+                original de la pieza.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 200.000</div>
+            </td>
+          </tr>
+
+          <!-- ILUMINACION -->
+          <tr class="table-section-header">
+            <td colspan="2">Sistema de iluminacion</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                15. Suministro e instalacion — luces de cortesia escaleras popa
+                (12 unidades)
+              </div>
+              <div class="item-desc">
+                Suministro e instalacion de 12 luces de cortesia LED en las
+                escaleras de la popa. Instalacion electrica completa con
+                cableado y conexiones protegidas contra humedad marina. Precio
+                pendiente de confirmar segun modelo y especificacion del equipo
+                seleccionado.
+              </div>
+            </td>
+            <td>
+              <div class="pending-price">Por confirmar</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-title">
+                16. Suministro e instalacion — luces subacuaticas (6 unidades)
+              </div>
+              <div class="item-desc">
+                Suministro e instalacion de 6 luminarias subacuaticas LED de
+                grado marino bajo la linea de flotacion del yate HAYA.
+                Instalacion sellada y estanca con acceso a bordo para
+                mantenimiento. Precio pendiente de confirmar segun modelo y
+                especificacion del equipo seleccionado.
+              </div>
+            </td>
+            <td>
+              <div class="pending-price">Por confirmar</div>
             </td>
           </tr>
         </tbody>
@@ -430,15 +702,45 @@
 
       <div class="totals-section">
         <div class="totals-box">
+          <div class="total-row">
+            <span>Detailing, pulido y metales (items 1–3):</span>
+            <span>$ 3.680.000</span>
+          </div>
+          <div class="total-row">
+            <span>Rep. adicional gelcoat por humedad (item 4):</span>
+            <span style="color: var(--accent-color); font-style: italic">Por confirmar</span>
+          </div>
+          <div class="total-row">
+            <span>Pintura y antifouling (items 5–7):</span>
+            <span>$ 13.500.000</span>
+          </div>
+          <div class="total-row">
+            <span>Acrilicos — 3 piezas (items 8–10):</span>
+            <span>$ 5.700.000</span>
+          </div>
+          <div class="total-row">
+            <span>Pisos adhesivos teca, suministro + instalacion (items 11–12):</span>
+            <span>$ 10.880.000</span>
+          </div>
+          <div class="total-row">
+            <span>Reparaciones fibra y gelcoat (items 13–14):</span>
+            <span>$ 2.000.000</span>
+          </div>
+          <div class="total-row">
+            <span>Sistema de iluminacion (items 15–16):</span>
+            <span style="color: var(--accent-color); font-style: italic">Por confirmar</span>
+          </div>
           <div class="total-row grand-total">
-            <span>Valor total del proyecto:</span>
-            <span>$ 3.680.000 COP</span>
+            <span>Subtotal confirmado (antes de IVA):</span>
+            <span>$ 35.760.000 COP</span>
           </div>
           <div
-            style="font-size: 10px; color: var(--text-light); margin-top: 2px"
+            style="font-size: 10px; color: var(--text-light); margin-top: 4px"
           >
-            Valor antes de IVA. Si el cliente requiere facturacion electronica,
-            se adicionara el IVA vigente.
+            Valores antes de IVA. Pendiente sumar: reparacion adicional de
+            gelcoat por humedad (item 4), 12 luces de cortesia escaleras popa
+            (item 15) y 6 luces subacuaticas (item 16). Si el cliente requiere
+            facturacion electronica, se adicionara el IVA vigente.
           </div>
         </div>
       </div>
