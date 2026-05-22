@@ -637,7 +637,7 @@
           <div class="flex items-center justify-between">
             <div style="flex: 1; min-width: 0">
               <p class="kpi-label" style="color: rgba(255, 255, 255, 0.45)">
-                Saldo acumulado en cuenta
+                Dinero disponible en cuenta
               </p>
               <p class="kpi-value" id="kpi-saldo" style="color: #22c55e">$0</p>
             </div>
@@ -657,10 +657,10 @@
         </div>
 
         <!-- KPIs MENSUALES -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
           <div class="kpi-card border-l-4 border-green-400">
             <p class="kpi-label">
-              Ingresos
+              Ingresos operativos
               <span class="normal-case font-normal text-slate-300">· mes</span>
             </p>
             <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
@@ -668,7 +668,7 @@
           </div>
           <div class="kpi-card border-l-4 border-red-400">
             <p class="kpi-label">
-              Gastos
+              Gastos operativos
               <span class="normal-case font-normal text-slate-300">· mes</span>
             </p>
             <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
@@ -679,7 +679,7 @@
             style="background: #f0fdf4; border-left: 4px solid #22c55e"
           >
             <p class="kpi-label">
-              Profit
+              Profit operativo
               <span class="normal-case font-normal text-slate-300">· mes</span>
             </p>
             <p class="kpi-value" id="kpi-profit">$0</p>
@@ -692,6 +692,24 @@
             </p>
             <p class="kpi-value text-blue-600" id="kpi-margen">0%</p>
             <i data-lucide="percent" class="kpi-icon"></i>
+          </div>
+          <div class="kpi-card border-l-4 border-emerald-500">
+            <p class="kpi-label">
+              Aportes de capital
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
+            <p class="kpi-value text-emerald-600" id="kpi-aportes-capital">
+              $0
+            </p>
+            <i data-lucide="hand-coins" class="kpi-icon"></i>
+          </div>
+          <div class="kpi-card border-l-4 border-orange-400">
+            <p class="kpi-label">
+              Retiros de capital
+              <span class="normal-case font-normal text-slate-300">· mes</span>
+            </p>
+            <p class="kpi-value text-orange-600" id="kpi-retiros-capital">$0</p>
+            <i data-lucide="wallet-cards" class="kpi-icon"></i>
           </div>
         </div>
 
@@ -1307,6 +1325,7 @@
         ingreso: [
           "Anticipo",
           "Saldo Final",
+          "Aporte de Capital",
           "Detailing - Pulida y Encerado",
           "Ceramic Coating",
           "PPF (Paint Protection Film)",
@@ -1322,6 +1341,7 @@
           "Materiales / Insumos",
           "Herramientas / Equipos",
           "Mano de Obra",
+          "Retiro de Capital",
           "ARL / Seguro",
           "Logistica / Transporte",
           "Arriendo / Local",
@@ -1329,6 +1349,9 @@
           "Otros Gastos",
         ],
       };
+
+      const CAPITAL_INGRESO_CAT = "Aporte de Capital";
+      const CAPITAL_GASTO_CAT = "Retiro de Capital";
 
       const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
@@ -1521,22 +1544,17 @@
         document.getElementById("tx-tipo").value = tipo;
         const bi = document.getElementById("btn-ingreso"),
           bg = document.getElementById("btn-gasto");
-        const opc = document.getElementById("proyecto-opcional");
         if (tipo === "ingreso") {
           bi.className =
             "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           bg.className =
             "toggle-btn inactive     py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
-          document.getElementById("tx-proyecto").required = true;
-          opc.textContent = "(requerido)";
           document.getElementById("label-receptor").textContent = "Lo recibe";
         } else {
           bg.className =
             "toggle-btn active-red  py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           bi.className =
             "toggle-btn inactive    py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
-          document.getElementById("tx-proyecto").required = false;
-          opc.textContent = "(opcional)";
           document.getElementById("label-receptor").textContent = "Quién paga";
         }
         const sel = document.getElementById("tx-categoria");
@@ -1547,7 +1565,20 @@
           o.textContent = c;
           sel.appendChild(o);
         });
+        onCategoriaChange();
         lucide.createIcons();
+      }
+
+      function updateProyectoRequirement() {
+        const tipo = document.getElementById("tx-tipo").value;
+        const cat = document.getElementById("tx-categoria").value;
+        const proyectoEl = document.getElementById("tx-proyecto");
+        const opc = document.getElementById("proyecto-opcional");
+        const requiereProyecto =
+          tipo === "ingreso" && cat !== CAPITAL_INGRESO_CAT;
+
+        proyectoEl.required = requiereProyecto;
+        opc.textContent = requiereProyecto ? "(requerido)" : "(opcional)";
       }
       function setMedio(m) {
         document.getElementById("tx-medio").value = m;
@@ -1976,6 +2007,7 @@
       }
       function onCategoriaChange() {
         const cat = document.getElementById("tx-categoria").value;
+        updateProyectoRequirement();
         const campo = document.getElementById("campo-pub-semana");
         if (!campo) return;
         campo.classList.toggle("hidden", cat !== "Publicidad");
@@ -2078,10 +2110,24 @@
 
       function renderKPIs(mes) {
         const totalIngresos = mes
-          .filter((t) => t.tipo === "ingreso")
+          .filter(
+            (t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT,
+          )
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = mes
-          .filter((t) => t.tipo === "gasto")
+          .filter(
+            (t) => t.tipo === "gasto" && t.categoria !== CAPITAL_GASTO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const aportesCapitalMes = mes
+          .filter(
+            (t) => t.tipo === "ingreso" && t.categoria === CAPITAL_INGRESO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const retirosCapitalMes = mes
+          .filter(
+            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+          )
           .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
         const margen =
@@ -2095,6 +2141,10 @@
         document.getElementById("kpi-margen").textContent = margen + "%";
         document.getElementById("kpi-margen").style.color =
           profit >= 0 ? "#2563eb" : "#dc2626";
+        document.getElementById("kpi-aportes-capital").textContent =
+          fmt(aportesCapitalMes);
+        document.getElementById("kpi-retiros-capital").textContent =
+          fmt(retirosCapitalMes);
 
         // Saldo acumulado hasta fin del mes seleccionado
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
@@ -2114,8 +2164,8 @@
         const esHoy =
           mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         document.getElementById("kpi-saldo-label").textContent = esHoy
-          ? "saldo actual en cuenta"
-          : "acumulado hasta fin de " +
+          ? "disponible actual en cuenta"
+          : "disponible acumulado hasta fin de " +
             MESES[mesSel.m].toLowerCase() +
             " " +
             mesSel.y;
@@ -2620,14 +2670,16 @@
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const tipo = document.getElementById("tx-tipo").value;
+          const cat = document.getElementById("tx-categoria").value;
           const monto = getMontoValue();
           const proyecto = document.getElementById("tx-proyecto").value.trim();
+          const requiereProyecto =
+            tipo === "ingreso" && cat !== CAPITAL_INGRESO_CAT;
           if (!monto || monto <= 0) return;
-          if (tipo === "ingreso" && !proyecto) {
+          if (requiereProyecto && !proyecto) {
             document.getElementById("tx-proyecto").focus();
             return;
           }
-          const cat = document.getElementById("tx-categoria").value;
           const hora =
             document.getElementById("tx-hora").value ||
             new Date().toTimeString().slice(0, 5);
