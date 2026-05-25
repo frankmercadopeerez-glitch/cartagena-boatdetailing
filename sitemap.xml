@@ -170,6 +170,40 @@
     </image:image>
   </url>
 
+  <!-- Páginas Locales de Limpieza de Casco -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/limpieza-casco-baru.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Calendario SEO -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/calendario-seo-2026.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ========================================
        ARTÍCULOS DEL BLOG
        ======================================== -->
