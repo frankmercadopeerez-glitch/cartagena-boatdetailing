@@ -204,6 +204,38 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- English Service Pages -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning-en.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning-baru-en.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
   <!-- ========================================
        ARTÍCULOS DEL BLOG
        ======================================== -->
@@ -254,6 +286,78 @@
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-limpieza-casco-cartagena/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-helice-casco-consumo/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-veleros-cartagena-checklist/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/frecuencia-limpieza-casco-charter/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/fouling-yates-senales-alerta/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-antes-travesia/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/costo-casco-sucio-yate/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-catamaran-cartagena/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-anodos-casco/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/suscripcion-limpieza-casco/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/pulido-casco-vs-limpieza-real/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/checklist-anual-casco-yate/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
   </url>
 
   <!-- ========================================
