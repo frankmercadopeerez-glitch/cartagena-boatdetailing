@@ -29,6 +29,16 @@
       rel="canonical"
       href="https://colombiaboatdetailing.com/services.html"
     />
+    <link
+      rel="alternate"
+      hreflang="es-CO"
+      href="https://colombiaboatdetailing.com/services.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://colombiaboatdetailing.com/services.html"
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -49,6 +59,20 @@
       content="https://colombiaboatdetailing.com/images/detailing.webp"
     />
     <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Colombia Boat Detailing" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Servicios de Detailing Naval en Cartagena | Colombia Boat Detailing"
+    />
+    <meta
+      name="twitter:description"
+      content="Limpieza de casco en agua, pulido, PPF, ceramic coating y restauracion naval en Cartagena."
+    />
+    <meta
+      name="twitter:image"
+      content="https://colombiaboatdetailing.com/images/detailing.webp"
+    />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -149,7 +173,52 @@
       }
     </style>
 
-    <!-- Schema.org - FAQPage -->
+    <!-- Schema.org - Service Catalog + FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Servicios de Colombia Boat Detailing",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Service",
+              "name": "Limpieza de Casco en Agua",
+              "url": "https://colombiaboatdetailing.com/hull-cleaning.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Service",
+              "name": "PPF para Embarcaciones",
+              "url": "https://colombiaboatdetailing.com/ppf.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Service",
+              "name": "Ceramic Coating",
+              "url": "https://colombiaboatdetailing.com/ceramic-coating.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Service",
+              "name": "Restauracion de Gelcoat",
+              "url": "https://colombiaboatdetailing.com/gelcoat.html"
+            }
+          }
+        ]
+      }
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

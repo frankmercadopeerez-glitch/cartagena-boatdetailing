@@ -11,7 +11,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://colombiaboatdetailing.com/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -31,13 +31,13 @@
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/services.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/blog.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -161,6 +161,8 @@
   <!-- Limpieza de Casco en Agua -->
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/hull-cleaning.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -173,24 +175,32 @@
   <!-- Páginas Locales de Limpieza de Casco -->
   <url>
     <loc>https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/limpieza-casco-baru.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-baru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -207,30 +217,40 @@
   <!-- English Service Pages -->
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/hull-cleaning.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning-baru-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-baru.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>

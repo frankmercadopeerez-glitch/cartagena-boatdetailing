@@ -75,6 +75,24 @@ User-agent: WhatsApp
 Allow: /
 
 # ==============================================
+# BOTS DE IA / RESPUESTAS GENERATIVAS
+# ==============================================
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# ==============================================
 # BLOQUEAR BOTS MALICIOSOS O NO DESEADOS
 # ==============================================
 User-agent: AhrefsBot
@@ -93,5 +111,5 @@ Disallow: /
 # INFORMACIÓN DE CONTACTO
 # Colombia Boat Detailing
 # Marina Manzanillo, Cartagena de Indias, Colombia
-# Tel: +57 300 123 4567
+# Tel: +57 304 430 1112
 # ==============================================
