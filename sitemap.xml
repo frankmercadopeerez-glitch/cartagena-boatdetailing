@@ -158,9 +158,39 @@
     </image:image>
   </url>
 
+  <!-- Limpieza de Casco en Agua -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/hull-cleaning.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://colombiaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:title>Limpieza de cascos de yates y veleros en el agua con buzos en Cartagena</image:title>
+    </image:image>
+  </url>
+
   <!-- ========================================
        ARTÍCULOS DEL BLOG
        ======================================== -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-frecuencia/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/incrustaciones-marinas/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/pulido-vs-limpieza-casco/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
   <url>
     <loc>https://colombiaboatdetailing.com/blog/ceramic-comparativa/</loc>
     <lastmod>2026-05-11</lastmod>
