@@ -1,8 +1,8 @@
-# Cartagena Boat Detailing - Sitio Web Multipágina Profesional
+# Colombia Boat Detailing - Sitio Web Multipágina Profesional
 
 ## 📋 Descripción del Proyecto
 
-Sitio web corporativo profesional para **Cartagena Boat Detailing**, un servicio especializado de detailing marino en Cartagena, Colombia. Diseñado con estándares internacionales y una experiencia de usuario inmersiva.
+Sitio web corporativo profesional para **Colombia Boat Detailing**, un servicio especializado de detailing marino en Cartagena, Colombia. Diseñado con estándares internacionales y una experiencia de usuario inmersiva.
 
 ---
 
@@ -186,7 +186,7 @@ Cada página incluye:
 Personaliza los meta tags:
 
 ```html
-<title>Tu Título | Cartagena Boat Detailing</title>
+<title>Tu Título | Colombia Boat Detailing</title>
 <meta name="description" content="Tu descripción" />
 ```
 
