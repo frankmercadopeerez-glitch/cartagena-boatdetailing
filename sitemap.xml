@@ -381,6 +381,40 @@
   </url>
 
   <!-- ========================================
+       NUEVOS SERVICIOS 2026
+       ======================================== -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/fibra.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://colombiaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:caption>Reparación de Fibra de Vidrio en Cartagena Colombia</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/cubierta-sintetica.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:caption>Instalación Cubierta Madera Sintética Botes Cartagena</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/cubierta-teka.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <image:image>
+      <image:loc>https://colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:caption>Teak Deck Installation Cartagena Colombia</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ========================================
        FACTURAS DE VENTA
        ======================================== -->
   <url>
