@@ -2025,27 +2025,36 @@
 
             <form
               class="space-y-6"
-              onsubmit="event.preventDefault(); window.open('https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Cartagena%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n', '_blank');"
+              action="https://formspree.io/f/xdajpzpj"
+              method="POST"
             >
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label
+                    for="form-nombre"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                     >Nombre</label
                   >
                   <input
+                    id="form-nombre"
                     type="text"
+                    name="nombre"
+                    required
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
                     placeholder="Su Nombre"
                   />
                 </div>
                 <div class="space-y-2">
                   <label
+                    for="form-telefono"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                     >Teléfono</label
                   >
                   <input
+                    id="form-telefono"
                     type="tel"
+                    name="telefono"
+                    required
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
                     placeholder="+57 ..."
                   />
@@ -2055,21 +2064,27 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label
+                    for="form-eslora"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                     >Eslora (Pies)</label
                   >
                   <input
+                    id="form-eslora"
                     type="text"
+                    name="eslora_pies"
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
                     placeholder="Ej: 42, 60, 80..."
                   />
                 </div>
                 <div class="space-y-2">
                   <label
+                    for="form-ubicacion"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                     >Ubicación</label
                   >
                   <select
+                    id="form-ubicacion"
+                    name="ubicacion"
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent text-slate-600"
                   >
                     <option>Marina Manzanillo</option>
@@ -2092,37 +2107,37 @@
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" /> PPF /
+                    <input type="checkbox" name="servicio[]" value="PPF / Protección Máxima" class="accent-gold-400" /> PPF /
                     Protección Máxima
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" /> Pintura de
+                    <input type="checkbox" name="servicio[]" value="Pintura de Motores" class="accent-gold-400" /> Pintura de
                     Motores
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" /> Ceramic
+                    <input type="checkbox" name="servicio[]" value="Ceramic Coating" class="accent-gold-400" /> Ceramic
                     Coating
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" />
+                    <input type="checkbox" name="servicio[]" value="Restauración de Gelcoat" class="accent-gold-400" />
                     Restauración de Gelcoat
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" /> Tapicería
+                    <input type="checkbox" name="servicio[]" value="Tapicería / Interiores" class="accent-gold-400" /> Tapicería
                     / Interiores
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" class="accent-gold-400" /> Plan
+                    <input type="checkbox" name="servicio[]" value="Plan Mantenimiento Mensual" class="accent-gold-400" /> Plan
                     Mantenimiento Mensual
                   </label>
                 </div>
