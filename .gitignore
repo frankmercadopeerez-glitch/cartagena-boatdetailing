@@ -5,6 +5,7 @@ package-lock.json
 css/tailwind-input.css
 _perf.py
 _standardize.py
+_fix-a11y.py
 _canonical-nav-root.html
 _canonical-footer-root.html
 _standardize-nav-footer.ps1

@@ -48,10 +48,12 @@ function initMobileMenu() {
       // Abrir menú
       mobileMenu.classList.remove("translate-x-full");
       mobileMenu.classList.remove("pointer-events-none");
+      mobileMenuBtn.setAttribute("aria-expanded", "true");
     } else {
       // Cerrar menú
       mobileMenu.classList.add("translate-x-full");
       mobileMenu.classList.add("pointer-events-none");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
     }
   }
 
@@ -128,11 +130,16 @@ function initDropdownMenu() {
         document.querySelectorAll(".dropdown-menu.active").forEach((menu) => {
           if (menu.id !== targetId) {
             menu.classList.remove("active");
+            const otherToggle = document.querySelector(
+              `[data-dropdown-toggle="${menu.id}"]`,
+            );
+            if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
           }
         });
 
         // Toggle this dropdown
-        dropdownMenu.classList.toggle("active");
+        const isActive = dropdownMenu.classList.toggle("active");
+        this.setAttribute("aria-expanded", isActive ? "true" : "false");
       }
     });
   });
@@ -145,6 +152,9 @@ function initDropdownMenu() {
     ) {
       document.querySelectorAll(".dropdown-menu").forEach((menu) => {
         menu.classList.remove("active");
+      });
+      document.querySelectorAll("[data-dropdown-toggle]").forEach((toggle) => {
+        toggle.setAttribute("aria-expanded", "false");
       });
     }
   });

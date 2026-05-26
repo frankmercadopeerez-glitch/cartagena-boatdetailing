@@ -151,9 +151,12 @@
       <div class="nav-dropdown">
         <button
           data-dropdown-toggle="servicesDropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicesDropdown"
           class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
         >
-          Servicios <i class="ph-bold ph-caret-down text-xs"></i>
+          Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
         </button>
         <div class="nav-dropdown-content" id="servicesDropdown">
           <a
@@ -192,8 +195,8 @@
           <a href="../../polarizado.html" class="nav-dropdown-link"
             >Polarizado Nanocerámico</a
           >
-          <div class="submenu-item nav-dropdown-link relative">
-            Pintura <i class="ph ph-caret-right text-xs ml-1"></i>
+          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
+            Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
             <div class="submenu-flyout">
               <a
                 href="../../engine-painting.html"
@@ -245,8 +248,11 @@
     <button
       id="mobile-menu-btn"
       class="md:hidden text-white focus:outline-none"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
     >
-      <i class="ph ph-list text-3xl"></i>
+      <i class="ph ph-list text-3xl" aria-hidden="true"></i>
     </button>
   </div>
 </nav>
@@ -256,14 +262,18 @@
     <!-- Mobile Menu -->
 <div
   id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
   class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
   style="opacity: 1; visibility: visible"
 >
   <button
     id="close-menu-btn"
     class="absolute top-6 right-6 text-white/50 hover:text-white"
+    aria-label="Cerrar menú de navegación"
   >
-    <i class="ph ph-x text-3xl"></i>
+    <i class="ph ph-x text-3xl" aria-hidden="true"></i>
   </button>
   <a
     href="../../services.html"
@@ -1071,7 +1081,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
       <div class="md:col-span-1">
         <div class="flex items-center gap-2 mb-4">
-          <i class="ph-fill ph-anchor text-2xl text-gold-400"></i>
+          <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
           <div>
             <p class="text-white text-xs tracking-[0.1em] font-bold">
               COLOMBIA
@@ -1200,7 +1210,7 @@
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
         >
-          <i class="ph ph-whatsapp-logo"></i> WhatsApp
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
         </a>
       </div>
     </div>
