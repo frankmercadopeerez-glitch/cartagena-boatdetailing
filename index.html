@@ -43,12 +43,7 @@
     <meta name="twitter:image" content="https://colombiaboatdetailing.com/images/header.webp" />
 
     <!-- Preconnect FIRST (before any resource fetch) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-
     <!-- Preload LCP image -->
     <link rel="preload" href="images/header.webp" as="image" type="image/webp" fetchpriority="high" />
 
@@ -65,14 +60,15 @@
       .container{width:100%;margin-left:auto;margin-right:auto;padding-left:1.5rem;padding-right:1.5rem}
     </style>
 
+        <!-- Preload critical fonts -->
+    <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="css/tailwind.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
 
     <!-- Google Fonts async -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
-
-    <!-- Phosphor Icons (defer) -->
+<!-- Phosphor Icons (defer) -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
     <style>
       /* Custom Styles for that premium feel */
@@ -2450,7 +2446,6 @@
     </div>
   </div>
 </footer>
-
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Cartagena%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp">

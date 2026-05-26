@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cotizaciones — Colombia Boat Detailing</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <style>
       :root {
         --primary: #050b14;
@@ -431,7 +425,10 @@
         }
       }
     </style>
-  </head>
+      <!-- Preload critical fonts -->
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+</head>
   <body>
     <header>
       <div class="header-inner">
