@@ -502,6 +502,7 @@
   role="dialog"
   aria-modal="true"
   aria-label="Menú de navegación"
+  aria-hidden="true"
   class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
   style="opacity: 1; visibility: visible"
 >
@@ -555,7 +556,7 @@
       </div>
 
       <!-- Naval Particles Canvas -->
-      <canvas id="naval-particles" class="absolute inset-0 z-[1]" style="width:100%;height:100%;"></canvas>
+      <canvas id="naval-particles" class="absolute inset-0 z-[1]" style="width:100%;height:100%;" aria-hidden="true"></canvas>
 
       <!-- Aurora orbs -->
       <div class="aurora-orb aurora-orb-gold" style="width:500px;height:500px;top:-10%;right:-5%;animation-delay:0s;"></div>
@@ -685,6 +686,7 @@
               <img
                 src="images/polichado.webp"
                 alt="Pulido de Gelcoat"
+                loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-gradient-to-b from-transparent to-navy-900/60 md:hidden"></div>
@@ -731,6 +733,7 @@
             <img
               src="images/brillo.webp"
               alt="PPF Protection Film"
+              loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"></div>
@@ -749,6 +752,7 @@
             <img
               src="images/detailing.webp"
               alt="Ceramic Coating"
+              loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"></div>
@@ -767,6 +771,7 @@
             <img
               src="images/cojineria.webp"
               alt="Interior Detailing"
+              loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"></div>
@@ -785,6 +790,7 @@
             <img
               src="images/header.webp"
               alt="Limpieza de Casco en Agua"
+              loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-navy-900/95 via-navy-900/50 to-transparent"></div>
@@ -858,7 +864,7 @@
             <div class="grid grid-cols-2 gap-8 border-t border-slate-100 pt-8">
               <div class="depth-counter">
                 <h4 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">Lifetime</h4>
-                <p class="text-xs text-slate-400 uppercase tracking-widest">
+                <p class="text-xs text-slate-500 uppercase tracking-widest">
                   Garantía en PPF
                 </p>
               </div>
@@ -866,7 +872,7 @@
                 <h4 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">
                   Manzanillo
                 </h4>
-                <p class="text-xs text-slate-400 uppercase tracking-widest">
+                <p class="text-xs text-slate-500 uppercase tracking-widest">
                   Aliados Estratégicos
                 </p>
               </div>
@@ -880,6 +886,7 @@
             <img
               src="images/header%20(2).webp"
               alt="Detailing Process"
+              loading="lazy"
               class="shadow-2xl w-full relative z-0"
             />
             <!-- Sonar rings decoration -->
@@ -2073,7 +2080,7 @@
                     >Teléfono</label
                   >
                   <div class="flex items-center border-b border-slate-300 focus-within:border-gold-400 transition-colors">
-                    <select id="form-country-code" name="codigo_pais" class="text-slate-500 text-sm py-2 pr-2 bg-transparent focus:outline-none cursor-pointer border-r border-slate-200 mr-2 shrink-0" style="max-width:100px">
+                    <select id="form-country-code" name="codigo_pais" aria-label="Código de país" class="text-slate-500 text-sm py-2 pr-2 bg-transparent focus:outline-none cursor-pointer border-r border-slate-200 mr-2 shrink-0" style="max-width:100px">
                       <option value="+57" selected>🇨🇴 +57</option>
                       <option value="+58">🇻🇪 +58</option>
                       <option value="+507">🇵🇦 +507</option>
@@ -2214,10 +2221,11 @@
               </div>
 
               <div class="space-y-2">
-                <label class="text-xs uppercase tracking-widest text-slate-500 font-bold"
+                <label for="form-descripcion" class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                   >Cuéntenos más <span class="font-normal normal-case">(opcional)</span></label
                 >
                 <textarea
+                  id="form-descripcion"
                   name="descripcion"
                   rows="3"
                   class="w-full border border-slate-200 rounded py-2 px-3 text-sm focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300 resize-none"

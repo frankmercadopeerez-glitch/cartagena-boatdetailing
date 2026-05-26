@@ -49,11 +49,13 @@ function initMobileMenu() {
       mobileMenu.classList.remove("translate-x-full");
       mobileMenu.classList.remove("pointer-events-none");
       mobileMenuBtn.setAttribute("aria-expanded", "true");
+      mobileMenu.removeAttribute("aria-hidden");
     } else {
       // Cerrar menú
       mobileMenu.classList.add("translate-x-full");
       mobileMenu.classList.add("pointer-events-none");
       mobileMenuBtn.setAttribute("aria-expanded", "false");
+      mobileMenu.setAttribute("aria-hidden", "true");
     }
   }
 
