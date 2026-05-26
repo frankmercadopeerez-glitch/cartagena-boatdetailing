@@ -78,8 +78,8 @@
             },
             colors: {
               navy: {
-                900: "#0a192f",
-                800: "#112240",
+                900: "#060607",
+                800: "#0e0e10",
               },
               gold: {
                 400: "#d4af37",
@@ -95,17 +95,17 @@
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
-        background: rgba(10, 25, 47, 0.95);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(5, 5, 6, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       }
 
       .hero-overlay {
         background: linear-gradient(
           to top,
-          #0a192f 0%,
-          rgba(10, 25, 47, 0.4) 50%,
-          rgba(10, 25, 47, 0.1) 100%
+          #060607 0%,
+          rgba(4, 4, 6, 0.55) 50%,
+          rgba(2, 2, 4, 0.12) 100%
         );
       }
 
@@ -617,8 +617,7 @@
         >
           Preservamos la elegancia y el valor de su embarcación.
           <span class="hidden md:inline"
-            >Especialistas en Ceramic Coating, Pintura de Motores y el único
-            servicio de PPF con garantía en la ciudad.</span
+            >Pulido de gelcoat desde <strong class="text-gold-400">$80.000/pie</strong>, limpieza subacuática de cascos sin varar y el único servicio de PPF con garantía de por vida en Cartagena.</span
           >
         </p>
 
@@ -650,12 +649,12 @@
       <!-- Wave SVG overlays at bottom -->
       <div class="hero-wave-container wave-2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
-          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="rgba(10,25,47,0.5)"/>
+          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="rgba(4,4,6,0.5)"/>
         </svg>
       </div>
       <div class="hero-wave-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
-          <path d="M0,45 C180,15 360,75 540,45 C720,15 900,75 1080,45 C1260,15 1350,65 1440,45 L1440,90 L0,90 Z" fill="#0a192f"/>
+          <path d="M0,45 C180,15 360,75 540,45 C720,15 900,75 1080,45 C1260,15 1350,65 1440,45 L1440,90 L0,90 Z" fill="#060607"/>
         </svg>
       </div>
 
@@ -705,11 +704,19 @@
               <p class="text-slate-300 font-light text-sm leading-relaxed mb-6 relative z-10">
                 Restauramos el brillo original del gelcoat de tu embarcación mediante corrección en múltiples etapas. Eliminamos oxidación, rayones y hologramas para un acabado showroom.
               </p>
-              <ul class="space-y-2 mb-8 text-sm text-slate-300 relative z-10">
+              <ul class="space-y-2 mb-6 text-sm text-slate-300 relative z-10">
                 <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-gold-400 flex-shrink-0"></i>Corrección de rayones y hologramas</li>
                 <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-gold-400 flex-shrink-0"></i>Eliminación de oxidación severa</li>
                 <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-gold-400 flex-shrink-0"></i>Acabado espejo showroom</li>
               </ul>
+              <!-- Precio -->
+              <div class="relative z-10 mb-6 py-3 px-4 border border-gold-400/30 bg-gold-400/8 inline-flex items-center gap-3">
+                <i class="ph-fill ph-tag text-gold-400 flex-shrink-0"></i>
+                <div>
+                  <span class="text-gold-400 font-black text-lg tracking-tight">Desde $80.000</span>
+                  <span class="text-slate-400 text-xs ml-1">/ pie de eslora</span>
+                </div>
+              </div>
               <span class="inline-flex items-center gap-2 bg-gold-400 text-navy-900 font-bold text-xs uppercase tracking-widest px-6 py-3 self-start transition-all group-hover:bg-white relative z-10">
                 Ver Servicio <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
               </span>
@@ -773,18 +780,20 @@
             </div>
           </a>
 
-          <!-- Boat Painting -->
-          <a href="boat-painting.html" class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]">
+          <!-- Hull Cleaning -->
+          <a href="hull-cleaning.html" class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]">
             <img
-              src="images/pintura.webp"
-              alt="Boat Painting"
+              src="images/header.webp"
+              alt="Limpieza de Casco en Agua"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-900/95 via-navy-900/50 to-transparent"></div>
+            <!-- Badge destacado -->
+            <div class="absolute top-3 left-3 bg-gold-400 text-navy-900 text-[10px] font-black uppercase tracking-widest px-2 py-1">Sin Varar</div>
             <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-              <span class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider">Renovación</span>
-              <h3 class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2">Pintura</h3>
-              <p class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block">Repintado profesional con sistemas Awlgrip</p>
+              <span class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider">Con Buzos · En el Agua</span>
+              <h3 class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2">Limpieza de Casco</h3>
+              <p class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block">Sin sacar la embarcación. Desde $20.000/pie</p>
               <span class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform">
                 Ver más <i class="ph ph-arrow-right ml-1 md:ml-2"></i>
               </span>
@@ -887,7 +896,7 @@
     <!-- Wave divider -->
     <div class="ocean-divider" style="background:white;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
-        <path d="M0,20 C240,60 480,0 720,30 C960,60 1200,10 1440,30 L1440,70 L0,70 Z" fill="#0a192f"/>
+        <path d="M0,20 C240,60 480,0 720,30 C960,60 1200,10 1440,30 L1440,70 L0,70 Z" fill="#060607"/>
       </svg>
     </div>
 
@@ -1174,7 +1183,7 @@
     </section>
 
     <!-- Wave divider: Services → Process -->
-    <div class="ocean-divider" style="background:#0a192f;">
+    <div class="ocean-divider" style="background:#060607;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 70" preserveAspectRatio="none">
         <path d="M0,30 C180,65 360,5 540,35 C720,65 900,10 1080,40 C1260,65 1360,20 1440,30 L1440,70 L0,70 Z" fill="white"/>
       </svg>
