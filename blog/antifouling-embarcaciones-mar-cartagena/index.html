@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Por Qué las Embarcaciones que Permanecen en el Mar Necesitan Antifouling | Colombia Boat Detailing
+      Por Qué las Embarcaciones que Permanecen en el Mar Necesitan Antifouling |
+      Colombia Boat Detailing
     </title>
     <link
       rel="icon"
@@ -74,20 +75,73 @@
     </script>
     <!-- Critical CSS inline -->
     <style>
-      *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth}
-      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: #060607;
+        color: #fff;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        background: rgba(5, 5, 6, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        transition: all 0.3s;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #060607 0%,
+          rgba(4, 4, 6, 0.55) 50%,
+          rgba(2, 2, 4, 0.12) 100%
+        );
+      }
     </style>
     <!-- Preload critical fonts -->
-    <link rel="preload" href="../../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="../../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="../../css/tailwind.css" />
     <link rel="dns-prefetch" href="//unpkg.com" />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <link rel="preload" href="../../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="../../css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="../../css/styles.css" /></noscript>
     <style>
       .glass-nav {
@@ -149,15 +203,22 @@
     </style>
   </head>
   <body class="bg-white text-slate-800 antialiased">
-
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
       <div class="container mx-auto px-6 flex justify-between items-center">
         <a href="../../index.html" class="flex items-center gap-3 group">
-          <i class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"></i>
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
           <div class="flex flex-col">
-            <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
-            <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>
+            <span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >COLOMBIA</span
+            >
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
           </div>
         </a>
         <div class="hidden md:flex items-center gap-10">
@@ -169,41 +230,100 @@
               aria-controls="servicesDropdown"
               class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
             >
-              Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+              Servicios
+              <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
             </button>
             <div class="nav-dropdown-content" id="servicesDropdown">
-              <a href="../../paint-polishing.html" class="nav-dropdown-link flex items-center gap-2">
-                <span class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm">★</span>
+              <a
+                href="../../paint-polishing.html"
+                class="nav-dropdown-link flex items-center gap-2"
+              >
+                <span
+                  class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
+                  >★</span
+                >
                 Pulido de Gelcoat
               </a>
               <div class="mx-4 h-px bg-white/10 my-1"></div>
-              <a href="../../hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>
-              <a href="../../ppf.html" class="nav-dropdown-link">PPF (Paint Protection)</a>
-              <a href="../../ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>
-              <a href="../../gelcoat.html" class="nav-dropdown-link">Restauración Gelcoat</a>
-              <a href="../../fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
-              <a href="../../cubierta-sintetica.html" class="nav-dropdown-link">Cubierta Sintética</a>
-              <a href="../../cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>
-              <a href="../../calcomanias.html" class="nav-dropdown-link">Calcomanías &amp; Gráficos</a>
-              <a href="../../polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>
-              <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
-                Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
+              <a href="../../hull-cleaning.html" class="nav-dropdown-link"
+                >Limpieza de Casco</a
+              >
+              <a href="../../ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="../../ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="../../gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <a href="../../fibra.html" class="nav-dropdown-link"
+                >Reparación de Fibra</a
+              >
+              <a href="../../cubierta-sintetica.html" class="nav-dropdown-link"
+                >Cubierta Sintética</a
+              >
+              <a href="../../cubierta-teka.html" class="nav-dropdown-link"
+                >Cubierta de Teca</a
+              >
+              <a href="../../calcomanias.html" class="nav-dropdown-link"
+                >Calcomanías &amp; Gráficos</a
+              >
+              <a href="../../polarizado.html" class="nav-dropdown-link"
+                >Polarizado Nanocerámico</a
+              >
+              <button
+                type="button"
+                class="submenu-item nav-dropdown-link relative w-full text-left"
+              >
+                Pintura
+                <i
+                  class="ph ph-caret-right text-xs ml-1"
+                  aria-hidden="true"
+                ></i>
                 <div class="submenu-flyout">
-                  <a href="../../engine-painting.html" class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm">Pintura de Motores</a>
-                  <a href="../../boat-painting.html" class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>
-                  <a href="../../bottom-paint.html" class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>
+                  <a
+                    href="../../engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="../../boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa</a
+                  >
+                  <a
+                    href="../../bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
                 </div>
               </button>
-              <a href="../../interior-detailing.html" class="nav-dropdown-link">Interiores &amp; Tapicería</a>
-              <a href="../../anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>
-              <a href="../../technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>
+              <a href="../../interior-detailing.html" class="nav-dropdown-link"
+                >Interiores &amp; Tapicería</a
+              >
+              <a href="../../anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="../../technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
             </div>
           </div>
-          <a href="../../about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Sobre Nosotros</a>
-          <a href="../../blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>
+          <a
+            href="../../about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
+          >
+          <a
+            href="../../blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
+          >
           <a
             href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
-            target="_blank" rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
             class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
           >
             Agendar Cita
@@ -231,37 +351,71 @@
       class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
       style="opacity: 1; visibility: visible"
     >
-      <button id="close-menu-btn" class="absolute top-6 right-6 text-white/50 hover:text-white" aria-label="Cerrar menú de navegación">
+      <button
+        id="close-menu-btn"
+        class="absolute top-6 right-6 text-white/50 hover:text-white"
+        aria-label="Cerrar menú de navegación"
+      >
         <i class="ph ph-x text-3xl" aria-hidden="true"></i>
       </button>
-      <a href="../../services.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Servicios</a>
-      <a href="../../about.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Sobre Nosotros</a>
-      <a href="../../blog.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Blog</a>
+      <a
+        href="../../services.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Servicios</a
+      >
+      <a
+        href="../../about.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Sobre Nosotros</a
+      >
+      <a
+        href="../../blog.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Blog</a
+      >
       <a
         href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
         class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
-      >Agendar Cita</a>
+        >Agendar Cita</a
+      >
     </div>
 
     <!-- Hero -->
     <section class="pt-32 pb-16 bg-navy-900 text-white">
       <div class="container mx-auto px-6 max-w-4xl">
         <div class="flex items-center gap-2 mb-4">
-          <span class="bg-gold-400 text-navy-900 text-xs font-bold px-3 py-1 uppercase tracking-wider">Pintura | Protección Marina</span>
+          <span
+            class="bg-gold-400 text-navy-900 text-xs font-bold px-3 py-1 uppercase tracking-wider"
+            >Pintura | Protección Marina</span
+          >
         </div>
         <h1 class="font-serif text-4xl md:text-5xl mb-6 leading-tight">
-          Por Qué las Embarcaciones que Permanecen en el Mar<br class="hidden md:block"> Necesitan Protección Antifouling
+          Por Qué las Embarcaciones que Permanecen en el Mar<br
+            class="hidden md:block"
+          />
+          Necesitan Protección Antifouling
         </h1>
         <p class="text-xl text-slate-300 font-light mb-6 max-w-3xl">
-          En las aguas tropicales de Cartagena a 28 °C, un casco sin antifouling está
-          colonizado en semanas. Descubra el impacto real en velocidad, combustible y
-          estructura de su embarcación, y cómo las marcas líderes del mundo la protegen.
+          En las aguas tropicales de Cartagena a 28 °C, un casco sin antifouling
+          está colonizado en semanas. Descubra el impacto real en velocidad,
+          combustible y estructura de su embarcación, y cómo las marcas líderes
+          del mundo la protegen.
         </p>
         <div class="flex flex-wrap items-center gap-6 text-sm text-slate-400">
-          <span><i class="ph ph-calendar text-gold-400 mr-1" aria-hidden="true"></i>26 de mayo, 2026</span>
-          <span><i class="ph ph-clock text-gold-400 mr-1" aria-hidden="true"></i>10 min de lectura</span>
-          <span><i class="ph ph-user text-gold-400 mr-1" aria-hidden="true"></i>Colombia Boat Detailing</span>
+          <span
+            ><i class="ph ph-calendar text-gold-400 mr-1" aria-hidden="true"></i
+            >26 de mayo, 2026</span
+          >
+          <span
+            ><i class="ph ph-clock text-gold-400 mr-1" aria-hidden="true"></i>10
+            min de lectura</span
+          >
+          <span
+            ><i class="ph ph-user text-gold-400 mr-1" aria-hidden="true"></i
+            >Colombia Boat Detailing</span
+          >
         </div>
       </div>
     </section>
@@ -270,7 +424,6 @@
     <article class="py-16">
       <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
-
           <img
             src="../../images/pintura.webp"
             alt="Aplicación de pintura antifouling en casco de yate en Cartagena"
@@ -279,305 +432,368 @@
           />
 
           <div class="prose">
-
             <p>
-              Existe una diferencia crítica entre una embarcación que sale al mar los fines de semana
-              y otra que vive permanentemente en el agua. Para la segunda, el antifouling no es una
-              opción ni un lujo: es la medida de protección más importante que puede tomar el propietario.
+              Existe una diferencia crítica entre una embarcación que sale al
+              mar los fines de semana y otra que vive permanentemente en el
+              agua. Para la segunda, el antifouling no es una opción ni un lujo:
+              es la medida de protección más importante que puede tomar el
+              propietario.
             </p>
             <p>
-              En Cartagena de Indias, con aguas del Mar Caribe que oscilan entre 27 y 30 °C durante
-              todo el año y una biodiversidad marina tropical extraordinariamente agresiva, la
-              colonización biológica del casco es un proceso que comienza en días, no en meses.
-              Este artículo explica por qué ocurre, qué consecuencias tiene y cómo la pintura
+              En Cartagena de Indias, con aguas del Mar Caribe que oscilan entre
+              27 y 30 °C durante todo el año y una biodiversidad marina tropical
+              extraordinariamente agresiva, la colonización biológica del casco
+              es un proceso que comienza en días, no en meses. Este artículo
+              explica por qué ocurre, qué consecuencias tiene y cómo la pintura
               antifouling de calidad profesional detiene ese proceso.
             </p>
 
             <h2>El Enemigo Invisible: Qué es el Fouling y Cómo Ataca</h2>
             <p>
-              El fouling (o incrustación biológica marina) es la colonización progresiva de la
-              superficie sumergida del casco por organismos marinos. No ocurre de golpe, sino en
-              etapas bien definidas que los biólogos marinos conocen perfectamente:
+              El fouling (o incrustación biológica marina) es la colonización
+              progresiva de la superficie sumergida del casco por organismos
+              marinos. No ocurre de golpe, sino en etapas bien definidas que los
+              biólogos marinos conocen perfectamente:
             </p>
 
             <ul>
               <li>
-                <strong>Semana 1–2: Biofilm bacteriano.</strong> Las primeras bacterias y diatómicas
-                forman una película microscópica invisible sobre el casco. Esta capa, llamada
-                "biofouling primario", actúa como un velcro químico que atrae a organismos más grandes.
+                <strong>Semana 1–2: Biofilm bacteriano.</strong> Las primeras
+                bacterias y diatómicas forman una película microscópica
+                invisible sobre el casco. Esta capa, llamada "biofouling
+                primario", actúa como un velcro químico que atrae a organismos
+                más grandes.
               </li>
               <li>
-                <strong>Semana 2–4: Algas filamentosas.</strong> Las cianobacterias y algas verdes
-                comienzan a crecer visiblemente. El casco toma una tonalidad verdosa y la resistencia
+                <strong>Semana 2–4: Algas filamentosas.</strong> Las
+                cianobacterias y algas verdes comienzan a crecer visiblemente.
+                El casco toma una tonalidad verdosa y la resistencia
                 hidrodinámica aumenta de forma medible.
               </li>
               <li>
-                <strong>Mes 1–3: Invertebrados macroscópicos.</strong> Briozoos, tunicados y larvas
-                de balanos y mejillones se adhieren. Cada balano adulto produce un cemento biológico
-                cuya fuerza de adhesión supera los 2 kg/cm² — más fuerte que la mayoría de los
+                <strong>Mes 1–3: Invertebrados macroscópicos.</strong> Briozoos,
+                tunicados y larvas de balanos y mejillones se adhieren. Cada
+                balano adulto produce un cemento biológico cuya fuerza de
+                adhesión supera los 2 kg/cm² — más fuerte que la mayoría de los
                 adhesivos comerciales.
               </li>
               <li>
-                <strong>Mes 3–12: Colonización completa.</strong> Una carena completamente incrustada
-                puede acumular varios centímetros de organismos. El peso añadido puede ser de
-                cientos de kilogramos en embarcaciones grandes.
+                <strong>Mes 3–12: Colonización completa.</strong> Una carena
+                completamente incrustada puede acumular varios centímetros de
+                organismos. El peso añadido puede ser de cientos de kilogramos
+                en embarcaciones grandes.
               </li>
             </ul>
 
             <div class="warning-box">
               <p class="text-sm text-slate-700 mb-0">
-                <strong>El factor Cartagena:</strong> Las temperaturas tropicales del Caribe colombiano
-                aceleran cada etapa de este proceso entre 4 y 8 veces respecto a las aguas del
-                Mediterráneo o el Atlántico Norte. Lo que tarda 6 meses en aparecer en España
+                <strong>El factor Cartagena:</strong> Las temperaturas
+                tropicales del Caribe colombiano aceleran cada etapa de este
+                proceso entre 4 y 8 veces respecto a las aguas del Mediterráneo
+                o el Atlántico Norte. Lo que tarda 6 meses en aparecer en España
                 ocurre en <strong>6–8 semanas en Cartagena</strong>.
               </p>
             </div>
 
             <h2>El Coste Real de No Tener Antifouling</h2>
             <p>
-              Los propietarios que postergan el antifouling suelen enfocarse solo en el coste del
-              servicio. Rara vez calculan el coste de NO tenerlo. Los números son contundentes:
+              Los propietarios que postergan el antifouling suelen enfocarse
+              solo en el coste del servicio. Rara vez calculan el coste de NO
+              tenerlo. Los números son contundentes:
             </p>
 
             <!-- Stats grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-8 not-prose">
               <div class="stat-card">
                 <p class="text-3xl font-bold text-navy-900 mb-1">2–3</p>
-                <p class="text-xs text-slate-500 font-light">nudos de velocidad perdidos con fouling severo</p>
+                <p class="text-xs text-slate-500 font-light">
+                  nudos de velocidad perdidos con fouling severo
+                </p>
               </div>
               <div class="stat-card">
                 <p class="text-3xl font-bold text-navy-900 mb-1">20%</p>
-                <p class="text-xs text-slate-500 font-light">aumento en consumo de combustible</p>
+                <p class="text-xs text-slate-500 font-light">
+                  aumento en consumo de combustible
+                </p>
               </div>
               <div class="stat-card">
                 <p class="text-3xl font-bold text-navy-900 mb-1">8x</p>
-                <p class="text-xs text-slate-500 font-light">más rápido el fouling en aguas tropicales vs. templadas</p>
+                <p class="text-xs text-slate-500 font-light">
+                  más rápido el fouling en aguas tropicales vs. templadas
+                </p>
               </div>
               <div class="stat-card">
                 <p class="text-3xl font-bold text-navy-900 mb-1">6 sem.</p>
-                <p class="text-xs text-slate-500 font-light">tiempo para colonización visible en Cartagena sin protección</p>
+                <p class="text-xs text-slate-500 font-light">
+                  tiempo para colonización visible en Cartagena sin protección
+                </p>
               </div>
             </div>
 
             <h3>Impacto en el Motor y el Combustible</h3>
             <p>
-              Un casco incrustado obliga al motor a trabajar mucho más para mantener la misma
-              velocidad. Si su yate de 50 pies consume 80 litros/hora a plena carga con el casco
-              limpio, con fouling severo puede consumir 96 litros/hora o más para alcanzar la
-              misma velocidad. En una salida de 8 horas, eso son <strong>128 litros adicionales
-              de combustible</strong>. Solo en ese día, el fouling le cuesta más de lo que ahorró
-              al posponer el antifouling.
+              Un casco incrustado obliga al motor a trabajar mucho más para
+              mantener la misma velocidad. Si su yate de 50 pies consume 80
+              litros/hora a plena carga con el casco limpio, con fouling severo
+              puede consumir 96 litros/hora o más para alcanzar la misma
+              velocidad. En una salida de 8 horas, eso son
+              <strong>128 litros adicionales de combustible</strong>. Solo en
+              ese día, el fouling le cuesta más de lo que ahorró al posponer el
+              antifouling.
             </p>
 
             <h3>Daño Estructural al Casco</h3>
             <p>
-              Más allá del rendimiento, el fouling actaca físicamente el casco. Los organismos
-              incrustantes segregan ácidos orgánicos y compuestos que degradan el gelcoat y la
-              resina epóxica. En cascos de fibra de vidrio, este proceso puede iniciar o
-              acelerar la <strong>ósmosis</strong> — la absorción de agua por la resina que
-              causa ampollas, delaminación y, en casos graves, pérdida de integridad estructural.
-              Reparar daño osmótico en un casco de 50 pies puede costar
-              <strong>entre $15 y $40 millones de pesos</strong>. La inversión en antifouling
-              es marginal comparada con esa alternativa.
+              Más allá del rendimiento, el fouling actaca físicamente el casco.
+              Los organismos incrustantes segregan ácidos orgánicos y compuestos
+              que degradan el gelcoat y la resina epóxica. En cascos de fibra de
+              vidrio, este proceso puede iniciar o acelerar la
+              <strong>ósmosis</strong> — la absorción de agua por la resina que
+              causa ampollas, delaminación y, en casos graves, pérdida de
+              integridad estructural. Reparar daño osmótico en un casco de 50
+              pies puede costar
+              <strong>entre $15 y $40 millones de pesos</strong>. La inversión
+              en antifouling es marginal comparada con esa alternativa.
             </p>
 
             <h3>Devaluación de la Embarcación</h3>
             <p>
-              Un comprador que inspecciona un casco con daño de fouling o señales de ósmosis
-              restará entre un 15 y un 30 % del valor de tasación sin dudarlo. Un historial
-              de mantenimiento de antifouling documentado es un argumento de venta tangible
-              que protege la inversión a largo plazo.
+              Un comprador que inspecciona un casco con daño de fouling o
+              señales de ósmosis restará entre un 15 y un 30 % del valor de
+              tasación sin dudarlo. Un historial de mantenimiento de antifouling
+              documentado es un argumento de venta tangible que protege la
+              inversión a largo plazo.
             </p>
 
-            <h2>Por Qué las Embarcaciones Permanentes en el Mar son las Más Vulnerables</h2>
+            <h2>
+              Por Qué las Embarcaciones Permanentes en el Mar son las Más
+              Vulnerables
+            </h2>
             <p>
-              Las embarcaciones que solo salen los fines de semana tienen algo que protege
-              parcialmente su casco incluso sin antifouling: el movimiento del agua al navegar
-              crea fricción que arranca las primeras etapas del fouling. Una embarcación que
-              avanza a 15 nudos ejerce suficiente turbulencia sobre la carena para dificultar
-              la adhesión de larvas.
+              Las embarcaciones que solo salen los fines de semana tienen algo
+              que protege parcialmente su casco incluso sin antifouling: el
+              movimiento del agua al navegar crea fricción que arranca las
+              primeras etapas del fouling. Una embarcación que avanza a 15 nudos
+              ejerce suficiente turbulencia sobre la carena para dificultar la
+              adhesión de larvas.
             </p>
             <p>
-              Una embarcación permanentemente amarrada o fondeada no tiene ese aliado. La carena
-              pasa días y semanas completamente inmóvil en agua caliente, a menudo en zonas
-              de baja corriente como marinas cerradas o bahías protegidas. Las condiciones son
-              <strong>perfectas para el fouling</strong> y terribles sin antifouling.
+              Una embarcación permanentemente amarrada o fondeada no tiene ese
+              aliado. La carena pasa días y semanas completamente inmóvil en
+              agua caliente, a menudo en zonas de baja corriente como marinas
+              cerradas o bahías protegidas. Las condiciones son
+              <strong>perfectas para el fouling</strong> y terribles sin
+              antifouling.
             </p>
 
             <div class="info-box">
               <p class="text-sm text-slate-700">
-                <strong>Regla de campo:</strong> En Cartagena, una embarcación permanente en el
-                agua sin antifouling debe contar con que necesitará un varado de emergencia para
-                limpieza agresiva de carena y re-aplicación de pintura antes de 3–4 meses.
-                Ese varado inesperado suele costar más que el mantenimiento preventivo planificado.
+                <strong>Regla de campo:</strong> En Cartagena, una embarcación
+                permanente en el agua sin antifouling debe contar con que
+                necesitará un varado de emergencia para limpieza agresiva de
+                carena y re-aplicación de pintura antes de 3–4 meses. Ese varado
+                inesperado suele costar más que el mantenimiento preventivo
+                planificado.
               </p>
             </div>
 
             <h2>Las Dos Marcas Que Usan los Profesionales en el Caribe</h2>
             <p>
-              No todos los antifoulings son iguales. En el mercado colombiano circulan pinturas
-              de procedencia dudosa y rendimiento insuficiente para las condiciones del Caribe.
-              En Colombia Boat Detailing trabajamos exclusivamente con las dos marcas que
-              definen el estándar mundial de la industria marina:
+              No todos los antifoulings son iguales. En el mercado colombiano
+              circulan pinturas de procedencia dudosa y rendimiento insuficiente
+              para las condiciones del Caribe. En Colombia Boat Detailing
+              trabajamos exclusivamente con las dos marcas que definen el
+              estándar mundial de la industria marina:
             </p>
 
             <h3>1. International Paint (AkzoNobel) — La Marca Nº1 del Mundo</h3>
             <p>
               Con más de 130 años de historia y presente en más de 100 países,
-              <strong>International Paint</strong> es la empresa de pinturas marinas más
-              vendida globalmente. Sus productos son la referencia que usan los astilleros
-              de superyates, flotas de charter del Caribe y constructores navales para
-              embarcaciones de recreo de alta gama.
+              <strong>International Paint</strong> es la empresa de pinturas
+              marinas más vendida globalmente. Sus productos son la referencia
+              que usan los astilleros de superyates, flotas de charter del
+              Caribe y constructores navales para embarcaciones de recreo de
+              alta gama.
             </p>
             <p>
-              Para embarcaciones permanentes en el mar en Cartagena, destacamos dos
-              productos de su catálogo:
+              Para embarcaciones permanentes en el mar en Cartagena, destacamos
+              dos productos de su catálogo:
             </p>
             <ul>
               <li>
-                <strong>Interspeed 640:</strong> antifouling de alto espesor formulado
-                específicamente para cascos que permanecen en el agua de forma continua.
-                Su alta carga de óxido cuproso proporciona protección intensa durante
-                hasta 24 meses en aguas tropicales cálidas. Ideal para yates de fondeo
-                permanente, veleros oceánicos y embarcaciones de pesca deportiva.
+                <strong>Interspeed 640:</strong> antifouling de alto espesor
+                formulado específicamente para cascos que permanecen en el agua
+                de forma continua. Su alta carga de óxido cuproso proporciona
+                protección intensa durante hasta 24 meses en aguas tropicales
+                cálidas. Ideal para yates de fondeo permanente, veleros
+                oceánicos y embarcaciones de pesca deportiva.
               </li>
               <li>
-                <strong>Micron Extra:</strong> tecnología auto-pulimentada de copolímero
-                (SPC). La capa de pintura se desgasta de forma controlada y precisa,
-                liberando biocidas de manera uniforme durante toda la vida de la pintura.
-                La solución de mayor rendimiento para yates que combinan fondeo largo con
-                navegación oceánica.
+                <strong>Micron Extra:</strong> tecnología auto-pulimentada de
+                copolímero (SPC). La capa de pintura se desgasta de forma
+                controlada y precisa, liberando biocidas de manera uniforme
+                durante toda la vida de la pintura. La solución de mayor
+                rendimiento para yates que combinan fondeo largo con navegación
+                oceánica.
               </li>
             </ul>
 
             <h3>2. Hempel — La Ingeniería Danesa al Servicio del Mar</h3>
             <p>
-              Fundada en Copenhague en 1915, <strong>Hempel</strong> es el proveedor de
-              confianza para las principales flotas navales, puertos y astilleros de
-              Europa, el Mediterráneo y el Caribe. Su departamento de I+D desarrolla
-              continuamente fórmulas adaptadas a biomas marinos específicos, incluyendo
-              el Caribe tropical.
+              Fundada en Copenhague en 1915, <strong>Hempel</strong> es el
+              proveedor de confianza para las principales flotas navales,
+              puertos y astilleros de Europa, el Mediterráneo y el Caribe. Su
+              departamento de I+D desarrolla continuamente fórmulas adaptadas a
+              biomas marinos específicos, incluyendo el Caribe tropical.
             </p>
             <ul>
               <li>
-                <strong>Hempel Mille NCT 7185:</strong> antifouling de copolímero de
-                última generación sin tributilestaño. Liberación de biocidas mediante
-                hidrólisis controlada por el pH del agua marina, lo que garantiza
-                una tasa de desgaste constante independientemente de si la embarcación
-                navega o está amarrada. Protección comprobada de 24–36 meses.
+                <strong>Hempel Mille NCT 7185:</strong> antifouling de
+                copolímero de última generación sin tributilestaño. Liberación
+                de biocidas mediante hidrólisis controlada por el pH del agua
+                marina, lo que garantiza una tasa de desgaste constante
+                independientemente de si la embarcación navega o está amarrada.
+                Protección comprobada de 24–36 meses.
               </li>
               <li>
-                <strong>Hempel Olympic Plus:</strong> formulación ablativa de alta
-                carga de cobre para aguas con fouling tropical agresivo. La opción
-                que recomendamos para embarcaciones que pasan periodos largos en
-                fondeos de la bahía de Cartagena, archipiélago de las Islas del
-                Rosario o costas de Barú, donde la presión biológica es máxima.
+                <strong>Hempel Olympic Plus:</strong> formulación ablativa de
+                alta carga de cobre para aguas con fouling tropical agresivo. La
+                opción que recomendamos para embarcaciones que pasan periodos
+                largos en fondeos de la bahía de Cartagena, archipiélago de las
+                Islas del Rosario o costas de Barú, donde la presión biológica
+                es máxima.
               </li>
             </ul>
 
             <div class="info-box">
               <p class="text-sm text-slate-700">
-                <strong>¿Cómo elegimos el producto correcto?</strong> Antes de aplicar,
-                evaluamos el tipo de casco (fibra, aluminio, acero), el historial de
-                capas anteriores, el tiempo estimado de permanencia en el agua y las
-                zonas de navegación habituales. International Paint para alta rotación
-                y navegación; Hempel para fondeo continuo en zonas biológicamente activas.
-                Consultamos antes de comprar.
+                <strong>¿Cómo elegimos el producto correcto?</strong> Antes de
+                aplicar, evaluamos el tipo de casco (fibra, aluminio, acero), el
+                historial de capas anteriores, el tiempo estimado de permanencia
+                en el agua y las zonas de navegación habituales. International
+                Paint para alta rotación y navegación; Hempel para fondeo
+                continuo en zonas biológicamente activas. Consultamos antes de
+                comprar.
               </p>
             </div>
 
             <h2>La Preparación es el 70 % del Resultado</h2>
             <p>
-              Uno de los errores más comunes que vemos en el sector es pintar antifouling
-              sobre una carena mal preparada. El mejor antifouling del mundo falla si se
-              aplica sobre grasa, salitre incrustado, capas viejas descascaradas o una
-              superficie con porosidades.
+              Uno de los errores más comunes que vemos en el sector es pintar
+              antifouling sobre una carena mal preparada. El mejor antifouling
+              del mundo falla si se aplica sobre grasa, salitre incrustado,
+              capas viejas descascaradas o una superficie con porosidades.
             </p>
             <p>
-              El proceso profesional que aplicamos en Colombia Boat Detailing comienza
-              siempre con:
+              El proceso profesional que aplicamos en Colombia Boat Detailing
+              comienza siempre con:
             </p>
             <ul>
               <li>
-                <strong>Descontaminación química:</strong> lavado de alta presión (250 bar)
-                con agentes desengrasantes marinos. Removemos salitre, aceites, biota adherida
-                y residuos que contaminarían la adherencia de la nueva pintura.
+                <strong>Descontaminación química:</strong> lavado de alta
+                presión (250 bar) con agentes desengrasantes marinos. Removemos
+                salitre, aceites, biota adherida y residuos que contaminarían la
+                adherencia de la nueva pintura.
               </li>
               <li>
-                <strong>Lijado integral:</strong> lijado mecánico con granos progresivos
-                (80 → 120 → 180) para crear el perfil de adherencia correcto sobre el gelcoat
-                o la capa de antifouling anterior compatible. Sin este paso, la nueva capa
-                se desprenderá prematuramente.
+                <strong>Lijado integral:</strong> lijado mecánico con granos
+                progresivos (80 → 120 → 180) para crear el perfil de adherencia
+                correcto sobre el gelcoat o la capa de antifouling anterior
+                compatible. Sin este paso, la nueva capa se desprenderá
+                prematuramente.
               </li>
               <li>
-                <strong>Primer marino:</strong> aplicamos International Primocon o Hempel
-                Underwater Primer 12450 como capa de adhesión entre el casco y el antifouling.
-                Crítico en cascos de aluminio o acero y cuando se cambia de marca.
+                <strong>Primer marino:</strong> aplicamos International Primocon
+                o Hempel Underwater Primer 12450 como capa de adhesión entre el
+                casco y el antifouling. Crítico en cascos de aluminio o acero y
+                cuando se cambia de marca.
               </li>
             </ul>
             <p>
-              Solo después de esa preparación completa aplicamos el antifouling en 2–3 capas
-              con los tiempos de reposo controlados entre manos. El resultado: una carena
-              perfectamente protegida que cumple los 24–36 meses prometidos por el fabricante.
+              Solo después de esa preparación completa aplicamos el antifouling
+              en 2–3 capas con los tiempos de reposo controlados entre manos. El
+              resultado: una carena perfectamente protegida que cumple los 24–36
+              meses prometidos por el fabricante.
             </p>
 
             <h2>¿Cuánto Cuesta el Antifouling Profesional en Cartagena?</h2>
             <p>
-              Trabajamos con un precio transparente por pie de eslora que incluye
-              absolutamente todo el proceso descrito arriba. No hay costes ocultos
-              ni materiales facturados por separado.
+              Trabajamos con un precio transparente por pie de eslora que
+              incluye absolutamente todo el proceso descrito arriba. No hay
+              costes ocultos ni materiales facturados por separado.
             </p>
             <p>
-              <strong>$240,000 COP por pie de eslora.</strong> Ejemplo práctico: un yate
-              de 50 pies tiene un coste total de <strong>$12,000,000 COP</strong> por el
-              servicio completo (descontaminación + lijado + primer + 2–3 capas antifouling
-              con International Paint o Hempel).
+              <strong>$240,000 COP por pie de eslora.</strong> Ejemplo práctico:
+              un yate de 50 pies tiene un coste total de
+              <strong>$12,000,000 COP</strong> por el servicio completo
+              (descontaminación + lijado + primer + 2–3 capas antifouling con
+              International Paint o Hempel).
             </p>
             <p>
-              El varado e izamiento en astillero se cotiza por separado según el tonelaje
-              y el astillero disponible. Le ayudamos a coordinarlo.
+              El varado e izamiento en astillero se cotiza por separado según el
+              tonelaje y el astillero disponible. Le ayudamos a coordinarlo.
             </p>
 
             <div class="info-box">
               <p class="text-sm text-slate-700">
-                <strong>¿Cada cuánto tiempo hay que repetirlo?</strong> En Cartagena, para
-                embarcaciones permanentes en el agua, recomendamos aplicación anual
-                (cada 10–12 meses) con pinturas estándar, o cada 18–24 meses con los
-                productos SPC premium de International Paint o Hempel correctamente aplicados.
-                Combine con <a href="../../hull-cleaning.html" class="text-gold-600 hover:underline">lavados
-                técnicos cada 3 meses</a> para maximizar la vida útil del antifouling.
+                <strong>¿Cada cuánto tiempo hay que repetirlo?</strong> En
+                Cartagena, para embarcaciones permanentes en el agua,
+                recomendamos aplicación anual (cada 10–12 meses) con pinturas
+                estándar, o cada 18–24 meses con los productos SPC premium de
+                International Paint o Hempel correctamente aplicados. Combine
+                con
+                <a
+                  href="../../hull-cleaning.html"
+                  class="text-gold-600 hover:underline"
+                  >lavados técnicos cada 3 meses</a
+                >
+                para maximizar la vida útil del antifouling.
               </p>
             </div>
 
-            <h2>Conclusión: El Antifouling no es un Gasto, es una Póliza de Seguro</h2>
+            <h2>
+              Conclusión: El Antifouling no es un Gasto, es una Póliza de Seguro
+            </h2>
             <p>
-              Si su embarcación vive en el mar en Cartagena, el antifouling con marcas
-              profesionales como International Paint o Hempel, aplicado con la preparación
-              correcta, es la inversión de mantenimiento con mayor retorno que puede hacer.
-              Protege la velocidad, el consumo de combustible, la integridad estructural del
-              casco y el valor de reventa de su embarcación.
+              Si su embarcación vive en el mar en Cartagena, el antifouling con
+              marcas profesionales como International Paint o Hempel, aplicado
+              con la preparación correcta, es la inversión de mantenimiento con
+              mayor retorno que puede hacer. Protege la velocidad, el consumo de
+              combustible, la integridad estructural del casco y el valor de
+              reventa de su embarcación.
             </p>
             <p>
-              El coste de no hacerlo —combustible extra, reparaciones de casco, varados
-              de emergencia— supera con creces el coste del servicio preventivo. Los números
-              no mienten: <strong>un yate de 50 pies con fouling severo puede gastar más
-              combustible adicional en un año de lo que cuesta el antifouling completo.</strong>
+              El coste de no hacerlo —combustible extra, reparaciones de casco,
+              varados de emergencia— supera con creces el coste del servicio
+              preventivo. Los números no mienten:
+              <strong
+                >un yate de 50 pies con fouling severo puede gastar más
+                combustible adicional en un año de lo que cuesta el antifouling
+                completo.</strong
+              >
             </p>
-
-          </div><!-- /prose -->
+          </div>
+          <!-- /prose -->
 
           <!-- CTA inline -->
           <div class="mt-12 bg-navy-900 text-white rounded-sm p-10 text-center">
-            <p class="text-gold-400 text-xs tracking-[0.3em] uppercase font-semibold mb-3">¿Lista su embarcación?</p>
-            <h3 class="font-serif text-3xl mb-4">Solicite su Presupuesto de Antifouling</h3>
+            <p
+              class="text-gold-400 text-xs tracking-[0.3em] uppercase font-semibold mb-3"
+            >
+              ¿Lista su embarcación?
+            </p>
+            <h3 class="font-serif text-3xl mb-4">
+              Solicite su Presupuesto de Antifouling
+            </h3>
             <p class="text-slate-300 font-light mb-8 max-w-lg mx-auto">
-              Díganos los pies de eslora y el tipo de embarcación. Le damos presupuesto
-              inmediato por WhatsApp. $240,000/pie · todo incluido.
+              Díganos los pies de eslora y el tipo de embarcación. Le damos
+              presupuesto inmediato por WhatsApp. $240,000/pie · todo incluido.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
               <a
                 href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20pintura%20antifouling%20para%20mi%20embarcaci%C3%B3n%20que%20permanece%20en%20el%20mar"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase hover:bg-white transition"
               >
                 Cotizar por WhatsApp
@@ -593,41 +809,116 @@
 
           <!-- Tags -->
           <div class="mt-10 flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">Antifouling</span>
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">Pintura de Casco</span>
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">International Paint</span>
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">Hempel</span>
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">Cartagena</span>
-            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium">Mantenimiento Marino</span>
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >Antifouling</span
+            >
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >Pintura de Casco</span
+            >
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >International Paint</span
+            >
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >Hempel</span
+            >
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >Cartagena</span
+            >
+            <span
+              class="bg-slate-100 text-slate-600 text-xs px-3 py-1.5 rounded-sm font-medium"
+              >Mantenimiento Marino</span
+            >
           </div>
 
           <!-- Related articles -->
           <div class="mt-14">
-            <h3 class="font-serif text-2xl text-navy-900 mb-8">Artículos Relacionados</h3>
+            <h3 class="font-serif text-2xl text-navy-900 mb-8">
+              Artículos Relacionados
+            </h3>
             <div class="grid md:grid-cols-2 gap-6">
-              <a href="../../bottom-paint.html" class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group">
-                <p class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2">Servicio</p>
-                <p class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2">Pintura Antifouling Profesional en Cartagena</p>
-                <p class="text-slate-500 text-sm font-light">Desde $240,000/pie. Descontaminación, lijado, primer y antifouling premium con International Paint y Hempel.</p>
+              <a
+                href="../../bottom-paint.html"
+                class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group"
+              >
+                <p
+                  class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2"
+                >
+                  Servicio
+                </p>
+                <p
+                  class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2"
+                >
+                  Pintura Antifouling Profesional en Cartagena
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Desde $240,000/pie. Descontaminación, lijado, primer y
+                  antifouling premium con International Paint y Hempel.
+                </p>
               </a>
-              <a href="../pintura-antifouling-yate-colombia/" class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group">
-                <p class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2">Blog</p>
-                <p class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2">Pintura Antifouling para Yates: Cuándo y Qué Usar</p>
-                <p class="text-slate-500 text-sm font-light">Guía sobre tipos de antifouling, frecuencia de aplicación y productos recomendados para el Caribe colombiano.</p>
+              <a
+                href="../pintura-antifouling-yate-colombia/"
+                class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group"
+              >
+                <p
+                  class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2"
+                >
+                  Blog
+                </p>
+                <p
+                  class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2"
+                >
+                  Pintura Antifouling para Yates: Cuándo y Qué Usar
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Guía sobre tipos de antifouling, frecuencia de aplicación y
+                  productos recomendados para el Caribe colombiano.
+                </p>
               </a>
-              <a href="../limpieza-casco-frecuencia/" class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group">
-                <p class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2">Blog</p>
-                <p class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2">¿Cada Cuánto Limpiar el Casco?</p>
-                <p class="text-slate-500 text-sm font-light">Frecuencia recomendada de limpieza de carena según tipo de embarcación y uso en Cartagena.</p>
+              <a
+                href="../limpieza-casco-frecuencia/"
+                class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group"
+              >
+                <p
+                  class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2"
+                >
+                  Blog
+                </p>
+                <p
+                  class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2"
+                >
+                  ¿Cada Cuánto Limpiar el Casco?
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Frecuencia recomendada de limpieza de carena según tipo de
+                  embarcación y uso en Cartagena.
+                </p>
               </a>
-              <a href="../fouling-yates-senales-alerta/" class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group">
-                <p class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2">Blog</p>
-                <p class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2">Señales de Alerta de Fouling en su Yate</p>
-                <p class="text-slate-500 text-sm font-light">Cómo identificar a tiempo si el fouling está afectando el rendimiento de su embarcación.</p>
+              <a
+                href="../fouling-yates-senales-alerta/"
+                class="block border border-slate-200 rounded-sm p-5 hover:border-gold-400 transition group"
+              >
+                <p
+                  class="text-gold-500 text-xs uppercase tracking-widest font-semibold mb-2"
+                >
+                  Blog
+                </p>
+                <p
+                  class="font-serif text-lg text-navy-900 group-hover:text-gold-600 transition mb-2"
+                >
+                  Señales de Alerta de Fouling en su Yate
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Cómo identificar a tiempo si el fouling está afectando el
+                  rendimiento de su embarcación.
+                </p>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </article>
@@ -638,50 +929,146 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div class="md:col-span-1">
             <div class="flex items-center gap-2 mb-4">
-              <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
+              <i
+                class="ph-fill ph-anchor text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
               <div>
-                <p class="text-white text-xs tracking-[0.1em] font-bold">COLOMBIA</p>
-                <p class="text-white font-serif font-bold text-sm tracking-widest">BOAT DETAILING</p>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  COLOMBIA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
               </div>
             </div>
-            <p class="text-xs text-slate-300 font-light">Estándares Internacionales de Excelencia Marina desde 2024.</p>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
+            </p>
           </div>
           <div>
-            <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">Servicios</h4>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
             <ul class="space-y-2 text-xs font-light">
-              <li><a href="../../paint-polishing.html" class="text-slate-300 hover:text-gold-400 transition-colors">Pulido de Gelcoat</a></li>
-              <li><a href="../../hull-cleaning.html" class="text-slate-300 hover:text-gold-400 transition-colors">Limpieza de Casco</a></li>
-              <li><a href="../../bottom-paint.html" class="text-slate-300 hover:text-gold-400 transition-colors">Pintura Antifouling</a></li>
-              <li><a href="../../ceramic-coating.html" class="text-slate-300 hover:text-gold-400 transition-colors">Ceramic Coating</a></li>
-              <li><a href="../../ppf.html" class="text-slate-300 hover:text-gold-400 transition-colors">PPF</a></li>
-              <li><a href="../../services.html" class="text-gold-400 hover:text-white transition-colors font-semibold">&rarr; Ver todos</a></li>
+              <li>
+                <a
+                  href="../../paint-polishing.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pulido de Gelcoat</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../hull-cleaning.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Limpieza de Casco</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../bottom-paint.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura Antifouling</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../ceramic-coating.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../ppf.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../services.html"
+                  class="text-gold-400 hover:text-white transition-colors font-semibold"
+                  >&rarr; Ver todos</a
+                >
+              </li>
             </ul>
           </div>
           <div>
-            <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">Blog</h4>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Blog
+            </h4>
             <ul class="space-y-2 text-xs font-light">
-              <li><a href="../../blog.html" class="text-slate-300 hover:text-gold-400 transition-colors">Todos los artículos</a></li>
-              <li><a href="../pintura-antifouling-yate-colombia/" class="text-slate-300 hover:text-gold-400 transition-colors">Antifouling: Cuándo y Qué Usar</a></li>
-              <li><a href="../limpieza-casco-frecuencia/" class="text-slate-300 hover:text-gold-400 transition-colors">Frecuencia Limpieza Casco</a></li>
-              <li><a href="../incrustaciones-marinas/" class="text-slate-300 hover:text-gold-400 transition-colors">Incrustaciones Marinas</a></li>
+              <li>
+                <a
+                  href="../../blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Todos los artículos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../pintura-antifouling-yate-colombia/"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Antifouling: Cuándo y Qué Usar</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../limpieza-casco-frecuencia/"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Frecuencia Limpieza Casco</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../incrustaciones-marinas/"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Incrustaciones Marinas</a
+                >
+              </li>
             </ul>
           </div>
           <div>
-            <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">Contacto</h4>
-            <p class="text-xs font-light mb-2"><a href="tel:+573044301112" class="hover:text-gold-400 transition">+57 304 430 1112</a></p>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <p class="text-xs font-light mb-2">
+              <a href="tel:+573044301112" class="hover:text-gold-400 transition"
+                >+57 304 430 1112</a
+              >
+            </p>
             <p class="text-xs font-light mb-2">Marina Manzanillo</p>
             <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
             <a
               href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
-              target="_blank" rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
             >
               <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
             </a>
           </div>
         </div>
-        <div class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500">
-          <p>&copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias, Colombia &middot; <a href="../../sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a></p>
+        <div
+          class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
+        >
+          <p>
+            &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de
+            Indias, Colombia &middot;
+            <a href="../../sitemap.xml" class="hover:text-gold-400 transition"
+              >Sitemap</a
+            >
+          </p>
         </div>
       </div>
     </footer>
@@ -690,13 +1077,16 @@
     <a
       href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20pintura%20antifouling%20para%20mi%20embarcaci%C3%B3n"
       class="whatsapp-float"
-      target="_blank" rel="noopener noreferrer"
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label="Cotizar Antifouling por WhatsApp"
     >
       <span class="whatsapp-float__label">Cotizar Antifouling</span>
       <span class="whatsapp-float__bubble">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+          />
         </svg>
       </span>
     </a>

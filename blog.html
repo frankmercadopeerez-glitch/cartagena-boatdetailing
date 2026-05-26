@@ -70,17 +70,62 @@
       content="https://colombiaboatdetailing.com/images/header.webp"
     />
     <!-- Tailwind CSS (compiled) -->
-        <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
+    <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
     <style>
-      *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth}
-      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: #060607;
+        color: #fff;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        background: rgba(5, 5, 6, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        transition: all 0.3s;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #060607 0%,
+          rgba(4, 4, 6, 0.55) 50%,
+          rgba(2, 2, 4, 0.12) 100%
+        );
+      }
     </style>
-        <!-- Preload critical fonts -->
-    <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preload critical fonts -->
+    <link
+      rel="preload"
+      href="fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="css/tailwind.css" />
     <!-- Google Fonts -->
     <link
@@ -92,11 +137,19 @@
     />
     <link rel="dns-prefetch" href="//unpkg.com" />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
-<!-- Phosphor Icons -->
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
 
     <style>
@@ -202,176 +255,186 @@
     class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
   >
     <!-- Navigation -->
-        <!-- Navigation -->
+    <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
-  <div class="container mx-auto px-6 flex justify-between items-center">
-    <a href="index.html" class="flex items-center gap-3 group">
-      <i
-        class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
-      ></i>
-      <div class="flex flex-col">
-        <span
-          class="text-white text-lg tracking-[0.2em] font-light leading-none"
-          >COLOMBIA</span
-        >
-        <span
-          class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
-          >BOAT DETAILING</span
-        >
-      </div>
-    </a>
-    <div class="hidden md:flex items-center gap-10">
-      <div class="nav-dropdown">
-        <button
-          data-dropdown-toggle="servicesDropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          aria-controls="servicesDropdown"
-          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
-        >
-          Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
-        </button>
-        <div class="nav-dropdown-content" id="servicesDropdown">
-          <a
-            href="paint-polishing.html"
-            class="nav-dropdown-link flex items-center gap-2"
-          >
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
             <span
-              class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
-              >★</span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >COLOMBIA</span
             >
-            Pulido de Gelcoat
-          </a>
-          <div class="mx-4 h-px bg-white/10 my-1"></div>
-          <a href="hull-cleaning.html" class="nav-dropdown-link"
-            >Limpieza de Casco</a
-          >
-          <a href="ppf.html" class="nav-dropdown-link"
-            >PPF (Paint Protection)</a
-          >
-          <a href="ceramic-coating.html" class="nav-dropdown-link"
-            >Ceramic Coating</a
-          >
-          <a href="gelcoat.html" class="nav-dropdown-link"
-            >Restauración Gelcoat</a
-          >
-          <a href="fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
-          <a href="cubierta-sintetica.html" class="nav-dropdown-link"
-            >Cubierta Sintética</a
-          >
-          <a href="cubierta-teka.html" class="nav-dropdown-link"
-            >Cubierta de Teca</a
-          >
-          <a href="calcomanias.html" class="nav-dropdown-link"
-            >Calcomanías &amp; Gráficos</a
-          >
-          <a href="polarizado.html" class="nav-dropdown-link"
-            >Polarizado Nanocerámico</a
-          >
-          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
-            Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
-            <div class="submenu-flyout">
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios
+              <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
               <a
-                href="engine-painting.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
-                >Pintura de Motores</a
+                href="paint-polishing.html"
+                class="nav-dropdown-link flex items-center gap-2"
               >
-              <a
-                href="boat-painting.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
-                >Pintura Completa</a
+                <span
+                  class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
+                  >★</span
+                >
+                Pulido de Gelcoat
+              </a>
+              <div class="mx-4 h-px bg-white/10 my-1"></div>
+              <a href="hull-cleaning.html" class="nav-dropdown-link"
+                >Limpieza de Casco</a
               >
-              <a
-                href="bottom-paint.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
-                >Pintura de Casco</a
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <a href="fibra.html" class="nav-dropdown-link"
+                >Reparación de Fibra</a
+              >
+              <a href="cubierta-sintetica.html" class="nav-dropdown-link"
+                >Cubierta Sintética</a
+              >
+              <a href="cubierta-teka.html" class="nav-dropdown-link"
+                >Cubierta de Teca</a
+              >
+              <a href="calcomanias.html" class="nav-dropdown-link"
+                >Calcomanías &amp; Gráficos</a
+              >
+              <a href="polarizado.html" class="nav-dropdown-link"
+                >Polarizado Nanocerámico</a
+              >
+              <button
+                type="button"
+                class="submenu-item nav-dropdown-link relative w-full text-left"
+              >
+                Pintura
+                <i
+                  class="ph ph-caret-right text-xs ml-1"
+                  aria-hidden="true"
+                ></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa</a
+                  >
+                  <a
+                    href="bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                </div>
+              </button>
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores &amp; Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
               >
             </div>
-          </button>
-          <a href="interior-detailing.html" class="nav-dropdown-link"
-            >Interiores &amp; Tapicería</a
+          </div>
+          <a
+            href="about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
           >
-          <a href="anti-corrosion.html" class="nav-dropdown-link"
-            >Control Anticorrosivo</a
+          <a
+            href="blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
           >
-          <a href="technical-wash.html" class="nav-dropdown-link"
-            >Lavado Técnico</a
+          <a
+            href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
           >
+            Agendar Cita
+          </a>
         </div>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <i class="ph ph-list text-3xl" aria-hidden="true"></i>
+        </button>
       </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
+    <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación"
+      aria-hidden="true"
+      class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+      style="opacity: 1; visibility: visible"
+    >
+      <button
+        id="close-menu-btn"
+        class="absolute top-6 right-6 text-white/50 hover:text-white"
+        aria-label="Cerrar menú de navegación"
+      >
+        <i class="ph ph-x text-3xl" aria-hidden="true"></i>
+      </button>
+      <a
+        href="services.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Servicios</a
+      >
       <a
         href="about.html"
-        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Sobre Nosotros</a
       >
       <a
         href="blog.html"
-        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Blog</a
       >
       <a
         href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
         target="_blank"
         rel="noopener noreferrer"
-        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+        >Agendar Cita</a
       >
-        Agendar Cita
-      </a>
     </div>
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-white focus:outline-none"
-      aria-label="Abrir menú de navegación"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <i class="ph ph-list text-3xl" aria-hidden="true"></i>
-    </button>
-  </div>
-</nav>
-
-    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
-        <!-- Mobile Menu -->
-    <!-- Mobile Menu -->
-<div
-  id="mobile-menu"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Menú de navegación"
-  aria-hidden="true"
-  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
-  style="opacity: 1; visibility: visible"
->
-  <button
-    id="close-menu-btn"
-    class="absolute top-6 right-6 text-white/50 hover:text-white"
-    aria-label="Cerrar menú de navegación"
-  >
-    <i class="ph ph-x text-3xl" aria-hidden="true"></i>
-  </button>
-  <a
-    href="services.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Servicios</a
-  >
-  <a
-    href="about.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Sobre Nosotros</a
-  >
-  <a
-    href="blog.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Blog</a
-  >
-  <a
-    href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
-    >Agendar Cita</a
-  >
-</div>
 
     <!-- Hero Section -->
     <header
@@ -657,9 +720,10 @@
               Por Qué las Embarcaciones en el Mar Necesitan Antifouling
             </h3>
             <p class="text-slate-600 font-light mb-4">
-              En Cartagena a 28 °C, un casco sin antifouling está colonizado en semanas.
-              Descubra el impacto real en combustible, velocidad y estructura, y cómo
-              International Paint y Hempel protegen su inversión.
+              En Cartagena a 28 °C, un casco sin antifouling está colonizado en
+              semanas. Descubra el impacto real en combustible, velocidad y
+              estructura, y cómo International Paint y Hempel protegen su
+              inversión.
             </p>
             <div
               class="flex items-center gap-4 text-xs text-slate-500 mb-6 border-t border-slate-100 pt-4"
@@ -830,6 +894,54 @@
             >
               Leer Artículo <i class="ph-bold ph-arrow-right"></i>
             </a>
+          </article>
+
+          <!-- Article New 5 (costo mantenimiento anual) -->
+          <article class="blog-card group">
+            <div class="relative overflow-hidden h-64 bg-slate-200 mb-6 rounded-sm">
+              <img src="images/detailing.webp" alt="Costo mantenimiento anual yate Cartagena" class="w-full h-full object-cover" />
+              <div class="absolute top-0 left-0 bg-gold-400 text-navy-900 text-xs font-bold px-3 py-1 tracking-wider uppercase m-4">Presupuesto | Mantenimiento</div>
+            </div>
+            <h3 class="font-serif text-2xl text-navy-900 mb-3">¿Cuánto Cuesta el Mantenimiento Anual de un Yate en Cartagena?</h3>
+            <p class="text-slate-600 font-light mb-4">Precios reales de todos los servicios de mantenimiento para yates de 30, 40 y 50 pies en el Caribe colombiano. Antifouling, limpieza, pulido y más.</p>
+            <div class="flex items-center gap-4 text-xs text-slate-500 mb-6 border-t border-slate-100 pt-4">
+              <span>10 min de lectura</span>
+              <span>•</span>
+              <span>Mayo 2026</span>
+            </div>
+            <a href="blog/costo-mantenimiento-anual-yate-cartagena/index.html" class="text-gold-400 font-bold text-sm tracking-wider uppercase hover:text-gold-500 transition-colors flex items-center gap-2">Leer Artículo <i class="ph-bold ph-arrow-right"></i></a>
+          </article>
+
+          <!-- Article New 6 (tapiceria nautica) -->
+          <article class="blog-card group">
+            <div class="relative overflow-hidden h-64 bg-slate-200 mb-6 rounded-sm">
+              <img src="images/detailing.webp" alt="Tapicería náutica vinilo marino cuero Cartagena" class="w-full h-full object-cover" />
+              <div class="absolute top-0 left-0 bg-gold-400 text-navy-900 text-xs font-bold px-3 py-1 tracking-wider uppercase m-4">Interiores | Tapicería</div>
+            </div>
+            <h3 class="font-serif text-2xl text-navy-900 mb-3">Tapicería Náutica en Cartagena: Vinilo Marino, Cuero y Tela</h3>
+            <p class="text-slate-600 font-light mb-4">Guía completa sobre materiales de tapicería náutica: diferencias entre vinilo marino, cuero y Sunbrella, cómo limpiar cada uno y cuándo restaurar o reemplazar.</p>
+            <div class="flex items-center gap-4 text-xs text-slate-500 mb-6 border-t border-slate-100 pt-4">
+              <span>8 min de lectura</span>
+              <span>•</span>
+              <span>Mayo 2026</span>
+            </div>
+            <a href="blog/tapiceria-nautica-cartagena/index.html" class="text-gold-400 font-bold text-sm tracking-wider uppercase hover:text-gold-500 transition-colors flex items-center gap-2">Leer Artículo <i class="ph-bold ph-arrow-right"></i></a>
+          </article>
+
+          <!-- Article New 7 (ceramic vs PPF) -->
+          <article class="blog-card group">
+            <div class="relative overflow-hidden h-64 bg-slate-200 mb-6 rounded-sm">
+              <img src="images/brillo.webp" alt="Ceramic Coating vs PPF yate Cartagena" class="w-full h-full object-cover" />
+              <div class="absolute top-0 left-0 bg-gold-400 text-navy-900 text-xs font-bold px-3 py-1 tracking-wider uppercase m-4">Protección | Comparativa</div>
+            </div>
+            <h3 class="font-serif text-2xl text-navy-900 mb-3">Ceramic Coating vs PPF: ¿Cuál Elegir para tu Yate?</h3>
+            <p class="text-slate-600 font-light mb-4">Comparación técnica entre las dos mejores protecciones para embarcaciones: diferencias de protección, duración, costo y la combinación óptima para el Caribe colombiano.</p>
+            <div class="flex items-center gap-4 text-xs text-slate-500 mb-6 border-t border-slate-100 pt-4">
+              <span>9 min de lectura</span>
+              <span>•</span>
+              <span>Mayo 2026</span>
+            </div>
+            <a href="blog/ceramic-coating-vs-ppf-marino/index.html" class="text-gold-400 font-bold text-sm tracking-wider uppercase hover:text-gold-500 transition-colors flex items-center gap-2">Leer Artículo <i class="ph-bold ph-arrow-right"></i></a>
           </article>
 
           <!-- Article New 3 -->
@@ -1158,7 +1270,8 @@
             <a
               href="blog/antifouling-embarcaciones-mar-cartagena/index.html"
               class="bg-white border border-slate-200 p-4 rounded-sm hover:border-gold-400 transition"
-              >Por Qué las Embarcaciones en el Mar Necesitan Protección Antifouling</a
+              >Por Qué las Embarcaciones en el Mar Necesitan Protección
+              Antifouling</a
             >
             <a
               href="blog/pintura-antifouling-yate-colombia/index.html"
@@ -1274,157 +1387,170 @@
     </section>
 
     <!-- Footer -->
-        <!-- Footer -->
     <!-- Footer -->
-<footer class="bg-navy-900 text-slate-300 py-12">
-  <div class="container mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-      <div class="md:col-span-1">
-        <div class="flex items-center gap-2 mb-4">
-          <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
-          <div>
-            <p class="text-white text-xs tracking-[0.1em] font-bold">
-              COLOMBIA
-            </p>
-            <p class="text-white font-serif font-bold text-sm tracking-widest">
-              BOAT DETAILING
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i
+                class="ph-fill ph-anchor text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  COLOMBIA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
             </p>
           </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="paint-polishing.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pulido de Gelcoat</a
+                >
+              </li>
+              <li>
+                <a
+                  href="hull-cleaning.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Limpieza de Casco</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ceramic-coating.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ppf.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF</a
+                >
+              </li>
+              <li>
+                <a
+                  href="calcomanias.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Calcomanías</a
+                >
+              </li>
+              <li>
+                <a
+                  href="polarizado.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Polarizado Nanocerámico</a
+                >
+              </li>
+              <li>
+                <a
+                  href="engine-painting.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="services.html"
+                  class="text-gold-400 hover:text-white transition-colors font-semibold"
+                  >&rarr; Ver todos</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Navegación
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="services.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Todos los Servicios</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <p class="text-xs font-light mb-2">
+              <a href="tel:+573044301112" class="hover:text-gold-400 transition"
+                >+57 304 430 1112</a
+              >
+            </p>
+            <p class="text-xs font-light mb-2">Marina Manzanillo</p>
+            <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+            >
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
+            </a>
+          </div>
         </div>
-        <p class="text-xs text-slate-300 font-light">
-          Estándares Internacionales de Excelencia Marina desde 2024.
-        </p>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Servicios
-        </h4>
-        <ul class="space-y-2 text-xs font-light">
-          <li>
-            <a
-              href="paint-polishing.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Pulido de Gelcoat</a
-            >
-          </li>
-          <li>
-            <a
-              href="hull-cleaning.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Limpieza de Casco</a
-            >
-          </li>
-          <li>
-            <a
-              href="ceramic-coating.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Ceramic Coating</a
-            >
-          </li>
-          <li>
-            <a
-              href="ppf.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >PPF</a
-            >
-          </li>
-          <li>
-            <a
-              href="calcomanias.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Calcomanías</a
-            >
-          </li>
-          <li>
-            <a
-              href="polarizado.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Polarizado Nanocerámico</a
-            >
-          </li>
-          <li>
-            <a
-              href="engine-painting.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Pintura de Motores</a
-            >
-          </li>
-          <li>
-            <a
-              href="services.html"
-              class="text-gold-400 hover:text-white transition-colors font-semibold"
-              >&rarr; Ver todos</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Navegación
-        </h4>
-        <ul class="space-y-2 text-xs font-light">
-          <li>
-            <a
-              href="index.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Inicio</a
-            >
-          </li>
-          <li>
-            <a
-              href="about.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Sobre Nosotros</a
-            >
-          </li>
-          <li>
-            <a
-              href="blog.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Blog</a
-            >
-          </li>
-          <li>
-            <a
-              href="services.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Todos los Servicios</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Contacto
-        </h4>
-        <p class="text-xs font-light mb-2">
-          <a href="tel:+573044301112" class="hover:text-gold-400 transition"
-            >+57 304 430 1112</a
-          >
-        </p>
-        <p class="text-xs font-light mb-2">Marina Manzanillo</p>
-        <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
-        <a
-          href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+        <div
+          class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
         >
-          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
-        </a>
+          <p>
+            &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de
+            Indias, Colombia &middot;
+            <a href="sitemap.xml" class="hover:text-gold-400 transition"
+              >Sitemap</a
+            >
+          </p>
+        </div>
       </div>
-    </div>
-    <div
-      class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
-    >
-      <p>
-        &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias,
-        Colombia &middot;
-        <a href="sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a>
-      </p>
-    </div>
-  </div>
-</footer>
+    </footer>
 
     <!-- WhatsApp Floating Button -->
     <a

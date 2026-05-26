@@ -79,18 +79,119 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cada cuánto hay que hacer el tratamiento anticorrosivo en Cartagena?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El tratamiento completo (desoxidación + primer + recubrimiento) se recomienda cada 2-3 años. Un resello de mantenimiento anual extiende ese ciclo y cuesta entre 3 y 5 veces menos que el tratamiento completo. En embarcaciones de alta actividad recomendamos inspección cada 12 meses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo sé si mi embarcación tiene corrosión galvánica activa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Los síntomas son: ánodos de zinc que se agotan en menos de 6 meses, picaduras puntiformes cerca de conexiones eléctricas, y descamado en interfaces metal-metal. Una inspección con voltímetro puede medir el potencial galvánico activo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es lo mismo un ánodo de zinc que uno de aluminio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Los ánodos de zinc son para agua salada (como Cartagena). Los de aluminio también funcionan en agua salada y son más activos, ideales para embarcaciones de fibra o aluminio. Los de magnesio son para agua dulce exclusivamente."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El tratamiento anticorrosivo requiere sacar la embarcación del agua?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende de las zonas. La sala de máquinas y estructuras exteriores se tratan con la embarcación en el agua. El tratamiento de eje, hélice, timón y casco externo requiere varado en travel-lift."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El acero inoxidable también necesita tratamiento anticorrosivo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. El acero inoxidable 316L es resistente pero no inmune. En el Caribe el cloruro ataca la capa pasiva de óxido de cromo generando picaduras. La pasivación química restaura la capa protectora."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia hay entre pintura anticorrosiva y recubrimiento epóxico?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La pintura anticorrosiva convencional es una barrera física. El epoxi bicomponente crea un enlace químico con el metal, con adhesión superior, impermeabilidad al vapor de agua y resistencia a combustibles. Para sala de máquinas siempre recomendamos epoxi bicomponente."
+            }
+          }
+        ]
+      }
+    </script>
     <!-- Tailwind CSS (compiled) -->
-        <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
+    <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
     <style>
-      *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth}
-      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: #060607;
+        color: #fff;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        background: rgba(5, 5, 6, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        transition: all 0.3s;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #060607 0%,
+          rgba(4, 4, 6, 0.55) 50%,
+          rgba(2, 2, 4, 0.12) 100%
+        );
+      }
     </style>
-        <!-- Preload critical fonts -->
-    <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preload critical fonts -->
+    <link
+      rel="preload"
+      href="fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="css/tailwind.css" />
     <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
     <link
@@ -109,11 +210,19 @@
     />
     <link rel="dns-prefetch" href="//unpkg.com" />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
-<!-- Phosphor Icons -->
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
     <style>
       /* Custom Styles for that premium feel */
@@ -159,180 +268,191 @@
     class="bg-slate-50 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
   >
     <!-- Navigation -->
-        <!-- Navigation -->
+    <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
-  <div class="container mx-auto px-6 flex justify-between items-center">
-    <a href="index.html" class="flex items-center gap-3 group">
-      <i
-        class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
-      ></i>
-      <div class="flex flex-col">
-        <span
-          class="text-white text-lg tracking-[0.2em] font-light leading-none"
-          >COLOMBIA</span
-        >
-        <span
-          class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
-          >BOAT DETAILING</span
-        >
-      </div>
-    </a>
-    <div class="hidden md:flex items-center gap-10">
-      <div class="nav-dropdown">
-        <button
-          data-dropdown-toggle="servicesDropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          aria-controls="servicesDropdown"
-          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
-        >
-          Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
-        </button>
-        <div class="nav-dropdown-content" id="servicesDropdown">
-          <a
-            href="paint-polishing.html"
-            class="nav-dropdown-link flex items-center gap-2"
-          >
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <i
+            class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+          ></i>
+          <div class="flex flex-col">
             <span
-              class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
-              >★</span
+              class="text-white text-lg tracking-[0.2em] font-light leading-none"
+              >COLOMBIA</span
             >
-            Pulido de Gelcoat
-          </a>
-          <div class="mx-4 h-px bg-white/10 my-1"></div>
-          <a href="hull-cleaning.html" class="nav-dropdown-link"
-            >Limpieza de Casco</a
-          >
-          <a href="ppf.html" class="nav-dropdown-link"
-            >PPF (Paint Protection)</a
-          >
-          <a href="ceramic-coating.html" class="nav-dropdown-link"
-            >Ceramic Coating</a
-          >
-          <a href="gelcoat.html" class="nav-dropdown-link"
-            >Restauración Gelcoat</a
-          >
-          <a href="fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
-          <a href="cubierta-sintetica.html" class="nav-dropdown-link"
-            >Cubierta Sintética</a
-          >
-          <a href="cubierta-teka.html" class="nav-dropdown-link"
-            >Cubierta de Teca</a
-          >
-          <a href="calcomanias.html" class="nav-dropdown-link"
-            >Calcomanías &amp; Gráficos</a
-          >
-          <a href="polarizado.html" class="nav-dropdown-link"
-            >Polarizado Nanocerámico</a
-          >
-          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
-            Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
-            <div class="submenu-flyout">
+            <span
+              class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+              >BOAT DETAILING</span
+            >
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios
+              <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
               <a
-                href="engine-painting.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
-                >Pintura de Motores</a
+                href="paint-polishing.html"
+                class="nav-dropdown-link flex items-center gap-2"
               >
-              <a
-                href="boat-painting.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
-                >Pintura Completa</a
+                <span
+                  class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
+                  >★</span
+                >
+                Pulido de Gelcoat
+              </a>
+              <div class="mx-4 h-px bg-white/10 my-1"></div>
+              <a href="hull-cleaning.html" class="nav-dropdown-link"
+                >Limpieza de Casco</a
               >
-              <a
-                href="bottom-paint.html"
-                class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
-                >Pintura de Casco</a
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Paint Protection)</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="gelcoat.html" class="nav-dropdown-link"
+                >Restauración Gelcoat</a
+              >
+              <a href="fibra.html" class="nav-dropdown-link"
+                >Reparación de Fibra</a
+              >
+              <a href="cubierta-sintetica.html" class="nav-dropdown-link"
+                >Cubierta Sintética</a
+              >
+              <a href="cubierta-teka.html" class="nav-dropdown-link"
+                >Cubierta de Teca</a
+              >
+              <a href="calcomanias.html" class="nav-dropdown-link"
+                >Calcomanías &amp; Gráficos</a
+              >
+              <a href="polarizado.html" class="nav-dropdown-link"
+                >Polarizado Nanocerámico</a
+              >
+              <button
+                type="button"
+                class="submenu-item nav-dropdown-link relative w-full text-left"
+              >
+                Pintura
+                <i
+                  class="ph ph-caret-right text-xs ml-1"
+                  aria-hidden="true"
+                ></i>
+                <div class="submenu-flyout">
+                  <a
+                    href="engine-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm"
+                    >Pintura de Motores</a
+                  >
+                  <a
+                    href="boat-painting.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura Completa</a
+                  >
+                  <a
+                    href="bottom-paint.html"
+                    class="block px-4 py-3 text-navy-900 hover:bg-slate-50 hover:text-gold-400 transition text-sm border-t"
+                    >Pintura de Casco</a
+                  >
+                </div>
+              </button>
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores &amp; Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
               >
             </div>
-          </button>
-          <a href="interior-detailing.html" class="nav-dropdown-link"
-            >Interiores &amp; Tapicería</a
+          </div>
+          <a
+            href="about.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Sobre Nosotros</a
           >
-          <a href="anti-corrosion.html" class="nav-dropdown-link"
-            >Control Anticorrosivo</a
+          <a
+            href="blog.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Blog</a
           >
-          <a href="technical-wash.html" class="nav-dropdown-link"
-            >Lavado Técnico</a
+          <a
+            href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
           >
+            Agendar Cita
+          </a>
         </div>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <i class="ph ph-list text-3xl" aria-hidden="true"></i>
+        </button>
       </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
+    <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación"
+      aria-hidden="true"
+      class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+      style="opacity: 1; visibility: visible"
+    >
+      <button
+        id="close-menu-btn"
+        class="absolute top-6 right-6 text-white/50 hover:text-white"
+        aria-label="Cerrar menú de navegación"
+      >
+        <i class="ph ph-x text-3xl" aria-hidden="true"></i>
+      </button>
+      <a
+        href="services.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Servicios</a
+      >
       <a
         href="about.html"
-        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Sobre Nosotros</a
       >
       <a
         href="blog.html"
-        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Blog</a
       >
       <a
         href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
         target="_blank"
         rel="noopener noreferrer"
-        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+        >Agendar Cita</a
       >
-        Agendar Cita
-      </a>
     </div>
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-white focus:outline-none"
-      aria-label="Abrir menú de navegación"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <i class="ph ph-list text-3xl" aria-hidden="true"></i>
-    </button>
-  </div>
-</nav>
-
-    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
-        <!-- Mobile Menu -->
-    <!-- Mobile Menu -->
-<div
-  id="mobile-menu"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Menú de navegación"
-  aria-hidden="true"
-  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
-  style="opacity: 1; visibility: visible"
->
-  <button
-    id="close-menu-btn"
-    class="absolute top-6 right-6 text-white/50 hover:text-white"
-    aria-label="Cerrar menú de navegación"
-  >
-    <i class="ph ph-x text-3xl" aria-hidden="true"></i>
-  </button>
-  <a
-    href="services.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Servicios</a
-  >
-  <a
-    href="about.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Sobre Nosotros</a
-  >
-  <a
-    href="blog.html"
-    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
-    >Blog</a
-  >
-  <a
-    href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
-    >Agendar Cita</a
-  >
-</div>
 
     <section
       class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
-      style="padding-top:8rem;
+      style="
+        padding-top: 8rem;
         background-image:
           linear-gradient(
             to right,
@@ -364,92 +484,347 @@
       </div>
     </section>
 
+    <!-- Por qué es crítico en el Caribe -->
     <section id="info" class="py-24 bg-white">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-          <h2 class="font-serif text-4xl text-navy-900 mb-12">
-            ¿Por qué es Importante?
+          <p
+            class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4"
+          >
+            Corrosión marina en el Caribe
+          </p>
+          <h2 class="font-serif text-4xl text-navy-900 mb-6">
+            Por qué el Caribe es el Entorno más Agresivo para el Metal
           </h2>
-          <p class="text-slate-700 font-light text-lg mb-8">
-            Las salas de máquinas en Cartagena enfrentan condiciones extremas:
-            humedad 100%, agua salada y vapor marino constante. Sin protección,
-            el óxido comienza en días.
+          <p class="text-slate-700 font-light text-lg mb-6">
+            El agua del Caribe colombiano tiene una salinidad promedio de 36 g/L
+            —un 8% superior al Atlántico Norte— combinada con temperaturas de
+            28-30 °C y humedad relativa que oscila entre el 80 y el 100%. Estas
+            condiciones aceleran la corrosión electroquímica hasta
+            <strong>3 veces más rápido</strong> que en aguas templadas.
+          </p>
+          <p class="text-slate-700 font-light text-lg mb-12">
+            En una embarcación sin protección activa, la corrosión visible en la
+            sala de máquinas aparece en 30-60 días. La corrosión galvánica en
+            conexiones mixtas acero-aluminio puede generar pérdida de metal en
+            menos de 90 días. El costo de reparar una sala de máquinas corroída
+            supera hasta <strong>15 veces</strong> el costo del mantenimiento
+            preventivo.
           </p>
 
-          <div class="grid md:grid-cols-2 gap-8 mb-12">
-            <div class="bg-slate-50 p-8 rounded-sm">
-              <h3 class="font-serif text-2xl text-navy-900 mb-4">
-                Protección Completa
-              </h3>
-              <ul class="space-y-3 text-slate-700 font-light">
-                <li>✓ Barrera anti-sal marina</li>
-                <li>✓ Protección de aceros especiales</li>
-                <li>✓ Aislante de humedad</li>
-                <li>✓ Prevención de corrosión galvánica</li>
-              </ul>
+          <!-- Tipos de corrosión -->
+          <h3 class="font-serif text-3xl text-navy-900 mb-8">
+            Los 3 Tipos de Corrosión que Atacan tu Embarcación
+          </h3>
+          <div class="grid md:grid-cols-3 gap-6 mb-16">
+            <div class="border border-slate-200 p-6 rounded-sm">
+              <div
+                class="w-12 h-12 bg-gold-400/10 rounded-sm flex items-center justify-center mb-4"
+              >
+                <i
+                  class="ph ph-wave text-2xl text-gold-500"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <h4 class="font-serif text-lg text-navy-900 mb-3">
+                Corrosión Salina
+              </h4>
+              <p class="text-slate-600 font-light text-sm">
+                El cloruro de sodio penetra en microporos del metal y rompe la
+                capa pasiva del acero inoxidable. Causa picaduras que se
+                profundizan invisiblemente hasta la fractura estructural.
+              </p>
             </div>
-            <div class="bg-slate-50 p-8 rounded-sm">
-              <h3 class="font-serif text-2xl text-navy-900 mb-4">
-                Durabilidad Extrema
-              </h3>
-              <ul class="space-y-3 text-slate-700 font-light">
-                <li>✓ 2-3 años de protección máxima</li>
-                <li>✓ Resellos anuales recomendados</li>
-                <li>✓ Con mantenimiento: 5-7 años</li>
-                <li>✓ Garantía de 1 año completa</li>
-              </ul>
+            <div class="border border-slate-200 p-6 rounded-sm">
+              <div
+                class="w-12 h-12 bg-gold-400/10 rounded-sm flex items-center justify-center mb-4"
+              >
+                <i
+                  class="ph ph-lightning text-2xl text-gold-500"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <h4 class="font-serif text-lg text-navy-900 mb-3">
+                Corrosión Galvánica
+              </h4>
+              <p class="text-slate-600 font-light text-sm">
+                Ocurre cuando dos metales de diferente potencial electroquímico
+                (ej. aluminio y acero inoxidable) están en contacto en presencia
+                de electrolito salado. El metal de menor potencial se sacrifica.
+              </p>
+            </div>
+            <div class="border border-slate-200 p-6 rounded-sm">
+              <div
+                class="w-12 h-12 bg-gold-400/10 rounded-sm flex items-center justify-center mb-4"
+              >
+                <i
+                  class="ph ph-thermometer-hot text-2xl text-gold-500"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <h4 class="font-serif text-lg text-navy-900 mb-3">
+                Corrosión por Vapor
+              </h4>
+              <p class="text-slate-600 font-light text-sm">
+                La sala de máquinas en el Caribe puede alcanzar 45-55 °C. El
+                vapor de agua salada acelera el proceso oxidativo en superficies
+                metálicas no protegidas, especialmente en codos de escape y
+                soportes de motor.
+              </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <h3 class="font-serif text-2xl text-navy-900 mb-6">Proceso</h3>
-          <div class="space-y-4">
-            <div class="flex gap-4">
+    <!-- Qué tratamos -->
+    <section class="py-24 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <p
+            class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4 text-center"
+          >
+            Cobertura completa
+          </p>
+          <h2 class="font-serif text-4xl text-navy-900 mb-4 text-center">
+            Áreas y Componentes que Protegemos
+          </h2>
+          <p
+            class="text-slate-600 font-light text-center mb-12 max-w-2xl mx-auto"
+          >
+            El tratamiento anticorrosivo cubre todas las zonas vulnerables de la
+            embarcación, no solo la sala de máquinas.
+          </p>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-gear text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Sala de Máquinas
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                Motores, codos de escape, soportes, mangueras metálicas, cuadro
+                eléctrico y todas las superficies de acero y aluminio del
+                compartimento de propulsión.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-anchor text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Eje y Hélice
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                El eje de propulsión, bocina, prensaestopas y hélice son zonas
+                de alta exposición galvánica. Pasivación y recubrimiento
+                anticorrosivo marino certificado.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-battery-charging text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Sistema de Ánodos
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                Revisión, sustitución y posicionamiento correcto de ánodos de
+                zinc o aluminio según el tipo de agua. Los ánodos son la primera
+                línea de defensa galvánica.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-steering-wheel text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Timón y Guardines
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                El timón y los herrajes de gobierno son estructuras de alta
+                tensión mecánica. La corrosión interna en timones de acero puede
+                causar fallas catastróficas sin señales previas visibles.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-wrench text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Estructuras Metálicas
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                Arcos, pasamanos, tinteros, bañeras de ancla, escalas y toda la
+                ferretería exterior de acero inoxidable o aluminio con
+                tratamiento de pasivación química.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-sm shadow-sm">
+              <i
+                class="ph ph-drop text-3xl text-gold-400 mb-3 block"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-serif text-lg text-navy-900 mb-2">
+                Sentina y Casco Interno
+              </h3>
+              <p class="text-slate-600 font-light text-sm">
+                La sentina acumula agua salada, combustible y agua dulce. El
+                tratamiento incluye limpieza química, desoxidación y
+                recubrimiento epóxico de la estructura interna del casco.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso paso a paso -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <p
+            class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4"
+          >
+            Metodología
+          </p>
+          <h2 class="font-serif text-4xl text-navy-900 mb-4">
+            Proceso de Tratamiento Anticorrosivo
+          </h2>
+          <p class="text-slate-600 font-light mb-12">
+            7 pasos para una protección completa y documentada.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-6 items-start">
               <div
-                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
               >
                 1
               </div>
-              <div>
-                <p class="text-slate-700 font-light">
-                  <strong>Limpieza profunda</strong> y desoxidación de toda la
-                  sala
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Inspección y Diagnóstico
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Evaluación visual y medición del avance de corrosión en todos
+                  los componentes. Registro fotográfico del estado inicial.
+                  Identificación de corrosión galvánica activa y zonas de riesgo
+                  crítico.
                 </p>
               </div>
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-6 items-start">
               <div
-                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
               >
                 2
               </div>
-              <div>
-                <p class="text-slate-700 font-light">
-                  <strong>Aplicación de convertidor de óxido</strong> en áreas
-                  afectadas
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Limpieza con Solvente Marino
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Desengrase completo con solvente de grado marino para eliminar
+                  aceite, grasa y combustible depositado. La limpieza previa es
+                  fundamental para la adhesión de los recubrimientos.
                 </p>
               </div>
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-6 items-start">
               <div
-                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
               >
                 3
               </div>
-              <div>
-                <p class="text-slate-700 font-light">
-                  <strong>Protector anti-corrosión marino</strong> en 2-3 capas
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Mecánica de Óxido
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Eliminación mecánica del óxido existente con cepillo de
+                  alambre, amoladora y disco abrasivo en zonas activas. Las
+                  superficies se llevan a metal desnudo (ST3) para máxima
+                  adhesión.
                 </p>
               </div>
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-6 items-start">
               <div
-                class="bg-gold-400 text-navy-900 rounded-full w-12 h-12 flex items-center justify-center font-bold flex-shrink-0"
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
               >
                 4
               </div>
-              <div>
-                <p class="text-slate-700 font-light">
-                  <strong>Sellado final</strong> y protección complementaria
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Convertidor de Óxido
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Aplicación de convertidor de óxido ácido (fosfórico) en
+                  superficies con oxidación residual. El convertidor transforma
+                  el óxido de hierro (Fe₂O₃) en fosfato de hierro estable, que
+                  actúa como base adherente.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-6 items-start">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
+              >
+                5
+              </div>
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Primer Anticorrosivo Marino
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Aplicación de primer epoxi anticorrosivo de grado marino
+                  (Interlux Interprotect 2000 o equivalente). El primer crea la
+                  barrera de adhesión química entre el metal y el recubrimiento
+                  de acabado.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-6 items-start">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
+              >
+                6
+              </div>
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Recubrimiento Anticorrosivo (2-3 capas)
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Aplicación de 2 a 3 capas de recubrimiento anticorrosivo
+                  marino de alta resistencia. Para sala de máquinas usamos
+                  Rust-Oleum Marine o International Toplac según la temperatura
+                  operativa. Curado entre capas de 4-6 horas.
+                </p>
+              </div>
+            </div>
+            <div class="flex gap-6 items-start">
+              <div
+                class="bg-gold-400 text-navy-900 rounded-sm w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0"
+              >
+                7
+              </div>
+              <div class="pt-2">
+                <h4 class="font-serif text-xl text-navy-900 mb-2">
+                  Revisión de Ánodos e Inspección Final
+                </h4>
+                <p class="text-slate-600 font-light">
+                  Sustitución de ánodos de zinc o aluminio según lectura de
+                  potencial electroquímico. Inspección final con documentación
+                  fotográfica comparativa (antes/después). Entrega de informe
+                  técnico.
                 </p>
               </div>
             </div>
@@ -458,172 +833,542 @@
       </div>
     </section>
 
-    <section class="py-24 bg-navy-900 text-white">
-      <div class="container mx-auto px-6 text-center">
-        <h2 class="font-serif text-4xl mb-6">Protege tu Sala de Máquinas</h2>
+    <!-- Marcas -->
+    <section class="py-20 bg-navy-900 border-b border-white/10">
+      <div class="container mx-auto px-6">
+        <p
+          class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4 text-center"
+        >
+          Productos de referencia mundial
+        </p>
+        <h2 class="font-serif text-3xl text-white mb-12 text-center">
+          Marcas Profesionales que Usamos
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div
+            class="bg-white/5 border border-white/10 p-8 rounded-sm text-center"
+          >
+            <h3 class="font-serif text-xl text-gold-400 mb-4">
+              Interlux (AkzoNobel)
+            </h3>
+            <ul class="text-slate-300 font-light text-sm space-y-2 text-left">
+              <li>
+                • <strong class="text-white">Interprotect 2000</strong> — Primer
+                epoxi marino de 2 componentes
+              </li>
+              <li>
+                • <strong class="text-white">Trilux 33</strong> — Acabado
+                anticorrosivo para carenas
+              </li>
+              <li>
+                • <strong class="text-white">Pre-Kote</strong> — Primer de
+                adherencia universal
+              </li>
+            </ul>
+          </div>
+          <div
+            class="bg-white/5 border border-white/10 p-8 rounded-sm text-center"
+          >
+            <h3 class="font-serif text-xl text-gold-400 mb-4">
+              Rust-Oleum Marine
+            </h3>
+            <ul class="text-slate-300 font-light text-sm space-y-2 text-left">
+              <li>
+                • <strong class="text-white">Marine Topside Paint</strong> —
+                Recubrimiento alquídico resistente a UV
+              </li>
+              <li>
+                • <strong class="text-white">Rust Reformer</strong> —
+                Convertidor de óxido de alta penetración
+              </li>
+              <li>
+                • <strong class="text-white">Stops Rust</strong> — Esmalte
+                anticorrosivo de curado rápido
+              </li>
+            </ul>
+          </div>
+          <div
+            class="bg-white/5 border border-white/10 p-8 rounded-sm text-center"
+          >
+            <h3 class="font-serif text-xl text-gold-400 mb-4">
+              International Paint
+            </h3>
+            <ul class="text-slate-300 font-light text-sm space-y-2 text-left">
+              <li>
+                • <strong class="text-white">Toplac Plus</strong> — Acabado de
+                alta durabilidad para superestructura
+              </li>
+              <li>
+                • <strong class="text-white">Primocon</strong> — Primer
+                anticorrosivo para superficies sumergidas
+              </li>
+              <li>
+                • <strong class="text-white">VC Offshore</strong> — Protección
+                epóxica de casco
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Garantía y durabilidad -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <p
+              class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4"
+            >
+              Resultados garantizados
+            </p>
+            <h2 class="font-serif text-4xl text-navy-900 mb-6">
+              Durabilidad y Garantía
+            </h2>
+            <p class="text-slate-600 font-light mb-6">
+              El sistema completo de tratamiento anticorrosivo ofrece una
+              protección activa de 2 a 3 años en condiciones de uso normal en el
+              Caribe. Con los resellos anuales recomendados, la protección puede
+              extenderse a 5-7 años sin necesidad de repetir el proceso
+              completo.
+            </p>
+            <ul class="space-y-4 text-slate-700 font-light">
+              <li class="flex items-start gap-3">
+                <span class="text-gold-500 font-bold mt-0.5">✓</span>
+                <span
+                  ><strong>Garantía de 1 año</strong> sobre mano de obra y
+                  materiales aplicados</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gold-500 font-bold mt-0.5">✓</span>
+                <span
+                  ><strong>Resello anual</strong> incluye inspección y
+                  recubrimiento de zonas desgastadas</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gold-500 font-bold mt-0.5">✓</span>
+                <span
+                  ><strong>Informe técnico</strong> con registro fotográfico
+                  antes/después y recomendaciones</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gold-500 font-bold mt-0.5">✓</span>
+                <span
+                  ><strong>Sustitución de ánodos</strong> incluida en cada ciclo
+                  de mantenimiento</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="bg-slate-50 p-8 rounded-sm">
+            <h3 class="font-serif text-2xl text-navy-900 mb-6">
+              Tarifas Orientativas
+            </h3>
+            <div class="space-y-4">
+              <div
+                class="flex justify-between items-center py-3 border-b border-slate-200"
+              >
+                <span class="text-slate-700 font-light"
+                  >Sala de máquinas (hasta 50 hp)</span
+                >
+                <span class="text-navy-900 font-bold">Desde $1.800.000</span>
+              </div>
+              <div
+                class="flex justify-between items-center py-3 border-b border-slate-200"
+              >
+                <span class="text-slate-700 font-light"
+                  >Sala de máquinas (50-200 hp)</span
+                >
+                <span class="text-navy-900 font-bold">Desde $3.200.000</span>
+              </div>
+              <div
+                class="flex justify-between items-center py-3 border-b border-slate-200"
+              >
+                <span class="text-slate-700 font-light"
+                  >Sala de máquinas (200+ hp)</span
+                >
+                <span class="text-navy-900 font-bold">Cotización</span>
+              </div>
+              <div
+                class="flex justify-between items-center py-3 border-b border-slate-200"
+              >
+                <span class="text-slate-700 font-light"
+                  >Estructuras exteriores (arcos, pasamanos)</span
+                >
+                <span class="text-navy-900 font-bold">Desde $900.000</span>
+              </div>
+              <div class="flex justify-between items-center py-3">
+                <span class="text-slate-700 font-light"
+                  >Resello anual de mantenimiento</span
+                >
+                <span class="text-navy-900 font-bold">Desde $650.000</span>
+              </div>
+            </div>
+            <p class="text-slate-500 text-xs font-light mt-4">
+              * Precios en COP. Cotización exacta según inspección.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-slate-50">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <p
+          class="text-gold-500 text-xs tracking-widest uppercase font-bold mb-4 text-center"
+        >
+          Preguntas frecuentes
+        </p>
+        <h2 class="font-serif text-4xl text-navy-900 mb-12 text-center">
+          Dudas sobre el Control Anticorrosivo
+        </h2>
+        <div class="space-y-3">
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿Cada cuánto hay que hacer el tratamiento anticorrosivo en
+              Cartagena?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              El tratamiento completo (desoxidación + primer + recubrimiento) se
+              recomienda cada 2-3 años. Un resello de mantenimiento anual
+              extiende ese ciclo y cuesta entre 3 y 5 veces menos que el
+              tratamiento completo. En embarcaciones de alta actividad o con
+              sala de máquinas sin ventilación adecuada recomendamos inspección
+              cada 12 meses.
+            </div>
+          </details>
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿Cómo sé si mi embarcación tiene corrosión galvánica activa?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              Los síntomas típicos son: ánodos de zinc que se agotan muy rápido
+              (en menos de 6 meses), picaduras puntiformes en superficies
+              metálicas cerca de conexiones eléctricas, y descamado en
+              interfaces metal-metal (ej. pernos de acero en estructura de
+              aluminio). Una inspección con voltímetro puede medir el potencial
+              galvánico activo.
+            </div>
+          </details>
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿Es lo mismo un ánodo de zinc que uno de aluminio?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              No. Los ánodos de zinc son para agua salada (como Cartagena). Los
+              de aluminio también funcionan bien en agua salada y son más
+              activos, ideales para embarcaciones de fibra o aluminio. Los de
+              magnesio son para agua dulce exclusivamente. Usar el ánodo
+              equivocado puede no brindar protección suficiente o pasivarse
+              prematuramente.
+            </div>
+          </details>
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿El tratamiento anticorrosivo requiere sacar la embarcación del
+              agua?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              Depende de las zonas a tratar. La sala de máquinas, estructuras
+              exteriores y superestructura se pueden tratar con la embarcación
+              en el agua. El tratamiento de eje, hélice, timón y casco externo
+              requiere varado. En la mayoría de los casos hacemos la sala de
+              máquinas en el muelle y coordinamos el varado solo para los
+              componentes sumergidos.
+            </div>
+          </details>
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿El acero inoxidable también necesita tratamiento anticorrosivo?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              Sí. El acero inoxidable 316 L es resistente a la corrosión, pero
+              no inmune. En el Caribe, el cloruro ataca la capa de óxido de
+              cromo pasivo, generando "óxido de té" (corrosión superficial
+              marrón) que si no se trata con pasivación química se convierte en
+              picaduras activas. La pasivación con ácido nítrico o cítrico
+              restaura la capa protectora.
+            </div>
+          </details>
+          <details
+            class="group border border-slate-200 rounded-sm bg-white overflow-hidden"
+          >
+            <summary
+              class="flex justify-between items-center px-6 py-5 cursor-pointer text-navy-900 font-semibold list-none"
+            >
+              ¿Qué diferencia hay entre pintura anticorrosiva y recubrimiento
+              epóxico?
+              <i
+                class="ph ph-caret-down text-gold-500 text-xl flex-shrink-0 ml-4 group-open:rotate-180 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </summary>
+            <div
+              class="px-6 pb-6 text-slate-600 font-light text-sm leading-relaxed"
+            >
+              La pintura anticorrosiva convencional (alquídica) es una barrera
+              física. El recubrimiento epóxico de 2 componentes crea un enlace
+              químico con la superficie metálica, ofreciendo adhesión superior,
+              impermeabilidad al vapor de agua y resistencia química a
+              combustibles y aceites. Para sala de máquinas siempre recomendamos
+              epoxi bicomponente.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="py-24 bg-navy-900 text-white relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+        <div
+          class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-400 rounded-full blur-[120px]"
+        ></div>
+      </div>
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <p
+          class="text-gold-400 text-xs tracking-widest uppercase font-bold mb-4"
+        >
+          Protección activa
+        </p>
+        <h2 class="font-serif text-4xl mb-6">
+          Protege tu Embarcación de la Corrosión Marina
+        </h2>
+        <p class="text-slate-300 font-light text-lg mb-10 max-w-2xl mx-auto">
+          Solicita una inspección sin costo. Evaluamos el estado actual de tu
+          sala de máquinas y estructuras y te entregamos un diagnóstico
+          detallado con presupuesto.
+        </p>
         <a
-          href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Cartagena%20Boat%20Detailing%20y%20quiero%20cotizar%20el%20control%20anticorrosivo%20para%20mi%20embarcaci%C3%B3n"
+          href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20el%20tratamiento%20anticorrosivo%20para%20mi%20embarcaci%C3%B3n%20en%20Cartagena"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-white transition"
+          class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-12 py-5 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(212,175,55,0.4)]"
         >
-          Solicitar Presupuesto
+          Solicitar Inspección Gratuita
         </a>
       </div>
     </section>
 
     <!-- Footer -->
-        <!-- Footer -->
     <!-- Footer -->
-<footer class="bg-navy-900 text-slate-300 py-12">
-  <div class="container mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-      <div class="md:col-span-1">
-        <div class="flex items-center gap-2 mb-4">
-          <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
-          <div>
-            <p class="text-white text-xs tracking-[0.1em] font-bold">
-              COLOMBIA
-            </p>
-            <p class="text-white font-serif font-bold text-sm tracking-widest">
-              BOAT DETAILING
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div class="md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i
+                class="ph-fill ph-anchor text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">
+                  COLOMBIA
+                </p>
+                <p
+                  class="text-white font-serif font-bold text-sm tracking-widest"
+                >
+                  BOAT DETAILING
+                </p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">
+              Estándares Internacionales de Excelencia Marina desde 2024.
             </p>
           </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Servicios
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="paint-polishing.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pulido de Gelcoat</a
+                >
+              </li>
+              <li>
+                <a
+                  href="hull-cleaning.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Limpieza de Casco</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ceramic-coating.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Ceramic Coating</a
+                >
+              </li>
+              <li>
+                <a
+                  href="ppf.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >PPF</a
+                >
+              </li>
+              <li>
+                <a
+                  href="calcomanias.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Calcomanías</a
+                >
+              </li>
+              <li>
+                <a
+                  href="polarizado.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Polarizado Nanocerámico</a
+                >
+              </li>
+              <li>
+                <a
+                  href="engine-painting.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Pintura de Motores</a
+                >
+              </li>
+              <li>
+                <a
+                  href="services.html"
+                  class="text-gold-400 hover:text-white transition-colors font-semibold"
+                  >&rarr; Ver todos</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Navegación
+            </h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="blog.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="services.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Todos los Servicios</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-white text-sm font-bold tracking-widest uppercase mb-4"
+            >
+              Contacto
+            </h4>
+            <p class="text-xs font-light mb-2">
+              <a href="tel:+573044301112" class="hover:text-gold-400 transition"
+                >+57 304 430 1112</a
+              >
+            </p>
+            <p class="text-xs font-light mb-2">Marina Manzanillo</p>
+            <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+            >
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
+            </a>
+          </div>
         </div>
-        <p class="text-xs text-slate-300 font-light">
-          Estándares Internacionales de Excelencia Marina desde 2024.
-        </p>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Servicios
-        </h4>
-        <ul class="space-y-2 text-xs font-light">
-          <li>
-            <a
-              href="paint-polishing.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Pulido de Gelcoat</a
-            >
-          </li>
-          <li>
-            <a
-              href="hull-cleaning.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Limpieza de Casco</a
-            >
-          </li>
-          <li>
-            <a
-              href="ceramic-coating.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Ceramic Coating</a
-            >
-          </li>
-          <li>
-            <a
-              href="ppf.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >PPF</a
-            >
-          </li>
-          <li>
-            <a
-              href="calcomanias.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Calcomanías</a
-            >
-          </li>
-          <li>
-            <a
-              href="polarizado.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Polarizado Nanocerámico</a
-            >
-          </li>
-          <li>
-            <a
-              href="engine-painting.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Pintura de Motores</a
-            >
-          </li>
-          <li>
-            <a
-              href="services.html"
-              class="text-gold-400 hover:text-white transition-colors font-semibold"
-              >&rarr; Ver todos</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Navegación
-        </h4>
-        <ul class="space-y-2 text-xs font-light">
-          <li>
-            <a
-              href="index.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Inicio</a
-            >
-          </li>
-          <li>
-            <a
-              href="about.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Sobre Nosotros</a
-            >
-          </li>
-          <li>
-            <a
-              href="blog.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Blog</a
-            >
-          </li>
-          <li>
-            <a
-              href="services.html"
-              class="text-slate-300 hover:text-gold-400 transition-colors"
-              >Todos los Servicios</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">
-          Contacto
-        </h4>
-        <p class="text-xs font-light mb-2">
-          <a href="tel:+573044301112" class="hover:text-gold-400 transition"
-            >+57 304 430 1112</a
-          >
-        </p>
-        <p class="text-xs font-light mb-2">Marina Manzanillo</p>
-        <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
-        <a
-          href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+        <div
+          class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
         >
-          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
-        </a>
+          <p>
+            &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de
+            Indias, Colombia &middot;
+            <a href="sitemap.xml" class="hover:text-gold-400 transition"
+              >Sitemap</a
+            >
+          </p>
+        </div>
       </div>
-    </div>
-    <div
-      class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
-    >
-      <p>
-        &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias,
-        Colombia &middot;
-        <a href="sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a>
-      </p>
-    </div>
-  </div>
-</footer>
+    </footer>
 
     <script src="js/main.js"></script>
   </body>
