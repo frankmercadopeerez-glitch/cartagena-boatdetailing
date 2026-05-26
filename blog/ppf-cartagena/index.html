@@ -71,7 +71,16 @@
       }
     </script>
     <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="../../css/tailwind.css" />
+        <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
+    <style>
+      *,::before,::after{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
+      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+    </style>
+    <link rel="preload" href="../../css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="../../css/tailwind.css" /></noscript>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
@@ -83,7 +92,8 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="preload" href="../../css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="../../css/styles.css" /></noscript>
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {

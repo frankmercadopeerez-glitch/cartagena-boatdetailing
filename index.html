@@ -42,26 +42,41 @@
     <meta name="twitter:description" content="Limpieza de casco en agua con buzos, pulido de botes y mantenimiento de yates en Cartagena." />
     <meta name="twitter:image" content="https://colombiaboatdetailing.com/images/header.webp" />
 
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="images/header.webp" as="image" type="image/webp" />
-    
-    <!-- DNS Prefetch for External Resources -->
+    <!-- Preconnect FIRST (before any resource fetch) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="css/tailwind.css" />
-    <!-- Google Fonts: Playfair Display (Lujo) & Inter (Legibilidad) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://unpkg.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload LCP image -->
+    <link rel="preload" href="images/header.webp" as="image" type="image/webp" fetchpriority="high" />
+
+    <!-- Critical CSS inline — evita flash blanco y renderiza navbar+hero sin esperar CSS externo -->
+    <style>
+      *,::before,::after{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
+      header.relative{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      header .absolute.inset-0{position:absolute;inset:0}
+      header img{width:100%;height:100%;object-fit:cover}
+      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+      .container{width:100%;margin-left:auto;margin-right:auto;padding-left:1.5rem;padding-right:1.5rem}
+    </style>
+
+    <!-- CSS externo: carga async (no bloquea render) -->
+    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+
+    <!-- Google Fonts async -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
 
-    <!-- Phosphor Icons (defer for performance) -->
+    <!-- Phosphor Icons (defer) -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/styles.css" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -534,6 +549,8 @@
           src="images/header.webp"
           alt="Yate de lujo en Cartagena"
           class="w-full h-full object-cover"
+          fetchpriority="high"
+          decoding="sync"
         />
         <div class="hero-overlay absolute inset-0"></div>
         <!-- Deep sea dark vignette -->
