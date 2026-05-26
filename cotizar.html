@@ -46,16 +46,56 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
     <!-- Tailwind CSS (compiled) -->
-        <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
+    <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
     <style>
-      *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth}
-      body{margin:0;background:#060607;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-      #navbar{position:fixed;width:100%;z-index:50;padding-top:1.5rem;padding-bottom:1.5rem;background:rgba(5,5,6,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .hero-overlay{background:linear-gradient(to top,#060607 0%,rgba(4,4,6,.55) 50%,rgba(2,2,4,.12) 100%)}
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: #060607;
+        color: #fff;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        background: rgba(5, 5, 6, 0.97);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        transition: all 0.3s;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #060607 0%,
+          rgba(4, 4, 6, 0.55) 50%,
+          rgba(2, 2, 4, 0.12) 100%
+        );
+      }
     </style>
-    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
+    <link
+      rel="preload"
+      href="css/tailwind.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,8 +119,15 @@
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link
+      rel="preload"
+      href="css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
 
     <style>
       body {
@@ -392,7 +439,7 @@
                         id="country-code"
                         name="codigo_pais"
                         class="text-white/70 text-sm py-2.5 px-3 bg-transparent focus:outline-none cursor-pointer border-r border-white/10 shrink-0"
-                        style="max-width:108px"
+                        style="max-width: 108px"
                       >
                         <option value="+57" selected>🇨🇴 +57</option>
                         <option value="+58">🇻🇪 +58</option>

@@ -12,3 +12,4 @@ _canonical-nav-root.html
 _canonical-footer-root.html
 _standardize-nav-footer.ps1
 _test.ps1
+_revert-async-css.py

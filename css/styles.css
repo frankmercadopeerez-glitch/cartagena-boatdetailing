@@ -1721,29 +1721,53 @@ footer a:hover {
 
 :root {
   --electric-400: #4d8bff;
-  --electric-500: #1B4FFF;
+  --electric-500: #1b4fff;
   --electric-600: #1540d6;
 }
 
 /* Text utilities */
-.text-electric-400 { color: var(--electric-400); }
-.text-electric-500 { color: var(--electric-500); }
-.text-electric-600 { color: var(--electric-600); }
+.text-electric-400 {
+  color: var(--electric-400);
+}
+.text-electric-500 {
+  color: var(--electric-500);
+}
+.text-electric-600 {
+  color: var(--electric-600);
+}
 
 /* Background utilities */
-.bg-electric-400 { background-color: var(--electric-400); }
-.bg-electric-500 { background-color: var(--electric-500); }
-.bg-electric-600 { background-color: var(--electric-600); }
+.bg-electric-400 {
+  background-color: var(--electric-400);
+}
+.bg-electric-500 {
+  background-color: var(--electric-500);
+}
+.bg-electric-600 {
+  background-color: var(--electric-600);
+}
 
 /* Border utilities */
-.border-electric-400 { border-color: var(--electric-400); }
-.border-electric-500 { border-color: var(--electric-500); }
+.border-electric-400 {
+  border-color: var(--electric-400);
+}
+.border-electric-500 {
+  border-color: var(--electric-500);
+}
 
 /* Hover utilities */
-.hover\:text-electric-400:hover { color: var(--electric-400); }
-.hover\:text-electric-500:hover { color: var(--electric-500); }
-.hover\:bg-electric-500:hover  { background-color: var(--electric-500); }
-.hover\:bg-electric-600:hover  { background-color: var(--electric-600); }
+.hover\:text-electric-400:hover {
+  color: var(--electric-400);
+}
+.hover\:text-electric-500:hover {
+  color: var(--electric-500);
+}
+.hover\:bg-electric-500:hover {
+  background-color: var(--electric-500);
+}
+.hover\:bg-electric-600:hover {
+  background-color: var(--electric-600);
+}
 
 /* Section eyebrow — blue variant */
 .section-eyebrow-blue {
@@ -1779,7 +1803,10 @@ footer a:hover {
 .btn-electric {
   background: var(--electric-500);
   color: white;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 .btn-electric:hover {
   background: var(--electric-600);
@@ -1792,9 +1819,9 @@ footer a:hover {
   background: linear-gradient(
     90deg,
     #1540d6,
-    #1B4FFF,
+    #1b4fff,
     #7ba8ff,
-    #1B4FFF,
+    #1b4fff,
     #1540d6
   );
   background-size: 250% auto;
@@ -1829,5 +1856,5 @@ footer a:hover {
 
 /* Inter font — applied globally so all pages inherit it */
 body {
-  font-family: 'Inter', 'Lato', sans-serif;
+  font-family: "Inter", "Lato", sans-serif;
 }
