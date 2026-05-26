@@ -2023,10 +2023,18 @@
               Déjenos sus datos y coordinaremos una visita técnica.
             </p>
 
+            <!-- Mensaje de éxito -->
+            <div id="contact-success" style="display:none" class="bg-green-50 border border-green-200 rounded p-6 text-center">
+              <p class="text-green-700 font-bold text-lg mb-1">¡Mensaje recibido!</p>
+              <p class="text-green-600 text-sm">Te contactamos en menos de 2 horas por WhatsApp al número indicado.</p>
+            </div>
+
             <form
+              id="contact-form"
               class="space-y-6"
               action="https://formspree.io/f/xdajpzpj"
               method="POST"
+              novalidate
             >
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
@@ -2046,18 +2054,24 @@
                 </div>
                 <div class="space-y-2">
                   <label
-                    for="form-telefono"
+                    for="form-telefono-num"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
                     >Teléfono</label
                   >
-                  <input
-                    id="form-telefono"
-                    type="tel"
-                    name="telefono"
-                    required
-                    class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
-                    placeholder="+57 ..."
-                  />
+                  <div class="flex items-center border-b border-slate-300 focus-within:border-gold-400 transition-colors">
+                    <span class="text-slate-500 text-sm py-2 pr-1 select-none font-medium">+57</span>
+                    <input
+                      id="form-telefono-num"
+                      type="tel"
+                      inputmode="numeric"
+                      maxlength="10"
+                      required
+                      class="flex-1 py-2 focus:outline-none bg-transparent placeholder-slate-300"
+                      placeholder="300 000 0000"
+                      autocomplete="tel-national"
+                    />
+                  </div>
+                  <input type="hidden" id="form-telefono" name="telefono" />
                 </div>
               </div>
 
@@ -2145,11 +2159,63 @@
 
               <button
                 type="submit"
-                class="w-full bg-navy-900 text-white font-bold text-sm tracking-widest uppercase py-4 hover:bg-gold-400 transition-colors mt-4 shadow-lg"
+                id="contact-submit-btn"
+                class="w-full bg-navy-900 text-white font-bold text-sm tracking-widest uppercase py-4 hover:bg-gold-400 transition-colors mt-4 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Solicitar Cotización
               </button>
             </form>
+
+            <script>
+            (function() {
+              var form = document.getElementById('contact-form');
+              var numInput = document.getElementById('form-telefono-num');
+              var hiddenTel = document.getElementById('form-telefono');
+              var successDiv = document.getElementById('contact-success');
+              var submitBtn = document.getElementById('contact-submit-btn');
+
+              // Solo números en el campo de teléfono
+              numInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '');
+              });
+
+              form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Validar campos requeridos manualmente
+                if (!form.checkValidity()) {
+                  form.reportValidity();
+                  return;
+                }
+
+                // Combinar +57 con el número
+                hiddenTel.value = '+57' + numInput.value;
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+
+                try {
+                  var res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                  });
+                  if (res.ok) {
+                    form.style.display = 'none';
+                    successDiv.style.display = 'block';
+                  } else {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Solicitar Cotización';
+                    alert('Hubo un error. Por favor inténtelo de nuevo.');
+                  }
+                } catch(err) {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'Solicitar Cotización';
+                  alert('Hubo un error de conexión. Por favor inténtelo de nuevo.');
+                }
+              });
+            })();
+            </script>
           </div>
         </div>
       </div>

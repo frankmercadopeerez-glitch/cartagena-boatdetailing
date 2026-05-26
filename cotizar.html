@@ -3,23 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cotiza tu Servicio de Bote o Yate en Cartagena | Colombia Boat Detailing</title>
+    <title>
+      Cotiza tu Servicio de Bote o Yate en Cartagena | Colombia Boat Detailing
+    </title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛵</text></svg>"
     />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Cotiza gratis tu servicio de limpieza de casco, pulido, PPF, ceramic coating o pintura para bote o yate en Cartagena. Respuesta en menos de 2 horas." />
+    <meta
+      name="description"
+      content="Cotiza gratis tu servicio de limpieza de casco, pulido, PPF, ceramic coating o pintura para bote o yate en Cartagena. Respuesta en menos de 2 horas."
+    />
     <meta name="robots" content="noindex, follow" />
-    <link rel="canonical" href="https://colombiaboatdetailing.com/cotizar.html" />
+    <link
+      rel="canonical"
+      href="https://colombiaboatdetailing.com/cotizar.html"
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://colombiaboatdetailing.com/cotizar.html" />
-    <meta property="og:title" content="Cotiza tu Servicio Naval en Cartagena | Colombia Boat Detailing" />
-    <meta property="og:description" content="Limpieza de casco, PPF, ceramic coating y más. Cotización gratuita en 2 horas." />
-    <meta property="og:image" content="https://colombiaboatdetailing.com/images/header.webp" />
+    <meta
+      property="og:url"
+      content="https://colombiaboatdetailing.com/cotizar.html"
+    />
+    <meta
+      property="og:title"
+      content="Cotiza tu Servicio Naval en Cartagena | Colombia Boat Detailing"
+    />
+    <meta
+      property="og:description"
+      content="Limpieza de casco, PPF, ceramic coating y más. Cotización gratuita en 2 horas."
+    />
+    <meta
+      property="og:image"
+      content="https://colombiaboatdetailing.com/images/header.webp"
+    />
 
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -31,8 +51,20 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet"
+    /></noscript>
 
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
@@ -47,8 +79,8 @@
       }
       .form-input {
         width: 100%;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 4px;
         padding: 12px 16px;
         color: #fff;
@@ -56,33 +88,52 @@
         transition: border-color 0.2s;
         outline: none;
       }
-      .form-input::placeholder { color: rgba(255,255,255,0.35); }
-      .form-input:focus { border-color: #d4af37; }
-      select.form-input option { background: #0e0e10; color: #fff; }
+      .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .form-input:focus {
+        border-color: #d4af37;
+      }
+      select.form-input option {
+        background: #0e0e10;
+        color: #fff;
+      }
       .trust-badge {
         display: flex;
         align-items: center;
         gap: 8px;
         font-size: 13px;
-        color: rgba(255,255,255,0.65);
+        color: rgba(255, 255, 255, 0.65);
       }
-      .trust-badge i { color: #d4af37; font-size: 18px; }
+      .trust-badge i {
+        color: #d4af37;
+        font-size: 18px;
+      }
       .step-dot {
-        width: 28px; height: 28px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background: #d4af37;
         color: #060607;
         font-weight: 700;
         font-size: 13px;
-        display: flex; align-items: center; justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
       }
-      .review-star { color: #f59e0b; }
+      .review-star {
+        color: #f59e0b;
+      }
       /* Success message */
       #success-msg {
         display: none;
-        background: linear-gradient(135deg, rgba(31,122,74,0.15), rgba(31,122,74,0.05));
-        border: 1px solid rgba(31,122,74,0.4);
+        background: linear-gradient(
+          135deg,
+          rgba(31, 122, 74, 0.15),
+          rgba(31, 122, 74, 0.05)
+        );
+        border: 1px solid rgba(31, 122, 74, 0.4);
         border-radius: 8px;
         padding: 32px;
         text-align: center;
@@ -95,10 +146,21 @@
     <header class="py-5 px-6 border-b border-white/8">
       <div class="max-w-5xl mx-auto flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2 group">
-          <i class="ph-fill ph-anchor text-xl text-gold-400" aria-hidden="true"></i>
+          <i
+            class="ph-fill ph-anchor text-xl text-gold-400"
+            aria-hidden="true"
+          ></i>
           <div>
-            <p class="text-white text-[10px] tracking-[0.15em] font-bold leading-none">COLOMBIA</p>
-            <p class="text-white font-serif font-bold text-sm tracking-widest leading-none">BOAT DETAILING</p>
+            <p
+              class="text-white text-[10px] tracking-[0.15em] font-bold leading-none"
+            >
+              COLOMBIA
+            </p>
+            <p
+              class="text-white font-serif font-bold text-sm tracking-widest leading-none"
+            >
+              BOAT DETAILING
+            </p>
           </div>
         </a>
         <a
@@ -121,21 +183,39 @@
             alt="Yate de lujo en Cartagena"
             class="w-full h-full object-cover opacity-20"
           />
-          <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(6,6,7,0.6) 0%, rgba(6,6,7,0.98) 100%);"></div>
+          <div
+            class="absolute inset-0"
+            style="
+              background: linear-gradient(
+                to bottom,
+                rgba(6, 6, 7, 0.6) 0%,
+                rgba(6, 6, 7, 0.98) 100%
+              );
+            "
+          ></div>
         </div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 py-16 md:py-24">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
+          <div
+            class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start"
+          >
             <!-- LEFT: copy -->
             <div>
-              <p class="text-gold-400 text-xs tracking-[0.2em] uppercase font-bold mb-4">Cartagena de Indias · Marina Manzanillo</p>
-              <h1 class="font-serif text-white text-4xl md:text-5xl font-bold leading-tight mb-6">
+              <p
+                class="text-gold-400 text-xs tracking-[0.2em] uppercase font-bold mb-4"
+              >
+                Cartagena de Indias · Marina Manzanillo
+              </p>
+              <h1
+                class="font-serif text-white text-4xl md:text-5xl font-bold leading-tight mb-6"
+              >
                 Cotización Gratis para tu<br />
                 <span class="text-gold-400">Bote o Yate</span>
               </h1>
               <p class="text-white/60 text-base leading-relaxed mb-10">
-                Completa el formulario y uno de nuestros técnicos te responde en <strong class="text-white">menos de 2 horas</strong> con un presupuesto personalizado.
+                Completa el formulario y uno de nuestros técnicos te responde en
+                <strong class="text-white">menos de 2 horas</strong> con un
+                presupuesto personalizado.
               </p>
 
               <!-- How it works -->
@@ -143,22 +223,34 @@
                 <div class="flex items-start gap-4">
                   <div class="step-dot">1</div>
                   <div>
-                    <p class="text-white font-semibold text-sm">Llena el formulario</p>
-                    <p class="text-white/50 text-xs mt-0.5">Cuéntanos qué necesita tu embarcación</p>
+                    <p class="text-white font-semibold text-sm">
+                      Llena el formulario
+                    </p>
+                    <p class="text-white/50 text-xs mt-0.5">
+                      Cuéntanos qué necesita tu embarcación
+                    </p>
                   </div>
                 </div>
                 <div class="flex items-start gap-4">
                   <div class="step-dot">2</div>
                   <div>
-                    <p class="text-white font-semibold text-sm">Recibe tu cotización</p>
-                    <p class="text-white/50 text-xs mt-0.5">Te enviamos el precio exacto por WhatsApp o email</p>
+                    <p class="text-white font-semibold text-sm">
+                      Recibe tu cotización
+                    </p>
+                    <p class="text-white/50 text-xs mt-0.5">
+                      Te enviamos el precio exacto por WhatsApp o email
+                    </p>
                   </div>
                 </div>
                 <div class="flex items-start gap-4">
                   <div class="step-dot">3</div>
                   <div>
-                    <p class="text-white font-semibold text-sm">Agendamos la visita</p>
-                    <p class="text-white/50 text-xs mt-0.5">Vamos a la marina en la fecha que más te convenga</p>
+                    <p class="text-white font-semibold text-sm">
+                      Agendamos la visita
+                    </p>
+                    <p class="text-white/50 text-xs mt-0.5">
+                      Vamos a la marina en la fecha que más te convenga
+                    </p>
                   </div>
                 </div>
               </div>
@@ -182,28 +274,52 @@
               <!-- Reviews mini -->
               <div class="mt-8 pt-8 border-t border-white/10">
                 <div class="flex items-center gap-2 mb-4">
-                  <div class="flex review-star text-sm" aria-label="5 estrellas">
+                  <div
+                    class="flex review-star text-sm"
+                    aria-label="5 estrellas"
+                  >
                     ★★★★★
                   </div>
-                  <span class="text-white/50 text-xs">4.9 / 5 · 60+ reseñas Google</span>
+                  <span class="text-white/50 text-xs"
+                    >4.9 / 5 · 60+ reseñas Google</span
+                  >
                 </div>
-                <blockquote class="text-white/60 text-sm italic leading-relaxed">
-                  "Increíble trabajo en el casco de mi velero de 52 pies. Quedó como nuevo y el precio fue justo. Los recomiendo sin dudarlo."
+                <blockquote
+                  class="text-white/60 text-sm italic leading-relaxed"
+                >
+                  "Increíble trabajo en el casco de mi velero de 52 pies. Quedó
+                  como nuevo y el precio fue justo. Los recomiendo sin dudarlo."
                 </blockquote>
-                <p class="text-gold-400 text-xs font-semibold mt-2">— Carlos M., Marina Manzanillo</p>
+                <p class="text-gold-400 text-xs font-semibold mt-2">
+                  — Carlos M., Marina Manzanillo
+                </p>
               </div>
             </div>
 
             <!-- RIGHT: form -->
-            <div class="bg-white/[0.03] border border-white/10 rounded-lg p-8 md:p-10 backdrop-blur-sm">
-              <h2 class="text-white font-serif text-xl font-bold mb-1">Solicitar Cotización</h2>
-              <p class="text-white/40 text-xs mb-8">Sin compromiso · 100% gratis</p>
+            <div
+              class="bg-white/[0.03] border border-white/10 rounded-lg p-8 md:p-10 backdrop-blur-sm"
+            >
+              <h2 class="text-white font-serif text-xl font-bold mb-1">
+                Solicitar Cotización
+              </h2>
+              <p class="text-white/40 text-xs mb-8">
+                Sin compromiso · 100% gratis
+              </p>
 
               <!-- Success message (shown after submit) -->
               <div id="success-msg">
-                <i class="ph-fill ph-check-circle text-4xl text-green-400 mb-4 block" aria-hidden="true"></i>
-                <h3 class="text-white font-bold text-lg mb-2">¡Mensaje recibido!</h3>
-                <p class="text-white/60 text-sm">Te contactamos en menos de 2 horas por WhatsApp o al correo que dejaste.</p>
+                <i
+                  class="ph-fill ph-check-circle text-4xl text-green-400 mb-4 block"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="text-white font-bold text-lg mb-2">
+                  ¡Mensaje recibido!
+                </h3>
+                <p class="text-white/60 text-sm">
+                  Te contactamos en menos de 2 horas por WhatsApp o al correo
+                  que dejaste.
+                </p>
                 <a
                   href="https://wa.me/573044301112?text=Hola%2C%20acabo%20de%20enviar%20una%20cotizaci%C3%B3n%20desde%20la%20p%C3%A1gina%20web"
                   target="_blank"
@@ -220,14 +336,26 @@
                 action="https://formspree.io/f/xdajpzpj"
                 method="POST"
                 class="space-y-5"
+                novalidate
               >
                 <!-- Hidden field to identify source -->
-                <input type="hidden" name="_source" value="Página cotizar.html (Google Ads)" />
-                <input type="hidden" name="_subject" value="Nueva cotización desde Google Ads" />
+                <input
+                  type="hidden"
+                  name="_source"
+                  value="Página cotizar.html (Google Ads)"
+                />
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="Nueva cotización desde Google Ads"
+                />
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div class="space-y-1.5">
-                    <label for="nombre" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                    <label
+                      for="nombre"
+                      class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                    >
                       Nombre <span class="text-gold-400">*</span>
                     </label>
                     <input
@@ -241,23 +369,34 @@
                     />
                   </div>
                   <div class="space-y-1.5">
-                    <label for="telefono" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                    <label
+                      for="telefono-num"
+                      class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                    >
                       Teléfono / WhatsApp <span class="text-gold-400">*</span>
                     </label>
-                    <input
-                      id="telefono"
-                      type="tel"
-                      name="telefono"
-                      required
-                      class="form-input"
-                      placeholder="+57 300 000 0000"
-                      autocomplete="tel"
-                    />
+                    <div class="flex items-center border-b border-white/20 focus-within:border-gold-400 transition-colors bg-white/5">
+                      <span class="text-white/70 text-sm py-2.5 px-3 select-none font-medium border-r border-white/10">+57</span>
+                      <input
+                        id="telefono-num"
+                        type="tel"
+                        inputmode="numeric"
+                        maxlength="10"
+                        required
+                        class="flex-1 bg-transparent text-white py-2.5 px-3 focus:outline-none placeholder-white/30 text-sm"
+                        placeholder="300 000 0000"
+                        autocomplete="tel-national"
+                      />
+                    </div>
+                    <input type="hidden" id="telefono" name="telefono" />
                   </div>
                 </div>
 
                 <div class="space-y-1.5">
-                  <label for="email" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                  <label
+                    for="email"
+                    class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                  >
                     Email
                   </label>
                   <input
@@ -272,10 +411,17 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div class="space-y-1.5">
-                    <label for="tipo-embarcacion" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                    <label
+                      for="tipo-embarcacion"
+                      class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                    >
                       Tipo de Embarcación
                     </label>
-                    <select id="tipo-embarcacion" name="tipo_embarcacion" class="form-input">
+                    <select
+                      id="tipo-embarcacion"
+                      name="tipo_embarcacion"
+                      class="form-input"
+                    >
                       <option value="">Seleccionar...</option>
                       <option>Yate a motor</option>
                       <option>Velero</option>
@@ -286,7 +432,10 @@
                     </select>
                   </div>
                   <div class="space-y-1.5">
-                    <label for="eslora" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                    <label
+                      for="eslora"
+                      class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                    >
                       Eslora (Pies)
                     </label>
                     <input
@@ -300,7 +449,10 @@
                 </div>
 
                 <div class="space-y-1.5">
-                  <label for="ubicacion" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                  <label
+                    for="ubicacion"
+                    class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                  >
                     Ubicación de la Embarcación
                   </label>
                   <select id="ubicacion" name="ubicacion" class="form-input">
@@ -317,51 +469,122 @@
                 </div>
 
                 <div class="space-y-2">
-                  <p class="text-white/50 text-xs uppercase tracking-widest font-semibold">
-                    Servicios de Interés <span class="text-white/30 normal-case tracking-normal">(puede marcar varios)</span>
+                  <p
+                    class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                  >
+                    Servicios de Interés
+                    <span class="text-white/30 normal-case tracking-normal"
+                      >(puede marcar varios)</span
+                    >
                   </p>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Limpieza de Casco" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Limpieza de Casco"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Limpieza de Casco
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Pulido de Gelcoat" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Pulido de Gelcoat"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Pulido de Gelcoat
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="PPF / Protección Máxima" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="PPF / Protección Máxima"
+                        class="accent-gold-400 shrink-0"
+                      />
                       PPF / Protección Máxima
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Ceramic Coating" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Ceramic Coating"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Ceramic Coating
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Pintura de Motores" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Pintura de Motores"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Pintura de Motores
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Pintura Completa / Casco" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Pintura Completa / Casco"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Pintura Completa / Casco
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Restauración de Gelcoat" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Restauración de Gelcoat"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Restauración Gelcoat
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70">
-                      <input type="checkbox" name="servicio[]" value="Tapicería / Interiores" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Tapicería / Interiores"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Tapicería / Interiores
                     </label>
-                    <label class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70 sm:col-span-2">
-                      <input type="checkbox" name="servicio[]" value="Plan Mantenimiento Mensual" class="accent-gold-400 shrink-0" />
+                    <label
+                      class="flex items-center gap-2.5 cursor-pointer p-2.5 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-sm text-white/70 sm:col-span-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="servicio[]"
+                        value="Plan Mantenimiento Mensual"
+                        class="accent-gold-400 shrink-0"
+                      />
                       Plan de Mantenimiento Mensual
                     </label>
                   </div>
                 </div>
 
                 <div class="space-y-1.5">
-                  <label for="mensaje" class="text-white/50 text-xs uppercase tracking-widest font-semibold">
+                  <label
+                    for="mensaje"
+                    class="text-white/50 text-xs uppercase tracking-widest font-semibold"
+                  >
                     Detalles adicionales
                   </label>
                   <textarea
@@ -374,10 +597,14 @@
                 </div>
 
                 <button
+                  id="cotizar-submit-btn"
                   type="submit"
-                  class="w-full bg-gold-400 hover:bg-gold-500 text-navy-900 font-bold text-sm tracking-widest uppercase py-4 rounded transition-colors shadow-lg flex items-center justify-center gap-2"
+                  class="w-full bg-gold-400 hover:bg-gold-500 text-navy-900 font-bold text-sm tracking-widest uppercase py-4 rounded transition-colors shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <i class="ph ph-paper-plane-tilt text-base" aria-hidden="true"></i>
+                  <i
+                    class="ph ph-paper-plane-tilt text-base"
+                    aria-hidden="true"
+                  ></i>
                   Solicitar Cotización Gratis
                 </button>
 
@@ -386,7 +613,6 @@
                 </p>
               </form>
             </div>
-
           </div>
         </div>
       </section>
@@ -394,23 +620,63 @@
       <!-- ===== SERVICES STRIP ===== -->
       <section class="border-t border-white/8 py-12">
         <div class="max-w-5xl mx-auto px-6">
-          <p class="text-white/30 text-xs uppercase tracking-widest text-center mb-8">Servicios disponibles</p>
+          <p
+            class="text-white/30 text-xs uppercase tracking-widest text-center mb-8"
+          >
+            Servicios disponibles
+          </p>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="hull-cleaning.html" class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center">
-              <i class="ph ph-waves text-2xl text-gold-400" aria-hidden="true"></i>
-              <span class="text-white/70 text-xs font-medium group-hover:text-white transition">Limpieza de Casco</span>
+            <a
+              href="hull-cleaning.html"
+              class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center"
+            >
+              <i
+                class="ph ph-waves text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <span
+                class="text-white/70 text-xs font-medium group-hover:text-white transition"
+                >Limpieza de Casco</span
+              >
             </a>
-            <a href="paint-polishing.html" class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center">
-              <i class="ph ph-sparkle text-2xl text-gold-400" aria-hidden="true"></i>
-              <span class="text-white/70 text-xs font-medium group-hover:text-white transition">Pulido de Gelcoat</span>
+            <a
+              href="paint-polishing.html"
+              class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center"
+            >
+              <i
+                class="ph ph-sparkle text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <span
+                class="text-white/70 text-xs font-medium group-hover:text-white transition"
+                >Pulido de Gelcoat</span
+              >
             </a>
-            <a href="ppf.html" class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center">
-              <i class="ph ph-shield-check text-2xl text-gold-400" aria-hidden="true"></i>
-              <span class="text-white/70 text-xs font-medium group-hover:text-white transition">PPF Protection</span>
+            <a
+              href="ppf.html"
+              class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center"
+            >
+              <i
+                class="ph ph-shield-check text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <span
+                class="text-white/70 text-xs font-medium group-hover:text-white transition"
+                >PPF Protection</span
+              >
             </a>
-            <a href="ceramic-coating.html" class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center">
-              <i class="ph ph-drop text-2xl text-gold-400" aria-hidden="true"></i>
-              <span class="text-white/70 text-xs font-medium group-hover:text-white transition">Ceramic Coating</span>
+            <a
+              href="ceramic-coating.html"
+              class="group flex flex-col items-center gap-2 p-4 border border-white/8 rounded hover:border-gold-400/40 hover:bg-white/5 transition text-center"
+            >
+              <i
+                class="ph ph-drop text-2xl text-gold-400"
+                aria-hidden="true"
+              ></i>
+              <span
+                class="text-white/70 text-xs font-medium group-hover:text-white transition"
+                >Ceramic Coating</span
+              >
             </a>
           </div>
         </div>
@@ -420,8 +686,11 @@
     <!-- ===== MINIMAL FOOTER ===== -->
     <footer class="border-t border-white/8 py-6 text-center">
       <p class="text-white/30 text-xs">
-        &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias &middot;
-        <a href="index.html" class="hover:text-gold-400 transition">Volver al inicio</a>
+        &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias
+        &middot;
+        <a href="index.html" class="hover:text-gold-400 transition"
+          >Volver al inicio</a
+        >
       </p>
     </footer>
 
@@ -435,35 +704,62 @@
     >
       <span class="whatsapp-float__label">Cotizar por WhatsApp</span>
       <span class="whatsapp-float__bubble"></span>
-      <i class="ph-fill ph-whatsapp-logo whatsapp-float__icon" aria-hidden="true"></i>
+      <i
+        class="ph-fill ph-whatsapp-logo whatsapp-float__icon"
+        aria-hidden="true"
+      ></i>
     </a>
 
     <script>
-      // Show success message after Formspree submission
-      const form = document.getElementById('cotizar-form');
-      const successMsg = document.getElementById('success-msg');
+      (function() {
+        var form = document.getElementById('cotizar-form');
+        var numInput = document.getElementById('telefono-num');
+        var hiddenTel = document.getElementById('telefono');
+        var successMsg = document.getElementById('success-msg');
+        var submitBtn = document.getElementById('cotizar-submit-btn');
 
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const data = new FormData(form);
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-          if (res.ok) {
-            form.style.display = 'none';
-            successMsg.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            // Fallback: native submit if fetch fails
-            form.submit();
+        // Solo números en el campo de teléfono
+        numInput.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '');
+        });
+
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+
+          // Validar campos requeridos
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
           }
-        } catch {
-          form.submit();
-        }
-      });
+
+          // Combinar +57 con el número
+          hiddenTel.value = '+57' + numInput.value;
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Enviando...';
+
+          try {
+            var res = await fetch(form.action, {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+              form.style.display = 'none';
+              successMsg.style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Solicitar Cotización Gratis';
+              alert('Hubo un error. Por favor inténtelo de nuevo.');
+            }
+          } catch(err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Solicitar Cotización Gratis';
+            alert('Hubo un error de conexión. Por favor inténtelo de nuevo.');
+          }
+        });
+      })();
     </script>
   </body>
 </html>
