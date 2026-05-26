@@ -2076,12 +2076,43 @@
                     >Teléfono</label
                   >
                   <div class="flex items-center border-b border-slate-300 focus-within:border-gold-400 transition-colors">
-                    <span class="text-slate-500 text-sm py-2 pr-1 select-none font-medium">+57</span>
+                    <select id="form-country-code" name="codigo_pais" class="text-slate-500 text-sm py-2 pr-2 bg-transparent focus:outline-none cursor-pointer border-r border-slate-200 mr-2 shrink-0" style="max-width:100px">
+                      <option value="+57" selected>🇨🇴 +57</option>
+                      <option value="+58">🇻🇪 +58</option>
+                      <option value="+507">🇵🇦 +507</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+1">🇨🇦 +1</option>
+                      <option value="+52">🇲🇽 +52</option>
+                      <option value="+54">🇦🇷 +54</option>
+                      <option value="+55">🇧🇷 +55</option>
+                      <option value="+56">🇨🇱 +56</option>
+                      <option value="+593">🇪🇨 +593</option>
+                      <option value="+51">🇵🇪 +51</option>
+                      <option value="+598">🇺🇾 +598</option>
+                      <option value="+591">🇧🇴 +591</option>
+                      <option value="+595">🇵🇾 +595</option>
+                      <option value="+506">🇨🇷 +506</option>
+                      <option value="+503">🇸🇻 +503</option>
+                      <option value="+502">🇬🇹 +502</option>
+                      <option value="+504">🇭🇳 +504</option>
+                      <option value="+505">🇳🇮 +505</option>
+                      <option value="+1809">🇩🇴 +1809</option>
+                      <option value="+53">🇨🇺 +53</option>
+                      <option value="+1787">🇵🇷 +1787</option>
+                      <option value="+34">🇪🇸 +34</option>
+                      <option value="+351">🇵🇹 +351</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+49">🇩🇪 +49</option>
+                      <option value="+33">🇫🇷 +33</option>
+                      <option value="+39">🇮🇹 +39</option>
+                      <option value="+31">🇳🇱 +31</option>
+                      <option value="+61">🇦🇺 +61</option>
+                    </select>
                     <input
                       id="form-telefono-num"
                       type="tel"
                       inputmode="numeric"
-                      maxlength="10"
+                      maxlength="15"
                       required
                       class="flex-1 py-2 focus:outline-none bg-transparent placeholder-slate-300"
                       placeholder="300 000 0000"
@@ -2150,8 +2181,8 @@
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
                   >
-                    <input type="checkbox" name="servicio[]" value="Ceramic Coating" class="accent-gold-400" /> Ceramic
-                    Coating
+                    <input type="checkbox" name="servicio[]" value="Cristal Líquido" class="accent-gold-400" /> Cristal
+                    Líquido
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
@@ -2171,7 +2202,30 @@
                     <input type="checkbox" name="servicio[]" value="Plan Mantenimiento Mensual" class="accent-gold-400" /> Plan
                     Mantenimiento Mensual
                   </label>
+                  <label
+                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
+                  >
+                    <input type="checkbox" name="servicio[]" value="Pulido Integral" class="accent-gold-400" /> Pulido
+                    Integral
+                  </label>
+                  <label
+                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-slate-50 transition-colors"
+                  >
+                    <input type="checkbox" name="servicio[]" value="Otro" class="accent-gold-400" /> Otro
+                  </label>
                 </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-xs uppercase tracking-widest text-slate-500 font-bold"
+                  >Cuéntenos más <span class="font-normal normal-case">(opcional)</span></label
+                >
+                <textarea
+                  name="descripcion"
+                  rows="3"
+                  class="w-full border border-slate-200 rounded py-2 px-3 text-sm focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300 resize-none"
+                  placeholder="Describa el estado de su embarcación, el servicio que busca, fecha tentativa..."
+                ></textarea>
               </div>
 
               <button
@@ -2187,6 +2241,7 @@
             (function() {
               var form = document.getElementById('contact-form');
               var numInput = document.getElementById('form-telefono-num');
+              var countrySelect = document.getElementById('form-country-code');
               var hiddenTel = document.getElementById('form-telefono');
               var successDiv = document.getElementById('contact-success');
               var submitBtn = document.getElementById('contact-submit-btn');
@@ -2206,7 +2261,7 @@
                 }
 
                 // Combinar +57 con el número
-                hiddenTel.value = '+57' + numInput.value;
+                hiddenTel.value = countrySelect.value + numInput.value;
 
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Enviando...';
