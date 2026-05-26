@@ -443,7 +443,7 @@ html {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 4px;
-  min-width: 260px;
+  min-width: 500px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -451,6 +451,14 @@ html {
   z-index: 1000;
   padding: 0.5rem 0;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Featured item (★) and separator span both columns */
+.nav-dropdown-content > *:first-child,
+.nav-dropdown-content > *:nth-child(2) {
+  grid-column: 1 / -1;
 }
 
 .nav-dropdown:hover .nav-dropdown-content {
