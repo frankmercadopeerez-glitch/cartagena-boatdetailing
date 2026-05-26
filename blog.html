@@ -69,10 +69,8 @@
       name="twitter:image"
       content="https://colombiaboatdetailing.com/images/header.webp"
     />
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
+    <!-- Tailwind CSS (compiled) -->
+    <link rel="stylesheet" href="css/tailwind.css" />
     <!-- Google Fonts -->
     <link
       rel="preload"
@@ -81,16 +79,14 @@
       type="image/webp"
       fetchpriority="high"
     />
-    <link rel="dns-prefetch" href="//cdn.tailwindcss.com" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
     <link rel="dns-prefetch" href="//unpkg.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
 
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
@@ -137,31 +133,6 @@
         font-size: 0.8rem;
       }
     </style>
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-              serif: ["Playfair Display", "serif"],
-            },
-            colors: {
-              navy: {
-                900: "#0a192f",
-                800: "#112240",
-              },
-              gold: {
-                400: "#d4af37",
-                500: "#c5a028",
-                600: "#b08d1e",
-              },
-            },
-          },
-        },
-      };
-    </script>
-
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
