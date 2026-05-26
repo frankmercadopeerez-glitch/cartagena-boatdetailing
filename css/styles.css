@@ -1705,3 +1705,121 @@ footer a:hover {
     display: none;
   }
 }
+
+/* ╔══════════════════════════════════════════════════════════╗
+   ║   ELECTRIC BLUE — AgentFire-inspired accent color       ║
+   ║   #1B4FFF as secondary accent alongside gold            ║
+   ╚══════════════════════════════════════════════════════════╝ */
+
+:root {
+  --electric-400: #4d8bff;
+  --electric-500: #1B4FFF;
+  --electric-600: #1540d6;
+}
+
+/* Text utilities */
+.text-electric-400 { color: var(--electric-400); }
+.text-electric-500 { color: var(--electric-500); }
+.text-electric-600 { color: var(--electric-600); }
+
+/* Background utilities */
+.bg-electric-400 { background-color: var(--electric-400); }
+.bg-electric-500 { background-color: var(--electric-500); }
+.bg-electric-600 { background-color: var(--electric-600); }
+
+/* Border utilities */
+.border-electric-400 { border-color: var(--electric-400); }
+.border-electric-500 { border-color: var(--electric-500); }
+
+/* Hover utilities */
+.hover\:text-electric-400:hover { color: var(--electric-400); }
+.hover\:text-electric-500:hover { color: var(--electric-500); }
+.hover\:bg-electric-500:hover  { background-color: var(--electric-500); }
+.hover\:bg-electric-600:hover  { background-color: var(--electric-600); }
+
+/* Section eyebrow — blue variant */
+.section-eyebrow-blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--electric-400);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.section-eyebrow-blue::before,
+.section-eyebrow-blue::after {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+/* Electric glow on card hover */
+.service-card:hover.electric-hover {
+  border-color: rgba(27, 79, 255, 0.45) !important;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(27, 79, 255, 0.1),
+    0 0 40px rgba(27, 79, 255, 0.08) !important;
+}
+
+/* Electric CTA button */
+.btn-electric {
+  background: var(--electric-500);
+  color: white;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-electric:hover {
+  background: var(--electric-600);
+  box-shadow: 0 0 28px rgba(27, 79, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Blue shimmer text (like gold-shimmer but blue) */
+.text-electric-shimmer {
+  background: linear-gradient(
+    90deg,
+    #1540d6,
+    #1B4FFF,
+    #7ba8ff,
+    #1B4FFF,
+    #1540d6
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4.5s linear infinite;
+}
+
+/* Badge / tag pill */
+.badge-electric {
+  display: inline-block;
+  background: rgba(27, 79, 255, 0.12);
+  color: var(--electric-400);
+  border: 1px solid rgba(27, 79, 255, 0.3);
+  border-radius: 2px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Aurora orb — blue variant */
+.aurora-orb-electric {
+  background: radial-gradient(
+    circle,
+    rgba(27, 79, 255, 0.12) 0%,
+    transparent 70%
+  );
+}
+
+/* Inter font — applied globally so all pages inherit it */
+body {
+  font-family: 'Inter', 'Lato', sans-serif;
+}

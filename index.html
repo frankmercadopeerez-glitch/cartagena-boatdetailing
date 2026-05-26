@@ -44,7 +44,7 @@
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="images/header.webp" as="image" type="image/webp" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" />
     
     <!-- DNS Prefetch for External Resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -54,11 +54,11 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <!-- Google Fonts: Playfair Display (Lujo) & Inter (Legibilidad) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
 
@@ -73,7 +73,7 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ["Lato", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
               serif: ["Playfair Display", "serif"],
             },
             colors: {
@@ -85,6 +85,11 @@
                 400: "#d4af37",
                 500: "#c5a028",
                 600: "#b08d1e",
+              },
+              electric: {
+                400: "#4d8bff",
+                500: "#1B4FFF",
+                600: "#1540d6",
               },
             },
           },
@@ -827,7 +832,7 @@
                 >01</span
               >
               <span
-                class="text-gold-400 font-bold tracking-widest uppercase text-sm mb-4"
+                class="text-electric-400 font-bold tracking-widest uppercase text-sm mb-4"
                 >Liderazgo & Tecnología</span
               >
             </div>
@@ -916,7 +921,7 @@
       <div class="container mx-auto px-6 relative z-10">
         <div class="text-center mb-20">
           <span
-            class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
+            class="text-electric-400 tracking-[0.3em] uppercase text-xs font-bold"
             >Sin Paquetes Genéricos</span
           >
           <h2 class="font-serif text-4xl md:text-5xl mt-4 text-white">
@@ -1053,7 +1058,7 @@
       <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-12">
-            <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold">Cobertura Local</span>
+            <span class="text-electric-400 tracking-[0.3em] uppercase text-xs font-bold">Cobertura Local</span>
             <h2 class="font-serif text-4xl text-navy-900 mt-4">Limpieza de Casco por Zonas en Cartagena</h2>
             <p class="text-slate-500 mt-4 font-light max-w-3xl mx-auto">Selecciona tu zona para ver detalles locales del servicio y cotizar mas rapido.</p>
           </div>
