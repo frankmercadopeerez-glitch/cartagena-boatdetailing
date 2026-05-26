@@ -1,2 +1,11 @@
 
 images/_originals_backup/
+node_modules/
+package-lock.json
+css/tailwind-input.css
+_perf.py
+_standardize.py
+_canonical-nav-root.html
+_canonical-footer-root.html
+_standardize-nav-footer.ps1
+_test.ps1
