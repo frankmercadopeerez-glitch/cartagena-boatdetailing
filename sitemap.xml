@@ -133,6 +133,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Instalación Eléctrica Náutica -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/electrical-systems.html</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
   
   <!-- Interiores y Tapicería -->
   <url>
@@ -452,6 +460,28 @@
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
+  </url>
+
+  <!-- ========================================
+       NUEVO SERVICIO - ELECTRICIDAD NÁUTICA MAYO 2026
+       ======================================== -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/instalacion-electrica-nautica-cartagena/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/luces-led-yate-cartagena/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/seguridad-electrica-barco/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- ========================================
