@@ -551,4 +551,175 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- ========================================
+       PÁGINAS GEO PULIDO DE GELCOAT 2026
+       ======================================== -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-cartagena.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-bocagrande.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-baru.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-islas-rosario.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ========================================
+       BLOG CALENDARIO SEO 2026 — JUN (PPF)
+       ======================================== -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/ppf-vs-ceramic-coating-yate/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-ppf-yate-cartagena/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/duracion-ppf-agua-salada-caribe/</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — JUL (Ceramic Coating) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-ceramic-coating-yate-cartagena/</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/ceramic-coating-vs-cera-marina-yate/</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-ceramic-coating-yate/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — AGO (Pintura) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-pintura-casco-yate-cartagena/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-pintura-motores-marinos-cartagena/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/cuando-repintar-casco-yate/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — SEP (Gelcoat/Ósmosis) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-restauracion-gelcoat-cartagena/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/frecuencia-pulido-gelcoat-yate/</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/tratamiento-osmosis-casco-fibra/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — OCT (Geo) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-club-pesca-cartagena/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-club-nautico-cartagena/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/buzos-limpieza-casco-cartagena/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — NOV (Mantenimiento) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/plan-mantenimiento-anual-yate-charter/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-helices-yate-cartagena/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/tapiceria-marina-cartagena-mantenimiento/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- BLOG CALENDARIO SEO 2026 — DIC (Evergreen) -->
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/detailing-naval-profesional-vs-diy/</loc>
+    <lastmod>2026-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/errores-mantenimiento-yates-cartagena/</loc>
+    <lastmod>2026-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/guia-mantenimiento-yates-cartagena-2027/</loc>
+    <lastmod>2026-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
 </urlset>
