@@ -1,0 +1,43 @@
+{
+  "name": "Colombia Boat Detailing",
+  "short_name": "CBD Cartagena",
+  "description": "Mantenimiento naval y detailing de yates en Cartagena de Indias. Pulido de gelcoat, ceramic coating, PPF y limpieza de casco.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060607",
+  "theme_color": "#d4af37",
+  "lang": "es-CO",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["business", "navigation"],
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cotizar por WhatsApp",
+      "short_name": "Cotizar",
+      "description": "Envía un mensaje de WhatsApp para cotizar un servicio",
+      "url": "https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Servicios",
+      "short_name": "Servicios",
+      "description": "Ver todos los servicios de detailing naval",
+      "url": "/services.html",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
