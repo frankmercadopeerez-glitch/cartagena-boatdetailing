@@ -745,5 +745,41 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-antes-festival-nautico/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/precio-preparacion-yate-festival-nautico/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/cuidado-yate-despues-bololo-arsenal/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/plan-mantenimiento-naval-yate-cartagena/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/detailing-naval-cartagena/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-preventivo-embarcaciones-cartagena/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.83</priority>
+  </url>
 
 </urlset>
