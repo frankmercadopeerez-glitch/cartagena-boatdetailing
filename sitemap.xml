@@ -220,13 +220,6 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Calendario SEO -->
-  <url>
-    <loc>https://colombiaboatdetailing.com/calendario-seo-2026.html</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <!-- English Service Pages -->
   <url>
@@ -524,21 +517,6 @@
     </image:image>
   </url>
 
-  <!-- ========================================
-       FACTURAS DE VENTA
-       ======================================== -->
-  <url>
-    <loc>https://colombiaboatdetailing.com/facturas/</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://colombiaboatdetailing.com/facturas/factura-037.html</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
   <url>
     <loc>https://colombiaboatdetailing.com/blog/costo-mantenimiento-anual-yate-cartagena/</loc>
     <lastmod>2026-05-28</lastmod>

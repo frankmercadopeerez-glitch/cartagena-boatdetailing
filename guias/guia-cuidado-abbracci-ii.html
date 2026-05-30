@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guia de cuidado — Abbracci II | Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+        --warn-color: #b45309;
+        --danger-color: #b91c1c;
+        --wrap-color: #1d4e89;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 0;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 20px;
+      }
+
+      /* ── Header ── */
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .doc-info {
+        text-align: right;
+        font-size: 11.5px;
+        color: var(--text-light);
+      }
+
+      .doc-info h2 {
+        color: var(--secondary-color);
+        font-size: 15px;
+        margin-bottom: 4px;
+        font-family: Georgia, serif;
+      }
+
+      /* ── Saludo ── */
+      .greeting-box {
+        background: linear-gradient(135deg, #f0faf5 0%, #e8f4fd 100%);
+        border-left: 4px solid var(--ok-color);
+        border-radius: 4px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        font-size: 12.5px;
+        line-height: 1.7;
+        color: var(--text-color);
+      }
+
+      .greeting-box p + p {
+        margin-top: 8px;
+      }
+
+      /* ── Section titles ── */
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 14px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 18px 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      /* ── Info cards grid ── */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .cards-grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .card {
+        padding: 11px 13px;
+        border-radius: 4px;
+        font-size: 11.5px;
+        line-height: 1.6;
+      }
+
+      .card h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 7px;
+      }
+
+      .card ul {
+        margin-left: 14px;
+      }
+
+      .card li {
+        margin-bottom: 4px;
+      }
+
+      /* colores de cards */
+      .card-green {
+        background: #f0faf5;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .card-green h4 {
+        color: var(--ok-color);
+      }
+
+      .card-blue {
+        background: #eff6ff;
+        border-left: 3px solid var(--wrap-color);
+      }
+
+      .card-blue h4 {
+        color: var(--wrap-color);
+      }
+
+      .card-gold {
+        background: #fffbeb;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .card-gold h4 {
+        color: var(--warn-color);
+      }
+
+      .card-dark {
+        background: #f8fafc;
+        border-left: 3px solid var(--secondary-color);
+      }
+
+      .card-dark h4 {
+        color: var(--secondary-color);
+      }
+
+      .card-red {
+        background: #fff1f1;
+        border-left: 3px solid var(--danger-color);
+      }
+
+      .card-red h4 {
+        color: var(--danger-color);
+      }
+
+      /* ── Tabla de frecuencia ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5px;
+        margin-bottom: 8px;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .freq-badge {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .freq-after { background: #dbeafe; color: #1e40af; }
+      .freq-week  { background: #d1fae5; color: #065f46; }
+      .freq-month { background: #fef3c7; color: #92400e; }
+      .freq-semi  { background: #ede9fe; color: #5b21b6; }
+
+      /* ── Bloque wrap ── */
+      .wrap-alert {
+        background: #eff6ff;
+        border: 1px solid rgba(29, 78, 137, 0.3);
+        border-left: 4px solid var(--wrap-color);
+        border-radius: 4px;
+        padding: 13px 15px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .wrap-alert h3 {
+        color: var(--wrap-color);
+        font-size: 13px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .wrap-alert ul {
+        margin-left: 16px;
+      }
+
+      .wrap-alert li {
+        margin-bottom: 5px;
+      }
+
+      /* ── Bloque peligro ── */
+      .danger-box {
+        background: #fff1f1;
+        border: 1px solid rgba(185, 28, 28, 0.25);
+        border-left: 4px solid var(--danger-color);
+        border-radius: 4px;
+        padding: 13px 15px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .danger-box h3 {
+        color: var(--danger-color);
+        font-size: 13px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .danger-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .danger-col h5 {
+        font-size: 11px;
+        color: var(--danger-color);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .danger-col ul {
+        margin-left: 14px;
+        font-size: 11.5px;
+      }
+
+      .danger-col li {
+        margin-bottom: 4px;
+      }
+
+      /* ── Marcas tag pills ── */
+      .brand-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 8px;
+      }
+
+      .brand-tag {
+        background: var(--secondary-color);
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 10.5px;
+        font-weight: 700;
+      }
+
+      .brand-tag.gold {
+        background: var(--accent-color);
+      }
+
+      .brand-tag.green {
+        background: var(--ok-color);
+      }
+
+      .brand-tag.blue {
+        background: var(--wrap-color);
+      }
+
+      /* ── Footer ── */
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 16px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      /* ── Tip highlight ── */
+      .tip {
+        display: inline;
+        background: #fef3c7;
+        padding: 0 3px;
+        border-radius: 2px;
+        font-weight: 600;
+      }
+
+      /* ── Responsive & print ── */
+      @media (max-width: 620px) {
+        header, .cards-grid, .cards-grid-3, .danger-grid {
+          flex-direction: column;
+          grid-template-columns: 1fr;
+        }
+
+        header { flex-direction: column; }
+        .doc-info { text-align: left; }
+      }
+
+      @media print {
+        @page {
+          size: letter portrait;
+          margin: 0;
+        }
+
+        html {
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          margin: 0 !important;
+          padding: 8mm 9mm !important;
+          background: white;
+          box-sizing: border-box;
+          width: 100%;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+          box-sizing: border-box;
+        }
+
+        /* ── Header ── */
+        header {
+          padding-bottom: 6px;
+          margin-bottom: 8px;
+        }
+
+        .brand-info h1 { font-size: 16px; }
+        .brand-info p  { font-size: 8.5px; letter-spacing: 1px; }
+
+        .doc-info      { font-size: 9.5px; }
+        .doc-info h2   { font-size: 12px; margin-bottom: 3px; }
+        .doc-info p    { margin-bottom: 1px; }
+
+        /* ── Saludo ── */
+        .greeting-box {
+          padding: 8px 10px;
+          margin-bottom: 8px;
+          font-size: 10px;
+          line-height: 1.5;
+          break-inside: avoid;
+        }
+
+        .greeting-box p + p { margin-top: 5px; }
+
+        /* ── Titulos de seccion ── */
+        .section-title {
+          font-size: 11px;
+          margin: 9px 0 5px;
+          padding-bottom: 2px;
+          break-after: avoid;
+        }
+
+        /* ── Cards ── */
+        .cards-grid {
+          gap: 6px;
+          margin-bottom: 5px;
+        }
+
+        .cards-grid-3 {
+          gap: 6px;
+          margin-bottom: 5px;
+        }
+
+        .card {
+          padding: 7px 9px;
+          font-size: 10px;
+          line-height: 1.48;
+          break-inside: avoid;
+        }
+
+        .card h4      { font-size: 9.5px; margin-bottom: 5px; }
+        .card li      { margin-bottom: 2px; }
+        .card ul      { margin-left: 12px; }
+
+        .brand-tags   { margin-top: 5px; gap: 4px; }
+        .brand-tag    { font-size: 9px; padding: 1px 6px; }
+
+        /* ── Wrap alert ── */
+        .wrap-alert {
+          padding: 8px 10px;
+          margin-bottom: 8px;
+          font-size: 10px;
+          line-height: 1.5;
+          break-inside: avoid;
+        }
+
+        .wrap-alert h3   { font-size: 10.5px; margin-bottom: 5px; }
+        .wrap-alert ul   { margin-left: 14px; }
+        .wrap-alert li   { margin-bottom: 3px; }
+
+        /* ── Tabla de frecuencia ── */
+        table         { font-size: 10px; margin-bottom: 5px; }
+        th            { padding: 5px 6px; font-size: 9.5px; }
+        td            { padding: 5px 6px; }
+        table tr      { break-inside: avoid; }
+
+        /* ── Danger box ── */
+        .danger-box {
+          padding: 8px 10px;
+          margin-bottom: 8px;
+          font-size: 10px;
+          line-height: 1.5;
+          break-inside: avoid;
+        }
+
+        .danger-box h3  { font-size: 10.5px; margin-bottom: 5px; }
+        .danger-grid    { gap: 7px; }
+        .danger-col h5  { font-size: 9.5px; margin-bottom: 3px; }
+        .danger-col ul  { font-size: 10px; margin-left: 12px; }
+        .danger-col li  { margin-bottom: 2px; }
+
+        /* ── Footer ── */
+        footer {
+          margin-top: 7px;
+          padding-top: 6px;
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <!-- ── ENCABEZADO ── -->
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="doc-info">
+          <h2>Guia de cuidado post-servicio</h2>
+          <p><strong>Cliente:</strong> Farid Lazaro</p>
+          <p><strong>Embarcacion:</strong> Abbracci II</p>
+          <p><strong>Servicio:</strong> CBD-2026-109 — 29/05/2026</p>
+        </div>
+      </header>
+
+      <!-- ── SALUDO ── -->
+      <div class="greeting-box">
+        <p>
+          <strong>Estimado Farid,</strong><br />
+          Fue un placer trabajar en el <strong>Abbracci II</strong>. Gracias por confiar en
+          <strong>Colombia Boat Detailing</strong> para el cuidado de su embarcacion. El resultado que
+          logramos con el sistema de tres etapas <strong>3M Marine</strong> en el casco, la superestructura
+          y el motor fuera de borda — mas el pulido del vinilo wrap — merece ser protegido con
+          los cuidados correctos para que dure el mayor tiempo posible.
+        </p>
+        <p>
+          Esta guia esta disenada especificamente para las superficies del <strong>Abbracci II</strong>:
+          gelcoat y wrap de vinilo. Siguiendo estas recomendaciones, mantendra el brillo espejo
+          y la proteccion que acabamos de aplicar.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 1 — LAVADO GENERAL (GELCOAT)
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">1. Lavado del casco y superficies en gelcoat</h2>
+
+      <div class="cards-grid">
+        <div class="card card-green">
+          <h4>Shampoos y jabon marino recomendados</h4>
+          <ul>
+            <li><strong>Meguiar's Marine/RV Wash</strong> — shampoo pH neutro, no retira la cera, disponible en MercadoLibre Colombia.</li>
+            <li><strong>3M Marine Boat Soap (39000)</strong> — formulacion biodegradable, no dana el gelcoat ni los protectores ceramicos.</li>
+            <li><strong>Star Brite Sea Safe Boat Wash</strong> — concentrado ecologico, seguro para el entorno marino.</li>
+            <li><strong>Star Brite Vinyl Cleaner &amp; Shampoo</strong> — para usar en zonas de transicion entre gelcoat y vinilo.</li>
+          </ul>
+          <div class="brand-tags">
+            <span class="brand-tag gold">Meguiar's</span>
+            <span class="brand-tag">3M Marine</span>
+            <span class="brand-tag green">Star Brite</span>
+          </div>
+        </div>
+
+        <div class="card card-dark">
+          <h4>Herramientas y materiales correctos</h4>
+          <ul>
+            <li><strong>Guante de lavado de microfibra</strong> — la opcion mas segura; fibras ultra-suaves que no rayan el gelcoat.</li>
+            <li><strong>Esponja de espuma de celula abierta</strong> — alternativa al guante.</li>
+            <li><strong>Cepillo de cerdas suaves de nylon</strong> — para rincones, filtros y cantos donde el guante no llega.</li>
+            <li><strong>Balde doble (método de dos baldes)</strong> — un balde con jabón, otro con agua limpia para enjuagar el guante entre pasadas y no reintroducir suciedad.</li>
+            <li><strong>Paño de microfibra 400+ GSM</strong> — para secar sin dejar marcas ni rayaduras.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 2 — WRAP DE VINILO (ESPECIAL)
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">2. Cuidado especial del wrap de vinilo</h2>
+
+      <div class="wrap-alert">
+        <h3>Atencion: el Abbracci II tiene vinilo wrap</h3>
+        <p>
+          El wrap fue pulido de forma suave durante el servicio utilizando tecnica manual y productos
+          compatibles. El vinilo es una superficie mas delicada que el gelcoat y requiere productos
+          especificos. Usar productos incorrectos puede levantar los bordes, opacar el vinilo o
+          comprometer el adhesivo.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card card-blue">
+          <h4>Productos recomendados para el wrap</h4>
+          <ul>
+            <li>
+              <strong>Star Brite Vinyl Brite Protectant Spray</strong> — protector UV grado marino,
+              restaura el brillo y mantiene el vinilo flexible. Aplicar con paño de microfibra.
+            </li>
+            <li>
+              <strong>Star Brite Vinyl Cleaner &amp; Shampoo</strong> — limpiador concentrado para vinilo,
+              elimina sal, hongos y grasa sin atacar el adhesivo.
+            </li>
+            <li>
+              <strong>3M Quick Wax (para vinilo)</strong> — sellador ligero compatible con wraps
+              que no contiene abrasivos; disponible en tiendas automotrices y MercadoLibre.
+            </li>
+            <li>
+              <strong>Meguiar's Ultimate Waterless Wash &amp; Wax</strong> — opcion practica para
+              limpiezas rapidas sin balde ni manguera.
+            </li>
+          </ul>
+          <div class="brand-tags">
+            <span class="brand-tag blue">Star Brite</span>
+            <span class="brand-tag">3M</span>
+            <span class="brand-tag gold">Meguiar's</span>
+          </div>
+        </div>
+
+        <div class="card card-red">
+          <h4>Lo que NUNCA debe hacer en el wrap</h4>
+          <ul>
+            <li>Nunca usar pulidora o maquina rotativa sobre el vinilo — daña o arranca el material.</li>
+            <li>Nunca aplicar compound abrasivo ni polish de corte en el vinilo.</li>
+            <li>Nunca usar ceras con abrasivos (leer etiqueta: "polishing wax" o "cleaner wax").</li>
+            <li>No aplicar calor directo (pistola de calor, sol intenso post-lavado sin secar).</li>
+            <li>No pasar la hidrolavadora a menos de 30 cm del vinilo ni a presiones superiores a 1.000 PSI.</li>
+            <li>No usar disolventes: acetona, gasolina, thinner, alcohol isopropilico concentrado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 3 — CERAS Y PROTECTORES
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">3. Ceras y protectores para mantener el brillo espejo</h2>
+
+      <div class="cards-grid-3">
+        <div class="card card-gold">
+          <h4>Para gelcoat (casco y superestructura)</h4>
+          <ul>
+            <li><strong>3M Marine Paste Wax (09009)</strong> — cera de carnauba pura; la misma linea usada en el servicio.</li>
+            <li><strong>Meguiar's Flagship Premium Marine Wax</strong> — cera liquida de larga duracion con proteccion UV, excelente para ambientes salinos.</li>
+            <li><strong>Star Brite Premium Marine Polish with PTFE</strong> — anade una capa de teflon que repele el agua y la sal.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:11px; color:var(--text-light);">Aplicar cada <strong>4–6 semanas</strong> en zona costera salina.</p>
+        </div>
+
+        <div class="card card-blue">
+          <h4>Para el wrap de vinilo</h4>
+          <ul>
+            <li><strong>Star Brite Vinyl Brite Protectant</strong> — protector UV en spray, aplicar mensualmente.</li>
+            <li><strong>303 Marine Aerospace Protectant</strong> — referente mundial para vinilo y superficies sinteticas; buscar en tiendas de importados o MercadoLibre.</li>
+            <li><strong>Meguiar's Marine Vinyl &amp; Rubber Cleaner/Conditioner</strong> — limpia y acondiciona en un solo paso.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:11px; color:var(--text-light);">Aplicar cada <strong>3–4 semanas</strong>; el ambiente marino acelera la degradacion UV del vinilo.</p>
+        </div>
+
+        <div class="card card-green">
+          <h4>Para el motor fuera de borda</h4>
+          <ul>
+            <li><strong>Star Brite Engine Cleaner &amp; Degreaser</strong> — limpiador desengrasante marino para la carcasa del motor.</li>
+            <li><strong>Meguiar's Quik Detailer</strong> — para mantener el brillo de plasticos y aluminio del motor entre lavados.</li>
+            <li><strong>WD-40 Specialist Corrosion Inhibitor</strong> — protector anticorrosion para las partes metalicas expuestas al ambiente salino.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:11px; color:var(--text-light);">Limpiar el motor <strong>despues de cada uso</strong> con agua dulce.</p>
+          <div style="margin-top:10px; background:#fff7ed; border-left:3px solid #ea580c; border-radius:3px; padding:8px 10px; font-size:11px; color:#7c2d12; line-height:1.6;">
+            <strong style="display:block; margin-bottom:3px; text-transform:uppercase; letter-spacing:0.4px; font-size:10.5px;">Nota — tapa superior quemada por sol</strong>
+            La parte superior de la tapa del motor presenta quemadura por exposicion prolongada al sol. Esta zona no fue posible pulir. Se recomienda <strong>pintarla antes de que el deterioro avance</strong>. <strong>Colombia Boat Detailing realiza pintura de tapas de motor</strong> — podemos programar este servicio en la proxima visita.
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 4 — FRECUENCIA DE LAVADO
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">4. Frecuencia recomendada de mantenimiento</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Frecuencia</th>
+            <th>Tarea</th>
+            <th>Producto / herramienta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="freq-badge freq-after">Tras cada uso</span></td>
+            <td>Enjuague completo con <strong>agua dulce</strong> a baja presion en todo el bote: casco, motor, wrap y cubierta. Elimina el salitre antes de que se cristalice y corroa superficies.</td>
+            <td>Manguera, paño de microfibra para secar.</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-week">Semanal</span></td>
+            <td>Lavado completo con shampoo marino. Incluir superficies plasticas. Secar completamente con paño de microfibra. Revisar el wrap en los bordes y esquinas por posibles levantamientos.</td>
+            <td>Meguiar's Marine Wash o Star Brite Sea Safe Boat Wash + guante de microfibra + dos baldes.</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-month">Mensual</span></td>
+            <td>Aplicacion de <strong>cera o protector</strong> al gelcoat y protector UV al wrap de vinilo. Inspeccionar el motor en busca de oxido inicial y aplicar anticorrosion en puntos metalicos.</td>
+            <td>3M Marine Paste Wax (gelcoat) + Star Brite Vinyl Brite (wrap) + WD-40 Specialist (motor).</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-semi">Cada 6 meses</span></td>
+            <td>Servicio profesional de mantenimiento: evaluacion del estado del gelcoat, del wrap y del motor. Refuerzo del sistema de cera y correccion de cualquier punto de oxidacion o mancha incrustada.</td>
+            <td>Colombia Boat Detailing — programar con al menos 2 semanas de anticipacion.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ══════════════════════════════════════
+           SECCION 5 — PRODUCTOS A EVITAR
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">5. Productos y practicas que danan su bote</h2>
+
+      <div class="danger-box">
+        <h3>Nunca use estos productos ni estas practicas</h3>
+        <div class="danger-grid">
+          <div class="danger-col">
+            <h5>Productos prohibidos en gelcoat y wrap</h5>
+            <ul>
+              <li><strong>Jabon de lavar platos</strong> (Lux, Ajax, Fab liquido) — quita la cera de inmediato y reseca el gelcoat.</li>
+              <li><strong>Cloro o lejia</strong> — oxida el gelcoat y destruye el vinilo y sus adhesivos.</li>
+              <li><strong>Acido muriatico</strong> — corroe el gelcoat, los metales y el adhesivo del wrap.</li>
+              <li><strong>Limpiadores de baño</strong> (Mr. Músculo, Tronex) — formulados para porcelana, incompatibles con superficies marinas.</li>
+              <li><strong>Alcohol isopropilico concentrado (&gt;30%)</strong> — extrae el plastificante del vinilo y reseca el gelcoat.</li>
+              <li><strong>Acetona, thinner o gasolina</strong> — disuelven el gelcoat y el adhesivo del wrap.</li>
+            </ul>
+          </div>
+          <div class="danger-col">
+            <h5>Practicas que danan el acabado</h5>
+            <ul>
+              <li><strong>Fregar con esponja verde (Scotch-Brite)</strong> — crea microrayaduras que opacan el brillo y acumulan suciedad.</li>
+              <li><strong>Lavar bajo el sol directo</strong> — el jabon se seca antes de enjuagar y deja manchas en el gelcoat.</li>
+              <li><strong>Hidrolavadora a alta presion (&gt;1.500 PSI / muy cerca)</strong> — erosiona el gelcoat y levanta bordes del wrap.</li>
+              <li><strong>Dejar el bote sin enjuagar con agua dulce</strong> tras uso en mar — el salitre cristalizado actua como papel de lija sobre todas las superficies.</li>
+              <li><strong>Aplicar cera bajo el sol directo</strong> — se seca en segundos y deja residuos blancos dificiles de retirar.</li>
+              <li><strong>Usar estropajos o fibras de metal</strong> en cualquier superficie del bote.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 6 — DONDE CONSEGUIR PRODUCTOS
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">6. Donde conseguir estos productos en Colombia</h2>
+
+      <div class="cards-grid">
+        <div class="card card-dark">
+          <h4>Canales de compra</h4>
+          <ul>
+            <li>
+              <strong>MercadoLibre Colombia</strong> — buscar "Meguiar's Marine", "Star Brite" o "3M Marine".
+              Vendedores con calificacion 4.5+ estrellas y +50 ventas son la referencia de confianza.
+            </li>
+            <li>
+              <strong>3M Colombia (distribuidores oficiales)</strong> — para productos de la linea 3M Marine;
+              consultar en tiendas especializadas en pintura automotriz o naval en Cartagena.
+            </li>
+            <li>
+              <strong>Tiendas de importados en Cartagena</strong> — zona industrial de Mamonal y distribuidores
+              de insumos nauticos locales suelen tener Star Brite y 303 Aerospace.
+            </li>
+            <li>
+              <strong>Amazon (con direccion de envio en Colombia)</strong> — para 303 Aerospace Protectant y
+              Star Brite, si no se encuentran localmente.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card card-gold">
+          <h4>Kit basico recomendado para el Abbracci II</h4>
+          <ul>
+            <li>Meguiar's Marine/RV Wash (shampoo)</li>
+            <li>3M Marine Paste Wax (cera gelcoat)</li>
+            <li>Star Brite Vinyl Brite Protectant (wrap)</li>
+            <li>303 Aerospace Protectant (protector UV premium)</li>
+            <li>2 guantes de lavado de microfibra</li>
+            <li>6 paños de microfibra 400 GSM</li>
+            <li>2 baldes de lavado (método dos baldes)</li>
+            <li>WD-40 Specialist Corrosion Inhibitor (motor)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── FOOTER ── -->
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com | @colombiaboatdetailing
+        </p>
+        <p style="margin-top:4px;">
+          Guia de cuidado emitida tras el servicio CBD-2026-109 — Uso exclusivo del propietario Farid Lazaro / Abbracci II.
+        </p>
+        <p style="margin-top:4px;">
+          Para agendar su servicio de mantenimiento de los 6 meses, contactenos con anticipacion. Gracias por confiar en los especialistas en estetica naval.
+        </p>
+      </footer>
+
+    </div>
+  </body>
+</html>
