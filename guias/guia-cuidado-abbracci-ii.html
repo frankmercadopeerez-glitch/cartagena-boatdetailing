@@ -30,8 +30,8 @@
       }
 
       @page {
-        size: letter portrait;
-        margin: 0;
+        size: A4 portrait;
+        margin: 10mm 0;
       }
 
       body {
@@ -374,8 +374,8 @@
 
       @media print {
         @page {
-          size: letter portrait;
-          margin: 0;
+          size: A4 portrait;
+          margin: 10mm 0;
         }
 
         html {
@@ -384,11 +384,11 @@
         }
 
         body {
+          width: 210mm;
           margin: 0 !important;
-          padding: 8mm 9mm !important;
+          padding: 0 14mm !important;
           background: white;
           box-sizing: border-box;
-          width: 100%;
         }
 
         .container {
@@ -398,102 +398,72 @@
           padding: 0;
           box-shadow: none;
           border-top-width: 5px;
-          box-sizing: border-box;
         }
 
-        /* ── Header ── */
-        header {
-          padding-bottom: 5px;
-          margin-bottom: 6px;
-        }
+        header         { padding-bottom: 8px; margin-bottom: 10px; }
+        .brand-info h1 { font-size: 19px; }
+        .brand-info p  { font-size: 9px; }
+        .doc-info      { font-size: 10.5px; }
+        .doc-info h2   { font-size: 14px; margin-bottom: 3px; }
+        .doc-info p    { margin-bottom: 2px; }
 
-        .brand-info h1 { font-size: 15px; }
-        .brand-info p  { font-size: 8px; letter-spacing: 1px; }
-
-        .doc-info      { font-size: 9px; }
-        .doc-info h2   { font-size: 11px; margin-bottom: 2px; }
-        .doc-info p    { margin-bottom: 1px; }
-
-        /* ── Saludo ── */
         .greeting-box {
-          padding: 7px 9px;
-          margin-bottom: 6px;
-          font-size: 9.5px;
-          line-height: 1.45;
-        }
-
-        .greeting-box p + p { margin-top: 4px; }
-
-        /* ── Titulos de seccion ── */
-        .section-title {
+          padding: 9px 12px;
+          margin-bottom: 10px;
           font-size: 10.5px;
-          margin: 7px 0 4px;
-          padding-bottom: 2px;
+          line-height: 1.5;
+        }
+        .greeting-box p + p { margin-top: 6px; }
+
+        .section-title {
+          font-size: 12px;
+          margin: 11px 0 7px;
+          padding-bottom: 3px;
           break-after: avoid;
         }
 
-        /* ── Cards ── */
-        .cards-grid {
-          gap: 5px;
-          margin-bottom: 4px;
-        }
-
-        .cards-grid-3 {
-          gap: 5px;
-          margin-bottom: 4px;
-        }
+        .cards-grid, .cards-grid-3 { gap: 7px; margin-bottom: 6px; }
 
         .card {
-          padding: 6px 8px;
-          font-size: 9.5px;
-          line-height: 1.45;
+          padding: 9px 11px;
+          font-size: 10.5px;
+          line-height: 1.5;
         }
+        .card h4   { font-size: 10px; margin-bottom: 5px; }
+        .card li   { margin-bottom: 3px; }
+        .card ul   { margin-left: 13px; }
 
-        .card h4      { font-size: 9px; margin-bottom: 4px; }
-        .card li      { margin-bottom: 2px; }
-        .card ul      { margin-left: 11px; }
+        .brand-tags { margin-top: 5px; gap: 5px; }
+        .brand-tag  { font-size: 9.5px; padding: 2px 7px; }
 
-        .brand-tags   { margin-top: 4px; gap: 4px; }
-        .brand-tag    { font-size: 8.5px; padding: 1px 5px; }
-
-        /* ── Wrap alert ── */
         .wrap-alert {
-          padding: 7px 9px;
-          margin-bottom: 6px;
-          font-size: 9.5px;
-          line-height: 1.45;
+          padding: 9px 12px;
+          margin-bottom: 9px;
+          font-size: 10.5px;
+          line-height: 1.5;
         }
+        .wrap-alert h3 { font-size: 11px; margin-bottom: 6px; }
+        .wrap-alert ul { margin-left: 14px; }
+        .wrap-alert li { margin-bottom: 3px; }
 
-        .wrap-alert h3   { font-size: 10px; margin-bottom: 4px; }
-        .wrap-alert ul   { margin-left: 12px; }
-        .wrap-alert li   { margin-bottom: 2px; }
+        table    { font-size: 10.5px; margin-bottom: 6px; }
+        th       { padding: 5px 7px; font-size: 10px; }
+        td       { padding: 5px 7px; }
+        table tr { break-inside: avoid; }
 
-        /* ── Tabla de frecuencia ── */
-        table         { font-size: 9.5px; margin-bottom: 4px; }
-        th            { padding: 4px 6px; font-size: 9px; }
-        td            { padding: 4px 6px; }
-        table tr      { break-inside: avoid; }
-
-        /* ── Danger box ── */
         .danger-box {
-          padding: 7px 9px;
-          margin-bottom: 6px;
-          font-size: 9.5px;
-          line-height: 1.45;
+          padding: 9px 12px;
+          margin-bottom: 9px;
+          font-size: 10.5px;
+          line-height: 1.5;
         }
+        .danger-box h3  { font-size: 11px; margin-bottom: 6px; }
+        .danger-grid    { gap: 8px; }
+        .danger-col h5  { font-size: 10px; margin-bottom: 4px; }
+        .danger-col ul  { font-size: 10.5px; margin-left: 13px; }
+        .danger-col li  { margin-bottom: 3px; }
 
-        .danger-box h3  { font-size: 10px; margin-bottom: 4px; }
-        .danger-grid    { gap: 6px; }
-        .danger-col h5  { font-size: 9px; margin-bottom: 3px; }
-        .danger-col ul  { font-size: 9.5px; margin-left: 11px; }
-        .danger-col li  { margin-bottom: 2px; }
-
-        /* ── Footer ── */
-        footer {
-          margin-top: 6px;
-          padding-top: 5px;
-          font-size: 8.5px;
-        }
+        footer { margin-top: 10px; padding-top: 7px; font-size: 9.5px; }
       }
     </style>
   </head>
@@ -749,8 +719,10 @@
               consultar en tiendas especializadas en pintura automotriz o naval en Cartagena.
             </li>
             <li>
-              <strong>Tiendas de importados en Cartagena</strong> — zona industrial de Mamonal y distribuidores
-              de insumos nauticos locales suelen tener Star Brite y 303 Aerospace.
+              <strong>Todomar Cartagena</strong> — distribuidor especializado en insumos nauticos; maneja Star Brite, productos de limpieza y mantenimiento marino. Primera opcion local antes de buscar en linea.
+            </li>
+            <li>
+              <strong>Tiendas de importados en Cartagena</strong> — zona industrial de Mamonal y distribuidores de insumos nauticos locales suelen tener Star Brite y 303 Aerospace.
             </li>
             <li>
               <strong>Amazon (con direccion de envio en Colombia)</strong> — para 303 Aerospace Protectant y

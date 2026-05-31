@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guia de cuidado — Zeus III & Baby Shark | Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+        --warn-color: #b45309;
+        --danger-color: #b91c1c;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 10mm 0;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 20px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .doc-info {
+        text-align: right;
+        font-size: 11.5px;
+        color: var(--text-light);
+      }
+
+      .doc-info h2 {
+        color: var(--secondary-color);
+        font-size: 15px;
+        margin-bottom: 4px;
+        font-family: Georgia, serif;
+      }
+
+      .greeting-box {
+        background: linear-gradient(135deg, #f0faf5 0%, #e8f4fd 100%);
+        border-left: 4px solid var(--ok-color);
+        border-radius: 4px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        font-size: 12.5px;
+        line-height: 1.7;
+        color: var(--text-color);
+      }
+
+      .greeting-box p + p { margin-top: 8px; }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 14px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 18px 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      /* badge de bote */
+      .boat-badge {
+        display: inline-block;
+        padding: 1px 8px;
+        border-radius: 20px;
+        font-size: 9.5px;
+        font-weight: 700;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+
+      .badge-zeus { background: #dbeafe; color: #1e3a8a; }
+      .badge-both { background: #d1fae5; color: #064e3b; }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .cards-grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .card {
+        padding: 11px 13px;
+        border-radius: 4px;
+        font-size: 11.5px;
+        line-height: 1.6;
+      }
+
+      .card h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 7px;
+      }
+
+      .card ul { margin-left: 14px; }
+      .card li { margin-bottom: 4px; }
+
+      .card-green  { background: #f0faf5; border-left: 3px solid var(--ok-color); }
+      .card-green h4 { color: var(--ok-color); }
+
+      .card-gold   { background: #fffbeb; border-left: 3px solid var(--accent-color); }
+      .card-gold h4 { color: var(--warn-color); }
+
+      .card-dark   { background: #f8fafc; border-left: 3px solid var(--secondary-color); }
+      .card-dark h4 { color: var(--secondary-color); }
+
+      .card-red    { background: #fff1f1; border-left: 3px solid var(--danger-color); }
+      .card-red h4 { color: var(--danger-color); }
+
+      /* bloque cojineria */
+      .upholstery-alert {
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.3);
+        border-left: 4px solid var(--ok-color);
+        border-radius: 4px;
+        padding: 13px 15px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .upholstery-alert h3 {
+        color: var(--ok-color);
+        font-size: 13px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* tabla */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5px;
+        margin-bottom: 8px;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .freq-badge {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .freq-after { background: #dbeafe; color: #1e40af; }
+      .freq-week  { background: #d1fae5; color: #065f46; }
+      .freq-month { background: #fef3c7; color: #92400e; }
+      .freq-semi  { background: #ede9fe; color: #5b21b6; }
+
+      .danger-box {
+        background: #fff1f1;
+        border: 1px solid rgba(185, 28, 28, 0.25);
+        border-left: 4px solid var(--danger-color);
+        border-radius: 4px;
+        padding: 13px 15px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .danger-box h3 {
+        color: var(--danger-color);
+        font-size: 13px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .danger-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .danger-col h5 {
+        font-size: 11px;
+        color: var(--danger-color);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .danger-col ul { margin-left: 14px; font-size: 11.5px; }
+      .danger-col li { margin-bottom: 4px; }
+
+      .brand-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 8px;
+      }
+
+      .brand-tag {
+        background: var(--secondary-color);
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 10.5px;
+        font-weight: 700;
+      }
+
+      .brand-tag.gold  { background: var(--accent-color); }
+      .brand-tag.green { background: var(--ok-color); }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 16px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 620px) {
+        header, .cards-grid, .cards-grid-3, .danger-grid {
+          flex-direction: column;
+          grid-template-columns: 1fr;
+        }
+        header { flex-direction: column; }
+        .doc-info { text-align: left; }
+      }
+
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 10mm 0;
+        }
+
+        html {
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          width: 210mm;
+          margin: 0 !important;
+          padding: 0 14mm !important;
+          background: white;
+          box-sizing: border-box;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
+
+        header         { padding-bottom: 8px; margin-bottom: 10px; }
+        .brand-info h1 { font-size: 19px; }
+        .brand-info p  { font-size: 9px; }
+        .doc-info      { font-size: 10.5px; }
+        .doc-info h2   { font-size: 14px; margin-bottom: 3px; }
+        .doc-info p    { margin-bottom: 2px; }
+
+        .greeting-box {
+          padding: 9px 12px;
+          margin-bottom: 10px;
+          font-size: 10.5px;
+          line-height: 1.5;
+        }
+        .greeting-box p + p { margin-top: 6px; }
+
+        .section-title {
+          font-size: 12px;
+          margin: 11px 0 7px;
+          padding-bottom: 3px;
+          break-after: avoid;
+        }
+
+        .boat-badge { font-size: 8.5px; padding: 1px 6px; }
+
+        .cards-grid, .cards-grid-3 { gap: 7px; margin-bottom: 6px; }
+
+        .card {
+          padding: 9px 11px;
+          font-size: 10.5px;
+          line-height: 1.5;
+        }
+        .card h4   { font-size: 10px; margin-bottom: 5px; }
+        .card li   { margin-bottom: 3px; }
+        .card ul   { margin-left: 13px; }
+
+        .brand-tags { margin-top: 5px; gap: 5px; }
+        .brand-tag  { font-size: 9.5px; padding: 2px 7px; }
+
+        .upholstery-alert {
+          padding: 9px 12px;
+          margin-bottom: 9px;
+          font-size: 10.5px;
+          line-height: 1.5;
+        }
+        .upholstery-alert h3 { font-size: 11px; margin-bottom: 6px; }
+
+        table    { font-size: 10.5px; margin-bottom: 6px; }
+        th       { padding: 5px 7px; font-size: 10px; }
+        td       { padding: 5px 7px; }
+        table tr { break-inside: avoid; }
+
+        .danger-box {
+          padding: 9px 12px;
+          margin-bottom: 9px;
+          font-size: 10.5px;
+          line-height: 1.5;
+        }
+        .danger-box h3  { font-size: 11px; margin-bottom: 6px; }
+        .danger-grid    { gap: 8px; }
+        .danger-col h5  { font-size: 10px; margin-bottom: 4px; }
+        .danger-col ul  { font-size: 10.5px; margin-left: 13px; }
+        .danger-col li  { margin-bottom: 3px; }
+
+        footer { margin-top: 10px; padding-top: 7px; font-size: 9.5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <!-- ── ENCABEZADO ── -->
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="doc-info">
+          <h2>Guia de cuidado post-servicio</h2>
+          <p><strong>Cliente:</strong> Ing. Ximena</p>
+          <p><strong>Embarcaciones:</strong> Zeus III &amp; Baby Shark</p>
+          <p><strong>Servicio:</strong> CBD-2026-108 — 30/05/2026</p>
+        </div>
+      </header>
+
+      <!-- ── SALUDO ── -->
+      <div class="greeting-box">
+        <p>
+          <strong>Estimada Ximena,</strong><br />
+          Fue un honor trabajar con su flota. Gracias por confiar en
+          <strong>Colombia Boat Detailing</strong>. En el <strong>Zeus III</strong> ejecutamos el pulido
+          integral de tres etapas con el sistema <strong>3M Marine</strong>, dejando el gelcoat, la
+          superestructura y los cromados con un acabado espejo y sellado UV. En el
+          <strong>Zeus III y el Baby Shark</strong> realizamos el tratamiento especializado de
+          desmanchado y proteccion de cojineria de vinilo.
+        </p>
+        <p>
+          Esta guia cubre el cuidado especifico para cada embarcacion y cada superficie tratada, con
+          marcas disponibles en Colombia. Siguiendo estas recomendaciones, preservara los resultados
+          obtenidos el mayor tiempo posible.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 1 — LAVADO DEL GELCOAT (ZEUS III)
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">
+        1. Lavado del casco y gelcoat
+        <span class="boat-badge badge-zeus">Solo Zeus III</span>
+      </h2>
+
+      <div class="cards-grid">
+        <div class="card card-green">
+          <h4>Shampoos marinos recomendados</h4>
+          <ul>
+            <li><strong>Meguiar's Marine/RV Wash</strong> — pH neutro, no retira la cera, disponible en MercadoLibre Colombia.</li>
+            <li><strong>3M Marine Boat Soap (39000)</strong> — formulacion biodegradable; no dana el gelcoat ni los selladores UV aplicados.</li>
+            <li><strong>Star Brite Sea Safe Boat Wash</strong> — concentrado ecologico, seguro para el entorno marino del Caribe.</li>
+          </ul>
+          <div class="brand-tags">
+            <span class="brand-tag gold">Meguiar's</span>
+            <span class="brand-tag">3M Marine</span>
+            <span class="brand-tag green">Star Brite</span>
+          </div>
+        </div>
+
+        <div class="card card-dark">
+          <h4>Herramientas correctas para el lavado</h4>
+          <ul>
+            <li><strong>Guante de lavado de microfibra</strong> — fibras ultra-suaves que no rayan ni opacan el gelcoat pulido.</li>
+            <li><strong>Esponja de espuma de celula abierta</strong> — alternativa segura al guante.</li>
+            <li><strong>Cepillo de cerdas suaves de nylon</strong> — para rincones, accesorios y cantos donde el guante no llega.</li>
+            <li><strong>Metodo de dos baldes</strong> — un balde con jabon, otro con agua limpia para enjuagar el guante entre pasadas.</li>
+            <li><strong>Paño de microfibra 400+ GSM</strong> — para secar sin dejar marcas ni rayaduras.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 2 — CERAS Y PROTECTORES (ZEUS III)
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">
+        2. Ceras y protectores para mantener el brillo espejo
+        <span class="boat-badge badge-zeus">Solo Zeus III</span>
+      </h2>
+
+      <div class="cards-grid-3">
+        <div class="card card-gold">
+          <h4>Para el gelcoat</h4>
+          <ul>
+            <li><strong>3M Marine Paste Wax (09009)</strong> — cera de carnauba pura; la misma linea usada en el servicio.</li>
+            <li><strong>Meguiar's Flagship Premium Marine Wax</strong> — cera liquida de larga duracion con proteccion UV.</li>
+            <li><strong>Star Brite Premium Marine Polish with PTFE</strong> — anade una capa de teflon que repele el agua salada.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:11px; color:var(--text-light);">Aplicar cada <strong>4–6 semanas</strong> en ambiente costero.</p>
+        </div>
+
+        <div class="card card-dark">
+          <h4>Para superficies plasticas y cromados</h4>
+          <ul>
+            <li><strong>Meguiar's Quik Detailer</strong> — para mantener el brillo de plasticos, cromados y aluminio entre lavados; aplicar con paño de microfibra.</li>
+            <li><strong>WD-40 Specialist Corrosion Inhibitor</strong> — protector anticorrosion para las partes metalicas expuestas al salitre.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:11px; color:var(--text-light);">Aplicar en cromados <strong>mensualmente</strong>.</p>
+        </div>
+
+        <div class="card card-green">
+          <h4>Como aplicar la cera correctamente</h4>
+          <ul>
+            <li>Lavar y secar el bote antes de cerrar.</li>
+            <li>Aplicar siempre <strong>a la sombra o con el gelcoat frio</strong> — bajo el sol la cera se seca en segundos y deja residuos blancos.</li>
+            <li>Aplicar en movimientos circulares suaves con paño de microfibra limpio.</li>
+            <li>Dejar secar hasta que haga "haze" (neblina mate) y pulir con paño limpio.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 3 — COJINERIA (ZEUS III Y BABY SHARK)
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">
+        3. Cuidado de la cojineria post-desmanchado
+        <span class="boat-badge badge-both">Zeus III &amp; Baby Shark</span>
+      </h2>
+
+      <div class="upholstery-alert">
+        <h3>Mantenimiento tras el desmanchado profesional</h3>
+        <p>
+          La cojineria de ambas embarcaciones fue sometida a desmanchado profundo de salitre, bloqueador
+          solar, aceites, hongos y decoloracion UV, con hidratacion y proteccion final. Para conservar
+          ese resultado y evitar que las manchas vuelvan, es clave mantener una rutina de limpieza y
+          proteccion constante. El vinilo marino sin mantenimiento pierde flexibilidad y se agrieta en
+          6–12 meses de exposicion al Caribe.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card card-green">
+          <h4>Limpieza y mantenimiento de cojines</h4>
+          <ul>
+            <li>
+              <strong>Limpieza regular:</strong> <strong>Star Brite Vinyl Cleaner &amp; Shampoo</strong>
+              diluido (1:10 en agua) con esponja suave. Enjuagar con agua dulce y secar con paño
+              de microfibra. No dejar la espuma seca sobre el vinilo.
+            </li>
+            <li>
+              <strong>Acondicionar tras cada limpieza:</strong> aplicar
+              <strong>Star Brite Vinyl Brite Protectant</strong> o
+              <strong>303 Aerospace Protectant</strong> con la superficie completamente seca.
+              Previene el agrietamiento por UV y el salitre marino.
+            </li>
+            <li>
+              <strong>Manchas puntuales:</strong> paño humedo con jabon de Marsella
+              (Carulla, Exito) sin frotar con fuerza. Para manchas de bloqueador solar,
+              usar <strong>Star Brite Instant Black Streak Remover</strong> con cuidado.
+            </li>
+            <li>
+              <strong>Control de moho:</strong> ventilar los cojines tras cada uso.
+              Guardarlos completamente secos. Ante inicio de moho aplicar
+              <strong>Star Brite Mildew Stain Remover</strong> con cepillo de cerdas suaves.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card card-red">
+          <h4>Lo que NUNCA debe usar en la cojineria</h4>
+          <ul>
+            <li><strong>Detergente de ropa</strong> (Ariel, Fab) — resurfa el vinilo y lo reseca.</li>
+            <li><strong>Cloro o lejia</strong> — destruye los pigmentos y desintegra el vinilo marino.</li>
+            <li><strong>Limpiadores con amoniaco</strong> (limpia-vidrios) — degradan el plastificante del vinilo.</li>
+            <li><strong>Esponja verde Scotch-Brite</strong> — crea microrayaduras que acumulan hongos y sal.</li>
+            <li><strong>Acetona o removedor de pintura</strong> — disuelven el material.</li>
+            <li><strong>Guardar cojines humedos o cubiertos sin ventilacion</strong> — genera moho en 24–48 h.</li>
+            <li><strong>Exposicion prolongada al sol sin protector UV</strong> — decolora y agrieta el vinilo en pocas semanas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 4 — FRECUENCIA
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">4. Frecuencia recomendada de mantenimiento</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Frecuencia</th>
+            <th>Tarea</th>
+            <th>Producto / herramienta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="freq-badge freq-after">Tras cada uso</span></td>
+            <td>Enjuague completo con <strong>agua dulce</strong> en todo el bote: casco, motor, cojines y cubierta. Elimina el salitre antes de que se cristalice.</td>
+            <td>Manguera, paño de microfibra para secar.</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-week">Semanal</span></td>
+            <td>Lavado completo con shampoo marino (Zeus III). Limpieza de cojineria con Star Brite Vinyl Cleaner en ambas embarcaciones. Secar completamente con paño de microfibra.</td>
+            <td>Meguiar's Marine Wash o Star Brite Sea Safe + guante de microfibra + dos baldes. Star Brite Vinyl Cleaner para cojines.</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-month">Mensual</span></td>
+            <td>Aplicacion de <strong>cera</strong> al gelcoat del Zeus III. Aplicacion de <strong>protector UV</strong> a la cojineria de ambas embarcaciones. Revision de cromados y partes metalicas.</td>
+            <td>3M Marine Paste Wax (gelcoat Zeus III) + Star Brite Vinyl Brite o 303 Aerospace (cojines) + WD-40 Specialist (cromados).</td>
+          </tr>
+          <tr>
+            <td><span class="freq-badge freq-semi">Cada 6 meses</span></td>
+            <td>Servicio profesional: evaluacion del estado del gelcoat, cojineria y cromados. Refuerzo del sistema de cera y correccion de manchas incrustadas.</td>
+            <td>Colombia Boat Detailing — programar con 2 semanas de anticipacion.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ══════════════════════════════════════
+           SECCION 5 — PRODUCTOS A EVITAR
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">5. Productos y practicas que danan sus embarcaciones</h2>
+
+      <div class="danger-box">
+        <h3>Nunca use estos productos ni estas practicas</h3>
+        <div class="danger-grid">
+          <div class="danger-col">
+            <h5>Productos prohibidos en gelcoat y cojineria</h5>
+            <ul>
+              <li><strong>Jabon de lavar platos</strong> (Lux, Ajax, Fab liquido) — quita la cera del gelcoat y reseca el vinilo.</li>
+              <li><strong>Cloro o lejia</strong> — oxida el gelcoat y destruye el vinilo y sus pigmentos.</li>
+              <li><strong>Acido muriatico</strong> — corroe el gelcoat y los metales.</li>
+              <li><strong>Limpiadores de baño</strong> (Mr. Musculo, Tronex) — formulados para porcelana, incompatibles con superficies marinas.</li>
+              <li><strong>Alcohol isopropilico concentrado (&gt;30%)</strong> — reseca el gelcoat y extrae el plastificante del vinilo.</li>
+              <li><strong>Acetona, thinner o gasolina</strong> — disuelven el gelcoat y el vinilo.</li>
+            </ul>
+          </div>
+          <div class="danger-col">
+            <h5>Practicas que danan el acabado</h5>
+            <ul>
+              <li><strong>Fregar con esponja verde (Scotch-Brite)</strong> — crea microrayaduras que opacan el brillo.</li>
+              <li><strong>Lavar bajo el sol directo</strong> — el jabon se seca antes de enjuagar y deja manchas.</li>
+              <li><strong>Hidrolavadora a alta presion (&gt;1.500 PSI)</strong> — erosiona el gelcoat y dana la cojineria.</li>
+              <li><strong>No enjuagar con agua dulce tras el uso en mar</strong> — el salitre cristalizado actua como lija sobre todas las superficies.</li>
+              <li><strong>Aplicar cera bajo el sol directo</strong> — deja residuos blancos dificiles de retirar.</li>
+              <li><strong>Guardar cojines humedos</strong> — genera moho irreversible en el relleno.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SECCION 6 — DONDE CONSEGUIR PRODUCTOS
+      ══════════════════════════════════════ -->
+      <h2 class="section-title">6. Donde conseguir estos productos en Colombia</h2>
+
+      <div class="cards-grid">
+        <div class="card card-dark">
+          <h4>Canales de compra</h4>
+          <ul>
+            <li><strong>MercadoLibre Colombia</strong> — buscar "Meguiar's Marine", "Star Brite" o "3M Marine". Vendedores con calificacion 4.5+ y +50 ventas son la referencia.</li>
+            <li><strong>3M Colombia (distribuidores oficiales)</strong> — para la linea 3M Marine; tiendas especializadas en pintura automotriz o naval en Cartagena.</li>
+            <li><strong>Todomar Cartagena</strong> — distribuidor especializado en insumos nauticos; maneja Star Brite, productos de limpieza y mantenimiento marino. Primera opcion local antes de buscar en linea.</li>
+            <li><strong>Tiendas de importados en Cartagena</strong> — zona industrial de Mamonal y distribuidores de insumos nauticos locales (Star Brite, 303 Aerospace).</li>
+            <li><strong>Amazon (envio a Colombia)</strong> — para 303 Aerospace Protectant y Star Brite si no se encuentran localmente.</li>
+          </ul>
+        </div>
+
+        <div class="card card-gold">
+          <h4>Kit basico recomendado para Zeus III &amp; Baby Shark</h4>
+          <ul>
+            <li>Meguiar's Marine/RV Wash (shampoo gelcoat)</li>
+            <li>3M Marine Paste Wax (cera gelcoat Zeus III)</li>
+            <li>Star Brite Vinyl Cleaner &amp; Shampoo (cojines)</li>
+            <li>Star Brite Vinyl Brite Protectant (cojines ambas)</li>
+            <li>303 Aerospace Protectant (protector UV premium)</li>
+            <li>Meguiar's Quik Detailer (cromados)</li>
+            <li>2 guantes de lavado de microfibra</li>
+            <li>6 paños de microfibra 400 GSM</li>
+            <li>2 baldes de lavado (metodo dos baldes)</li>
+            <li>WD-40 Specialist Corrosion Inhibitor</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── FOOTER ── -->
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com | @colombiaboatdetailing
+        </p>
+        <p style="margin-top:4px;">
+          Guia de cuidado emitida tras el servicio CBD-2026-108 — Uso exclusivo de la propietaria Ing. Ximena / Zeus III &amp; Baby Shark.
+        </p>
+        <p style="margin-top:4px;">
+          Para agendar su servicio de mantenimiento de los 6 meses, contactenos con anticipacion. Gracias por confiar en los especialistas en estetica naval.
+        </p>
+      </footer>
+
+    </div>
+  </body>
+</html>
