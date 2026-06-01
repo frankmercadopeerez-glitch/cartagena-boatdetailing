@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.colombiaboatdetailing.com" }],
+      "destination": "https://colombiaboatdetailing.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)/index.html",
+      "destination": "/$1/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "index, follow" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ]
+}
