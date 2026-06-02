@@ -1,12 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.colombiaboatdetailing.com" }],
-      "destination": "https://colombiaboatdetailing.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/(.*)/index.html",
       "destination": "/$1/",
       "permanent": true
