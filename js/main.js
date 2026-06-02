@@ -20,13 +20,9 @@ function initNavbarScroll() {
     if (window.scrollY > 50) {
       navbar.classList.add("glass-nav");
       navbar.classList.add("shadow-lg");
-      navbar.classList.remove("py-6");
-      navbar.classList.add("py-4");
     } else {
       navbar.classList.remove("glass-nav");
       navbar.classList.remove("shadow-lg");
-      navbar.classList.remove("py-4");
-      navbar.classList.add("py-6");
     }
   });
 }
@@ -119,44 +115,35 @@ function initScrollAnimations() {
 // DROPDOWN MENU (Services)
 // =============================================
 function initDropdownMenu() {
+  const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
+
   const dropdownToggles = document.querySelectorAll("[data-dropdown-toggle]");
 
   dropdownToggles.forEach((toggle) => {
     toggle.addEventListener("click", function (e) {
+      if (!isTouchDevice()) return; // en desktop el hover CSS lo maneja
       e.preventDefault();
+      e.stopPropagation();
       const targetId = this.getAttribute("data-dropdown-toggle");
       const dropdownMenu = document.getElementById(targetId);
+      if (!dropdownMenu) return;
 
-      if (dropdownMenu) {
-        // Close other dropdowns
-        document.querySelectorAll(".dropdown-menu.active").forEach((menu) => {
-          if (menu.id !== targetId) {
-            menu.classList.remove("active");
-            const otherToggle = document.querySelector(
-              `[data-dropdown-toggle="${menu.id}"]`,
-            );
-            if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
-          }
-        });
-
-        // Toggle this dropdown
-        const isActive = dropdownMenu.classList.toggle("active");
-        this.setAttribute("aria-expanded", isActive ? "true" : "false");
-      }
+      const isOpen = dropdownMenu.classList.contains("nav-open");
+      // Cerrar todos
+      document.querySelectorAll(".nav-dropdown-content.nav-open").forEach((m) => {
+        m.classList.remove("nav-open");
+      });
+      // Abrir este si estaba cerrado
+      if (!isOpen) dropdownMenu.classList.add("nav-open");
     });
   });
 
-  // Close dropdown when clicking outside
+  // Cerrar al tocar fuera
   document.addEventListener("click", function (e) {
-    if (
-      !e.target.closest("[data-dropdown-toggle]") &&
-      !e.target.closest(".dropdown-menu")
-    ) {
-      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
-        menu.classList.remove("active");
-      });
-      document.querySelectorAll("[data-dropdown-toggle]").forEach((toggle) => {
-        toggle.setAttribute("aria-expanded", "false");
+    if (!isTouchDevice()) return;
+    if (!e.target.closest(".nav-dropdown")) {
+      document.querySelectorAll(".nav-dropdown-content.nav-open").forEach((m) => {
+        m.classList.remove("nav-open");
       });
     }
   });
