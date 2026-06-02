@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Fondo negro redondeado -->
-  <rect width="64" height="64" rx="12" fill="#0A0A0A"/>
+  <!-- Fondo navy redondeado -->
+  <rect width="64" height="64" rx="12" fill="#071428"/>
   <!-- Ancla dorada -->
   <!-- Círculo superior del ancla -->
   <circle cx="32" cy="16" r="5" fill="none" stroke="#B8904D" stroke-width="3"/>
