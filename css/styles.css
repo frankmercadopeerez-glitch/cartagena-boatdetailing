@@ -2,4 +2,4 @@
 /* ── Dropdown touch fix ─────────────────────── */
 @media(hover:none){.nav-dropdown:hover .nav-dropdown-content{opacity:0;visibility:hidden;transform:translateY(-10px)}.nav-dropdown-content.nav-open{opacity:1!important;visibility:visible!important;transform:translateY(0)!important}}
 /* ── Forzar nav desktop oculto en móvil ────── */
-@media(max-width:767px){#navbar .hidden{display:none!important}}@media(max-width:639px){.faq-toggle{padding:1.25rem 1rem!important}.faq-answer>div{padding:0 1rem 1.25rem!important}.container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}}
+@media(max-width:767px){#navbar .hidden{display:none!important}}@media(max-width:639px){.featured-star-card{margin-left:-.75rem!important;margin-right:-.75rem!important;border-radius:0!important;width:calc(100% + 1.5rem)!important}.container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}}
