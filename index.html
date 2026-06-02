@@ -1306,229 +1306,113 @@
         </div>
       </div>
 
-      <!-- Infinite Scroll Carousel -->
-      <div class="reviews-carousel-wrapper">
-        <div class="reviews-mask-inner">
-        <div class="reviews-track flex gap-8 animate-scroll-left">
-          <!-- Review Card 1 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, y el cambio es visible incluso bajo el sol mayor de Cartagena. Altamente recomendado."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Carlos Mendoza</p>
-              <p class="text-xs text-slate-500">Propietario, Grady White 45'</p>
-            </div>
-          </div>
+      <!-- ── Dual Marquee Reviews ── -->
+      <style>
+        @keyframes marquee-l {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes marquee-r {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+        .rw-outer {
+          overflow: hidden;
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+                  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+        }
+        .rw-track {
+          display: flex;
+          gap: 1rem;
+          width: max-content;
+          will-change: transform;
+        }
+        .rw-left  { animation: marquee-l 34s linear infinite; }
+        .rw-right { animation: marquee-r 42s linear infinite; }
+        .rw-outer:hover .rw-left,
+        .rw-outer:hover .rw-right { animation-play-state: paused; }
+        .rw-card {
+          flex-shrink: 0;
+          width: 272px;
+          background: #fff;
+          border: 1px solid rgba(0,31,63,0.09);
+          border-radius: 3px;
+          padding: 1.1rem 1.2rem .9rem;
+          box-shadow: 0 2px 14px rgba(0,31,63,0.07);
+        }
+        .rw-stars { display:flex; gap:2px; margin-bottom:.55rem; }
+        .rw-stars i { color:#d4af37; font-size:.8rem; }
+        .rw-quote {
+          font-style: italic;
+          font-size: .78rem;
+          line-height: 1.55;
+          color: #475569;
+          margin-bottom: .7rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .rw-meta { border-top: 1px solid #f1f5f9; padding-top: .55rem; }
+        .rw-name { font-weight: 700; font-size: .78rem; color: #001f3f; line-height:1.2; }
+        .rw-boat { font-size: .68rem; color: #94a3b8; }
+        @media (max-width: 480px) { .rw-card { width: 236px; } }
+        @media (prefers-reduced-motion: reduce) {
+          .rw-left, .rw-right { animation: none; }
+        }
+      </style>
 
-          <!-- Review Card 2 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Profesionales expertos. Su conocimiento en PPF junto con atención al detalle me sorprendió. Mi inversión en el bote está protegida al 100%."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">María Fernández</p>
-              <p class="text-xs text-slate-500">Propietaria, Sunseeker 60'</p>
-            </div>
-          </div>
+      <div class="space-y-4 px-0">
 
-          <!-- Review Card 3 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Servicio de pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía. No hay nada mejor en Cartagena."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Jorge Turbay</p>
-              <p class="text-xs text-slate-500">Propietario, Boston Whaler 35'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 4 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Increíble el trabajo en mi sala de máquinas. Control anticorrosivo y protección completa. Ahora no me preocupa la oxidación marina."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Patricia Ruiz</p>
-              <p class="text-xs text-slate-500">Propietaria, Cigarette 38'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 5 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Confiabilidad total. Coordinaron el trabajo perfectamente con Cartagena de Indias. Mi yate nunca se vio mejor. Altamente profesionales."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Rafael González</p>
-              <p class="text-xs text-slate-500">Propietario, Contender 35'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 6 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "El lavado técnico que hacen antes del Ceramic es impresionante. Eliminan toda la contaminación marina. Resultados 10/10, sin duda volveré."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Ana Reyes</p>
-              <p class="text-xs text-slate-500">Propietaria, Pursuit 35'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 7 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Restauraron el gelcoat de mi embarcación que tenía más de 15 años. El resultado superó todas mis expectativas. Parece recién salido del astillero."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Andrés Vélez</p>
-              <p class="text-xs text-slate-500">Propietario, Sea Ray 42'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 8 -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Excelente comunicación y puntualidad. Vinieron directamente a mi muelle privado en Isla Barú. Servicio VIP de verdad."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Lucía Martínez</p>
-              <p class="text-xs text-slate-500">Propietaria, Azimut 55'</p>
-            </div>
-          </div>
-
-          <!-- Duplicate cards for infinite scroll effect -->
-          <!-- Review Card 1 (duplicate) -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, y el cambio es visible incluso bajo el sol mayor de Cartagena. Altamente recomendado."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Carlos Mendoza</p>
-              <p class="text-xs text-slate-500">Propietario, Grady White 45'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 2 (duplicate) -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Profesionales expertos. Su conocimiento en PPF junto con atención al detalle me sorprendió. Mi inversión en el bote está protegida al 100%."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">María Fernández</p>
-              <p class="text-xs text-slate-500">Propietaria, Sunseeker 60'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 3 (duplicate) -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Servicio de pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía. No hay nada mejor en Cartagena."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Jorge Turbay</p>
-              <p class="text-xs text-slate-500">Propietario, Boston Whaler 35'</p>
-            </div>
-          </div>
-
-          <!-- Review Card 4 (duplicate) -->
-          <div class="review-card flex-shrink-0 w-[400px] bg-white p-8 border border-slate-100 rounded-sm shadow-lg">
-            <div class="flex items-center gap-1 mb-4">
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-              <i class="ph-fill ph-star text-gold-400 text-lg"></i>
-            </div>
-            <p class="text-slate-700 font-light mb-6 italic leading-relaxed">
-              "Increíble el trabajo en mi sala de máquinas. Control anticorrosivo y protección completa. Ahora no me preocupa la oxidación marina."
-            </p>
-            <div class="border-t border-slate-100 pt-4">
-              <p class="font-bold text-navy-900">Patricia Ruiz</p>
-              <p class="text-xs text-slate-500">Propietaria, Cigarette 38'</p>
-            </div>
+        <!-- Row 1 → izquierda -->
+        <div class="rw-outer">
+          <div class="rw-track rw-left">
+            <!-- set A -->
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, visible incluso bajo el sol mayor de Cartagena."</p><div class="rw-meta"><p class="rw-name">Carlos Mendoza</p><p class="rw-boat">Propietario · Grady White 45'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Profesionales expertos en PPF. Atención al detalle impecable. Mi inversión en el bote está protegida al 100%."</p><div class="rw-meta"><p class="rw-name">María Fernández</p><p class="rw-boat">Propietaria · Sunseeker 60'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía real."</p><div class="rw-meta"><p class="rw-name">Jorge Turbay</p><p class="rw-boat">Propietario · Boston Whaler 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Increíble trabajo en mi sala de máquinas. Control anticorrosivo total. Ahora no me preocupa la oxidación marina."</p><div class="rw-meta"><p class="rw-name">Patricia Ruiz</p><p class="rw-boat">Propietaria · Cigarette 38'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Confiabilidad total. Coordinaron perfectamente en el muelle. Mi yate nunca se vio mejor. Altamente profesionales."</p><div class="rw-meta"><p class="rw-name">Rafael González</p><p class="rw-boat">Propietario · Contender 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"El lavado técnico antes del Ceramic es impresionante. Eliminan toda la contaminación marina. Resultados 10/10."</p><div class="rw-meta"><p class="rw-name">Ana Reyes</p><p class="rw-boat">Propietaria · Pursuit 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Restauraron el gelcoat de mi embarcación de 15 años. El resultado superó todo. Parece recién salido del astillero."</p><div class="rw-meta"><p class="rw-name">Andrés Vélez</p><p class="rw-boat">Propietario · Sea Ray 42'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Excelente comunicación y puntualidad. Vinieron a mi muelle privado en Isla Barú. Servicio VIP de verdad."</p><div class="rw-meta"><p class="rw-name">Lucía Martínez</p><p class="rw-boat">Propietaria · Azimut 55'</p></div></div>
+            <!-- set B (duplicate para loop) -->
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, visible incluso bajo el sol mayor de Cartagena."</p><div class="rw-meta"><p class="rw-name">Carlos Mendoza</p><p class="rw-boat">Propietario · Grady White 45'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Profesionales expertos en PPF. Atención al detalle impecable. Mi inversión en el bote está protegida al 100%."</p><div class="rw-meta"><p class="rw-name">María Fernández</p><p class="rw-boat">Propietaria · Sunseeker 60'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía real."</p><div class="rw-meta"><p class="rw-name">Jorge Turbay</p><p class="rw-boat">Propietario · Boston Whaler 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Increíble trabajo en mi sala de máquinas. Control anticorrosivo total. Ahora no me preocupa la oxidación marina."</p><div class="rw-meta"><p class="rw-name">Patricia Ruiz</p><p class="rw-boat">Propietaria · Cigarette 38'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Confiabilidad total. Coordinaron perfectamente en el muelle. Mi yate nunca se vio mejor. Altamente profesionales."</p><div class="rw-meta"><p class="rw-name">Rafael González</p><p class="rw-boat">Propietario · Contender 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"El lavado técnico antes del Ceramic es impresionante. Eliminan toda la contaminación marina. Resultados 10/10."</p><div class="rw-meta"><p class="rw-name">Ana Reyes</p><p class="rw-boat">Propietaria · Pursuit 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Restauraron el gelcoat de mi embarcación de 15 años. El resultado superó todo. Parece recién salido del astillero."</p><div class="rw-meta"><p class="rw-name">Andrés Vélez</p><p class="rw-boat">Propietario · Sea Ray 42'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Excelente comunicación y puntualidad. Vinieron a mi muelle privado en Isla Barú. Servicio VIP de verdad."</p><div class="rw-meta"><p class="rw-name">Lucía Martínez</p><p class="rw-boat">Propietaria · Azimut 55'</p></div></div>
           </div>
         </div>
-      </div><!-- /reviews-mask-inner -->
-      </div><!-- /reviews-carousel-wrapper -->
+
+        <!-- Row 2 → derecha (orden offset) -->
+        <div class="rw-outer">
+          <div class="rw-track rw-right">
+            <!-- set A (empezamos desde la mitad para que no sea igual) -->
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Confiabilidad total. Coordinaron perfectamente en el muelle. Mi yate nunca se vio mejor. Altamente profesionales."</p><div class="rw-meta"><p class="rw-name">Rafael González</p><p class="rw-boat">Propietario · Contender 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"El lavado técnico antes del Ceramic es impresionante. Eliminan toda la contaminación marina. Resultados 10/10."</p><div class="rw-meta"><p class="rw-name">Ana Reyes</p><p class="rw-boat">Propietaria · Pursuit 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Restauraron el gelcoat de mi embarcación de 15 años. El resultado superó todo. Parece recién salido del astillero."</p><div class="rw-meta"><p class="rw-name">Andrés Vélez</p><p class="rw-boat">Propietario · Sea Ray 42'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Excelente comunicación y puntualidad. Vinieron a mi muelle privado en Isla Barú. Servicio VIP de verdad."</p><div class="rw-meta"><p class="rw-name">Lucía Martínez</p><p class="rw-boat">Propietaria · Azimut 55'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, visible incluso bajo el sol mayor de Cartagena."</p><div class="rw-meta"><p class="rw-name">Carlos Mendoza</p><p class="rw-boat">Propietario · Grady White 45'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Profesionales expertos en PPF. Atención al detalle impecable. Mi inversión en el bote está protegida al 100%."</p><div class="rw-meta"><p class="rw-name">María Fernández</p><p class="rw-boat">Propietaria · Sunseeker 60'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía real."</p><div class="rw-meta"><p class="rw-name">Jorge Turbay</p><p class="rw-boat">Propietario · Boston Whaler 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Increíble trabajo en mi sala de máquinas. Control anticorrosivo total. Ahora no me preocupa la oxidación marina."</p><div class="rw-meta"><p class="rw-name">Patricia Ruiz</p><p class="rw-boat">Propietaria · Cigarette 38'</p></div></div>
+            <!-- set B (duplicate para loop) -->
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Confiabilidad total. Coordinaron perfectamente en el muelle. Mi yate nunca se vio mejor. Altamente profesionales."</p><div class="rw-meta"><p class="rw-name">Rafael González</p><p class="rw-boat">Propietario · Contender 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"El lavado técnico antes del Ceramic es impresionante. Eliminan toda la contaminación marina. Resultados 10/10."</p><div class="rw-meta"><p class="rw-name">Ana Reyes</p><p class="rw-boat">Propietaria · Pursuit 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Restauraron el gelcoat de mi embarcación de 15 años. El resultado superó todo. Parece recién salido del astillero."</p><div class="rw-meta"><p class="rw-name">Andrés Vélez</p><p class="rw-boat">Propietario · Sea Ray 42'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Excelente comunicación y puntualidad. Vinieron a mi muelle privado en Isla Barú. Servicio VIP de verdad."</p><div class="rw-meta"><p class="rw-name">Lucía Martínez</p><p class="rw-boat">Propietaria · Azimut 55'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Transformaron completamente mi yate. El Ceramic Coating ha dejado la fibra impecable, visible incluso bajo el sol mayor de Cartagena."</p><div class="rw-meta"><p class="rw-name">Carlos Mendoza</p><p class="rw-boat">Propietario · Grady White 45'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Profesionales expertos en PPF. Atención al detalle impecable. Mi inversión en el bote está protegida al 100%."</p><div class="rw-meta"><p class="rw-name">María Fernández</p><p class="rw-boat">Propietaria · Sunseeker 60'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Pintura de motores excepcional. Mis Yamahas se ven como nuevas. Rápidos, profesionales y con garantía real."</p><div class="rw-meta"><p class="rw-name">Jorge Turbay</p><p class="rw-boat">Propietario · Boston Whaler 35'</p></div></div>
+            <div class="rw-card"><div class="rw-stars"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div><p class="rw-quote">"Increíble trabajo en mi sala de máquinas. Control anticorrosivo total. Ahora no me preocupa la oxidación marina."</p><div class="rw-meta"><p class="rw-name">Patricia Ruiz</p><p class="rw-boat">Propietaria · Cigarette 38'</p></div></div>
+          </div>
+        </div>
+
+      </div><!-- /dual-marquee -->
     <!-- Blog Preview Section -->
     <section id="blog-preview" class="py-24 bg-blue-50 relative overflow-hidden">
       <div class="container mx-auto px-6">
