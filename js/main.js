@@ -7,7 +7,31 @@ document.addEventListener("DOMContentLoaded", function () {
   initMobileMenu();
   initScrollAnimations();
   initDropdownMenu();
+  initBackToTop();
 });
+
+// =============================================
+// BACK TO TOP BUTTON
+// =============================================
+function initBackToTop() {
+  const btn = document.createElement("button");
+  btn.id = "back-to-top";
+  btn.setAttribute("aria-label", "Volver arriba");
+  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,149.66a8,8,0,0,1-11.32,0L128,75.31,53.66,149.66a8,8,0,0,1-11.32-11.32l80-80a8,8,0,0,1,11.32,0l80,80A8,8,0,0,1,213.66,149.66Z"/></svg>';
+  document.body.appendChild(btn);
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      btn.classList.add("visible");
+    } else {
+      btn.classList.remove("visible");
+    }
+  });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
 // =============================================
 // NAVBAR SCROLL EFFECT
