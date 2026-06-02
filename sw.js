@@ -1,10 +1,11 @@
-const CACHE_NAME = "cbd-finanzas-v3";
+const CACHE_NAME = "cbd-finanzas-v5";
 const APP_SHELL = [
   "/finanzas.html",
   "/finanzas-manifest.json",
-  "/css/styles.css",
-  "/js/main.js",
 ];
+
+// Solo archivos directamente relacionados con finanzas
+const FINANZAS_PATHS = ["/finanzas.html", "/finanzas-manifest.json"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
@@ -25,15 +26,15 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  // Skip cross-origin requests and Firestore/Firebase network calls
+  const url = new URL(e.request.url);
+
+  // Solo interceptar peticiones de finanzas.html y su manifest
+  // Todo lo demas (CSS, JS del sitio principal, imagenes) pasa directo a la red
+  const isFinanzas = FINANZAS_PATHS.includes(url.pathname);
+  if (!isFinanzas) return;
+
+  // Skip cross-origin
   if (!e.request.url.startsWith(self.location.origin)) return;
-  if (
-    e.request.url.includes("firestore") ||
-    e.request.url.includes("firebase") ||
-    e.request.url.includes("googleapis") ||
-    e.request.url.includes("groq")
-  )
-    return;
 
   e.respondWith(
     caches.match(e.request).then((cached) => {
