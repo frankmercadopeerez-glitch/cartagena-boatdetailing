@@ -17,7 +17,8 @@ function initBackToTop() {
   const btn = document.createElement("button");
   btn.id = "back-to-top";
   btn.setAttribute("aria-label", "Volver arriba");
-  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,149.66a8,8,0,0,1-11.32,0L128,75.31,53.66,149.66a8,8,0,0,1-11.32-11.32l80-80a8,8,0,0,1,11.32,0l80,80A8,8,0,0,1,213.66,149.66Z"/></svg>';
+  btn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,149.66a8,8,0,0,1-11.32,0L128,75.31,53.66,149.66a8,8,0,0,1-11.32-11.32l80-80a8,8,0,0,1,11.32,0l80,80A8,8,0,0,1,213.66,149.66Z"/></svg>';
   document.body.appendChild(btn);
 
   window.addEventListener("scroll", () => {
@@ -154,9 +155,11 @@ function initDropdownMenu() {
 
       const isOpen = dropdownMenu.classList.contains("nav-open");
       // Cerrar todos
-      document.querySelectorAll(".nav-dropdown-content.nav-open").forEach((m) => {
-        m.classList.remove("nav-open");
-      });
+      document
+        .querySelectorAll(".nav-dropdown-content.nav-open")
+        .forEach((m) => {
+          m.classList.remove("nav-open");
+        });
       // Abrir este si estaba cerrado
       if (!isOpen) dropdownMenu.classList.add("nav-open");
     });
@@ -166,9 +169,11 @@ function initDropdownMenu() {
   document.addEventListener("click", function (e) {
     if (!isTouchDevice()) return;
     if (!e.target.closest(".nav-dropdown")) {
-      document.querySelectorAll(".nav-dropdown-content.nav-open").forEach((m) => {
-        m.classList.remove("nav-open");
-      });
+      document
+        .querySelectorAll(".nav-dropdown-content.nav-open")
+        .forEach((m) => {
+          m.classList.remove("nav-open");
+        });
     }
   });
 }
