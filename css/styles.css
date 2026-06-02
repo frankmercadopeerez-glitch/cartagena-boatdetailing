@@ -2,4 +2,4 @@
 /* ── Dropdown touch fix ─────────────────────── */
 @media(hover:none){.nav-dropdown:hover .nav-dropdown-content{opacity:0;visibility:hidden;transform:translateY(-10px)}.nav-dropdown-content.nav-open{opacity:1!important;visibility:visible!important;transform:translateY(0)!important}}
 /* ── Forzar nav desktop oculto en móvil ────── */
-@media(max-width:767px){#navbar .hidden{display:none!important}}
+@media(max-width:767px){#navbar .hidden{display:none!important}}@media(max-width:639px){.container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}}
