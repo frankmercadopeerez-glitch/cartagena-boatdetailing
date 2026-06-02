@@ -140,8 +140,8 @@
         padding: 14mm 15mm;
         box-shadow: 0 6px 28px rgba(0, 0, 0, 0.14);
         display: grid;
-        grid-template-columns: repeat(2, 85mm);
-        grid-template-rows: repeat(4, 54mm);
+        grid-template-columns: repeat(1, 85mm);
+        grid-template-rows: repeat(1, 54mm);
         gap: 5mm;
         justify-content: center;
       }
@@ -458,20 +458,16 @@
   <body>
     <!-- ── Controls (screen only) ───────────────────────── -->
     <div class="controls">
-      <h1>⛵ Tarjetas de Presentación</h1>
+      <h1>⛵ Tarjeta de Presentación</h1>
       <p class="subtitle">
-        Colombia Boat Detailing &nbsp;·&nbsp; A4 · 8 tarjetas por hoja
+        Colombia Boat Detailing &nbsp;·&nbsp; 85×54 mm · Monofronte
       </p>
       <div class="instructions">
         <ol>
           <li>Haz clic en <strong>"Imprimir"</strong> y elige tu impresora</li>
-          <li>Imprime la <strong>Hoja 1</strong> (Frente) primero</li>
+          <li>La imprenta ajustará el tamaño a 85×54 mm (estándar)</li>
           <li>
-            Voltea el papel e imprime la <strong>Hoja 2</strong> (Reverso)
-          </li>
-          <li>
-            Corta por las <strong>líneas punteadas</strong> &rarr; 8 tarjetas
-            listas
+            Envía a imprimir - <strong>Frente y Reverso automático</strong>
           </li>
         </ol>
       </div>
@@ -483,13 +479,13 @@
 
     <!-- ── Sheet 1 · Front ───────────────────────────────── -->
     <p class="sheet-label">
-      <span>Hoja 1 &nbsp;·&nbsp; Frente de las tarjetas</span>
+      <span>Frente</span>
     </p>
     <div class="sheet" id="sheet-front"></div>
 
     <!-- ── Sheet 2 · Back ────────────────────────────────── -->
     <p class="sheet-label">
-      <span>Hoja 2 &nbsp;·&nbsp; Reverso de las tarjetas</span>
+      <span>Reverso</span>
     </p>
     <div class="sheet" id="sheet-back"></div>
 
@@ -573,11 +569,11 @@
       </div>
     </div>`;
 
-      /* ── Populate sheets with 8 cards each ── */
+      /* ── Populate sheets with 1 card each ── */
       const front = document.getElementById("sheet-front");
       const back = document.getElementById("sheet-back");
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 1; i++) {
         front.innerHTML += FRONT;
         back.innerHTML += BACK;
       }
