@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initClickableCards();
   initWhatsAppMessages();
   initFooterConsistency();
+  normalizeFloatingWhatsApp();
+  centerBlogArticleHeader();
 });
 
 function getLayoutContext() {
@@ -223,6 +225,48 @@ function initFooterConsistency() {
       )
       .forEach((a) => a.remove());
   });
+}
+
+function normalizeFloatingWhatsApp() {
+  // Replace any ad-hoc green circle WA button with the canonical whatsapp-float img button
+  const existing = document.querySelector("a.whatsapp-float");
+  if (existing) return; // already canonical
+
+  const greenBtn = document.querySelector(
+    'a[aria-label="WhatsApp"][href*="wa.me"]'
+  );
+  if (!greenBtn) return;
+
+  // Determine image path depth (root vs blog/slug/)
+  const depth = (window.location.pathname.match(/\//g) || []).length;
+  const prefix = depth >= 3 ? "../../" : "";
+
+  const href = greenBtn.getAttribute("href") || "https://wa.me/573044301112";
+
+  const canonical = document.createElement("a");
+  canonical.href = href;
+  canonical.className = "whatsapp-float";
+  canonical.setAttribute("target", "_blank");
+  canonical.setAttribute("rel", "noopener noreferrer");
+  canonical.setAttribute("aria-label", "Cotizar por WhatsApp");
+  canonical.innerHTML = `<img src="${prefix}images/whatsapp.webp" alt="WhatsApp" class="whatsapp-float__img" width="58" height="58" />`;
+
+  greenBtn.replaceWith(canonical);
+}
+
+function centerBlogArticleHeader() {
+  const pathname = (window.location.pathname || "").toLowerCase();
+  const isBlogArticle = /\/blog\/[^/]+\/index\.html$/.test(pathname);
+  if (!isBlogArticle) return;
+
+  // Target the inner content wrapper inside the <header> element
+  const header = document.querySelector("header");
+  if (!header) return;
+
+  const inner = header.querySelector(".max-w-3xl, .max-w-4xl, .max-w-5xl");
+  if (inner && !inner.classList.contains("text-center")) {
+    inner.classList.add("text-center");
+  }
 }
 
 function normalizeBlogArticleReadability() {
