@@ -3,3 +3,35 @@
 @media(hover:none){.nav-dropdown:hover .nav-dropdown-content{opacity:0;visibility:hidden;transform:translateY(-10px)}.nav-dropdown-content.nav-open{opacity:1!important;visibility:visible!important;transform:translateY(0)!important}}
 /* ── Forzar nav desktop oculto en móvil ────── */
 @media(max-width:767px){#navbar .hidden{display:none!important}}@media(max-width:639px){.featured-star-card{margin-left:-.75rem!important;margin-right:-.75rem!important;border-radius:0!important;width:calc(100% + 1.5rem)!important}.container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}}#back-to-top{position:fixed;bottom:100px;right:28px;transform:translateY(20px);z-index:9999;background:#d4af37;color:#001f3f;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:0 4px 16px rgba(0,0,0,.35)}#back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}#back-to-top:hover{background:#c5a028}.sonar-rings,.sonar-ring{display:none!important}
+
+/* ── DARK SECTION FIXES ─────────────────────────────────────────────────────
+   Corrects dark text classes used inside dark-background sections (bg-navy-900).
+   Works automatically across ALL pages — no HTML changes needed.
+   To apply to a new section: just use bg-navy-900 on the <section> tag.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Headings & labels: navy text → white */
+section.bg-navy-900 h1.text-navy-900,
+section.bg-navy-900 h2.text-navy-900,
+section.bg-navy-900 h3.text-navy-900,
+section.bg-navy-900 h4.text-navy-900,
+section.bg-navy-900 p.text-navy-900,
+section.bg-navy-900 summary.text-navy-900 { color: #fff !important; }
+
+/* Body text: slate-600 → slate-300 (readable on dark) */
+section.bg-navy-900 p.text-slate-600,
+section.bg-navy-900 li.text-slate-600,
+section.bg-navy-900 div.text-slate-600,
+section.bg-navy-900 summary + div.text-slate-600 { color: #cbd5e1 !important; }
+
+/* Exception: elements with gold background keep dark text */
+section.bg-navy-900 .bg-gold-400 .text-navy-900,
+section.bg-navy-900 .bg-gold-400.text-navy-900,
+section.bg-navy-900 .bg-gold-500 .text-navy-900,
+section.bg-navy-900 .bg-gold-500.text-navy-900 { color: #0a192f !important; }
+
+/* Section header centering: eyebrow label, main h2, intro paragraph */
+section.bg-navy-900 > div > div > p[class*="text-gold"],
+section.bg-navy-900 > div > div > h2,
+section.bg-navy-900 > div > div > p.text-slate-600,
+section.bg-navy-900 > div > div > p.text-slate-300 { text-align: center; }
