@@ -233,7 +233,7 @@ function normalizeFloatingWhatsApp() {
   if (existing) return; // already canonical
 
   const greenBtn = document.querySelector(
-    'a[aria-label="WhatsApp"][href*="wa.me"]'
+    'a[aria-label="WhatsApp"][href*="wa.me"]',
   );
   if (!greenBtn) return;
 
