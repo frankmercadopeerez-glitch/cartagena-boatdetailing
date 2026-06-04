@@ -20,31 +20,23 @@ body.bg-navy-900 .bg-slate-100,
 body.bg-navy-900 .bg-amber-50,
 section.bg-white, section.bg-slate-50 { color: #1e293b; }
 
-/* 3. Inside DARK containers: dark utility text classes were invisible → lighten.
-   Scoped to bg-navy-900 section/div so light sections are never affected. */
-section.bg-navy-900 .text-navy-900,
-div.bg-navy-900 .text-navy-900 { color: #ffffff !important; }
+/* 3. Inside DARK zones (navy-800/900 section or div): dark text classes were
+   invisible → lighten. Scoped with section./div. (NOT bare .bg-navy-900) so
+   LIGHT sections are never matched, even on dark-bodied pages.
+   Covers ALL dark shades so no page is left with invisible text. */
+:is(section,div).bg-navy-900 :is(.text-navy-900,.text-navy-800),
+:is(section,div).bg-navy-800 :is(.text-navy-900,.text-navy-800) { color:#ffffff !important; }
 
-section.bg-navy-900 .text-slate-600,
-section.bg-navy-900 .text-slate-700,
-div.bg-navy-900 .text-slate-600,
-div.bg-navy-900 .text-slate-700 { color: #cbd5e1 !important; }
+:is(section,div).bg-navy-900 :is(.text-slate-500,.text-slate-600,.text-slate-700,.text-slate-800,.text-slate-900,.text-gray-600,.text-gray-700,.text-gray-800,.text-gray-900),
+:is(section,div).bg-navy-800 :is(.text-slate-500,.text-slate-600,.text-slate-700,.text-slate-800,.text-slate-900) { color:#cbd5e1 !important; }
 
-/* 4. Re-protect: a LIGHT card sitting inside a dark container keeps DARK text.
-   Headings/navy text → dark navy; body slate text → dark slate. */
-.bg-navy-900 .bg-white .text-navy-900,
-.bg-navy-900 .bg-slate-50 .text-navy-900,
-.bg-navy-900 .bg-amber-50 .text-navy-900,
-.bg-navy-900 .bg-white h2, .bg-navy-900 .bg-white h3, .bg-navy-900 .bg-white h4,
-.bg-navy-900 .bg-slate-50 h3, .bg-navy-900 .bg-slate-50 h4,
-.bg-navy-900 .bg-amber-50 h3, .bg-navy-900 .bg-amber-50 h4 { color: #0a192f !important; }
+/* 4. Re-protect: LIGHT cards (white/slate-50/amber-50) inside dark zones keep
+   DARK text — headings dark navy, body dark slate. Higher specificity wins. */
+.bg-navy-900 :is(.bg-white,.bg-slate-50,.bg-amber-50) :is(.text-navy-900,h2,h3,h4),
+.bg-navy-800 :is(.bg-white,.bg-slate-50,.bg-amber-50) :is(.text-navy-900,h2,h3,h4) { color:#0a192f !important; }
 
-.bg-navy-900 .bg-white .text-slate-600,
-.bg-navy-900 .bg-white .text-slate-700,
-.bg-navy-900 .bg-slate-50 .text-slate-600,
-.bg-navy-900 .bg-slate-50 .text-slate-700,
-.bg-navy-900 .bg-amber-50 .text-slate-600,
-.bg-navy-900 .bg-amber-50 .text-slate-700 { color: #334155 !important; }
+.bg-navy-900 :is(.bg-white,.bg-slate-50,.bg-amber-50) :is(.text-slate-500,.text-slate-600,.text-slate-700,.text-slate-800,.text-slate-900),
+.bg-navy-800 :is(.bg-white,.bg-slate-50,.bg-amber-50) :is(.text-slate-500,.text-slate-600,.text-slate-700,.text-slate-800,.text-slate-900) { color:#334155 !important; }
 
 /* 5. Gold backgrounds always keep dark text */
 .bg-gold-400 .text-navy-900, .bg-gold-400.text-navy-900,
