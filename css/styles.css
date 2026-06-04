@@ -9,9 +9,14 @@
    Works automatically across ALL pages — no HTML changes needed per file.
    ─────────────────────────────────────────────────────────────────────────── */
 
-/* FIX 1: Default inherited text for dark-background pages.
-   body.bg-navy-900.text-slate-800 sets dark default text — override it. */
-body.bg-navy-900 { color: #e2e8f0; }
+/* FIX 1: Make text visible inside dark containers (section OR div with bg-navy-900).
+   Does NOT affect white/light sections — only sets color on the dark container itself
+   so children without explicit text classes inherit light color. */
+section.bg-navy-900,
+div.bg-navy-900:not([class*="bg-gold"]) { color: #e2e8f0; }
+
+/* Reset to dark inside light-background cards that sit INSIDE dark sections */
+.bg-white, .bg-slate-50, .bg-amber-50, .bg-slate-100 { color: #1e293b; }
 
 /* FIX 2: section.bg-navy-900 — headings & labels: navy text → white */
 section.bg-navy-900 h1.text-navy-900,
