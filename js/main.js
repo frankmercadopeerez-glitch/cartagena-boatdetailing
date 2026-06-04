@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initFooterConsistency();
   normalizeFloatingWhatsApp();
   centerBlogArticleHeader();
+  initClickableBlogPreviewCards();
 });
 
 function getLayoutContext() {
@@ -403,6 +404,18 @@ function initClickableCards() {
     card.style.cursor = "pointer";
     card.addEventListener("click", (e) => {
       if (e.target.closest("a, button")) return; // let real links/buttons work
+      window.location.href = link.href;
+    });
+  });
+}
+
+function initClickableBlogPreviewCards() {
+  document.querySelectorAll(".blog-preview-card").forEach((card) => {
+    const link = card.querySelector("a[href]");
+    if (!link) return;
+    card.style.cursor = "pointer";
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a, button")) return;
       window.location.href = link.href;
     });
   });
