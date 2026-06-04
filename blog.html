@@ -727,8 +727,105 @@
         const pagination = document.getElementById("blog-pagination");
         if (!featuredWrap || !filtersWrap || !grid || !pagination) return;
 
-        const featuredPosts = posts.filter((p) => p.featured).slice(0, 4);
-        const categories = [...new Set(posts.map((p) => p.category))].sort();
+        const curatedImagePools = {
+          Cascos: [
+            "images/limpieza.webp",
+            "images/limpieza%20(2).webp",
+            "images/limpieza%20(3).webp",
+            "images/limpieza%20(4).webp",
+            "images/limpieza%20(5).webp",
+            "images/limpieza%20(6).webp",
+            "images/limpieza%20(7).webp",
+          ],
+          Cubiertas: ["images/cubierta.webp", "images/detailing%20(2).webp"],
+          Electricidad: [
+            "images/motores.webp",
+            "images/detailing%20(3).webp",
+            "images/header%20(2).webp",
+          ],
+          Eventos: [
+            "images/header.webp",
+            "images/header%20(2).webp",
+            "images/detailing.webp",
+            "images/detailing%20(3).webp",
+          ],
+          Interiores: [
+            "images/cojineria.webp",
+            "images/cojineria%20(2).webp",
+            "images/cojineria%20(3).webp",
+          ],
+          Mantenimiento: [
+            "images/limpieza%20(2).webp",
+            "images/limpieza%20(3).webp",
+            "images/limpieza%20(4).webp",
+            "images/detailing.webp",
+            "images/header.webp",
+          ],
+          Pintura: [
+            "images/pintura.webp",
+            "images/polichado.webp",
+            "images/polichado%20(2).webp",
+            "images/brillo.webp",
+          ],
+          Proteccion: [
+            "images/brillo.webp",
+            "images/detailing.webp",
+            "images/detailing%20(2).webp",
+            "images/polichado.webp",
+          ],
+          Reparacion: [
+            "images/pintura.webp",
+            "images/polichado%20(2).webp",
+            "images/detailing%20(3).webp",
+          ],
+        };
+
+        function hashSlug(slug) {
+          const source = String(slug || "");
+          let hash = 0;
+          for (let idx = 0; idx < source.length; idx += 1) {
+            hash = (hash * 31 + source.charCodeAt(idx)) >>> 0;
+          }
+          return hash;
+        }
+
+        function curateImage(post) {
+          const category = post.category || "Mantenimiento";
+          const pool =
+            curatedImagePools[category] || curatedImagePools.Mantenimiento;
+          const imageFromPool = pool[hashSlug(post.slug) % pool.length];
+
+          if ((post.slug || "").includes("cubierta-teca")) {
+            return "images/cubierta.webp";
+          }
+          if (
+            (post.slug || "").includes("tapiceria") ||
+            (post.slug || "").includes("cojineria")
+          ) {
+            return "images/cojineria.webp";
+          }
+          if (
+            category === "Electricidad" &&
+            ((post.slug || "").includes("motor") ||
+              (post.slug || "").includes("electric"))
+          ) {
+            return "images/motores.webp";
+          }
+
+          return imageFromPool;
+        }
+
+        const curatedPosts = posts.map((post) => ({
+          ...post,
+          image: curateImage(post),
+        }));
+
+        const featuredPosts = curatedPosts
+          .filter((p) => p.featured)
+          .slice(0, 4);
+        const categories = [
+          ...new Set(curatedPosts.map((p) => p.category)),
+        ].sort();
         const filters = ["Todos", "Destacados", ...categories];
         const pageSize = 12;
 
@@ -769,16 +866,20 @@
                   <span>${readTime}</span><span>•</span><span>${dateLabel}</span>
                 </div>
                 <span class="text-gold-400 font-bold text-sm tracking-wider uppercase inline-flex items-center gap-2">Leer Artículo <i class="ph-bold ph-arrow-right"></i></span>
-              </div>
+              if (
+                category === "Electricidad" &&
+                ((post.slug || "").includes("motor") ||
+                  (post.slug || "").includes("electric"))
+              ) {
             </a>
           `;
         }
 
         function getFilteredPosts() {
           if (currentFilter === "Destacados")
-            return posts.filter((p) => p.featured);
-          if (currentFilter === "Todos") return posts;
-          return posts.filter((p) => p.category === currentFilter);
+            return curatedPosts.filter((p) => p.featured);
+          if (currentFilter === "Todos") return curatedPosts;
+          return curatedPosts.filter((p) => p.category === currentFilter);
         }
 
         function renderFilters() {
