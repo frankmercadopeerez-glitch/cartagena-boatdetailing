@@ -57,7 +57,7 @@ function buildGlobalNavbar(prefix) {
           <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
         </button>
 
-        <div class="nav-dropdown-content" id="servicesDropdown">
+        <div class="nav-dropdown-content" id="servicesDropdown" style="opacity:0;visibility:hidden;transform:translateY(-10px);position:absolute;top:100%;left:0;z-index:1000;">
           <a href="${prefix}paint-polishing.html" class="nav-dropdown-link">Pulido de Gelcoat</a>
           <a href="${prefix}hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>
           <a href="${prefix}ppf.html" class="nav-dropdown-link">PPF (Paint Protection)</a>
