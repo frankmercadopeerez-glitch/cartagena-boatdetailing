@@ -58,3 +58,22 @@ section.bg-white, section.bg-slate-50 { color: #1e293b; }
 #contact-form .border-b { border-color: #94a3b8 !important; }
 #contact-form label[class*="border-slate-100"] { border-color: #cbd5e1 !important; }
 #contact-form ::placeholder { color: #94a3b8 !important; opacity: 1; }
+
+/* ── BOTONES FLOTANTES ──────────────────────────────────────────────────────
+   WhatsApp como logo limpio sin fondo + back-to-top alineado verticalmente. */
+.whatsapp-float__img {
+  width: 58px; height: 58px; display: block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.28));
+  transition: transform .25s ease;
+}
+.whatsapp-float:hover .whatsapp-float__img { transform: scale(1.08); }
+.whatsapp-float { bottom: 24px; right: 24px; }
+#back-to-top { right: 29px; bottom: 94px; }
+@media (max-width: 768px) {
+  .whatsapp-float { bottom: 20px; right: 20px; }
+  .whatsapp-float__img { width: 52px; height: 52px; }
+  #back-to-top { right: 22px; bottom: 84px; }
+}
+
+/* Stat "Lifetime": no recortar el titulo (quitar overflow:hidden del contenedor) */
+.depth-counter { overflow: visible; }
