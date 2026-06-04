@@ -10,7 +10,33 @@ document.addEventListener("DOMContentLoaded", function () {
   initBackToTop();
   initClickableCards();
   initWhatsAppMessages();
+  initFooterConsistency();
 });
+
+function initFooterConsistency() {
+  // Keep the page edge navy to avoid any white strip under the footer.
+  document.documentElement.style.backgroundColor = "#001f3f";
+  document.body.style.backgroundColor = "#001f3f";
+
+  document.querySelectorAll("footer").forEach((footer) => {
+    footer.querySelectorAll("h4, .text-navy-900, .text-navy-800").forEach((el) => {
+      el.style.setProperty("color", "#e2e8f0", "important");
+    });
+
+    footer
+      .querySelectorAll(".text-slate-500, .text-slate-600, .text-slate-700")
+      .forEach((el) => {
+        el.style.setProperty("color", "#cbd5e1", "important");
+      });
+
+    // Remove any WhatsApp CTA inside footer (requested global UI rule).
+    footer
+      .querySelectorAll(
+        "a[href*='wa.me'], a[href*='api.whatsapp.com'], a[href*='whatsapp.com/send']",
+      )
+      .forEach((a) => a.remove());
+  });
+}
 
 function initWhatsAppMessages() {
   const base =
@@ -101,9 +127,7 @@ function initWhatsAppMessages() {
 
   document.querySelectorAll("a[href*='wa.me/573044301112']").forEach((a) => {
     const txt = (a.textContent || "").trim().toLowerCase();
-    const normalized = txt
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+    const normalized = txt.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const isAgendar =
       normalized.includes("agendar cita") ||
       normalized.includes("agendar") ||
