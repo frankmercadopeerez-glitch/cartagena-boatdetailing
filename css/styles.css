@@ -4,51 +4,48 @@
 /* ── Forzar nav desktop oculto en móvil ────── */
 @media(max-width:767px){#navbar .hidden{display:none!important}}@media(max-width:639px){.featured-star-card{margin-left:-.75rem!important;margin-right:-.75rem!important;border-radius:0!important;width:calc(100% + 1.5rem)!important}.container.px-6{padding-left:.75rem!important;padding-right:.75rem!important}}#back-to-top{position:fixed;bottom:100px;right:28px;transform:translateY(20px);z-index:9999;background:#d4af37;color:#001f3f;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:0 4px 16px rgba(0,0,0,.35)}#back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}#back-to-top:hover{background:#c5a028}.sonar-rings,.sonar-ring{display:none!important}
 
-/* ── DARK PAGES / DARK SECTION FIXES ────────────────────────────────────────
-   Fixes invisible text on dark-background pages and sections.
-   Works automatically across ALL pages — no HTML changes needed per file.
+/* ── CONTRAST FIXES (scoped, safe) ──────────────────────────────────────────
+   Only forces light text where it sits on a DARK container, and forces dark
+   text where it sits on a LIGHT card. Light-background sections are NOT touched
+   by the dark rules, so normal pages keep their original contrast.
    ─────────────────────────────────────────────────────────────────────────── */
 
-/* FIX 1: Make text visible inside dark containers (section OR div with bg-navy-900).
-   Does NOT affect white/light sections — only sets color on the dark container itself
-   so children without explicit text classes inherit light color. */
-section.bg-navy-900,
-div.bg-navy-900:not([class*="bg-gold"]) { color: #e2e8f0; }
+/* 1. Dark-bodied pages (body.bg-navy-900): default/unclassed text → light */
+body.bg-navy-900 { color: #e2e8f0; }
 
-/* Reset to dark inside light-background cards that sit INSIDE dark sections */
-.bg-white, .bg-slate-50, .bg-amber-50, .bg-slate-100 { color: #1e293b; }
+/* 2. Light-background sections & cards keep DARK default text (overrides #1) */
+body.bg-navy-900 .bg-white,
+body.bg-navy-900 .bg-slate-50,
+body.bg-navy-900 .bg-slate-100,
+body.bg-navy-900 .bg-amber-50,
+section.bg-white, section.bg-slate-50 { color: #1e293b; }
 
-/* FIX 2: section.bg-navy-900 — headings & labels: navy text → white */
-section.bg-navy-900 h1.text-navy-900,
-section.bg-navy-900 h2.text-navy-900,
-section.bg-navy-900 h3.text-navy-900,
-section.bg-navy-900 h4.text-navy-900,
-section.bg-navy-900 p.text-navy-900,
-section.bg-navy-900 summary.text-navy-900 { color: #fff !important; }
+/* 3. Inside DARK containers: dark utility text classes were invisible → lighten.
+   Scoped to bg-navy-900 section/div so light sections are never affected. */
+section.bg-navy-900 .text-navy-900,
+div.bg-navy-900 .text-navy-900 { color: #ffffff !important; }
 
-/* FIX 3: section.bg-navy-900 — body text: slate-600/700 → slate-300 */
-section.bg-navy-900 p.text-slate-600,
-section.bg-navy-900 p.text-slate-700,
-section.bg-navy-900 li.text-slate-600,
-section.bg-navy-900 li.text-slate-700,
-section.bg-navy-900 div.text-slate-600,
-section.bg-navy-900 summary + div.text-slate-600 { color: #cbd5e1 !important; }
+section.bg-navy-900 .text-slate-600,
+section.bg-navy-900 .text-slate-700,
+div.bg-navy-900 .text-slate-600,
+div.bg-navy-900 .text-slate-700 { color: #cbd5e1 !important; }
 
-/* FIX 4: Cards with bg-white/5 or bg-white/10 (transparent = dark bg).
-   Headings and body text inside these cards need to be light. */
-.bg-white\/5 h2, .bg-white\/5 h3, .bg-white\/5 h4 { color: #ffffff !important; }
-.bg-white\/5 p, .bg-white\/5 li, .bg-white\/5 ul { color: #cbd5e1 !important; }
-.bg-white\/10 h2, .bg-white\/10 h3, .bg-white\/10 h4 { color: #ffffff !important; }
+/* 4. Re-protect: a LIGHT card sitting inside a dark container keeps DARK text.
+   Headings/navy text → dark navy; body slate text → dark slate. */
+.bg-navy-900 .bg-white .text-navy-900,
+.bg-navy-900 .bg-slate-50 .text-navy-900,
+.bg-navy-900 .bg-amber-50 .text-navy-900,
+.bg-navy-900 .bg-white h2, .bg-navy-900 .bg-white h3, .bg-navy-900 .bg-white h4,
+.bg-navy-900 .bg-slate-50 h3, .bg-navy-900 .bg-slate-50 h4,
+.bg-navy-900 .bg-amber-50 h3, .bg-navy-900 .bg-amber-50 h4 { color: #0a192f !important; }
 
-/* Exception: elements with gold background keep dark text */
-section.bg-navy-900 .bg-gold-400 .text-navy-900,
-section.bg-navy-900 .bg-gold-400.text-navy-900,
-section.bg-navy-900 .bg-gold-500 .text-navy-900,
-section.bg-navy-900 .bg-gold-500.text-navy-900,
-.bg-gold-400 .text-navy-900, .bg-gold-400.text-navy-900 { color: #0a192f !important; }
+.bg-navy-900 .bg-white .text-slate-600,
+.bg-navy-900 .bg-white .text-slate-700,
+.bg-navy-900 .bg-slate-50 .text-slate-600,
+.bg-navy-900 .bg-slate-50 .text-slate-700,
+.bg-navy-900 .bg-amber-50 .text-slate-600,
+.bg-navy-900 .bg-amber-50 .text-slate-700 { color: #334155 !important; }
 
-/* Section header centering: eyebrow label, main h2, intro paragraph */
-section.bg-navy-900 > div > div > p[class*="text-gold"],
-section.bg-navy-900 > div > div > h2,
-section.bg-navy-900 > div > div > p.text-slate-600,
-section.bg-navy-900 > div > div > p.text-slate-300 { text-align: center; }
+/* 5. Gold backgrounds always keep dark text */
+.bg-gold-400 .text-navy-900, .bg-gold-400.text-navy-900,
+.bg-gold-500 .text-navy-900, .bg-gold-500.text-navy-900 { color: #0a192f !important; }
