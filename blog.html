@@ -822,7 +822,7 @@
 
         const featuredPosts = curatedPosts
           .filter((p) => p.featured)
-          .slice(0, 4);
+          .slice(0, 6);
         const categories = [
           ...new Set(curatedPosts.map((p) => p.category)),
         ].sort();
@@ -896,7 +896,15 @@
         }
 
         function renderFeatured() {
-          featuredWrap.innerHTML = featuredPosts.map(cardTemplate).join("");
+          const showFeatured =
+            currentFilter === "Todos" || currentFilter === "Destacados";
+          if (showFeatured) {
+            featuredWrap.innerHTML = featuredPosts.map(cardTemplate).join("");
+            featuredWrap.style.display = "";
+          } else {
+            featuredWrap.innerHTML = "";
+            featuredWrap.style.display = "none";
+          }
         }
 
         function renderPagination(totalItems) {
@@ -935,6 +943,7 @@
           const pageItems = filtered.slice(start, end);
 
           grid.innerHTML = pageItems.map(cardTemplate).join("");
+          renderFeatured();
           renderFilters();
           renderPagination(filtered.length);
         }
