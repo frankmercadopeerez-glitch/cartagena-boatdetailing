@@ -205,7 +205,7 @@
       }
 
       .blog-card__body {
-        padding: 1.25rem;
+        padding: 1rem;
       }
 
       .blog-filter-btn {
@@ -493,7 +493,7 @@
     >
       <div class="absolute inset-0 z-0">
         <img
-          src="images/detailing%20(3).webp"
+          src="images/header.webp"
           alt="Blog de Detailing Marino"
           class="w-full h-full object-cover"
         />
@@ -529,23 +529,24 @@
               Blog Completo por Categorias
             </h2>
             <p class="text-slate-300 mt-4 max-w-3xl mx-auto">
-              Guías, comparativas y consejos de mantenimiento naval para propietarios de yates en Cartagena y el Caribe colombiano.
+              Guías, comparativas y consejos de mantenimiento naval para
+              propietarios de yates en Cartagena y el Caribe colombiano.
             </p>
           </div>
 
           <div
-            id="blog-featured"
-            class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+            id="blog-filters"
+            class="flex flex-wrap gap-2 mb-10 justify-center"
           ></div>
 
           <div
-            id="blog-filters"
-            class="flex flex-wrap gap-2 mb-8 justify-center"
+            id="blog-featured"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
           ></div>
 
           <div
             id="blog-grid"
-            class="grid grid-cols-1 md:grid-cols-2 gap-8"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           ></div>
 
           <div
@@ -854,17 +855,17 @@
 
           return `
             <a href="${href}" class="blog-card group" aria-label="Leer ${title}">
-              <div class="relative overflow-hidden h-56 bg-slate-900">
+              <div class="relative overflow-hidden h-40 bg-slate-900">
                 <img src="${image}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                 <span class="absolute top-3 left-3 bg-gold-400 text-navy-900 text-[11px] font-bold px-3 py-1 tracking-wider uppercase">${category}</span>
               </div>
               <div class="blog-card__body">
-                <h3 class="font-serif text-2xl text-slate-100 mb-3 leading-tight">${title}</h3>
-                <p class="text-slate-300 font-light mb-5">${excerpt}</p>
-                <div class="flex items-center gap-3 text-xs text-slate-400 border-t border-white/15 pt-4 mb-4">
+                <h3 class="font-serif text-lg text-slate-100 mb-2 leading-snug">${title}</h3>
+                <p class="text-slate-300 text-sm font-light mb-3 line-clamp-2">${excerpt}</p>
+                <div class="flex items-center gap-2 text-xs text-slate-400 border-t border-white/15 pt-3 mb-3">
                   <span>${readTime}</span><span>•</span><span>${dateLabel}</span>
                 </div>
-                <span class="text-gold-400 font-bold text-sm tracking-wider uppercase inline-flex items-center gap-2">Leer Artículo <i class="ph-bold ph-arrow-right"></i></span>
+                <span class="text-gold-400 font-bold text-xs tracking-wider uppercase inline-flex items-center gap-1">Leer Artículo <i class="ph-bold ph-arrow-right"></i></span>
               </div>
             </a>
           `;
