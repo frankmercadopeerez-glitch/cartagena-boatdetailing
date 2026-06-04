@@ -8,7 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollAnimations();
   initDropdownMenu();
   initBackToTop();
+  initClickableCards();
 });
+
+// =============================================
+// CLICKABLE SERVICE CARDS (whole card is a link)
+// =============================================
+function initClickableCards() {
+  document.querySelectorAll(".service-card").forEach((card) => {
+    if (card.tagName === "A") return; // already a link
+    const link = card.querySelector("a[href]");
+    if (!link) return;
+    card.style.cursor = "pointer";
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a, button")) return; // let real links/buttons work
+      window.location.href = link.href;
+    });
+  });
+}
 
 // =============================================
 // BACK TO TOP BUTTON
