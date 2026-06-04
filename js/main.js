@@ -9,7 +9,56 @@ document.addEventListener("DOMContentLoaded", function () {
   initDropdownMenu();
   initBackToTop();
   initClickableCards();
+  initWhatsAppMessages();
 });
+
+function initWhatsAppMessages() {
+  const base =
+    "Hola, vi la página web de Colombia Boat Detailing y quiero cotizar un servicio para mi embarcación.";
+
+  const page = (window.location.pathname.split("/").pop() || "").toLowerCase();
+
+  const serviceMap = [
+    { re: /hull-cleaning|limpieza-casco/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar limpieza de casco para mi embarcacion." },
+    { re: /paint-polishing|pulido-gelcoat/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pulido de gelcoat para mi embarcacion." },
+    { re: /ceramic-coating/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar ceramic coating para mi embarcacion." },
+    { re: /ppf/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar PPF para mi embarcacion." },
+    { re: /gelcoat/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar restauracion de gelcoat para mi embarcacion." },
+    { re: /fibra/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar reparacion de fibra para mi embarcacion." },
+    { re: /cubierta-teka/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar servicio para cubierta de teca para mi embarcacion." },
+    { re: /cubierta-sintetica/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar servicio para cubierta sintetica para mi embarcacion." },
+    { re: /calcomanias/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar calcomanias y graficos para mi embarcacion." },
+    { re: /polarizado/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar polarizado nanoceramico para mi embarcacion." },
+    { re: /engine-painting/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura de motores para mi embarcacion." },
+    { re: /boat-painting/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura completa para mi embarcacion." },
+    { re: /bottom-paint/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura de casco para mi embarcacion." },
+    { re: /interior-detailing/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar detailing de interiores para mi embarcacion." },
+    { re: /anti-corrosion/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar tratamiento anticorrosivo para mi embarcacion." },
+    { re: /technical-wash/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar lavado tecnico para mi embarcacion." },
+    { re: /electrical-systems/, msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar servicios electricos nauticos para mi embarcacion." },
+  ];
+
+  let message = base;
+  for (const item of serviceMap) {
+    if (item.re.test(page)) {
+      message = item.msg;
+      break;
+    }
+  }
+
+  const waHref = `https://wa.me/573044301112?text=${encodeURIComponent(message)}`;
+
+  document.querySelectorAll("a[href*='wa.me/573044301112']").forEach((a) => {
+    const txt = (a.textContent || "").trim().toLowerCase();
+    const isAgendar = txt.includes("agendar cita");
+    const isFloat = a.classList.contains("whatsapp-float");
+    const isFooterWhatsApp = txt === "whatsapp";
+
+    if (isAgendar || isFloat || isFooterWhatsApp) {
+      a.href = waHref;
+    }
+  });
+}
 
 // =============================================
 // CLICKABLE SERVICE CARDS (whole card is a link)
