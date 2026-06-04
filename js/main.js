@@ -156,7 +156,6 @@ function buildGlobalFooter(prefix) {
       <div>
         <h4 class="text-sm font-bold tracking-widest uppercase mb-4">CONTACTO</h4>
         <p class="text-xs font-light mb-2"><a href="tel:+573044301112" class="hover:text-gold-400 transition">+57 304 430 1112</a></p>
-        <p class="text-xs font-light mb-2">Cartagena de Indias</p>
         <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
       </div>
     </div>
