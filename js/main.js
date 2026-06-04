@@ -4,6 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   initGlobalLayout();
+  normalizeBlogArticleReadability();
   initNavbarScroll();
   initMobileMenu();
   initScrollAnimations();
@@ -25,7 +26,8 @@ function getLayoutContext() {
 
   let prefix = "";
   if (isBlogArticle) prefix = "../../";
-  else if (isBlogFolder || isCotizacionesFolder || isFacturasFolder) prefix = "../";
+  else if (isBlogFolder || isCotizacionesFolder || isFacturasFolder)
+    prefix = "../";
 
   return { pathname, prefix, isUtilityPage, isLeadOnlyPage };
 }
@@ -172,13 +174,19 @@ function initGlobalLayout() {
   const mobileHtml = buildGlobalMobileMenu(prefix);
   const footerHtml = buildGlobalFooter(prefix);
 
-  const nav = document.querySelector("nav#navbar") || document.querySelector("body > nav") || document.querySelector("nav");
+  const nav =
+    document.querySelector("nav#navbar") ||
+    document.querySelector("body > nav") ||
+    document.querySelector("nav");
   if (nav) nav.outerHTML = navHtml;
   else document.body.insertAdjacentHTML("afterbegin", navHtml);
 
   const existingMobile = document.getElementById("mobile-menu");
   if (existingMobile) existingMobile.outerHTML = mobileHtml;
-  else document.getElementById("navbar")?.insertAdjacentHTML("afterend", mobileHtml);
+  else
+    document
+      .getElementById("navbar")
+      ?.insertAdjacentHTML("afterend", mobileHtml);
 
   const footer = document.querySelector("footer");
   if (footer) footer.outerHTML = footerHtml;
@@ -188,7 +196,12 @@ function initGlobalLayout() {
 function initFooterConsistency() {
   // Keep the page edge navy to avoid any white strip under the footer.
   document.documentElement.style.backgroundColor = "#001f3f";
-  document.body.style.backgroundColor = "#001f3f";
+  const hasDarkBody = document.body.classList.contains("bg-navy-900");
+  if (hasDarkBody) {
+    document.body.style.backgroundColor = "#001f3f";
+  } else {
+    document.body.style.removeProperty("background-color");
+  }
 
   document.querySelectorAll("footer").forEach((footer) => {
     footer
@@ -209,6 +222,26 @@ function initFooterConsistency() {
         "a[href*='wa.me'], a[href*='api.whatsapp.com'], a[href*='whatsapp.com/send']",
       )
       .forEach((a) => a.remove());
+  });
+}
+
+function normalizeBlogArticleReadability() {
+  const pathname = (window.location.pathname || "").toLowerCase();
+  const isBlogArticle = /\/blog\/[^/]+\/index\.html$/.test(pathname);
+  if (!isBlogArticle) return;
+
+  const article = document.querySelector("article");
+  if (article && !article.className.includes("bg-")) {
+    article.classList.add("bg-white");
+  }
+
+  const prose = document.querySelector(".prose");
+  if (!prose) return;
+
+  prose.querySelectorAll("p, li").forEach((el) => {
+    if (!el.className.includes("text-")) {
+      el.classList.add("text-slate-800");
+    }
   });
 }
 
