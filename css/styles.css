@@ -76,3 +76,12 @@ html,body{margin:0;background-color:#001f3f}
 footer h4,footer .text-navy-900,footer .text-navy-800{color:#e2e8f0!important}
 footer .text-slate-500,footer .text-slate-600,footer .text-slate-700{color:#cbd5e1!important}
 footer{margin-bottom:0!important;border-bottom:0!important}
+
+/* Round 4 mobile hardening */
+html,body{overflow-x:hidden}
+#mobile-menu .mobile-link{min-height:44px;display:flex;align-items:center;padding:.35rem .25rem}
+@media (max-width:480px){
+   .whatsapp-float{right:16px;bottom:16px}
+   .whatsapp-float__img{width:48px;height:48px}
+   #back-to-top{right:16px;bottom:72px;width:44px;height:44px}
+}
