@@ -3,6 +3,7 @@
 // =============================================
 
 document.addEventListener("DOMContentLoaded", function () {
+  initGlobalLayout();
   initNavbarScroll();
   initMobileMenu();
   initScrollAnimations();
@@ -13,15 +14,188 @@ document.addEventListener("DOMContentLoaded", function () {
   initFooterConsistency();
 });
 
+function getLayoutContext() {
+  const pathname = (window.location.pathname || "").toLowerCase();
+  const isBlogArticle = /\/blog\/[^/]+\/index\.html$/.test(pathname);
+  const isBlogFolder = /\/blog\//.test(pathname);
+  const isCotizacionesFolder = /\/cotizaciones\//.test(pathname);
+  const isFacturasFolder = /\/facturas\//.test(pathname);
+  const isUtilityPage = /business-card\.html|finanzas\.html/.test(pathname);
+  const isLeadOnlyPage = /\/cotizar\.html$/.test(pathname);
+
+  let prefix = "";
+  if (isBlogArticle) prefix = "../../";
+  else if (isBlogFolder || isCotizacionesFolder || isFacturasFolder) prefix = "../";
+
+  return { pathname, prefix, isUtilityPage, isLeadOnlyPage };
+}
+
+function buildGlobalNavbar(prefix) {
+  return `
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
+  <div class="container mx-auto px-6 flex justify-between items-center">
+    <a href="${prefix}index.html" class="flex items-center gap-3 group">
+      <i class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"></i>
+      <div class="flex flex-col">
+        <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
+        <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10">
+      <div class="nav-dropdown">
+        <button
+          data-dropdown-toggle="servicesDropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicesDropdown"
+          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+        >
+          Servicios
+          <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-dropdown-content" id="servicesDropdown">
+          <a href="${prefix}paint-polishing.html" class="nav-dropdown-link">Pulido de Gelcoat</a>
+          <a href="${prefix}hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>
+          <a href="${prefix}ppf.html" class="nav-dropdown-link">PPF (Paint Protection)</a>
+          <a href="${prefix}ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>
+          <a href="${prefix}gelcoat.html" class="nav-dropdown-link">Restauración Gelcoat</a>
+          <a href="${prefix}fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
+          <a href="${prefix}cubierta-sintetica.html" class="nav-dropdown-link">Cubierta Sintética</a>
+          <a href="${prefix}cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>
+          <a href="${prefix}calcomanias.html" class="nav-dropdown-link">Calcomanías &amp; Gráficos</a>
+          <a href="${prefix}polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>
+          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
+            Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
+            <div class="submenu-flyout">
+              <a href="${prefix}engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Pintura de Motores</a>
+              <a href="${prefix}boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>
+              <a href="${prefix}bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>
+            </div>
+          </button>
+          <a href="${prefix}interior-detailing.html" class="nav-dropdown-link">Interiores &amp; Tapicería</a>
+          <a href="${prefix}anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>
+          <a href="${prefix}technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>
+        </div>
+      </div>
+
+      <a href="${prefix}about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Sobre Nosotros</a>
+      <a href="${prefix}blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>
+      <a
+        href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+      >Agendar Cita</a>
+    </div>
+
+    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">
+      <i class="ph ph-list text-3xl" aria-hidden="true"></i>
+    </button>
+  </div>
+</nav>`;
+}
+
+function buildGlobalMobileMenu(prefix) {
+  return `
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+  aria-hidden="true"
+  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+>
+  <button id="close-menu-btn" class="absolute top-6 right-6 text-white/50 hover:text-white" aria-label="Cerrar menú de navegación">
+    <i class="ph ph-x text-3xl" aria-hidden="true"></i>
+  </button>
+  <a href="${prefix}services.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Servicios</a>
+  <a href="${prefix}about.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Sobre Nosotros</a>
+  <a href="${prefix}blog.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Blog</a>
+  <a
+    href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+  >Agendar Cita</a>
+</div>`;
+}
+
+function buildGlobalFooter(prefix) {
+  return `
+<footer class="bg-navy-900 text-slate-300 py-6 md:py-10">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 items-start">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <i class="ph-fill ph-anchor text-3xl text-gold-400"></i>
+          <div>
+            <p class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</p>
+            <p class="text-white font-serif font-bold text-xl tracking-widest leading-none">BOAT DETAILING</p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-300 font-light">Estándares Internacionales de Excelencia Marina desde 2024.</p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold tracking-widest uppercase mb-4">NAVEGACIÓN</h4>
+        <ul class="space-y-2 text-xs font-light">
+          <li><a href="${prefix}index.html" class="text-slate-300 hover:text-gold-400 transition-colors">Inicio</a></li>
+          <li><a href="${prefix}about.html" class="text-slate-300 hover:text-gold-400 transition-colors">Sobre Nosotros</a></li>
+          <li><a href="${prefix}blog.html" class="text-slate-300 hover:text-gold-400 transition-colors">Blog</a></li>
+          <li><a href="${prefix}services.html" class="text-slate-300 hover:text-gold-400 transition-colors">Todos los Servicios</a></li>
+          <li><a href="${prefix}contacto.html" class="text-gold-400 hover:text-white transition-colors font-semibold">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold tracking-widest uppercase mb-4">CONTACTO</h4>
+        <p class="text-xs font-light mb-2"><a href="tel:+573044301112" class="hover:text-gold-400 transition">+57 304 430 1112</a></p>
+        <p class="text-xs font-light mb-2">Cartagena de Indias</p>
+        <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500">
+      <p>&copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias, Colombia &middot; <a href="${prefix}sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a></p>
+    </div>
+  </div>
+</footer>`;
+}
+
+function initGlobalLayout() {
+  const { prefix, isUtilityPage, isLeadOnlyPage } = getLayoutContext();
+  if (isUtilityPage || isLeadOnlyPage) return;
+
+  const navHtml = buildGlobalNavbar(prefix);
+  const mobileHtml = buildGlobalMobileMenu(prefix);
+  const footerHtml = buildGlobalFooter(prefix);
+
+  const nav = document.querySelector("nav#navbar") || document.querySelector("body > nav") || document.querySelector("nav");
+  if (nav) nav.outerHTML = navHtml;
+  else document.body.insertAdjacentHTML("afterbegin", navHtml);
+
+  const existingMobile = document.getElementById("mobile-menu");
+  if (existingMobile) existingMobile.outerHTML = mobileHtml;
+  else document.getElementById("navbar")?.insertAdjacentHTML("afterend", mobileHtml);
+
+  const footer = document.querySelector("footer");
+  if (footer) footer.outerHTML = footerHtml;
+  else document.body.insertAdjacentHTML("beforeend", footerHtml);
+}
+
 function initFooterConsistency() {
   // Keep the page edge navy to avoid any white strip under the footer.
   document.documentElement.style.backgroundColor = "#001f3f";
   document.body.style.backgroundColor = "#001f3f";
 
   document.querySelectorAll("footer").forEach((footer) => {
-    footer.querySelectorAll("h4, .text-navy-900, .text-navy-800").forEach((el) => {
-      el.style.setProperty("color", "#e2e8f0", "important");
-    });
+    footer
+      .querySelectorAll("h4, .text-navy-900, .text-navy-800")
+      .forEach((el) => {
+        el.style.setProperty("color", "#e2e8f0", "important");
+      });
 
     footer
       .querySelectorAll(".text-slate-500, .text-slate-600, .text-slate-700")
