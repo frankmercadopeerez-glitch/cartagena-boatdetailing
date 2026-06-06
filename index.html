@@ -1319,10 +1319,11 @@
           gap: 1rem;
           width: max-content;
           will-change: transform;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
         }
-        .rw-left  { animation: marquee-l 34s linear infinite; }
-        .rw-right { animation: marquee-r 42s linear infinite; }
-        /* Las reseñas siempre se mueven — no se pausan al pasar el cursor */
+        .rw-left  { animation: marquee-l 34s linear infinite; animation-play-state: running; }
+        .rw-right { animation: marquee-r 42s linear infinite; animation-play-state: running; }
         .rw-card {
           flex-shrink: 0;
           width: 272px;
@@ -1348,6 +1349,15 @@
         .rw-meta { border-top: 1px solid #f1f5f9; padding-top: .55rem; }
         .rw-name { font-weight: 700; font-size: .78rem; color: #001f3f; line-height:1.2; }
         .rw-boat { font-size: .68rem; color: #94a3b8; }
+        @media (max-width: 768px) {
+          .rw-outer {
+            -webkit-mask-image: none;
+            mask-image: none;
+          }
+          .rw-left, .rw-right {
+            animation-play-state: running !important;
+          }
+        }
         @media (max-width: 480px) { .rw-card { width: 236px; } }
         @media (prefers-reduced-motion: reduce) {
           .rw-left, .rw-right { animation: none; }
