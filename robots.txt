@@ -1,7 +1,7 @@
 ﻿# ==============================================
 # Robots.txt - Colombia Boat Detailing
 # Detailing y Estética Naval en Cartagena, Colombia
-# https://colombiaboatdetailing.com
+# https://www.colombiaboatdetailing.com
 # ==============================================
 
 # Reglas generales para todos los robots
@@ -15,7 +15,7 @@ Disallow: /package-lock.json
 Disallow: /.git/
 
 # Sitemap principal
-Sitemap: https://colombiaboatdetailing.com/sitemap.xml
+Sitemap: https://www.colombiaboatdetailing.com/sitemap.xml
 
 # ==============================================
 # GOOGLE - Configuración optimizada

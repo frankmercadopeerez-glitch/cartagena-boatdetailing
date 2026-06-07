@@ -10,12 +10,12 @@
   
   <!-- Página Principal -->
   <url>
-    <loc>https://colombiaboatdetailing.com/</loc>
+    <loc>https://www.colombiaboatdetailing.com/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/header.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/header.webp</image:loc>
       <image:title>Colombia Boat Detailing - Detailing Naval Premium</image:title>
       <image:caption>Servicio de detailing y estética naval en Cartagena, Colombia</image:caption>
       <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
@@ -24,25 +24,25 @@
   
   <!-- Páginas Principales -->
   <url>
-    <loc>https://colombiaboatdetailing.com/about.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/about.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/contacto.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/contacto.html</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/services.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/services.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog.html</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -54,67 +54,67 @@
   
   <!-- PPF - Paint Protection Film -->
   <url>
-    <loc>https://colombiaboatdetailing.com/ppf.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/ppf.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/brillo.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/brillo.webp</image:loc>
       <image:title>PPF Paint Protection Film para botes en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Ceramic Coating -->
   <url>
-    <loc>https://colombiaboatdetailing.com/ceramic-coating.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/ceramic-coating.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/polichado.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/polichado.webp</image:loc>
       <image:title>Ceramic Coating para embarcaciones en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Restauración Gelcoat -->
   <url>
-    <loc>https://colombiaboatdetailing.com/gelcoat.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/gelcoat.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/detailing.webp</image:loc>
       <image:title>Restauración de gelcoat en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Pintura de Botes -->
   <url>
-    <loc>https://colombiaboatdetailing.com/boat-painting.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/boat-painting.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/pintura.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/pintura.webp</image:loc>
       <image:title>Pintura profesional de botes en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Pintura de Motores -->
   <url>
-    <loc>https://colombiaboatdetailing.com/engine-painting.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/engine-painting.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/motores.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/motores.webp</image:loc>
       <image:title>Pintura de motores marinos en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Pintura de Casco / Antifouling -->
   <url>
-    <loc>https://colombiaboatdetailing.com/bottom-paint.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/bottom-paint.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -122,19 +122,19 @@
   
   <!-- Pulido de Gelcoat - Servicio Estrella -->
   <url>
-    <loc>https://colombiaboatdetailing.com/paint-polishing.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/paint-polishing.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/polichado.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/polichado.webp</image:loc>
       <image:title>Pulido de Gelcoat para botes en Cartagena | Colombia Boat Detailing</image:title>
     </image:image>
   </url>
   
   <!-- Control Anticorrosivo -->
   <url>
-    <loc>https://colombiaboatdetailing.com/anti-corrosion.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/anti-corrosion.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -142,7 +142,7 @@
 
   <!-- Instalación Eléctrica Náutica -->
   <url>
-    <loc>https://colombiaboatdetailing.com/electrical-systems.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/electrical-systems.html</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -150,71 +150,71 @@
   
   <!-- Interiores y Tapicería -->
   <url>
-    <loc>https://colombiaboatdetailing.com/interior-detailing.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/interior-detailing.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/cojineria.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cojineria.webp</image:loc>
       <image:title>Limpieza de interiores de botes en Cartagena</image:title>
     </image:image>
   </url>
   
   <!-- Lavado Técnico -->
   <url>
-    <loc>https://colombiaboatdetailing.com/technical-wash.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/technical-wash.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/limpieza.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/limpieza.webp</image:loc>
       <image:title>Lavado técnico de embarcaciones en Cartagena</image:title>
     </image:image>
   </url>
 
   <!-- Limpieza de Casco en Agua -->
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning.html</loc>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/hull-cleaning.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-en.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/hull-cleaning.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/detailing.webp</image:loc>
       <image:title>Limpieza de cascos de yates y veleros en el agua con buzos en Cartagena</image:title>
     </image:image>
   </url>
 
   <!-- Páginas Locales de Limpieza de Casco -->
   <url>
-    <loc>https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html</loc>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
+    <loc>https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/limpieza-casco-baru.html</loc>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-baru.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
+    <loc>https://www.colombiaboatdetailing.com/limpieza-casco-baru.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-baru.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html</loc>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
+    <loc>https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html</loc>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
+    <loc>https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html</loc>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -223,41 +223,41 @@
 
   <!-- English Service Pages -->
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-en.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/hull-cleaning.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/hull-cleaning.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning-baru-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-baru.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-baru.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
+    <loc>https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -267,121 +267,121 @@
        ARTÍCULOS DEL BLOG
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-frecuencia/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-frecuencia/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/incrustaciones-marinas/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/incrustaciones-marinas/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/pulido-vs-limpieza-casco/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/pulido-vs-limpieza-casco/</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ceramic-comparativa/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ceramic-comparativa/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-tropical/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-tropical/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ppf-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ppf-cartagena/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/restauracion-gelcoat/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/restauracion-gelcoat/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/cuidado-cojineria/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/cuidado-cojineria/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-limpieza-casco-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-limpieza-casco-cartagena/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-helice-casco-consumo/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-helice-casco-consumo/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-veleros-cartagena-checklist/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-veleros-cartagena-checklist/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/frecuencia-limpieza-casco-charter/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/frecuencia-limpieza-casco-charter/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/fouling-yates-senales-alerta/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/fouling-yates-senales-alerta/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-antes-travesia/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-antes-travesia/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/costo-casco-sucio-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/costo-casco-sucio-yate/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-catamaran-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-catamaran-cartagena/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-anodos-casco/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-anodos-casco/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/suscripcion-limpieza-casco/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/suscripcion-limpieza-casco/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/pulido-casco-vs-limpieza-real/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/pulido-casco-vs-limpieza-real/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/checklist-anual-casco-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/checklist-anual-casco-yate/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.84</priority>
@@ -391,43 +391,43 @@
        NUEVOS POSTS SEO MAYO 2026
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/reparacion-fibra-vidrio-casco/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/reparacion-fibra-vidrio-casco/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/osmosis-casco-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/osmosis-casco-yate-cartagena/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/cubierta-teca-vs-sintetica-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/cubierta-teca-vs-sintetica-yate/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-cubierta-teca-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-cubierta-teca-yate/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/antifouling-embarcaciones-mar-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/antifouling-embarcaciones-mar-cartagena/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/pintura-antifouling-yate-colombia/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/pintura-antifouling-yate-colombia/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ceramic-coating-botes-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ceramic-coating-botes-cartagena/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
@@ -437,25 +437,25 @@
        NUEVOS SERVICIOS MAYO 2026 - CALCOMANIAS Y POLARIZADO
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/calcomanias.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/calcomanias.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/polarizado.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/polarizado.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/calcomanias-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/calcomanias-yate-cartagena/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/polarizado-ventanas-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/polarizado-ventanas-yate-cartagena/</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.87</priority>
@@ -465,19 +465,19 @@
        NUEVO SERVICIO - ELECTRICIDAD NÁUTICA MAYO 2026
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/instalacion-electrica-nautica-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/instalacion-electrica-nautica-cartagena/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/luces-led-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/luces-led-yate-cartagena/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/seguridad-electrica-barco/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/seguridad-electrica-barco/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -487,50 +487,50 @@
        NUEVOS SERVICIOS 2026
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/fibra.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/fibra.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/detailing.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/detailing.webp</image:loc>
       <image:caption>Reparación de Fibra de Vidrio en Cartagena Colombia</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/cubierta-sintetica.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/cubierta-sintetica.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
       <image:caption>Instalación Cubierta Madera Sintética Botes Cartagena</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/cubierta-teka.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/cubierta-teka.html</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <image:image>
-      <image:loc>https://colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
       <image:caption>Teak Deck Installation Cartagena Colombia</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/costo-mantenimiento-anual-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/costo-mantenimiento-anual-yate-cartagena/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/tapiceria-nautica-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/tapiceria-nautica-cartagena/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ceramic-coating-vs-ppf-marino/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ceramic-coating-vs-ppf-marino/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -540,25 +540,25 @@
        PÁGINAS GEO PULIDO DE GELCOAT 2026
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-cartagena.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-cartagena.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-bocagrande.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-bocagrande.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-baru.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-baru.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/pulido-gelcoat-islas-rosario.html</loc>
+    <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-islas-rosario.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -568,19 +568,19 @@
        BLOG CALENDARIO SEO 2026 — JUN (PPF)
        ======================================== -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ppf-vs-ceramic-coating-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ppf-vs-ceramic-coating-yate/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-ppf-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-ppf-yate-cartagena/</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/duracion-ppf-agua-salada-caribe/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/duracion-ppf-agua-salada-caribe/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -588,19 +588,19 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — JUL (Ceramic Coating) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-ceramic-coating-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-ceramic-coating-yate-cartagena/</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/ceramic-coating-vs-cera-marina-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/ceramic-coating-vs-cera-marina-yate/</loc>
     <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-ceramic-coating-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-ceramic-coating-yate/</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -608,19 +608,19 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — AGO (Pintura) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-pintura-casco-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-pintura-casco-yate-cartagena/</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-pintura-motores-marinos-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-pintura-motores-marinos-cartagena/</loc>
     <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/cuando-repintar-casco-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/cuando-repintar-casco-yate/</loc>
     <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -628,19 +628,19 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — SEP (Gelcoat/Ósmosis) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-restauracion-gelcoat-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-restauracion-gelcoat-cartagena/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/frecuencia-pulido-gelcoat-yate/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/frecuencia-pulido-gelcoat-yate/</loc>
     <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/tratamiento-osmosis-casco-fibra/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/tratamiento-osmosis-casco-fibra/</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -648,19 +648,19 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — OCT (Geo) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-club-pesca-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-club-pesca-cartagena/</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-club-nautico-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-club-nautico-cartagena/</loc>
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/buzos-limpieza-casco-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/buzos-limpieza-casco-cartagena/</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
@@ -668,19 +668,19 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — NOV (Mantenimiento) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/plan-mantenimiento-anual-yate-charter/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/plan-mantenimiento-anual-yate-charter/</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-helices-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-helices-yate-cartagena/</loc>
     <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/tapiceria-marina-cartagena-mantenimiento/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/tapiceria-marina-cartagena-mantenimiento/</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -688,79 +688,79 @@
 
   <!-- BLOG CALENDARIO SEO 2026 — DIC (Evergreen) -->
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/detailing-naval-profesional-vs-diy/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/detailing-naval-profesional-vs-diy/</loc>
     <lastmod>2026-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/errores-mantenimiento-yates-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/errores-mantenimiento-yates-cartagena/</loc>
     <lastmod>2026-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/guia-mantenimiento-yates-cartagena-2027/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/guia-mantenimiento-yates-cartagena-2027/</loc>
     <lastmod>2026-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-naval-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-naval-cartagena/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/festival-nautico-cartagena-2026/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/festival-nautico-cartagena-2026/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/prepara-tu-yate-festival-nautico-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/prepara-tu-yate-festival-nautico-cartagena/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/bololo-arsenal-embarcaciones-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/bololo-arsenal-embarcaciones-cartagena/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/limpieza-casco-antes-festival-nautico/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-casco-antes-festival-nautico/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/precio-preparacion-yate-festival-nautico/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-preparacion-yate-festival-nautico/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/cuidado-yate-despues-bololo-arsenal/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/cuidado-yate-despues-bololo-arsenal/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/plan-mantenimiento-naval-yate-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/plan-mantenimiento-naval-yate-cartagena/</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/detailing-naval-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/detailing-naval-cartagena/</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://colombiaboatdetailing.com/blog/mantenimiento-preventivo-embarcaciones-cartagena/</loc>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-preventivo-embarcaciones-cartagena/</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.83</priority>
