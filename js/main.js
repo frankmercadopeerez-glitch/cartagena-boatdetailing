@@ -39,7 +39,7 @@ function buildGlobalNavbar(prefix) {
   return `
 <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
   <div class="container mx-auto px-6 flex justify-between items-center">
-    <a href="${prefix}index.html" class="flex items-center gap-3 group">
+    <a href="${prefix || "/"}" class="flex items-center gap-3 group">
       <i class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"></i>
       <div class="flex flex-col">
         <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
@@ -146,7 +146,7 @@ function buildGlobalFooter(prefix) {
       <div>
         <h4 class="text-sm font-bold tracking-widest uppercase mb-4">NAVEGACIÓN</h4>
         <ul class="space-y-2 text-xs font-light">
-          <li><a href="${prefix}index.html" class="text-slate-300 hover:text-gold-400 transition-colors">Inicio</a></li>
+          <li><a href="${prefix || "/"}" class="text-slate-300 hover:text-gold-400 transition-colors">Inicio</a></li>
           <li><a href="${prefix}about.html" class="text-slate-300 hover:text-gold-400 transition-colors">Sobre Nosotros</a></li>
           <li><a href="${prefix}blog.html" class="text-slate-300 hover:text-gold-400 transition-colors">Blog</a></li>
           <li><a href="${prefix}services.html" class="text-slate-300 hover:text-gold-400 transition-colors">Todos los Servicios</a></li>
