@@ -447,6 +447,13 @@
                     + '⛵ Embarcación: ' + embarcacion + '\n'
                     + '🔧 Servicio: ' + servicio;
                   if (mensaje) text += '\n\n📝 ' + mensaje;
+                  if (typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', {
+                      event_category: 'contact',
+                      event_label: servicio || 'cotizacion_general',
+                      method: 'whatsapp_form',
+                    });
+                  }
                   window.open('https://wa.me/573044301112?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
                 }
               </script>

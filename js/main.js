@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   normalizeFloatingWhatsApp();
   centerBlogArticleHeader();
   initClickableBlogPreviewCards();
+  initConversionTracking();
 });
 
 function getLayoutContext() {
@@ -1021,3 +1022,38 @@ document.addEventListener("DOMContentLoaded", () => {
   initCardTilt();
   initSonarPulse();
 });
+
+// =============================================
+// CONVERSION TRACKING (GA4)
+// =============================================
+function initConversionTracking() {
+  if (typeof gtag !== "function") return;
+
+  const pageLabel = document.title
+    .split("|")[0]
+    .trim()
+    .slice(0, 60);
+
+  // WhatsApp clicks (floating button, navbar CTA, inline CTAs)
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[href*='wa.me']");
+    if (!link) return;
+    const isFloat = link.classList.contains("whatsapp-float");
+    gtag("event", "contact", {
+      method: "whatsapp",
+      event_category: "contact",
+      event_label: isFloat ? "boton_flotante" : pageLabel,
+    });
+  });
+
+  // Phone clicks
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[href^='tel:']");
+    if (!link) return;
+    gtag("event", "contact", {
+      method: "phone",
+      event_category: "contact",
+      event_label: pageLabel,
+    });
+  });
+}
