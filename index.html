@@ -163,139 +163,145 @@
     
     <!-- Schema.org Structured Data - LocalBusiness -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://www.colombiaboatdetailing.com/#organization",
+  "name": "Colombia Boat Detailing",
+  "alternateName": "CBD Colombia",
+  "description": "Servicio profesional de detailing, limpieza y mantenimiento de botes y embarcaciones en Cartagena, Colombia. Especialistas en PPF, Ceramic Coating, pintura de motores y restauración de gelcoat.",
+  "url": "https://www.colombiaboatdetailing.com",
+  "telephone": "+57-304-430-1112",
+  "email": "info@colombiaboatdetailing.com",
+  "image": "https://www.colombiaboatdetailing.com/images/header.webp",
+  "logo": "https://www.colombiaboatdetailing.com/images/logo.webp",
+  "priceRange": "$$-$$$",
+  "currenciesAccepted": "COP, USD",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Cartagena de Indias",
+    "addressLocality": "Cartagena de Indias",
+    "addressRegion": "Bolívar",
+    "postalCode": "130001",
+    "addressCountry": "CO"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 10.391,
+    "longitude": -75.4794
+  },
+  "areaServed": [
     {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://www.colombiaboatdetailing.com/#organization",
-      "name": "Colombia Boat Detailing",
-      "alternateName": "CBD Colombia",
-      "description": "Servicio profesional de detailing, limpieza y mantenimiento de botes y embarcaciones en Cartagena, Colombia. Especialistas en PPF, Ceramic Coating, pintura de motores y restauración de gelcoat.",
-      "url": "https://www.colombiaboatdetailing.com",
-      "telephone": "+57-304-430-1112",
-      "email": "info@colombiaboatdetailing.com",
-      "image": "https://www.colombiaboatdetailing.com/images/header.webp",
-      "logo": "https://www.colombiaboatdetailing.com/images/logo.webp",
-      "priceRange": "$$-$$$",
-      "currenciesAccepted": "COP, USD",
-      "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Cartagena de Indias",
-        "addressLocality": "Cartagena de Indias",
-        "addressRegion": "Bolívar",
-        "postalCode": "130001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 10.3910,
-        "longitude": -75.4794
-      },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Cartagena de Indias",
-          "@id": "https://www.wikidata.org/wiki/Q74688"
-        },
-        {
-          "@type": "State",
-          "name": "Bolívar"
-        },
-        "Islas del Rosario",
-        "Barú",
-        "Santa Marta"
+      "@type": "City",
+      "name": "Cartagena de Indias",
+      "@id": "https://www.wikidata.org/wiki/Q74688"
+    },
+    {
+      "@type": "State",
+      "name": "Bolívar"
+    },
+    "Islas del Rosario",
+    "Barú",
+    "Santa Marta"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
       ],
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "07:00",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "08:00",
-          "closes": "14:00"
-        }
-      ],
-      "sameAs": [
-        "https://www.instagram.com/colombiaboatdetailing",
-        "https://www.facebook.com/cartagenaboatdetailing",
-        "https://wa.me/573044301112",
-        "https://www.google.com/maps/place/Colombia+Boat+Detailing/@10.699717,-74.9150595,175556m/data=!3m2!1e3!4b1!4m6!3m5!1s0xac2730326076d621:0x2854c144e30a09c6!8m2!3d10.699717!4d-74.9150595!16s%2Fg%2F11zb708h49"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Detailing Naval",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "PPF - Paint Protection Film",
-              "description": "Película de protección de pintura con garantía de por vida para yates y embarcaciones"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Ceramic Coating",
-              "description": "Revestimiento nano-cerámico hidrofóbico certificado para embarcaciones"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Pintura de Motores Marinos",
-              "description": "Restauración y pintura profesional de motores fuera de borda y intraborda"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Restauración de Gelcoat",
-              "description": "Reparación y restauración de gelcoat dañado u oxidado"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Limpieza de Interiores y Tapicería",
-              "description": "Detailing completo de interiores de embarcaciones"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Control Anticorrosivo",
-              "description": "Tratamiento anticorrosivo profesional para embarcaciones"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Lavado Técnico",
-              "description": "Lavado profesional técnico para embarcaciones"
-            }
-          }
-        ]
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "47",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
+      "opens": "07:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "08:00",
+      "closes": "14:00"
     }
-    </script>
+  ],
+  "sameAs": [
+    "https://www.instagram.com/colombiaboatdetailing",
+    "https://www.facebook.com/cartagenaboatdetailing",
+    "https://wa.me/573044301112",
+    "https://maps.app.goo.gl/HnKWMGY6tKthLGde8"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Detailing Naval",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "PPF - Paint Protection Film",
+          "description": "Película de protección de pintura con garantía de por vida para yates y embarcaciones"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ceramic Coating",
+          "description": "Revestimiento nano-cerámico hidrofóbico certificado para embarcaciones"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Pintura de Motores Marinos",
+          "description": "Restauración y pintura profesional de motores fuera de borda y intraborda"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Restauración de Gelcoat",
+          "description": "Reparación y restauración de gelcoat dañado u oxidado"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Limpieza de Interiores y Tapicería",
+          "description": "Detailing completo de interiores de embarcaciones"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Control Anticorrosivo",
+          "description": "Tratamiento anticorrosivo profesional para embarcaciones"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Lavado Técnico",
+          "description": "Lavado profesional técnico para embarcaciones"
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
     
     <!-- Schema.org - WebSite for Sitelinks Search Box -->
     <script type="application/ld+json">
