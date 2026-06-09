@@ -98,55 +98,69 @@
 
     <!-- Schema.org Service + FAQ -->
     <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Limpieza de Casco en Agua para Yates y Veleros en Cartagena",
+          "alternateName": [
+                  "Hull Cleaning Cartagena",
+                  "Pulido de casco velero",
+                  "Limpieza submarina embarcaciones"
+          ],
+          "description": "Servicio de limpieza y pulido de cascos de yates, veleros y embarcaciones en el agua con buzos certificados en Cartagena, Colombia. Eliminamos incrustaciones marinas, algas y fouling sin necesidad de varar la embarcación. Precio desde $20.000 COP por pie de eslora.",
+          "serviceType": "Hull Cleaning / Limpieza de Cascos",
+          "url": "https://www.colombiaboatdetailing.com/hull-cleaning.html",
+          "provider": {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.colombiaboatdetailing.com/#organization",
+                  "name": "Colombia Boat Detailing",
+                  "telephone": "+57-304-430-1112",
+                  "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "Cartagena de Indias",
+                          "addressLocality": "Cartagena de Indias",
+                          "addressRegion": "Bolívar",
+                          "addressCountry": "CO"
+                  }
+          },
+          "areaServed": [
+                  {
+                          "@type": "City",
+                          "name": "Cartagena de Indias"
+                  },
+                  {
+                          "@type": "Country",
+                          "name": "Colombia"
+                  }
+          ],
+          "offers": [
+                  {
+                          "@type": "Offer",
+                          "name": "Limpieza de casco por pie",
+                          "description": "Limpieza completa del casco en el agua por buzo certificado",
+                          "priceSpecification": {
+                                  "@type": "UnitPriceSpecification",
+                                  "price": "20000",
+                                  "priceCurrency": "COP",
+                                  "unitText": "pie de eslora"
+                          },
+                          "availability": "https://schema.org/InStock"
+                  },
+                  {
+                          "@type": "Offer",
+                          "name": "Suscripción mensual de mantenimiento de casco",
+                          "description": "Plan de mantenimiento mensual para limpieza recurrente del casco",
+                          "availability": "https://schema.org/InStock"
+                  }
+          ]
+  }
+    </script>
+    <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Limpieza de Casco en Agua para Yates y Veleros en Cartagena",
-        "alternateName": [
-          "Hull Cleaning Cartagena",
-          "Pulido de casco velero",
-          "Limpieza submarina embarcaciones"
-        ],
-        "description": "Servicio de limpieza y pulido de cascos de yates, veleros y embarcaciones en el agua con buzos certificados en Cartagena, Colombia. Eliminamos incrustaciones marinas, algas y fouling sin necesidad de varar la embarcación. Precio desde $20.000 COP por pie de eslora.",
-        "serviceType": "Hull Cleaning / Limpieza de Cascos",
-        "url": "https://www.colombiaboatdetailing.com/hull-cleaning.html",
-        "provider": {
-          "@type": "LocalBusiness",
-          "@id": "https://www.colombiaboatdetailing.com/#organization",
-          "name": "Colombia Boat Detailing",
-          "telephone": "+57-304-430-1112",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Cartagena de Indias",
-            "addressLocality": "Cartagena de Indias",
-            "addressRegion": "Bolívar",
-            "addressCountry": "CO"
-          }
-        },
-        "areaServed": [
-          { "@type": "City", "name": "Cartagena de Indias" },
-          { "@type": "Country", "name": "Colombia" }
-        ],
-        "offers": [
-          {
-            "@type": "Offer",
-            "name": "Limpieza de casco por pie",
-            "description": "Limpieza completa del casco en el agua por buzo certificado",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "20000",
-              "priceCurrency": "COP",
-              "unitText": "pie de eslora"
-            },
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Suscripción mensual de mantenimiento de casco",
-            "description": "Plan de mantenimiento mensual para limpieza recurrente del casco",
-            "availability": "https://schema.org/InStock"
-          }
-        ],
+        "@type": "LocalBusiness",
+        "@id": "https://www.colombiaboatdetailing.com/#organization",
+        "name": "Colombia Boat Detailing",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
@@ -156,6 +170,7 @@
         }
       }
     </script>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

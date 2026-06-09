@@ -33,40 +33,52 @@
 
     <!-- Schema.org Service -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Pintura de Motores Marinos en Cartagena",
-      "description": "Pintura y restauración profesional de motores fuera de borda e intraborda en Cartagena, Colombia. Especialistas en Yamaha, Mercury, Volvo y Honda. Garantía de 2 años.",
-      "serviceType": "Marine Engine Painting",
-      "url": "https://www.colombiaboatdetailing.com/engine-painting.html",
-      "provider": {
+      {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Pintura de Motores Marinos en Cartagena",
+          "description": "Pintura y restauración profesional de motores fuera de borda e intraborda en Cartagena, Colombia. Especialistas en Yamaha, Mercury, Volvo y Honda. Garantía de 2 años.",
+          "serviceType": "Marine Engine Painting",
+          "url": "https://www.colombiaboatdetailing.com/engine-painting.html",
+          "provider": {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.colombiaboatdetailing.com/#organization",
+                  "name": "Colombia Boat Detailing",
+                  "telephone": "+57-304-430-1112",
+                  "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "Cartagena de Indias",
+                          "addressLocality": "Cartagena de Indias",
+                          "addressRegion": "Bolívar",
+                          "addressCountry": "CO"
+                  }
+          },
+          "areaServed": {
+                  "@type": "City",
+                  "name": "Cartagena de Indias"
+          },
+          "offers": {
+                  "@type": "Offer",
+                  "availability": "https://schema.org/InStock"
+          }
+  }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
-        "telephone": "+57-304-430-1112",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Cartagena de Indias",
-          "addressLocality": "Cartagena de Indias",
-          "addressRegion": "Bolívar",
-          "addressCountry": "CO"
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "47",
+          "bestRating": "5",
+          "worstRating": "1"
         }
-      },
-      "areaServed": { "@type": "City", "name": "Cartagena de Indias" },
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "47",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
       }
     </script>
+
     <!-- Tailwind CSS (compiled) -->
         <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
     <style>

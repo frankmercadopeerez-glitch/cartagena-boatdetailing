@@ -54,43 +54,54 @@
 
     <!-- Schema.org Service -->
     <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Pulido de Gelcoat en Cartagena",
+          "alternateName": [
+                  "Pulido de Botes Cartagena",
+                  "Polichar Bote Cartagena",
+                  "Polichar Yate Colombia"
+          ],
+          "description": "Servicio profesional de pulido y abrillantado de gelcoat para embarcaciones en Cartagena, Colombia. Incluye pulido exterior, interior, cromos y todos los accesorios. $90.000 COP por pie de eslora.",
+          "serviceType": "Boat Detailing",
+          "url": "https://www.colombiaboatdetailing.com/paint-polishing.html",
+          "provider": {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.colombiaboatdetailing.com/#organization",
+                  "name": "Colombia Boat Detailing",
+                  "telephone": "+57-304-430-1112",
+                  "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "Cartagena de Indias",
+                          "addressLocality": "Cartagena de Indias",
+                          "addressRegion": "Bolívar",
+                          "addressCountry": "CO"
+                  }
+          },
+          "areaServed": {
+                  "@type": "City",
+                  "name": "Cartagena de Indias"
+          },
+          "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "COP",
+                  "priceSpecification": {
+                          "@type": "UnitPriceSpecification",
+                          "price": "90000",
+                          "priceCurrency": "COP",
+                          "unitText": "pie lineal"
+                  },
+                  "availability": "https://schema.org/InStock"
+          }
+  }
+    </script>
+    <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Pulido de Gelcoat en Cartagena",
-        "alternateName": [
-          "Pulido de Botes Cartagena",
-          "Polichar Bote Cartagena",
-          "Polichar Yate Colombia"
-        ],
-        "description": "Servicio profesional de pulido y abrillantado de gelcoat para embarcaciones en Cartagena, Colombia. Incluye pulido exterior, interior, cromos y todos los accesorios. $90.000 COP por pie de eslora.",
-        "serviceType": "Boat Detailing",
-        "url": "https://www.colombiaboatdetailing.com/paint-polishing.html",
-        "provider": {
-          "@type": "LocalBusiness",
-          "@id": "https://www.colombiaboatdetailing.com/#organization",
-          "name": "Colombia Boat Detailing",
-          "telephone": "+57-304-430-1112",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Cartagena de Indias",
-            "addressLocality": "Cartagena de Indias",
-            "addressRegion": "Bolívar",
-            "addressCountry": "CO"
-          }
-        },
-        "areaServed": { "@type": "City", "name": "Cartagena de Indias" },
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "COP",
-          "priceSpecification": {
-            "@type": "UnitPriceSpecification",
-            "price": "90000",
-            "priceCurrency": "COP",
-            "unitText": "pie lineal"
-          },
-          "availability": "https://schema.org/InStock"
-        },
+        "@type": "LocalBusiness",
+        "@id": "https://www.colombiaboatdetailing.com/#organization",
+        "name": "Colombia Boat Detailing",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
@@ -100,6 +111,7 @@
         }
       }
     </script>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
