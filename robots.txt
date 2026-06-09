@@ -14,6 +14,13 @@ Disallow: /package.json
 Disallow: /package-lock.json
 Disallow: /.git/
 
+# Páginas privadas de negocio (cotizaciones, facturas, herramientas internas)
+Disallow: /cotizaciones/
+Disallow: /facturas/
+Disallow: /finanzas.html
+Disallow: /business-card.html
+Disallow: /calendario-seo-2026.html
+
 # Sitemap principal
 Sitemap: https://www.colombiaboatdetailing.com/sitemap.xml
 
