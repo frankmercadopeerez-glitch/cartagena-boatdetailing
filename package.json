@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "build:css:tailwind": "tailwindcss -i css/tailwind-input.css -o css/tailwind.css --minify",
+    "build:css:styles": "cleancss -o css/styles.css css/styles.css",
+    "build:js": "terser js/main.js -o js/main.js --compress --mangle && terser js/blog-catalog.js -o js/blog-catalog.js --compress --mangle",
+    "build": "npm run build:css:tailwind && npm run build:css:styles && npm run build:js"
+  },
   "devDependencies": {
-    "tailwindcss": "^3.4.19"
+    "clean-css-cli": "^5.6.3",
+    "tailwindcss": "^3.4.19",
+    "terser": "^5.48.0"
   }
 }
