@@ -508,7 +508,7 @@
           src="images/header.webp"
           alt="Blog de Detailing Marino"
           fetchpriority="high"
-          decoding="sync"
+          decoding="async"
           class="w-full h-full object-cover"
         />
         <div class="hero-overlay absolute inset-0"></div>
@@ -729,7 +729,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script src="js/blog-catalog.js"></script>
+    <script defer src="js/blog-catalog.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const posts = Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [];
@@ -966,7 +966,7 @@
         renderCards();
       });
     </script>
-    <script src="js/main.js"></script>
+    <script defer src="js/main.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
