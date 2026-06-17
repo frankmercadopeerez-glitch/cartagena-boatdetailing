@@ -2,7 +2,6 @@
 images/_originals_backup/
 node_modules/
 package-lock.json
-css/tailwind-input.css
 _perf.py
 _standardize.py
 _fix-a11y.py
