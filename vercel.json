@@ -4,6 +4,12 @@
   "outputDirectory": ".",
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "colombiaboatdetailing.com" }],
+      "destination": "https://www.colombiaboatdetailing.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
