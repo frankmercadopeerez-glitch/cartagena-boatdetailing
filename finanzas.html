@@ -247,13 +247,30 @@
 
       /* ── Misc ── */
       #ios-banner { display: none; padding-bottom: calc(1rem + var(--sab)); }
+      #proyecto-dropdown {
+        background: #0d1a2e;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+      }
       #proyecto-dropdown li {
-        padding: 0.6rem 1rem;
+        padding: 0.65rem 1rem;
         cursor: pointer;
         font-size: 0.875rem;
         color: var(--text);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
       }
-      #proyecto-dropdown li:hover { background: var(--glass-hover); }
+      #proyecto-dropdown li:last-child { border-bottom: none; }
+      #proyecto-dropdown li:hover { background: rgba(184,144,77,0.1); color: var(--accent-bright); }
+      #cat-dropdown {
+        background: #0d1a2e !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+        color: var(--text);
+      }
+      #cat-dropdown button, #cat-dropdown [role="button"] {
+        color: var(--text) !important;
+      }
+      #cat-dropdown button:hover { background: rgba(184,144,77,0.1) !important; color: var(--accent-bright) !important; }
       .pub-widget {
         background: linear-gradient(135deg, rgba(184,144,77,0.07) 0%, rgba(6,12,24,0.6) 100%);
         backdrop-filter: blur(16px);
@@ -1263,7 +1280,7 @@
                     />
                     <ul
                       id="proyecto-dropdown"
-                      class="absolute z-10 left-0 right-0 mt-1 bg-white rounded-xl border border-white/10 shadow-xl hidden max-h-48 overflow-y-auto"
+                      class="absolute z-50 left-0 right-0 mt-1 rounded-xl hidden max-h-48 overflow-y-auto"
                     ></ul>
                   </div>
                 </div>
@@ -1462,7 +1479,7 @@
     <!-- Cat dropdown (fixed, outside flow) -->
     <div
       id="cat-dropdown"
-      class="hidden fixed bg-white border border-white/10 rounded-xl shadow-xl z-50 p-2 w-56 max-h-64 overflow-y-auto"
+      class="hidden fixed rounded-xl z-50 p-2 w-56 max-h-64 overflow-y-auto"
     ></div>
 
     <div id="toast"></div>
@@ -1948,8 +1965,8 @@
         dd.innerHTML = "";
         const allBtn = document.createElement("button");
         allBtn.type = "button";
-        allBtn.className =
-          "w-full text-left text-xs px-2 py-1.5 rounded hover:bg-slate-100 text-slate-500 font-semibold mb-1";
+        allBtn.className = "w-full text-left text-xs px-2 py-1.5 rounded font-semibold mb-1";
+        allBtn.style.cssText = "color:var(--text2);";
         allBtn.textContent = "Todas las categorías";
         allBtn.onclick = (e) => {
           e.stopPropagation();
@@ -1960,19 +1977,21 @@
         };
         dd.appendChild(allBtn);
         const hr = document.createElement("hr");
-        hr.className = "border-slate-100 mb-1";
+        hr.style.cssText = "border-color:rgba(255,255,255,0.08);margin-bottom:4px;";
         dd.appendChild(hr);
         cats.forEach((cat) => {
           const sel = filterCats.has(cat);
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className =
-            "w-full text-left text-xs px-2 py-1.5 rounded flex items-center gap-2 " +
-            (sel
-              ? "bg-slate-900 text-white font-semibold"
-              : "hover:bg-white/10 text-slate-700");
+          btn.className = "w-full text-left text-xs px-2 py-1.5 rounded flex items-center gap-2";
+          btn.style.cssText = sel
+            ? "background:rgba(184,144,77,0.18);color:var(--accent-bright);font-weight:600;"
+            : "color:var(--text);";
+          const checkStyle = sel
+            ? "background:#B8904D;border-color:#B8904D;color:#1a0f00;"
+            : "border-color:rgba(255,255,255,0.25);";
           btn.innerHTML =
-            `<span class="w-3.5 h-3.5 border rounded flex-shrink-0 flex items-center justify-center text-[9px] ${sel ? "bg-amber-500 border-amber-500 text-white" : "border-slate-300"}">${sel ? "✓" : ""}</span>` +
+            `<span style="width:14px;height:14px;border:1px solid;border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;${checkStyle}">${sel ? "✓" : ""}</span>` +
             cat;
           btn.onclick = (e) => {
             e.stopPropagation();
