@@ -1,15 +1,27 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018"></script>
+    <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-01GC6QM018");
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
+        }
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
+      })();
     </script>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plan de Mantenimiento Naval para tu Yate en Cartagena: Calendario 2026</title>
