@@ -280,7 +280,7 @@
       /* ── Toast ── */
       #toast {
         position: fixed;
-        bottom: 5rem;
+        bottom: calc(68px + var(--sab) + 1rem);
         left: 50%;
         transform: translateX(-50%) translateY(4rem);
         z-index: 60;
@@ -345,6 +345,109 @@
       #main-app .border-blue-200     { border-color: rgba(56,189,248,0.2)  !important; }
       #main-app .rounded-xl.border.border-slate-200 { background-color: rgba(255,255,255,0.03) !important; }
       #main-app .mes-selector-btn { background: var(--glass) !important; border-color: var(--glass-b) !important; }
+
+      /* ── Bottom Nav ── */
+      #bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(68px + var(--sab));
+        padding-bottom: var(--sab);
+        background: rgba(6,12,24,0.85);
+        backdrop-filter: blur(40px) saturate(200%);
+        -webkit-backdrop-filter: blur(40px) saturate(200%);
+        border-top: 1px solid rgba(255,255,255,0.06);
+        display: none;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 40;
+        padding-left: max(env(safe-area-inset-left,0px), 4px);
+        padding-right: max(env(safe-area-inset-right,0px), 4px);
+      }
+      #bottom-nav.visible { display: flex; }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 6px 10px;
+        border-radius: 14px;
+        cursor: pointer;
+        color: var(--text3);
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        transition: color 0.2s, transform 0.1s;
+        flex: 1;
+        border: none;
+        background: transparent;
+        min-width: 0;
+      }
+      .nav-item:active { transform: scale(0.9); }
+      .nav-item svg { width: 22px; height: 22px; stroke-width: 1.8; }
+      .nav-item.active { color: var(--accent); }
+      .nav-item.active svg { filter: drop-shadow(0 0 8px rgba(184,144,77,0.55)); }
+      .nav-fab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #D4A85E 0%, #B8904D 100%);
+        box-shadow: 0 4px 20px rgba(184,144,77,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
+        cursor: pointer;
+        border: none;
+        color: #1a0f00;
+        margin-bottom: 4px;
+        transition: transform 0.15s, box-shadow 0.15s;
+        flex-shrink: 0;
+      }
+      .nav-fab:active { transform: scale(0.93); box-shadow: 0 2px 10px rgba(184,144,77,0.3); }
+      .nav-fab svg { width: 24px; height: 24px; stroke-width: 2.5; }
+
+      /* ── Más Drawer ── */
+      #mas-drawer-overlay {
+        position: fixed; inset: 0; z-index: 38;
+        background: rgba(0,0,0,0);
+        pointer-events: none;
+        transition: background 0.25s;
+      }
+      #mas-drawer-overlay.open {
+        background: rgba(0,0,0,0.5);
+        pointer-events: auto;
+      }
+      #mas-drawer {
+        position: fixed;
+        left: 0; right: 0;
+        bottom: calc(68px + var(--sab));
+        z-index: 39;
+        background: #0c1628;
+        border: 1px solid rgba(255,255,255,0.09);
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
+        padding: 16px 20px calc(8px);
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+      }
+      #mas-drawer.open { transform: translateY(0); }
+      .mas-item {
+        display: flex; align-items: center; gap: 14px;
+        padding: 14px 4px;
+        border-radius: 12px;
+        cursor: pointer;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: none;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+        transition: background 0.15s;
+      }
+      .mas-item:hover { background: var(--glass); }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -491,7 +594,7 @@
         </div>
       </nav>
 
-      <div class="max-w-7xl mx-auto p-3 sm:p-5 lg:p-7 pb-28">
+      <div class="max-w-7xl mx-auto p-3 sm:p-5 lg:p-7" style="padding-bottom: calc(68px + env(safe-area-inset-bottom,0px) + 16px)">
         <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
         <div
           class="rounded-2xl mb-4 p-4 sm:p-5"
@@ -773,8 +876,8 @@
           </div>
         </div>
 
-        <!-- TABS CARD -->
-        <div class="glass-card mb-5">
+        <!-- TABS CARD - hidden, navigation handled by bottom nav -->
+        <div class="glass-card mb-5 hidden">
           <div
             class="flex border-b border-slate-100"
             style="
@@ -1316,26 +1419,45 @@
     </div>
     <!-- /main-app -->
 
-    <!-- FAB Nuevo Registro -->
-    <button
-      onclick="showTab('nuevo')"
-      id="fab-nuevo"
-      class="hidden fixed z-30 flex items-center gap-2 shadow-2xl transition-all active:scale-95"
-      style="
-        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
-        right: 1.25rem;
-        background: linear-gradient(135deg, #1C1C1C, #071428);
-        color: white;
-        padding: 0.9rem 1.4rem;
-        border-radius: 2rem;
-        font-size: 0.9rem;
-        font-weight: 700;
-        border: 2px solid rgba(184, 144, 77, 0.5);
-      "
-    >
-      <i data-lucide="plus" class="w-5 h-5" style="color: #b8904d"></i>
-      Nuevo Registro
-    </button>
+    <!-- BOTTOM NAV -->
+    <nav id="bottom-nav">
+      <button class="nav-item active" id="nav-resumen" onclick="showTab('resumen')">
+        <i data-lucide="home"></i>
+        <span>Inicio</span>
+      </button>
+      <button class="nav-item" id="nav-movimientos" onclick="showTab('movimientos')">
+        <i data-lucide="list"></i>
+        <span>Movimientos</span>
+      </button>
+      <button class="nav-fab" id="nav-nuevo" onclick="showTab('nuevo')" title="Nuevo registro">
+        <i data-lucide="plus"></i>
+      </button>
+      <button class="nav-item" id="nav-estadisticas" onclick="showTab('estadisticas')">
+        <i data-lucide="bar-chart-2"></i>
+        <span>Reportes</span>
+      </button>
+      <button class="nav-item" id="nav-mas" onclick="toggleMasDrawer()">
+        <i data-lucide="grid-2x2"></i>
+        <span>Más</span>
+      </button>
+    </nav>
+
+    <!-- MÁS DRAWER OVERLAY -->
+    <div id="mas-drawer-overlay" onclick="closeMasDrawer()"></div>
+
+    <!-- MÁS DRAWER -->
+    <div id="mas-drawer">
+      <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
+      <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Opciones</p>
+      <button class="mas-item" onclick="closeMasDrawer(); document.getElementById('btn-install-ios') && document.getElementById('btn-install-ios').click()">
+        <i data-lucide="download" style="color:var(--accent);width:20px;height:20px"></i>
+        Instalar App
+      </button>
+      <button class="mas-item" onclick="closeMasDrawer(); logout()">
+        <i data-lucide="log-out" style="color:var(--red);width:20px;height:20px"></i>
+        Cerrar sesión
+      </button>
+    </div>
 
     <!-- Cat dropdown (fixed, outside flow) -->
     <div
@@ -1426,16 +1548,19 @@
       function showTab(tab) {
         currentTab = tab;
         ["resumen", "movimientos", "estadisticas", "nuevo"].forEach((t) => {
-          document
-            .getElementById("panel-" + t)
-            .classList.toggle("hidden", t !== tab);
-          document
-            .getElementById("tab-" + t)
-            .classList.toggle("active", t === tab);
+          const panel = document.getElementById("panel-" + t);
+          if (panel) panel.classList.toggle("hidden", t !== tab);
+          const topBtn = document.getElementById("tab-" + t);
+          if (topBtn) topBtn.classList.toggle("active", t === tab);
         });
-        // FAB: hide on "nuevo" tab, show on all others
-        const fab = document.getElementById("fab-nuevo");
-        if (fab) fab.classList.toggle("hidden", tab === "nuevo");
+        // Update bottom nav active states
+        ["resumen", "movimientos", "estadisticas"].forEach((t) => {
+          const navBtn = document.getElementById("nav-" + t);
+          if (navBtn) navBtn.classList.toggle("active", t === tab);
+        });
+        // FAB glow: dim when on nuevo tab
+        const navFab = document.getElementById("nav-nuevo");
+        if (navFab) navFab.style.opacity = tab === "nuevo" ? "0.6" : "1";
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
         lucide.createIcons();
@@ -1496,6 +1621,22 @@
       }
       function logout() {
         if (auth) auth.signOut();
+        const bnav = document.getElementById("bottom-nav");
+        if (bnav) bnav.classList.remove("visible");
+      }
+      function toggleMasDrawer() {
+        const drawer = document.getElementById("mas-drawer");
+        const overlay = document.getElementById("mas-drawer-overlay");
+        const isOpen = drawer.classList.contains("open");
+        if (isOpen) { closeMasDrawer(); } else {
+          drawer.classList.add("open");
+          overlay.classList.add("open");
+          lucide.createIcons();
+        }
+      }
+      function closeMasDrawer() {
+        document.getElementById("mas-drawer").classList.remove("open");
+        document.getElementById("mas-drawer-overlay").classList.remove("open");
       }
       document
         .getElementById("auth-password")
@@ -1516,9 +1657,9 @@
             document.getElementById("tx-hora").value = new Date()
               .toTimeString()
               .slice(0, 5);
-            // Show FAB (starts on resumen tab, not nuevo)
-            const fab = document.getElementById("fab-nuevo");
-            if (fab) fab.classList.remove("hidden");
+            // Show bottom nav
+            const bnav = document.getElementById("bottom-nav");
+            if (bnav) bnav.classList.add("visible");
             actualizarMesLabel();
             setTipo("ingreso");
             setMedio("Efectivo");
