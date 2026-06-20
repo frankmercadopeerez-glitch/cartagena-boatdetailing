@@ -1581,6 +1581,12 @@
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
         lucide.createIcons();
+        const activePanel = document.getElementById("panel-" + tab);
+        if (activePanel) {
+          const navH = (document.getElementById("main-nav") || {}).offsetHeight || 56;
+          const top = activePanel.getBoundingClientRect().top + window.scrollY - navH - 8;
+          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        }
       }
 
       // ── Mes ───────────────────────────────────────────────
@@ -1670,6 +1676,7 @@
           if (user) {
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
+            requestAnimationFrame(() => showTab("resumen"));
             document.getElementById("tx-fecha").value = todayStr;
             document.getElementById("tx-hora").value = new Date()
               .toTimeString()
