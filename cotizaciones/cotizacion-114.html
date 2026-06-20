@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
+        }
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #114 — Yate HAYA (Actualización) - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #374151;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+        --warn-color: #b45309;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page { size: A4; margin: 10mm; }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info .update-badge {
+        display: inline-block;
+        background: var(--accent-color);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 2px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p { color: var(--text-light); margin-bottom: 2px; }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p { color: var(--primary-color); font-size: 12px; }
+
+      .info-box {
+        font-size: 12.5px;
+        background: rgba(184,144,77,0.12);
+        border: 1px solid rgba(184,144,77,0.35);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-box strong { color: var(--secondary-color); }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table { width: 100%; border-collapse: collapse; }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      th:last-child, td:last-child { text-align: right; }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 14px;
+        margin-bottom: 4px;
+        text-align: left !important;
+      }
+
+      .item-desc {
+        font-size: 12.5px;
+        color: var(--text-color);
+        text-align: left !important;
+        line-height: 1.6;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .pending-price {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 12px;
+        white-space: nowrap;
+        font-style: italic;
+      }
+
+      .status-done {
+        display: inline-block;
+        background: #d1fae5;
+        color: var(--ok-color);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .status-progress {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .status-pending {
+        display: inline-block;
+        background: #f1f5f9;
+        color: var(--text-light);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .status-warn {
+        display: inline-block;
+        background: #fff7ed;
+        color: var(--warn-color);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .status-ref {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .table-section-header td {
+        background: var(--secondary-color);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 6px 8px;
+        text-align: left !important;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .rec-box {
+        background: #f0faf5;
+        border: 1px solid rgba(31,122,74,0.35);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+        font-size: 11.6px;
+      }
+
+      .warn-box {
+        background: #fff7ed;
+        border: 1px solid rgba(180,83,9,0.35);
+        border-left: 3px solid var(--warn-color);
+        border-radius: 3px;
+        padding: 9px 10px;
+        margin-bottom: 10px;
+        font-size: 11.6px;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box, .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .warranty-box h4, .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul, .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        height: 165px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-caption {
+        font-size: 10.5px;
+        color: var(--text-light);
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container { padding: 16px; }
+        header, .client-section { flex-direction: column; }
+        .quote-info { text-align: left; }
+        .photo-grid, .bottom-grid { grid-template-columns: 1fr; }
+        .totals-box { width: 100%; }
+      }
+
+      @media print {
+        @page { size: A4; margin: 0; }
+        body { padding: 0; margin: 0; background: white; }
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 5mm 6mm;
+          box-shadow: none;
+        }
+        .photo-grid img { height: 145px; }
+        .photo-grid { gap: 5px; }
+        .totals-section, .rec-box, .warn-box, .bottom-grid,
+        .warranty-box, .terms-section, footer { break-inside: avoid; }
+        .table-section-header { break-after: avoid; }
+        tr { break-inside: avoid; }
+      }
+    </style>
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div class="invoice-container">
+
+      <!-- ENCABEZADO -->
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="quote-info">
+          <div class="update-badge">Actualizacion de proyecto</div>
+          <h2>INFORME DE AVANCE Y COTIZACION</h2>
+          <p><strong>Numero:</strong> CBD-2026-114</p>
+          <p><strong>Ref. anterior:</strong> CBD-2026-105</p>
+          <p><strong>Fecha:</strong> 20/06/2026</p>
+          <p><strong>Validez:</strong> 15 dias</p>
+        </div>
+      </header>
+
+      <!-- CLIENTE -->
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Propietarios Yate HAYA (Azimut 46 pies)</strong></p>
+          <p>Marina Portobello — Cartagena de Indias</p>
+        </div>
+        <div>
+          <h3>Descripcion del proyecto</h3>
+          <p>Yate HAYA (Azimut 46 pies) — Proyecto integral de renovacion</p>
+          <p>Actualizacion de avance · Estado de trabajos · Nuevas propuestas</p>
+        </div>
+      </div>
+
+      <!-- NOTA INTRODUCTORIA -->
+      <div class="info-box">
+        <strong>Informe de avance — 20 de junio de 2026:</strong> El presente documento consolida el estado actualizado de todos los trabajos en curso, ejecutados y pendientes sobre el Yate HAYA, incluyendo el estado de los pagos realizados, las condiciones para iniciar los trabajos proximos y las nuevas propuestas formuladas para decision del cliente. Cada seccion indica claramente el estado operativo del trabajo y el balance financiero correspondiente.
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- TABLA DE TRABAJOS -->
+      <!-- ============================================================ -->
+      <h3 class="section-title">Estado detallado de trabajos</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripcion del servicio / Estado</th>
+            <th style="width:155px">Valor / Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ========== PINTURA RADARES ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Pintura de radares y equipos de cubierta</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-progress">Casi completado — pendiente calcomanias</span>
+              <div class="item-title">A. Pintura de radares, soportes y accesorios en negro — instalacion completada</div>
+              <div class="item-desc">
+                Los radares y soportes fueron preparados, pintados en negro mate de alta adherencia y reinstalados en cubierta. El resultado estetico es uniforme y coherente con la linea del yate.<br><br>
+                <strong>Estado de avance:</strong> Los radares pintados fueron instalados exitosamente. El trabajo se considera ejecutado en su totalidad a excepcion de la instalacion de las <strong>calcomanias blancas identificativas</strong> en los equipos, cuya aplicacion queda pendiente para la fase final de terminados.<br><br>
+                <strong>Balance del trabajo:</strong>
+                <ul style="margin: 5px 0 0 16px; line-height: 1.8">
+                  <li>Valor total cotizado: <strong>$ 1.000.000</strong></li>
+                  <li>Anticipo recibido: <strong>$ 500.000</strong></li>
+                  <li>Segundo pago recibido: <strong>$ 400.000</strong></li>
+                  <li>Saldo pendiente: <strong>$ 100.000</strong> — pagadero al momento de la instalacion de las calcomanias blancas</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 1.000.000</div>
+              <div style="font-size:10px;color:var(--ok-color);margin-top:4px;font-weight:700;">Pagado: $ 900.000</div>
+              <div style="font-size:10px;color:var(--warn-color);margin-top:2px;font-weight:700;">Saldo: $ 100.000</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;font-style:italic;">Al instalar<br>calcomanias</div>
+            </td>
+          </tr>
+
+          <!-- ========== SISTEMA DE ILUMINACION ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Sistema de iluminacion — luces de popa, escaleras y flybridge</td>
+          </tr>
+
+          <!-- LUCES SUBACUATICAS -->
+          <tr>
+            <td>
+              <span class="status-done">Completado</span>
+              <div class="item-title">B1. Luces subacuaticas azules — 2 unidades instaladas y operativas</div>
+              <div class="item-desc">
+                Las dos luminarias subacuaticas LED azules fueron instaladas bajo la linea de flotacion del yate, con sellado estanco y pruebas funcionales completadas satisfactoriamente. El sistema de iluminacion subacuatica se encuentra <strong>totalmente operativo</strong>. Las luces fueron instaladas con conectores de grado marino, cableado protegido contra humedad y corrosion. Prueba en agua confirmada con resultado exitoso.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:10px;color:var(--ok-color);font-weight:700;">✓ Operativo</div>
+            </td>
+          </tr>
+
+          <!-- LUCES ESCALERAS -->
+          <tr>
+            <td>
+              <span class="status-progress">Instaladas — pendientes de energizar</span>
+              <div class="item-title">B2. Luces de cortesia LED — escaleras de popa (9 unidades instaladas + 3 en popa = 12 total)</div>
+              <div class="item-desc">
+                De las 12 luminarias LED de cortesia del circuito, <strong>9 unidades fueron montadas en las escaleras de popa</strong>, con todo el cableado interno tendido y conectado. Las <strong>3 luminarias restantes se instalaran en la zona de popa</strong> para completar el total de 12 unidades del sistema. Hoy, 20 de junio de 2026, se tiende el cableado definitivo del circuito completo para que el sistema pueda energizarse. <strong>El sistema se energizara el dia 20 de junio de 2026</strong>, de forma simultanea con la conexion de las luces de popa, ya que el circuito es interdependiente: las luces de escaleras encienden en conjunto con el sistema completo de iluminacion de popa una vez se energice el circuito principal. Esta condicion tecnica es inherente al diseno del sistema electrico del yate.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:10px;color:#92400e;font-weight:700;">Montadas</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:2px;">Se energizan<br>hoy 20/06/2026</div>
+            </td>
+          </tr>
+
+          <!-- LUCES DE POPA -->
+          <tr>
+            <td>
+              <span class="status-progress">En ejecucion — hoy 20/06/2026</span>
+              <div class="item-title">B3. Instalacion de luces de popa — 3 unidades</div>
+              <div class="item-desc">
+                La instalacion de las tres (3) luminarias de popa se ejecuta el dia <strong>20 de junio de 2026</strong>. Se trata de un trabajo tecnicamente exigente que requiere la perforacion precisa del casco en fibra de vidrio para el paso del cableado y el montaje de cada luminaria con sellado hermetico marino.<br><br>
+                <strong>Complejidad tecnica — refuerzo estructural de fibra de vidrio:</strong> En la zona de popa que da hacia la plataforma de bano, donde se ubicaran las luminarias, existe un <strong>refuerzo estructural de laminado de fibra de vidrio de espesor considerable</strong>. Esta acumulacion de capas de fibra en un punto critico de la estructura requiere una intervencion con especial cuidado: perforacion a baja velocidad con brocas de punta de carburo especificas para composite, presion controlada y refrigeracion del punto de corte para evitar sobrecalentamiento, deslaminacion o fisuras en el laminado circundante. Colombia Boat Detailing adquirio las herramientas especializadas requeridas para ejecutar este trabajo con las garantias tecnicas necesarias, asegurando cortes limpios, sellos hermeticos y acabado de nivel astillero en cada punto de instalacion.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:10px;color:#92400e;font-weight:700;">En proceso</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:2px;">20/06/2026</div>
+            </td>
+          </tr>
+
+          <!-- LUCES FLYBRIDGE -->
+          <tr>
+            <td>
+              <span class="status-warn">Observacion tecnica — accion requerida</span>
+              <div class="item-title">B4. Luces del flybridge — incompatibilidad de voltaje detectada</div>
+              <div class="item-desc">
+                Las luminarias del flybridge fueron adquiridas directamente por el Sr. Manuel (propietario). Tras la inspeccion tecnica realizada por Colombia Boat Detailing, se determino que las unidades adquiridas operan a <strong>110V AC</strong>, tension incompatible con el sistema electrico del yate, que opera integralmente a <strong>12V DC</strong> — tension estandar en embarcaciones de recreo de esta categoria.<br><br>
+                La instalacion de equipos de 110V AC en un sistema de 12V DC representa un riesgo de corto circuito, dano permanente a los equipos del yate y potencial riesgo de incendio a bordo. Por lo anterior, estas luminarias <strong>no pueden ser instaladas</strong> en la embarcacion.<br><br>
+                <strong>Recomendacion tecnica de Colombia Boat Detailing:</strong> Se recomienda sustituir las luminarias adquiridas por una <strong>tira LED 12V DC de grado marino</strong>, una solucion tecnica superior en todos los aspectos: tension compatible con el sistema electrico del yate, instalacion limpia sin perforaciones adicionales en estructura, reemplazo y mantenimiento sencillos, mayor durabilidad ante vibracion y humedad marina, y costo notablemente inferior al de las luminarias puntuales de 110V. Este cambio permitira completar el circuito de iluminacion del flybridge con total seguridad y coherencia con el sistema existente.<br><br>
+                <strong>Nota:</strong> Las demas luminarias del proyecto (escaleras y popa) tambien fueron adquiridas por los propietarios. El costo de envio de dichos equipos ($ 20.900) fue asumido directamente por Frank Mercado (Colombia Boat Detailing) y se suma al balance del proyecto.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:10px;color:var(--warn-color);font-weight:700;">No instalable</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;">Requiere<br>sustitucion<br>por tira LED<br>12V DC</div>
+            </td>
+          </tr>
+
+          <!-- RESUMEN FINANCIERO ILUMINACION -->
+          <tr>
+            <td>
+              <div class="item-title">Balance financiero — sistema de iluminacion completo (B2 + B3 + B4)</div>
+              <div class="item-desc">
+                El sistema de iluminacion (luces de popa, escaleras y flybridge) fue cotizado y acordado en su totalidad por valor de <strong>$ 2.700.000</strong>. El trabajo finaliza con la instalacion de las luminarias correctas en el flybridge (tira LED 12V) una vez sean adquiridas o autorizadas.<br><br>
+                <ul style="margin: 5px 0 0 16px; line-height: 1.8">
+                  <li>Valor total acordado: <strong>$ 2.700.000</strong></li>
+                  <li>Anticipo recibido (50%): <strong>$ 1.350.000</strong></li>
+                  <li>Gasto envio de equipos (Frank Mercado): <strong>$ 20.900</strong></li>
+                  <li>Saldo pendiente al finalizar flybridge: <strong>$ 1.370.900</strong></li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 2.700.000</div>
+              <div style="font-size:10px;color:var(--ok-color);margin-top:4px;font-weight:700;">Pagado: $ 1.350.000</div>
+              <div style="font-size:10px;color:var(--warn-color);margin-top:2px;font-weight:700;">Saldo: $ 1.370.900</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;font-style:italic;">Al finalizar<br>flybridge</div>
+            </td>
+          </tr>
+
+          <!-- ========== PISOS TIPO TECA ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Pisos adhesivos tipo teca — suministro e instalacion</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-progress">En proceso — suministro por fases segun avance</span>
+              <div class="item-title">C1. Suministro de laminas de piso adhesivo tipo teca — 13 unidades (pedido por fases)</div>
+              <div class="item-desc">
+                El suministro de las <strong>13 laminas de piso adhesivo en patron teca</strong> se realizara de forma <strong>escalonada segun el avance de los trabajos y las areas que el cliente vaya aprobando</strong>, no en un unico pedido. Material de grado marino con alta resistencia al agua salada, rayos UV y uso continuo en cubierta. Valor unitario acordado: <strong>$ 680.000 por lamina</strong>.<br><br>
+                <strong>Primera fase — Plataforma de popa:</strong> Con el anticipo de <strong>$ 2.000.000</strong> ya recibido, se realizo el primer pedido de laminas destinadas a cubrir la <strong>plataforma de popa</strong>. Llegada estimada: <strong>martes 24 de junio de 2026</strong>. Una vez instaladas y aprobadas por el cliente, se procedera con el pedido del siguiente conjunto de laminas para las demas areas (puente de mando, escalera de acceso, zona social de popa y <strong>pasillos laterales del yate</strong>), conforme se vayan definiendo y autorizando.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 8.840.000</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;">13 und × $ 680.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-pending">Pendiente — requiere anticipo de mano de obra para iniciar</span>
+              <div class="item-title">C2. Instalacion profesional de pisos adhesivos tipo teca — mano de obra</div>
+              <div class="item-desc">
+                Instalacion tecnica especializada de los pisos adhesivos en todas las areas acordadas: plataforma de popa, puente de mando, escalera de acceso, zona social en popa, <strong>pasillos laterales del yate</strong> y demas superficies que el cliente vaya aprobando por fases. El proceso incluye preparacion rigurosa de la superficie (limpieza, desengrase y verificacion de planitud), corte preciso a medida de cada lamina ajustandose a los radios y geometrias del yate, y adhesion permanente con tecnica profesional.<br><br>
+                <strong>Condicion para inicio de trabajo:</strong> Para programar e iniciar la instalacion, se requiere el pago de la <strong>mitad de la mano de obra ($ 1.800.000)</strong> adicionalmente a los $ 2.000.000 ya recibidos. Este pago puede efectuarse de forma anticipada o a la llegada de las laminas el martes 24 de junio de 2026.<br><br>
+                <strong>Balance acumulado — pisos (suministro + instalacion):</strong>
+                <ul style="margin: 5px 0 0 16px; line-height: 1.8">
+                  <li>Laminas (13 und × $ 680.000): <strong>$ 8.840.000</strong></li>
+                  <li>Mano de obra de instalacion: <strong>$ 3.600.000</strong></li>
+                  <li><strong>Total trabajo pisos: $ 12.440.000</strong></li>
+                  <li>Anticipo recibido a la fecha: <strong>$ 2.000.000</strong></li>
+                  <li>Pago requerido para iniciar (50% MO): <strong>$ 1.800.000</strong></li>
+                  <li>Saldo final al terminar: <strong>$ 10.440.000</strong></li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 3.600.000</div>
+              <div style="font-size:10px;color:var(--ok-color);margin-top:4px;font-weight:700;">Pagado: $ 2.000.000</div>
+              <div style="font-size:10px;color:var(--warn-color);margin-top:2px;font-weight:700;">Para iniciar: $ 1.800.000</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;font-style:italic;">Laminas llegan<br>24/06/2026</div>
+            </td>
+          </tr>
+
+          <!-- ========== ACRILICOS ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Fabricacion e instalacion de acrilicos</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-pending">Pendiente de decision del cliente</span>
+              <div class="item-title">D. Reemplazo de acrilicos — opcion seleccionada por el cliente (sin parabrisas del flybridge)</div>
+              <div class="item-desc">
+                Fabricacion e instalacion de acrilicos nuevos en color negro humo de grado marino para todas las piezas del yate, a excepcion del parabrisas ubicado en la parte superior del flybridge, el cual queda excluido por decision del cliente. El alcance incluye: escotilla circular de proa, paneles de puertas de acceso en popa (estribor y babor) y demas ventanas y piezas que requieran sustitucion.<br><br>
+                Todos los acrilicos son fabricados a medida con policarbonato o acrilico de grado marino de alta resistencia a rayos UV, con corte CNC de precision y sellado perimetral marino para garantizar hermeticidad total y acabado estetico homogeneo en todo el yate.<br><br>
+                <strong>Referencia — precio total incluyendo parabrisas del flybridge:</strong> El parabrisas superior del flybridge tiene un valor de <strong>$ 4.700.000</strong> de forma independiente. Si los propietarios deciden incluirlo en el futuro, el valor total del reemplazo integral de todos los acrilicos del yate ascenderia a <strong>$ 7.000.000</strong>. Por el momento, los propietarios optaron por la opcion parcial de <strong>$ 2.300.000</strong>, excluyendo unicamente dicha pieza.
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:10.5px;color:#dc2626;font-weight:700;margin-bottom:2px;">Opcion completa:</div>
+              <div style="font-size:14px;color:#dc2626;text-decoration:line-through;font-weight:700;margin-bottom:6px;">$ 7.000.000</div>
+              <div style="font-size:10.5px;color:#1f7a4a;font-weight:700;margin-bottom:2px;">Opcion seleccionada:</div>
+              <div class="special-price" style="color:#1f7a4a;">$ 2.300.000</div>
+            </td>
+          </tr>
+
+          <!-- ========== POLARIZADO ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Polarizado de cristales — Pelicula Spectra (alta gama)</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-pending">Pendiente de decision del cliente</span>
+              <div class="item-title">E1. Polarizado ventanas laterales — 8 m² (opcion seleccionada)</div>
+              <div class="item-desc">
+                Instalacion de pelicula de control solar en las ventanas laterales de estribor y babor, incluyendo las ventanas de proa. La pelicula seleccionada es de la marca <strong>Spectra</strong>, referencia de maxima calidad en el mercado de polarizado profesional: alta transparencia optica, optima reduccion de calor (rechazo solar superior), proteccion UV de amplio espectro, resistencia superior a condiciones marinas (humedad, sal y temperatura) y acabado estetico oscuro que otorga privacidad y unidad visual al conjunto del yate.<br><br>
+                El area total de ventanas laterales y recortes de proa a intervenir es de <strong>8 m²</strong>. El precio unitario es de <strong>$ 240.000 por metro cuadrado</strong>, valor que incluye suministro de pelicula Spectra, instalacion profesional con tecnica libre de burbujas y garantia de adherencia.<br><br>
+                <em>Esta opcion fue seleccionada por los propietarios como alternativa al polarizado completo, priorizando las ventanas de mayor exposicion solar.</em>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 1.920.000</div>
+              <div style="font-size:9.5px;color:var(--text-light);margin-top:4px;">8 m² × $ 240.000</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-ref">Oferta especial — polarizado total (descuento disponible)</span>
+              <div class="item-title">E2. Polarizado completo de todos los cristales — 13,45 m² con precio especial</div>
+              <div class="item-desc">
+                Colombia Boat Detailing ofrece una <strong>tarifa especial con descuento</strong> si los propietarios deciden polarizar la totalidad de los cristales del yate: ventanas laterales, ventanas de proa y parabrisas de cabina (13,45 m² totales) con pelicula Spectra de alta gama.<br><br>
+                <strong>Precio de referencia anterior:</strong> Se habia ofrecido el trabajo completo por <strong>$ 3.900.000</strong>, lo que equivale a <strong>$ 290.000 por m²</strong> (13,45 m²).<br><br>
+                <strong>Oferta especial vigente:</strong> Si se autoriza la totalidad de los 13,45 m², aplicamos una <strong>tarifa reducida de $ 230.000/m²</strong>, lo que resulta en un valor total de <strong>$ 3.093.500</strong> — un ahorro de $ 806.500 respecto al precio anterior.<br><br>
+                <strong>Alternativa:</strong> Si prefieren solo las ventanas laterales y recortes de proa (8 m²), el precio se mantiene en <strong>$ 240.000/m² — total $ 1.920.000</strong> (ver opcion E1).
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div style="font-size:15px;color:#dc2626;text-decoration:line-through;font-weight:700;margin-bottom:4px;">$ 3.900.000</div>
+              <div class="special-price" style="color:#1d4ed8;">$ 3.093.500</div>
+              <div style="font-size:9.5px;color:#1d4ed8;margin-top:3px;font-weight:700;">13,45 m² × $ 230.000</div>
+              <div style="font-size:9px;color:var(--text-light);margin-top:4px;">Ahorro vs. precio<br>anterior: $ 806.500</div>
+            </td>
+          </tr>
+
+          <!-- ========== LONA PARABRISAS ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Cubierta de lona para parabrisas de cabina</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="status-ref">Medidas tomadas — pendiente de autorizar</span>
+              <div class="item-title">F. Lona a medida para parabrisas de cabina — sustitucion del polarizado en esa zona</div>
+              <div class="item-desc">
+                En sustitucion del polarizado en el parabrisas de cabina (area de mayor incidencia solar), los propietarios optaron por una <strong>cubierta de lona confeccionada a medida</strong>. Las medidas exactas del parabrisas ya fueron relevadas en obra, garantizando un ajuste perfecto a la geometria del yate.<br><br>
+                <strong>Especificaciones tecnicas:</strong>
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
+                  <li><strong>Material:</strong> Lona nautica de alta resistencia, impermeable, tratada contra rayos UV y hongos.</li>
+                  <li><strong>Color:</strong> Negro, en armonia con la estetica del yate.</li>
+                  <li><strong>Sistema de fijacion:</strong> Broches en acero inoxidable marino (AISI 316), garantizando durabilidad frente a la corrosion salina y un montaje y desmontaje rapido y seguro. Los puntos de anclaje quedan instalados de forma definitiva en la estructura.</li>
+                  <li><strong>Funcion:</strong> Bloqueo total de la luz solar sobre el parabrisas de cabina, reduccion de temperatura interior, proteccion del acrilico y acabado estetico de primer nivel.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px">
+              <div class="special-price">$ 1.700.000</div>
+            </td>
+          </tr>
+
+          <!-- ========== BOTES SEMIRRIGIDOS ========== -->
+          <tr class="table-section-header">
+            <td colspan="2">Restauracion integral — embarcaciones semirrigidas RIB (2 unidades) — Marina Portobello</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span style="display:inline-block;background:#0e7490;color:#fff;font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:2px 8px;border-radius:10px;margin-bottom:4px;">Propuesta formal — pendiente de autorizacion</span>
+              <div class="item-title">G. Puesta en funcionamiento total de dos botes semirrigidos (RIB) — conversion, restauracion mecanica, electrica y naval completa</div>
+              <div class="item-desc">
+                Colombia Boat Detailing formula la presente propuesta tecnica para la <strong>restauracion y puesta en funcionamiento total de las dos embarcaciones semirrigidas</strong> de los propietarios, actualmente en condicion de desuso en Marina Portobello. El alcance cubre la totalidad de las intervenciones necesarias para entregar cada bote en plena operatividad, seguridad y estetica de primer nivel.
+                <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;">
+                  <tbody>
+                    <tr style="background:#f8fafc;">
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Conversion de borda inflable a fibra de vidrio</strong> — Retiro de la borda neumatica existente y fabricacion e instalacion de nueva borda en laminado de fibra de vidrio con acabado en gelcoat marino, garantizando resistencia estructural, mantenimiento minimo y estetica de embarcacion solida. La estructura central se conserva. Trabajo ejecutado en los dos botes.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 18.000.000</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Restauracion completa del motor fuera de borda 20 HP</strong> — El motor se encuentra en condicion de descuido avanzado. Se ejecutara desmontaje total, limpieza profunda, revision y sustitucion de componentes internos en mal estado, afinacion completa, pintura exterior y puesta en marcha con pruebas de funcionamiento. El motor se entregara como nuevo, tanto en operacion como en presentacion.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 3.000.000</td>
+                    </tr>
+                    <tr style="background:#f8fafc;">
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Sistema hidraulico de direccion</strong> — Montaje completo del sistema hidraulico de gobierno en los dos botes: cilindro hidraulico, bomba de direccion, mangueras de alta presion certificadas para uso marino y todos los accesorios de conexion. Garantiza una direccion precisa, suave y segura a cualquier velocidad.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 3.000.000</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Instalacion electrica completa</strong> — Cableado de ambas embarcaciones con cable marino homologado, panel de interruptores con etiquetado, sistema de luces de navegacion reglamentarias, circuito de arranque electrico, fusibles y protecciones contra humedad y corrosion. Toda la instalacion cumple estandares de seguridad nautica.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 3.000.000</td>
+                    </tr>
+                    <tr style="background:#f8fafc;">
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Bombas de achique, brujulas, herrajes y accesorios</strong> — Adquisicion e instalacion de bombas de achique automaticas con flotador en cada embarcacion, brujulas nauticas, cornamusas, argollas de amarre, tapas de acceso, pasacables y demas herrajes necesarios para el equipamiento completo de los dos botes segun estandar de marina.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 2.000.000</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Pintura y acabado final</strong> — Preparacion de superficie y aplicacion de pintura de grado marino en casco y borda nueva en fibra de vidrio de los dos botes. Acabado homogeneo en color a definir por el cliente. Incluye pruebas funcionales en agua antes de la entrega formal.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-weight:800;font-size:13px;color:var(--secondary-color);">$ 1.000.000</td>
+                    </tr>
+                    <tr style="background:#f8fafc;">
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);vertical-align:top;"><strong>Transporte en grua — incluido</strong> — Traslado de ambas embarcaciones desde Marina Portobello hasta el taller de Colombia Boat Detailing para la ejecucion de los trabajos. Una vez concluida la restauracion, los botes seran entregados directamente en el <strong>Club Nautico de Manga</strong>, donde se encuentra el Yate HAYA.</td>
+                      <td style="padding:8px 10px;border:1px solid var(--border-color);text-align:right;vertical-align:middle;white-space:nowrap;font-size:11px;color:var(--text-light);font-style:italic;">Incluido</td>
+                    </tr>
+                    <tr style="background:var(--secondary-color);">
+                      <td style="padding:8px 12px;border:1px solid #1a3050;color:#fff;font-weight:700;font-size:13px;">TOTAL RESTAURACION — 2 botes (sin motor nuevo)</td>
+                      <td style="padding:8px 12px;border:1px solid #1a3050;text-align:right;color:#fff;font-weight:800;font-size:15px;white-space:nowrap;">$ 32.000.000</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <strong>Motor fuera de borda nuevo — no incluido:</strong> La propuesta no contempla la adquisicion de un motor fuera de borda nuevo. Con base en las caracteristicas de la embarcacion, Colombia Boat Detailing recomienda un motor de <strong>40 o 50 HP</strong> como la opcion idonea para este tipo de bote. Buscaremos y presentaremos al cliente alternativas tanto nuevas como usadas en buen estado, para que los propietarios puedan evaluar opciones de precio y tomar la decision de adquisicion.
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- ============================================================ -->
+      <!-- RESUMEN FINANCIERO -->
+      <!-- ============================================================ -->
+      <h3 class="section-title">Resumen financiero consolidado</h3>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <table style="width:100%; border-collapse:collapse; font-size:11.5px; margin-bottom:10px;">
+            <thead>
+              <tr>
+                <th style="background:var(--secondary-color);color:#fff;padding:5px 8px;text-align:left;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;">Ref.</th>
+                <th style="background:var(--secondary-color);color:#fff;padding:5px 8px;text-align:left;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;">Trabajo</th>
+                <th style="background:var(--secondary-color);color:#fff;padding:5px 8px;text-align:right;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;">Total</th>
+                <th style="background:var(--secondary-color);color:#fff;padding:5px 8px;text-align:right;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;">Pagado</th>
+                <th style="background:var(--secondary-color);color:#fff;padding:5px 8px;text-align:right;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;">Saldo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- TRABAJOS EN CURSO / EJECUTADOS -->
+              <tr style="background:#f0faf5;">
+                <td colspan="5" style="padding:4px 8px;font-size:9.5px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--ok-color);border-bottom:1px solid var(--border-color);text-align:left;">Trabajos ejecutados y en curso</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">A</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Pintura radares y accesorios (saldo al instalar calcomanias)</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 1.000.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--ok-color);font-weight:600;">$ 900.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--warn-color);font-weight:700;">$ 100.000</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">B</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Sistema iluminacion completo (popa, escaleras, flybridge) + envio $ 20.900</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 2.720.900</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--ok-color);font-weight:600;">$ 1.350.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--warn-color);font-weight:700;">$ 1.370.900</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">C</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Pisos adhesivos tipo teca — laminas (13 und) + instalacion (para iniciar: $ 1.800.000 adicionales)</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 12.440.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--ok-color);font-weight:600;">$ 2.000.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--warn-color);font-weight:700;">$ 10.440.000</td>
+              </tr>
+
+              <!-- PROPUESTAS PARA DECISION -->
+              <tr style="background:#f0f4f8;">
+                <td colspan="5" style="padding:4px 8px;font-size:9.5px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text-light);border-bottom:1px solid var(--border-color);text-align:left;">Propuestas para decision del cliente</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">D</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Acrilicos — reemplazo integral (excepto parabrisas superior flybridge)</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 2.300.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--text-light);">—</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--accent-color);font-style:italic;font-weight:700;">Por autorizar</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">E1</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Polarizado Spectra — ventanas laterales y proa (8 m² × $ 240.000) <em style="font-size:10px;color:#1d4ed8;font-weight:700;">Opcion A</em></td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 1.920.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--text-light);">—</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--accent-color);font-style:italic;font-weight:700;">Por autorizar</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">E2</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Polarizado Spectra — totalidad de cristales (13,45 m² × $ 230.000) — oferta especial con descuento <em style="font-size:10px;color:#0e7490;font-weight:700;">Opcion B</em></td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 3.093.500</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--text-light);">—</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--accent-color);font-style:italic;font-weight:700;">Por autorizar</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">F</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Lona a medida para parabrisas de cabina — negro con broches en acero inoxidable</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 1.700.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--text-light);">—</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--accent-color);font-style:italic;font-weight:700;">Por autorizar</td>
+              </tr>
+              <tr>
+                <td style="padding:3px 8px;color:var(--secondary-color);border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:700;">G</td>
+                <td style="padding:3px 8px;border-bottom:1px solid var(--border-color);">Restauracion integral 2 botes semirrigidos RIB — conversion fibra, motor, hidraulica, electrica, accesorios (sin motor nuevo)</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;font-weight:600;">$ 32.000.000</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--text-light);">—</td>
+                <td style="padding:3px 8px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap;color:var(--accent-color);font-style:italic;font-weight:700;">Por autorizar</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- RESUMEN SALDOS -->
+          <div style="border-top:1px solid var(--border-color);padding-top:8px;margin-top:4px;">
+            <div class="total-row" style="font-size:11px;color:var(--text-light);">
+              <span>Total trabajos en curso (A + B + C):</span>
+              <span>$ 16.160.900</span>
+            </div>
+            <div class="total-row" style="font-size:11px;color:var(--ok-color);font-weight:700;">
+              <span>Total pagado a la fecha:</span>
+              <span>$ 4.250.000</span>
+            </div>
+            <div class="total-row" style="font-size:11px;color:var(--warn-color);font-weight:700;">
+              <span>Saldo en curso (trabajos A + B + C):</span>
+              <span>$ 11.910.900</span>
+            </div>
+            <div class="total-row" style="font-size:11px;margin-top:4px;">
+              <span>Propuestas pendientes de autorizar (D + F + G + E1 o E2):</span>
+              <span>$ 37.920.000</span>
+            </div>
+          </div>
+
+          <div class="total-row grand-total" style="margin-top:8px;">
+            <span>Total comprometido confirmado:</span>
+            <span>$ 16.160.900 COP</span>
+          </div>
+          <div class="total-row" style="font-size:12px;color:var(--accent-color);font-weight:700;margin-top:4px;">
+            <span>Propuestas adicionales pendientes (E1 + F + G):</span>
+            <span>+ $ 35.620.000 COP</span>
+          </div>
+          <div style="font-size:10px;color:var(--text-light);margin-top:6px;">
+            Los valores no incluyen IVA. Si el cliente requiere facturacion electronica, se adicionara el impuesto vigente.
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMENDACION TECNICA -->
+      <div class="rec-box">
+        <strong>Estado de avance — resumen ejecutivo:</strong> El proyecto del Yate HAYA se encuentra en fase activa de ejecucion con tres frentes simultaneos: (1) la instalacion de las luces de popa en proceso el dia de hoy, lo que energizara el circuito completo de escaleras y activara las luces subacuaticas ya operativas; (2) la llegada de las laminas de piso teca prevista para el martes 24 de junio, con inicio de instalacion inmediato una vez recibido el anticipo de mano de obra; y (3) la resolucion pendiente de las luces del flybridge, cuya solucion tecnica recomendada (tira LED 12V DC) permitira dar cierre total al sistema de iluminacion del yate. Los trabajos de acrilicos, polarizado y lona quedan en agenda para programacion segun autorizacion del cliente.
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Proximas fechas clave</h4>
+          <ul>
+            <li><strong>20/06/2026:</strong> Instalacion luces de popa (3 und) — energizado del circuito completo de iluminacion.</li>
+            <li><strong>24/06/2026:</strong> Llegada estimada de laminas de piso tipo teca — inicio de instalacion condicionado a anticipo de MO.</li>
+            <li><strong>Por definir:</strong> Adquisicion luminarias flybridge 12V DC — cierre del sistema de iluminacion y pago del saldo.</li>
+            <li><strong>Por definir:</strong> Seleccion y autorizacion de motor fuera de borda 40–50 HP — Colombia Boat Detailing presentara opciones nuevas y usadas para decision del cliente.</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h4>Condiciones del proyecto</h4>
+          <ul>
+            <li>Para inicio de instalacion de pisos: <strong>50% de mano de obra ($ 1.700.000)</strong> antes del 24/06/2026.</li>
+            <li>Saldo de trabajos en curso pagadero al finalizar cada etapa.</li>
+            <li>Trabajos nuevos requieren anticipo del 50% para programar.</li>
+            <li>Costos de ingreso de personal externo a Marina Portobello a cargo del cliente.</li>
+            <li>Motor RIB: ningun desembolso sin autorizacion expresa del cliente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Documento preparado por: Frank Mercado — Colombia Boat Detailing &nbsp;|&nbsp; 20/06/2026</p>
+        <p>Gracias por confiar en los especialistas en estetica y restauracion naval.</p>
+      </footer>
+
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
