@@ -657,7 +657,7 @@
                 class="text-xs font-semibold uppercase tracking-wide mb-1"
                 style="color: rgba(255, 255, 255, 0.4)"
               >
-                Total Gastos
+                Gastos Op.
               </p>
               <p
                 class="font-bold text-red-400 leading-tight"
@@ -2249,7 +2249,7 @@
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent = fmt(totalGastos);
+        document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
         document.getElementById("g-profit").textContent = fmt(profit);
         document.getElementById("g-profit").style.color =
           profit >= 0 ? "#D4A85E" : "#f87171";
@@ -2279,7 +2279,7 @@
             (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos + retirosCapitalMes;
+        const profit = totalIngresos - totalGastos;
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
         document.getElementById("kpi-ingresos").textContent =
