@@ -832,7 +832,7 @@
             </p>
             <i data-lucide="hand-coins" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card border-l-4 border-orange-400" onclick="irAMovimientosFiltrado('gasto','Retiro de Capital')">
+          <div class="kpi-card border-l-4 border-orange-400" onclick="irAMovimientosFiltrado('gasto','Retiro de Profit,Retiro de Capital')">
             <p class="kpi-label">
               Retiros de capital
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -1226,7 +1226,7 @@
                     class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
                     >Tipo</label
                   >
-                  <div class="grid grid-cols-2 gap-2">
+                  <div class="grid grid-cols-3 gap-2">
                     <button
                       type="button"
                       id="btn-ingreso"
@@ -1243,8 +1243,36 @@
                     >
                       <i data-lucide="trending-down" class="w-4 h-4"></i>Gasto
                     </button>
+                    <button
+                      type="button"
+                      id="btn-tipo-transfer"
+                      onclick="setTipo('transferencia')"
+                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                    >
+                      <i data-lucide="arrow-left-right" class="w-4 h-4"></i>Transfer
+                    </button>
                   </div>
                   <input type="hidden" id="tx-tipo" value="ingreso" />
+                </div>
+                <!-- CAMPO TRANSFERENCIA (visible solo cuando tipo=transferencia) -->
+                <div id="campo-transferencia" class="hidden">
+                  <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">Transferencia interna entre socios</label>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-xs text-slate-400 mb-1">De (quien envía)</label>
+                      <select id="tx-de" class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none">
+                        <option value="Frank">Frank</option>
+                        <option value="Cristian">Cristian</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="block text-xs text-slate-400 mb-1">Para (quien recibe)</label>
+                      <select id="tx-para" class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none">
+                        <option value="Cristian">Cristian</option>
+                        <option value="Frank">Frank</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div id="campo-proyecto">
                   <label
@@ -1284,7 +1312,7 @@
                     class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none"
                   />
                 </div>
-                <div>
+                <div id="campo-categoria-wrap">
                   <label
                     class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
                     >Categoría</label
@@ -1454,7 +1482,7 @@
           "Materiales / Insumos",
           "Herramientas / Equipos",
           "Mano de Obra",
-          "Retiro de Capital",
+          "Retiro de Profit",
           "ARL / Seguro",
           "Logistica / Transporte",
           "Arriendo / Local",
@@ -1464,7 +1492,9 @@
       };
 
       const CAPITAL_INGRESO_CAT = "Aporte de Capital";
-      const CAPITAL_GASTO_CAT = "Retiro de Capital";
+      const CAPITAL_GASTO_CAT = "Retiro de Profit";
+      const CAPITAL_GASTO_CATS = ["Retiro de Profit", "Retiro de Capital"];
+      const TRANSFER_CAT = "Transferencia Interna";
 
       const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
@@ -1673,27 +1703,40 @@
       // ── Tipo / Medio / Receptor ───────────────────────────
       function setTipo(tipo) {
         document.getElementById("tx-tipo").value = tipo;
-        const bi = document.getElementById("btn-ingreso"),
-          bg = document.getElementById("btn-gasto");
+        const bi = document.getElementById("btn-ingreso");
+        const bg = document.getElementById("btn-gasto");
+        const bt = document.getElementById("btn-tipo-transfer");
+        const inact = "toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+        bi.className = inact; bg.className = inact; if (bt) bt.className = inact;
+        const campoTransfer = document.getElementById("campo-transferencia");
+        const campoProyecto = document.getElementById("campo-proyecto");
+        const campoCat = document.getElementById("campo-categoria-wrap");
+
+        if (tipo === "transferencia") {
+          if (bt) bt.className = "toggle-btn active-indigo py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          if (campoTransfer) campoTransfer.classList.remove("hidden");
+          if (campoProyecto) campoProyecto.classList.add("hidden");
+          if (campoCat) campoCat.classList.add("hidden");
+          document.getElementById("label-receptor").textContent = "Medio";
+          lucide.createIcons();
+          return;
+        }
+        if (campoTransfer) campoTransfer.classList.add("hidden");
+        if (campoProyecto) campoProyecto.classList.remove("hidden");
+        if (campoCat) campoCat.classList.remove("hidden");
+
         if (tipo === "ingreso") {
-          bi.className =
-            "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
-          bg.className =
-            "toggle-btn inactive     py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          bi.className = "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("label-receptor").textContent = "Lo recibe";
         } else {
-          bg.className =
-            "toggle-btn active-red  py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
-          bi.className =
-            "toggle-btn inactive    py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          bg.className = "toggle-btn active-red py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("label-receptor").textContent = "Quién paga";
         }
         const sel = document.getElementById("tx-categoria");
         sel.innerHTML = "";
         CATS[tipo].forEach((c) => {
           const o = document.createElement("option");
-          o.value = c;
-          o.textContent = c;
+          o.value = c; o.textContent = c;
           sel.appendChild(o);
         });
         onCategoriaChange();
@@ -2209,12 +2252,12 @@
         if (currentTab === "estadisticas") renderCharts();
       }
 
-      function irAMovimientosFiltrado(tipo, categoria, todosMeses) {
+      function irAMovimientosFiltrado(tipo, cats, todosMeses) {
         document.getElementById("filter-tipo").value = tipo || "";
         document.getElementById("filter-proyecto").value = "";
         document.getElementById("filter-semana").value = "";
         filterCats.clear();
-        if (categoria) filterCats.add(categoria);
+        if (cats) cats.split(",").map(c=>c.trim()).filter(Boolean).forEach(c=>filterCats.add(c));
         updateCatLabel();
         if (todosMeses !== undefined) {
           document.getElementById("toggle-todos-meses").checked = !!todosMeses;
@@ -2259,13 +2302,13 @@
 
       function renderGlobalKPIs() {
         const totalIngresos = transactions
-          .filter((t) => t.tipo === "ingreso")
+          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = transactions
-          .filter((t) => t.tipo === "gasto")
+          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const retirosCapital = transactions
-          .filter((t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT)
+          .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
           .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos + retirosCapital;
         const margen =
@@ -2283,12 +2326,12 @@
       function renderKPIs(mes) {
         const totalIngresos = mes
           .filter(
-            (t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT,
+            (t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT && t.categoria !== TRANSFER_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = mes
           .filter(
-            (t) => t.tipo === "gasto" && t.categoria !== CAPITAL_GASTO_CAT,
+            (t) => t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== TRANSFER_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
         const aportesCapitalMes = mes
@@ -2298,7 +2341,7 @@
           .reduce((s, t) => s + t.monto, 0);
         const retirosCapitalMes = mes
           .filter(
-            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+            (t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
@@ -2842,12 +2885,48 @@
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const tipo = document.getElementById("tx-tipo").value;
-          const cat = document.getElementById("tx-categoria").value;
           const monto = getMontoValue();
+          if (!monto || monto <= 0) return;
+
+          // ── Transferencia interna entre socios ──────────────
+          if (tipo === "transferencia") {
+            const de = document.getElementById("tx-de").value;
+            const para = document.getElementById("tx-para").value;
+            if (de === para) { showToast("Emisor y receptor deben ser distintos", "delete"); return; }
+            const fecha = document.getElementById("tx-fecha").value || todayStr;
+            const hora2 = document.getElementById("tx-hora").value || new Date().toTimeString().slice(0,5);
+            const desc = document.getElementById("tx-descripcion").value.trim();
+            const medio = document.getElementById("tx-medio").value;
+            const btn2 = e.target.querySelector("button[type=submit]");
+            btn2.disabled = true; btn2.textContent = "Guardando...";
+            try {
+              const batch = db.batch();
+              batch.set(db.collection("transacciones").doc(), {
+                tipo:"gasto", categoria:TRANSFER_CAT, monto, receptor:de,
+                descripcion:desc||`Transferencia a ${para}`, fecha:fecha, hora:hora2, medio
+              });
+              batch.set(db.collection("transacciones").doc(), {
+                tipo:"ingreso", categoria:TRANSFER_CAT, monto, receptor:para,
+                descripcion:desc||`Transferencia de ${de}`, fecha:fecha, hora:hora2, medio
+              });
+              await batch.commit();
+              showToast(`Transferencia ${de} → ${para} registrada ✓`);
+            } catch(err) { showToast("Error al registrar", "delete"); }
+            btn2.disabled = false;
+            btn2.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
+            e.target.reset();
+            document.getElementById("tx-fecha").value = todayStr;
+            document.getElementById("tx-hora").value = new Date().toTimeString().slice(0,5);
+            setTipo("ingreso"); setMedio("Efectivo"); setReceptor("Cristian");
+            lucide.createIcons();
+            showTab("resumen");
+            return;
+          }
+
+          const cat = document.getElementById("tx-categoria").value;
           const proyecto = document.getElementById("tx-proyecto").value.trim();
           const requiereProyecto =
             tipo === "ingreso" && cat !== CAPITAL_INGRESO_CAT;
-          if (!monto || monto <= 0) return;
           if (requiereProyecto && !proyecto) {
             document.getElementById("tx-proyecto").focus();
             return;
