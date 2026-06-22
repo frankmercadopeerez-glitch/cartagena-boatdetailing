@@ -615,7 +615,8 @@
         </div>
       </nav>
 
-      <div class="max-w-7xl mx-auto p-3 sm:p-5 lg:p-7" style="padding-bottom: calc(68px + env(safe-area-inset-bottom,0px) + 16px)">
+      <div class="max-w-7xl mx-auto" style="padding-bottom: calc(68px + env(safe-area-inset-bottom,0px) + 16px)">
+        <div id="panel-resumen" class="p-3 sm:p-5 lg:p-7">
         <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
         <div
           class="rounded-2xl mb-4 p-4 sm:p-5"
@@ -971,7 +972,7 @@
         <!-- /tabs card -->
 
         <!-- TAB RESUMEN -->
-        <div id="panel-resumen" class="p-4 sm:p-6">
+        <div class="mt-4">
             <div class="flex items-center justify-between mb-4">
               <h2
                 class="text-sm font-semibold text-slate-700 flex items-center gap-2"
@@ -1033,9 +1034,10 @@
               </table>
             </div>
           </div>
+        </div><!-- /panel-resumen -->
 
-          <!-- TAB MOVIMIENTOS -->
-          <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
+        <!-- TAB MOVIMIENTOS -->
+        <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
             <div class="flex items-center justify-between mb-3">
               <label class="flex items-center gap-2 cursor-pointer select-none">
                 <div class="relative">
@@ -1608,12 +1610,7 @@
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
         lucide.createIcons();
-        const activePanel = document.getElementById("panel-" + tab);
-        if (activePanel) {
-          const navH = (document.getElementById("main-nav") || {}).offsetHeight || 56;
-          const top = activePanel.getBoundingClientRect().top + window.scrollY - navH - 8;
-          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-        }
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
 
       // ── Mes ───────────────────────────────────────────────
@@ -1703,7 +1700,6 @@
           if (user) {
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
-            requestAnimationFrame(() => showTab("resumen"));
             document.getElementById("tx-fecha").value = todayStr;
             document.getElementById("tx-hora").value = new Date()
               .toTimeString()
