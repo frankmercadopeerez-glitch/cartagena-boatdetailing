@@ -1589,6 +1589,7 @@
       // ── Tabs ──────────────────────────────────────────────
       let currentTab = "resumen";
       function showTab(tab) {
+        closeMasDrawer();
         currentTab = tab;
         ["resumen", "movimientos", "estadisticas", "nuevo"].forEach((t) => {
           const panel = document.getElementById("panel-" + t);
