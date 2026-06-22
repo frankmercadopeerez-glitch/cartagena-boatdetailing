@@ -2318,6 +2318,31 @@
         document.getElementById("pub-total-anio").textContent = fmt(totalAnio);
       }
 
+      async function seedMayoCierre() {
+        if (!db || !transactions.length) return;
+        const MARKER = "Cierre cuentas Mayo 2026";
+        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        if (!snap.empty) return;
+        const mayo = transactions.filter(t => (t.fecha||"").startsWith("2026-05"));
+        let frank = 0, cristian = 0;
+        mayo.forEach(t => {
+          const r = (t.receptor||"").trim().toLowerCase();
+          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
+          if (r==="frank") frank += d;
+          else if (r==="cristian") cristian += d;
+        });
+        if (Math.abs(frank) < 1 && Math.abs(cristian) < 1) return;
+        const batch = db.batch();
+        const base = { descripcion:MARKER, fecha:"2026-05-31", hora:"23:59", medio:"Efectivo", proyecto:"", categoria:TRANSFER_CAT };
+        if (Math.abs(frank) >= 1)
+          batch.set(db.collection("transacciones").doc(), { ...base, tipo:frank<0?"ingreso":"gasto", monto:Math.round(Math.abs(frank)), receptor:"Frank" });
+        if (Math.abs(cristian) >= 1)
+          batch.set(db.collection("transacciones").doc(), { ...base, tipo:cristian<0?"ingreso":"gasto", monto:Math.round(Math.abs(cristian)), receptor:"Cristian" });
+        await batch.commit();
+        showToast("Cierre de Mayo 2026 registrado ✓");
+      }
+
+      let seedMayoDone = false;
       // ── Render All ────────────────────────────────────────
       function renderAll() {
         const mes = txDelMes(transactions);
@@ -2328,6 +2353,10 @@
         renderResumen(mes);
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
+        if (!seedMayoDone && transactions.length > 0) {
+          seedMayoDone = true;
+          seedMayoCierre();
+        }
       }
 
       function irAMovimientosFiltrado(tipo, cats, todosMeses) {
@@ -2443,7 +2472,7 @@
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
           .toISOString()
           .split("T")[0];
-        const txHasta = transactions.filter((t) => (t.fecha || "") <= lastDay);
+        const txHasta = transactions.filter((t) => (t.fecha || "") <= lastDay && t.categoria !== TRANSFER_CAT);
         const saldoIng = txHasta
           .filter((t) => t.tipo === "ingreso")
           .reduce((s, t) => s + t.monto, 0);
