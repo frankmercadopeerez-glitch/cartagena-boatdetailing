@@ -722,87 +722,6 @@
           </div>
         </div>
 
-        <!-- PUBLICIDAD WIDGET -->
-        <div class="pub-widget px-4 pt-4 pb-3 mb-5">
-          <!-- Fila 1: icono + título + rango -->
-          <div class="flex items-center gap-2.5 mb-3">
-            <div
-              class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-              style="background: rgba(245, 158, 11, 0.18)"
-            >
-              <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
-            </div>
-            <div>
-              <p
-                class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none"
-              >
-                Publicidad
-              </p>
-              <p class="text-xs text-slate-400 mt-0.5" id="pub-semana-label">
-                Esta semana
-              </p>
-            </div>
-          </div>
-          <!-- Fila 2: stats en dos columnas -->
-          <div class="grid grid-cols-2 gap-3 mb-3">
-            <div
-              class="rounded-xl px-3 py-2.5"
-              style="background: rgba(255, 255, 255, 0.05)"
-            >
-              <p class="text-xs text-slate-400 mb-1">Semana actual</p>
-              <p
-                class="text-xl font-bold text-white leading-none"
-                id="pub-monto-semana"
-              >
-                $0
-              </p>
-              <p class="text-xs text-slate-500 mt-1" id="pub-count-semana">
-                0 registros
-              </p>
-            </div>
-            <div
-              class="rounded-xl px-3 py-2.5"
-              style="background: rgba(255, 255, 255, 0.05)"
-            >
-              <p class="text-xs text-slate-400 mb-1">Total año</p>
-              <p
-                class="text-xl font-bold leading-none"
-                style="color: #d4a85e"
-                id="pub-total-anio"
-              >
-                $0
-              </p>
-              <p class="text-xs text-slate-500 mt-1">acumulado</p>
-            </div>
-          </div>
-          <!-- Fila 3: botones a ancho completo -->
-          <div class="flex gap-2">
-            <button
-              onclick="filtrarPorPublicidad()"
-              class="flex-1 text-xs font-semibold py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center justify-center gap-1.5"
-              style="border-color: rgba(184, 144, 77, 0.4)"
-            >
-              <i data-lucide="filter" class="w-3.5 h-3.5"></i>
-              Ver movimientos
-            </button>
-            <button
-              onclick="abrirGastoPublicidad()"
-              class="flex-1 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition"
-              style="
-                background: rgba(184, 144, 77, 0.2);
-                border: 1px solid rgba(184, 144, 77, 0.45);
-              "
-            >
-              <i
-                data-lucide="plus"
-                class="w-3.5 h-3.5"
-                style="color: #b8904d"
-              ></i>
-              <span style="color: #d4a85e">Gasto semanal</span>
-            </button>
-          </div>
-        </div>
-
         <!-- MES SELECTOR -->
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-1">
@@ -984,6 +903,9 @@
                 ></i>
                 <span id="summary-title">Resumen del mes</span>
               </h2>
+              <button onclick="exportarResumenCompleto()" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl transition" style="background:rgba(184,144,77,0.15);border:1px solid rgba(184,144,77,0.4);color:#d4a85e">
+                <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i> Exportar mes
+              </button>
               <button
                 id="btn-ver-mas"
                 onclick="toggleVerMas()"
@@ -1172,6 +1094,39 @@
 
           <!-- TAB ESTADÍSTICAS -->
           <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
+            <!-- PUBLICIDAD WIDGET -->
+            <div class="pub-widget px-4 pt-4 pb-3 mb-5">
+              <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.18)">
+                  <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none">Publicidad</p>
+                  <p class="text-xs text-slate-400 mt-0.5" id="pub-semana-label">Esta semana</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 mb-3">
+                <div class="rounded-xl px-3 py-2.5" style="background:rgba(255,255,255,0.05)">
+                  <p class="text-xs text-slate-400 mb-1">Semana actual</p>
+                  <p class="text-xl font-bold text-white leading-none" id="pub-monto-semana">$0</p>
+                  <p class="text-xs text-slate-500 mt-1" id="pub-count-semana">0 registros</p>
+                </div>
+                <div class="rounded-xl px-3 py-2.5" style="background:rgba(255,255,255,0.05)">
+                  <p class="text-xs text-slate-400 mb-1">Total año</p>
+                  <p class="text-xl font-bold leading-none" style="color:#d4a85e" id="pub-total-anio">$0</p>
+                  <p class="text-xs text-slate-500 mt-1">acumulado</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="filtrarPorPublicidad()" class="flex-1 text-xs font-semibold py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center justify-center gap-1.5" style="border-color:rgba(184,144,77,0.4)">
+                  <i data-lucide="filter" class="w-3.5 h-3.5"></i> Ver movimientos
+                </button>
+                <button onclick="abrirGastoPublicidad()" class="flex-1 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition" style="background:rgba(184,144,77,0.2);border:1px solid rgba(184,144,77,0.45)">
+                  <i data-lucide="plus" class="w-3.5 h-3.5" style="color:#b8904d"></i>
+                  <span style="color:#d4a85e">Registrar gasto</span>
+                </button>
+              </div>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               <div class="glass-card p-4">
                 <p
@@ -1336,43 +1291,6 @@
                     onchange="onCategoriaChange()"
                     class="block w-full rounded-xl border border-white/10 bg-white p-3 text-sm focus:outline-none"
                   ></select>
-                </div>
-                <div
-                  id="campo-pub-semana"
-                  class="hidden p-3 rounded-xl"
-                  style="
-                    background: rgba(245, 158, 11, 0.08);
-                    border: 1px solid rgba(184, 144, 77, 0.3);
-                  "
-                >
-                  <p
-                    class="text-xs font-semibold text-yellow-700 uppercase tracking-widest mb-2.5 flex items-center gap-1.5"
-                  >
-                    <i data-lucide="calendar-range" class="w-3.5 h-3.5"></i>
-                    Semana del gasto
-                  </p>
-                  <div class="grid grid-cols-2 gap-2">
-                    <div>
-                      <label class="block text-xs text-slate-400 mb-1"
-                        >Desde</label
-                      >
-                      <input
-                        type="date"
-                        id="pub-desde"
-                        class="block w-full rounded-xl border border-white/10 p-2.5 text-sm text-slate-800 focus:outline-none bg-white"
-                      />
-                    </div>
-                    <div>
-                      <label class="block text-xs text-slate-400 mb-1"
-                        >Hasta</label
-                      >
-                      <input
-                        type="date"
-                        id="pub-hasta"
-                        class="block w-full rounded-xl border border-white/10 p-2.5 text-sm text-slate-800 focus:outline-none bg-white"
-                      />
-                    </div>
-                  </div>
                 </div>
                 <div>
                   <label
@@ -1894,10 +1812,6 @@
         document.getElementById("tx-descripcion").value = tx.descripcion || "";
         document.getElementById("tx-categoria").value = tx.categoria || "";
         onCategoriaChange();
-        if (tx.pub_desde)
-          document.getElementById("pub-desde").value = tx.pub_desde;
-        if (tx.pub_hasta)
-          document.getElementById("pub-hasta").value = tx.pub_hasta;
         if (tx.monto) setMontoValue(tx.monto);
         setMedio(tx.medio || "Efectivo");
         setReceptor(tx.receptor || "Cristian");
@@ -1923,9 +1837,6 @@
         document.getElementById("btn-submit").innerHTML =
           '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
         document.getElementById("btn-cancelar-edicion").classList.add("hidden");
-        document.getElementById("pub-desde").value = "";
-        document.getElementById("pub-hasta").value = "";
-        document.getElementById("campo-pub-semana").classList.add("hidden");
         lucide.createIcons();
       }
       async function deleteTransaction(id) {
@@ -2126,6 +2037,91 @@
         showToast("CSV exportado ✓");
       }
 
+      function exportarResumenCompleto() {
+        const mes = txDelMes(transactions);
+        const mesLabel = MESES[mesSel.m] + " " + mesSel.y;
+
+        // Global acumulado
+        const gIng = transactions.filter(t=>t.tipo==="ingreso").reduce((s,t)=>s+t.monto,0);
+        const gGas = transactions.filter(t=>t.tipo==="gasto").reduce((s,t)=>s+t.monto,0);
+        const gRet = transactions.filter(t=>t.tipo==="gasto"&&t.categoria===CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
+        const gProfit = gIng - gGas + gRet;
+
+        // Mes actual
+        const mIng = mes.filter(t=>t.tipo==="ingreso"&&t.categoria!==CAPITAL_INGRESO_CAT).reduce((s,t)=>s+t.monto,0);
+        const mGas = mes.filter(t=>t.tipo==="gasto"&&t.categoria!==CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
+        const mRet = mes.filter(t=>t.tipo==="gasto"&&t.categoria===CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
+        const mApo = mes.filter(t=>t.tipo==="ingreso"&&t.categoria===CAPITAL_INGRESO_CAT).reduce((s,t)=>s+t.monto,0);
+        const mProfit = mIng - mGas + mRet;
+        const mMargen = mIng > 0 ? ((mProfit/mIng)*100).toFixed(1)+"%" : "0%";
+
+        // Cuentas personales
+        let frank = 0, cristian = 0;
+        mes.forEach(t => {
+          const r = (t.receptor||"").trim().toLowerCase();
+          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
+          if (r==="frank") frank += d;
+          else if (r==="cristian") cristian += d;
+        });
+        const diff = frank - cristian;
+        const settlement = Math.abs(diff)/2;
+        const settlementText = Math.abs(diff) < 500
+          ? "Equilibradas"
+          : diff > 0
+            ? "Frank transfiere " + fmt(settlement) + " a Cristian"
+            : "Cristian transfiere " + fmt(settlement) + " a Frank";
+
+        // Publicidad del mes
+        const pubMes = mes.filter(t=>t.tipo==="gasto"&&t.categoria==="Publicidad").reduce((s,t)=>s+t.monto,0);
+
+        const rows = [];
+        rows.push(["CBD FINANZAS — RESUMEN COMPLETO", mesLabel]);
+        rows.push([]);
+        rows.push(["BALANCE GLOBAL ACUMULADO"]);
+        rows.push(["Total Ingresos", gIng]);
+        rows.push(["Total Gastos (sin retiros)", gGas - gRet]);
+        rows.push(["Retiros de Capital (profit distribuido)", gRet]);
+        rows.push(["Profit Total", gProfit]);
+        rows.push([]);
+        rows.push(["RESUMEN DEL MES — " + mesLabel.toUpperCase()]);
+        rows.push(["Ingresos Operativos", mIng]);
+        rows.push(["Gastos Operativos", mGas]);
+        rows.push(["Retiros de Capital", mRet]);
+        rows.push(["Aportes de Capital", mApo]);
+        rows.push(["Profit del Mes", mProfit]);
+        rows.push(["Margen", mMargen]);
+        rows.push([]);
+        rows.push(["PUBLICIDAD DEL MES"]);
+        rows.push(["Gasto en Publicidad", pubMes]);
+        rows.push([]);
+        rows.push(["CUENTAS PERSONALES (este mes)"]);
+        rows.push(["Cristian", cristian]);
+        rows.push(["Frank", frank]);
+        rows.push(["Liquidacion", settlementText]);
+        rows.push([]);
+        rows.push(["MOVIMIENTOS DEL MES — " + mesLabel.toUpperCase()]);
+        rows.push(["Fecha","Hora","Tipo","Proyecto","Descripcion","Categoria","Monto","Medio","Persona"]);
+        [...mes].sort((a,b)=>((b.fecha||"")+(b.hora||"")).localeCompare((a.fecha||"")+(a.hora||""))).forEach(t=>{
+          rows.push([t.fecha||"",t.hora||"",t.tipo||"",
+            (t.proyecto||"").replace(/,/g,";"),
+            (t.descripcion||"").replace(/,/g,";"),
+            (t.categoria||"").replace(/,/g,";"),
+            t.monto||0, t.medio||"", t.receptor||""]);
+        });
+
+        const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+        const blob = new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8;"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "CBD-Resumen-"+mesLabel.replace(" ","-")+".csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("Resumen del mes exportado ✓");
+      }
+
       // ── Publicidad helpers ────────────────────────────────
       function getSemanaActual() {
         const hoy = new Date();
@@ -2139,19 +2135,7 @@
         return { desde: toISO(lunes), hasta: toISO(domingo) };
       }
       function onCategoriaChange() {
-        const cat = document.getElementById("tx-categoria").value;
         updateProyectoRequirement();
-        const campo = document.getElementById("campo-pub-semana");
-        if (!campo) return;
-        campo.classList.toggle("hidden", cat !== "Publicidad");
-        if (cat === "Publicidad") {
-          const { desde, hasta } = getSemanaActual();
-          const desdeEl = document.getElementById("pub-desde");
-          const hastaEl = document.getElementById("pub-hasta");
-          if (desdeEl && !desdeEl.value) desdeEl.value = desde;
-          if (hastaEl && !hastaEl.value) hastaEl.value = hasta;
-          lucide.createIcons();
-        }
       }
       function abrirGastoPublicidad() {
         showTab("nuevo");
@@ -2258,7 +2242,10 @@
         const totalGastos = transactions
           .filter((t) => t.tipo === "gasto")
           .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos;
+        const retirosCapital = transactions
+          .filter((t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT)
+          .reduce((s, t) => s + t.monto, 0);
+        const profit = totalIngresos - totalGastos + retirosCapital;
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
@@ -2292,7 +2279,7 @@
             (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos;
+        const profit = totalIngresos - totalGastos + retirosCapitalMes;
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
         document.getElementById("kpi-ingresos").textContent =
@@ -2856,10 +2843,6 @@
             monto,
             medio: document.getElementById("tx-medio").value,
             receptor: document.getElementById("tx-receptor").value,
-            ...(cat === "Publicidad" && {
-              pub_desde: document.getElementById("pub-desde").value || null,
-              pub_hasta: document.getElementById("pub-hasta").value || null,
-            }),
           };
           const btn = e.target.querySelector("button[type=submit]");
           btn.disabled = true;
@@ -2882,9 +2865,6 @@
           document.getElementById("tx-hora").value = new Date()
             .toTimeString()
             .slice(0, 5);
-          document.getElementById("pub-desde").value = "";
-          document.getElementById("pub-hasta").value = "";
-          document.getElementById("campo-pub-semana").classList.add("hidden");
           setTipo("ingreso");
           setMedio("Efectivo");
           setReceptor("Cristian");
