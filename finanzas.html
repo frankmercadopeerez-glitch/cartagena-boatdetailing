@@ -699,6 +699,28 @@
           </div>
         </div>
 
+        <!-- CUENTAS PERSONALES -->
+        <div class="rounded-2xl mb-4 p-4" style="background:linear-gradient(135deg,#071428 0%,#111111 100%);border:1px solid rgba(184,144,77,0.2)">
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="users" class="w-4 h-4" style="color:#b8904d"></i>
+            <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Cuentas · Balance por Socio</span>
+            <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)">Histórico total</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Cristian</p>
+              <p class="font-bold leading-tight" id="cuenta-cristian-val" style="font-size:clamp(1rem,4vw,1.5rem);color:var(--green)">$0</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:rgba(255,255,255,0.4)">Frank</p>
+              <p class="font-bold leading-tight" id="cuenta-frank-val" style="font-size:clamp(1rem,4vw,1.5rem);color:var(--green)">$0</p>
+            </div>
+          </div>
+          <div class="pt-2 text-xs leading-relaxed" id="settlement-text" style="border-top:1px solid rgba(255,255,255,0.08);color:var(--text2)">
+            Calculando…
+          </div>
+        </div>
+
         <!-- PUBLICIDAD WIDGET -->
         <div class="pub-widget px-4 pt-4 pb-3 mb-5">
           <!-- Fila 1: icono + título + rango -->
@@ -2195,11 +2217,41 @@
       function renderAll() {
         const mes = txDelMes(transactions);
         renderGlobalKPIs();
+        renderCuentas();
         renderKPIs(mes);
         renderPubWidget();
         renderResumen(mes);
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
+      }
+
+      function renderCuentas() {
+        let frank = 0, cristian = 0;
+        transactions.forEach((t) => {
+          const r = (t.receptor || "").trim().toLowerCase();
+          const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+          if (r === "frank") frank += delta;
+          else if (r === "cristian") cristian += delta;
+        });
+
+        const fEl = document.getElementById("cuenta-frank-val");
+        const cEl = document.getElementById("cuenta-cristian-val");
+        const sEl = document.getElementById("settlement-text");
+
+        fEl.textContent = fmt(frank);
+        fEl.style.color = frank >= 0 ? "var(--green)" : "var(--red)";
+        cEl.textContent = fmt(cristian);
+        cEl.style.color = cristian >= 0 ? "var(--green)" : "var(--red)";
+
+        const diff = frank - cristian;
+        const amount = Math.abs(diff) / 2;
+        if (Math.abs(diff) < 500) {
+          sEl.innerHTML = '<span style="color:var(--green)">✓ Cuentas equilibradas</span>';
+        } else if (diff > 0) {
+          sEl.innerHTML = `Frank debe transferir <strong style="color:var(--accent-bright)">${fmt(amount)}</strong> a Cristian para quedar iguales`;
+        } else {
+          sEl.innerHTML = `Cristian debe transferir <strong style="color:var(--accent-bright)">${fmt(amount)}</strong> a Frank para quedar iguales`;
+        }
       }
 
       function renderGlobalKPIs() {
