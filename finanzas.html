@@ -1107,6 +1107,22 @@
 
           <!-- TAB ESTADÍSTICAS -->
           <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
+            <!-- REPORTES HEADER -->
+            <div class="flex items-center justify-between mb-5">
+              <div class="flex items-center gap-1">
+                <button onclick="cambiarMes(-1)" class="p-2 rounded-xl transition" style="background:var(--glass);border:1px solid var(--glass-b)">
+                  <i data-lucide="chevron-left" class="w-4 h-4" style="color:var(--text2)"></i>
+                </button>
+                <span id="reportes-mes-label" class="text-sm font-bold min-w-[120px] text-center capitalize px-1" style="color:var(--text)">—</span>
+                <button onclick="cambiarMes(1)" id="reportes-btn-sig" class="p-2 rounded-xl transition" style="background:var(--glass);border:1px solid var(--glass-b)">
+                  <i data-lucide="chevron-right" class="w-4 h-4" style="color:var(--text2)"></i>
+                </button>
+              </div>
+              <div class="flex rounded-xl overflow-hidden" style="border:1px solid var(--glass-b)">
+                <button id="rpt-mes-btn" onclick="setReportesVista('mes')" class="text-xs px-3 py-1.5 font-semibold transition" style="background:var(--accent);color:#1a0f00">Mes</button>
+                <button id="rpt-anio-btn" onclick="setReportesVista('anio')" class="text-xs px-3 py-1.5 font-semibold transition" style="background:transparent;color:var(--text2)">Año</button>
+              </div>
+            </div>
             <!-- PUBLICIDAD WIDGET -->
             <div class="pub-widget px-4 pt-4 pb-3 mb-5">
               <div class="flex items-center gap-2.5 mb-3">
@@ -1145,7 +1161,7 @@
                 <p
                   class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
                 >
-                  Ingresos vs Gastos · Últimos 6 meses
+                  <span id="chart-1-label">Ingresos vs Gastos · Últimos 6 meses</span>
                 </p>
                 <div style="height: 220px">
                   <canvas id="chart-mensual"></canvas>
@@ -1166,7 +1182,7 @@
                 <p
                   class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
                 >
-                  Flujo semanal del mes
+                  <span id="chart-3-label">Flujo semanal del mes</span>
                 </p>
                 <div style="height: 200px">
                   <canvas id="chart-semanal"></canvas>
@@ -1176,7 +1192,7 @@
                 <p
                   class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
                 >
-                  Medios de pago · este mes
+                  <span id="chart-4-label">Medios de pago · este mes</span>
                 </p>
                 <div id="chart-medios-wrap" style="height: 200px">
                   <canvas id="chart-medios"></canvas>
@@ -1187,7 +1203,7 @@
               <p
                 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4"
               >
-                Top proyectos por profit · este mes
+                <span id="chart-top-label">Top proyectos por profit · este mes</span>
               </p>
               <div id="top-proyectos" class="space-y-3"></div>
             </div>
@@ -1593,15 +1609,19 @@
         renderAll();
       }
       function actualizarMesLabel() {
-        document.getElementById("mes-label").textContent =
-          MESES[mesSel.m] + " " + mesSel.y;
+        const mesNombre = MESES[mesSel.m] + " " + mesSel.y;
+        document.getElementById("mes-label").textContent = mesNombre;
         const esHoy =
           mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         const btn = document.getElementById("btn-mes-sig");
         btn.style.opacity = esHoy ? "0.3" : "1";
         btn.disabled = esHoy;
+        const btnSig2 = document.getElementById("reportes-btn-sig");
+        if (btnSig2) { btnSig2.style.opacity = esHoy && reportesVista==="mes" ? "0.3" : "1"; btnSig2.disabled = esHoy && reportesVista==="mes"; }
         document.getElementById("summary-title").textContent =
-          "Resumen · " + MESES[mesSel.m] + " " + mesSel.y;
+          "Resumen · " + mesNombre;
+        const rptLbl = document.getElementById("reportes-mes-label");
+        if (rptLbl) rptLbl.textContent = reportesVista === "anio" ? "Año " + mesSel.y : mesNombre;
         const lbl = document.getElementById("chart-cat-mes-label");
         if (lbl) lbl.textContent = MESES[mesSel.m].toLowerCase();
       }
@@ -2670,30 +2690,46 @@
         return result;
       }
 
-      function renderCharts() {
-        const mes = txDelMes(transactions);
+      let reportesVista = "mes";
+      function setReportesVista(vista) {
+        reportesVista = vista;
+        const mb = document.getElementById("rpt-mes-btn");
+        const ab = document.getElementById("rpt-anio-btn");
+        if (mb) { mb.style.background = vista==="mes"?"var(--accent)":"transparent"; mb.style.color = vista==="mes"?"#1a0f00":"var(--text2)"; }
+        if (ab) { ab.style.background = vista==="anio"?"var(--accent)":"transparent"; ab.style.color = vista==="anio"?"#1a0f00":"var(--text2)"; }
+        actualizarMesLabel();
+        renderCharts();
+      }
 
-        // Chart 1 — Ingresos vs Gastos últimos 6 meses
+      function renderCharts() {
+        const isAnio = reportesVista === "anio";
+        const anioPool = transactions.filter(t => (t.fecha||"").startsWith(String(mesSel.y)));
+        const mes = isAnio ? anioPool : txDelMes(transactions);
+        const periodoLabel = isAnio ? `año ${mesSel.y}` : MESES[mesSel.m].toLowerCase();
+        const lbl1 = document.getElementById("chart-1-label");
+        const lbl3 = document.getElementById("chart-3-label");
+        const lbl4 = document.getElementById("chart-4-label");
+        const lblTop = document.getElementById("chart-top-label");
+        if (lbl1) lbl1.textContent = isAnio ? `Ingresos vs Gastos · ${mesSel.y}` : "Ingresos vs Gastos · Últimos 6 meses";
+        if (lbl3) lbl3.textContent = isAnio ? `Profit mensual · ${mesSel.y}` : "Flujo semanal del mes";
+        if (lbl4) lbl4.textContent = `Medios de pago · ${periodoLabel}`;
+        if (lblTop) lblTop.textContent = `Top proyectos por profit · ${periodoLabel}`;
+        const catLbl = document.getElementById("chart-cat-mes-label");
+        if (catLbl) catLbl.textContent = periodoLabel;
+
+        // Chart 1 — Ingresos vs Gastos
         destroyChart("mensual");
-        const range = getMonthRange(6);
-        const ingsArr = [],
-          gastArr = [],
-          lblArr = [];
+        const range = isAnio
+          ? Array.from({length:12},(_,i)=>({y:mesSel.y,m:i,label:MESES[i].slice(0,3)}))
+          : getMonthRange(6);
+        const ingsArr = [], gastArr = [], lblArr = [];
         range.forEach(({ y, m, label }) => {
           const prefix = y + "-" + String(m + 1).padStart(2, "0");
           const txM = transactions.filter((t) =>
             (t.fecha || "").startsWith(prefix),
           );
-          ingsArr.push(
-            txM
-              .filter((t) => t.tipo === "ingreso")
-              .reduce((s, t) => s + t.monto, 0),
-          );
-          gastArr.push(
-            txM
-              .filter((t) => t.tipo === "gasto")
-              .reduce((s, t) => s + t.monto, 0),
-          );
+          ingsArr.push(txM.filter((t) => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0));
+          gastArr.push(txM.filter((t) => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0));
           lblArr.push(label);
         });
         const ctx1 = document.getElementById("chart-mensual").getContext("2d");
@@ -2811,79 +2847,44 @@
             '<p class="text-center text-slate-400 text-sm flex items-center justify-center h-full">Sin gastos este mes</p>';
         }
 
-        // Chart 3 — Flujo semanal (línea)
+        // Chart 3 — Flujo semanal (mes) / Profit mensual (año)
         destroyChart("semanal");
-        const semanasLbl = [
-          "Sem 1 (1-7)",
-          "Sem 2 (8-14)",
-          "Sem 3 (15-21)",
-          "Sem 4 (22-31)",
-        ];
-        const ingSem = [0, 0, 0, 0],
-          gastSem = [0, 0, 0, 0];
-        mes.forEach((t) => {
-          const i = parseInt(getSemana(t.fecha), 10) - 1;
-          if (t.tipo === "ingreso") ingSem[i] += t.monto;
-          else gastSem[i] += t.monto;
-        });
         const ctx3 = document.getElementById("chart-semanal").getContext("2d");
-        charts["semanal"] = new Chart(ctx3, {
-          type: "line",
-          data: {
-            labels: semanasLbl,
-            datasets: [
-              {
-                label: "Ingresos",
-                data: ingSem,
-                borderColor: "#22c55e",
-                backgroundColor: "rgba(34,197,94,0.1)",
-                tension: 0.35,
-                fill: true,
-                pointRadius: 5,
-                pointBackgroundColor: "#22c55e",
-                borderWidth: 2,
-              },
-              {
-                label: "Gastos",
-                data: gastSem,
-                borderColor: "#ef4444",
-                backgroundColor: "rgba(239,68,68,0.07)",
-                tension: 0.35,
-                fill: true,
-                pointRadius: 5,
-                pointBackgroundColor: "#ef4444",
-                borderWidth: 2,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                labels: {
-                  font: { family: "Poppins", size: 11 },
-                  boxWidth: 12,
-                  padding: 16,
-                },
-              },
-            },
-            scales: {
-              y: {
-                ticks: {
-                  callback: (v) =>
-                    "$" +
-                    (v >= 1e6
-                      ? (v / 1e6).toFixed(1) + "M"
-                      : (v / 1e3).toFixed(0) + "k"),
-                  font: { size: 10 },
-                },
-                grid: { color: "#f1f5f9" },
-              },
-              x: { ticks: { font: { size: 10 } }, grid: { display: false } },
-            },
-          },
-        });
+        if (isAnio) {
+          const mesesLbl = MESES.map(m=>m.slice(0,3));
+          const profitMeses = Array.from({length:12},(_,i)=>{
+            const pref = mesSel.y+"-"+String(i+1).padStart(2,"0");
+            const txM = transactions.filter(t=>(t.fecha||"").startsWith(pref));
+            return txM.filter(t=>t.tipo==="ingreso").reduce((s,t)=>s+t.monto,0)
+                 - txM.filter(t=>t.tipo==="gasto").reduce((s,t)=>s+t.monto,0);
+          });
+          charts["semanal"] = new Chart(ctx3, {
+            type:"bar",
+            data:{ labels:mesesLbl, datasets:[{ label:"Profit", data:profitMeses,
+              backgroundColor: profitMeses.map(v=>v>=0?"rgba(34,197,94,0.8)":"rgba(239,68,68,0.8)"),
+              borderRadius:6, borderSkipped:false }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+              plugins:{ legend:{display:false}, tooltip:{callbacks:{label:(c)=>" "+fmt(c.raw)}} },
+              scales:{ y:{ticks:{callback:(v)=>"$"+(v>=1e6?(v/1e6).toFixed(1)+"M":(v/1e3).toFixed(0)+"k"),font:{size:10}},grid:{color:"#f1f5f9"}},
+                x:{ticks:{font:{size:10}},grid:{display:false}} } }
+          });
+        } else {
+          const semanasLbl = ["Sem 1 (1-7)","Sem 2 (8-14)","Sem 3 (15-21)","Sem 4 (22-31)"];
+          const ingSem=[0,0,0,0], gastSem=[0,0,0,0];
+          mes.forEach(t=>{
+            const i=parseInt(getSemana(t.fecha),10)-1;
+            if(t.tipo==="ingreso") ingSem[i]+=t.monto; else gastSem[i]+=t.monto;
+          });
+          charts["semanal"] = new Chart(ctx3,{
+            type:"line", data:{ labels:semanasLbl, datasets:[
+              {label:"Ingresos",data:ingSem,borderColor:"#22c55e",backgroundColor:"rgba(34,197,94,0.1)",tension:0.35,fill:true,pointRadius:5,pointBackgroundColor:"#22c55e",borderWidth:2},
+              {label:"Gastos",data:gastSem,borderColor:"#ef4444",backgroundColor:"rgba(239,68,68,0.07)",tension:0.35,fill:true,pointRadius:5,pointBackgroundColor:"#ef4444",borderWidth:2}]},
+            options:{responsive:true,maintainAspectRatio:false,
+              plugins:{legend:{labels:{font:{family:"Poppins",size:11},boxWidth:12,padding:16}}},
+              scales:{y:{ticks:{callback:(v)=>"$"+(v>=1e6?(v/1e6).toFixed(1)+"M":(v/1e3).toFixed(0)+"k"),font:{size:10}},grid:{color:"#f1f5f9"}},
+                x:{ticks:{font:{size:10}},grid:{display:false}}}}
+          });
+        }
 
         // Chart 4 — Medios de pago
         destroyChart("medios");
