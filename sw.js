@@ -1,4 +1,4 @@
-const CACHE_NAME = "cbd-finanzas-v9";
+const CACHE_NAME = "cbd-finanzas-v10";
 const APP_SHELL = [
   "/finanzas.html",
   "/finanzas-manifest.json",
