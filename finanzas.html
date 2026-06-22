@@ -132,7 +132,10 @@
         padding: 1rem 1.25rem;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
+        transition: opacity 0.15s, transform 0.1s;
       }
+      .kpi-card:active { opacity: 0.75; transform: scale(0.97); }
       .kpi-card .kpi-icon {
         position: absolute;
         right: 0.75rem;
@@ -637,7 +640,7 @@
             >
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div>
+            <div onclick="irAMovimientosFiltrado('ingreso','',true)" style="cursor:pointer">
               <p
                 class="text-xs font-semibold uppercase tracking-wide mb-1"
                 style="color: rgba(255, 255, 255, 0.4)"
@@ -652,7 +655,7 @@
                 $0
               </p>
             </div>
-            <div>
+            <div onclick="irAMovimientosFiltrado('gasto','',true)" style="cursor:pointer">
               <p
                 class="text-xs font-semibold uppercase tracking-wide mb-1"
                 style="color: rgba(255, 255, 255, 0.4)"
@@ -784,7 +787,7 @@
 
         <!-- KPIs MENSUALES -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-          <div class="kpi-card border-l-4 border-green-400">
+          <div class="kpi-card border-l-4 border-green-400" onclick="irAMovimientosFiltrado('ingreso','')">
             <p class="kpi-label">
               Ingresos operativos
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -792,7 +795,7 @@
             <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
             <i data-lucide="trending-up" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card border-l-4 border-red-400">
+          <div class="kpi-card border-l-4 border-red-400" onclick="irAMovimientosFiltrado('gasto','')">
             <p class="kpi-label">
               Gastos operativos
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -803,7 +806,7 @@
           <div
             class="kpi-card"
             style="background: #f0fdf4; border-left: 4px solid #22c55e"
-          >
+            onclick="irAMovimientosFiltrado('','')">
             <p class="kpi-label">
               Profit operativo
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -811,7 +814,7 @@
             <p class="kpi-value" id="kpi-profit">$0</p>
             <i data-lucide="bar-chart-2" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card border-l-4 border-slate-800">
+          <div class="kpi-card border-l-4 border-slate-800" onclick="irAMovimientosFiltrado('','')">
             <p class="kpi-label">
               Margen
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -819,7 +822,7 @@
             <p class="kpi-value text-slate-900 font-bold" id="kpi-margen">0%</p>
             <i data-lucide="percent" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card border-l-4 border-emerald-500">
+          <div class="kpi-card border-l-4 border-emerald-500" onclick="irAMovimientosFiltrado('ingreso','Aporte de Capital')">
             <p class="kpi-label">
               Aportes de capital
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -829,7 +832,7 @@
             </p>
             <i data-lucide="hand-coins" class="kpi-icon"></i>
           </div>
-          <div class="kpi-card border-l-4 border-orange-400">
+          <div class="kpi-card border-l-4 border-orange-400" onclick="irAMovimientosFiltrado('gasto','Retiro de Capital')">
             <p class="kpi-label">
               Retiros de capital
               <span class="normal-case font-normal text-slate-300">· mes</span>
@@ -2206,6 +2209,19 @@
         if (currentTab === "estadisticas") renderCharts();
       }
 
+      function irAMovimientosFiltrado(tipo, categoria, todosMeses) {
+        document.getElementById("filter-tipo").value = tipo || "";
+        document.getElementById("filter-proyecto").value = "";
+        document.getElementById("filter-semana").value = "";
+        filterCats.clear();
+        if (categoria) filterCats.add(categoria);
+        updateCatLabel();
+        if (todosMeses !== undefined) {
+          document.getElementById("toggle-todos-meses").checked = !!todosMeses;
+        }
+        showTab("movimientos");
+      }
+
       function renderCuentas() {
         let frank = 0, cristian = 0;
         txDelMes(transactions).forEach((t) => {
@@ -2223,6 +2239,12 @@
         fEl.style.color = frank >= 0 ? "var(--green)" : "var(--red)";
         cEl.textContent = fmt(cristian);
         cEl.style.color = cristian >= 0 ? "var(--green)" : "var(--red)";
+
+        const esMesActual = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        if (!esMesActual) {
+          sEl.innerHTML = '<span style="color:var(--text3)">Mes cerrado · saldos archivados</span>';
+          return;
+        }
 
         const diff = frank - cristian;
         const amount = Math.abs(diff) / 2;
