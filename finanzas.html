@@ -151,11 +151,13 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--text2);
+        text-align: center;
       }
       .kpi-card .kpi-value {
         font-size: clamp(0.85rem, 3.5vw, 1.6rem);
         font-weight: 700;
         line-height: 1.2;
+        text-align: center;
         margin-top: 0.15rem;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -608,6 +610,14 @@
               <span class="hidden sm:inline">Instalar</span>
             </button>
             <button
+              onclick="exportarTodo()"
+              class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
+              title="Exportar todo a CSV"
+            >
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span class="hidden sm:inline">CSV</span>
+            </button>
+            <button
               onclick="logout()"
               class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
             >
@@ -660,7 +670,7 @@
                 class="text-xs font-semibold uppercase tracking-wide mb-1"
                 style="color: rgba(255, 255, 255, 0.4)"
               >
-                Gastos Op.
+                Gastos Operativos
               </p>
               <p
                 class="font-bold text-red-400 leading-tight"
@@ -834,7 +844,7 @@
           </div>
           <div class="kpi-card border-l-4 border-orange-400" onclick="irAMovimientosFiltrado('gasto','Retiro de Profit,Retiro de Capital')">
             <p class="kpi-label">
-              Retiros de capital
+              Retiro de profit
               <span class="normal-case font-normal text-slate-300">· mes</span>
             </p>
             <p class="kpi-value text-orange-600" id="kpi-retiros-capital">$0</p>
@@ -1678,6 +1688,7 @@
                 lucide.createIcons();
               }
             }
+            seedAbrilRetiro();
             db.collection("transacciones")
               .orderBy("fecha", "desc")
               .onSnapshot(
@@ -1712,18 +1723,20 @@
         const campoProyecto = document.getElementById("campo-proyecto");
         const campoCat = document.getElementById("campo-categoria-wrap");
 
+        const campoReceptor = document.getElementById("campo-receptor");
         if (tipo === "transferencia") {
           if (bt) bt.className = "toggle-btn active-indigo py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           if (campoTransfer) campoTransfer.classList.remove("hidden");
           if (campoProyecto) campoProyecto.classList.add("hidden");
           if (campoCat) campoCat.classList.add("hidden");
-          document.getElementById("label-receptor").textContent = "Medio";
+          if (campoReceptor) campoReceptor.classList.add("hidden");
           lucide.createIcons();
           return;
         }
         if (campoTransfer) campoTransfer.classList.add("hidden");
         if (campoProyecto) campoProyecto.classList.remove("hidden");
         if (campoCat) campoCat.classList.remove("hidden");
+        if (campoReceptor) campoReceptor.classList.remove("hidden");
 
         if (tipo === "ingreso") {
           bi.className = "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
@@ -2168,6 +2181,60 @@
         showToast("Resumen del mes exportado ✓");
       }
 
+      function exportarTodo() {
+        const rows = [];
+        rows.push(["CBD FINANZAS — EXPORTACIÓN COMPLETA", new Date().toLocaleDateString("es-CO")]);
+        rows.push([]);
+        const gIng = transactions.filter(t=>t.tipo==="ingreso"&&t.categoria!==TRANSFER_CAT).reduce((s,t)=>s+t.monto,0);
+        const gGas = transactions.filter(t=>t.tipo==="gasto"&&t.categoria!==TRANSFER_CAT).reduce((s,t)=>s+t.monto,0);
+        const gRet = transactions.filter(t=>t.tipo==="gasto"&&CAPITAL_GASTO_CATS.includes(t.categoria)).reduce((s,t)=>s+t.monto,0);
+        rows.push(["BALANCE GLOBAL ACUMULADO"]);
+        rows.push(["Total Ingresos",gIng]);
+        rows.push(["Gastos Operativos",gGas-gRet]);
+        rows.push(["Retiro de Profit distribuido",gRet]);
+        rows.push(["Profit Total",gIng-gGas+gRet]);
+        rows.push([]);
+        rows.push(["TODOS LOS MOVIMIENTOS"]);
+        rows.push(["Fecha","Hora","Tipo","Proyecto","Descripcion","Categoria","Monto","Medio","Persona"]);
+        [...transactions]
+          .sort((a,b)=>((b.fecha||"")+(b.hora||"")).localeCompare((a.fecha||"")+(a.hora||"")))
+          .forEach(t=>{
+            rows.push([t.fecha||"",t.hora||"",t.tipo||"",
+              (t.proyecto||"").replace(/"/g,'""'),
+              (t.descripcion||"").replace(/"/g,'""'),
+              (t.categoria||"").replace(/"/g,'""'),
+              t.monto||0,t.medio||"",t.receptor||""]);
+          });
+        const csv = rows.map(r=>r.map(c=>`"${String(c)}"`).join(",")).join("\n");
+        const blob = new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8;"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href=url; a.download="CBD-Finanzas-Completo-"+new Date().toISOString().split("T")[0]+".csv";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("Exportación completa ✓");
+      }
+
+      async function seedAbrilRetiro() {
+        if (!db) return;
+        const MARKER_F = "Cierre profit Abril 2026 - Frank";
+        const snap = await db.collection("transacciones").where("descripcion","==",MARKER_F).limit(1).get();
+        if (!snap.empty) return;
+        const batch = db.batch();
+        batch.set(db.collection("transacciones").doc(), {
+          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
+          receptor:"Frank", descripcion:MARKER_F,
+          fecha:"2026-04-30", hora:"23:59", medio:"Efectivo"
+        });
+        batch.set(db.collection("transacciones").doc(), {
+          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
+          receptor:"Cristian", descripcion:"Cierre profit Abril 2026 - Cristian",
+          fecha:"2026-04-30", hora:"23:59", medio:"Efectivo"
+        });
+        await batch.commit();
+        showToast("Cierre de Abril 2026 registrado ✓");
+      }
+
       // ── Publicidad helpers ────────────────────────────────
       function getSemanaActual() {
         const hoy = new Date();
@@ -2293,10 +2360,10 @@
         const amount = Math.abs(diff) / 2;
         if (Math.abs(diff) < 500) {
           sEl.innerHTML = '<span style="color:var(--green)">✓ Cuentas equilibradas</span>';
-        } else if (diff > 0) {
-          sEl.innerHTML = `Frank debe transferir <strong style="color:var(--accent-bright)">${fmt(amount)}</strong> a Cristian para quedar iguales`;
         } else {
-          sEl.innerHTML = `Cristian debe transferir <strong style="color:var(--accent-bright)">${fmt(amount)}</strong> a Frank para quedar iguales`;
+          const nameFrom = diff > 0 ? "Frank" : "Cristian";
+          const nameTo   = diff > 0 ? "Cristian" : "Frank";
+          sEl.innerHTML = `<div style="font-size:1.5rem;font-weight:800;color:var(--accent-bright);text-align:center;margin:6px 0 2px">${fmt(amount)}</div><div style="font-size:0.72rem;text-align:center;color:var(--text2)">${nameFrom} transfiere a ${nameTo} para quedar iguales</div>`;
         }
       }
 
