@@ -1,0 +1,21 @@
+# Keep dev-only files out of the production deployment.
+# (Everything not listed here is deployed from the repo root — outputDirectory ".")
+
+# One-off build/maintenance scripts
+tools/
+*.py
+*.ps1
+
+# Source / build tooling not needed at runtime
+package.json
+package-lock.json
+tailwind.config.js
+css/tailwind-input.css
+
+# Docs
+*.md
+
+# Editor / tooling config
+.vscode/
+.claude/
+.gitattributes

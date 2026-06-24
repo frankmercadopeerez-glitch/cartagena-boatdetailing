@@ -1,14 +1,13 @@
-
-images/_originals_backup/
+# Dependencies
 node_modules/
 package-lock.json
+
+# Local backups
+images/_originals_backup/
+
+# One-off dev helper scripts kept locally under tools/ (not deployed; see .vercelignore)
 _perf.py
-_standardize.py
 _fix-a11y.py
 _fix-perf.py
 _fix-hero-overlap.py
-_canonical-nav-root.html
-_canonical-footer-root.html
-_standardize-nav-footer.ps1
-_test.ps1
 _revert-async-css.py
