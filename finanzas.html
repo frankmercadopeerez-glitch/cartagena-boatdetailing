@@ -23,6 +23,13 @@
         });
       })();
     </script>
+    <script>
+      try {
+        if (localStorage.getItem("cbd_hadSession")) {
+          document.documentElement.classList.add("fz-resume");
+        }
+      } catch (e) {}
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -288,6 +295,35 @@
       ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
+      /* ── Anti-flash login ──────────────────────── */
+      #login-loading { display: none; }
+      html.fz-resume #login-form { display: none; }
+      html.fz-resume #login-loading { display: flex; }
+      @keyframes fzspin { to { transform: rotate(360deg); } }
+      .fz-spinner {
+        width: 28px; height: 28px;
+        border: 3px solid rgba(184,144,77,0.2);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: fzspin 0.8s linear infinite;
+      }
+
+      /* ── Skeleton de carga de datos ─────────────── */
+      #data-loading { display: none; }
+      @keyframes fzshimmer {
+        0%   { background-position: -450px 0; }
+        100% { background-position:  450px 0; }
+      }
+      .fz-sk {
+        background: linear-gradient(90deg,
+          rgba(255,255,255,0.04) 25%,
+          rgba(255,255,255,0.09) 37%,
+          rgba(255,255,255,0.04) 63%);
+        background-size: 900px 100%;
+        animation: fzshimmer 1.4s infinite linear;
+        border-radius: 14px;
+      }
+
       @keyframes panelIn {
         from { opacity: 0; transform: translateY(8px); }
         to   { opacity: 1; transform: translateY(0); }
@@ -536,29 +572,54 @@
         <p class="text-slate-500 mb-8 text-sm">
           Panel Privado · Colombia Boat Detailing
         </p>
-        <input
-          type="email"
-          id="auth-email"
-          placeholder="Correo electrónico"
-          class="block w-full rounded-xl border p-3 text-center mb-3 text-sm focus:outline-none"
-          style="background: #1a1a1a; border-color: #333333; color: white"
-        />
-        <input
-          type="password"
-          id="auth-password"
-          placeholder="Contraseña"
-          class="block w-full rounded-xl border p-3 text-center mb-5 text-sm focus:outline-none"
-          style="background: #1a1a1a; border-color: #333333; color: white"
-        />
-        <button
-          onclick="loginWithEmail()"
-          id="login-btn"
-          class="w-full text-white font-semibold py-3 px-4 rounded-xl text-sm tracking-wide transition"
-          style="background: linear-gradient(135deg, #b8904d, #d4a85e)"
-        >
-          Ingresar
-        </button>
-        <p id="pin-error" class="text-red-400 mt-3 text-sm hidden"></p>
+
+        <!-- Spinner mientras Firebase valida la sesión guardada -->
+        <div id="login-loading" class="flex-col items-center gap-3 mt-2">
+          <div class="fz-spinner"></div>
+          <span class="text-sm" style="color: var(--text2)">Cargando CBD Finanzas…</span>
+        </div>
+
+        <!-- Formulario de inicio de sesión -->
+        <div id="login-form">
+          <input
+            type="email"
+            id="auth-email"
+            placeholder="Correo electrónico"
+            class="block w-full rounded-xl border p-3 text-center mb-3 text-sm focus:outline-none"
+            style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white"
+          />
+          <input
+            type="password"
+            id="auth-password"
+            placeholder="Contraseña"
+            class="block w-full rounded-xl border p-3 text-center mb-5 text-sm focus:outline-none"
+            style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white"
+          />
+          <button
+            onclick="loginWithEmail()"
+            id="login-btn"
+            class="w-full font-bold py-3.5 px-4 rounded-2xl text-sm tracking-wide transition"
+            style="background: linear-gradient(135deg, #b8904d, #d4a85e); color: #1a0f00; box-shadow: 0 4px 20px rgba(184,144,77,0.35)"
+          >
+            Ingresar
+          </button>
+          <p id="pin-error" class="text-red-400 mt-3 text-sm hidden"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKELETON DE CARGA DE DATOS -->
+    <div id="data-loading" class="fixed inset-0 p-4 sm:p-6" style="z-index: 45; background: var(--bg); transition: opacity 0.35s ease">
+      <div class="max-w-2xl mx-auto pt-6">
+        <div class="fz-sk mb-4" style="height: 120px"></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+          <div class="fz-sk" style="height: 70px"></div>
+          <div class="fz-sk" style="height: 70px"></div>
+          <div class="fz-sk" style="height: 70px"></div>
+          <div class="fz-sk" style="height: 70px"></div>
+        </div>
+        <div class="fz-sk mb-3" style="height: 90px"></div>
+        <div class="fz-sk" style="height: 150px"></div>
       </div>
     </div>
 
@@ -1539,7 +1600,16 @@
         auth = null,
         transactions = [],
         filterCats = new Set();
+      let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
+
+      function hideDataLoading() {
+        const dl = document.getElementById("data-loading");
+        if (!dl) return;
+        dl.style.opacity = "0";
+        setTimeout(() => { dl.style.display = "none"; }, 350);
+        _firstDataLoaded = true;
+      }
       const nowD = new Date();
       let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() };
       const MESES = [
@@ -1683,6 +1753,13 @@
         db = firebase.firestore();
         auth.onAuthStateChanged((user) => {
           if (user) {
+            try { localStorage.setItem("cbd_hadSession", "1"); } catch (e) {}
+            // Mostrar skeleton hasta que lleguen los datos
+            if (!_firstDataLoaded) {
+              const dl = document.getElementById("data-loading");
+              if (dl) { dl.style.display = "block"; dl.style.opacity = "1"; }
+              setTimeout(hideDataLoading, 8000); // seguridad: nunca dejar skeleton atascado
+            }
             document.getElementById("lock-screen").classList.add("hidden");
             document.getElementById("main-app").classList.remove("hidden");
             document.getElementById("tx-fecha").value = todayStr;
@@ -1713,6 +1790,7 @@
               }
             }
             seedAbrilRetiro();
+            seedJunioAjuste();
             db.collection("transacciones")
               .orderBy("fecha", "desc")
               .onSnapshot(
@@ -1721,11 +1799,14 @@
                     id: d.id,
                     ...d.data(),
                   }));
+                  hideDataLoading();
                   renderAll();
                 },
                 (err) => console.error("Firestore:", err),
               );
           } else {
+            try { localStorage.removeItem("cbd_hadSession"); } catch (e) {}
+            document.documentElement.classList.remove("fz-resume");
             document.getElementById("lock-screen").classList.remove("hidden");
             document.getElementById("main-app").classList.add("hidden");
             document.getElementById("login-btn").disabled = false;
@@ -2257,6 +2338,26 @@
         });
         await batch.commit();
         showToast("Cierre de Abril 2026 registrado ✓");
+      }
+
+      async function seedJunioAjuste() {
+        if (!db) return;
+        const MARKER = "Ajuste de saldo Junio 2026 - Frank";
+        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        if (!snap.empty) return;
+        const batch = db.batch();
+        batch.set(db.collection("transacciones").doc(), {
+          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
+          receptor:"Frank", descripcion:MARKER,
+          fecha:"2026-06-24", hora:"23:59", medio:"Efectivo", proyecto:""
+        });
+        batch.set(db.collection("transacciones").doc(), {
+          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
+          receptor:"Cristian", descripcion:"Ajuste de saldo Junio 2026 - Cristian",
+          fecha:"2026-06-24", hora:"23:59", medio:"Efectivo", proyecto:""
+        });
+        await batch.commit();
+        showToast("Ajuste de saldo Junio 2026 registrado ✓");
       }
 
       // ── Publicidad helpers ────────────────────────────────
