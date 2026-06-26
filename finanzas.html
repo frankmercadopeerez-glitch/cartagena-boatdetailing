@@ -779,7 +779,7 @@
           <div class="flex items-center gap-2 mb-3">
             <i data-lucide="users" class="w-4 h-4" style="color:#b8904d"></i>
             <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Cuentas · Balance por Socio</span>
-            <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)" id="cuentas-mes-label">Este mes</span>
+            <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)" id="cuentas-mes-label">Acumulado</span>
           </div>
           <div class="grid grid-cols-2 gap-3 mb-3">
             <div>
@@ -1791,6 +1791,7 @@
             }
             seedAbrilRetiro();
             seedJunioAjuste();
+            seedSaldoAnteriorJunio();
             db.collection("transacciones")
               .orderBy("fecha", "desc")
               .onSnapshot(
@@ -2360,6 +2361,23 @@
         showToast("Ajuste de saldo Junio 2026 registrado ✓");
       }
 
+      async function seedSaldoAnteriorJunio() {
+        if (!db) return;
+        const MARKER = "Saldo anterior - Ajuste Junio 2026";
+        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        if (!snap.empty) return;
+        // Ingreso sin receptor: sube el disponible acumulado sin tocar los saldos de socios en junio.
+        // Contrarresta el gap de $340.696 generado por los retiros de abril que redujeron el acumulado
+        // pero no afectaron el cálculo mensual de socios.
+        await db.collection("transacciones").add({
+          tipo:"ingreso", categoria:"Aporte de Capital", monto:340696,
+          descripcion:MARKER,
+          fecha:"2026-06-01", hora:"00:01", medio:"Efectivo",
+          receptor:"", proyecto:""
+        });
+        showToast("Saldo anterior registrado ✓");
+      }
+
       // ── Publicidad helpers ────────────────────────────────
       function getSemanaActual() {
         const hoy = new Date();
@@ -2494,17 +2512,22 @@
       }
 
       function renderCuentas() {
+        // Acumulado hasta el último día del mes seleccionado (mismo criterio que disponible)
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         let frank = 0, cristian = 0;
-        txDelMes(transactions).forEach((t) => {
-          const r = (t.receptor || "").trim().toLowerCase();
-          const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-          if (r === "frank") frank += delta;
-          else if (r === "cristian") cristian += delta;
-        });
+        transactions
+          .filter(t => (t.fecha || "") <= lastDay)
+          .forEach(t => {
+            const r = (t.receptor || "").trim().toLowerCase();
+            const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+            if (r === "frank") frank += delta;
+            else if (r === "cristian") cristian += delta;
+          });
 
         const fEl = document.getElementById("cuenta-frank-val");
         const cEl = document.getElementById("cuenta-cristian-val");
         const sEl = document.getElementById("settlement-text");
+        const lEl = document.getElementById("cuentas-mes-label");
 
         fEl.textContent = fmt(frank);
         fEl.style.color = frank >= 0 ? "var(--green)" : "var(--red)";
@@ -2512,10 +2535,7 @@
         cEl.style.color = cristian >= 0 ? "var(--green)" : "var(--red)";
 
         const esMesActual = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        if (!esMesActual) {
-          sEl.innerHTML = '<span style="color:var(--text3)">Mes cerrado · saldos archivados</span>';
-          return;
-        }
+        if (lEl) lEl.textContent = esMesActual ? "Acumulado" : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
 
         const diff = frank - cristian;
         const amount = Math.abs(diff) / 2;
