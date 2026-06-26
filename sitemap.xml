@@ -503,7 +503,7 @@
     <priority>0.88</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
-      <image:caption>Instalación Cubierta Madera Sintética Botes Cartagena</image:caption>
+      <image:caption>Foam Deck e Instalación Cubierta Sintética Botes Cartagena</image:caption>
     </image:image>
   </url>
   <url>
@@ -825,5 +825,49 @@
     <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
+  </url>
+
+  <!-- ========================================
+       BLOG FOAM DECK — JUN 2026
+       ======================================== -->
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/foam-deck-cartagena/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:title>Foam Deck instalado en yate en Cartagena Colombia</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/precio-foam-deck-yate-cartagena/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:title>Precio foam deck yate Cartagena 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/foam-deck-vs-cubierta-teca-yate/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.83</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:title>Foam deck vs cubierta de teca yate Cartagena</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/cubierta-espuma-marina-cartagena/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.83</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:title>Cubierta de espuma marina EVA para yates en Cartagena</image:title>
+    </image:image>
   </url>
 </urlset>
