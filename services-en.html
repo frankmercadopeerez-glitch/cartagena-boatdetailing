@@ -1,210 +1,1186 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
+    <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       (function(){
         function loadGA(){
-          if(window._gaLoaded)return;window._gaLoaded=true;
-          var s=document.createElement('script');s.async=true;
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
           s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
-          document.head.appendChild(s);gtag('js',new Date());gtag('config','G-01GC6QM018');
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
         }
         if(document.readyState==='complete'){setTimeout(loadGA,2000);}
         else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){document.addEventListener(e,loadGA,{once:true,passive:true});});
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
       })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yacht &amp; Boat Services in Cartagena | Colombia Boat Detailing</title>
+    <title>All Marine Detailing Services | Cartagena | Colombia Boat Detailing</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="description" content="Complete yacht and boat maintenance services in Cartagena, Colombia. Gelcoat polishing, hull cleaning, ceramic coating, PPF, engine painting, interior detailing and more. International clients welcome." />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://www.colombiaboatdetailing.com/services-en.html" />
-    <link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/services-en.html" />
-    <link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/services.html" />
-    <link rel="alternate" hreflang="x-default" href="https://www.colombiaboatdetailing.com/services.html" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete marine detailing services in Cartagena: Ceramic Coating, PPF, hull cleaning, gelcoat polishing, interior detailing, engine painting and more."
+    />
+    <meta
+      name="keywords"
+      content="mantenimiento naval cartagena, mantenimiento naval yachts, limpieza casco yacht Cartagena, hull cleaning Cartagena, pulido de botes, pulido de yachts, servicios detailing botes Cartagena, estética naval Colombia, PPF yachts, ceramic coating barcos, pintura motores"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://www.colombiaboatdetailing.com/services-en.html"
+    />
+  <link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/services.html" />
+  <link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/services-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.colombiaboatdetailing.com/services.html" />
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.colombiaboatdetailing.com/services-en.html" />
-    <meta property="og:title" content="Yacht &amp; Boat Services in Cartagena | Colombia Boat Detailing" />
-    <meta property="og:description" content="Complete yacht and boat maintenance services in Cartagena: gelcoat polishing, hull cleaning, ceramic coating, PPF, engine painting, interior detailing." />
-    <meta property="og:image" content="https://www.colombiaboatdetailing.com/images/detailing.webp" />
+    <meta
+      property="og:url"
+      content="https://www.colombiaboatdetailing.com/services.html"
+    />
+    <meta
+      property="og:title"
+      content="Servicios de Detailing Naval in Cartagena"
+    />
+    <meta
+      property="og:description"
+      content="Servicios completos de detailing y protección marina in Cartagena."
+    />
+    <meta
+      property="og:image"
+      content="https://www.colombiaboatdetailing.com/images/detailing.webp"
+    />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Colombia Boat Detailing" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "Yacht &amp; Boat Services in Cartagena — Colombia Boat Detailing",
-      "url": "https://www.colombiaboatdetailing.com/services-en.html",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "item": {"@type": "Service", "name": "Gelcoat Polishing", "url": "https://www.colombiaboatdetailing.com/paint-polishing-en.html"}},
-        {"@type": "ListItem", "position": 2, "item": {"@type": "Service", "name": "In-Water Hull Cleaning", "url": "https://www.colombiaboatdetailing.com/hull-cleaning-en.html"}},
-        {"@type": "ListItem", "position": 3, "item": {"@type": "Service", "name": "PPF – Paint Protection Film", "url": "https://www.colombiaboatdetailing.com/ppf-en.html"}},
-        {"@type": "ListItem", "position": 4, "item": {"@type": "Service", "name": "Ceramic Coating", "url": "https://www.colombiaboatdetailing.com/ceramic-coating-en.html"}},
-        {"@type": "ListItem", "position": 5, "item": {"@type": "Service", "name": "Engine Painting", "url": "https://www.colombiaboatdetailing.com/engine-painting.html"}},
-        {"@type": "ListItem", "position": 6, "item": {"@type": "Service", "name": "Interior Detailing", "url": "https://www.colombiaboatdetailing.com/interior-detailing.html"}}
-      ]
-    }
-    </script>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Servicios de Detailing Naval in Cartagena | Colombia Boat Detailing"
+    />
+    <meta
+      name="twitter:description"
+      content="Hull cleaning en agua, pulido, PPF, ceramic coating y restauracion naval in Cartagena."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.colombiaboatdetailing.com/images/detailing.webp"
+    />
+    <!-- Tailwind CSS (compiled) -->
+        <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
     <style>
       *,::before,::after{box-sizing:border-box}
       html{scroll-behavior:smooth}
       body{margin:0;background:#001f3f;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
       #navbar{position:fixed;width:100%;z-index:50;padding-top:0.5rem;padding-bottom:0.5rem;background:#0a192f;backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .hero-overlay{background:linear-gradient(to top,#071428 0%,rgba(5,18,48,0.55) 50%,rgba(5,15,35,0.12) 100%)}
-      .service-card{transition:all 0.3s ease;border:1px solid rgba(255,255,255,0.07)}
-      .service-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,0.5)}
+      .hero-overlay{background:linear-gradient(to top,#071428 0%,rgba(5,18,48,0.55) 50%,rgba(5, 15, 35, 0.12) 100%)}
     </style>
+        <!-- Preload critical fonts -->
     <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+<!-- Critical Tailwind utilities — evita layout shift al cargar tailwind async -->
     <style>*,:after,:before{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-shadow:0 0 #0000;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.block{display:block}.inline{display:inline}.grid{display:grid}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.shrink-0,.flex-shrink-0{flex-shrink:0}.items-center{align-items:center}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-10{gap:2.5rem}.gap-12{gap:3rem}.mx-auto{margin-left:auto;margin-right:auto}.mx-4{margin-left:1rem;margin-right:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.mb-2{margin-bottom:.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.ml-1{margin-left:.25rem}.ml-2{margin-left:.5rem}.my-1{margin-top:.25rem;margin-bottom:.25rem}.text-center{text-align:center}.text-left{text-align:left}.text-right{text-align:right}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.top-0{top:0}.left-0{left:0}.top-6{top:1.5rem}.right-6{right:1.5rem}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.z-\[1\]{z-index:1}.z-\[9999\]{z-index:9999}.w-full{width:100%}.h-full{height:100%}.h-screen{height:100vh}.min-h-\[700px\]{min-height:700px}.min-h-\[380px\]{min-height:380px}.min-h-\[70vh\]{min-height:70vh}.min-h-screen{min-height:100vh}.max-w-7xl{max-width:80rem}.max-w-4xl{max-width:56rem}.max-w-3xl{max-width:48rem}.h-px{height:1px}.overflow-hidden{overflow:hidden}.object-cover{-o-object-fit:cover;object-fit:cover}.pointer-events-none{pointer-events:none}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.text-xs{font-size:.75rem;line-height:1rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.font-light{font-weight:300}.font-normal{font-weight:400}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.font-black{font-weight:900}.font-serif{font-family:Playfair Display,serif}.tracking-widest{letter-spacing:.1em}.tracking-\[0\.2em\]{letter-spacing:.2em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-\[0\.15em\]{letter-spacing:.15em}.leading-none{line-height:1}.leading-tight{line-height:1.25}.leading-relaxed{line-height:1.625}.uppercase{text-transform:uppercase}.capitalize{text-transform:capitalize}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/90{color:hsla(0,0%,100%,.9)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-white\/70{color:hsla(0,0%,100%,.7)}.text-white\/60{color:hsla(0,0%,100%,.6)}.text-white\/50{color:hsla(0,0%,100%,.5)}.text-white\/40{color:hsla(0,0%,100%,.4)}.text-white\/30{color:hsla(0,0%,100%,.3)}.text-gold-400{--tw-text-opacity:1;color:rgb(212 175 55/var(--tw-text-opacity,1))}.text-gold-500{--tw-text-opacity:1;color:rgb(197 160 40/var(--tw-text-opacity,1))}.text-gold-600{--tw-text-opacity:1;color:rgb(176 141 30/var(--tw-text-opacity,1))}.text-navy-900{--tw-text-opacity:1;color:rgb(0 31 63/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.bg-gold-400{--tw-bg-opacity:1;background-color:rgb(212 175 55/var(--tw-bg-opacity,1))}.bg-gold-500{--tw-bg-opacity:1;background-color:rgb(197 160 40/var(--tw-bg-opacity,1))}.bg-navy-900{--tw-bg-opacity:1;background-color:rgb(0 31 63/var(--tw-bg-opacity,1))}.bg-navy-800{--tw-bg-opacity:1;background-color:rgb(10 47 94/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gold-400{--tw-border-opacity:1;border-color:rgb(212 175 55/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.rounded-sm{border-radius:.125rem}.rounded{border-radius:.25rem}.rounded-md{border-radius:.375rem}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-full{border-radius:9999px}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-x-full{--tw-translate-x:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.opacity-0{opacity:0}.opacity-50{opacity:.5}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}@media (min-width:768px){.md\:flex{display:flex}.md\:hidden{display:none}.md\:gap-10{gap:2.5rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:flex-row{flex-direction:row}}</style>
-    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <link
+      rel="preload"
+      href="images/header.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
+<!-- Phosphor Icons -->
     <link rel="preload" href="vendor/phosphor/icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="vendor/phosphor/icons.css" /></noscript>
-  </head>
-  <body class="bg-navy-900 text-slate-800 antialiased">
 
-    <header class="pt-20 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white">
-      <div class="container mx-auto px-6 max-w-4xl text-center">
-        <p class="text-xs uppercase tracking-[0.2em] text-[#d4af37] font-bold mb-4">Cartagena, Colombia</p>
-        <h1 class="font-serif text-5xl md:text-6xl leading-tight mb-5">
-          Yacht &amp; Boat Services<br /><span class="italic text-gold-400 font-normal">in Cartagena</span>
-        </h1>
-        <p class="text-slate-300 text-xl font-light mb-8 max-w-2xl mx-auto">
-          No generic packages — we assess your vessel and design a specific treatment plan. You choose the level of perfection.
+    <!-- Custom Styles -->
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <style>
+      /* Custom Styles for that premium feel */
+      .glass-nav {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to top,
+          #071428 0%,
+          rgba(7, 20, 40, 0.55) 50%,
+          rgba(5, 15, 35, 0.12) 100%
+        );
+      }
+
+      .service-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        border-color: #d4af37;
+      }
+
+      .feature-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .feature-list li::before {
+        content: "✦";
+        color: #d4af37;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+      }
+    </style>
+
+    <!-- Schema.org - Service Catalog + FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Servicios de Colombia Boat Detailing",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Service",
+              "name": "Hull Cleaning en Agua",
+              "url": "https://www.colombiaboatdetailing.com/hull-cleaning.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Service",
+              "name": "PPF para Embarcaciones",
+              "url": "https://www.colombiaboatdetailing.com/ppf.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Service",
+              "name": "Ceramic Coating",
+              "url": "https://www.colombiaboatdetailing.com/ceramic-coating.html"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Service",
+              "name": "Restauracion de Gelcoat",
+              "url": "https://www.colombiaboatdetailing.com/gelcoat.html"
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué servicios de detailing naval ofrecen in Cartagena?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ofrecemos hull cleaning en agua con buzos, pulido de pintura, PPF, ceramic coating, restauración de gelcoat, pintura de motores, lavado técnico y control anticorrosivo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Hacen hull cleanings de yachts y veleros without dry dock?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Nuestro servicio de limpieza submarina se realiza con la vessel in the water, sin necesidad de varada."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuál es el precio de la hull cleaning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La tarifa base es de $20.000 COP por feet LOA. También contamos con planes de mantenimiento mensual."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body
+    class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+  >
+    <!-- Navigation -->
+        <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
+  <div class="container mx-auto px-6 flex justify-between items-center">
+    <a href="/" class="flex items-center gap-3 group">
+      <i
+        class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"
+      ></i>
+      <div class="flex flex-col">
+        <span
+          class="text-white text-lg tracking-[0.2em] font-light leading-none"
+          >COLOMBIA</span
+        >
+        <span
+          class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors"
+          >BOAT DETAILING</span
+        >
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-10">
+      <div class="nav-dropdown">
+        <button
+          data-dropdown-toggle="servicesDropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicesDropdown"
+          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+        >
+          Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+        </button>
+        <div class="nav-dropdown-content" id="servicesDropdown">
+          <a
+            href="paint-polishing.html"
+            class="nav-dropdown-link flex items-center gap-2"
+          >
+            <span
+              class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm"
+              >★</span
+            >
+            Gelcoat Polishing
+          </a>
+          <div class="mx-4 h-px bg-white/10 my-1"></div>
+          <a href="hull-cleaning.html" class="nav-dropdown-link"
+            >Hull Cleaning</a
+          >
+          <a href="ppf.html" class="nav-dropdown-link"
+            >PPF (Paint Protection)</a
+          >
+          <a href="ceramic-coating.html" class="nav-dropdown-link"
+            >Ceramic Coating</a
+          >
+          <a href="gelcoat.html" class="nav-dropdown-link"
+            >Restauración Gelcoat</a
+          >
+          <a href="fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
+          <a href="cubierta-sintetica.html" class="nav-dropdown-link"
+            >Cubierta Sintética</a
+          >
+          <a href="cubierta-teka.html" class="nav-dropdown-link"
+            >Cubierta de Teca</a
+          >
+          <a href="calcomanias.html" class="nav-dropdown-link"
+            >Calcomanías y Gráficos</a
+          >
+          <a href="polarizado.html" class="nav-dropdown-link"
+            >Polarizado Nanocerámico</a
+          >
+          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
+            Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
+            <div class="submenu-flyout">
+              <a
+                href="engine-painting.html"
+                class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm"
+                >Engine Painting</a
+              >
+              <a
+                href="boat-painting.html"
+                class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t"
+                >Pintura Completa</a
+              >
+              <a
+                href="bottom-paint.html"
+                class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t"
+                >Pintura de Casco</a
+              >
+            </div>
+          </button>
+          <a href="interior-detailing.html" class="nav-dropdown-link"
+            >Interiores y Tapicería</a
+          >
+          <a href="anti-corrosion.html" class="nav-dropdown-link"
+            >Control Anticorrosivo</a
+          >
+          <a href="technical-wash.html" class="nav-dropdown-link"
+            >Lavado Técnico</a
+          >
+        </div>
+      </div>
+      <a
+        href="about.html"
+        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        >About Us</a
+      >
+      <a
+        href="blog.html"
+        class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+        >Blog</a
+      >
+      <a
+        href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+      >
+        Book Appointment
+      </a>
+    </div>
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-white focus:outline-none"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <i class="ph ph-list text-3xl" aria-hidden="true"></i>
+    </button>
+  </div>
+</nav>
+
+    <!-- Mobile Menu Overlay (Outside navbar for z-index independence) -->
+        <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+  aria-hidden="true"
+  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+  style="opacity: 1; visibility: visible"
+>
+  <button
+    id="close-menu-btn"
+    class="absolute top-6 right-6 text-white/50 hover:text-white"
+    aria-label="Cerrar menú de navegación"
+  >
+    <i class="ph ph-x text-3xl" aria-hidden="true"></i>
+  </button>
+  <a
+    href="services.html"
+    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+    >Services</a
+  >
+  <a
+    href="about.html"
+    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+    >About Us</a
+  >
+  <a
+    href="blog.html"
+    class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+    >Blog</a
+  >
+  <a
+    href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+    >Book Appointment</a
+  >
+</div>
+
+    <!-- Hero Section -->
+    <section
+      class="pt-32 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+        <div
+          class="absolute bottom-10 left-10 w-80 h-80 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+            Servicios Especializados en
+            <span class="text-gold-400">Protección Marina</span>
+          </h1>
+          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl mx-auto">
+            Ocho servicios profesionales diseñados para proteger, restaurar y
+            mantener tu vessel en óptimas condiciones en el clima tropical
+            of Cartagena.
+          </p>
+          <a
+            href="#servicios"
+            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
+          >
+            View Services <i class="ph ph-arrow-down ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="servicios" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="w-full mx-auto">
+          <h2 class="font-serif text-4xl text-navy-900 text-center mb-16">
+            Our Services
+          </h2>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Service Card 0: Hull Cleaning -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/detailing.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-wave-sine text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Hull Cleaning en Agua
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Limpieza submarina de hulls de yachts y veleros con buzos
+                  certifieds. Remoción de incrustaciones from $20.000 COP por
+                  pie.
+                </p>
+                <a
+                  href="hull-cleaning.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 1: PPF -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/brillo.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-shield text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">PPF</h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Paint Protection Film certified con garantía de por vida.
+                  Protección contra rayos UV, sal marina y contaminantes.
+                </p>
+                <a
+                  href="ppf.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 2: Ceramic Coating -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/polichado.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-droplet text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Ceramic Coating
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Revestimiento cerámico nano-cristalino. Hidrofóbico,
+                  resistente a productos químicos y protección UV extrema.
+                </p>
+                <a
+                  href="ceramic-coating.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 3: Gelcoat Restoration -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/polichado%20(2).webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-sparkle text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Restauración Gelcoat
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Reparación profesional de grietas, arañazos y decoloración.
+                  Acabado brillante de fábrica restaurado.
+                </p>
+                <a
+                  href="gelcoat.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 4: Engine Painting -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/motores.webp&quot;);
+                "
+              >
+                <i class="ph ph-gear text-5xl text-gold-400 relative z-10"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Pintura de Motores
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Restauración de motores Yamaha, Mercury y Volvo. Imprimador
+                  epóxico anti-corrosión de 2 capas.
+                </p>
+                <a
+                  href="engine-painting.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 5: Interior Detailing -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/cojineria.webp&quot;);
+                "
+              >
+                <i class="ph ph-couch text-5xl text-gold-400 relative z-10"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Interiores & Tapicería
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Limpieza profunda, desinfección y tratamiento de tapicería.
+                  Restauración de acabados interiores.
+                </p>
+                <a
+                  href="interior-detailing.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 6: Anti-Corrosion Control -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/limpieza%20(2).webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-shield-warning text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Control Anticorrosivo
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Protección anticorrosiva especializada para salas de máquinas
+                  y estructuras metálicas. Prevención de oxidación marina.
+                </p>
+                <a
+                  href="anti-corrosion.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Instalación Eléctrica Náutica -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/detailing.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-lightning text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Instalación Eléctrica Náutica
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Luces LED subacuáticas, navegación COLREGS, tablero eléctrico,
+                  banco de baterías y paneles solares. Estándar ABYC E-11.
+                </p>
+                <a
+                  href="electrical-systems.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Reparación de Fibra -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/detailing.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-wrench text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Reparación de Fibra
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Reparamos golpes, grietas, osmosis y daños en el laminado.
+                  Acabado idéntico al original con gelcoat a color.
+                </p>
+                <a
+                  href="fibra.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Cubierta Sintética -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/cubierta.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-tree-evergreen text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Cubierta Sintética
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Madera sintética PVC marino. Aspecto idéntico a la teca, sin
+                  mantenimiento, resistente al UV tropical.
+                </p>
+                <a
+                  href="cubierta-sintetica.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Cubierta de Teca -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/cubierta.webp&quot;);
+                "
+              >
+                <i class="ph ph-star text-5xl text-gold-400 relative z-10"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Cubierta de Teca
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Teca birmana grado A. El acabado más exclusivo de la náutica.
+                  Instalación artesanal y restauración.
+                </p>
+                <a
+                  href="cubierta-teka.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 7: Bottom Paint -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/pintura.webp&quot;);
+                "
+              >
+                <i class="ph ph-ship text-5xl text-gold-400 relative z-10"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Pintura de Casco
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Pintura antifouling de última generación. Prevención de
+                  incrustaciones marinas en carena.
+                </p>
+                <a
+                  href="bottom-paint.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 8: Technical Wash -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/desmanchado.webp&quot;);
+                "
+              >
+                <i class="ph ph-water text-5xl text-gold-400 relative z-10"></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Lavado Técnico
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Eliminación de contaminantes marinos, sal y calcio. Base
+                  profesional para protecciones premium.
+                </p>
+                <a
+                  href="technical-wash.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 9: Boat Painting -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/pintura.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-paint-brush text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Pintura Completa de Botes
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Repintado profesional integral con sistemas premium Awlgrip e
+                  International. Garantía de hasta 5 años.
+                </p>
+                <a
+                  href="boat-painting.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card 10: Paint Polishing -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/polichado.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-sparkle text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Pulido de Pintura
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Corrección multi-etapa para acabado espejo. Eliminación de
+                  oxidación, swirl marks y arañazos.
+                </p>
+                <a
+                  href="paint-polishing.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Calcomanías y Gráficos -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/detailing (2).webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-sticker text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Calcomanías & Gráficos
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Nombre de la vessel, línea de flotación, matrícula y
+                  gráficos personalizados en vinilo marino de alta durabilidad.
+                </p>
+                <a
+                  href="calcomanias.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Service Card: Polarizado Nanocerámico -->
+            <div
+              class="service-card bg-white/5 border border-white/10 rounded-sm overflow-hidden hover:shadow-2xl transition group"
+            >
+              <div
+                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
+                style="
+                  background-image:
+                    linear-gradient(
+                      rgba(17, 34, 64, 0.7),
+                      rgba(17, 34, 64, 0.7)
+                    ),
+                    url(&quot;images/cojineria.webp&quot;);
+                "
+              >
+                <i
+                  class="ph ph-sun-dim text-5xl text-gold-400 relative z-10"
+                ></i>
+              </div>
+              <div class="p-6">
+                <h3 class="font-serif text-xl text-navy-900 mb-2">
+                  Polarizado Nanocerámico
+                </h3>
+                <p class="text-slate-600 text-sm font-light mb-4">
+                  Film nanocerámico para ventanas. Reduce el calor hasta 70%,
+                  bloquea 99% UV. Sin interferencia con GPS ni VHF.
+                </p>
+                <a
+                  href="polarizado.html"
+                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
+                >
+                  View Details <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-navy-900 text-white relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="font-serif text-4xl mb-6">
+            ¿Listo para proteger tu vessel?
+          </h2>
+          <p class="text-lg text-slate-300 font-light mb-8">
+            Contáctanos para una consultoría gratuita y diagnóstico profesional
+            de tu yacht.
+          </p>
+          <a
+            href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
+          >
+            Schedule Inspection
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+        <!-- Footer -->
+    <!-- Footer -->
+<footer class="bg-navy-900 text-slate-300 py-6 md:py-10">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mb-6 md:mb-10">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
+          <div>
+            <p class="text-white text-xs tracking-[0.1em] font-bold">
+              COLOMBIA
+            </p>
+            <p class="text-white font-serif font-bold text-sm tracking-widest">
+              BOAT DETAILING
+            </p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-300 font-light">
+          International Standards of Marine Excellence since 2024.
         </p>
-        <a href="https://wa.me/573044301112?text=Hi%2C%20I%20want%20a%20quote%20for%20my%20boat%20in%20Cartagena"
-           target="_blank" rel="noopener noreferrer"
-           class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105">
-          Request a Quote
+      </div>
+      <div>
+        <h4 class="text-navy-900 text-sm font-bold tracking-widest uppercase mb-4">
+          Navegación
+        </h4>
+        <ul class="space-y-2 text-xs font-light">
+          <li>
+            <a
+              href="/"
+              class="text-slate-300 hover:text-gold-400 transition-colors"
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="text-slate-300 hover:text-gold-400 transition-colors"
+              >About Us</a
+            >
+          </li>
+          <li>
+            <a
+              href="blog.html"
+              class="text-slate-300 hover:text-gold-400 transition-colors"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              href="services.html"
+              class="text-slate-300 hover:text-gold-400 transition-colors"
+              >All Services</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-navy-900 text-sm font-bold tracking-widest uppercase mb-4">
+          Contacto
+        </h4>
+        <p class="text-xs font-light mb-2">
+          <a href="tel:+573044301112" class="hover:text-gold-400 transition"
+            >+57 304 430 1112</a
+          >
+        </p>
+        <p class="text-xs font-light mb-2">Cartagena de Indias</p>
+        <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
+        <a
+          href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+        >
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
         </a>
       </div>
-    </header>
+    </div>
+    <div
+      class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500"
+    >
+      <p>
+        &copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias,
+        Colombia &middot;
+        <a href="sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a>
+      </p>
+    </div>
+  </div>
+</footer>
 
-    <main class="py-16 bg-white">
-      <div class="container mx-auto px-6 max-w-5xl">
+    <!-- WhatsApp Floating Button -->
+    <a
+      href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Cotizar por WhatsApp"
+    >
+      <img src="images/whatsapp.webp" alt="WhatsApp" class="whatsapp-float__img" width="58" height="58" />
+    </a>
 
-        <!-- Protection & Aesthetics -->
-        <h2 class="font-serif text-3xl text-navy-900 mb-8">Protection &amp; Aesthetics</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <a href="paint-polishing-en.html" class="service-card group flex gap-5 p-6 bg-navy-900 rounded-sm">
-            <div class="flex-shrink-0 w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm border border-white/10">
-              <i class="ph ph-sparkle text-2xl text-gold-400"></i>
-            </div>
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">★ Star Service · From COP 90,000/ft</span>
-              <h3 class="font-serif text-xl text-white mt-1 mb-1 group-hover:text-gold-400 transition-colors">Gelcoat Polishing</h3>
-              <p class="text-slate-400 text-sm font-light leading-relaxed">Multi-stage paint correction that eliminates oxidation, swirls and scratches. Mirror showroom finish guaranteed.</p>
-              <span class="inline-flex items-center text-gold-400 text-xs mt-3 font-semibold">Learn more <i class="ph ph-arrow-right ml-1"></i></span>
-            </div>
-          </a>
-          <a href="ppf-en.html" class="service-card group flex gap-5 p-6 bg-navy-900 rounded-sm">
-            <div class="flex-shrink-0 w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm border border-white/10">
-              <i class="ph ph-shield-check text-2xl text-gold-400"></i>
-            </div>
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Lifetime Warranty</span>
-              <h3 class="font-serif text-xl text-white mt-1 mb-1 group-hover:text-gold-400 transition-colors">PPF – Paint Protection Film</h3>
-              <p class="text-slate-400 text-sm font-light leading-relaxed">Self-healing thermoplastic film (150–200 µ). Absorbs impacts, scratches and UV. Only PPF with lifetime guarantee in Cartagena.</p>
-              <span class="inline-flex items-center text-gold-400 text-xs mt-3 font-semibold">Learn more <i class="ph ph-arrow-right ml-1"></i></span>
-            </div>
-          </a>
-          <a href="ceramic-coating-en.html" class="service-card group flex gap-5 p-6 bg-navy-900 rounded-sm">
-            <div class="flex-shrink-0 w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm border border-white/10">
-              <i class="ph ph-diamond text-2xl text-gold-400"></i>
-            </div>
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">2–5 Year Protection</span>
-              <h3 class="font-serif text-xl text-white mt-1 mb-1 group-hover:text-gold-400 transition-colors">Ceramic Coating</h3>
-              <p class="text-slate-400 text-sm font-light leading-relaxed">Certified nano-ceramic bonding to gelcoat. Extreme hydrophobia, 95% UV block, anti-salt and anti-fouling.</p>
-              <span class="inline-flex items-center text-gold-400 text-xs mt-3 font-semibold">Learn more <i class="ph ph-arrow-right ml-1"></i></span>
-            </div>
-          </a>
-          <a href="hull-cleaning-en.html" class="service-card group flex gap-5 p-6 bg-navy-900 rounded-sm">
-            <div class="flex-shrink-0 w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm border border-white/10">
-              <i class="ph ph-waves text-2xl text-gold-400"></i>
-            </div>
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">No Haul-Out · From COP 20,000/ft</span>
-              <h3 class="font-serif text-xl text-white mt-1 mb-1 group-hover:text-gold-400 transition-colors">In-Water Hull Cleaning</h3>
-              <p class="text-slate-400 text-sm font-light leading-relaxed">Certified divers. Hull, propeller, shaft and rudder cleaning. Visual anode inspection. Photo report included.</p>
-              <span class="inline-flex items-center text-gold-400 text-xs mt-3 font-semibold">Learn more <i class="ph ph-arrow-right ml-1"></i></span>
-            </div>
-          </a>
-        </div>
-
-        <!-- Painting & Restoration -->
-        <h2 class="font-serif text-3xl text-navy-900 mb-8">Painting &amp; Restoration</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <a href="engine-painting.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-paint-bucket text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Engine Painting</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">OEM color matching for Yamaha, Mercury, Volvo. Epoxy anti-corrosion primer. 2-year warranty.</p>
-          </a>
-          <a href="boat-painting.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-paint-roller text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Full Boat Painting</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">Complete marine paint restoration. Hull, superstructure and topside refinishing with professional marine-grade coatings.</p>
-          </a>
-          <a href="gelcoat.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-wrench text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Gelcoat Restoration</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">Repair of cracks, chips and deep oxidation. Color-matched gelcoat application and blending to restore original surface.</p>
-          </a>
-        </div>
-
-        <!-- Interior & Other -->
-        <h2 class="font-serif text-3xl text-navy-900 mb-8">Interior, Deck &amp; Systems</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <a href="interior-detailing.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-armchair text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Interior &amp; Upholstery</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">Deep cleaning and restoration of upholstery, cabin surfaces, floors and soft goods. Mold and mildew treatment.</p>
-          </a>
-          <a href="cubierta-teka.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-tree text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Teak Deck Restoration</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">Cleaning, oiling and caulk restoration of teak decks. Prevents drying, cracking and graying from tropical sun exposure.</p>
-          </a>
-          <a href="anti-corrosion.html" class="service-card group p-6 bg-navy-900 rounded-sm block">
-            <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded-sm border border-white/10 mb-4">
-              <i class="ph ph-shield text-xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-lg text-white mb-2 group-hover:text-gold-400 transition-colors">Anti-Corrosion Treatment</h3>
-            <p class="text-slate-400 text-sm font-light leading-relaxed">Professional corrosion treatment for fittings, rails, cleats and structural metal parts. Salt-environment coating.</p>
-          </a>
-        </div>
-
-        <div class="mt-10 p-6 bg-slate-50 border-l-4 border-[#d4af37] rounded-sm">
-          <p class="text-slate-700 text-sm">
-            Spanish services page: <a href="services.html" class="text-[#c5a028] hover:text-[#b08d1e] font-semibold">Servicios en español</a>.<br />
-            Quote by WhatsApp: <a href="https://wa.me/573044301112?text=Hi%2C%20I%20want%20a%20services%20quote%20for%20my%20boat%20in%20Cartagena" target="_blank" rel="noopener noreferrer" class="text-[#c5a028] hover:text-[#b08d1e] font-semibold">+57 304 430 1112</a>
-          </p>
-        </div>
-      </div>
-    </main>
-
-    <footer class="bg-navy-900 text-slate-400 py-10 border-t border-white/10">
-      <div class="container mx-auto px-6 text-xs text-center">
-        &copy; 2025 Colombia Boat Detailing &mdash; Cartagena de Indias, Colombia
-      </div>
-    </footer>
+    <!-- Main Scripts -->
     <script defer src="js/main.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>

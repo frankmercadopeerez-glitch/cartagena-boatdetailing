@@ -1,50 +1,88 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
+    <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       (function(){
         function loadGA(){
-          if(window._gaLoaded)return;window._gaLoaded=true;
-          var s=document.createElement('script');s.async=true;
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
           s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
-          document.head.appendChild(s);gtag('js',new Date());gtag('config','G-01GC6QM018');
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
         }
         if(document.readyState==='complete'){setTimeout(loadGA,2000);}
         else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){document.addEventListener(e,loadGA,{once:true,passive:true});});
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
       })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | Colombia Boat Detailing Cartagena — +57 304 430 1112</title>
+    <title>Contact | Book Marine Detailing in Cartagena | Colombia Boat Detailing</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="description" content="Contact Colombia Boat Detailing in Cartagena, Colombia. WhatsApp +57 304 430 1112. Get a quote for gelcoat polishing, hull cleaning, ceramic coating or PPF. We respond within 2 hours. English spoken." />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Contact Colombia Boat Detailing to schedule your vessel inspection in Cartagena. We respond within 2 hours via WhatsApp."
+    />
+    <meta
+      name="keywords"
+      content="contacto Colombia Boat Detailing, teléfono boat detailing Cartagena, WhatsApp mantenimiento naval Cartagena, cotizar detailing yacht Cartagena"
+    />
+    <meta name="author" content="Colombia Boat Detailing" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://www.colombiaboatdetailing.com/contact-en.html" />
-    <link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/contact-en.html" />
-    <link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/contacto.html" />
-    <link rel="alternate" hreflang="x-default" href="https://www.colombiaboatdetailing.com/contacto.html" />
+  <link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/contacto.html" />
+  <link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/contact-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.colombiaboatdetailing.com/contacto.html" />
+    <!-- Geo Meta Tags -->
+    <meta name="geo.region" content="CO-BOL" />
+    <meta name="geo.placename" content="Cartagena de Indias, Bolívar, Colombia" />
+    <meta name="geo.position" content="10.3910;-75.4794" />
+    <meta name="ICBM" content="10.3910, -75.4794" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.colombiaboatdetailing.com/contact-en.html" />
     <meta property="og:title" content="Contact | Colombia Boat Detailing Cartagena" />
-    <meta property="og:description" content="Get a boat detailing quote in Cartagena. WhatsApp +57 304 430 1112. We respond within 2 hours. English spoken." />
+    <meta
+      property="og:description"
+      content="Cotiza tu servicio de mantenimiento naval in Cartagena. WhatsApp +57 304 430 1112. Respuesta en menos de 2 horas."
+    />
     <meta property="og:image" content="https://www.colombiaboatdetailing.com/images/header.webp" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Colombia Boat Detailing" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact | Colombia Boat Detailing Cartagena" />
+    <meta name="twitter:description" content="Contact Colombia Boat Detailing to schedule your vessel inspection in Cartagena. We respond within 2 hours via WhatsApp." />
+    <meta name="twitter:image" content="https://www.colombiaboatdetailing.com/images/header.webp" />
+
+    <!-- Schema.org — ContactPage + LocalBusiness -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ContactPage",
       "name": "Contact — Colombia Boat Detailing",
-      "url": "https://www.colombiaboatdetailing.com/contact-en.html",
-      "description": "Contact page for Colombia Boat Detailing. Request a quote for yacht maintenance, boat detailing and hull cleaning in Cartagena de Indias.",
+      "url": "https://www.colombiaboatdetailing.com/contacto.html",
+      "description": "Página de contacto de Colombia Boat Detailing. Solicita cotización de mantenimiento naval, detailing de yachts y hull cleaning in Cartagena de Indias.",
       "mainEntity": {
         "@type": "LocalBusiness",
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
-        "description": "Professional yacht and boat detailing specialist in Cartagena de Indias, Colombia.",
+        "description": "Empresa especializada en mantenimiento naval y detailing de yachts in Cartagena de Indias, Colombia.",
         "url": "https://www.colombiaboatdetailing.com",
         "telephone": "+57-304-430-1112",
         "email": "info@colombiaboatdetailing.com",
@@ -56,167 +94,541 @@
           "postalCode": "130001",
           "addressCountry": "CO"
         },
-        "geo": {"@type": "GeoCoordinates", "latitude": 10.391, "longitude": -75.4794},
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 10.391,
+          "longitude": -75.4794
+        },
         "openingHoursSpecification": [
-          {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "18:00"},
-          {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "14:00"}
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+            "opens": "07:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "14:00"
+          }
         ],
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "47", "bestRating": "5", "worstRating": "1"},
-        "sameAs": ["https://www.instagram.com/colombiaboatdetailing","https://wa.me/573044301112"]
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "47",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "sameAs": [
+          "https://www.instagram.com/colombiaboatdetailing",
+          "https://www.facebook.com/cartagenaboatdetailing",
+          "https://wa.me/573044301112"
+        ]
       }
     }
     </script>
+
+    <!-- Schema.org — BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.colombiaboatdetailing.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.colombiaboatdetailing.com/contacto.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#d4af37" />
+
+    <!-- Critical CSS inline -->
     <style>
       *,::before,::after{box-sizing:border-box}
       html{scroll-behavior:smooth}
       body{margin:0;background:#001f3f;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
       #navbar{position:fixed;width:100%;z-index:50;padding-top:0.5rem;padding-bottom:0.5rem;background:#0a192f;backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
-      .contact-card{transition:all 0.3s ease;border:1px solid rgba(255,255,255,0.07)}
-      .contact-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,0.4);box-shadow:0 12px 40px rgba(212,175,55,0.1)}
+      .hero-overlay{background:linear-gradient(to top,#071428 0%,rgba(5,18,48,0.55) 50%,rgba(5, 15, 35, 0.12) 100%)}
     </style>
+
+    <!-- Preload critical fonts -->
     <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+<!-- Critical Tailwind utilities — evita layout shift al cargar tailwind async -->
     <style>*,:after,:before{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-shadow:0 0 #0000;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.block{display:block}.inline{display:inline}.grid{display:grid}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.shrink-0,.flex-shrink-0{flex-shrink:0}.items-center{align-items:center}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-10{gap:2.5rem}.gap-12{gap:3rem}.mx-auto{margin-left:auto;margin-right:auto}.mx-4{margin-left:1rem;margin-right:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.mb-2{margin-bottom:.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.ml-1{margin-left:.25rem}.ml-2{margin-left:.5rem}.my-1{margin-top:.25rem;margin-bottom:.25rem}.text-center{text-align:center}.text-left{text-align:left}.text-right{text-align:right}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.top-0{top:0}.left-0{left:0}.top-6{top:1.5rem}.right-6{right:1.5rem}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.z-\[1\]{z-index:1}.z-\[9999\]{z-index:9999}.w-full{width:100%}.h-full{height:100%}.h-screen{height:100vh}.min-h-\[700px\]{min-height:700px}.min-h-\[380px\]{min-height:380px}.min-h-\[70vh\]{min-height:70vh}.min-h-screen{min-height:100vh}.max-w-7xl{max-width:80rem}.max-w-4xl{max-width:56rem}.max-w-3xl{max-width:48rem}.h-px{height:1px}.overflow-hidden{overflow:hidden}.object-cover{-o-object-fit:cover;object-fit:cover}.pointer-events-none{pointer-events:none}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.text-xs{font-size:.75rem;line-height:1rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.font-light{font-weight:300}.font-normal{font-weight:400}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.font-black{font-weight:900}.font-serif{font-family:Playfair Display,serif}.tracking-widest{letter-spacing:.1em}.tracking-\[0\.2em\]{letter-spacing:.2em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-\[0\.15em\]{letter-spacing:.15em}.leading-none{line-height:1}.leading-tight{line-height:1.25}.leading-relaxed{line-height:1.625}.uppercase{text-transform:uppercase}.capitalize{text-transform:capitalize}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/90{color:hsla(0,0%,100%,.9)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-white\/70{color:hsla(0,0%,100%,.7)}.text-white\/60{color:hsla(0,0%,100%,.6)}.text-white\/50{color:hsla(0,0%,100%,.5)}.text-white\/40{color:hsla(0,0%,100%,.4)}.text-white\/30{color:hsla(0,0%,100%,.3)}.text-gold-400{--tw-text-opacity:1;color:rgb(212 175 55/var(--tw-text-opacity,1))}.text-gold-500{--tw-text-opacity:1;color:rgb(197 160 40/var(--tw-text-opacity,1))}.text-gold-600{--tw-text-opacity:1;color:rgb(176 141 30/var(--tw-text-opacity,1))}.text-navy-900{--tw-text-opacity:1;color:rgb(0 31 63/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.bg-gold-400{--tw-bg-opacity:1;background-color:rgb(212 175 55/var(--tw-bg-opacity,1))}.bg-gold-500{--tw-bg-opacity:1;background-color:rgb(197 160 40/var(--tw-bg-opacity,1))}.bg-navy-900{--tw-bg-opacity:1;background-color:rgb(0 31 63/var(--tw-bg-opacity,1))}.bg-navy-800{--tw-bg-opacity:1;background-color:rgb(10 47 94/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gold-400{--tw-border-opacity:1;border-color:rgb(212 175 55/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.rounded-sm{border-radius:.125rem}.rounded{border-radius:.25rem}.rounded-md{border-radius:.375rem}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-full{border-radius:9999px}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-x-full{--tw-translate-x:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.opacity-0{opacity:0}.opacity-50{opacity:.5}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}@media (min-width:768px){.md\:flex{display:flex}.md\:hidden{display:none}.md\:gap-10{gap:2.5rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:flex-row{flex-direction:row}}</style>
-    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
     <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
     <link rel="preload" href="vendor/phosphor/icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="vendor/phosphor/icons.css" /></noscript>
-  </head>
-  <body class="bg-navy-900 text-slate-800 antialiased">
 
-    <header class="pt-20 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white">
-      <div class="container mx-auto px-6 max-w-4xl text-center">
-        <p class="text-xs uppercase tracking-[0.2em] text-[#d4af37] font-bold mb-4">English · Español · Response within 2 hours</p>
-        <h1 class="font-serif text-5xl md:text-6xl leading-tight mb-5">
-          Get a Quote<br /><span class="italic text-gold-400 font-normal">Colombia Boat Detailing</span>
-        </h1>
-        <p class="text-slate-300 text-xl font-light mb-8 max-w-2xl mx-auto">
-          Contact us via WhatsApp for the fastest response. Tell us the vessel size, service needed and your location — we'll send a quote within 2 hours.
-        </p>
-        <a href="https://wa.me/573044301112?text=Hi%2C%20I%20want%20a%20boat%20detailing%20quote%20in%20Cartagena"
-           target="_blank" rel="noopener noreferrer"
-           class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-          <i class="ph ph-whatsapp-logo mr-2"></i>WhatsApp: +57 304 430 1112
+    <style>
+      .contact-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.07);
+      }
+      .contact-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(212,175,55,0.4);
+        box-shadow: 0 12px 40px rgba(212,175,55,0.1);
+      }
+      .hours-row:nth-child(even) {
+        background: rgba(255,255,255,0.03);
+      }
+    </style>
+  </head>
+  <body class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3 group">
+          <i class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"></i>
+          <div class="flex flex-col">
+            <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
+            <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>
+          </div>
         </a>
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button
+              data-dropdown-toggle="servicesDropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+            >
+              Servicios <i class="ph-bold ph-caret-down text-xs" aria-hidden="true"></i>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="paint-polishing.html" class="nav-dropdown-link flex items-center gap-2">
+                <span class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm">★</span>
+                Gelcoat Polishing
+              </a>
+              <div class="mx-4 h-px bg-white/10 my-1"></div>
+              <a href="hull-cleaning.html" class="nav-dropdown-link">Hull Cleaning</a>
+              <a href="ppf.html" class="nav-dropdown-link">PPF (Paint Protection)</a>
+              <a href="ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>
+              <a href="gelcoat.html" class="nav-dropdown-link">Restauración Gelcoat</a>
+              <a href="fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>
+              <a href="cubierta-sintetica.html" class="nav-dropdown-link">Cubierta Sintética</a>
+              <a href="cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>
+              <a href="calcomanias.html" class="nav-dropdown-link">Calcomanías y Gráficos</a>
+              <a href="polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>
+              <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left">
+                Pintura <i class="ph ph-caret-right text-xs ml-1" aria-hidden="true"></i>
+                <div class="submenu-flyout">
+                  <a href="engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Engine Painting</a>
+                  <a href="boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>
+                  <a href="bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>
+                </div>
+              </button>
+              <a href="interior-detailing.html" class="nav-dropdown-link">Interiores y Tapicería</a>
+              <a href="anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>
+              <a href="technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>
+            </div>
+          </div>
+          <a href="about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">About Us</a>
+          <a href="blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>
+          <a
+            href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+          >Book Appointment</a>
+        </div>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-white focus:outline-none"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <i class="ph ph-list text-3xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación"
+      aria-hidden="true"
+      class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+      style="opacity: 1; visibility: visible"
+    >
+      <button id="close-menu-btn" class="absolute top-6 right-6 text-white/50 hover:text-white" aria-label="Cerrar menú de navegación">
+        <i class="ph ph-x text-3xl" aria-hidden="true"></i>
+      </button>
+      <a href="services.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Services</a>
+      <a href="about.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">About Us</a>
+      <a href="blog.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Blog</a>
+      <a
+        href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+      >Book Appointment</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="images/detailing.webp"
+          alt="Detailing profesional de embarcaciones in Cartagena de Indias"
+          class="w-full h-full object-cover"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="absolute inset-0 bg-navy-900/50"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <p class="text-gold-400 text-xs tracking-[0.3em] uppercase font-semibold mb-4">Colombia Boat Detailing · Cartagena</p>
+        <h1 class="font-serif text-5xl md:text-7xl text-white font-medium leading-tight mb-6 drop-shadow-2xl">
+          Hablemos de<br /><span class="italic text-gold-400 font-normal">tu Vessel</span>
+        </h1>
+        <p class="text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+          Respondemos en menos de 2 horas. Sin compromiso, sin presión.
+        </p>
+        <div class="flex items-center justify-center gap-2 mt-6">
+          <i class="ph-fill ph-star text-gold-400 text-sm"></i>
+          <span class="text-white/80 text-sm">5.0 · 47 reseñas verificadas</span>
+        </div>
       </div>
     </header>
 
-    <main class="py-16 bg-white">
-      <div class="container mx-auto px-6 max-w-4xl">
+    <!-- Contact Section -->
+    <section class="py-20 bg-navy-900">
+      <div class="container mx-auto px-6">
+        <div class="w-full mx-auto">
 
-        <!-- Contact Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <a href="https://wa.me/573044301112?text=Hi%2C%20I%20want%20a%20boat%20detailing%20quote%20in%20Cartagena"
-             target="_blank" rel="noopener noreferrer"
-             class="contact-card p-6 bg-navy-900 rounded-sm text-center">
-            <div class="w-14 h-14 bg-white/5 flex items-center justify-center mx-auto mb-4 rounded-sm border border-white/10">
-              <i class="ph ph-whatsapp-logo text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl text-white mb-2">WhatsApp</h3>
-            <p class="text-[#d4af37] font-semibold mb-1">+57 304 430 1112</p>
-            <p class="text-slate-400 text-sm font-light">Fastest response. English &amp; Spanish. Available Mon–Sat.</p>
-          </a>
-          <a href="mailto:info@colombiaboatdetailing.com"
-             class="contact-card p-6 bg-navy-900 rounded-sm text-center">
-            <div class="w-14 h-14 bg-white/5 flex items-center justify-center mx-auto mb-4 rounded-sm border border-white/10">
-              <i class="ph ph-envelope text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl text-white mb-2">Email</h3>
-            <p class="text-[#d4af37] font-semibold mb-1">info@colombiaboatdetailing.com</p>
-            <p class="text-slate-400 text-sm font-light">For detailed service requests and documentation.</p>
-          </a>
-          <a href="https://www.instagram.com/colombiaboatdetailing"
-             target="_blank" rel="noopener noreferrer"
-             class="contact-card p-6 bg-navy-900 rounded-sm text-center">
-            <div class="w-14 h-14 bg-white/5 flex items-center justify-center mx-auto mb-4 rounded-sm border border-white/10">
-              <i class="ph ph-instagram-logo text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl text-white mb-2">Instagram</h3>
-            <p class="text-[#d4af37] font-semibold mb-1">@colombiaboatdetailing</p>
-            <p class="text-slate-400 text-sm font-light">Before &amp; after photos, project updates and tips.</p>
-          </a>
-        </div>
+          <!-- Contact cards row -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
 
-        <!-- Hours & Location -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <h2 class="font-serif text-2xl text-navy-900 mb-6 flex items-center gap-2">
-              <i class="ph ph-clock text-[#d4af37]"></i> Business Hours
-            </h2>
-            <div class="bg-slate-50 rounded-sm overflow-hidden border border-slate-100">
-              <div class="flex justify-between px-5 py-3 bg-navy-900">
-                <span class="text-slate-300 text-sm font-medium">Day</span>
-                <span class="text-slate-300 text-sm font-medium">Hours</span>
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20de%20mantenimiento%20para%20mi%20embarcaci%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-card bg-navy-900 rounded-sm p-8 text-center group"
+            >
+              <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-whatsapp-logo text-3xl text-white" aria-hidden="true"></i>
               </div>
-              <div class="flex justify-between px-5 py-3 border-b border-slate-100">
-                <span class="text-slate-700 text-sm">Monday – Friday</span>
-                <span class="text-navy-900 font-semibold text-sm">7:00 am – 6:00 pm</span>
+              <h2 class="text-white font-serif text-xl mb-2">WhatsApp</h2>
+              <p class="text-gold-400 font-bold text-lg mb-3">+57 304 430 1112</p>
+              <p class="text-slate-400 text-sm font-light">Respuesta en menos de 2 horas · Lun–Sáb</p>
+              <span class="inline-block mt-4 bg-green-600 text-white text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-sm group-hover:bg-green-500 transition">
+                Escribir ahora
+              </span>
+            </a>
+
+            <!-- Teléfono -->
+            <a
+              href="tel:+573044301112"
+              class="contact-card bg-navy-900 rounded-sm p-8 text-center group"
+            >
+              <div class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-phone text-3xl text-navy-900" aria-hidden="true"></i>
               </div>
-              <div class="flex justify-between px-5 py-3 bg-slate-50 border-b border-slate-100">
-                <span class="text-slate-700 text-sm">Saturday</span>
-                <span class="text-navy-900 font-semibold text-sm">8:00 am – 2:00 pm</span>
+              <h2 class="text-white font-serif text-xl mb-2">Llamar</h2>
+              <p class="text-gold-400 font-bold text-lg mb-3">+57 304 430 1112</p>
+              <p class="text-slate-400 text-sm font-light">Lun–Vie 7am–6pm · Sáb 8am–2pm</p>
+              <span class="inline-block mt-4 bg-gold-400 text-navy-900 text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-sm group-hover:bg-gold-500 transition">
+                Llamar ahora
+              </span>
+            </a>
+
+            <!-- Instagram -->
+            <a
+              href="https://www.instagram.com/colombiaboatdetailing"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-card bg-navy-900 rounded-sm p-8 text-center group"
+            >
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-instagram-logo text-3xl text-white" aria-hidden="true"></i>
               </div>
-              <div class="flex justify-between px-5 py-3">
-                <span class="text-slate-700 text-sm">Sunday</span>
-                <span class="text-slate-500 text-sm">Closed</span>
-              </div>
-            </div>
-            <p class="text-slate-500 text-xs mt-3 font-light">WhatsApp messages received outside hours are answered the next business day.</p>
+              <h2 class="text-white font-serif text-xl mb-2">Instagram</h2>
+              <p class="text-gold-400 font-bold text-lg mb-3">@colombiaboatdetailing</p>
+              <p class="text-slate-400 text-sm font-light">Galería de trabajos · Resultados reales</p>
+              <span class="inline-block mt-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-sm group-hover:opacity-90 transition">
+                Ver galería
+              </span>
+            </a>
+
           </div>
 
-          <div>
-            <h2 class="font-serif text-2xl text-navy-900 mb-6 flex items-center gap-2">
-              <i class="ph ph-map-pin text-[#d4af37]"></i> Location &amp; Coverage
-            </h2>
-            <div class="bg-slate-50 p-5 rounded-sm border border-slate-100">
-              <p class="text-slate-700 font-semibold mb-1">Cartagena de Indias, Colombia</p>
-              <p class="text-slate-600 text-sm font-light mb-4">We operate from Cartagena and provide mobile service to all marinas and docks in the area — we come to you.</p>
-              <ul class="space-y-2 text-sm text-slate-600 font-light">
-                <li class="flex items-center gap-2"><i class="ph ph-check-circle text-[#d4af37] flex-shrink-0"></i>Bocagrande &amp; Club Náutico</li>
-                <li class="flex items-center gap-2"><i class="ph ph-check-circle text-[#d4af37] flex-shrink-0"></i>Manzanillo del Mar</li>
-                <li class="flex items-center gap-2"><i class="ph ph-check-circle text-[#d4af37] flex-shrink-0"></i>Isla de Barú</li>
-                <li class="flex items-center gap-2"><i class="ph ph-check-circle text-[#d4af37] flex-shrink-0"></i>Islas del Rosario</li>
-                <li class="flex items-center gap-2"><i class="ph ph-check-circle text-[#d4af37] flex-shrink-0"></i>Santa Marta (on request)</li>
-              </ul>
+          <!-- Quick quote form (WhatsApp deeplink) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+            <div>
+              <h2 class="font-serif text-3xl text-navy-900 mb-4">Request Quote</h2>
+              <p class="text-slate-600 font-light leading-relaxed mb-8">
+                Completa los datos básicos de tu vessel y te enviaremos una cotización personalizada sin costo ni compromiso. Respondemos el mismo día.
+              </p>
+
+              <form
+                id="quote-form"
+                class="space-y-5"
+                onsubmit="sendWhatsApp(event)"
+              >
+                <div>
+                  <label for="nombre" class="block text-sm font-semibold text-navy-900 mb-1">Tu nombre</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    placeholder="Ej. Carlos López"
+                    class="w-full border border-slate-300 rounded-sm px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-gold-400"
+                  />
+                </div>
+                <div>
+                  <label for="embarcacion" class="block text-sm font-semibold text-navy-900 mb-1">Tipo y tamaño de vessel</label>
+                  <input
+                    type="text"
+                    id="embarcacion"
+                    name="embarcacion"
+                    required
+                    placeholder="Ej. Yacht 38 pies, velero 45 pies, lancha 25 pies"
+                    class="w-full border border-slate-300 rounded-sm px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-gold-400"
+                  />
+                </div>
+                <div>
+                  <label for="servicio" class="block text-sm font-semibold text-navy-900 mb-1">Servicio de interés</label>
+                  <select
+                    id="servicio"
+                    name="servicio"
+                    required
+                    class="w-full border border-slate-300 rounded-sm px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-gold-400 bg-white"
+                  >
+                    <option value="">— Selecciona un servicio —</option>
+                    <option value="Gelcoat polishing">Gelcoat polishing</option>
+                    <option value="Hull cleaning (buzos)">Hull cleaning (buzos)</option>
+                    <option value="PPF (Paint Protection Film)">PPF (Paint Protection Film)</option>
+                    <option value="Ceramic Coating">Ceramic Coating</option>
+                    <option value="Restauración de gelcoat">Restauración de gelcoat</option>
+                    <option value="Pintura de motores">Pintura de motores</option>
+                    <option value="Detailing interior">Detailing interior y tapicería</option>
+                    <option value="Plan de mantenimiento mensual">Plan de mantenimiento mensual</option>
+                    <option value="Otro">Otro / No sé cuál necesito</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="mensaje" class="block text-sm font-semibold text-navy-900 mb-1">Mensaje adicional <span class="text-slate-400 font-normal">(opcional)</span></label>
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    rows="3"
+                    placeholder="Estado actual de la vessel, fecha preferida, ubicación..."
+                    class="w-full border border-slate-300 rounded-sm px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-gold-400 resize-none"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-gold-400 hover:bg-gold-500 text-navy-900 font-bold text-sm tracking-widest uppercase px-8 py-4 rounded-sm transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+                >
+                  Enviar cotización por WhatsApp →
+                </button>
+                <p class="text-center text-xs text-slate-400">Al enviar, se abrirá WhatsApp con tu mensaje pre-redactado. Gratis y sin compromiso.</p>
+              </form>
+
+              <script>
+                function sendWhatsApp(e) {
+                  e.preventDefault();
+                  var nombre = document.getElementById('nombre').value.trim();
+                  var embarcacion = document.getElementById('embarcacion').value.trim();
+                  var servicio = document.getElementById('servicio').value;
+                  var mensaje = document.getElementById('mensaje').value.trim();
+                  var text = 'Hola, quiero cotizar un servicio de Colombia Boat Detailing.\n\n'
+                    + '👤 Nombre: ' + nombre + '\n'
+                    + '⛵ Vessel: ' + embarcacion + '\n'
+                    + '🔧 Servicio: ' + servicio;
+                  if (mensaje) text += '\n\n📝 ' + mensaje;
+                  if (typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', {
+                      event_category: 'contact',
+                      event_label: servicio || 'cotizacion_general',
+                      method: 'whatsapp_form',
+                    });
+                  }
+                  window.open('https://wa.me/573044301112?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
+                }
+              </script>
+            </div>
+
+            <!-- Right column: hours + location -->
+            <div class="space-y-8">
+              <!-- Business Hours -->
+              <div class="bg-navy-900 rounded-sm p-8">
+                <h3 class="text-white font-serif text-xl mb-6 flex items-center gap-3">
+                  <i class="ph-fill ph-clock text-gold-400 text-2xl" aria-hidden="true"></i>
+                  Horario de Atención
+                </h3>
+                <table class="w-full text-sm">
+                  <tbody>
+                    <tr class="hours-row">
+                      <td class="py-2.5 px-3 text-slate-300 font-light">Lunes – Viernes</td>
+                      <td class="py-2.5 px-3 text-gold-400 font-semibold text-right">7:00am – 6:00pm</td>
+                    </tr>
+                    <tr class="hours-row">
+                      <td class="py-2.5 px-3 text-slate-300 font-light">Sábado</td>
+                      <td class="py-2.5 px-3 text-gold-400 font-semibold text-right">8:00am – 2:00pm</td>
+                    </tr>
+                    <tr class="hours-row">
+                      <td class="py-2.5 px-3 text-slate-300 font-light">Domingo</td>
+                      <td class="py-2.5 px-3 text-slate-500 text-right">Cerrado</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="mt-4 text-xs text-slate-400 font-light">
+                  WhatsApp disponible fuera de horario para urgencias y consultas. Respondemos en la mañana del siguiente día hábil.
+                </p>
+              </div>
+
+              <!-- Location -->
+              <div class="bg-navy-900 rounded-sm p-8">
+                <h3 class="text-white font-serif text-xl mb-6 flex items-center gap-3">
+                  <i class="ph-fill ph-map-pin text-gold-400 text-2xl" aria-hidden="true"></i>
+                  Zona de Servicio
+                </h3>
+                <ul class="space-y-3 text-sm">
+                  <li class="flex items-center gap-3 text-slate-300 font-light">
+                    <i class="ph-fill ph-anchor text-gold-400 text-base shrink-0" aria-hidden="true"></i>
+                    Cartagena de Indias (sede principal)
+                  </li>
+                  <li class="flex items-center gap-3 text-slate-300 font-light">
+                    <i class="ph-fill ph-anchor text-gold-400 text-base shrink-0" aria-hidden="true"></i>
+                    Bocagrande · Club de Pesca · Club Náutico
+                  </li>
+                  <li class="flex items-center gap-3 text-slate-300 font-light">
+                    <i class="ph-fill ph-anchor text-gold-400 text-base shrink-0" aria-hidden="true"></i>
+                    Isla de Barú · Islas del Rosario
+                  </li>
+                  <li class="flex items-center gap-3 text-slate-300 font-light">
+                    <i class="ph-fill ph-anchor text-gold-400 text-base shrink-0" aria-hidden="true"></i>
+                    Manzanillo del Mar · Puerto Encanto
+                  </li>
+                </ul>
+                <p class="mt-5 text-xs text-slate-400 font-light">
+                  Servicio a domicilio en marina o fondeadero. No necesitas varar la vessel para la mayoría de servicios.
+                </p>
+              </div>
+
+              <!-- Quick stats -->
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="bg-gold-400/10 border border-gold-400/20 rounded-sm p-4">
+                  <p class="text-gold-400 font-serif text-2xl font-bold">47</p>
+                  <p class="text-slate-600 text-xs mt-1">Reseñas 5★</p>
+                </div>
+                <div class="bg-gold-400/10 border border-gold-400/20 rounded-sm p-4">
+                  <p class="text-gold-400 font-serif text-2xl font-bold">&lt;2h</p>
+                  <p class="text-slate-600 text-xs mt-1">Respuesta</p>
+                </div>
+                <div class="bg-gold-400/10 border border-gold-400/20 rounded-sm p-4">
+                  <p class="text-gold-400 font-serif text-2xl font-bold">+2</p>
+                  <p class="text-slate-600 text-xs mt-1">Años activos</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- What to include in your quote request -->
-        <div class="p-8 bg-navy-900 text-white rounded-sm mb-10">
-          <h2 class="font-serif text-2xl mb-4">What to Include in Your Message</h2>
-          <ul class="space-y-2 text-slate-300 font-light text-sm">
-            <li class="flex items-start gap-3"><i class="ph ph-arrow-right text-gold-400 mt-0.5 flex-shrink-0"></i><span>Vessel name, type and LOA (length overall) in feet</span></li>
-            <li class="flex items-start gap-3"><i class="ph ph-arrow-right text-gold-400 mt-0.5 flex-shrink-0"></i><span>Service requested (polishing, hull cleaning, PPF, ceramic coating, etc.)</span></li>
-            <li class="flex items-start gap-3"><i class="ph ph-arrow-right text-gold-400 mt-0.5 flex-shrink-0"></i><span>Current condition: last service date, visible oxidation, scratches</span></li>
-            <li class="flex items-start gap-3"><i class="ph ph-arrow-right text-gold-400 mt-0.5 flex-shrink-0"></i><span>Location / marina where the vessel is berthed</span></li>
-            <li class="flex items-start gap-3"><i class="ph ph-arrow-right text-gold-400 mt-0.5 flex-shrink-0"></i><span>Preferred dates or urgency</span></li>
-          </ul>
-          <div class="mt-6">
-            <a href="https://wa.me/573044301112?text=Hi%2C%20I%20want%20a%20boat%20detailing%20quote.%20Vessel:%20%5Bname%5D%20%5BLOA%5D%20ft.%20Service:%20%5Bservice%5D.%20Location:%20%5Bmarina%5D"
-               target="_blank" rel="noopener noreferrer"
-               class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105">
-              Send Quote Request
+        </div>
+      </div>
+    </section>
+
+    <!-- Services CTA strip -->
+    <section class="py-14 bg-navy-900 border-t border-white/5">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-slate-400 text-sm tracking-widest uppercase mb-3">¿No sabes cuál servicio necesitas?</p>
+        <h2 class="font-serif text-3xl text-white mb-6">Explorá todos nuestros servicios</h2>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="services.html"
+            class="inline-block border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-navy-900 px-10 py-3.5 text-sm font-bold tracking-widest uppercase rounded-sm transition-all"
+          >
+            View all services
+          </a>
+          <a
+            href="https://wa.me/573044301112?text=Hola%2C%20no%20s%C3%A9%20cu%C3%A1l%20servicio%20necesito%2C%20%C2%BFme%20pueden%20asesorar%3F"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-green-600 hover:bg-green-500 text-white px-10 py-3.5 text-sm font-bold tracking-widest uppercase rounded-sm transition-all"
+          >
+            <i class="ph-fill ph-whatsapp-logo mr-1" aria-hidden="true"></i> Pedir asesoría gratis
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 py-12 border-t border-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mb-6 md:mb-10">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">COLOMBIA</p>
+                <p class="text-white font-serif font-bold text-sm tracking-widest">BOAT DETAILING</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">International Standards of Marine Excellence since 2024.</p>
+          </div>
+          <div>
+            <h4 class="text-navy-900 text-sm font-bold tracking-widest uppercase mb-4">Navegación</h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li><a href="/" class="text-slate-300 hover:text-gold-400 transition-colors">Inicio</a></li>
+              <li><a href="about.html" class="text-slate-300 hover:text-gold-400 transition-colors">About Us</a></li>
+              <li><a href="blog.html" class="text-slate-300 hover:text-gold-400 transition-colors">Blog</a></li>
+              <li><a href="services.html" class="text-slate-300 hover:text-gold-400 transition-colors">All Services</a></li>
+              <li><a href="contacto.html" class="text-gold-400 hover:text-white transition-colors font-semibold">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-navy-900 text-sm font-bold tracking-widest uppercase mb-4">Contact</h4>
+            <p class="text-xs font-light mb-2"><a href="tel:+573044301112" class="hover:text-gold-400 transition">+57 304 430 1112</a></p>
+            <p class="text-xs font-light mb-2">Cartagena de Indias, Colombia</p>
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition"
+            >
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
             </a>
           </div>
         </div>
-
-        <div class="p-6 bg-slate-50 border-l-4 border-[#d4af37] rounded-sm">
-          <p class="text-slate-700 text-sm">
-            Spanish contact page: <a href="contacto.html" class="text-[#c5a028] font-semibold hover:text-[#b08d1e]">Contacto en español</a> ·
-            Services: <a href="services-en.html" class="text-[#c5a028] hover:text-[#b08d1e]">All Services</a>
-          </p>
+        <div class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500">
+          <p>&copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias, Colombia &middot; <a href="sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a></p>
         </div>
       </div>
-    </main>
-
-    <footer class="bg-navy-900 text-slate-400 py-10 border-t border-white/10">
-      <div class="container mx-auto px-6 text-xs text-center">
-        &copy; 2025 Colombia Boat Detailing &mdash; Cartagena de Indias, Colombia
-      </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp">
+      <img src="images/whatsapp.webp" alt="WhatsApp" class="whatsapp-float__img" width="58" height="58" />
+    </a>
+
     <script defer src="js/main.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
