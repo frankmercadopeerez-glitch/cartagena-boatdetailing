@@ -1838,6 +1838,9 @@
           if (campoProyecto) campoProyecto.classList.add("hidden");
           if (campoCat) campoCat.classList.add("hidden");
           if (campoReceptor) campoReceptor.classList.add("hidden");
+          // Quitar required del proyecto para que el form pueda submitear
+          const proyEl = document.getElementById("tx-proyecto");
+          if (proyEl) proyEl.required = false;
           lucide.createIcons();
           return;
         }
