@@ -2532,7 +2532,7 @@
         transactions
           .filter(t => {
             const f = t.fecha || "";
-            return f >= CUENTAS_DESDE && f <= lastDay && t.categoria !== TRANSFER_CAT;
+            return f >= CUENTAS_DESDE && f <= lastDay;
           })
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
@@ -2635,7 +2635,7 @@
         // Solo muestra negativo si los DOS están en negativo.
         let _frankD = 0, _cristianD = 0;
         transactions
-          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay && t.categoria !== TRANSFER_CAT; })
+          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay; })
           .forEach(t => {
             const r = (t.receptor||"").trim().toLowerCase();
             const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
