@@ -2362,20 +2362,13 @@
       }
 
       async function seedSaldoAnteriorJunio() {
+        // Cleanup: elimina el ingreso sin receptor que se agregó por error.
+        // Regla del sistema: toda transacción debe tener receptor (Frank o Cristian).
         if (!db) return;
         const MARKER = "Saldo anterior - Ajuste Junio 2026";
         const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
-        if (!snap.empty) return;
-        // Ingreso sin receptor: sube el disponible acumulado sin tocar los saldos de socios en junio.
-        // Contrarresta el gap de $340.696 generado por los retiros de abril que redujeron el acumulado
-        // pero no afectaron el cálculo mensual de socios.
-        await db.collection("transacciones").add({
-          tipo:"ingreso", categoria:"Aporte de Capital", monto:340696,
-          descripcion:MARKER,
-          fecha:"2026-06-01", hora:"00:01", medio:"Efectivo",
-          receptor:"", proyecto:""
-        });
-        showToast("Saldo anterior registrado ✓");
+        if (snap.empty) return;
+        await snap.docs[0].ref.delete();
       }
 
       // ── Publicidad helpers ────────────────────────────────
@@ -2516,7 +2509,7 @@
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         let frank = 0, cristian = 0;
         transactions
-          .filter(t => (t.fecha || "") <= lastDay)
+          .filter(t => (t.fecha || "") <= lastDay && t.categoria !== TRANSFER_CAT)
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
