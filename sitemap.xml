@@ -191,7 +191,7 @@
     <loc>https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html</loc>
     <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html" />
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -199,7 +199,7 @@
     <loc>https://www.colombiaboatdetailing.com/limpieza-casco-baru.html</loc>
     <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-baru.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html" />
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -207,7 +207,7 @@
     <loc>https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html</loc>
     <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html" />
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -215,7 +215,7 @@
     <loc>https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html</loc>
     <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html" />
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -541,19 +541,19 @@
        ======================================== -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-bocagrande.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-baru.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/pulido-gelcoat-islas-rosario.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -569,7 +569,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/precio-ppf-yate-cartagena/</loc>
-    <lastmod>2026-06-08</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -868,6 +868,17 @@
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
       <image:title>Cubierta de espuma marina EVA para yates en Cartagena</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/cubierta-eva-foamdeck-cartagena/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
+      <image:title>Cubierta EVA Foamdeck para yates en Cartagena — Instalación y Precios 2026</image:title>
+      <image:caption>Instalación profesional de cubierta EVA foamdeck en Cartagena de Indias, Colombia</image:caption>
     </image:image>
   </url>
 </urlset>
