@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
+        }
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotización #116 — Yate Kon-Tiki II - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #374151;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+        --warn-color: #b45309;
+        --danger-color: #b83232;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page { size: A4; margin: 10mm; }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p { color: var(--text-light); margin-bottom: 2px; }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p { color: var(--primary-color); font-size: 12px; }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 12px 0 7px;
+      }
+
+      .warn-box {
+        background: #fff7ed;
+        border: 1px solid rgba(180,83,9,0.35);
+        border-left: 4px solid var(--warn-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .warn-box strong { color: var(--warn-color); }
+
+      .rec-box {
+        background: #f0faf5;
+        border: 1px solid rgba(31,122,74,0.35);
+        border-left: 4px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .rec-box strong { color: #155c37; }
+
+      table { width: 100%; border-collapse: collapse; }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      th:last-child, td:last-child { text-align: right; }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 9px 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13.5px;
+        margin-bottom: 5px;
+      }
+
+      .item-desc {
+        font-size: 12px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .item-desc ul {
+        margin: 5px 0 0 16px;
+        line-height: 1.7;
+      }
+
+      .item-desc strong { color: var(--secondary-color); }
+
+      .excluido-tag {
+        display: inline-block;
+        background: #fee2e2;
+        color: var(--danger-color);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+      }
+
+      .nota-tag {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+      }
+
+      .garantia-tag {
+        display: inline-block;
+        background: #d1fae5;
+        color: var(--ok-color);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .price-sub {
+        font-size: 10px;
+        color: var(--text-light);
+        white-space: nowrap;
+        margin-top: 2px;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 460px;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 12px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 5px;
+        font-size: 12px;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .grand-total {
+        margin-top: 6px;
+        padding-top: 7px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      /* Photo section */
+      .photo-section { margin-top: 14px; }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .photo-slot img {
+        width: 100%;
+        height: 165px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        display: block;
+      }
+
+      .photo-grid-2col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .photo-grid-2col .photo-slot img {
+        height: 260px;
+      }
+
+      .photo-grid-2col .photo-placeholder {
+        height: 260px;
+      }
+
+      .photo-placeholder {
+        width: 100%;
+        height: 165px;
+        background: #f1f5f9;
+        border: 1px dashed #cbd5e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        font-size: 11px;
+        font-style: italic;
+      }
+
+      .photo-caption {
+        font-size: 10px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      .photo-caption strong {
+        color: var(--accent-color);
+        font-style: normal;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .warranty-box, .terms-section {
+        padding: 11px 12px;
+        font-size: 11.5px;
+        line-height: 1.6;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .terms-section ul { margin-left: 14px; }
+      .terms-section li { margin-bottom: 4px; }
+      .warranty-box ul { margin-left: 14px; }
+      .warranty-box li { margin-bottom: 4px; }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255,255,255,0.08);
+        font-size: 11px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 14px;
+        padding-top: 8px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container { padding: 16px; }
+        header, .client-section { flex-direction: column; }
+        .quote-info { text-align: left; }
+        .bottom-grid { grid-template-columns: 1fr; }
+        .totals-box { width: 100%; }
+        .photo-grid { grid-template-columns: 1fr 1fr; }
+      }
+
+      @media print {
+        @page { size: A4; margin: 10mm 8mm; }
+        body { padding: 0; margin: 0; background: white; }
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
+        .section-adicionales { page-break-before: always; break-before: always; }
+        .photo-section { page-break-before: always; break-before: always; }
+        .totals-section, .warn-box, .rec-box, .bottom-grid,
+        .warranty-box, .terms-section, footer { break-inside: avoid; }
+        tr { break-inside: avoid; }
+
+        /* Comprimir página 2 para que resumen + garantías entren */
+        .section-adicionales ~ p,
+        .section-adicionales ~ p + table td,
+        .section-adicionales + p { font-size: 10.5px; }
+        .item-title { font-size: 12px !important; margin-bottom: 2px !important; }
+        .item-desc { font-size: 10px !important; line-height: 1.4 !important; }
+        .item-desc ul { margin-top: 3px !important; }
+        td { padding: 5px 8px !important; }
+        .section-title { margin: 6px 0 4px !important; padding-bottom: 3px !important; font-size: 13px !important; }
+        .totals-box { padding: 8px !important; }
+        .total-row { margin-bottom: 3px !important; font-size: 11px !important; }
+        .grand-total { font-size: 15px !important; }
+        .bottom-grid { margin-top: 6px !important; gap: 6px !important; }
+        .warranty-box, .terms-section { padding: 7px 9px !important; font-size: 10.5px !important; }
+        .warranty-box li, .terms-section li { margin-bottom: 2px !important; }
+        .payment-info { margin-top: 5px !important; padding: 5px 6px !important; }
+
+        /* Fotos */
+        .photo-placeholder { height: 120px; }
+        .photo-slot img { height: 120px; }
+        .photo-grid-2col .photo-slot img,
+        .photo-grid-2col .photo-placeholder { height: 200px; }
+        .photo-grid { gap: 6px; }
+      }
+    </style>
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div class="invoice-container">
+
+      <!-- ENCABEZADO -->
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estética naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN TÉCNICA</h2>
+          <p><strong>Número:</strong> CBD-2026-116</p>
+          <p><strong>Fecha:</strong> 26/06/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <!-- DATOS DEL CLIENTE -->
+      <div class="client-section">
+        <div>
+          <h3>Preparada para</h3>
+          <p><strong>Sr. Ricardo</strong></p>
+        </div>
+        <div>
+          <h3>Embarcación</h3>
+          <p><strong>Yate Kon-Tiki II</strong></p>
+        </div>
+        <div>
+          <h3>Ubicación</h3>
+          <p>Club Náutico — Manga, Cartagena</p>
+        </div>
+        <div>
+          <h3>Prestador</h3>
+          <p><strong>Colombia Boat Detailing</strong></p>
+          <p>Frank Mercado — Cartagena</p>
+        </div>
+      </div>
+
+      <!-- ADVERTENCIA GELCOAT SUPERESTRUCTURA -->
+      <div class="warn-box">
+        <strong>⚠ Diagnóstico técnico — Gelcoat superestructura:</strong> Durante la inspección se constató que el gelcoat de la <strong>superestructura del yate</strong> (cubierta superior y flybridge) se encuentra en estado de deterioro avanzado: <strong>agrietado, oxidado y con pérdida de material</strong>. En estas condiciones no es posible garantizar un resultado óptimo mediante pulido, por lo que dicha zona queda <strong>excluida del servicio de pulido</strong>. Se recomienda la intervención con pintura de gelcoat antes de cualquier tratamiento estético en esa área. El resto de las superficies evaluadas — costados, techo de popa, escaleras al puente y espejo de popa — <strong>sí se encuentran en condiciones de ser intervenidas</strong> y pueden alcanzar acabado de espejo.
+      </div>
+
+      <!-- SERVICIO PRINCIPAL -->
+      <h3 class="section-title">Servicio cotizado — Yate Kon-Tiki II</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:75%">Descripción del servicio</th>
+            <th style="width:25%">Valor inversión (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- PULIDO COSTADOS -->
+          <tr>
+            <td>
+              <span class="nota-tag">Superestructura excluida — resto del yate incluido</span>
+              <div class="item-title">Pulido de gelcoat — costados, techo de popa, escaleras y espejo (efecto espejo)</div>
+              <div class="item-desc">
+                Pulido técnico profesional en todas las superficies del yate que se encuentran en condiciones óptimas para intervenir: <strong>costados del casco, techo de popa, paredes de las escaleras al puente y espejo de popa</strong>. El proceso devuelve la transparencia, profundidad y brillo al gelcoat, logrando un <strong>acabado de espejo de alto nivel</strong> en cada una de estas zonas.
+                <ul>
+                  <li><strong>Descontaminación:</strong> Remoción de sarro marino, óxidos de ferro y contaminantes incrustados en la superficie.</li>
+                  <li><strong>Corrección:</strong> Eliminación de rayones, marcas de escobilla, hazing y opacidad acumulada por exposición UV.</li>
+                  <li><strong>Pulido en 3 etapas:</strong> Abrasivo de corte, pulido medio y pulido de abrillantado final hasta lograr reflejo espejo.</li>
+                  <li><strong>Sellado protector:</strong> Aplicación de sellante de alta durabilidad para proteger el brillo obtenido y repeler la contaminación marina.</li>
+                  <li><strong>Zonas incluidas:</strong> Costados del casco (babor y estribor), techo de popa, paredes de escaleras al puente y espejo de popa.</li>
+                  <li><strong>Zona excluida:</strong> Superestructura y cubierta superior — el estado avanzado de deterioro del gelcoat en esa zona no permite garantizar resultados. Se recomienda pintar con gelcoat antes de pulir (ver recomendación al pie).</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:12px;">
+              <div class="special-price">$ 4.000.000</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- TOTAL SERVICIO PRINCIPAL -->
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row grand-total">
+            <span>Pulido de costados — efecto espejo:</span>
+            <span>$ 4.000.000 COP</span>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-light); margin-top:6px;">
+            Valor no incluye IVA. Se adiciona el 19% si se requiere factura electrónica.
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMENDACIÓN TÉCNICA -->
+      <div class="rec-box">
+        <strong>Recomendación técnica — Superestructura:</strong> Para recuperar la estética integral del yate, Colombia Boat Detailing recomienda <strong>aplicar pintura de gelcoat</strong> en la zona de la superestructura donde el material original se encuentra deteriorado y agrietado. Esta intervención devuelve la protección y la apariencia original al yate, y constituye el paso previo necesario para poder pulir esa área en el futuro. Ver opciones de pintura en la <strong>Cotización #117</strong>.
+      </div>
+
+      <!-- ADICIONALES OPCIONALES -->
+      <h3 class="section-title section-adicionales">Adicionales opcionales — Identificados en inspección</h3>
+      <p style="font-size:11.5px; color:var(--text-light); margin-bottom:8px;">
+        Los siguientes servicios fueron identificados durante la visita técnica al yate. Son independientes del pulido cotizado y pueden aprobarse individualmente según las prioridades del propietario.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:75%">Descripción del adicional</th>
+            <th style="width:25%">Valor (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- POLARIZADO -->
+          <tr>
+            <td>
+              <span class="garantia-tag">Garantía 10 años — sin decoloración ni burbujas</span>
+              <span class="nota-tag" style="margin-left:4px;">Opcional</span>
+              <div class="item-title">1. Polarizado Spectra High Definition — parabrisas y costados</div>
+              <div class="item-desc">
+                Instalación de polarizado de marca <strong>Spectra High Definition</strong> en el parabrisas frontal y las ventanas laterales del yate. Lámina de gama alta que garantiza <strong>excelente visibilidad desde el interior</strong>, rechazo de calor y protección UV, con acabado limpio y profesional.
+                <ul>
+                  <li><strong>Retiro de polarizado antiguo:</strong> Extracción completa del film deteriorado actual — incluido en el precio, sin costo adicional.</li>
+                  <li><strong>Instalación Spectra HD:</strong> Colocación de lámina nueva sin burbujas, sin arrugas y con bordes perfectamente sellados.</li>
+                  <li><strong>Garantía del fabricante: 10 años</strong> — el polarizado no se decolora, no forma burbujas ni se despega durante la vigencia de la garantía.</li>
+                  <li><strong>No incluye</strong> las ventanas circulares traseras ni las puertas de popa, que se encuentran actualmente en buen estado y no requieren intervención.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:12px;">
+              <div class="special-price">$ 5.700.000</div>
+            </td>
+          </tr>
+
+          <!-- ACRILICOS ESCOTILLAS -->
+          <tr>
+            <td>
+              <span class="nota-tag">Opcional</span>
+              <div class="item-title">2. Reemplazo de acrílicos — 2 escotillas de proa</div>
+              <div class="item-desc">
+                Los acrílicos de las dos escotillas de proa presentan <strong>cristalización avanzada</strong>: la superficie ha perdido transparencia y presenta opacidad estructural que no es recuperable mediante pulido. Se reemplazarán por unidades idénticas en dimensiones y perfil.
+                <ul>
+                  <li><strong>Fabricación a medida:</strong> Cada acrílico se fabrica con las mismas dimensiones y espesores del original, asegurando ajuste perfecto.</li>
+                  <li><strong>Conservación de herrajes:</strong> Se reutilizan las <strong>bisagras y seguros originales</strong> del yate — no se modifica la estructura ni los mecanismos de apertura.</li>
+                  <li><strong>Instalación completa:</strong> Retiro del acrílico viejo, adecuación si fuera necesario, instalación y sellado del nuevo.</li>
+                  <li>Precio por unidad: <strong>$ 1.600.000</strong> — 2 unidades incluidas.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:12px;">
+              <div class="special-price">$ 3.200.000</div>
+              <div class="price-sub">2 unid. × $ 1.600.000</div>
+            </td>
+          </tr>
+
+          <!-- ACRILICO PUENTE -->
+          <tr>
+            <td>
+              <span class="nota-tag">Opcional</span>
+              <div class="item-title">3. Reemplazo de acrílico del puente de mando — curvo</div>
+              <div class="item-desc">
+                El acrílico del puente de mando presenta <strong>cristalización severa</strong> y opacidad total que compromete la visibilidad y la estética del yate. Por su geometría especial — <strong>curvo en dos zonas</strong> — su fabricación requiere un proceso técnico más complejo que eleva el costo respecto a los acrílicos planos estándar.
+                <ul>
+                  <li><strong>Fabricación de alta complejidad:</strong> Termoformado a medida del acrílico en sus dos curvaturas, respetando exactamente la geometría original del puente.</li>
+                  <li><strong>Material de alta claridad:</strong> Acrílico óptico de máxima transparencia y resistencia UV, sin amarillamiento ni cristalización prematura.</li>
+                  <li><strong>Conservación de herrajes:</strong> Se reutilizan bisagras, seguros y marcos originales del puente.</li>
+                  <li><strong>Resultado:</strong> El puente queda con visibilidad perfecta, como si fuera nuevo, integrado a la estética original del yate.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:12px;">
+              <div class="special-price">$ 6.200.000</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- RESUMEN COMBINADO -->
+      <div class="totals-section">
+        <div class="totals-box">
+          <div style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-light); margin-bottom:8px;">
+            Resumen — si se aprueban todos los servicios
+          </div>
+          <div class="total-row">
+            <span>Pulido de costados (servicio principal):</span>
+            <span>$ 4.000.000</span>
+          </div>
+          <div class="total-row" style="color:var(--text-light);">
+            <span>+ 1. Polarizado Spectra HD:</span>
+            <span>$ 5.700.000</span>
+          </div>
+          <div class="total-row" style="color:var(--text-light);">
+            <span>+ 2. Acrílicos escotillas de proa (2 unid.):</span>
+            <span>$ 3.200.000</span>
+          </div>
+          <div class="total-row" style="color:var(--text-light);">
+            <span>+ 3. Acrílico puente de mando (curvo):</span>
+            <span>$ 6.200.000</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total si se aprueban todos:</span>
+            <span>$ 19.100.000 COP</span>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-light); margin-top:6px;">
+            Cada adicional puede aprobarse de forma independiente. Valores no incluyen IVA.
+          </div>
+        </div>
+      </div>
+
+      <!-- GARANTÍA Y CONDICIONES -->
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Alcance y garantías</h4>
+          <ul>
+            <li>El <strong>pulido de costados</strong> incluye descontaminación, corrección, pulido en 3 etapas y sellado final.</li>
+            <li>El <strong>polarizado Spectra HD</strong> incluye retiro completo del film anterior y garantía de 10 años del fabricante.</li>
+            <li>Los <strong>acrílicos</strong> se fabrican a medida conservando bisagras y seguros originales.</li>
+            <li>Cada servicio puede ser aprobado y ejecutado de forma <strong>independiente</strong>.</li>
+            <li>Tiempo estimado de ejecución: <strong>5 a 8 días hábiles</strong> según los servicios aprobados.</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y forma de pago</h4>
+          <ul>
+            <li>Anticipo del <strong>50%</strong> para programar los trabajos.</li>
+            <li>Saldo del <strong>50%</strong> contra entrega a satisfacción del propietario.</li>
+            <li>Validez de la cotización: <strong>15 días calendario</strong>.</li>
+            <li>Los trabajos se ejecutan en las instalaciones del <strong>Club Náutico, Manga</strong>.</li>
+            <li>Cualquier acceso o permiso de ingreso requerido corre por cuenta del cliente.</li>
+          </ul>
+          <div class="payment-info">
+            La información bancaria para el anticipo se comparte una vez aprobada la cotización.
+          </div>
+        </div>
+      </div>
+
+      <!-- FOTOS -->
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotográfico — Estado actual del yate Kon-Tiki II</h3>
+
+        <!-- Vista general -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); margin:8px 0 5px;">Vista general</p>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(14).jpg" alt="Kon-Tiki II — Vista general lateral" />
+            <p class="photo-caption"><strong>Vista general</strong> — Yate Kon-Tiki II amarrado en el Club Náutico, Manga</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(12).jpg" alt="Kon-Tiki II — Popa" />
+            <p class="photo-caption"><strong>Popa y espejo</strong> — Zona en buen estado, incluida en el servicio de pulido</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(1).jpg" alt="Kon-Tiki II — Superestructura lateral" />
+            <p class="photo-caption"><strong>Superestructura lateral</strong> — Gelcoat opaco, sin brillo, con pérdida de material</p>
+          </div>
+        </div>
+
+        <!-- Zonas en buen estado incluidas en el pulido -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--ok-color); margin:10px 0 5px;">Zonas en buen estado — incluidas en el servicio de pulido</p>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(9).jpg" alt="Kon-Tiki II — Techo de popa en buen estado" />
+            <p class="photo-caption"><strong>Techo de popa</strong> — Gelcoat en buen estado con reflejo conservado, se recuperará brillo de espejo con el pulido</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(15).jpg" alt="Kon-Tiki II — Escaleras al puente" />
+            <p class="photo-caption"><strong>Escaleras al puente</strong> — Paredes de fibra en buen estado, incluidas en el servicio de pulido junto a los costados</p>
+          </div>
+        </div>
+
+        <!-- Gelcoat superestructura -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--warn-color); margin:10px 0 5px;">Gelcoat superestructura — deterioro avanzado (zona excluida del pulido)</p>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(3).jpg" alt="Kon-Tiki II — Grietas severas superestructura" />
+            <p class="photo-caption"><strong>Grietas severas</strong> — Gelcoat agrietado en la zona del flybridge, deterioro que impide garantizar el pulido</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(5).jpg" alt="Kon-Tiki II — Proa agrietada" />
+            <p class="photo-caption"><strong>Proa</strong> — Gelcoat con agrietamiento avanzado en toda la zona de proa, deterioro estructural visible</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(8).jpg" alt="Kon-Tiki II — Proa gelcoat hecho polvo" />
+            <p class="photo-caption"><strong>Proa</strong> — Gelcoat completamente oxidado, se desprende en polvo al tacto; deterioro irreversible sin pintura</p>
+          </div>
+        </div>
+
+        <!-- Adicional 1 — Polarizado -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); margin:10px 0 5px;">Adicional 1 — Polarizado deteriorado</p>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(13).jpg" alt="Kon-Tiki II — Ventana acceso flybridge polarizado" />
+            <p class="photo-caption"><strong>Ventana de acceso al flybridge</strong> — Acrílico en buen estado; solo requiere reemplazo del polarizado deteriorado con Spectra HD</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(7).jpg" alt="Kon-Tiki II — Parabrisas polarizado deteriorado interior" />
+            <p class="photo-caption"><strong>Parabrisas — vista interior</strong> — Polarizado completamente rayado y deteriorado en toda la superficie del parabrisas</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(11).jpg" alt="Kon-Tiki II — Parabrisas polarizado lateral" />
+            <p class="photo-caption"><strong>Parabrisas — ángulo lateral</strong> — Film degradado en la zona curva; se incluye en el reemplazo con Spectra HD</p>
+          </div>
+        </div>
+        <div class="photo-grid photo-grid-2col" style="margin-top:8px;">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(10).jpg" alt="Kon-Tiki II — Parabrisas polarizado otro ángulo" />
+            <p class="photo-caption"><strong>Parabrisas — otro ángulo</strong> — Deterioro total del polarizado; la visibilidad desde el interior del puente queda comprometida</p>
+          </div>
+        </div>
+
+        <!-- Adicional 2 — Escotillas -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); margin:10px 0 5px;">Adicional 2 — Escotillas de proa (acrílicos cristalizados)</p>
+        <div class="photo-grid photo-grid-2col">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(2).jpg" alt="Kon-Tiki II — Escotilla abierta acrílico cristalizado" />
+            <p class="photo-caption"><strong>Escotilla 1</strong> — Acrílico completamente opaco y cristalizado, sin transparencia recuperable</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(6).jpg" alt="Kon-Tiki II — Escotilla cerrada acrílico cristalizado" />
+            <p class="photo-caption"><strong>Escotilla 2</strong> — Mismo estado de cristalización severa, ambas unidades requieren reemplazo</p>
+          </div>
+        </div>
+
+        <!-- Adicional 3 — Acrílico puente flybridge -->
+        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); margin:10px 0 5px;">Adicional 3 — Acrílico del puente de mando (flybridge)</p>
+        <div class="photo-grid photo-grid-2col">
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(16).jpg" alt="Kon-Tiki II — Acrílico flybridge exterior" />
+            <p class="photo-caption"><strong>Vista exterior flybridge</strong> — Acrílico del puente completamente degradado; opacidad severa por oxidación del material en sus dos curvaturas</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/kon-tiki/kontiki%20(4).jpg" alt="Kon-Tiki II — Detalle acrílico flybridge deteriorado" />
+            <p class="photo-caption"><strong>Detalle del acrílico</strong> — Material pulverizado y sin transparencia; requiere fabricación a medida por la curvatura en dos zonas</p>
+          </div>
+        </div>
+
+      </div>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> — Cartagena de Indias, Colombia — colombiaboatdetailing.com</p>
+        <p style="margin-top:3px;">Cotización elaborada por <strong>Frank Mercado</strong> — 26/06/2026 — CBD-2026-116</p>
+      </footer>
+
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
