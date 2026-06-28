@@ -4,7 +4,7 @@
     url("./fill/Phosphor-Fill.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 .ph-fill {
@@ -150,7 +150,7 @@
     url("./regular/Phosphor.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 .ph-bold {
@@ -240,7 +240,7 @@
     url("./light/Phosphor-Light.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 .ph {
