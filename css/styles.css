@@ -1107,6 +1107,7 @@ footer a:hover {
   overflow: hidden;
   line-height: 0;
   pointer-events: none;
+  margin-top: -1px;
 }
 .ocean-divider svg {
   display: block;
