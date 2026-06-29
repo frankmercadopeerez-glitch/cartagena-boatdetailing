@@ -261,20 +261,20 @@
 .submenu-item:hover > .submenu-flyout {
   opacity: 1;
   visibility: visible;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 .submenu-flyout {
   position: absolute;
   right: 0;
-  left: auto;
-  top: 0;
-  min-width: 220px;
+  left: 0;
+  top: 100%;
+  min-width: 100%;
   background: rgba(10, 25, 47, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(212, 175, 55, 0.25);
   opacity: 0;
   visibility: hidden;
-  transform: translateX(10px);
+  transform: translateY(10px);
   transition: all 0.3s ease-out;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
@@ -494,7 +494,7 @@ html {
   background: rgba(212, 175, 55, 0.1);
   border-left-color: #d4af37;
   color: #d4af37;
-  transform: translateX(8px);
+  transform: translateX(4px);
 }
 .carousel-wrapper {
   position: relative;
@@ -1124,22 +1124,7 @@ footer a:hover {
   position: relative;
 }
 .rope-border::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    #d4af37 0,
-    #d4af37 8px,
-    #b08d1e 8px,
-    #b08d1e 16px,
-    #c5a028 16px,
-    #c5a028 24px
-  );
-  opacity: 0.6;
+  display: none;
 }
 .compass-rose {
   position: absolute;
