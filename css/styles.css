@@ -1117,6 +1117,7 @@ footer a:hover {
   height: 70px;
   margin-bottom: -1px;
   vertical-align: bottom;
+  transform-origin: bottom center;
   animation: wave-move 10s linear infinite;
 }
 .ocean-divider.flipped {
