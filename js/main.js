@@ -140,11 +140,8 @@ function i18nAutoDetect() {
   var primary = (langs[0] || "").slice(0, 2).toLowerCase();
   if (!primary || primary === "es") return;
   if (primary === "en" && i.enUrl) {
-    i18nBanner(
-      '<i class="ph ph-globe" aria-hidden="true"></i><span>This page is available in English.</span><a class="cbd-lang-btn" href="' +
-        i.enUrl +
-        '" data-lang-go>View in English</a>',
-    );
+    i18nSetPref("en");
+    window.location.replace(i.enUrl);
   }
 }
 function i18nInjectStyles() {
