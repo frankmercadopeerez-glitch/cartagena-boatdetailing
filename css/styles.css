@@ -495,7 +495,6 @@ html {
   background: rgba(212, 175, 55, 0.1);
   border-left-color: #d4af37;
   color: #d4af37;
-  transform: translateX(4px);
 }
 .carousel-wrapper {
   position: relative;
@@ -1116,6 +1115,8 @@ footer a:hover {
   display: block;
   width: calc(200% + 1px);
   height: 70px;
+  margin-bottom: -1px;
+  vertical-align: bottom;
   animation: wave-move 10s linear infinite;
 }
 .ocean-divider.flipped {
