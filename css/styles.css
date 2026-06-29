@@ -560,7 +560,7 @@ html {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 1.5rem 0;
+  padding: 1.25rem 2rem;
   user-select: none;
   transition: all 0.3s ease-out;
 }
