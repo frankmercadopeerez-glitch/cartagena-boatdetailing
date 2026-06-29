@@ -261,20 +261,21 @@
 .submenu-item:hover > .submenu-flyout {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 .submenu-flyout {
   position: absolute;
-  right: 0;
-  left: 0;
-  top: 100%;
-  min-width: 100%;
+  left: 100%;
+  right: auto;
+  bottom: 0;
+  top: auto;
+  min-width: 220px;
   background: rgba(10, 25, 47, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(212, 175, 55, 0.25);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
+  transform: translateX(10px);
   transition: all 0.3s ease-out;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
