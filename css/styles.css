@@ -1124,6 +1124,43 @@ footer a:hover {
   .cta-center-mobile {
     align-self: center;
   }
+  /* Footer compacto en móvil (no más de la mitad de la pantalla) */
+  footer > div:first-child {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  footer .grid {
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  /* Ocultar columnas redundantes con el menú (siguen en el DOM) */
+  footer .grid > div:nth-child(2),
+  footer .grid > div:nth-child(3) {
+    display: none;
+  }
+  /* Ocultar el párrafo descriptivo del brand */
+  footer .grid > div:first-child > p {
+    display: none;
+  }
+  footer .grid > div:first-child > a {
+    margin-bottom: 0.75rem;
+  }
+  /* Contacto: ocultar ubicación y horario, compactar */
+  footer .grid > div:last-child ul.space-y-4 > li:nth-child(3),
+  footer .grid > div:last-child ul.space-y-4 > li:nth-child(4) {
+    display: none;
+  }
+  footer .grid > div:last-child ul.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.6rem;
+  }
+  footer .grid > div:last-child > a {
+    margin-top: 1rem !important;
+  }
+  /* Barra inferior más compacta */
+  footer > div:last-child .container {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
 }
 .rope-border {
   position: relative;
