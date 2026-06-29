@@ -1133,10 +1133,24 @@ footer a:hover {
     gap: 1rem !important;
     margin-bottom: 1rem !important;
   }
-  /* Ocultar columnas redundantes con el menú (siguen en el DOM) */
-  footer .grid > div:nth-child(2),
+  /* Ocultar Navegación/Zonas (redundante con el menú); Servicios sí se muestra */
   footer .grid > div:nth-child(3) {
     display: none;
+  }
+  /* Servicios un poco más compacto en móvil */
+  footer .grid > div:nth-child(2) h4 {
+    margin-bottom: 0.75rem;
+  }
+  footer .grid > div:nth-child(2) ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+  }
+  footer .grid > div:nth-child(2) ul > * {
+    margin-top: 0 !important;
+  }
+  footer .grid > div:nth-child(2) ul > li:last-child {
+    grid-column: 1 / -1;
   }
   /* Ocultar el párrafo descriptivo del brand */
   footer .grid > div:first-child > p {
@@ -1145,9 +1159,8 @@ footer a:hover {
   footer .grid > div:first-child > a {
     margin-bottom: 0.75rem;
   }
-  /* Contacto: ocultar ubicación y horario, compactar */
-  footer .grid > div:last-child ul.space-y-4 > li:nth-child(3),
-  footer .grid > div:last-child ul.space-y-4 > li:nth-child(4) {
+  /* Contacto: ocultar solo el correo, compactar */
+  footer .grid > div:last-child ul.space-y-4 > li:nth-child(2) {
     display: none;
   }
   footer .grid > div:last-child ul.space-y-4 > :not([hidden]) ~ :not([hidden]) {
