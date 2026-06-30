@@ -4,28 +4,37 @@
     <meta name="robots" content="noindex, nofollow" />
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      (function(){
-        function loadGA(){
-          if(window._gaLoaded)return;
-          window._gaLoaded=true;
-          var s=document.createElement('script');
-          s.async=true;
-          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
           document.head.appendChild(s);
-          gtag('js',new Date());
-          gtag('config','G-01GC6QM018');
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
         }
-        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
-        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){
-          document.addEventListener(e,loadGA,{once:true,passive:true});
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cotización #118 — Pulido Catamarán Mavi Soul - Colombia Boat Detailing</title>
+    <title>
+      Cotización #118 — Pulido Catamarán Mavi Soul - Colombia Boat Detailing
+    </title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <style>
       :root {
@@ -50,7 +59,10 @@
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
 
-      @page { size: A4; margin: 10mm; }
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
 
       body {
         background: #edf2f7;
@@ -63,7 +75,7 @@
         margin: 0 auto;
         background: var(--bg-color);
         border-top: 8px solid var(--primary-color);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         padding: 22px 24px 18px;
       }
 
@@ -105,7 +117,10 @@
         margin-bottom: 4px;
       }
 
-      .quote-info p { color: var(--text-light); margin-bottom: 2px; }
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
 
       .client-section {
         display: flex;
@@ -125,19 +140,24 @@
         margin-bottom: 4px;
       }
 
-      .client-section p { color: var(--primary-color); font-size: 12px; }
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
 
       .info-box {
         font-size: 12px;
-        background: rgba(184,144,77,0.12);
-        border: 1px solid rgba(184,144,77,0.35);
+        background: rgba(184, 144, 77, 0.12);
+        border: 1px solid rgba(184, 144, 77, 0.35);
         border-radius: 3px;
         padding: 10px 12px;
         margin-bottom: 10px;
         line-height: 1.6;
       }
 
-      .info-box strong { color: var(--secondary-color); }
+      .info-box strong {
+        color: var(--secondary-color);
+      }
 
       .section-title {
         font-family: Georgia, "Times New Roman", serif;
@@ -168,7 +188,7 @@
         font-weight: 900;
         letter-spacing: 1px;
         text-transform: uppercase;
-        background: rgba(255,255,255,0.2);
+        background: rgba(255, 255, 255, 0.2);
         padding: 3px 10px;
         border-radius: 12px;
         white-space: nowrap;
@@ -200,7 +220,10 @@
         white-space: nowrap;
       }
 
-      table { width: 100%; border-collapse: collapse; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
       th {
         background: #f8fafc;
@@ -215,7 +238,10 @@
         white-space: nowrap;
       }
 
-      th:last-child, td:last-child { text-align: right; }
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
 
       td {
         border-bottom: 1px solid var(--border-color);
@@ -241,7 +267,9 @@
         line-height: 1.7;
       }
 
-      .item-desc strong { color: var(--secondary-color); }
+      .item-desc strong {
+        color: var(--secondary-color);
+      }
 
       .special-price {
         color: var(--primary-color);
@@ -286,7 +314,9 @@
       }
 
       /* Photo section */
-      .photo-section { margin-top: 14px; }
+      .photo-section {
+        margin-top: 14px;
+      }
 
       .photo-grid {
         display: grid;
@@ -337,7 +367,8 @@
         margin-top: 14px;
       }
 
-      .warranty-box, .terms-section {
+      .warranty-box,
+      .terms-section {
         padding: 11px 12px;
         font-size: 11.5px;
         line-height: 1.6;
@@ -354,8 +385,12 @@
         margin-bottom: 6px;
       }
 
-      .warranty-box ul { margin-left: 14px; }
-      .warranty-box li { margin-bottom: 4px; }
+      .warranty-box ul {
+        margin-left: 14px;
+      }
+      .warranty-box li {
+        margin-bottom: 4px;
+      }
 
       .terms-section {
         background: var(--primary-color);
@@ -368,14 +403,18 @@
         margin-bottom: 6px;
       }
 
-      .terms-section ul { margin-left: 14px; }
-      .terms-section li { margin-bottom: 4px; }
+      .terms-section ul {
+        margin-left: 14px;
+      }
+      .terms-section li {
+        margin-bottom: 4px;
+      }
 
       .payment-info {
         margin-top: 8px;
         padding: 7px 8px;
         border-left: 2px solid var(--accent-color);
-        background: rgba(255,255,255,0.08);
+        background: rgba(255, 255, 255, 0.08);
         font-size: 11px;
       }
 
@@ -389,17 +428,37 @@
       }
 
       @media (max-width: 760px) {
-        .invoice-container { padding: 16px; }
-        header, .client-section { flex-direction: column; }
-        .quote-info { text-align: left; }
-        .bottom-grid { grid-template-columns: 1fr; }
-        .photo-grid { grid-template-columns: 1fr 1fr; }
-        .in-water-tag { display: none; }
+        .invoice-container {
+          padding: 16px;
+        }
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+        .quote-info {
+          text-align: left;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+        .photo-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .in-water-tag {
+          display: none;
+        }
       }
 
       @media print {
-        @page { size: A4; margin: 0; }
-        body { padding: 0; margin: 0; background: white; }
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
         .invoice-container {
           max-width: 100%;
           width: 100%;
@@ -407,21 +466,47 @@
           padding: 5mm 6mm;
           box-shadow: none;
         }
-        .photo-section { page-break-before: always; break-before: always; }
-        .bottom-grid, .warranty-box,
-        .terms-section, footer { break-inside: avoid; }
-        .option-banner { break-after: avoid; }
-        tr { break-inside: avoid; }
-        .photo-placeholder { height: 130px; }
-        .photo-slot img { height: 130px; }
+        .photo-section {
+          page-break-before: always;
+          break-before: always;
+        }
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+        .option-banner {
+          break-after: avoid;
+        }
+        tr {
+          break-inside: avoid;
+        }
+        .photo-placeholder {
+          height: 130px;
+        }
+        .photo-slot img {
+          height: 130px;
+        }
       }
     </style>
-    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div class="invoice-container">
-
       <!-- ENCABEZADO -->
       <header>
         <div class="brand-info">
@@ -459,39 +544,70 @@
 
       <!-- ALCANCE GENERAL -->
       <div class="info-box">
-        <strong>⚓ Alcance de la propuesta:</strong> La presente cotización cubre el <strong>pulido completo de los aceros inoxidables de las barandas</strong> alrededor del catamarán Mavi Soul, más el <strong>pulido de gelcoat del jacuzzi y la consola</strong>. Los trabajos se ejecutan con el catamarán amarrado en la Marina Cartagena, El Bosque — <strong>no requiere varada</strong>. El precio es todo incluido: materiales, equipos y mano de obra.
+        <strong>⚓ Alcance de la propuesta:</strong> La presente cotización
+        cubre el
+        <strong
+          >pulido completo de los aceros inoxidables de las barandas</strong
+        >
+        alrededor del catamarán Mavi Soul, más el
+        <strong>pulido de gelcoat del jacuzzi y la consola</strong>. Los
+        trabajos se ejecutan con el catamarán amarrado en la Marina Cartagena,
+        El Bosque — <strong>no requiere varada</strong>. El precio es todo
+        incluido: materiales, equipos y mano de obra.
       </div>
 
       <!-- SERVICIOS -->
       <div class="option-banner option-banner-a">
         <span class="option-badge">Servicio</span>
         <div>
-          <div class="option-title">Pulido de aceros y gelcoat — Catamarán Mavi Soul</div>
-          <div class="option-subtitle">Barandas perimetrales (acero inoxidable) + jacuzzi y consola (gelcoat)</div>
+          <div class="option-title">
+            Pulido de aceros y gelcoat — Catamarán Mavi Soul
+          </div>
+          <div class="option-subtitle">
+            Barandas perimetrales (acero inoxidable) + jacuzzi y consola
+            (gelcoat)
+          </div>
         </div>
-        <span class="in-water-tag">✓ Se hace en el agua</span>
       </div>
 
       <table>
         <thead>
           <tr>
-            <th style="width:75%">Descripción del servicio</th>
-            <th style="width:25%">Valor (COP)</th>
+            <th style="width: 75%">Descripción del servicio</th>
+            <th style="width: 25%">Valor (COP)</th>
           </tr>
         </thead>
         <tbody>
-
           <tr>
             <td>
-              <div class="item-title">1 — Pulido y restauración de aceros inoxidables — barandas perimetrales</div>
+              <div class="item-title">
+                1 — Pulido y restauración de aceros inoxidables — barandas
+                perimetrales
+              </div>
               <div class="item-desc">
-                Pulido técnico completo de todos los tubos, soportes y estructuras de acero inoxidable de las barandas alrededor del catamarán. El proceso incluye:
+                Pulido técnico completo de todos los tubos, soportes y
+                estructuras de acero inoxidable de las barandas alrededor del
+                catamarán. El proceso incluye:
                 <ul>
-                  <li>Desengrase y limpieza inicial de toda la estructura metálica</li>
-                  <li>Pulido progresivo con compuestos abrasivos especializados para acero marino</li>
-                  <li>Eliminación de oxidación superficial, manchas de sal, agua y corrosión incipiente</li>
-                  <li>Acabado espejo con brillo de alto nivel en <strong>toda la perimetral</strong> del catamarán</li>
-                  <li>Aplicación de sellante protector de acero inoxidable para retardar la reoxidación</li>
+                  <li>
+                    Desengrase y limpieza inicial de toda la estructura metálica
+                  </li>
+                  <li>
+                    Pulido progresivo con compuestos abrasivos especializados
+                    para acero marino
+                  </li>
+                  <li>
+                    Eliminación de oxidación superficial, manchas de sal, agua y
+                    corrosión incipiente
+                  </li>
+                  <li>
+                    Acabado espejo con brillo de alto nivel en
+                    <strong>toda la perimetral</strong> del catamarán
+                  </li>
+                  <li>
+                    Aplicación de sellante protector de acero inoxidable para
+                    retardar la reoxidación
+                  </li>
                 </ul>
               </div>
             </td>
@@ -500,21 +616,35 @@
 
           <tr>
             <td>
-              <div class="item-title">2 — Pulido de gelcoat — jacuzzi y consola</div>
+              <div class="item-title">
+                2 — Pulido de gelcoat — jacuzzi y consola
+              </div>
               <div class="item-desc">
-                Pulido técnico del gelcoat en el jacuzzi y la consola del catamarán Mavi Soul. El proceso incluye:
+                Pulido técnico del gelcoat en el jacuzzi y la consola del
+                catamarán Mavi Soul. El proceso incluye:
                 <ul>
                   <li>Limpieza profunda de las superficies a intervenir</li>
-                  <li>Pulido con compuesto abrasivo marino para recuperar el brillo original del gelcoat</li>
-                  <li>Corrección de manchas, oxidación leve y pérdida de brillo acumulada</li>
-                  <li>Acabado con polish de terminación para uniformizar el color y la reflectividad</li>
-                  <li>Aplicación de cera marina de protección sobre las superficies pulidas</li>
+                  <li>
+                    Pulido con compuesto abrasivo marino para recuperar el
+                    brillo original del gelcoat
+                  </li>
+                  <li>
+                    Corrección de manchas, oxidación leve y pérdida de brillo
+                    acumulada
+                  </li>
+                  <li>
+                    Acabado con polish de terminación para uniformizar el color
+                    y la reflectividad
+                  </li>
+                  <li>
+                    Aplicación de cera marina de protección sobre las
+                    superficies pulidas
+                  </li>
                 </ul>
               </div>
             </td>
             <td><div class="special-price">$ 1.000.000</div></td>
           </tr>
-
         </tbody>
       </table>
 
@@ -531,44 +661,130 @@
           <span>Total — Catamarán Mavi Soul:</span>
           <span>$ 3.200.000 COP</span>
         </div>
-        <div style="font-size:10.5px; color:var(--text-light); margin-top:6px;">
-          Valor todo incluido: materiales, equipos y mano de obra. No incluye IVA — se adiciona el 19% si se requiere factura electrónica.
+        <div
+          style="font-size: 10.5px; color: var(--text-light); margin-top: 6px"
+        >
+          Valor todo incluido: materiales, equipos y mano de obra. No incluye
+          IVA — se adiciona el 19% si se requiere factura electrónica.
         </div>
       </div>
 
       <!-- FOTOS -->
       <div class="photo-section">
-        <h3 class="section-title">Registro fotográfico — Catamarán Mavi Soul</h3>
+        <h3 class="section-title">
+          Registro fotográfico — Catamarán Mavi Soul
+        </h3>
 
-        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); margin:8px 0 5px;">Estado actual — Aceros y gelcoat</p>
+        <p
+          style="
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-light);
+            margin: 8px 0 5px;
+          "
+        >
+          Estado actual — Aceros y gelcoat
+        </p>
         <div class="photo-grid">
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-1.jpg" alt="Mavi Soul — Vista general" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Vista general</strong> — Catamarán Mavi Soul, Marina Cartagena, El Bosque</p>
+            <img
+              src="images/mavi-soul/mavi-soul-1.jpg"
+              alt="Mavi Soul — Vista general"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Vista general</strong> — Catamarán Mavi Soul, Marina
+              Cartagena, El Bosque
+            </p>
           </div>
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-2.jpg" alt="Mavi Soul — Barandas" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Barandas</strong> — Estado actual de los aceros inoxidables perimetrales</p>
+            <img
+              src="images/mavi-soul/mavi-soul-2.jpg"
+              alt="Mavi Soul — Barandas"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Barandas</strong> — Estado actual de los aceros
+              inoxidables perimetrales
+            </p>
           </div>
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-3.jpg" alt="Mavi Soul — Jacuzzi y consola" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Jacuzzi y consola</strong> — Estado actual del gelcoat antes del pulido</p>
+            <img
+              src="images/mavi-soul/mavi-soul-3.jpg"
+              alt="Mavi Soul — Jacuzzi y consola"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Jacuzzi y consola</strong> — Estado actual del gelcoat
+              antes del pulido
+            </p>
           </div>
         </div>
 
-        <p style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--warn-color); margin:10px 0 5px;">Detalle — Áreas a intervenir</p>
+        <p
+          style="
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--warn-color);
+            margin: 10px 0 5px;
+          "
+        >
+          Detalle — Áreas a intervenir
+        </p>
         <div class="photo-grid">
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-4.jpg" alt="Mavi Soul — Acero oxidado" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Aceros</strong> — Oxidación y manchas de sal en las barandas que requieren intervención</p>
+            <img
+              src="images/mavi-soul/mavi-soul-4.jpg"
+              alt="Mavi Soul — Acero oxidado"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Aceros</strong> — Oxidación y manchas de sal en las
+              barandas que requieren intervención
+            </p>
           </div>
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-5.jpg" alt="Mavi Soul — Gelcoat opaco" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Gelcoat</strong> — Superficie opaca y sin brillo en el jacuzzi / consola</p>
+            <img
+              src="images/mavi-soul/mavi-soul-5.jpg"
+              alt="Mavi Soul — Gelcoat opaco"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Gelcoat</strong> — Superficie opaca y sin brillo en el
+              jacuzzi / consola
+            </p>
           </div>
           <div class="photo-slot">
-            <img src="images/mavi-soul/mavi-soul-6.jpg" alt="Mavi Soul — Detalle consola" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>Foto por cargar</div>'" />
-            <p class="photo-caption"><strong>Consola</strong> — Detalle del área de gelcoat a pulir</p>
+            <img
+              src="images/mavi-soul/mavi-soul-6.jpg"
+              alt="Mavi Soul — Detalle consola"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div class=\'photo-placeholder\'>Foto por cargar</div>'
+              "
+            />
+            <p class="photo-caption">
+              <strong>Consola</strong> — Detalle del área de gelcoat a pulir
+            </p>
           </div>
         </div>
       </div>
@@ -578,34 +794,71 @@
         <div class="warranty-box">
           <h4>Alcance y garantía del trabajo</h4>
           <ul>
-            <li>El precio es <strong>todo incluido</strong>: materiales, compuestos de pulido, equipos y mano de obra. Sin cobros adicionales.</li>
-            <li>Materiales de grado marino certificados en todos los trabajos.</li>
-            <li>El pulido de acero inoxidable incluye <strong>sellante protector</strong> para extender la durabilidad del brillo en ambiente marino.</li>
-            <li>El pulido de gelcoat incluye <strong>cera marina de terminación</strong> para proteger y conservar el acabado.</li>
-            <li>Los trabajos se ejecutan en la Marina Cartagena, El Bosque — <strong>sin necesidad de varar el catamarán</strong>.</li>
+            <li>
+              El precio es <strong>todo incluido</strong>: materiales,
+              compuestos de pulido, equipos y mano de obra. Sin cobros
+              adicionales.
+            </li>
+            <li>
+              Materiales de grado marino certificados en todos los trabajos.
+            </li>
+            <li>
+              El pulido de acero inoxidable incluye
+              <strong>sellante protector</strong> para extender la durabilidad
+              del brillo en ambiente marino.
+            </li>
+            <li>
+              El pulido de gelcoat incluye
+              <strong>cera marina de terminación</strong> para proteger y
+              conservar el acabado.
+            </li>
+            <li>
+              Los trabajos se ejecutan en la Marina Cartagena, El Bosque —
+              <strong>sin necesidad de varar el catamarán</strong>.
+            </li>
           </ul>
         </div>
 
         <div class="terms-section">
           <h4>Condiciones y forma de pago</h4>
           <ul>
-            <li>Anticipo del <strong>50%</strong> para iniciar los trabajos.</li>
-            <li>Saldo del <strong>50%</strong> contra entrega a satisfacción del propietario.</li>
-            <li>Validez de la cotización: <strong>15 días calendario</strong>.</li>
-            <li>Los trabajos se programan según disponibilidad y condiciones climáticas en la marina.</li>
-            <li>El tiempo estimado de ejecución es de <strong>1 a 2 días hábiles</strong>, sujeto al estado real de las superficies.</li>
+            <li>
+              Anticipo del <strong>50%</strong> para iniciar los trabajos.
+            </li>
+            <li>
+              Saldo del <strong>50%</strong> contra entrega a satisfacción del
+              propietario.
+            </li>
+            <li>
+              Validez de la cotización: <strong>15 días calendario</strong>.
+            </li>
+            <li>
+              Los trabajos se programan según disponibilidad y condiciones
+              climáticas en la marina.
+            </li>
+            <li>
+              El tiempo estimado de ejecución es de
+              <strong>1 a 2 días hábiles</strong>, sujeto al estado real de las
+              superficies.
+            </li>
           </ul>
           <div class="payment-info">
-            La información bancaria para el anticipo se comparte una vez aprobada la cotización.
+            La información bancaria para el anticipo se comparte una vez
+            aprobada la cotización.
           </div>
         </div>
       </div>
 
       <footer>
-        <p><strong>Colombia Boat Detailing</strong> — Cartagena de Indias, Colombia — colombiaboatdetailing.com</p>
-        <p style="margin-top:3px;">Cotización elaborada por <strong>Frank Mercado</strong> — 30/06/2026 — CBD-2026-118</p>
+        <p>
+          <strong>Colombia Boat Detailing</strong> — Cartagena de Indias,
+          Colombia — colombiaboatdetailing.com
+        </p>
+        <p style="margin-top: 3px">
+          Cotización elaborada por <strong>Frank Mercado</strong> — 30/06/2026 —
+          CBD-2026-118
+        </p>
       </footer>
-
     </div>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
