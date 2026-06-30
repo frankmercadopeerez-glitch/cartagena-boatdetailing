@@ -115,6 +115,8 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#d4af37" />
 
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <!-- Preconnect FIRST (before any resource fetch) -->
     <!-- Preload LCP image -->
     <link
@@ -895,9 +897,9 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css" />
+    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
 
     <!-- Google Fonts async -->

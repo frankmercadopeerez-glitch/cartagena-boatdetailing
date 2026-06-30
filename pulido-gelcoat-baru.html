@@ -148,6 +148,8 @@
         );
       }
     </style>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link
       rel="preload"
       href="fonts/inter-normal-400-latin.woff2"
@@ -746,7 +748,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css" />
+    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
     <link
       rel="preload"
@@ -760,7 +762,7 @@
     <noscript
       ><link rel="stylesheet" href="vendor/phosphor/icons.css"
     /></noscript>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
   </head>
   <body

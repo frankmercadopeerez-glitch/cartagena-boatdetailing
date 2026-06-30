@@ -696,7 +696,9 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 
     <!-- Preload critical fonts (self-hosted) -->
     <link
@@ -729,7 +731,7 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 
     <style>
       body {
