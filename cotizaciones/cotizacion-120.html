@@ -400,6 +400,10 @@
       }
 
       @media print {
+        html {
+          font-size: 93%;
+        }
+
         @page {
           size: A4;
           margin: 10mm 8mm;
@@ -418,6 +422,21 @@
           padding: 0;
           box-shadow: none;
           border-top-width: 5px;
+        }
+
+        /* Bloquear layout — impedir que el breakpoint responsive se active al imprimir */
+        header {
+          flex-direction: row !important;
+          align-items: flex-start !important;
+        }
+        .client-section {
+          flex-direction: row !important;
+        }
+        .quote-info {
+          text-align: right !important;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr 1fr !important;
         }
 
         .photo-section {
@@ -441,41 +460,53 @@
 
         .item-title {
           font-size: 12px !important;
-          margin-bottom: 2px !important;
+          margin-bottom: 3px !important;
         }
         .item-desc {
-          font-size: 10px !important;
-          line-height: 1.4 !important;
+          font-size: 11px !important;
+          line-height: 1.65 !important;
         }
         .item-desc ul {
-          margin-top: 3px !important;
+          margin-top: 4px !important;
         }
         td {
-          padding: 5px 8px !important;
+          padding: 9px 8px !important;
         }
         .section-title {
-          margin: 6px 0 4px !important;
-          padding-bottom: 3px !important;
+          margin: 8px 0 5px !important;
+          padding-bottom: 4px !important;
           font-size: 13px !important;
         }
+        .client-section {
+          padding: 12px 14px !important;
+          margin-bottom: 12px !important;
+        }
         .totals-box {
-          padding: 8px !important;
+          padding: 10px !important;
         }
         .total-row {
-          margin-bottom: 3px !important;
+          margin-bottom: 4px !important;
           font-size: 11px !important;
         }
         .grand-total {
           font-size: 15px !important;
         }
         .bottom-grid {
-          margin-top: 6px !important;
-          gap: 6px !important;
+          margin-top: 10px !important;
+          gap: 8px !important;
         }
         .warranty-box,
         .terms-section {
-          padding: 7px 9px !important;
-          font-size: 10.5px !important;
+          padding: 10px 12px !important;
+          font-size: 11px !important;
+        }
+        .guarantee-section {
+          padding: 14px 16px !important;
+          margin-top: 12px !important;
+        }
+        .guarantee-section p {
+          line-height: 1.8 !important;
+          margin-bottom: 8px !important;
         }
 
         .photo-slot img {
@@ -485,7 +516,7 @@
           height: 240px;
         }
         .photo-grid {
-          gap: 6px;
+          gap: 7px;
         }
       }
     </style>
@@ -508,8 +539,15 @@
   <body>
     <div class="invoice-container">
       <header>
-        <div class="brand-info" style="display:flex;align-items:center;gap:10px;">
-          <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" style="height:48px;width:auto;" />
+        <div
+          class="brand-info"
+          style="display: flex; align-items: center; gap: 10px"
+        >
+          <img
+            src="../images/cbdlogo-gold.svg"
+            alt="Colombia Boat Detailing"
+            style="height: 48px; width: auto"
+          />
           <div>
             <h1>Colombia Boat Detailing</h1>
             <p>Los expertos en estetica naval</p>
