@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
+        }
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #122 - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page { size: A4; margin: 10mm; }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      th:last-child, td:last-child { text-align: right; }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+        text-align: left !important;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        text-align: left !important;
+        line-height: 1.5;
+      }
+
+      .item-desc ul {
+        margin: 5px 0 0 16px;
+        line-height: 1.7;
+      }
+
+      .nota-tag {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .price-sub {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 2px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:first-child { min-width: 0; }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child { white-space: nowrap; }
+
+      .billing-note {
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box, .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .warranty-box h4, .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul, .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      .guarantee-section {
+        margin-top: 10px;
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.3);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .guarantee-section h4 {
+        color: var(--ok-color);
+        font-size: 12px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .guarantee-section p {
+        color: var(--text-color);
+        line-height: 1.6;
+        margin-bottom: 5px;
+      }
+
+      .guarantee-section p:last-child { margin-bottom: 0; }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container { padding: 16px; }
+        header, .client-section { flex-direction: column; }
+        .quote-info { text-align: left; }
+        .bottom-grid { grid-template-columns: 1fr; }
+      }
+
+      @media print {
+        @page { size: A4; margin: 10mm 8mm; }
+
+        body { padding: 0; margin: 0; background: white; }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
+
+        .totals-section,
+        .billing-note,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        .guarantee-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr { break-inside: avoid; }
+
+        .item-title { font-size: 12px !important; margin-bottom: 2px !important; }
+        .item-desc { font-size: 10px !important; line-height: 1.4 !important; }
+        .item-desc ul { margin-top: 3px !important; }
+        td { padding: 5px 8px !important; }
+        .section-title { margin: 6px 0 4px !important; padding-bottom: 3px !important; font-size: 13px !important; }
+        .totals-box { padding: 8px !important; }
+        .total-row { margin-bottom: 3px !important; font-size: 11px !important; }
+        .grand-total { font-size: 15px !important; }
+        .bottom-grid { margin-top: 6px !important; gap: 6px !important; }
+        .warranty-box, .terms-section { padding: 7px 9px !important; font-size: 10.5px !important; }
+      }
+    </style>
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACION DE SERVICIOS</h2>
+          <p><strong>Numero:</strong> CBD-2026-122</p>
+          <p><strong>Fecha:</strong> 01/07/2026</p>
+          <p><strong>Validez:</strong> 15 dias</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Juan Jose Silva</strong></p>
+          <p>Propietario &mdash; Lancha 28 pies</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Lancha de fibra aprox. 28 pies &mdash; Cartagena de Indias</p>
+          <p>Limpieza detailing completo interior y exterior</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Plan de trabajo &mdash; Desglose por etapa</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:75%">Descripcion y productos por etapa</th>
+            <th style="width:25%">Valor (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ETAPA 1 -->
+          <tr>
+            <td>
+              <div class="item-title">Etapa 1 &mdash; Lavado y limpieza exterior del casco</div>
+              <div class="item-desc">
+                Lavado completo de todas las superficies exteriores de fibra con
+                tecnica de dos cubetas para evitar contaminar la superficie con
+                suciedad retirada. Se eliminan depositos de sal, algas, linea de
+                flotacion y contaminantes ambientales del casco y la cubierta.
+                <ul>
+                  <li><strong>Producto:</strong> <strong>Star Brite Boat Wash &amp; Wax</strong> (pH neutro, no retira ceras existentes).</li>
+                  <li><strong>Descontaminacion de linea de flotacion:</strong> <strong>Star Brite Hull Cleaner</strong> para remocion de manchas de oxido, sarro y minerales calcificados.</li>
+                  <li><strong>Enjuague:</strong> agua dulce a presion para remocion total de residuos de sal.</li>
+                  <li><strong>Secado tecnico</strong> con microfibra marina para evitar manchas de agua.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 120.000</div>
+            </td>
+          </tr>
+
+          <!-- ETAPA 2 -->
+          <tr>
+            <td>
+              <div class="item-title">Etapa 2 &mdash; Limpieza interior completa del cockpit</div>
+              <div class="item-desc">
+                Limpieza profunda de toda la zona interior de la embarcacion: consola, tablero de instrumentos, suelo de fibra, paredes interiores, compartimientos de almacenamiento y sentina accesible. La embarcacion no cuenta con cocina ni bano a bordo, por lo que esas areas no aplican.
+                <ul>
+                  <li><strong>Desengrase de superficies internas:</strong> <strong>303 Multi-Surface Cleaner</strong> (concentrado de pH neutro, no deja residuo) para tablero, consola y bordes internos.</li>
+                  <li><strong>Limpieza de pisos de fibra antideslizante:</strong> <strong>Star Brite Non-Skid Deck Cleaner</strong> con cepillo de cerdas medianas para remocion de mugre incrustada en la textura.</li>
+                  <li><strong>Compartimientos y cajoneras:</strong> vaciado, limpieza interna con <strong>303 Multi-Surface Cleaner</strong> y secado.</li>
+                  <li><strong>Tablero de instrumentos y consola:</strong> limpieza detallada con brocha fina y producto antiestático para remocion de polvo marino y sal depositada en ranuras y botones.</li>
+                  <li><strong>Proteccion final de plasticos interiores:</strong> aplicacion de <strong>303 Aerospace Protectant</strong> que protege contra rayos UV, repele el polvo y restaura el color original de los plasticos.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 180.000</div>
+            </td>
+          </tr>
+
+          <!-- ETAPA 3 -->
+          <tr>
+            <td>
+              <div class="item-title">Etapa 3 &mdash; Cojineria y tapiceria</div>
+              <div class="item-desc">
+                Limpieza profunda y acondicionamiento de toda la tapiceria y cojineria de la embarcacion. La cojineria en ambiente marino acumula sal en los poros del vinilo, lo que la reseca y agrieta si no recibe tratamiento especializado. El proceso incluye:
+                <ul>
+                  <li><strong>Limpieza inicial:</strong> <strong>Meguiar's M5717 Vinyl &amp; Rubber Cleaner/Conditioner</strong> aplicado con cepillo suave para remover sal, moho superficial y manchas sin dano al material.</li>
+                  <li><strong>Desinfeccion antimicrobiana:</strong> aplicacion de <strong>Star Brite Mold &amp; Mildew Stain Remover</strong> en zonas con presencia de manchas de humedad o moho.</li>
+                  <li><strong>Acondicionamiento:</strong> <strong>303 Marine Aerospace Protectant</strong> que hidrata el vinilo, restaura su flexibilidad y aplica una pelicula de proteccion UV que extiende la vida util de la tapiceria.</li>
+                  <li><strong>Resultado:</strong> tapiceria limpia, desinfectada, con brillo natural restaurado y protegida contra la degradacion por UV y sal.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 200.000</div>
+            </td>
+          </tr>
+
+          <!-- ETAPA 4 -->
+          <tr>
+            <td>
+              <div class="item-title">Etapa 4 &mdash; Vidrios, acero inoxidable y superficies plasticas</div>
+              <div class="item-desc">
+                Limpieza y proteccion de todos los metales, vidrios y superficies plasticas visibles de la embarcacion.
+                <ul>
+                  <li><strong>Acero inoxidable</strong> (pasamanos, grilletes, herrajes): <strong>Star Brite Stainless Steel One Step Cleaner &amp; Polish</strong> para eliminar manchas de oxido de hierro (roya), sarro marino y restituir el brillo metalico. Sellado final con <strong>Flitz Metal Polish &amp; Protectant</strong>.</li>
+                  <li><strong>Vidrios y parabrisas:</strong> <strong>Meguiar's Perfect Clarity Glass Cleaner</strong> para remocion de sal calcificada, manchas de agua dura y depositos de suciedad. Aplicacion de <strong>Rain-X Marine Water Repellent</strong> para efecto hidrofugo que mejora la visibilidad con lluvia y salpicadura.</li>
+                  <li><strong>Superficies plasticas exteriores</strong> (tapas, cubierta, carcasas): <strong>303 Aerospace Protectant UV</strong> para restaurar el negro o el color original del plastico opacado por el sol y aplicar barrera de proteccion duradera.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 150.000</div>
+            </td>
+          </tr>
+
+          <!-- ETAPA 5 -->
+          <tr>
+            <td>
+              <div class="item-title">Etapa 5 &mdash; Compartimiento de motores y limpieza exterior del motor</div>
+              <div class="item-desc">
+                Limpieza tecnica del compartimiento de motores y de las superficies exteriores del motor. Este proceso remueve acumulaciones de grasa, aceite, combustible y sal que aceleran la corrosion de componentes electricos y mecanicos.
+                <ul>
+                  <li><strong>Desengrasante de grado marino:</strong> <strong>Star Brite Super Orange Cleaner &amp; Degreaser</strong> aplicado sobre todas las superficies del compartimiento, dejando actuar el tiempo necesario para disolver la grasa incrustada.</li>
+                  <li><strong>Carcasa exterior del motor:</strong> <strong>Meguiar's D108 Super Degreaser</strong> diluido para remocion de residuos de aceite, grasa y sal sin dano a plásticos ni pinturas del motor.</li>
+                  <li><strong>Enjuague y secado:</strong> agua dulce a presion moderada y secado con aire y microfibra para evitar acumulacion de humedad en componentes electricos.</li>
+                  <li><strong>Protector anticorrosivo:</strong> <strong>CRC Marine Heavy Duty Corrosion Inhibitor</strong> aplicado sobre conectores, cables y partes metalicas del compartimiento para retardar la oxidacion en ambiente salino.</li>
+                  <li><strong>Abrillantador de motor:</strong> <strong>Star Brite Motor Kote Engine Treatment</strong> sobre carcasa externa para un acabado limpio y protegido.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 150.000</div>
+            </td>
+          </tr>
+
+          <!-- OPCIONAL PULIDO -->
+          <tr>
+            <td>
+              <span class="nota-tag">Opcional &mdash; no incluido en el total</span>
+              <div class="item-title">Adicional &mdash; Pulido integral de gelcoat exterior (sistema 3M Marine)</div>
+              <div class="item-desc">
+                Servicio de pulido profesional para recuperar el brillo y la profundidad del gelcoat exterior. Se aplica el sistema de tres etapas de <strong>3M Marine</strong> con pulidora orbital de doble accion, que protege la integridad del gelcoat y garantiza un acabado homogeneo.
+                <ul>
+                  <li><strong>Etapa 1 &mdash; Compound:</strong> <strong>3M Marine Heavy Duty Compound</strong> para retiro de oxidacion, rayones superficiales y opacidad.</li>
+                  <li><strong>Etapa 2 &mdash; Polish:</strong> <strong>3M Finesse-it / Marine Polish</strong> para refinado y recuperacion de brillo profundo.</li>
+                  <li><strong>Etapa 3 &mdash; Cera:</strong> <strong>3M Ultra Performance Paste Wax</strong> para sellado y proteccion contra UV, salitre y contaminacion marina.</li>
+                  <li>Incluye <strong>garantia de 6 meses</strong> sobre el brillo restaurado.</li>
+                  <li>Se recomienda combinarlo con la limpieza para resultados optimos en el mismo dia.</li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align:top; padding-top:10px;">
+              <div class="special-price">$ 1.800.000</div>
+              <div class="price-sub">Solo si se aprueba</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Etapa 1 &mdash; Lavado y limpieza exterior del casco:</span>
+            <span>$ 120.000</span>
+          </div>
+          <div class="total-row">
+            <span>Etapa 2 &mdash; Limpieza interior completa del cockpit:</span>
+            <span>$ 180.000</span>
+          </div>
+          <div class="total-row">
+            <span>Etapa 3 &mdash; Cojineria y tapiceria:</span>
+            <span>$ 200.000</span>
+          </div>
+          <div class="total-row">
+            <span>Etapa 4 &mdash; Vidrios, acero inoxidable y plasticos:</span>
+            <span>$ 150.000</span>
+          </div>
+          <div class="total-row">
+            <span>Etapa 5 &mdash; Compartimiento de motores y motor exterior:</span>
+            <span>$ 150.000</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total servicio de limpieza (antes de IVA):</span>
+            <span>$ 800.000 COP</span>
+          </div>
+          <div style="font-size:10px; color:var(--text-light); margin-top:6px;">
+            Opcional: pulido integral adicional por $ 1.800.000 COP (no incluido en el total anterior).
+            Si el cliente requiere facturacion electronica se adicionara el IVA vigente.
+          </div>
+        </div>
+      </div>
+
+      <div class="billing-note">
+        La informacion de facturacion se entrega cuando se apruebe la cotizacion.
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Tiempo y equipo de trabajo</h4>
+          <ul>
+            <li>Duracion estimada: <strong>1 dia de trabajo</strong>.</li>
+            <li>Equipo de <strong>2 tecnicos</strong> especializados en detailing naval.</li>
+            <li>Todos los productos son de grado marino — no se usan quimicos industriales que danen las superficies.</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo del 50% para confirmar y programar el trabajo.</li>
+            <li>Saldo del 50% contra entrega a satisfaccion.</li>
+            <li>El pulido opcional se cobra por separado si es aprobado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guarantee-section">
+        <h4>&#10003; Garantia y guia de cuidado personalizada</h4>
+        <p>
+          Se otorga <strong>garantia de 6 meses</strong> sobre el brillo y
+          la limpieza de la tapiceria tratada. Si el pulido opcional es aprobado,
+          la garantia de 6 meses se extiende tambien al brillo del gelcoat exterior.
+        </p>
+        <p>
+          &#128241; <strong>Guia digital de cuidado personalizada:</strong>
+          Al finalizar los trabajos se entrega una guia digital con las
+          instrucciones de mantenimiento especificas para preservar los resultados
+          obtenidos el mayor tiempo posible.
+        </p>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com
+        </p>
+        <p>Gracias por confiar en los especialistas en estetica naval.</p>
+      </footer>
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
