@@ -5,22 +5,29 @@
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      (function(){
-        function loadGA(){
-          if(window._gaLoaded)return;
-          window._gaLoaded=true;
-          var s=document.createElement('script');
-          s.async=true;
-          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
           document.head.appendChild(s);
-          gtag('js',new Date());
-          gtag('config','G-01GC6QM018');
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
         }
-        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
-        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){
-          document.addEventListener(e,loadGA,{once:true,passive:true});
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
@@ -296,6 +303,42 @@
         color: var(--text-light);
       }
 
+      .photo-section {
+        margin-top: 14px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .photo-grid-2col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .photo-slot img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        display: block;
+      }
+
+      .photo-grid-2col .photo-slot img {
+        height: 260px;
+      }
+
+      .photo-caption {
+        font-size: 10px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 3px;
+        font-style: italic;
+        line-height: 1.4;
+      }
+
       @media (max-width: 760px) {
         .invoice-container {
           padding: 16px;
@@ -318,7 +361,7 @@
       @media print {
         @page {
           size: A4;
-          margin: 0;
+          margin: 10mm 8mm;
         }
 
         body {
@@ -331,8 +374,14 @@
           max-width: 100%;
           width: 100%;
           margin: 0;
-          padding: 5mm 6mm;
+          padding: 0;
           box-shadow: none;
+          border-top-width: 5px;
+        }
+
+        .photo-section {
+          page-break-before: always;
+          break-before: always;
         }
 
         .totals-section,
@@ -347,11 +396,38 @@
         tr {
           break-inside: avoid;
         }
+
+        .item-title { font-size: 12px !important; margin-bottom: 2px !important; }
+        .item-desc { font-size: 10px !important; line-height: 1.4 !important; }
+        .item-desc ul { margin-top: 3px !important; }
+        td { padding: 5px 8px !important; }
+        .section-title { margin: 6px 0 4px !important; padding-bottom: 3px !important; font-size: 13px !important; }
+        .totals-box { padding: 8px !important; }
+        .total-row { margin-bottom: 3px !important; font-size: 11px !important; }
+        .grand-total { font-size: 15px !important; }
+        .bottom-grid { margin-top: 6px !important; gap: 6px !important; }
+        .warranty-box, .terms-section { padding: 7px 9px !important; font-size: 10.5px !important; }
+
+        .photo-slot img { height: 185px; }
+        .photo-grid-2col .photo-slot img { height: 240px; }
+        .photo-grid { gap: 6px; }
       }
     </style>
     <!-- Preload critical fonts -->
-    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div class="invoice-container">
@@ -381,15 +457,90 @@
         </div>
       </div>
 
-      <div style="margin-bottom:10px;">
-        <h3 style="font-family:Georgia,'Times New Roman',serif;font-size:13px;color:var(--primary-color);border-bottom:1px solid var(--accent-color);padding-bottom:4px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Estado actual del velero</h3>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
-          <img src="images/satori/satori (1).jpg" alt="Satori foto 1" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
-          <img src="images/satori/satori (2).jpg" alt="Satori foto 2" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
-          <img src="images/satori/satori (3).jpg" alt="Satori foto 3" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
-          <img src="images/satori/satori (4).jpg" alt="Satori foto 4" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
-          <img src="images/satori/satori (5).jpg" alt="Satori foto 5" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
-          <img src="images/satori/satori (6).jpg" alt="Satori foto 6" style="width:100%;height:130px;object-fit:cover;border-radius:3px;border:1px solid var(--border-color);" />
+      <div style="margin-bottom: 10px">
+        <h3
+          style="
+            font-family: Georgia, &quot;Times New Roman&quot;, serif;
+            font-size: 13px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          "
+        >
+          Estado actual del velero
+        </h3>
+        <div
+          style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px"
+        >
+          <img
+            src="images/satori/satori (1).jpg"
+            alt="Satori foto 1"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
+          <img
+            src="images/satori/satori (2).jpg"
+            alt="Satori foto 2"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
+          <img
+            src="images/satori/satori (3).jpg"
+            alt="Satori foto 3"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
+          <img
+            src="images/satori/satori (4).jpg"
+            alt="Satori foto 4"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
+          <img
+            src="images/satori/satori (5).jpg"
+            alt="Satori foto 5"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
+          <img
+            src="images/satori/satori (6).jpg"
+            alt="Satori foto 6"
+            style="
+              width: 100%;
+              height: 130px;
+              object-fit: cover;
+              border-radius: 3px;
+              border: 1px solid var(--border-color);
+            "
+          />
         </div>
       </div>
 
@@ -438,8 +589,8 @@
                 </ul>
                 El equipo de trabajo esta conformado por
                 <strong>2 tecnicos especializados</strong> para garantizar
-                cubrimiento completo y calidad homogenea en toda la
-                embarcacion. Inicio pactado para la
+                cubrimiento completo y calidad homogenea en toda la embarcacion.
+                Inicio pactado para la
                 <strong>semana del 20 de julio de 2026</strong>.
               </div>
             </td>
@@ -456,14 +607,18 @@
             <span>Total (antes de IVA):</span>
             <span>$ 4.500.000 COP</span>
           </div>
-          <div style="font-size: 10px; color: var(--text-light); margin-top: 4px">
-            Si el cliente requiere facturacion electronica, se adicionara el IVA vigente.
+          <div
+            style="font-size: 10px; color: var(--text-light); margin-top: 4px"
+          >
+            Si el cliente requiere facturacion electronica, se adicionara el IVA
+            vigente.
           </div>
         </div>
       </div>
 
       <div class="billing-note">
-        La informacion de facturacion se entrega cuando se apruebe la cotizacion.
+        La informacion de facturacion se entrega cuando se apruebe la
+        cotizacion.
       </div>
 
       <div class="bottom-grid">
@@ -471,9 +626,16 @@
           <h4>Tiempo estimado de ejecucion</h4>
           <ul>
             <li>Duracion estimada: <strong>4 a 5 dias de trabajo</strong>.</li>
-            <li>Equipo de <strong>2 tecnicos</strong> especializados en estetica naval.</li>
-            <li>Trabajo ejecutado con el velero en el agua en el Club de Pesca.</li>
-            <li>Inicio pactado: <strong>semana del 20 de julio de 2026</strong>.</li>
+            <li>
+              Equipo de <strong>2 tecnicos</strong> especializados en estetica
+              naval.
+            </li>
+            <li>
+              Trabajo ejecutado con el velero en el agua en el Club de Pesca.
+            </li>
+            <li>
+              Inicio pactado: <strong>semana del 20 de julio de 2026</strong>.
+            </li>
           </ul>
         </div>
 
@@ -482,8 +644,10 @@
           <ul>
             <li>Anticipo del 50% para confirmar y programar el trabajo.</li>
             <li>Saldo del 50% contra entrega a satisfaccion.</li>
-            <li>Los costos de acceso al Club de Pesca
-              <strong>corren por cuenta del cliente</strong>.</li>
+            <li>
+              Los costos de acceso al Club de Pesca
+              <strong>corren por cuenta del cliente</strong>.
+            </li>
           </ul>
         </div>
       </div>
@@ -494,6 +658,36 @@
         </p>
         <p>Gracias por confiar en los especialistas en estetica naval.</p>
       </footer>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotografico &mdash; Estado actual del velero Satori</h3>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/satori/satori (1).jpg" alt="Satori foto 1" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 1</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/satori/satori (2).jpg" alt="Satori foto 2" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 2</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/satori/satori (3).jpg" alt="Satori foto 3" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 3</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/satori/satori (4).jpg" alt="Satori foto 4" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 4</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/satori/satori (5).jpg" alt="Satori foto 5" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 5</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/satori/satori (6).jpg" alt="Satori foto 6" />
+            <p class="photo-caption">Velero Satori &mdash; Vista 6</p>
+          </div>
+        </div>
+      </div>
     </div>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
