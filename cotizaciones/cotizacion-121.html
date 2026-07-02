@@ -5,22 +5,29 @@
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      (function(){
-        function loadGA(){
-          if(window._gaLoaded)return;
-          window._gaLoaded=true;
-          var s=document.createElement('script');
-          s.async=true;
-          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
           document.head.appendChild(s);
-          gtag('js',new Date());
-          gtag('config','G-01GC6QM018');
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
         }
-        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
-        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){
-          document.addEventListener(e,loadGA,{once:true,passive:true});
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
@@ -419,25 +426,71 @@
           break-inside: avoid;
         }
 
-        .item-title { font-size: 12px !important; margin-bottom: 2px !important; }
-        .item-desc { font-size: 10px !important; line-height: 1.4 !important; }
-        .item-desc ul { margin-top: 3px !important; }
-        td { padding: 5px 8px !important; }
-        .section-title { margin: 6px 0 4px !important; padding-bottom: 3px !important; font-size: 13px !important; }
-        .totals-box { padding: 8px !important; }
-        .total-row { margin-bottom: 3px !important; font-size: 11px !important; }
-        .grand-total { font-size: 15px !important; }
-        .bottom-grid { margin-top: 6px !important; gap: 6px !important; }
-        .warranty-box, .terms-section { padding: 7px 9px !important; font-size: 10.5px !important; }
+        .item-title {
+          font-size: 12px !important;
+          margin-bottom: 2px !important;
+        }
+        .item-desc {
+          font-size: 10px !important;
+          line-height: 1.4 !important;
+        }
+        .item-desc ul {
+          margin-top: 3px !important;
+        }
+        td {
+          padding: 5px 8px !important;
+        }
+        .section-title {
+          margin: 6px 0 4px !important;
+          padding-bottom: 3px !important;
+          font-size: 13px !important;
+        }
+        .totals-box {
+          padding: 8px !important;
+        }
+        .total-row {
+          margin-bottom: 3px !important;
+          font-size: 11px !important;
+        }
+        .grand-total {
+          font-size: 15px !important;
+        }
+        .bottom-grid {
+          margin-top: 6px !important;
+          gap: 6px !important;
+        }
+        .warranty-box,
+        .terms-section {
+          padding: 7px 9px !important;
+          font-size: 10.5px !important;
+        }
 
-        .photo-slot img { height: 180px; }
-        .photo-grid-2col .photo-slot img { height: 240px; }
-        .photo-grid { gap: 6px; }
+        .photo-slot img {
+          height: 180px;
+        }
+        .photo-grid-2col .photo-slot img {
+          height: 240px;
+        }
+        .photo-grid {
+          gap: 6px;
+        }
       }
     </style>
     <!-- Preload critical fonts -->
-    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div class="invoice-container">
@@ -484,9 +537,9 @@
               </div>
               <div class="item-desc">
                 En la inspeccion realizada el dia 01/07/2026 se confirmo que el
-                gelcoat del bote Juldor se encuentra en condiciones optimas
-                para ser intervenido y se puede garantizar un excelente
-                resultado. Se aplica el sistema nautico de tres etapas de
+                gelcoat del bote Juldor se encuentra en condiciones optimas para
+                ser intervenido y se puede garantizar un excelente resultado. Se
+                aplica el sistema nautico de tres etapas de
                 <strong>3M Marine</strong> en todas las superficies exteriores:
                 casco, superestructura y cubierta.
                 <ul style="margin: 5px 0 0 16px; line-height: 1.7">
@@ -528,14 +581,18 @@
             <span>Total (antes de IVA):</span>
             <span>$ 2.700.000 COP</span>
           </div>
-          <div style="font-size: 10px; color: var(--text-light); margin-top: 4px">
-            Si el cliente requiere facturacion electronica, se adicionara el IVA vigente.
+          <div
+            style="font-size: 10px; color: var(--text-light); margin-top: 4px"
+          >
+            Si el cliente requiere facturacion electronica, se adicionara el IVA
+            vigente.
           </div>
         </div>
       </div>
 
       <div class="billing-note">
-        La informacion de facturacion se entrega cuando se apruebe la cotizacion.
+        La informacion de facturacion se entrega cuando se apruebe la
+        cotizacion.
       </div>
 
       <div class="bottom-grid">
@@ -543,7 +600,9 @@
           <h4>Tiempo estimado de ejecucion</h4>
           <ul>
             <li>Duracion estimada: <strong>2 a 3 dias de trabajo</strong>.</li>
-            <li>Inicio programado: <strong>lunes 6 de julio de 2026</strong>.</li>
+            <li>
+              Inicio programado: <strong>lunes 6 de julio de 2026</strong>.
+            </li>
           </ul>
         </div>
 
@@ -560,12 +619,12 @@
         <h4>&#10003; Garantia de brillo y guia de cuidado personalizada</h4>
         <p>
           Se otorga <strong>garantia de 6 meses</strong> sobre el brillo
-          restaurado con el sistema de pulido 3M Marine aplicado en el
-          bote <strong>Juldor</strong>.
+          restaurado con el sistema de pulido 3M Marine aplicado en el bote
+          <strong>Juldor</strong>.
         </p>
         <p>
-          &#128241; <strong>Guia digital de cuidado personalizada:</strong>
-          Al finalizar los trabajos se entrega una guia digital con las
+          &#128241; <strong>Guia digital de cuidado personalizada:</strong> Al
+          finalizar los trabajos se entrega una guia digital con las
           instrucciones de mantenimiento especificas para preservar el brillo
           del gelcoat del bote <strong>Juldor</strong> el mayor tiempo posible.
         </p>
@@ -577,6 +636,36 @@
         </p>
         <p>Gracias por confiar en los especialistas en estetica naval.</p>
       </footer>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotografico &mdash; Estado actual del bote Juldor</h3>
+        <div class="photo-grid">
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (1).jpg" alt="Juldor foto 1" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 1</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (2).jpg" alt="Juldor foto 2" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 2</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (3).jpg" alt="Juldor foto 3" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 3</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (4).jpg" alt="Juldor foto 4" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 4</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (5).jpg" alt="Juldor foto 5" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 5</p>
+          </div>
+          <div class="photo-slot">
+            <img src="images/juldor/juldor (6).jpg" alt="Juldor foto 6" />
+            <p class="photo-caption">Bote Juldor &mdash; Vista 6</p>
+          </div>
+        </div>
+      </div>
     </div>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
