@@ -277,13 +277,18 @@
       }
 
       .terms-section {
-        background: #f8fafc;
-        border-left: 3px solid var(--accent-color);
+        background: var(--primary-color);
+        color: #e2e8f0;
       }
 
-      .warranty-box h4,
-      .terms-section h4 {
+      .warranty-box h4 {
         color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
         margin-bottom: 6px;
         font-size: 12px;
       }
@@ -292,6 +297,14 @@
       .warranty-box ul {
         margin-left: 15px;
         line-height: 1.6;
+      }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255,255,255,0.08);
+        font-size: 11px;
       }
 
       footer {
@@ -649,11 +662,6 @@
         </div>
       </div>
 
-      <div class="billing-note">
-        La informacion de facturacion se entrega cuando se apruebe la
-        cotizacion.
-      </div>
-
       <div class="bottom-grid">
         <div class="warranty-box">
           <h4>Tiempo estimado de ejecucion</h4>
@@ -668,17 +676,18 @@
         </div>
 
         <div class="terms-section">
-          <h4>Condiciones y pagos</h4>
+          <h4>Condiciones y forma de pago</h4>
           <ul>
-            <li>Anticipo para iniciar: items 1 y 3 segun programacion.</li>
-            <li>Item 2 sin anticipo y pago unicamente contra resultado.</li>
-            <li>Item 4 solo se ejecuta con aprobacion del cliente.</li>
+            <li>Anticipo del <strong>50%</strong> de los items 1 y 3 para programar el trabajo.</li>
+            <li>Saldo del <strong>50%</strong> contra entrega a satisfaccion.</li>
+            <li>Item 2 sin anticipo &mdash; pago unicamente contra resultado.</li>
+            <li>Item 4 se ejecuta solo con aprobacion del cliente.</li>
             <li>Item 5 pendiente de valor final por definir.</li>
-            <li>
-              Los costos de acceso a Marina de Baru
-              <strong>corren por cuenta del cliente</strong>.
-            </li>
+            <li>Costos de acceso a Marina de Baru <strong>corren por cuenta del cliente</strong>.</li>
           </ul>
+          <div class="payment-info">
+            La informacion de facturacion se entrega cuando se apruebe la cotizacion.
+          </div>
         </div>
       </div>
 

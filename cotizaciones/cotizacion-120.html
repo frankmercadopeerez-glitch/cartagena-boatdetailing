@@ -277,13 +277,18 @@
       }
 
       .terms-section {
-        background: #f8fafc;
-        border-left: 3px solid var(--accent-color);
+        background: var(--primary-color);
+        color: #e2e8f0;
       }
 
-      .warranty-box h4,
-      .terms-section h4 {
+      .warranty-box h4 {
         color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
         margin-bottom: 6px;
         font-size: 12px;
       }
@@ -292,6 +297,14 @@
       .warranty-box ul {
         margin-left: 15px;
         line-height: 1.6;
+      }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255,255,255,0.08);
+        font-size: 11px;
       }
 
       footer {
@@ -426,20 +439,54 @@
           break-inside: avoid;
         }
 
-        .item-title { font-size: 12px !important; margin-bottom: 2px !important; }
-        .item-desc { font-size: 10px !important; line-height: 1.4 !important; }
-        .item-desc ul { margin-top: 3px !important; }
-        td { padding: 5px 8px !important; }
-        .section-title { margin: 6px 0 4px !important; padding-bottom: 3px !important; font-size: 13px !important; }
-        .totals-box { padding: 8px !important; }
-        .total-row { margin-bottom: 3px !important; font-size: 11px !important; }
-        .grand-total { font-size: 15px !important; }
-        .bottom-grid { margin-top: 6px !important; gap: 6px !important; }
-        .warranty-box, .terms-section { padding: 7px 9px !important; font-size: 10.5px !important; }
+        .item-title {
+          font-size: 12px !important;
+          margin-bottom: 2px !important;
+        }
+        .item-desc {
+          font-size: 10px !important;
+          line-height: 1.4 !important;
+        }
+        .item-desc ul {
+          margin-top: 3px !important;
+        }
+        td {
+          padding: 5px 8px !important;
+        }
+        .section-title {
+          margin: 6px 0 4px !important;
+          padding-bottom: 3px !important;
+          font-size: 13px !important;
+        }
+        .totals-box {
+          padding: 8px !important;
+        }
+        .total-row {
+          margin-bottom: 3px !important;
+          font-size: 11px !important;
+        }
+        .grand-total {
+          font-size: 15px !important;
+        }
+        .bottom-grid {
+          margin-top: 6px !important;
+          gap: 6px !important;
+        }
+        .warranty-box,
+        .terms-section {
+          padding: 7px 9px !important;
+          font-size: 10.5px !important;
+        }
 
-        .photo-slot img { height: 185px; }
-        .photo-grid-2col .photo-slot img { height: 240px; }
-        .photo-grid { gap: 6px; }
+        .photo-slot img {
+          height: 185px;
+        }
+        .photo-grid-2col .photo-slot img {
+          height: 240px;
+        }
+        .photo-grid {
+          gap: 6px;
+        }
       }
     </style>
     <!-- Preload critical fonts -->
@@ -645,39 +692,27 @@
         </div>
       </div>
 
-      <div class="billing-note">
-        La informacion de facturacion se entrega cuando se apruebe la
-        cotizacion.
-      </div>
-
       <div class="bottom-grid">
         <div class="warranty-box">
           <h4>Tiempo estimado de ejecucion</h4>
           <ul>
             <li>Duracion estimada: <strong>4 a 5 dias de trabajo</strong>.</li>
-            <li>
-              Equipo de <strong>2 tecnicos</strong> especializados en estetica
-              naval.
-            </li>
-            <li>
-              Trabajo ejecutado con el velero en el agua en el Club de Pesca.
-            </li>
-            <li>
-              Inicio pactado: <strong>semana del 20 de julio de 2026</strong>.
-            </li>
+            <li>Equipo de <strong>2 tecnicos</strong> especializados en estetica naval.</li>
+            <li>Trabajo ejecutado con el velero en el agua en el Club de Pesca.</li>
+            <li>Inicio pactado: <strong>semana del 20 de julio de 2026</strong>.</li>
           </ul>
         </div>
 
         <div class="terms-section">
-          <h4>Condiciones y pagos</h4>
+          <h4>Condiciones y forma de pago</h4>
           <ul>
-            <li>Anticipo del 50% para confirmar y programar el trabajo.</li>
-            <li>Saldo del 50% contra entrega a satisfaccion.</li>
-            <li>
-              Los costos de acceso al Club de Pesca
-              <strong>corren por cuenta del cliente</strong>.
-            </li>
+            <li>Anticipo del <strong>50%</strong> para confirmar y programar el trabajo.</li>
+            <li>Saldo del <strong>50%</strong> contra entrega a satisfaccion.</li>
+            <li>Costos de acceso al Club de Pesca <strong>corren por cuenta del cliente</strong>.</li>
           </ul>
+          <div class="payment-info">
+            La informacion de facturacion se entrega cuando se apruebe la cotizacion.
+          </div>
         </div>
       </div>
 
@@ -689,8 +724,8 @@
           gelcoat del velero <strong>Satori</strong>.
         </p>
         <p>
-          &#128241; <strong>Guia digital de cuidado personalizada:</strong>
-          Al finalizar los trabajos se entrega una guia digital con las
+          &#128241; <strong>Guia digital de cuidado personalizada:</strong> Al
+          finalizar los trabajos se entrega una guia digital con las
           instrucciones de mantenimiento especificas para preservar el brillo
           del gelcoat del velero <strong>Satori</strong> el mayor tiempo
           posible.
@@ -705,7 +740,9 @@
       </footer>
 
       <div class="photo-section">
-        <h3 class="section-title">Registro fotografico &mdash; Estado actual del velero Satori</h3>
+        <h3 class="section-title">
+          Registro fotografico &mdash; Estado actual del velero Satori
+        </h3>
         <div class="photo-grid">
           <div class="photo-slot">
             <img src="images/satori/satori (1).jpg" alt="Satori foto 1" />
