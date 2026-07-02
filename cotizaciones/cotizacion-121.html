@@ -5,35 +5,28 @@
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      (function () {
-        function loadGA() {
-          if (window._gaLoaded) return;
-          window._gaLoaded = true;
-          var s = document.createElement("script");
-          s.async = true;
-          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
           document.head.appendChild(s);
-          gtag("js", new Date());
-          gtag("config", "G-01GC6QM018");
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
         }
-        if (document.readyState === "complete") {
-          setTimeout(loadGA, 2000);
-        } else {
-          window.addEventListener("load", function () {
-            setTimeout(loadGA, 2000);
-          });
-        }
-        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
-          document.addEventListener(e, loadGA, { once: true, passive: true });
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
         });
       })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cotizacion #119 - Colombia Boat Detailing</title>
+    <title>Cotizacion #121 - Colombia Boat Detailing</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <style>
       :root {
@@ -294,6 +287,34 @@
         line-height: 1.6;
       }
 
+      .guarantee-section {
+        margin-top: 10px;
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.3);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .guarantee-section h4 {
+        color: var(--ok-color);
+        font-size: 12px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .guarantee-section p {
+        color: var(--text-color);
+        line-height: 1.6;
+        margin-bottom: 5px;
+      }
+
+      .guarantee-section p:last-child {
+        margin-bottom: 0;
+      }
+
       footer {
         border-top: 1px solid var(--border-color);
         margin-top: 12px;
@@ -337,34 +358,6 @@
         margin-top: 3px;
         font-style: italic;
         line-height: 1.4;
-      }
-
-      .guarantee-section {
-        margin-top: 10px;
-        background: #f0faf5;
-        border: 1px solid rgba(31, 122, 74, 0.3);
-        border-left: 3px solid var(--ok-color);
-        border-radius: 3px;
-        padding: 10px 12px;
-        font-size: 11px;
-      }
-
-      .guarantee-section h4 {
-        color: var(--ok-color);
-        font-size: 12px;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .guarantee-section p {
-        color: var(--text-color);
-        line-height: 1.6;
-        margin-bottom: 5px;
-      }
-
-      .guarantee-section p:last-child {
-        margin-bottom: 0;
       }
 
       @media (max-width: 760px) {
@@ -443,20 +436,8 @@
       }
     </style>
     <!-- Preload critical fonts -->
-    <link
-      rel="preload"
-      href="../fonts/inter-normal-400-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="../fonts/playfair-display-normal-700-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <div class="invoice-container">
@@ -467,7 +448,7 @@
         </div>
         <div class="quote-info">
           <h2>COTIZACION DE SERVICIOS</h2>
-          <p><strong>Numero:</strong> CBD-2026-119</p>
+          <p><strong>Numero:</strong> CBD-2026-121</p>
           <p><strong>Fecha:</strong> 01/07/2026</p>
           <p><strong>Validez:</strong> 15 dias</p>
         </div>
@@ -476,13 +457,13 @@
       <div class="client-section">
         <div>
           <h3>Preparado para</h3>
-          <p><strong>Magin Ortiga</strong></p>
-          <p>Propietario - Boston Whaler 17 pies</p>
+          <p><strong>Luis Ignacio Herrera</strong></p>
+          <p>Propietario &mdash; Bote Juldor</p>
         </div>
         <div>
           <h3>Detalle del proyecto</h3>
-          <p>Bote Musiquita - Marina de Baru</p>
-          <p>Pulido, desmanchado, pintura de motor y ajuste electrico</p>
+          <p>Bote Juldor &mdash; Regal 26 pies &mdash; Cartagena de Indias</p>
+          <p>Pulido integral de gelcoat &mdash; sistema 3M Marine</p>
         </div>
       </div>
 
@@ -499,124 +480,43 @@
           <tr>
             <td>
               <div class="item-title">
-                1. Pulido integral con descuento - sistema 3M Marine
+                1. Pulido integral de gelcoat &mdash; sistema 3M Marine
               </div>
               <div class="item-desc">
-                Pulido integral de casco, cubierta y superficies exteriores del
-                bote con sistema nautico profesional. Se aplican los siguientes
-                pasos y productos:
+                En la inspeccion realizada el dia 01/07/2026 se confirmo que el
+                gelcoat del bote Juldor se encuentra en condiciones optimas
+                para ser intervenido y se puede garantizar un excelente
+                resultado. Se aplica el sistema nautico de tres etapas de
+                <strong>3M Marine</strong> en todas las superficies exteriores:
+                casco, superestructura y cubierta.
                 <ul style="margin: 5px 0 0 16px; line-height: 1.7">
                   <li>
-                    <strong>Etapa 1 - Correccion:</strong> limpieza tecnica y
-                    corte con <strong>3M Marine Heavy Duty Compound</strong>
-                    para remover oxidacion, rayones leves y opacidad.
+                    <strong>Etapa 1 &mdash; Compound:</strong> retiro de
+                    oxidacion, rayones superficiales y opacidad con
+                    <strong>3M Marine Heavy Duty Compound</strong>, aplicado con
+                    pulidora orbital para un corte uniforme sin dano al gelcoat.
                   </li>
                   <li>
-                    <strong>Etapa 2 - Refinado:</strong> nivelacion de acabado
-                    con <strong>3M Finesse-it / Marine Polish</strong> para
-                    recuperar profundidad de brillo.
+                    <strong>Etapa 2 &mdash; Polish:</strong> refinado y
+                    nivelacion del acabado con
+                    <strong>3M Finesse-it / Marine Polish</strong> para
+                    recuperar la profundidad de brillo y eliminar marcas del
+                    compound.
                   </li>
                   <li>
-                    <strong>Etapa 3 - Proteccion:</strong> sellado con
-                    <strong>3M Ultra Performance Paste Wax</strong> para defensa
-                    UV, salitre y contaminacion marina.
+                    <strong>Etapa 3 &mdash; Cera protectora:</strong> sellado
+                    final con <strong>3M Ultra Performance Paste Wax</strong>
+                    para proteccion contra radiacion UV, agua salada y
+                    contaminacion del ambiente marino.
                   </li>
                 </ul>
                 Aplicacion con pulidora orbital de doble accion y pads marinos
-                para proteger el gelcoat y lograr un acabado uniforme.
+                para proteger la integridad del gelcoat y lograr un acabado
+                uniforme en toda la embarcacion.
               </div>
             </td>
             <td>
-              <div class="special-price">$ 1.200.000</div>
-              <div
-                style="
-                  font-size: 10px;
-                  color: var(--text-light);
-                  margin-top: 4px;
-                "
-              >
-                Precio con descuento
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="item-title">
-                2. Desmanchado de borda blanca de caucho (prueba tecnica)
-              </div>
-              <div class="item-desc">
-                Trabajo de desmanchado en la borda blanca de caucho mediante
-                pruebas controladas con diferentes quimicos especializados para
-                contaminacion marina. Este item se ejecuta bajo modalidad de
-                resultado: si no se logra el resultado esperado, este concepto
-                no se cobra y no requiere anticipo.
-              </div>
-            </td>
-            <td>
-              <div class="special-price">$ 300.000</div>
-              <div
-                style="
-                  font-size: 10px;
-                  color: var(--text-light);
-                  margin-top: 4px;
-                "
-              >
-                Solo se paga si se logra resultado
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="item-title">3. Pintura de tapa del motor</div>
-              <div class="item-desc">
-                Preparacion, lijado tecnico, aplicacion de primer y pintura de
-                acabado para restaurar la tapa del motor con apariencia uniforme
-                y protegida para ambiente marino. Duracion estimada de este
-                proceso: <strong>5 dias de trabajo</strong>.
-              </div>
-            </td>
-            <td>
-              <div class="special-price">$ 1.100.000</div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="item-title">
-                4. Cambio de calcomanias del motor (opcional)
-              </div>
-              <div class="item-desc">
-                Diseno y fabricacion de calcomanias nuevas para la tapa del
-                motor, con instalacion final despues del proceso de pintura.
-              </div>
-            </td>
-            <td>
-              <div class="special-price">$ 300.000</div>
-              <div
-                style="
-                  font-size: 10px;
-                  color: var(--text-light);
-                  margin-top: 4px;
-                "
-              >
-                Item opcional, no incluido en el total
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="item-title">5. Trabajo electrico general</div>
-              <div class="item-desc">
-                Cambio de switch, reemplazo de todos los terminales para
-                aislamiento con protector termo encogible, cambio de terminales
-                desde la bateria y cambio de luz de navegacion de proa.
-              </div>
-            </td>
-            <td>
-              <div class="special-price">Por definir</div>
+              <div class="special-price">$ 2.700.000</div>
             </td>
           </tr>
         </tbody>
@@ -624,60 +524,34 @@
 
       <div class="totals-section">
         <div class="totals-box">
-          <div class="total-row">
-            <span>Total base confirmado (items 1, 2 y 3):</span>
-            <span>$ 2.600.000 COP</span>
-          </div>
-          <div class="total-row">
-            <span>Item opcional (item 4):</span>
-            <span>$ 300.000 COP</span>
-          </div>
-          <div class="total-row">
-            <span>Trabajo electrico (item 5):</span>
-            <span>Por definir</span>
-          </div>
           <div class="total-row grand-total">
-            <span>Total actual cotizado:</span>
-            <span>$ 2.600.000 COP</span>
+            <span>Total (antes de IVA):</span>
+            <span>$ 2.700.000 COP</span>
           </div>
-          <div
-            style="font-size: 10px; color: var(--text-light); margin-top: 4px"
-          >
-            El item 2 se cobra solo contra resultado. Item 4 es opcional y item
-            5 queda sujeto a diagnostico final para definir valor.
+          <div style="font-size: 10px; color: var(--text-light); margin-top: 4px">
+            Si el cliente requiere facturacion electronica, se adicionara el IVA vigente.
           </div>
         </div>
       </div>
 
       <div class="billing-note">
-        La informacion de facturacion se entrega cuando se apruebe la
-        cotizacion.
+        La informacion de facturacion se entrega cuando se apruebe la cotizacion.
       </div>
 
       <div class="bottom-grid">
         <div class="warranty-box">
           <h4>Tiempo estimado de ejecucion</h4>
           <ul>
-            <li>
-              Duracion estimada inicial: <strong>2 a 3 dias de trabajo</strong>.
-            </li>
-            <li>
-              El item electrico puede ajustar el cronograma segun diagnostico.
-            </li>
+            <li>Duracion estimada: <strong>2 a 3 dias de trabajo</strong>.</li>
+            <li>Inicio programado: <strong>lunes 6 de julio de 2026</strong>.</li>
           </ul>
         </div>
 
         <div class="terms-section">
           <h4>Condiciones y pagos</h4>
           <ul>
-            <li>Anticipo para iniciar: items 1 y 3 segun programacion.</li>
-            <li>Item 2 sin anticipo y pago unicamente contra resultado.</li>
-            <li>Item 4 solo se ejecuta con aprobacion del cliente.</li>
-            <li>Item 5 pendiente de valor final por definir.</li>
-            <li>
-              Los costos de acceso a Marina de Baru
-              <strong>corren por cuenta del cliente</strong>.
-            </li>
+            <li>Anticipo del 50% para confirmar y programar el trabajo.</li>
+            <li>Saldo del 50% contra entrega a satisfaccion.</li>
           </ul>
         </div>
       </div>
@@ -686,15 +560,14 @@
         <h4>&#10003; Garantia de brillo y guia de cuidado personalizada</h4>
         <p>
           Se otorga <strong>garantia de 6 meses</strong> sobre el brillo
-          restaurado con el sistema de pulido 3M Marine aplicado en las
-          superficies del bote <strong>Musiquita</strong>.
+          restaurado con el sistema de pulido 3M Marine aplicado en el
+          bote <strong>Juldor</strong>.
         </p>
         <p>
           &#128241; <strong>Guia digital de cuidado personalizada:</strong>
           Al finalizar los trabajos se entrega una guia digital con las
           instrucciones de mantenimiento especificas para preservar el brillo
-          del gelcoat del bote <strong>Musiquita</strong> el mayor tiempo
-          posible.
+          del gelcoat del bote <strong>Juldor</strong> el mayor tiempo posible.
         </p>
       </div>
 
@@ -704,28 +577,6 @@
         </p>
         <p>Gracias por confiar en los especialistas en estetica naval.</p>
       </footer>
-
-      <div class="photo-section">
-        <h3 class="section-title">Registro fotografico &mdash; Estado actual del bote Musiquita</h3>
-        <div class="photo-grid photo-grid-2col">
-          <div class="photo-slot">
-            <img src="images/musiquita/musiquita (1).jpg" alt="Musiquita foto 1" />
-            <p class="photo-caption">Bote Musiquita &mdash; Vista 1</p>
-          </div>
-          <div class="photo-slot">
-            <img src="images/musiquita/musiquita (2).jpg" alt="Musiquita foto 2" />
-            <p class="photo-caption">Bote Musiquita &mdash; Vista 2</p>
-          </div>
-          <div class="photo-slot">
-            <img src="images/musiquita/musiquita (3).jpg" alt="Musiquita foto 3" />
-            <p class="photo-caption">Bote Musiquita &mdash; Vista 3</p>
-          </div>
-          <div class="photo-slot">
-            <img src="images/musiquita/musiquita (4).jpg" alt="Musiquita foto 4" />
-            <p class="photo-caption">Bote Musiquita &mdash; Vista 4</p>
-          </div>
-        </div>
-      </div>
     </div>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
