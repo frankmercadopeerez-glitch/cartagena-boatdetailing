@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Google Analytics - lazy loaded for better performance -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
+          document.head.appendChild(s);
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
+        }
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #119 - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+        text-align: left !important;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        text-align: left !important;
+        line-height: 1.5;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:first-child {
+        min-width: 0;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        white-space: nowrap;
+      }
+
+      .bold-box {
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.35);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+      }
+
+      .bold-box h4 {
+        color: var(--ok-color);
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .bold-box p {
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul,
+      .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container {
+          padding: 16px;
+        }
+
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+
+        .quote-info {
+          text-align: left;
+        }
+
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 0;
+        }
+
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 5mm 6mm;
+          box-shadow: none;
+        }
+
+        .totals-section,
+        .bold-box,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
+        }
+      }
+    </style>
+    <!-- Preload critical fonts -->
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <h1>Colombia Boat Detailing</h1>
+          <p>Los expertos en estetica naval</p>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACION DE SERVICIOS</h2>
+          <p><strong>Numero:</strong> CBD-2026-119</p>
+          <p><strong>Fecha:</strong> 01/07/2026</p>
+          <p><strong>Validez:</strong> 15 dias</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Magin Ortiga</strong></p>
+          <p>Propietario - Boston Whaler 17 pies</p>
+        </div>
+        <div>
+          <h3>Detalle del proyecto</h3>
+          <p>Bote Musiquita - Marina de Baru</p>
+          <p>Pulido, desmanchado, pintura de motor y ajuste electrico</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Plan de trabajo</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descripcion del servicio</th>
+            <th style="width: 160px">Valor (antes de IVA)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-title">
+                1. Pulido integral con descuento - sistema 3M Marine
+              </div>
+              <div class="item-desc">
+                Pulido integral de casco, cubierta y superficies exteriores del
+                bote con sistema nautico profesional. Se aplican los siguientes
+                pasos y productos:
+                <ul style="margin: 5px 0 0 16px; line-height: 1.7">
+                  <li>
+                    <strong>Etapa 1 - Correccion:</strong> limpieza tecnica y
+                    corte con <strong>3M Marine Heavy Duty Compound</strong>
+                    para remover oxidacion, rayones leves y opacidad.
+                  </li>
+                  <li>
+                    <strong>Etapa 2 - Refinado:</strong> nivelacion de acabado
+                    con <strong>3M Finesse-it / Marine Polish</strong> para
+                    recuperar profundidad de brillo.
+                  </li>
+                  <li>
+                    <strong>Etapa 3 - Proteccion:</strong> sellado con
+                    <strong>3M Ultra Performance Paste Wax</strong> para defensa
+                    UV, salitre y contaminacion marina.
+                  </li>
+                </ul>
+                Aplicacion con pulidora orbital de doble accion y pads marinos
+                para proteger el gelcoat y lograr un acabado uniforme.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 1.200.000</div>
+              <div
+                style="
+                  font-size: 10px;
+                  color: var(--text-light);
+                  margin-top: 4px;
+                "
+              >
+                Precio con descuento
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="item-title">
+                2. Desmanchado de borda blanca de caucho (prueba tecnica)
+              </div>
+              <div class="item-desc">
+                Trabajo de desmanchado en la borda blanca de caucho mediante
+                pruebas controladas con diferentes quimicos especializados para
+                contaminacion marina. Este item se ejecuta bajo modalidad de
+                resultado: si no se logra el resultado esperado, este concepto
+                no se cobra y no requiere anticipo.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 300.000</div>
+              <div
+                style="
+                  font-size: 10px;
+                  color: var(--text-light);
+                  margin-top: 4px;
+                "
+              >
+                Solo se paga si se logra resultado
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="item-title">3. Pintura de tapa del motor</div>
+              <div class="item-desc">
+                Preparacion, lijado tecnico, aplicacion de primer y pintura de
+                acabado para restaurar la tapa del motor con apariencia uniforme
+                y protegida para ambiente marino.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 1.100.000</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="item-title">
+                4. Cambio de calcomanias del motor (opcional)
+              </div>
+              <div class="item-desc">
+                Diseno y fabricacion de calcomanias nuevas para la tapa del
+                motor, con instalacion final despues del proceso de pintura.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">$ 300.000</div>
+              <div
+                style="
+                  font-size: 10px;
+                  color: var(--text-light);
+                  margin-top: 4px;
+                "
+              >
+                Item opcional, no incluido en el total
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="item-title">5. Trabajo electrico general</div>
+              <div class="item-desc">
+                Cambio de switch, reemplazo de todos los terminales para
+                aislamiento con protector termo encogible, cambio de terminales
+                desde la bateria y cambio de luz de navegacion de proa.
+              </div>
+            </td>
+            <td>
+              <div class="special-price">Por definir</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Total base confirmado (items 1, 2 y 3):</span>
+            <span>$ 2.600.000 COP</span>
+          </div>
+          <div class="total-row">
+            <span>Item opcional (item 4):</span>
+            <span>$ 300.000 COP</span>
+          </div>
+          <div class="total-row">
+            <span>Trabajo electrico (item 5):</span>
+            <span>Por definir</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total actual cotizado:</span>
+            <span>$ 2.600.000 COP</span>
+          </div>
+          <div
+            style="font-size: 10px; color: var(--text-light); margin-top: 4px"
+          >
+            El item 2 se cobra solo contra resultado. Item 4 es opcional y item
+            5 queda sujeto a diagnostico final para definir valor.
+          </div>
+        </div>
+      </div>
+
+      <div class="bold-box">
+        <h4>&#128279; Pago en linea - Bold</h4>
+        <p>
+          El link de pago sera compartido junto con esta cotizacion. Podra
+          realizar el pago de forma segura con tarjeta de credito, debito o
+          transferencia bancaria a traves de la plataforma
+          <strong>Bold</strong>. Anticipo sugerido: 50% de los items confirmados
+          que si aplican anticipo (item 1 y item 3).
+        </p>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Tiempo estimado de ejecucion</h4>
+          <ul>
+            <li>
+              Duracion estimada inicial: <strong>2 a 3 dias de trabajo</strong>.
+            </li>
+            <li>
+              El item electrico puede ajustar el cronograma segun diagnostico.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo para iniciar: items 1 y 3 segun programacion.</li>
+            <li>Item 2 sin anticipo y pago unicamente contra resultado.</li>
+            <li>Item 4 solo se ejecuta con aprobacion del cliente.</li>
+            <li>Item 5 pendiente de valor final por definir.</li>
+            <li>
+              Los costos de acceso a Marina de Baru
+              <strong>corren por cuenta del cliente</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com
+        </p>
+        <p>Gracias por confiar en los especialistas en estetica naval.</p>
+      </footer>
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
