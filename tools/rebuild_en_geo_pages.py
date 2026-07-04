@@ -1,0 +1,597 @@
+import os
+
+root = r'C:/Users/Dell/PROYECTOS WEB/cartagena-boatdetailing'
+
+# ================================================================
+# SHARED COMPONENTS
+# ================================================================
+
+HEAD_COMMON = """    <!-- Google Analytics - lazy loaded for better performance -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      (function(){
+        function loadGA(){
+          if(window._gaLoaded)return;
+          window._gaLoaded=true;
+          var s=document.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+          document.head.appendChild(s);
+          gtag('js',new Date());
+          gtag('config','G-01GC6QM018');
+        }
+        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
+        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
+        ['click','touchstart','scroll','keydown'].forEach(function(e){
+          document.addEventListener(e,loadGA,{once:true,passive:true});
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Colombia Boat Detailing" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="geo.region" content="CO-BOL" />
+    <meta name="geo.placename" content="Cartagena de Indias, Bolívar, Colombia" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.colombiaboatdetailing.com/images/detailing.webp" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Colombia Boat Detailing" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.colombiaboatdetailing.com/images/detailing.webp" />"""
+
+CRITICAL_CSS = """    <style>
+      *,::before,::after{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;background:#001f3f;color:#fff;font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+      #navbar{position:fixed;top:0;left:0;width:100%;z-index:50;padding-top:0.5rem;padding-bottom:0.5rem;background:#0a192f;backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07);transition:all .3s}
+      .hero-overlay{background:linear-gradient(to top,#071428 0%,rgba(5,18,48,0.55) 50%,rgba(5,15,35,0.12) 100%)}
+    </style>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="preload" href="fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style>*,:after,:before{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-shadow:0 0 #0000;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.block{display:block}.grid{display:grid}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.shrink-0{flex-shrink:0}.items-center{align-items:center}.items-start{align-items:flex-start}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-10{gap:2.5rem}.mx-auto{margin-left:auto;margin-right:auto}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.mb-2{margin-bottom:.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.text-center{text-align:center}.text-left{text-align:left}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.top-0{top:0}.left-0{left:0}.top-6{top:1.5rem}.right-6{right:1.5rem}.z-50{z-index:50}.z-\\[9999\\]{z-index:9999}.w-full{width:100%}.h-full{height:100%}.h-screen{height:100vh}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.text-sm{font-size:.875rem}.text-xs{font-size:.75rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}.text-4xl{font-size:2.25rem}.text-5xl{font-size:3rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.font-light{font-weight:300}.leading-tight{line-height:1.25}.tracking-widest{letter-spacing:.1em}.uppercase{text-transform:uppercase}.rounded-sm{border-radius:.125rem}.shadow-xl{box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transform{transform:var(--tw-transform)}.hover\\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05}.border{border-width:1px}.border-t{border-top-width:1px}.border-b{border-bottom-width:1px}.py-16{padding-top:4rem;padding-bottom:4rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.pt-36{padding-top:9rem}.pb-20{padding-bottom:5rem}.space-y-2>*+*{margin-top:.5rem}.space-y-3>*+*{margin-top:.75rem}.list-disc{list-style-type:disc}.pl-6{padding-left:1.5rem}.col-span-2{grid-column:span 2/span 2}</style>
+    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
+    <link rel="preload" href="vendor/phosphor/icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="vendor/phosphor/icons.css" /></noscript>
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <style>
+      .feature-list li{position:relative;padding-left:1.5rem;margin-bottom:.75rem}
+      .feature-list li::before{content:"✦";color:#d4af37;position:absolute;left:0;font-size:.8rem}
+      .faq-item summary{cursor:pointer;list-style:none}
+      .faq-item summary::-webkit-details-marker{display:none}
+    </style>"""
+
+NAV_EN = """    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3 group">
+          <i class="ph-fill ph-anchor text-3xl text-gold-400 group-hover:rotate-12 transition-transform"></i>
+          <div class="flex flex-col">
+            <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
+            <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-10">
+          <div class="nav-dropdown">
+            <button data-dropdown-toggle="servicesDropdown" aria-haspopup="true" aria-expanded="false" aria-controls="servicesDropdown"
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1">
+              Services <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown-content" id="servicesDropdown">
+              <a href="paint-polishing.html" class="nav-dropdown-link flex items-center gap-2">
+                <span class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm">★</span>
+                Gelcoat Polishing
+              </a>
+              <div class="mx-4 h-px bg-white/10 my-1"></div>
+              <a href="hull-cleaning-en.html" class="nav-dropdown-link">Hull Cleaning</a>
+              <a href="ppf-en.html" class="nav-dropdown-link">PPF (Paint Protection)</a>
+              <a href="ceramic-coating-en.html" class="nav-dropdown-link">Ceramic Coating</a>
+              <a href="gelcoat-en.html" class="nav-dropdown-link">Gelcoat Restoration</a>
+              <a href="interior-detailing-en.html" class="nav-dropdown-link">Interior &amp; Upholstery</a>
+              <a href="anti-corrosion-en.html" class="nav-dropdown-link">Anti-Corrosion</a>
+            </div>
+          </div>
+          <a href="about-en.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">About Us</a>
+          <a href="blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>
+          <a href="https://wa.me/573044301112?text=Hi%2C%20I%20need%20hull%20cleaning%20service" target="_blank" rel="noopener noreferrer"
+            class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+            Book Now
+          </a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true"
+      class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-8 pointer-events-none"
+      style="opacity:1;visibility:visible">
+      <button id="close-menu-btn" class="absolute top-6 right-6 text-white/50 hover:text-white" aria-label="Close navigation menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <a href="services-en.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Services</a>
+      <a href="about-en.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">About Us</a>
+      <a href="blog.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Blog</a>
+      <a href="https://wa.me/573044301112?text=Hi%2C%20I%20need%20hull%20cleaning%20service" target="_blank" rel="noopener noreferrer"
+        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1">Book Now</a>
+    </div>"""
+
+FOOTER_EN = """    <footer class="bg-navy-900 text-slate-300 py-6 md:py-10">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-10 mb-6 md:mb-10">
+          <div class="col-span-2 md:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="ph-fill ph-anchor text-2xl text-gold-400" aria-hidden="true"></i>
+              <div>
+                <p class="text-white text-xs tracking-[0.1em] font-bold">COLOMBIA</p>
+                <p class="text-white font-serif font-bold text-sm tracking-widest">BOAT DETAILING</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 font-light">International Marine Detailing Standards since 2024.</p>
+          </div>
+          <div>
+            <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">Navigation</h4>
+            <ul class="space-y-2 text-xs font-light">
+              <li><a href="index-en.html" class="text-slate-300 hover:text-gold-400 transition-colors">Home</a></li>
+              <li><a href="about-en.html" class="text-slate-300 hover:text-gold-400 transition-colors">About Us</a></li>
+              <li><a href="hull-cleaning-en.html" class="text-slate-300 hover:text-gold-400 transition-colors">Hull Cleaning</a></li>
+              <li><a href="services-en.html" class="text-slate-300 hover:text-gold-400 transition-colors">All Services</a></li>
+              <li><a href="contact-en.html" class="text-slate-300 hover:text-gold-400 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white text-sm font-bold tracking-widest uppercase mb-4">Contact</h4>
+            <p class="text-xs font-light mb-2"><a href="tel:+573044301112" class="hover:text-gold-400 transition">+57 304 430 1112</a></p>
+            <p class="text-xs font-light mb-2">Marina Manzanillo, Cartagena</p>
+            <p class="text-xs font-light">Cartagena de Indias, Colombia</p>
+            <a href="https://wa.me/573044301112?text=Hi%2C%20I%20need%20hull%20cleaning%20service" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 mt-4 bg-green-600 text-white px-4 py-2 rounded-sm text-xs font-semibold hover:bg-green-500 transition">
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+        <div class="border-t border-slate-700 pt-6 text-center text-xs font-light text-slate-500">
+          <p>&copy; 2024-2026 Colombia Boat Detailing &middot; Cartagena de Indias, Colombia &middot;
+            <a href="sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a></p>
+        </div>
+      </div>
+    </footer>"""
+
+SCRIPTS = """    <script defer src="js/main.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>"""
+
+# ================================================================
+# PAGE DATA PER LOCATION
+# ================================================================
+
+pages = {
+    'hull-cleaning-baru-en.html': {
+        'title': 'Hull Cleaning in Barú | Certified Divers | Colombia Boat Detailing',
+        'description': 'Professional in-water hull cleaning service for yachts and sailboats in Barú, Cartagena. Certified divers remove fouling without hauling out. From COP 20,000/ft.',
+        'keywords': 'hull cleaning Baru, boat cleaning Baru Cartagena, yacht hull cleaning Baru, underwater hull cleaning Colombia, fouling removal Baru',
+        'canonical': 'https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html',
+        'hreflang_es': 'https://www.colombiaboatdetailing.com/limpieza-casco-baru.html',
+        'og_title': 'Hull Cleaning in Barú | Colombia Boat Detailing',
+        'og_description': 'Underwater hull cleaning for yachts and sailboats in Barú. Certified divers, no haulout required. COP 20,000/ft.',
+        'og_url': 'https://www.colombiaboatdetailing.com/hull-cleaning-baru-en.html',
+        'schema_area': 'Barú, Bolívar, Colombia',
+        'schema_name': 'Hull Cleaning Service in Barú - Colombia Boat Detailing',
+        'wa_text': 'Hi%2C%20I%20need%20hull%20cleaning%20in%20Bar%C3%BA',
+        'location_badge': 'Local Coverage | Barú Peninsula',
+        'h1': 'Hull Cleaning in Barú',
+        'hero_desc': 'We serve yachts and charter vessels anchored at Playa Blanca and Barú\'s private docks. Our certified divers eliminate fouling and marine growth without hauling your boat out of the water.',
+        'benefits_h2': 'Benefits for Vessels in Barú',
+        'benefits': [
+            'Lower fuel consumption and better performance',
+            'Reduced propeller vibration from fouling buildup',
+            'Extended antifouling paint life',
+            'Preventive maintenance with photo reports after every service',
+            'No haulout, no transport costs, no downtime',
+        ],
+        'pricing_note': 'COP 20,000 per foot. Monthly maintenance plans available for charter fleets and active vessels operating between Cartagena and Barú.',
+        'conditions_h2': 'Sea Conditions in Barú',
+        'conditions': [
+            'The Barú Peninsula sits approximately 25 km southwest of Cartagena and hosts intense nautical activity: tourist catamarans, cruising yachts, and charter boats anchored at Playa Blanca and private docks. Its proximity to the Parque Nacional Natural Corales del Rosario y San Bernardo means highly biodiverse waters — which translates to more aggressive fouling than in the city\'s inner bay.',
+            'Vessels running regular routes between Cartagena and Barú can accumulate significant barnacle and algae growth on the hull and propeller in as little as 30 days. Charter catamarans that remain anchored between operations are especially affected: warm, nutrient-rich water with limited circulation under the hull accelerates the biofouling cycle considerably.',
+            'Our team arrives by support vessel with full dive equipment and scraping tools. We schedule service to avoid disrupting your charter operations — we recommend booking early morning slots before 9 am to take advantage of calm water before the day\'s nautical traffic begins.',
+        ],
+        'faq_location': 'Barú',
+        'faqs': [
+            ('How long does hull cleaning in Barú take?',
+             'A standard service for a 35–40 ft sailboat takes approximately 60–90 minutes. Larger vessels or those with heavy fouling may require more time. We always provide a time estimate before starting.'),
+            ('Do you travel to Barú from Cartagena for hull cleaning?',
+             'Yes. Our team travels from Cartagena to Barú by support vessel. We serve boats anchored at Playa Blanca, Cholón, and private docks on the Barú Peninsula. Travel cost is included in the quote for regular service areas.'),
+            ('How often should I clean the hull of a yacht in Barú?',
+             'In the Colombian Caribbean, biological fouling grows very quickly due to high water temperatures and salinity. We recommend hull cleaning every 4–6 weeks for active charter boats and every 6–8 weeks for vessels used less frequently.'),
+            ('What vessels can receive underwater hull cleaning in Barú?',
+             'We service all vessel types: sailboats, motor yachts, launches, catamarans, and work boats. Our divers have experience with fiberglass, aluminum, and steel hulls of all sizes.'),
+        ],
+        'related_links': [
+            ('hull-cleaning-en.html', 'Main Service', 'Hull Cleaning in Cartagena'),
+            ('hull-cleaning-bocagrande-en.html', 'Also Available', 'Hull Cleaning in Bocagrande'),
+            ('hull-cleaning-rosario-en.html', 'Also Available', 'Hull Cleaning in Islas del Rosario'),
+            ('blog/buzos-limpieza-casco-cartagena/', 'Guide', 'Divers for Hull Cleaning in Cartagena'),
+        ],
+        'cta_h2': 'Ready to Serve in Barú',
+    },
+    'hull-cleaning-bocagrande-en.html': {
+        'title': 'Hull Cleaning in Bocagrande | Certified Divers | Colombia Boat Detailing',
+        'description': 'In-water hull cleaning in Bocagrande, Cartagena. Certified divers at Club Náutico, Club de Pesca and private docks. No dry dock required. From COP 20,000/ft.',
+        'keywords': 'hull cleaning Bocagrande, boat hull cleaning Bocagrande Cartagena, Club Nautico hull cleaning, yacht fouling removal Bocagrande',
+        'canonical': 'https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html',
+        'hreflang_es': 'https://www.colombiaboatdetailing.com/limpieza-casco-bocagrande.html',
+        'og_title': 'Hull Cleaning in Bocagrande | Colombia Boat Detailing',
+        'og_description': 'Underwater hull cleaning service in Bocagrande, Cartagena. Club Náutico, Club de Pesca and private docks. No haulout. COP 20,000/ft.',
+        'og_url': 'https://www.colombiaboatdetailing.com/hull-cleaning-bocagrande-en.html',
+        'schema_area': 'Bocagrande, Cartagena de Indias, Colombia',
+        'schema_name': 'Hull Cleaning Service in Bocagrande - Colombia Boat Detailing',
+        'wa_text': 'Hi%2C%20I%20need%20hull%20cleaning%20in%20Bocagrande',
+        'location_badge': 'Local Coverage | Bocagrande',
+        'h1': 'Hull Cleaning in Bocagrande, Cartagena',
+        'hero_desc': 'We serve yachts and sailboats moored at Club Náutico, Club de Pesca, and Bocagrande\'s private docks. Certified divers remove fouling, algae, and barnacles directly in the water — no haulout required.',
+        'benefits_h2': 'Why Hull Cleaning Matters in Bocagrande',
+        'benefits': [
+            'The semi-enclosed bay accelerates biofouling — clean hulls cut fuel costs by up to 30%',
+            'Club Náutico and Club de Pesca vessels benefit from fast turnaround without leaving the dock',
+            'Regular cleaning extends antifouling paint effectiveness and reduces repainting frequency',
+            'Propeller and shaft cleaning restores full engine efficiency and reduces vibration',
+            'Photo documentation provided after every service for insurance and maintenance records',
+        ],
+        'pricing_note': 'COP 20,000 per foot. Monthly maintenance subscription plans available for Bocagrande marinas and yacht clubs.',
+        'conditions_h2': 'Sea Conditions in Bocagrande',
+        'conditions': [
+            'Bocagrande has the highest concentration of recreational vessels in Cartagena. Club Náutico, Club de Pesca, and the neighbourhood\'s private docks keep hundreds of yachts, sailboats, and sport-fishing boats active year-round. The semi-enclosed inner bay combines high water temperatures with organic nutrients from the surrounding urban environment — conditions that dramatically accelerate algae and barnacle growth on hull bottoms.',
+            'Vessels permanently docked in Bocagrande typically show significant fouling buildup within 3–5 weeks, even with active antifouling paint. The limited water circulation in the inner marina areas means fouling organisms settle quickly on any underwater surface. Without regular cleaning, hull drag increases fuel consumption and puts additional load on the propulsion system.',
+            'Our team responds quickly in Bocagrande — we are typically on site within 24–48 hours of booking. Services at Club Náutico and Club de Pesca are coordinated directly with marina staff to minimise disruption to mooring arrangements.',
+        ],
+        'faq_location': 'Bocagrande',
+        'faqs': [
+            ('Can you service my yacht at Club Náutico in Bocagrande?',
+             'Yes. We service vessels at Club Náutico, Club de Pesca, and private docks throughout Bocagrande. We coordinate with marina personnel and work within dock access rules. Book via WhatsApp and we\'ll confirm availability within a few hours.'),
+            ('How often should I schedule hull cleaning in Bocagrande?',
+             'We recommend every 4–6 weeks for boats in regular use in Bocagrande. The semi-enclosed bay and urban nutrient runoff create faster-than-average fouling conditions. Charter and sport-fishing vessels may need monthly cleanings.'),
+            ('What is the price for hull cleaning in Bocagrande?',
+             'The rate is COP 20,000 per foot of overall length. For a typical 35-foot sailboat that works out to COP 700,000. Monthly subscription plans are available at a discount — contact us on WhatsApp for a personalised quote.'),
+            ('Do your divers clean propellers and shafts in Bocagrande?',
+             'Yes. Every hull cleaning service includes propeller, shaft, and rudder cleaning. We also perform a visual check of sacrificial anodes and report any abnormalities. If anodes need replacing, we can schedule that as a separate service.'),
+        ],
+        'related_links': [
+            ('hull-cleaning-en.html', 'Main Service', 'Hull Cleaning in Cartagena'),
+            ('hull-cleaning-baru-en.html', 'Also Available', 'Hull Cleaning in Barú'),
+            ('hull-cleaning-manzanillo-en.html', 'Also Available', 'Hull Cleaning at Marina Manzanillo'),
+            ('blog/incrustaciones-marinas/', 'Guide', 'Marine Fouling: Causes and Solutions'),
+        ],
+        'cta_h2': 'Ready to Serve in Bocagrande',
+    },
+    'hull-cleaning-manzanillo-en.html': {
+        'title': 'Hull Cleaning at Marina Manzanillo | Cartagena | Colombia Boat Detailing',
+        'description': 'Professional hull cleaning at Marina Manzanillo del Mar, Cartagena. Certified divers service yachts, sailboats, and work vessels. No haulout required. COP 20,000/ft.',
+        'keywords': 'hull cleaning Manzanillo, Marina Manzanillo hull cleaning, boat cleaning Cartagena marina, yacht hull service Manzanillo Cartagena',
+        'canonical': 'https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html',
+        'hreflang_es': 'https://www.colombiaboatdetailing.com/limpieza-casco-manzanillo.html',
+        'og_title': 'Hull Cleaning at Marina Manzanillo | Colombia Boat Detailing',
+        'og_description': 'Underwater hull cleaning at Marina Manzanillo del Mar, Cartagena. Certified divers, no haulout. COP 20,000/ft.',
+        'og_url': 'https://www.colombiaboatdetailing.com/hull-cleaning-manzanillo-en.html',
+        'schema_area': 'Marina Manzanillo del Mar, Cartagena de Indias, Colombia',
+        'schema_name': 'Hull Cleaning Service at Marina Manzanillo - Colombia Boat Detailing',
+        'wa_text': 'Hi%2C%20I%20need%20hull%20cleaning%20at%20Marina%20Manzanillo',
+        'location_badge': 'Local Coverage | Marina Manzanillo del Mar',
+        'h1': 'Hull Cleaning at Marina Manzanillo',
+        'hero_desc': 'We serve all vessel types docked at Marina Manzanillo del Mar — from cruising yachts and sailing vessels to work boats and charter fleets. Our certified divers clean your hull in the water, with no need to haul out.',
+        'benefits_h2': 'Why Regular Hull Cleaning Matters at Marina Manzanillo',
+        'benefits': [
+            'Port canal proximity means turbid water and fast biofouling — even with fresh antifouling paint',
+            'Fuel savings of up to 25–30% for vessels with clean hulls',
+            'Propeller cleaning reduces engine load and prevents shaft seal damage',
+            'Convenient scheduling: we work around your marina berth without disrupting neighbours',
+            'Photo report included — useful for insurance documentation and maintenance logs',
+        ],
+        'pricing_note': 'COP 20,000 per foot of overall length. Monthly and quarterly maintenance plans available for marina residents at Manzanillo.',
+        'conditions_h2': 'Sea Conditions at Marina Manzanillo',
+        'conditions': [
+            'Marina Manzanillo del Mar and the surrounding docks host the most diverse mix of vessels in Cartagena: recreational yachts, sport-fishing launches, port support boats, and transiting sailboats. The marina\'s proximity to the Cartagena port access channel brings higher water turbidity and elevated concentrations of suspended organic matter — conditions that accelerate biofouling even on hulls with active antifouling paint.',
+            'Vessels berthed at Marina Manzanillo often show barnacle and algae buildup within 3–4 weeks during the rainy season (May–November), when warmer temperatures and increased runoff push fouling rates higher. The enclosed dock layout limits water movement around hull bottoms, creating stagnant micro-environments where fouling organisms attach quickly.',
+            'Because Colombia Boat Detailing is based at Marina Manzanillo, our team can respond faster here than anywhere else in the city. We are on-site regularly and can often schedule same-day or next-day service for marina residents.',
+        ],
+        'faq_location': 'Marina Manzanillo',
+        'faqs': [
+            ('Is Colombia Boat Detailing based at Marina Manzanillo?',
+             'Yes. Our base of operations is at Marina Manzanillo del Mar in Cartagena. This means we can offer faster response times and more flexible scheduling for vessels berthed there. We also serve Club Náutico, Club de Pesca, and vessels at anchor throughout the bay.'),
+            ('How quickly can you schedule hull cleaning at Marina Manzanillo?',
+             'For marina residents, we can often arrange same-day or next-day service. Contact us via WhatsApp with your vessel\'s length and location and we\'ll confirm availability promptly.'),
+            ('Does turbid water at Manzanillo affect hull cleaning quality?',
+             'Experienced divers work effectively in the reduced-visibility conditions typical of the port area. We use specialised lighting equipment when needed and our team is trained in zero-visibility diving for hull maintenance.'),
+            ('Can you service large motor yachts and catamarans at Marina Manzanillo?',
+             'Yes. We service all sizes and types of vessels. Large motor yachts, catamarans, and even commercial work boats have all been serviced from our Marina Manzanillo base. Contact us with your vessel dimensions for an accurate quote.'),
+        ],
+        'related_links': [
+            ('hull-cleaning-en.html', 'Main Service', 'Hull Cleaning in Cartagena'),
+            ('hull-cleaning-bocagrande-en.html', 'Also Available', 'Hull Cleaning in Bocagrande'),
+            ('hull-cleaning-baru-en.html', 'Also Available', 'Hull Cleaning in Barú'),
+            ('blog/frecuencia-limpieza-casco/', 'Guide', 'How Often to Clean Your Hull in Cartagena'),
+        ],
+        'cta_h2': 'Ready to Serve at Marina Manzanillo',
+    },
+    'hull-cleaning-rosario-en.html': {
+        'title': 'Hull Cleaning at Islas del Rosario | Colombia Boat Detailing',
+        'description': 'Underwater hull cleaning service at Islas del Rosario near Cartagena. Certified divers remove barnacles and marine fouling from anchored yachts and sailboats. COP 20,000/ft.',
+        'keywords': 'hull cleaning Islas del Rosario, yacht hull cleaning Rosario islands Colombia, boat maintenance Rosario Cartagena, underwater cleaning anchored yacht',
+        'canonical': 'https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html',
+        'hreflang_es': 'https://www.colombiaboatdetailing.com/limpieza-casco-islas-del-rosario.html',
+        'og_title': 'Hull Cleaning at Islas del Rosario | Colombia Boat Detailing',
+        'og_description': 'Professional hull cleaning for anchored yachts at Islas del Rosario. Certified divers, no haulout. COP 20,000/ft.',
+        'og_url': 'https://www.colombiaboatdetailing.com/hull-cleaning-rosario-en.html',
+        'schema_area': 'Islas del Rosario, Bolívar, Colombia',
+        'schema_name': 'Hull Cleaning Service at Islas del Rosario - Colombia Boat Detailing',
+        'wa_text': 'Hi%2C%20I%20need%20hull%20cleaning%20at%20Islas%20del%20Rosario',
+        'location_badge': 'Local Coverage | Islas del Rosario',
+        'h1': 'Hull Cleaning at Islas del Rosario',
+        'hero_desc': 'We travel to the Rosario Archipelago to service yachts and sailboats anchored in the national park. Our certified divers remove barnacles, calcified algae, and fouling directly in the water — no haulout required.',
+        'benefits_h2': 'Ideal for Anchored Vessels and Charter Fleets',
+        'benefits': [
+            'Protect your hull from the aggressive fouling typical of Rosario\'s high-biodiversity waters',
+            'On-site service at anchor — no need to return to Cartagena for a haul-out',
+            'Extended antifouling paint life through regular light cleaning rather than waiting for heavy buildup',
+            'Propeller and shaft service included to maintain maximum propulsion efficiency',
+            'Photo report after each service for charter compliance documentation',
+        ],
+        'pricing_note': 'COP 20,000 per foot of overall length. Travel fee applies for Islas del Rosario — contact us for a full quote including logistics.',
+        'conditions_h2': 'Sea Conditions at Islas del Rosario',
+        'conditions': [
+            'The Rosario Archipelago lies approximately 45 km from Cartagena and forms part of the Parque Nacional Natural Corales del Rosario y San Bernardo. Its crystal-clear, biologically rich waters make for some of the most aggressive fouling in the entire region: barnacles, oysters, calcified algae, and polychaete worms colonise hull bottoms within just 3–4 weeks under typical anchoring conditions.',
+            'Yachts that anchor for extended periods at the Rosario Islands — whether on a passage, a charter layover, or a private cruise — are particularly vulnerable. The combination of clear warm water, abundant marine life, and minimal current around anchored vessels creates ideal attachment conditions for hard-shelled fouling organisms that are much more difficult to remove than softer algae.',
+            'Our team travels from Cartagena in a dedicated support boat with all dive equipment and cleaning tools. We recommend scheduling service upon arrival at the islands or after no more than 4 weeks at anchor to prevent hard fouling from bonding permanently to the antifouling coat.',
+        ],
+        'faq_location': 'Islas del Rosario',
+        'faqs': [
+            ('How do you reach vessels anchored at Islas del Rosario?',
+             'We travel by support vessel from Cartagena. The trip takes approximately 45–60 minutes depending on conditions. We coordinate the exact meeting point (GPS coordinates or mooring buoy reference) with you before departure.'),
+            ('Is there an additional charge for travel to Islas del Rosario?',
+             'Yes, a travel fee applies for the Rosario Islands to cover the support vessel and fuel. The final price depends on your vessel\'s size and the number of boats scheduled for the same trip. Contact us on WhatsApp for a full quote.'),
+            ('How fast does fouling build up at Islas del Rosario?',
+             'Very fast. The high biodiversity of the national park waters means fouling can be significant within 3–4 weeks. Barnacles and calcified organisms that form during prolonged anchoring are harder to remove than fresh algae. We strongly recommend cleaning every 4–5 weeks for vessels staying at the islands.'),
+            ('Can you clean hull and propeller of a sailing catamaran at Rosario?',
+             'Yes. We service sailing catamarans, motor catamarans, mono-hulled sailboats, and motor yachts. Catamarans have two hulls and two propellers — we account for this in the quote. Contact us with your vessel\'s dimensions for an accurate estimate.'),
+        ],
+        'related_links': [
+            ('hull-cleaning-en.html', 'Main Service', 'Hull Cleaning in Cartagena'),
+            ('hull-cleaning-baru-en.html', 'Also Available', 'Hull Cleaning in Barú'),
+            ('hull-cleaning-bocagrande-en.html', 'Also Available', 'Hull Cleaning in Bocagrande'),
+            ('blog/antifouling-embarcaciones-mar-cartagena/', 'Guide', 'Antifouling in the Colombian Caribbean'),
+        ],
+        'cta_h2': 'Ready to Serve at Islas del Rosario',
+    },
+}
+
+
+def build_page(filename, data):
+    schema_json = """    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "{schema_name}",
+      "serviceType": "Hull Cleaning",
+      "url": "{canonical}",
+      "description": "{description}",
+      "provider": {{
+        "@type": "LocalBusiness",
+        "@id": "https://www.colombiaboatdetailing.com/#organization",
+        "name": "Colombia Boat Detailing",
+        "telephone": "+57-304-430-1112",
+        "address": {{
+          "@type": "PostalAddress",
+          "addressLocality": "Cartagena de Indias",
+          "addressRegion": "Bolívar",
+          "addressCountry": "CO"
+        }}
+      }},
+      "areaServed": {{
+        "@type": "Place",
+        "name": "{schema_area}"
+      }},
+      "offers": {{
+        "@type": "Offer",
+        "priceSpecification": {{
+          "@type": "UnitPriceSpecification",
+          "price": "20000",
+          "priceCurrency": "COP",
+          "unitText": "per foot LOA"
+        }},
+        "availability": "https://schema.org/InStock"
+      }}
+    }}
+    </script>
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{faq_items}
+      ]
+    }}
+    </script>""".format(
+        schema_name=data['schema_name'],
+        canonical=data['canonical'],
+        description=data['description'],
+        schema_area=data['schema_area'],
+        faq_items=',\n        '.join([
+            '{{"@type":"Question","name":"{q}","acceptedAnswer":{{"@type":"Answer","text":"{a}"}}}}'.format(
+                q=q.replace('"', '\\"'), a=a.replace('"', '\\"')
+            ) for q, a in data['faqs']
+        ])
+    )
+
+    benefits_html = '\n          '.join(
+        f'<li class="flex items-start gap-3"><i class="ph ph-check-circle text-gold-400 text-xl mt-0.5"></i><span>{b}</span></li>'
+        for b in data['benefits']
+    )
+
+    conditions_html = '\n        '.join(
+        f'<p class="text-slate-700 font-light text-lg mb-4">{p}</p>'
+        for p in data['conditions']
+    )
+
+    faq_html = '\n          '.join([
+        f'''<details class="faq-item border border-slate-200 rounded-sm overflow-hidden">
+            <summary class="flex items-center justify-between p-6 text-navy-900 font-semibold bg-white hover:bg-slate-50 transition">
+              <span>{q}</span>
+              <i class="ph ph-plus text-gold-400 text-lg flex-shrink-0 ml-4" aria-hidden="true"></i>
+            </summary>
+            <div class="px-6 pb-6 bg-white text-slate-600 font-light">{a}</div>
+          </details>'''
+        for q, a in data['faqs']
+    ])
+
+    related_html = '\n          '.join([
+        f'<a href="{href}" class="bg-white p-5 border border-slate-200 hover:border-gold-400 transition rounded-sm"><p class="text-xs text-gold-500 font-bold uppercase mb-1">{label}</p><h3 class="font-serif text-base text-navy-900">{title}</h3></a>'
+        for href, label, title in data['related_links']
+    ])
+
+    html = f"""<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+{HEAD_COMMON}
+    <title>{data['title']}</title>
+    <meta name="description" content="{data['description']}" />
+    <meta name="keywords" content="{data['keywords']}" />
+    <link rel="canonical" href="{data['canonical']}" />
+    <link rel="alternate" hreflang="en" href="{data['canonical']}" />
+    <link rel="alternate" hreflang="es-CO" href="{data['hreflang_es']}" />
+    <link rel="alternate" hreflang="x-default" href="{data['hreflang_es']}" />
+    <meta property="og:title" content="{data['og_title']}" />
+    <meta property="og:description" content="{data['og_description']}" />
+    <meta property="og:url" content="{data['og_url']}" />
+{schema_json}
+{CRITICAL_CSS}
+  </head>
+  <body class="bg-navy-900 text-slate-800 antialiased">
+{NAV_EN}
+
+    <!-- Hero Section -->
+    <section class="pt-36 pb-20 bg-gradient-to-b from-navy-900 to-navy-800 text-white">
+      <div class="container mx-auto px-6 max-w-4xl text-center">
+        <span class="inline-block text-xs font-bold text-gold-400 uppercase tracking-[0.2em] mb-4">{data['location_badge']}</span>
+        <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">{data['h1']}</h1>
+        <p class="text-slate-300 text-xl font-light mb-8 max-w-2xl mx-auto">{data['hero_desc']}</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://wa.me/573044301112?text={data['wa_text']}" target="_blank" rel="noopener noreferrer"
+            class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(212,175,55,0.4)] text-center">
+            Get a Quote on WhatsApp
+          </a>
+          <a href="hull-cleaning-en.html"
+            class="inline-block border border-white/30 hover:border-gold-400 text-white hover:text-gold-400 px-10 py-4 rounded-sm font-light text-sm tracking-widest uppercase transition-all text-center">
+            Full Service Details
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Benefits Bar -->
+    <section class="bg-navy-800 py-6 border-b border-white/5">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white">
+          <div class="flex flex-col items-center gap-1">
+            <i class="ph-fill ph-shield-check text-gold-400 text-2xl" aria-hidden="true"></i>
+            <span class="text-xs tracking-widest uppercase font-light">Certified Divers</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <i class="ph-fill ph-anchor text-gold-400 text-2xl" aria-hidden="true"></i>
+            <span class="text-xs tracking-widest uppercase font-light">No Haulout Required</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <i class="ph-fill ph-calendar-check text-gold-400 text-2xl" aria-hidden="true"></i>
+            <span class="text-xs tracking-widest uppercase font-light">Monthly Plans</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <i class="ph-fill ph-map-pin text-gold-400 text-2xl" aria-hidden="true"></i>
+            <span class="text-xs tracking-widest uppercase font-light">Cartagena, Colombia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <span class="text-xs font-bold text-gold-400 uppercase tracking-widest">The Service</span>
+            <h2 class="font-serif text-3xl text-navy-900 mt-3 mb-6">{data['benefits_h2']}</h2>
+            <ul class="space-y-3 text-slate-700 font-light text-lg">
+              {benefits_html}
+            </ul>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-gold-400 uppercase tracking-widest">What's Included</span>
+            <h2 class="font-serif text-3xl text-navy-900 mt-3 mb-6">Complete In-Water Hull Service</h2>
+            <ul class="feature-list text-slate-700 mt-4">
+              <li>Full hull cleaning below the waterline</li>
+              <li>Removal of algae, barnacles, and hard fouling</li>
+              <li>Propeller, shaft, and rudder cleaning</li>
+              <li>Visual inspection of sacrificial anodes</li>
+              <li>Photo documentation report after service</li>
+              <li>Monthly maintenance plan available</li>
+            </ul>
+            <div class="mt-8 p-6 bg-slate-50 border-l-4 border-gold-400 rounded-sm">
+              <p class="text-slate-700 font-semibold">Pricing</p>
+              <p class="text-slate-700 font-light mt-1">{data['pricing_note']}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sea Conditions -->
+    <section class="py-16 bg-slate-50">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <span class="text-xs font-bold text-gold-400 uppercase tracking-widest">Local Context</span>
+        <h2 class="font-serif text-3xl text-navy-900 mt-3 mb-6">{data['conditions_h2']}</h2>
+        {conditions_html}
+        <div class="grid md:grid-cols-2 gap-4 mt-8">
+          {related_html}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <span class="text-xs font-bold text-gold-400 uppercase tracking-widest">Common Questions</span>
+        <h2 class="font-serif text-3xl text-navy-900 mt-3 mb-8">FAQ — Hull Cleaning in {data['faq_location']}</h2>
+        <div class="space-y-3">
+          {faq_html}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-navy-900 text-white text-center">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <h2 class="font-serif text-4xl mb-4">{data['cta_h2']}</h2>
+        <p class="text-slate-300 font-light mb-8 text-lg">Book your hull cleaning via WhatsApp. We respond quickly and confirm your slot within hours.</p>
+        <a href="https://wa.me/573044301112?text={data['wa_text']}" target="_blank" rel="noopener noreferrer"
+          class="inline-block bg-gold-400 hover:bg-gold-500 text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105">
+          Book on WhatsApp
+        </a>
+      </div>
+    </section>
+
+{FOOTER_EN}
+{SCRIPTS}
+  </body>
+</html>"""
+    return html
+
+
+for filename, data in pages.items():
+    filepath = os.path.join(root, filename)
+    content = build_page(filename, data)
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+    size = os.path.getsize(filepath)
+    print(f'Written: {filename} ({size} bytes)')
+
+print('\nAll 4 EN geo pages rebuilt successfully.')
