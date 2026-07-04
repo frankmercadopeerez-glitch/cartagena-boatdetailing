@@ -17,6 +17,9 @@ Disallow: /.git/
 # Páginas privadas de negocio (cotizaciones, facturas, herramientas internas)
 Disallow: /cotizaciones/
 Disallow: /facturas/
+Disallow: /contratos/
+Disallow: /guias/
+Disallow: /tools/
 Disallow: /finanzas.html
 Disallow: /business-card.html
 Disallow: /calendario-seo-2026.html
