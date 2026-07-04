@@ -386,38 +386,109 @@
       }
 
       @media print {
-        html { font-size: 93%; }
+        html {
+          font-size: 93%;
+        }
 
-        @page { size: A4; margin: 10mm 8mm; }
+        @page {
+          size: A4;
+          margin: 10mm 8mm;
+        }
 
-        body { padding: 0; margin: 0; background: white; }
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
 
-        .invoice-container { max-width: 100%; width: 100%; margin: 0; padding: 0; box-shadow: none; border-top-width: 5px; }
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
 
         /* Bloquear layout — impedir que el breakpoint responsive se active al imprimir */
-        header { flex-direction: row !important; align-items: flex-start !important; }
-        .client-section { flex-direction: row !important; }
-        .quote-info { text-align: right !important; }
-        .bottom-grid { grid-template-columns: 1fr 1fr !important; }
+        header {
+          flex-direction: row !important;
+          align-items: flex-start !important;
+        }
+        .client-section {
+          flex-direction: row !important;
+        }
+        .quote-info {
+          text-align: right !important;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr 1fr !important;
+        }
 
-        .totals-section, .billing-note, .bottom-grid, .warranty-box,
-        .terms-section, .guarantee-section, footer { break-inside: avoid; }
+        .totals-section,
+        .billing-note,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        .guarantee-section,
+        footer {
+          break-inside: avoid;
+        }
 
-        tr { break-inside: avoid; }
+        tr {
+          break-inside: avoid;
+        }
 
-        .item-title { font-size: 12px !important; margin-bottom: 3px !important; }
-        .item-desc { font-size: 11px !important; line-height: 1.65 !important; }
-        .item-desc ul { margin-top: 4px !important; }
-        td { padding: 9px 8px !important; }
-        .section-title { margin: 8px 0 5px !important; padding-bottom: 4px !important; font-size: 13px !important; }
-        .client-section { padding: 12px 14px !important; margin-bottom: 12px !important; }
-        .totals-box { padding: 10px !important; }
-        .total-row { margin-bottom: 4px !important; font-size: 11px !important; }
-        .grand-total { font-size: 15px !important; }
-        .bottom-grid { margin-top: 10px !important; gap: 8px !important; }
-        .warranty-box, .terms-section { padding: 10px 12px !important; font-size: 11px !important; }
-        .guarantee-section { padding: 14px 16px !important; margin-top: 12px !important; }
-        .guarantee-section p { line-height: 1.8 !important; margin-bottom: 8px !important; }
+        .item-title {
+          font-size: 12px !important;
+          margin-bottom: 3px !important;
+        }
+        .item-desc {
+          font-size: 11px !important;
+          line-height: 1.65 !important;
+        }
+        .item-desc ul {
+          margin-top: 4px !important;
+        }
+        td {
+          padding: 9px 8px !important;
+        }
+        .section-title {
+          margin: 8px 0 5px !important;
+          padding-bottom: 4px !important;
+          font-size: 13px !important;
+        }
+        .client-section {
+          padding: 12px 14px !important;
+          margin-bottom: 12px !important;
+        }
+        .totals-box {
+          padding: 10px !important;
+        }
+        .total-row {
+          margin-bottom: 4px !important;
+          font-size: 11px !important;
+        }
+        .grand-total {
+          font-size: 15px !important;
+        }
+        .bottom-grid {
+          margin-top: 10px !important;
+          gap: 8px !important;
+        }
+        .warranty-box,
+        .terms-section {
+          padding: 10px 12px !important;
+          font-size: 11px !important;
+        }
+        .guarantee-section {
+          padding: 14px 16px !important;
+          margin-top: 12px !important;
+        }
+        .guarantee-section p {
+          line-height: 1.8 !important;
+          margin-bottom: 8px !important;
+        }
       }
     </style>
     <link
