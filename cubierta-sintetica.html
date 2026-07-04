@@ -240,7 +240,11 @@
       }
     </style>
     <!-- Preload critical fonts -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link
       rel="preload"
@@ -840,7 +844,15 @@
         }
       }
     </style>
-    <link rel="preload" href="css/tailwind.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="css/tailwind.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="css/tailwind.css" /></noscript>
     <link
       rel="preload"
@@ -861,7 +873,15 @@
     <noscript
       ><link rel="stylesheet" href="vendor/phosphor/icons.css"
     /></noscript>
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
     <style>
       .glass-nav {
@@ -1365,29 +1385,44 @@
     <section class="py-20 bg-slate-50">
       <div class="container mx-auto px-6 max-w-5xl">
         <div class="text-center mb-12">
-          <span class="text-gold-400 text-xs font-bold uppercase tracking-widest">Ficha Técnica</span>
+          <span
+            class="text-gold-400 text-xs font-bold uppercase tracking-widest"
+            >Ficha Técnica</span
+          >
           <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mt-2 mb-4">
             Especificaciones del Foam Deck EVA
           </h2>
           <p class="text-slate-600 font-light max-w-2xl mx-auto">
-            Trabajamos con láminas de EVA marino de alta densidad con las siguientes características de referencia. Las dimensiones se cortan a medida exacta para cada embarcación.
+            Trabajamos con láminas de EVA marino de alta densidad con las
+            siguientes características de referencia. Las dimensiones se cortan
+            a medida exacta para cada embarcación.
           </p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 items-start">
           <!-- Tabla de specs -->
-          <div class="bg-white border border-slate-200 rounded-sm overflow-hidden shadow-sm">
+          <div
+            class="bg-white border border-slate-200 rounded-sm overflow-hidden shadow-sm"
+          >
             <div class="bg-navy-900 px-6 py-4">
-              <h3 class="text-white font-serif text-lg tracking-wide">Datos Técnicos</h3>
+              <h3 class="text-white font-serif text-lg tracking-wide">
+                Datos Técnicos
+              </h3>
             </div>
             <table class="w-full text-sm">
               <tbody class="divide-y divide-slate-100">
                 <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-3 font-semibold text-navy-900 w-1/2">Material</td>
-                  <td class="px-6 py-3 text-slate-600">EVA (Etilenvinilacetato) marino</td>
+                  <td class="px-6 py-3 font-semibold text-navy-900 w-1/2">
+                    Material
+                  </td>
+                  <td class="px-6 py-3 text-slate-600">
+                    EVA (Etilenvinilacetato) marino
+                  </td>
                 </tr>
                 <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-3 font-semibold text-navy-900">Dimensiones lámina</td>
+                  <td class="px-6 py-3 font-semibold text-navy-900">
+                    Dimensiones lámina
+                  </td>
                   <td class="px-6 py-3 text-slate-600">244 cm × 91.5 cm</td>
                 </tr>
                 <tr class="hover:bg-slate-50">
@@ -1395,16 +1430,26 @@
                   <td class="px-6 py-3 text-slate-600">6 mm</td>
                 </tr>
                 <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-3 font-semibold text-navy-900">Dureza (Shore)</td>
+                  <td class="px-6 py-3 font-semibold text-navy-900">
+                    Dureza (Shore)
+                  </td>
                   <td class="px-6 py-3 text-slate-600">50–55P (±3)</td>
                 </tr>
                 <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-3 font-semibold text-navy-900">Acabado estético</td>
-                  <td class="px-6 py-3 text-slate-600">Estilo teca con veta y líneas de juntura</td>
+                  <td class="px-6 py-3 font-semibold text-navy-900">
+                    Acabado estético
+                  </td>
+                  <td class="px-6 py-3 text-slate-600">
+                    Estilo teca con veta y líneas de juntura
+                  </td>
                 </tr>
                 <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-3 font-semibold text-navy-900">Adhesión</td>
-                  <td class="px-6 py-3 text-slate-600">Autoadhesivo de doble cara en dorso</td>
+                  <td class="px-6 py-3 font-semibold text-navy-900">
+                    Adhesión
+                  </td>
+                  <td class="px-6 py-3 text-slate-600">
+                    Autoadhesivo de doble cara en dorso
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1412,47 +1457,91 @@
 
           <!-- Características -->
           <div class="space-y-4">
-            <h3 class="font-serif text-2xl text-navy-900 mb-6">Propiedades del Material</h3>
+            <h3 class="font-serif text-2xl text-navy-900 mb-6">
+              Propiedades del Material
+            </h3>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">Antideslizante</p>
-                <p class="text-slate-500 text-sm font-light">Superficie texturizada que ofrece agarre seguro incluso mojada.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  Antideslizante
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Superficie texturizada que ofrece agarre seguro incluso
+                  mojada.
+                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">No absorbe agua</p>
-                <p class="text-slate-500 text-sm font-light">Celda cerrada: resiste la humedad y el ambiente marino sin hincharse.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  No absorbe agua
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Celda cerrada: resiste la humedad y el ambiente marino sin
+                  hincharse.
+                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">Fácil de cortar a medida</p>
-                <p class="text-slate-500 text-sm font-light">Se trabaja con plantillas para adaptarse exactamente a la forma de cada cubierta.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  Fácil de cortar a medida
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Se trabaja con plantillas para adaptarse exactamente a la
+                  forma de cada cubierta.
+                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">Resistente a manchas y UV</p>
-                <p class="text-slate-500 text-sm font-light">Estabilizado para el sol del Caribe. No se decolora ni se agrieta.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  Resistente a manchas y UV
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Estabilizado para el sol del Caribe. No se decolora ni se
+                  agrieta.
+                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">Lavable a presión</p>
-                <p class="text-slate-500 text-sm font-light">Limpieza con hidrolavadora sin dañar la superficie ni el adhesivo.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  Lavable a presión
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Limpieza con hidrolavadora sin dañar la superficie ni el
+                  adhesivo.
+                </p>
               </div>
             </div>
             <div class="flex items-start gap-3">
-              <i class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"></i>
+              <i
+                class="ph-fill ph-check-circle text-gold-400 text-xl flex-shrink-0 mt-0.5"
+              ></i>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">Buena amortiguación</p>
-                <p class="text-slate-500 text-sm font-light">Absorbe el impacto al caminar y reduce el ruido de la cubierta.</p>
+                <p class="font-semibold text-navy-900 text-sm">
+                  Buena amortiguación
+                </p>
+                <p class="text-slate-500 text-sm font-light">
+                  Absorbe el impacto al caminar y reduce el ruido de la
+                  cubierta.
+                </p>
               </div>
             </div>
           </div>
