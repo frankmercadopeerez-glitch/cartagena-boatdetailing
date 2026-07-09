@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
+          document.head.appendChild(s);
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
+        }
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #123 - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 2px solid var(--primary-color);
+        text-align: left;
+        padding: 6px 7px;
+        font-size: 10px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      th.th-center {
+        text-align: center;
+      }
+
+      th.th-right {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 7px;
+        vertical-align: middle;
+        font-size: 11px;
+      }
+
+      td.td-center {
+        text-align: center;
+      }
+
+      td.td-right {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 12px;
+        margin-bottom: 1px;
+      }
+
+      .item-code {
+        font-size: 9.5px;
+        color: var(--text-light);
+        letter-spacing: 0.2px;
+      }
+
+      .item-desc {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 2px;
+        line-height: 1.5;
+      }
+
+      .obsequio-tag {
+        display: inline-block;
+        background: #d1fae5;
+        color: #065f46;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+
+      .service-row td {
+        background: #f0f4ff;
+      }
+
+      .price-cell {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      .total-cell {
+        font-weight: 800;
+        color: var(--primary-color);
+        font-size: 11.5px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:first-child {
+        min-width: 0;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .total-divider {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 5px 0;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        white-space: nowrap;
+      }
+
+      .billing-note {
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul,
+      .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.7;
+      }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 11px;
+      }
+
+      /* Resumen de ganancia — solo pantalla, no imprime */
+      .profit-box {
+        margin-top: 14px;
+        background: #fef9c3;
+        border: 1px solid #f59e0b;
+        border-left: 4px solid #d97706;
+        border-radius: 4px;
+        padding: 12px 14px;
+        font-size: 12px;
+      }
+
+      .profit-box h4 {
+        color: #92400e;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .profit-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 3px;
+        font-size: 12px;
+        color: #78350f;
+      }
+
+      .profit-row span:last-child {
+        font-weight: 700;
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .profit-note {
+        font-size: 10.5px;
+        color: #92400e;
+        margin-top: 5px;
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      .profit-total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 2px solid #d97706;
+        font-size: 14px;
+        font-weight: 800;
+        color: #78350f;
+      }
+
+      .profit-total-row span:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container {
+          padding: 16px;
+        }
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+        .quote-info {
+          text-align: left;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+        table {
+          font-size: 10px;
+        }
+        th {
+          font-size: 9px;
+          padding: 5px 4px;
+        }
+        td {
+          padding: 5px 4px;
+        }
+      }
+
+      @media print {
+        html {
+          font-size: 93%;
+        }
+
+        @page {
+          size: A4;
+          margin: 10mm 8mm;
+        }
+
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
+
+        header {
+          flex-direction: row !important;
+          align-items: flex-start !important;
+        }
+
+        .client-section {
+          flex-direction: row !important;
+        }
+
+        .quote-info {
+          text-align: right !important;
+        }
+
+        .bottom-grid {
+          grid-template-columns: 1fr 1fr !important;
+        }
+
+        /* El resumen de ganancia no se imprime */
+        .profit-box {
+          display: none !important;
+        }
+
+        .totals-section,
+        .billing-note,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
+        }
+
+        td {
+          padding: 6px 7px !important;
+        }
+
+        th {
+          font-size: 9.5px !important;
+          padding: 5px 6px !important;
+        }
+
+        .section-title {
+          margin: 8px 0 5px !important;
+          font-size: 13px !important;
+        }
+
+        .totals-box {
+          padding: 10px !important;
+        }
+
+        .total-row {
+          margin-bottom: 4px !important;
+          font-size: 11px !important;
+        }
+
+        .grand-total {
+          font-size: 15px !important;
+        }
+
+        .bottom-grid {
+          margin-top: 10px !important;
+          gap: 8px !important;
+        }
+
+        .warranty-box,
+        .terms-section {
+          padding: 10px 12px !important;
+          font-size: 11px !important;
+        }
+      }
+    </style>
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div
+          class="brand-info"
+          style="display: flex; align-items: center; gap: 10px"
+        >
+          <img
+            src="../images/cbdlogo-gold.svg"
+            alt="Colombia Boat Detailing"
+            style="height: 48px; width: auto"
+          />
+          <div>
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en est&eacute;tica naval</p>
+          </div>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACI&Oacute;N DE SERVICIOS</h2>
+          <p><strong>N&uacute;mero:</strong> CBD-2026-123</p>
+          <p><strong>Fecha:</strong> 09/07/2026</p>
+          <p><strong>Validez:</strong> 15 d&iacute;as</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Carlos Echeverry</strong></p>
+          <p>BPM BOLIVAR SAS</p>
+        </div>
+        <div>
+          <h3>Descripci&oacute;n del servicio</h3>
+          <p>Mantenimiento preventivo &mdash; Cambio de aceite 100hr y 300hr</p>
+          <p>
+            2 embarcaciones &mdash; Motores Mercury 150 Seapro &mdash; Cartagena
+            de Indias
+          </p>
+        </div>
+      </div>
+
+      <h3 class="section-title">
+        Relaci&oacute;n de materiales y mano de obra
+      </h3>
+
+      <div
+        style="
+          font-size: 11px;
+          color: var(--text-light);
+          background: #f8fafc;
+          border-left: 3px solid var(--accent-color);
+          padding: 7px 10px;
+          margin-bottom: 10px;
+          line-height: 1.6;
+        "
+      >
+        Los precios de los productos incluyen un porcentaje de gesti&oacute;n y
+        log&iacute;stica. El IVA (19%) se aplica sobre cada &iacute;tem
+        seg&uacute;n la normativa fiscal vigente en Colombia. El
+        <strong>Salt-Away</strong> se suministra de
+        <strong>obsequio</strong> incluido con el servicio.
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">
+              Descripci&oacute;n del producto / servicio
+            </th>
+            <th class="th-center" style="width: 7%">Pres.</th>
+            <th class="th-center" style="width: 5%">Cant.</th>
+            <th class="th-right" style="width: 14%">P. Unitario (COP)</th>
+            <th class="th-right" style="width: 13%">Base (COP)</th>
+            <th class="th-center" style="width: 5%">%IVA</th>
+            <th class="th-right" style="width: 12%">IVA (COP)</th>
+            <th class="th-right" style="width: 14%">Total (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aceite motor 25W40 -->
+          <tr>
+            <td>
+              <div class="item-title">Aceite Mercury Mezcla Sint. 25W40</div>
+              <div class="item-code">
+                Ref. 8M0078630 &mdash; Aceite motor 4 tiempos
+              </div>
+            </td>
+            <td class="td-center">GLN</td>
+            <td class="td-center">3</td>
+            <td class="td-right price-cell">$ 161.546,22</td>
+            <td class="td-right">$ 484.638,66</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 92.081,35</td>
+            <td class="td-right total-cell">$ 576.720,01</td>
+          </tr>
+
+          <!-- Aceite transmision SAE90 -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Aceite Mercury Quicksilver 90 High Performance
+              </div>
+              <div class="item-code">
+                Ref. 858064Q01 &mdash; Aceite transmisi&oacute;n SAE 90
+              </div>
+            </td>
+            <td class="td-center">1/4</td>
+            <td class="td-center">2</td>
+            <td class="td-right price-cell">$ 60.605,04</td>
+            <td class="td-right">$ 121.210,08</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 23.029,92</td>
+            <td class="td-right total-cell">$ 144.240,00</td>
+          </tr>
+
+          <!-- Waipe -->
+          <tr>
+            <td>
+              <div class="item-title">Waipe</div>
+              <div class="item-code">
+                Ref. 110503 &mdash; Material de limpieza
+              </div>
+            </td>
+            <td class="td-center">KG</td>
+            <td class="td-center">2</td>
+            <td class="td-right price-cell">$ 9.277,31</td>
+            <td class="td-right">$ 18.554,62</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 3.525,38</td>
+            <td class="td-right total-cell">$ 22.080,00</td>
+          </tr>
+
+          <!-- Empaque tornillo tapon -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Empaque tornillo tap&oacute;n aceite verado
+              </div>
+              <div class="item-code">
+                Ref. 8M0204693 &mdash; Junta tap&oacute;n vaciado
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">4</td>
+            <td class="td-right price-cell">$ 4.436,98</td>
+            <td class="td-right">$ 17.747,90</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 3.372,10</td>
+            <td class="td-right total-cell">$ 21.120,00</td>
+          </tr>
+
+          <!-- Corrosion Block -->
+          <tr>
+            <td>
+              <div class="item-title">Corrosion Block 12oz</div>
+              <div class="item-code">
+                Ref. CB-12 &mdash; Inhibidor de corrosi&oacute;n marino
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">1</td>
+            <td class="td-right price-cell">$ 150.050,42</td>
+            <td class="td-right">$ 150.050,42</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 28.509,58</td>
+            <td class="td-right total-cell">$ 178.560,00</td>
+          </tr>
+
+          <!-- Filtro combustible -->
+          <tr>
+            <td>
+              <div class="item-title">Filtro de combustible 40/350 HP</div>
+              <div class="item-code">
+                Ref. 879885Q &mdash; Filtro combustible marino
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">2</td>
+            <td class="td-right price-cell">$ 74.924,36</td>
+            <td class="td-right">$ 149.848,73</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 28.471,26</td>
+            <td class="td-right total-cell">$ 178.319,99</td>
+          </tr>
+
+          <!-- Filtro aceite -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Filtro de aceite Mercury 115 / stator
+              </div>
+              <div class="item-code">
+                Ref. 8M0162829 &mdash; Filtro aceite motor
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">2</td>
+            <td class="td-right price-cell">$ 44.067,23</td>
+            <td class="td-right">$ 88.134,46</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 16.745,55</td>
+            <td class="td-right total-cell">$ 104.880,01</td>
+          </tr>
+
+          <!-- Limpiador CRC -->
+          <tr>
+            <td>
+              <div class="item-title">Limpiador CRC Carburador 235ml</div>
+              <div class="item-code">
+                Ref. 1801 &mdash; Limpiador sistema de combustible
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">1</td>
+            <td class="td-right price-cell">$ 39.831,94</td>
+            <td class="td-right">$ 39.831,94</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 7.568,07</td>
+            <td class="td-right total-cell">$ 47.400,01</td>
+          </tr>
+
+          <!-- Grasa Mercury -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Grasa Mercury 2-4-C con Tefl&oacute;n 227g
+              </div>
+              <div class="item-code">
+                Ref. 802859A1 &mdash; Grasa marina multiprop&oacute;sito
+              </div>
+            </td>
+            <td class="td-center">UND</td>
+            <td class="td-center">1</td>
+            <td class="td-right price-cell">$ 60.201,68</td>
+            <td class="td-right">$ 60.201,68</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 11.438,32</td>
+            <td class="td-right total-cell">$ 71.640,00</td>
+          </tr>
+
+          <!-- Salt-Away OBSEQUIO -->
+          <tr style="background: #f0fdf4">
+            <td>
+              <span class="obsequio-tag">&#10003; Obsequio incluido</span>
+              <div class="item-title" style="margin-top: 4px">
+                Salt-Away 946ml
+              </div>
+              <div class="item-desc">
+                Inhibidor salino &mdash; protege el sistema de enfriamiento. Se
+                incluye de <strong>cortesia</strong> con el mantenimiento.
+              </div>
+            </td>
+            <td class="td-center">946ml</td>
+            <td class="td-center">0.2</td>
+            <td
+              class="td-right"
+              style="color: var(--ok-color); font-weight: 700"
+            >
+              CORTESIA
+            </td>
+            <td class="td-right">$ 0,00</td>
+            <td class="td-center">&mdash;</td>
+            <td class="td-right">$ 0,00</td>
+            <td class="td-right total-cell" style="color: var(--ok-color)">
+              $ 0,00
+            </td>
+          </tr>
+
+          <!-- Mano de obra -->
+          <tr class="service-row">
+            <td>
+              <div class="item-title">
+                Mano de obra &mdash; Mantenimiento preventivo 100hr y 300hr
+              </div>
+              <div class="item-desc">
+                Cambio de aceite de motor y transmisi&oacute;n, reemplazo de
+                filtros (aceite y combustible), aplicaci&oacute;n de grasa y
+                lubricaci&oacute;n general.
+                <strong
+                  >Incluye subida y bajada de cada embarcaci&oacute;n.</strong
+                >
+                Precio por embarcaci&oacute;n: $ 550.000.
+              </div>
+            </td>
+            <td class="td-center">&mdash;</td>
+            <td class="td-center">2 emb.</td>
+            <td class="td-right price-cell">$ 550.000,00</td>
+            <td class="td-right">$ 1.100.000,00</td>
+            <td class="td-center">19%</td>
+            <td class="td-right">$ 209.000,00</td>
+            <td class="td-right total-cell">$ 1.309.000,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Subtotal productos (base sin IVA):</span>
+            <span>$ 1.130.218,49</span>
+          </div>
+          <div class="total-row">
+            <span>IVA productos (19%):</span>
+            <span>$ 214.741,53</span>
+          </div>
+          <div class="total-row" style="font-weight: 600; margin-bottom: 6px">
+            <span>Total productos con IVA:</span>
+            <span>$ 1.344.960,02</span>
+          </div>
+          <hr class="total-divider" />
+          <div class="total-row">
+            <span
+              >Subtotal mano de obra &mdash; 2 embarcaciones (base sin
+              IVA):</span
+            >
+            <span>$ 1.100.000,00</span>
+          </div>
+          <div class="total-row">
+            <span>IVA mano de obra (19%):</span>
+            <span>$ 209.000,00</span>
+          </div>
+          <div class="total-row" style="font-weight: 600; margin-bottom: 6px">
+            <span>Total mano de obra con IVA:</span>
+            <span>$ 1.309.000,00</span>
+          </div>
+          <hr class="total-divider" />
+          <div class="total-row" style="font-size: 11px">
+            <span>Salt-Away:</span>
+            <span style="color: var(--ok-color); font-weight: 700"
+              >Cortesia incluida</span
+            >
+          </div>
+          <div class="total-row grand-total">
+            <span>TOTAL COTIZACI&Oacute;N:</span>
+            <span>$ 2.653.960,02 COP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="billing-note">
+        <strong>Datos de facturaci&oacute;n:</strong> Este servicio es prestado
+        y facturado por
+        <strong>INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S</strong>
+        &mdash; NIT: 902071074-0 &mdash; Matr&iacute;cula No. 10013010 &mdash;
+        Fecha de matr&iacute;cula: 27 de mayo de 2026 &mdash; Grupo NIIF II
+        &mdash; Domicilio: Cartagena, Bol&iacute;var. La informaci&oacute;n de
+        pago se entrega v&iacute;a WhatsApp al ser aprobada la
+        cotizaci&oacute;n.
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Descripci&oacute;n del trabajo</h4>
+          <ul>
+            <li>
+              2 embarcaciones &mdash; Motores
+              <strong>Mercury 150 Seapro</strong>.
+            </li>
+            <li>
+              Embarcaci&oacute;n 1: Servicio de <strong>100 horas</strong>.
+            </li>
+            <li>
+              Embarcaci&oacute;n 2: Servicio de <strong>300 horas</strong>.
+            </li>
+            <li>Incluye subida, trabajo completo y bajada de cada lancha.</li>
+            <li>
+              Productos de grado marino original Mercury y marcas
+              especializadas.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y forma de pago</h4>
+          <ul>
+            <li>
+              Anticipo del <strong>50%</strong> para confirmar y programar.
+            </li>
+            <li>
+              Saldo del <strong>50%</strong> contra entrega a
+              satisfacci&oacute;n.
+            </li>
+            <li>
+              Cotizaci&oacute;n v&aacute;lida por
+              <strong>15 d&iacute;as</strong> h&aacute;biles.
+            </li>
+            <li>
+              Precios incluyen IVA (19%) seg&uacute;n normativa fiscal vigente.
+            </li>
+          </ul>
+          <div class="payment-info">
+            Informaci&oacute;n de pago y facturaci&oacute;n electr&oacute;nica
+            disponible v&iacute;a WhatsApp al aprobar la cotizaci&oacute;n.
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           RESUMEN DE GANANCIA — SOLO PANTALLA, NO SE IMPRIME
+           =================================================== -->
+      <div class="profit-box">
+        <h4>
+          &#128200; Resumen de ganancia estimada (uso interno &mdash; no se
+          imprime)
+        </h4>
+
+        <div class="profit-row">
+          <span>Costo productos (precios Todomar):</span>
+          <span>$ 941.848,74</span>
+        </div>
+        <div class="profit-row">
+          <span>Venta productos al cliente (base, sin IVA):</span>
+          <span>$ 1.130.218,49</span>
+        </div>
+        <div
+          class="profit-row"
+          style="padding-bottom: 4px; border-bottom: 1px dashed #f59e0b"
+        >
+          <span>&#8594; Ganancia productos (markup 20%):</span>
+          <span style="color: var(--ok-color)">+ $ 188.369,75</span>
+        </div>
+
+        <div class="profit-row" style="margin-top: 6px">
+          <span>Cobro mano de obra al cliente (2 emb. &times; $ 550.000):</span>
+          <span>$ 1.100.000,00</span>
+        </div>
+        <div class="profit-row">
+          <span>Costo real mano de obra (2 emb. &times; $ 400.000):</span>
+          <span>$ 800.000,00</span>
+        </div>
+        <div
+          class="profit-row"
+          style="padding-bottom: 4px; border-bottom: 1px dashed #f59e0b"
+        >
+          <span>&#8594; Ganancia mano de obra:</span>
+          <span style="color: var(--ok-color)">+ $ 300.000,00</span>
+        </div>
+
+        <p class="profit-note">
+          &#9888; El IVA total recaudado ($ 423.741,53) se transfiere a la DIAN
+          &mdash; no es utilidad.<br />
+          &#9888; El costo del Salt-Away (obsequio) no est&aacute; incluido en
+          este c&aacute;lculo &mdash; reducir&aacute; la ganancia en el valor
+          real de ese producto.
+        </p>
+
+        <div class="profit-total-row">
+          <span>&#128200; GANANCIA BRUTA TOTAL ESTIMADA:</span>
+          <span>$ 488.369,75 COP</span>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com
+        </p>
+        <p>
+          Gracias por confiar en los especialistas en est&eacute;tica naval.
+        </p>
+      </footer>
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
