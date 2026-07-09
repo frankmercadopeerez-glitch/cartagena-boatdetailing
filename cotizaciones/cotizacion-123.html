@@ -355,66 +355,6 @@
         font-size: 11px;
       }
 
-      /* Resumen de ganancia — solo pantalla, no imprime */
-      .profit-box {
-        margin-top: 14px;
-        background: #fef9c3;
-        border: 1px solid #f59e0b;
-        border-left: 4px solid #d97706;
-        border-radius: 4px;
-        padding: 12px 14px;
-        font-size: 12px;
-      }
-
-      .profit-box h4 {
-        color: #92400e;
-        font-size: 13px;
-        font-weight: 800;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.4px;
-      }
-
-      .profit-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        margin-bottom: 3px;
-        font-size: 12px;
-        color: #78350f;
-      }
-
-      .profit-row span:last-child {
-        font-weight: 700;
-        white-space: nowrap;
-        text-align: right;
-      }
-
-      .profit-note {
-        font-size: 10.5px;
-        color: #92400e;
-        margin-top: 5px;
-        font-style: italic;
-        line-height: 1.5;
-      }
-
-      .profit-total-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        margin-top: 6px;
-        padding-top: 6px;
-        border-top: 2px solid #d97706;
-        font-size: 14px;
-        font-weight: 800;
-        color: #78350f;
-      }
-
-      .profit-total-row span:last-child {
-        white-space: nowrap;
-        text-align: right;
-      }
-
       footer {
         border-top: 1px solid var(--border-color);
         margin-top: 12px;
@@ -490,11 +430,6 @@
 
         .bottom-grid {
           grid-template-columns: 1fr 1fr !important;
-        }
-
-        /* El resumen de ganancia no se imprime */
-        .profit-box {
-          display: none !important;
         }
 
         .totals-section,
@@ -925,61 +860,6 @@
             Informaci&oacute;n de pago y facturaci&oacute;n electr&oacute;nica
             disponible v&iacute;a WhatsApp al aprobar la cotizaci&oacute;n.
           </div>
-        </div>
-      </div>
-
-      <!-- ===================================================
-           RESUMEN DE GANANCIA — SOLO PANTALLA, NO SE IMPRIME
-           =================================================== -->
-      <div class="profit-box">
-        <h4>
-          &#128200; Resumen de ganancia estimada (uso interno &mdash; no se
-          imprime)
-        </h4>
-
-        <div class="profit-row">
-          <span>Costo productos (precios Todomar):</span>
-          <span>$ 941.848,74</span>
-        </div>
-        <div class="profit-row">
-          <span>Venta productos al cliente (base, sin IVA):</span>
-          <span>$ 1.130.218,49</span>
-        </div>
-        <div
-          class="profit-row"
-          style="padding-bottom: 4px; border-bottom: 1px dashed #f59e0b"
-        >
-          <span>&#8594; Ganancia productos (markup 20%):</span>
-          <span style="color: var(--ok-color)">+ $ 188.369,75</span>
-        </div>
-
-        <div class="profit-row" style="margin-top: 6px">
-          <span>Cobro mano de obra al cliente (2 emb. &times; $ 550.000):</span>
-          <span>$ 1.100.000,00</span>
-        </div>
-        <div class="profit-row">
-          <span>Costo real mano de obra (2 emb. &times; $ 400.000):</span>
-          <span>$ 800.000,00</span>
-        </div>
-        <div
-          class="profit-row"
-          style="padding-bottom: 4px; border-bottom: 1px dashed #f59e0b"
-        >
-          <span>&#8594; Ganancia mano de obra:</span>
-          <span style="color: var(--ok-color)">+ $ 300.000,00</span>
-        </div>
-
-        <p class="profit-note">
-          &#9888; El IVA total recaudado ($ 423.741,53) se transfiere a la DIAN
-          &mdash; no es utilidad.<br />
-          &#9888; El costo del Salt-Away (obsequio) no est&aacute; incluido en
-          este c&aacute;lculo &mdash; reducir&aacute; la ganancia en el valor
-          real de ese producto.
-        </p>
-
-        <div class="profit-total-row">
-          <span>&#128200; GANANCIA BRUTA TOTAL ESTIMADA:</span>
-          <span>$ 488.369,75 COP</span>
         </div>
       </div>
 
