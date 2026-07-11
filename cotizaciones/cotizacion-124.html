@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src =
+            "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
+          document.head.appendChild(s);
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
+        }
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizacion #124 - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+      }
+
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 22px 24px 18px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+
+      .brand-info h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 3px;
+      }
+
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+
+      .quote-info h2 {
+        color: var(--secondary-color);
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .quote-info p {
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .client-section h3 {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+
+      .vessel-badge {
+        display: inline-block;
+        background: var(--primary-color);
+        color: #d4af37;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 2px;
+        margin-bottom: 4px;
+      }
+
+      .section-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin: 10px 0 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f8fafc;
+        color: var(--primary-color);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        text-align: left;
+        padding: 7px 8px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+
+      td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .item-title {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 13px;
+        margin-bottom: 4px;
+        text-align: left !important;
+      }
+
+      .item-desc {
+        font-size: 11px;
+        color: var(--text-color);
+        text-align: left !important;
+        line-height: 1.5;
+      }
+
+      .item-desc ul {
+        margin: 5px 0 0 16px;
+        line-height: 1.7;
+      }
+
+      .special-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .price-sub {
+        font-size: 10px;
+        color: var(--text-light);
+        margin-top: 2px;
+        white-space: nowrap;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+
+      .totals-box {
+        width: 100%;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+
+      .total-row span:first-child {
+        min-width: 0;
+      }
+
+      .total-row span:last-child {
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-align: right;
+      }
+
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+
+      .grand-total span:last-child {
+        white-space: nowrap;
+      }
+
+      .billing-note {
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--accent-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+
+      .warranty-box h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section h4 {
+        color: var(--accent-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul,
+      .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
+      .payment-info {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid var(--accent-color);
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 11px;
+      }
+
+      .guarantee-section {
+        margin-top: 10px;
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.3);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .guarantee-section h4 {
+        color: var(--ok-color);
+        font-size: 12px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .guarantee-section p {
+        color: var(--text-color);
+        line-height: 1.6;
+        margin-bottom: 5px;
+      }
+
+      .guarantee-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 12px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 10.5px;
+        color: var(--text-light);
+      }
+
+      @media (max-width: 760px) {
+        .invoice-container {
+          padding: 16px;
+        }
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+        .quote-info {
+          text-align: left;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        html {
+          font-size: 93%;
+        }
+
+        @page {
+          size: A4;
+          margin: 10mm 8mm;
+        }
+
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          border-top-width: 5px;
+        }
+
+        header {
+          flex-direction: row !important;
+          align-items: flex-start !important;
+        }
+        .client-section {
+          flex-direction: row !important;
+        }
+        .quote-info {
+          text-align: right !important;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr 1fr !important;
+        }
+
+        .totals-section,
+        .billing-note,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        .guarantee-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
+        }
+
+        td {
+          padding: 9px 8px !important;
+        }
+
+        .section-title {
+          margin: 8px 0 5px !important;
+          font-size: 13px !important;
+        }
+
+        .totals-box {
+          padding: 10px !important;
+        }
+
+        .total-row {
+          font-size: 11px !important;
+        }
+
+        .grand-total {
+          font-size: 15px !important;
+        }
+
+        .bottom-grid {
+          margin-top: 10px !important;
+          gap: 8px !important;
+        }
+
+        .warranty-box,
+        .terms-section {
+          padding: 10px 12px !important;
+          font-size: 11px !important;
+        }
+
+        .guarantee-section {
+          padding: 10px 12px !important;
+          margin-top: 10px !important;
+        }
+      }
+    </style>
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div
+          class="brand-info"
+          style="display: flex; align-items: center; gap: 10px"
+        >
+          <img
+            src="../images/cbdlogo-gold.svg"
+            alt="Colombia Boat Detailing"
+            style="height: 48px; width: auto"
+          />
+          <div>
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en est&eacute;tica naval</p>
+          </div>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACI&Oacute;N DE SERVICIOS</h2>
+          <p><strong>N&uacute;mero:</strong> CBD-2026-124</p>
+          <p><strong>Fecha:</strong> 10/07/2026</p>
+          <p><strong>Validez:</strong> 15 d&iacute;as</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Fabi&aacute;n Alberto Gallo Gordillo</strong></p>
+          <p>Propietario &mdash; C.C. 94.275.777</p>
+        </div>
+        <div>
+          <h3>Embarcaci&oacute;n</h3>
+          <span class="vessel-badge">Matr&iacute;cula CP-05-5142</span>
+          <p><strong>SOLACE</strong> &mdash; Fibra de vidrio &mdash; 13.1 m eslora</p>
+          <p>Puerto de registro: Cartagena &mdash; Distintivo: HK7308</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Plan de trabajo &mdash; Servicios cotizados</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 75%">Descripci&oacute;n del servicio</th>
+            <th style="width: 25%">Valor (COP)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- SERVICIO 1: PULIDO GELCOAT -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Pulido completo de gelcoat &mdash; Casco y superestructura
+              </div>
+              <div class="item-desc">
+                Pulido integral de todas las superficies de gelcoat del yate
+                SOLACE: costados, proa, popa y superestructura. El proceso
+                utiliza un sistema de tres etapas con pulidora orbital de doble
+                acci&oacute;n para garantizar resultados profundos sin da&ntilde;ar
+                el gelcoat:
+                <ul>
+                  <li>
+                    <strong>Etapa 1 &mdash; Descontaminaci&oacute;n y lavado t&eacute;cnico:</strong>
+                    limpieza profunda con productos marinos de pH controlado
+                    para remover sal, oxidaci&oacute;n superficial y residuos
+                    org&aacute;nicos antes del proceso de pulido.
+                  </li>
+                  <li>
+                    <strong>Etapa 2 &mdash; Compound (corrección):</strong>
+                    aplicaci&oacute;n de compound de corte marino para
+                    eliminar oxidaci&oacute;n, rayones superficiales, manchas
+                    de agua dura y la capa de gelcoat opacada por exposici&oacute;n
+                    UV y salitre del Caribe.
+                  </li>
+                  <li>
+                    <strong>Etapa 3 &mdash; Polish y refinado:</strong>
+                    pulido fino para recuperar la profundidad y el brillo
+                    espejo del gelcoat, eliminando las marcas del compound.
+                  </li>
+                  <li>
+                    <strong>Etapa 4 &mdash; Sellado y protecci&oacute;n:</strong>
+                    aplicaci&oacute;n de cera o sellador de larga duraci&oacute;n
+                    que protege el gelcoat restaurado contra los rayos UV,
+                    el salitre y la contaminaci&oacute;n marina del Caribe.
+                  </li>
+                  <li>
+                    <strong>Resultado garantizado:</strong> brillo espejo
+                    restaurado, color intensificado, superficie hidr&oacute;fuga
+                    y con protecci&oacute;n activa.
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align: top; padding-top: 10px">
+              <div class="special-price">$ 4.200.000</div>
+              <div class="price-sub">Sin IVA</div>
+            </td>
+          </tr>
+
+          <!-- SERVICIO 2: ANTIFOULING + ANODOS -->
+          <tr>
+            <td>
+              <div class="item-title">
+                Pintura antifouling negro &mdash; Obra viva + Cambio de &aacute;nodos de zinc
+              </div>
+              <div class="item-desc">
+                Preparaci&oacute;n completa y pintura de la obra viva (zona
+                sumergida del casco) con antifouling negro de alta resistencia,
+                m&aacute;s reemplazo de todos los &aacute;nodos de zinc del
+                yate. El trabajo incluye:
+                <ul>
+                  <li>
+                    <strong>Varada e inspecci&oacute;n:</strong> varado de la
+                    embarcaci&oacute;n e inspecci&oacute;n del estado actual
+                    de la obra viva, &aacute;nodos existentes y ap&eacute;ndices
+                    (h&eacute;lices, timones, arbotantes).
+                  </li>
+                  <li>
+                    <strong>Limpieza de obra viva:</strong> hidrolavado a
+                    presi&oacute;n para remover antifouling viejo, incrustaciones,
+                    &oacute;xido y residuos biol&oacute;gicos. Lij ado y
+                    preparaci&oacute;n de la superficie para nueva aplicaci&oacute;n.
+                  </li>
+                  <li>
+                    <strong>Aplicaci&oacute;n de antifouling negro:</strong>
+                    2 manos de pintura antifouling negro de alta eficiencia
+                    para prevenci&oacute;n de organismos marinos incrustantes
+                    (biol&oacute;gicos y qu&iacute;micos). Producto
+                    homologado para aguas tropicales del Caribe colombiano.
+                  </li>
+                  <li>
+                    <strong>Cambio completo de &aacute;nodos de zinc:</strong>
+                    retiro de todos los &aacute;nodos desgastados e
+                    instalaci&oacute;n de &aacute;nodos nuevos en casco,
+                    h&eacute;lices, arbotantes y timones. Los &aacute;nodos
+                    protegen la estructura met&aacute;lica de la embarcaci&oacute;n
+                    frente a la corrosi&oacute;n galv&aacute;nica en agua salada.
+                  </li>
+                  <li>
+                    <strong>Incluye materiales:</strong> antifouling negro,
+                    &aacute;nodos de zinc, selladores y materiales de
+                    preparaci&oacute;n.
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td style="vertical-align: top; padding-top: 10px">
+              <div class="special-price">$ 10.500.000</div>
+              <div class="price-sub">Sin IVA &mdash; incl. &aacute;nodos</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Pulido completo de gelcoat &mdash; casco y superestructura:</span>
+            <span>$ 4.200.000</span>
+          </div>
+          <div class="total-row">
+            <span>Pintura antifouling negro + cambio de &aacute;nodos:</span>
+            <span>$ 10.500.000</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>TOTAL COTIZACI&Oacute;N:</span>
+            <span>$ 14.700.000 COP</span>
+          </div>
+          <div
+            style="font-size: 10px; color: var(--text-light); margin-top: 6px"
+          >
+            Precios no incluyen IVA. Si se requiere facturaci&oacute;n
+            electr&oacute;nica se adicionar&aacute; el IVA vigente (19%).
+          </div>
+        </div>
+      </div>
+
+      <div class="billing-note">
+        <strong>Datos de facturaci&oacute;n:</strong> Este servicio es
+        prestado y facturado por
+        <strong>INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S</strong>
+        &mdash; NIT: 902071074-0. La informaci&oacute;n de pago se entrega
+        v&iacute;a WhatsApp al ser aprobada la cotizaci&oacute;n.
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>Embarcaci&oacute;n y equipo de trabajo</h4>
+          <ul>
+            <li>
+              Yate <strong>SOLACE</strong> &mdash; 13.1 m eslora &mdash;
+              Fibra de vidrio.
+            </li>
+            <li>
+              Duraci&oacute;n estimada: <strong>2&ndash;3 d&iacute;as</strong>
+              seg&uacute;n estado de superficies.
+            </li>
+            <li>
+              Equipo de <strong>2&ndash;3 t&eacute;cnicos</strong>
+              especializados en detailing y pintura naval.
+            </li>
+            <li>
+              Todos los productos son de grado marino profesional.
+            </li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y forma de pago</h4>
+          <ul>
+            <li>
+              Anticipo del <strong>50%</strong> para confirmar y programar.
+            </li>
+            <li>
+              Saldo del <strong>50%</strong> contra entrega a
+              satisfacci&oacute;n.
+            </li>
+            <li>
+              Cotizaci&oacute;n v&aacute;lida por <strong>15 d&iacute;as</strong>
+              h&aacute;biles.
+            </li>
+            <li>
+              Los servicios pueden contratarse de forma independiente.
+            </li>
+          </ul>
+          <div class="payment-info">
+            Informaci&oacute;n de pago disponible v&iacute;a WhatsApp al
+            aprobar la cotizaci&oacute;n.
+          </div>
+        </div>
+      </div>
+
+      <div class="guarantee-section">
+        <h4>&#10003; Garant&iacute;a y gu&iacute;a de cuidado personalizada</h4>
+        <p>
+          Se otorga <strong>garant&iacute;a de 6 meses</strong> sobre el
+          brillo del gelcoat restaurado. La garant&iacute;a cubre la
+          conservaci&oacute;n del acabado bajo uso y condiciones normales
+          en ambiente marino del Caribe.
+        </p>
+        <p>
+          &#128241; <strong>Gu&iacute;a digital de cuidado personalizada:</strong>
+          Al finalizar los trabajos se entrega una gu&iacute;a digital con
+          las instrucciones de mantenimiento espec&iacute;ficas para el
+          yate SOLACE, con frecuencias y productos recomendados para
+          preservar los resultados el mayor tiempo posible.
+        </p>
+      </div>
+
+      <footer>
+        <p>
+          <strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com
+        </p>
+        <p>Gracias por confiar en los especialistas en est&eacute;tica naval.</p>
+      </footer>
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
