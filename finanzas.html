@@ -734,18 +734,37 @@
 
       /* ── Number update animation ── */
       @keyframes numFlash {
-        0%   { opacity:1; transform:scale(1); }
-        28%  { opacity:0.3; transform:scale(0.93); }
-        100% { opacity:1; transform:scale(1); }
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        28% {
+          opacity: 0.3;
+          transform: scale(0.93);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
-      .num-flash { animation: numFlash 0.42s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+      .num-flash {
+        animation: numFlash 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      }
 
       /* ── Project card entry animation ── */
       @keyframes cardSlideIn {
-        from { opacity:0; transform:translateY(14px) scale(0.96); }
-        to   { opacity:1; transform:translateY(0)   scale(1); }
+        from {
+          opacity: 0;
+          transform: translateY(14px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
-      .proj-card { animation: cardSlideIn 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+      .proj-card {
+        animation: cardSlideIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      }
 
       /* ── Privacy / blur mode ── */
       #main-app.privacy-mode .sv {
@@ -755,40 +774,237 @@
         border-radius: 4px;
       }
       @media (hover: hover) {
-        #main-app.privacy-mode .sv:hover { filter: blur(0); }
+        #main-app.privacy-mode .sv:hover {
+          filter: blur(0);
+        }
       }
-      #main-app.privacy-mode .sv:active { filter: blur(0); }
+      #main-app.privacy-mode .sv:active {
+        filter: blur(0);
+      }
 
       /* ── Notas ── */
-      .notas-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
-      @media(min-width:640px) { .notas-grid { grid-template-columns:repeat(3,1fr); } }
-      .nota-card { border-radius:14px; border:1px solid rgba(255,255,255,0.09); background:rgba(255,255,255,0.04); padding:12px; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; min-height:100px; position:relative; overflow:hidden; }
-      .nota-card:active { transform:scale(0.97); }
-      .nota-card:hover { border-color:rgba(255,255,255,0.14); box-shadow:0 6px 20px rgba(0,0,0,0.4); }
-      .nota-color-bar { position:absolute; top:0;left:0;right:0; height:3px; border-radius:14px 14px 0 0; }
-      .nota-title { font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:4px; margin-top:5px; line-height:1.3; }
-      .nota-body { font-size:0.7rem; color:var(--text2); line-height:1.5; display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden; }
-      .nota-item-check { display:flex; align-items:flex-start; gap:5px; margin-bottom:3px; font-size:0.7rem; color:var(--text2); }
-      .nota-item-check.done { color:var(--text3); text-decoration:line-through; }
-      .nota-item-check input[type="checkbox"] { width:12px; height:12px; margin-top:2px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
-      .nota-add-btn { border:2px dashed rgba(255,255,255,0.1); border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100px; cursor:pointer; color:var(--text3); gap:5px; font-size:0.68rem; font-weight:600; background:transparent; width:100%; transition:border-color 0.2s,color 0.2s; }
-      .nota-add-btn:hover { border-color:rgba(184,144,77,0.4); color:var(--accent); }
-      .nota-link-card { display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:7px 10px; margin-top:6px; text-decoration:none; background:rgba(255,255,255,0.04); cursor:pointer; }
-      .nota-link-card img { width:16px; height:16px; border-radius:3px; flex-shrink:0; }
-      .nota-link-domain { font-size:0.62rem; color:var(--accent); font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-      .nota-link-title { font-size:0.65rem; color:var(--text2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:1px; }
-      .nota-check-input { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
-      .nota-check-input input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent); flex-shrink:0; }
-      .nota-check-input input[type="text"] { flex:1; background:transparent!important; border:none!important; color:var(--text)!important; font-size:0.82rem; padding:2px 0!important; box-shadow:none!important; }
-      .nota-check-input .del-item { width:20px;height:20px; cursor:pointer; color:var(--text3); display:flex;align-items:center;justify-content:center; border-radius:50%; border:none; background:transparent; flex-shrink:0; padding:0; }
-      .nota-check-input .del-item:hover { color:var(--red); }
-      .color-dot { width:22px;height:22px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:transform 0.15s,border-color 0.15s; }
-      .color-dot.selected { border-color:white; transform:scale(1.25); }
-      .active-nota-tipo { border-color:var(--accent)!important; color:var(--accent)!important; background:rgba(184,144,77,0.1)!important; }
+      .notas-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      @media (min-width: 640px) {
+        .notas-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .nota-card {
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 12px;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        min-height: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+      .nota-card:active {
+        transform: scale(0.97);
+      }
+      .nota-card:hover {
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+      .nota-color-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 14px 14px 0 0;
+      }
+      .nota-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+        margin-top: 5px;
+        line-height: 1.3;
+      }
+      .nota-body {
+        font-size: 0.7rem;
+        color: var(--text2);
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .nota-item-check {
+        display: flex;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 3px;
+        font-size: 0.7rem;
+        color: var(--text2);
+      }
+      .nota-item-check.done {
+        color: var(--text3);
+        text-decoration: line-through;
+      }
+      .nota-item-check input[type="checkbox"] {
+        width: 12px;
+        height: 12px;
+        margin-top: 2px;
+        accent-color: var(--accent);
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      .nota-add-btn {
+        border: 2px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px;
+        cursor: pointer;
+        color: var(--text3);
+        gap: 5px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        background: transparent;
+        width: 100%;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .nota-add-btn:hover {
+        border-color: rgba(184, 144, 77, 0.4);
+        color: var(--accent);
+      }
+      .nota-link-card {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 7px 10px;
+        margin-top: 6px;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.04);
+        cursor: pointer;
+      }
+      .nota-link-card img {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        flex-shrink: 0;
+      }
+      .nota-link-domain {
+        font-size: 0.62rem;
+        color: var(--accent);
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .nota-link-title {
+        font-size: 0.65rem;
+        color: var(--text2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-top: 1px;
+      }
+      .nota-check-input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nota-check-input input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--accent);
+        flex-shrink: 0;
+      }
+      .nota-check-input input[type="text"] {
+        flex: 1;
+        background: transparent !important;
+        border: none !important;
+        color: var(--text) !important;
+        font-size: 0.82rem;
+        padding: 2px 0 !important;
+        box-shadow: none !important;
+      }
+      .nota-check-input .del-item {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        color: var(--text3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        flex-shrink: 0;
+        padding: 0;
+      }
+      .nota-check-input .del-item:hover {
+        color: var(--red);
+      }
+      .color-dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition:
+          transform 0.15s,
+          border-color 0.15s;
+      }
+      .color-dot.selected {
+        border-color: white;
+        transform: scale(1.25);
+      }
+      .active-nota-tipo {
+        border-color: var(--accent) !important;
+        color: var(--accent) !important;
+        background: rgba(184, 144, 77, 0.1) !important;
+      }
       /* ── Mas drawer styled items ── */
-      .mas-drawer-item { display:flex; align-items:center; gap:14px; padding:13px 14px; border-radius:14px; cursor:pointer; background:var(--glass); border:1px solid var(--glass-b); margin-bottom:9px; width:100%; color:var(--text); transition:background 0.2s,border-color 0.2s; text-align:left; }
-      .mas-drawer-item:hover,.mas-drawer-item:active { background:rgba(255,255,255,0.07); border-color:rgba(184,144,77,0.2); }
-      .mas-drawer-icon { width:40px;height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .mas-drawer-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        background: var(--glass);
+        border: 1px solid var(--glass-b);
+        margin-bottom: 9px;
+        width: 100%;
+        color: var(--text);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+        text-align: left;
+      }
+      .mas-drawer-item:hover,
+      .mas-drawer-item:active {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(184, 144, 77, 0.2);
+      }
+      .mas-drawer-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -984,7 +1200,7 @@
               <i data-lucide="eye" id="privacy-icon" class="w-4 h-4"></i>
             </button>
             <button
-              onclick="if(confirm('\u00bfCerrar sesi\u00f3n?')) logout();"
+              onclick="if (confirm('\u00bfCerrar sesi\u00f3n?')) logout();"
               class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
             >
               <i data-lucide="log-out" class="w-4 h-4"></i>
@@ -1091,54 +1307,226 @@
           </div>
 
           <!-- CUENTAS PERSONALES -->
-          <div class="rounded-2xl mb-4 p-4" style="background:linear-gradient(135deg,#071428 0%,#111111 100%);border:1px solid rgba(184,144,77,0.2)">
+          <div
+            class="rounded-2xl mb-4 p-4"
+            style="
+              background: linear-gradient(135deg, #071428 0%, #111111 100%);
+              border: 1px solid rgba(184, 144, 77, 0.2);
+            "
+          >
             <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="users" class="w-4 h-4" style="color:#b8904d"></i>
-              <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Balance · Socios</span>
-              <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)" id="cuentas-mes-label">Acumulado</span>
+              <i data-lucide="users" class="w-4 h-4" style="color: #b8904d"></i>
+              <span
+                class="text-xs font-bold uppercase tracking-widest"
+                style="color: #b8904d"
+                >Balance · Socios</span
+              >
+              <span
+                class="text-xs ml-auto"
+                style="color: rgba(255, 255, 255, 0.3)"
+                id="cuentas-mes-label"
+                >Acumulado</span
+              >
             </div>
             <!-- Cristian -->
-            <div class="rounded-xl p-3 mb-2" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)">
+            <div
+              class="rounded-xl p-3 mb-2"
+              style="
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.07);
+              "
+            >
               <div class="flex items-center justify-between mb-2">
-                <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Cristian</p>
-                <p class="text-sm font-bold" id="cuenta-cristian-val" style="color:var(--green)">$0</p>
+                <p
+                  class="text-xs font-bold uppercase tracking-widest"
+                  style="
+                    color: rgba(255, 255, 255, 0.4);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Cristian
+                </p>
+                <p
+                  class="text-sm font-bold"
+                  id="cuenta-cristian-val"
+                  style="color: var(--green)"
+                >
+                  $0
+                </p>
               </div>
               <div class="grid grid-cols-2 gap-2 mb-2 text-center">
-                <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
-                  <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
-                  <p class="text-sm font-bold" id="cuenta-cristian-capital" style="color:var(--blue)">$0</p>
+                <div
+                  class="rounded-lg p-2"
+                  style="
+                    background: rgba(56, 189, 248, 0.08);
+                    border: 1px solid rgba(56, 189, 248, 0.15);
+                  "
+                >
+                  <p
+                    class="text-xs mb-0.5"
+                    style="color: rgba(56, 189, 248, 0.7)"
+                  >
+                    Capital de trabajo
+                  </p>
+                  <p
+                    class="text-sm font-bold"
+                    id="cuenta-cristian-capital"
+                    style="color: var(--blue)"
+                  >
+                    $0
+                  </p>
                 </div>
-                <div class="rounded-lg p-2" style="background:rgba(184,144,77,0.08);border:1px solid rgba(184,144,77,0.15)">
-                  <p class="text-xs mb-0.5" style="color:rgba(184,144,77,0.7)">Profit disponible</p>
-                  <p class="text-sm font-bold" id="cuenta-cristian-profit" style="color:var(--accent-bright)">$0</p>
+                <div
+                  class="rounded-lg p-2"
+                  style="
+                    background: rgba(184, 144, 77, 0.08);
+                    border: 1px solid rgba(184, 144, 77, 0.15);
+                  "
+                >
+                  <p
+                    class="text-xs mb-0.5"
+                    style="color: rgba(184, 144, 77, 0.7)"
+                  >
+                    Profit disponible
+                  </p>
+                  <p
+                    class="text-sm font-bold"
+                    id="cuenta-cristian-profit"
+                    style="color: var(--accent-bright)"
+                  >
+                    $0
+                  </p>
                 </div>
               </div>
-              <button id="btn-retiro-cristian" onclick="retirarProfitSocio('Cristian')" class="w-full text-xs font-bold py-1.5 rounded-lg transition" style="background:rgba(184,144,77,0.12);border:1px solid rgba(184,144,77,0.3);color:var(--accent-bright);display:none">Retirar Profit</button>
+              <button
+                id="btn-retiro-cristian"
+                onclick="retirarProfitSocio('Cristian')"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
+                style="
+                  background: rgba(184, 144, 77, 0.12);
+                  border: 1px solid rgba(184, 144, 77, 0.3);
+                  color: var(--accent-bright);
+                  display: none;
+                "
+              >
+                Retirar Profit
+              </button>
             </div>
             <!-- Frank -->
-            <div class="rounded-xl p-3 mb-3" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)">
+            <div
+              class="rounded-xl p-3 mb-3"
+              style="
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.07);
+              "
+            >
               <div class="flex items-center justify-between mb-2">
-                <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Frank</p>
-                <p class="text-sm font-bold" id="cuenta-frank-val" style="color:var(--green)">$0</p>
+                <p
+                  class="text-xs font-bold uppercase tracking-widest"
+                  style="
+                    color: rgba(255, 255, 255, 0.4);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Frank
+                </p>
+                <p
+                  class="text-sm font-bold"
+                  id="cuenta-frank-val"
+                  style="color: var(--green)"
+                >
+                  $0
+                </p>
               </div>
               <div class="grid grid-cols-2 gap-2 mb-2 text-center">
-                <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
-                  <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
-                  <p class="text-sm font-bold" id="cuenta-frank-capital" style="color:var(--blue)">$0</p>
+                <div
+                  class="rounded-lg p-2"
+                  style="
+                    background: rgba(56, 189, 248, 0.08);
+                    border: 1px solid rgba(56, 189, 248, 0.15);
+                  "
+                >
+                  <p
+                    class="text-xs mb-0.5"
+                    style="color: rgba(56, 189, 248, 0.7)"
+                  >
+                    Capital de trabajo
+                  </p>
+                  <p
+                    class="text-sm font-bold"
+                    id="cuenta-frank-capital"
+                    style="color: var(--blue)"
+                  >
+                    $0
+                  </p>
                 </div>
-                <div class="rounded-lg p-2" style="background:rgba(184,144,77,0.08);border:1px solid rgba(184,144,77,0.15)">
-                  <p class="text-xs mb-0.5" style="color:rgba(184,144,77,0.7)">Profit disponible</p>
-                  <p class="text-sm font-bold" id="cuenta-frank-profit" style="color:var(--accent-bright)">$0</p>
+                <div
+                  class="rounded-lg p-2"
+                  style="
+                    background: rgba(184, 144, 77, 0.08);
+                    border: 1px solid rgba(184, 144, 77, 0.15);
+                  "
+                >
+                  <p
+                    class="text-xs mb-0.5"
+                    style="color: rgba(184, 144, 77, 0.7)"
+                  >
+                    Profit disponible
+                  </p>
+                  <p
+                    class="text-sm font-bold"
+                    id="cuenta-frank-profit"
+                    style="color: var(--accent-bright)"
+                  >
+                    $0
+                  </p>
                 </div>
               </div>
-              <button id="btn-retiro-frank" onclick="retirarProfitSocio('Frank')" class="w-full text-xs font-bold py-1.5 rounded-lg transition" style="background:rgba(184,144,77,0.12);border:1px solid rgba(184,144,77,0.3);color:var(--accent-bright);display:none">Retirar Profit</button>
+              <button
+                id="btn-retiro-frank"
+                onclick="retirarProfitSocio('Frank')"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
+                style="
+                  background: rgba(184, 144, 77, 0.12);
+                  border: 1px solid rgba(184, 144, 77, 0.3);
+                  color: var(--accent-bright);
+                  display: none;
+                "
+              >
+                Retirar Profit
+              </button>
             </div>
             <!-- Settlement -->
-            <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px">
-              <div id="settlement-text" style="flex:1">
-                <span style="font-size:0.72rem;color:rgba(255,255,255,0.25)">Calculando…</span>
+            <div
+              style="
+                border-top: 1px solid rgba(255, 255, 255, 0.07);
+                padding-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+              "
+            >
+              <div id="settlement-text" style="flex: 1">
+                <span
+                  style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.25)"
+                  >Calculando…</span
+                >
               </div>
-              <button id="btn-equilibrar" onclick="equilibrarCuentas()" class="text-xs font-bold py-1.5 px-3 rounded-lg transition" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3);color:var(--blue);display:none;flex-shrink:0">Equilibrar</button>
+              <button
+                id="btn-equilibrar"
+                onclick="equilibrarCuentas()"
+                class="text-xs font-bold py-1.5 px-3 rounded-lg transition"
+                style="
+                  background: rgba(56, 189, 248, 0.15);
+                  border: 1px solid rgba(56, 189, 248, 0.3);
+                  color: var(--blue);
+                  display: none;
+                  flex-shrink: 0;
+                "
+              >
+                Equilibrar
+              </button>
             </div>
           </div>
 
@@ -1186,22 +1574,100 @@
           </div>
 
           <!-- DINERO EN CUENTA -->
-          <div class="rounded-2xl mb-4 p-4" style="background:linear-gradient(135deg,#071428 0%,#111111 100%);border:1px solid rgba(255,255,255,0.09)">
+          <div
+            class="rounded-2xl mb-4 p-4"
+            style="
+              background: linear-gradient(135deg, #071428 0%, #111111 100%);
+              border: 1px solid rgba(255, 255, 255, 0.09);
+            "
+          >
             <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="wallet" class="w-4 h-4" style="color:#b8904d"></i>
-              <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Dinero total en cuenta</span>
+              <i
+                data-lucide="wallet"
+                class="w-4 h-4"
+                style="color: #b8904d"
+              ></i>
+              <span
+                class="text-xs font-bold uppercase tracking-widest"
+                style="color: #b8904d"
+                >Dinero total en cuenta</span
+              >
             </div>
-            <p class="font-bold sv" id="kpi-saldo" style="font-size:clamp(1.4rem,6vw,2.4rem);color:var(--green);line-height:1.1;margin-bottom:10px">$0</p>
+            <p
+              class="font-bold sv"
+              id="kpi-saldo"
+              style="
+                font-size: clamp(1.4rem, 6vw, 2.4rem);
+                color: var(--green);
+                line-height: 1.1;
+                margin-bottom: 10px;
+              "
+            >
+              $0
+            </p>
             <div class="grid grid-cols-2 gap-2">
-              <div class="rounded-xl p-3" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.18)">
-                <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(56,189,248,0.75);letter-spacing:.06em">Capital de trabajo</p>
-                <p class="font-bold sv" id="kpi-saldo-capital" style="font-size:clamp(0.9rem,3.5vw,1.25rem);color:var(--blue)">$0</p>
-                <p class="text-xs mt-0.5" style="color:rgba(255,255,255,0.25)">en proyectos activos</p>
+              <div
+                class="rounded-xl p-3"
+                style="
+                  background: rgba(56, 189, 248, 0.08);
+                  border: 1px solid rgba(56, 189, 248, 0.18);
+                "
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-1"
+                  style="
+                    color: rgba(56, 189, 248, 0.75);
+                    letter-spacing: 0.06em;
+                  "
+                >
+                  Capital de trabajo
+                </p>
+                <p
+                  class="font-bold sv"
+                  id="kpi-saldo-capital"
+                  style="
+                    font-size: clamp(0.9rem, 3.5vw, 1.25rem);
+                    color: var(--blue);
+                  "
+                >
+                  $0
+                </p>
+                <p
+                  class="text-xs mt-0.5"
+                  style="color: rgba(255, 255, 255, 0.25)"
+                >
+                  en proyectos activos
+                </p>
               </div>
-              <div class="rounded-xl p-3" style="background:rgba(184,144,77,0.08);border:1px solid rgba(184,144,77,0.18)">
-                <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(212,168,94,0.8);letter-spacing:.06em">Profit</p>
-                <p class="font-bold sv" id="kpi-saldo-profit" style="font-size:clamp(0.9rem,3.5vw,1.25rem);color:var(--accent-bright)">$0</p>
-                <p class="text-xs mt-0.5" style="color:rgba(255,255,255,0.25)">disponible</p>
+              <div
+                class="rounded-xl p-3"
+                style="
+                  background: rgba(184, 144, 77, 0.08);
+                  border: 1px solid rgba(184, 144, 77, 0.18);
+                "
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-1"
+                  style="color: rgba(212, 168, 94, 0.8); letter-spacing: 0.06em"
+                >
+                  Profit
+                </p>
+                <p
+                  class="font-bold sv"
+                  id="kpi-saldo-profit"
+                  style="
+                    font-size: clamp(0.9rem, 3.5vw, 1.25rem);
+                    color: var(--accent-bright);
+                  "
+                >
+                  $0
+                </p>
+                <p
+                  class="text-xs mt-0.5"
+                  style="color: rgba(255, 255, 255, 0.25)"
+                >
+                  disponible
+                </p>
               </div>
             </div>
           </div>
@@ -1301,15 +1767,46 @@
           </div>
 
           <!-- PROFIT DEL MES -->
-          <div id="profit-mes-section" class="mb-5" style="display:none">
+          <div id="profit-mes-section" class="mb-5" style="display: none">
             <div class="flex items-center gap-2 mb-2">
-              <i data-lucide="check-circle" class="w-4 h-4" style="color:var(--green)"></i>
-              <h2 class="text-sm font-semibold" style="color:var(--text)">Profit del mes</h2>
-              <span class="text-xs" id="profit-mes-periodo" style="color:var(--text2)"></span>
+              <i
+                data-lucide="check-circle"
+                class="w-4 h-4"
+                style="color: var(--green)"
+              ></i>
+              <h2 class="text-sm font-semibold" style="color: var(--text)">
+                Profit del mes
+              </h2>
+              <span
+                class="text-xs"
+                id="profit-mes-periodo"
+                style="color: var(--text2)"
+              ></span>
             </div>
-            <div class="rounded-xl p-3 mb-3 text-center" style="background:rgba(34,214,138,0.07);border:1px solid rgba(34,214,138,0.2)">
-              <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(34,214,138,0.6);letter-spacing:.07em">Total cerrado este mes</p>
-              <p class="font-bold sv" id="profit-mes-total" style="font-size:clamp(1.3rem,5vw,2rem);color:var(--green);line-height:1.1">$0</p>
+            <div
+              class="rounded-xl p-3 mb-3 text-center"
+              style="
+                background: rgba(34, 214, 138, 0.07);
+                border: 1px solid rgba(34, 214, 138, 0.2);
+              "
+            >
+              <p
+                class="text-xs font-semibold uppercase tracking-widest mb-1"
+                style="color: rgba(34, 214, 138, 0.6); letter-spacing: 0.07em"
+              >
+                Total cerrado este mes
+              </p>
+              <p
+                class="font-bold sv"
+                id="profit-mes-total"
+                style="
+                  font-size: clamp(1.3rem, 5vw, 2rem);
+                  color: var(--green);
+                  line-height: 1.1;
+                "
+              >
+                $0
+              </p>
             </div>
             <div id="profit-mes-list" class="space-y-2"></div>
           </div>
@@ -1393,15 +1890,41 @@
                 Exportar mes
               </button>
             </div>
-            <div class="rounded-xl p-3 mb-4" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2)">
+            <div
+              class="rounded-xl p-3 mb-4"
+              style="
+                background: rgba(56, 189, 248, 0.08);
+                border: 1px solid rgba(56, 189, 248, 0.2);
+              "
+            >
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(56,189,248,0.75);letter-spacing:.07em">Capital en proyectos activos</p>
-                  <p class="font-bold leading-none" id="proj-capital-trabajo" style="font-size:clamp(1rem,4vw,1.5rem);color:var(--blue)">$0</p>
+                  <p
+                    class="text-xs font-semibold uppercase tracking-widest mb-1"
+                    style="
+                      color: rgba(56, 189, 248, 0.75);
+                      letter-spacing: 0.07em;
+                    "
+                  >
+                    Capital en proyectos activos
+                  </p>
+                  <p
+                    class="font-bold leading-none"
+                    id="proj-capital-trabajo"
+                    style="
+                      font-size: clamp(1rem, 4vw, 1.5rem);
+                      color: var(--blue);
+                    "
+                  >
+                    $0
+                  </p>
                 </div>
-                <i data-lucide="activity" class="w-8 h-8 flex-shrink-0" style="color:rgba(56,189,248,0.25)"></i>
+                <i
+                  data-lucide="activity"
+                  class="w-8 h-8 flex-shrink-0"
+                  style="color: rgba(56, 189, 248, 0.25)"
+                ></i>
               </div>
-            </div>
             </div>
             <div id="proyectos-list" class="space-y-2"></div>
           </div>
@@ -1409,7 +1932,7 @@
         <!-- /panel-resumen -->
 
         <!-- TAB MOVIMIENTOS -->
-        <div id="panel-movimientos" class="pt-2 px-3 pb-6 sm:px-5 hidden">
+        <div id="panel-movimientos" class="pt-0 px-3 pb-6 sm:px-5 hidden">
           <div class="flex items-center justify-between mb-3">
             <label class="flex items-center gap-2 cursor-pointer select-none">
               <div class="relative">
@@ -1541,7 +2064,7 @@
         </div>
 
         <!-- TAB ESTADÍSTICAS -->
-        <div id="panel-estadisticas" class="pt-2 px-3 pb-10 sm:px-5 hidden">
+        <div id="panel-estadisticas" class="pt-0 px-3 pb-10 sm:px-5 hidden">
           <!-- REPORTES HEADER -->
           <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-1">
@@ -1606,21 +2129,51 @@
           <!-- PUBLICIDAD -->
           <div class="pub-widget px-4 py-3 mb-5">
             <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.18)">
+              <div
+                class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
+                style="background: rgba(245, 158, 11, 0.18)"
+              >
                 <i data-lucide="megaphone" class="w-4 h-4 text-yellow-400"></i>
               </div>
               <div class="flex-1 min-w-0">
-                <p class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none">Publicidad</p>
-                <p class="font-bold text-white leading-none mt-1" id="pub-total-mes" style="font-size:clamp(1rem,4vw,1.4rem)">$0</p>
-                <p class="text-xs text-slate-400 mt-0.5" id="pub-periodo-label">este mes</p>
+                <p
+                  class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none"
+                >
+                  Publicidad
+                </p>
+                <p
+                  class="font-bold text-white leading-none mt-1"
+                  id="pub-total-mes"
+                  style="font-size: clamp(1rem, 4vw, 1.4rem)"
+                >
+                  $0
+                </p>
+                <p class="text-xs text-slate-400 mt-0.5" id="pub-periodo-label">
+                  este mes
+                </p>
               </div>
               <div class="flex gap-2 flex-shrink-0">
-                <button onclick="filtrarPorPublicidad()" class="text-xs font-semibold py-1.5 px-3 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center gap-1" style="border-color:rgba(184,144,77,0.4)">
+                <button
+                  onclick="filtrarPorPublicidad()"
+                  class="text-xs font-semibold py-1.5 px-3 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center gap-1"
+                  style="border-color: rgba(184, 144, 77, 0.4)"
+                >
                   <i data-lucide="filter" class="w-3 h-3"></i> Ver
                 </button>
-                <button onclick="abrirGastoPublicidad()" class="text-xs font-bold py-1.5 px-3 rounded-xl flex items-center gap-1 transition" style="background:rgba(184,144,77,0.2);border:1px solid rgba(184,144,77,0.45)">
-                  <i data-lucide="plus" class="w-3 h-3" style="color:#b8904d"></i>
-                  <span style="color:#d4a85e">Agregar</span>
+                <button
+                  onclick="abrirGastoPublicidad()"
+                  class="text-xs font-bold py-1.5 px-3 rounded-xl flex items-center gap-1 transition"
+                  style="
+                    background: rgba(184, 144, 77, 0.2);
+                    border: 1px solid rgba(184, 144, 77, 0.45);
+                  "
+                >
+                  <i
+                    data-lucide="plus"
+                    class="w-3 h-3"
+                    style="color: #b8904d"
+                  ></i>
+                  <span style="color: #d4a85e">Agregar</span>
                 </button>
               </div>
             </div>
@@ -1945,11 +2498,26 @@
         <!-- TAB NOTAS -->
         <div id="panel-notas" class="pt-2 px-3 pb-6 sm:px-5 hidden">
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-sm font-semibold flex items-center gap-2" style="color:var(--text)">
-              <i data-lucide="notebook-pen" class="w-4 h-4" style="color:#A78BFA"></i>
+            <h2
+              class="text-sm font-semibold flex items-center gap-2"
+              style="color: var(--text)"
+            >
+              <i
+                data-lucide="notebook-pen"
+                class="w-4 h-4"
+                style="color: #a78bfa"
+              ></i>
               Mis Notas
             </h2>
-            <button onclick="abrirModalNota()" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl" style="background:rgba(167,139,250,0.12);color:#A78BFA;border:1px solid rgba(167,139,250,0.25)">
+            <button
+              onclick="abrirModalNota()"
+              class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl"
+              style="
+                background: rgba(167, 139, 250, 0.12);
+                color: #a78bfa;
+                border: 1px solid rgba(167, 139, 250, 0.25);
+              "
+            >
               <i data-lucide="plus" class="w-3.5 h-3.5"></i> Nueva nota
             </button>
           </div>
@@ -2005,34 +2573,113 @@
 
     <!-- MÁS DRAWER -->
     <div id="mas-drawer">
-      <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
-      <p style="font-size:0.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px">Herramientas</p>
-      <button class="mas-drawer-item" onclick="closeMasDrawer();showTab('notas')">
-        <div class="mas-drawer-icon" style="background:rgba(167,139,250,0.12)">
-          <i data-lucide="notebook-pen" style="color:#A78BFA;width:20px;height:20px"></i>
+      <div
+        style="
+          width: 36px;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 2px;
+          margin: 0 auto 16px;
+        "
+      ></div>
+      <p
+        style="
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--text3);
+          margin-bottom: 10px;
+        "
+      >
+        Herramientas
+      </p>
+      <button
+        class="mas-drawer-item"
+        onclick="
+          closeMasDrawer();
+          showTab('notas');
+        "
+      >
+        <div
+          class="mas-drawer-icon"
+          style="background: rgba(167, 139, 250, 0.12)"
+        >
+          <i
+            data-lucide="notebook-pen"
+            style="color: #a78bfa; width: 20px; height: 20px"
+          ></i>
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold" style="color:var(--text)">Notas</p>
-          <p class="text-xs mt-0.5" style="color:var(--text2)">Apuntes, listas y links</p>
+          <p class="text-sm font-semibold" style="color: var(--text)">Notas</p>
+          <p class="text-xs mt-0.5" style="color: var(--text2)">
+            Apuntes, listas y links
+          </p>
         </div>
-        <i data-lucide="chevron-right" style="color:var(--text3);width:16px;height:16px;flex-shrink:0"></i>
+        <i
+          data-lucide="chevron-right"
+          style="color: var(--text3); width: 16px; height: 16px; flex-shrink: 0"
+        ></i>
       </button>
-      <p style="font-size:0.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;margin-top:14px">Cuenta</p>
-      <button class="mas-drawer-item" onclick="closeMasDrawer();document.getElementById('btn-install-ios')&&document.getElementById('btn-install-ios').click()">
-        <div class="mas-drawer-icon" style="background:rgba(184,144,77,0.12)">
-          <i data-lucide="download" style="color:var(--accent);width:20px;height:20px"></i>
+      <p
+        style="
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--text3);
+          margin-bottom: 10px;
+          margin-top: 14px;
+        "
+      >
+        Cuenta
+      </p>
+      <button
+        class="mas-drawer-item"
+        onclick="
+          closeMasDrawer();
+          document.getElementById('btn-install-ios') &&
+            document.getElementById('btn-install-ios').click();
+        "
+      >
+        <div
+          class="mas-drawer-icon"
+          style="background: rgba(184, 144, 77, 0.12)"
+        >
+          <i
+            data-lucide="download"
+            style="color: var(--accent); width: 20px; height: 20px"
+          ></i>
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold" style="color:var(--text)">Instalar App</p>
-          <p class="text-xs mt-0.5" style="color:var(--text2)">Agregar a pantalla de inicio</p>
+          <p class="text-sm font-semibold" style="color: var(--text)">
+            Instalar App
+          </p>
+          <p class="text-xs mt-0.5" style="color: var(--text2)">
+            Agregar a pantalla de inicio
+          </p>
         </div>
       </button>
-      <button class="mas-drawer-item" onclick="closeMasDrawer();if(confirm('\u00bfCerrar sesi\u00f3n?'))logout()">
-        <div class="mas-drawer-icon" style="background:rgba(255,77,106,0.12)">
-          <i data-lucide="log-out" style="color:var(--red);width:20px;height:20px"></i>
+      <button
+        class="mas-drawer-item"
+        onclick="
+          closeMasDrawer();
+          if (confirm('\u00bfCerrar sesi\u00f3n?')) logout();
+        "
+      >
+        <div
+          class="mas-drawer-icon"
+          style="background: rgba(255, 77, 106, 0.12)"
+        >
+          <i
+            data-lucide="log-out"
+            style="color: var(--red); width: 20px; height: 20px"
+          ></i>
         </div>
         <div class="flex-1">
-          <p class="text-sm font-semibold" style="color:var(--red)">Cerrar sesión</p>
+          <p class="text-sm font-semibold" style="color: var(--red)">
+            Cerrar sesión
+          </p>
         </div>
       </button>
     </div>
@@ -2046,49 +2693,314 @@
     <div id="toast"></div>
 
     <!-- MODAL NOTA -->
-    <div id="modal-nota" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center" style="background:rgba(0,0,0,0.7);backdrop-filter:blur(6px)" onclick="if(event.target===this)cerrarModalNota()">
-      <div class="w-full sm:max-w-md" style="background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);border-radius:20px 20px 0 0;max-height:92dvh;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom,0px)" onclick="event.stopPropagation()">
-        <div id="nota-modal-colorbar" style="height:4px;border-radius:20px 20px 0 0;background:var(--accent);transition:background 0.2s"></div>
+    <div
+      id="modal-nota"
+      class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+      style="background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px)"
+      onclick="if (event.target === this) cerrarModalNota();"
+    >
+      <div
+        class="w-full sm:max-w-md"
+        style="
+          background: #0a0e1a;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px 20px 0 0;
+          max-height: 92dvh;
+          overflow-y: auto;
+          padding-bottom: env(safe-area-inset-bottom, 0px);
+        "
+        onclick="event.stopPropagation()"
+      >
+        <div
+          id="nota-modal-colorbar"
+          style="
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+            background: var(--accent);
+            transition: background 0.2s;
+          "
+        ></div>
         <div class="p-5">
           <div class="flex gap-2 mb-4">
-            <button id="btn-tipo-nota" type="button" onclick="setNotaTipo('nota')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="file-text" style="width:13px;height:13px"></i> Texto</button>
-            <button id="btn-tipo-lista" type="button" onclick="setNotaTipo('lista')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="check-square" style="width:13px;height:13px"></i> Lista</button>
-            <button id="btn-tipo-link" type="button" onclick="setNotaTipo('link')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="link" style="width:13px;height:13px"></i> Link</button>
+            <button
+              id="btn-tipo-nota"
+              type="button"
+              onclick="setNotaTipo('nota')"
+              class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5"
+              style="
+                border-color: rgba(255, 255, 255, 0.1);
+                color: var(--text2);
+              "
+            >
+              <i data-lucide="file-text" style="width: 13px; height: 13px"></i>
+              Texto
+            </button>
+            <button
+              id="btn-tipo-lista"
+              type="button"
+              onclick="setNotaTipo('lista')"
+              class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5"
+              style="
+                border-color: rgba(255, 255, 255, 0.1);
+                color: var(--text2);
+              "
+            >
+              <i
+                data-lucide="check-square"
+                style="width: 13px; height: 13px"
+              ></i>
+              Lista
+            </button>
+            <button
+              id="btn-tipo-link"
+              type="button"
+              onclick="setNotaTipo('link')"
+              class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5"
+              style="
+                border-color: rgba(255, 255, 255, 0.1);
+                color: var(--text2);
+              "
+            >
+              <i data-lucide="link" style="width: 13px; height: 13px"></i> Link
+            </button>
           </div>
-          <input type="text" id="nota-titulo" placeholder="Título (opcional)" class="block w-full rounded-xl p-3 mb-3 text-sm font-semibold focus:outline-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"/>
-          <div id="nota-section-texto"><textarea id="nota-texto" placeholder="Escribe tu nota…" rows="5" class="block w-full rounded-xl p-3 mb-3 text-sm focus:outline-none resize-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"></textarea></div>
+          <input
+            type="text"
+            id="nota-titulo"
+            placeholder="Título (opcional)"
+            class="block w-full rounded-xl p-3 mb-3 text-sm font-semibold focus:outline-none"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              color: var(--text);
+            "
+          />
+          <div id="nota-section-texto">
+            <textarea
+              id="nota-texto"
+              placeholder="Escribe tu nota…"
+              rows="5"
+              class="block w-full rounded-xl p-3 mb-3 text-sm focus:outline-none resize-none"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: var(--text);
+              "
+            ></textarea>
+          </div>
           <div id="nota-section-lista" class="hidden">
             <div id="nota-items-list" class="mb-2"></div>
-            <button type="button" onclick="addNotaItemRow()" class="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-xl mb-3" style="color:var(--text2);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)"><i data-lucide="plus" style="width:13px;height:13px"></i> Agregar elemento</button>
+            <button
+              type="button"
+              onclick="addNotaItemRow()"
+              class="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-xl mb-3"
+              style="
+                color: var(--text2);
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+              "
+            >
+              <i data-lucide="plus" style="width: 13px; height: 13px"></i>
+              Agregar elemento
+            </button>
           </div>
           <div id="nota-section-link" class="hidden">
-            <input type="url" id="nota-url" placeholder="https://…" oninput="previewNotaLink(this.value)" class="block w-full rounded-xl p-3 mb-2 text-sm focus:outline-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"/>
+            <input
+              type="url"
+              id="nota-url"
+              placeholder="https://…"
+              oninput="previewNotaLink(this.value)"
+              class="block w-full rounded-xl p-3 mb-2 text-sm focus:outline-none"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: var(--text);
+              "
+            />
             <div id="nota-link-preview"></div>
           </div>
           <div class="mb-5">
-            <p class="text-xs font-semibold uppercase tracking-wide mb-2" style="color:var(--text3)">Color</p>
+            <p
+              class="text-xs font-semibold uppercase tracking-wide mb-2"
+              style="color: var(--text3)"
+            >
+              Color
+            </p>
             <div id="nota-color-picker" class="flex gap-2.5 flex-wrap"></div>
           </div>
           <div class="flex gap-2">
-            <button id="btn-borrar-nota" type="button" onclick="borrarNota()" class="hidden py-2.5 px-3 rounded-xl text-sm font-semibold flex items-center gap-1" style="background:rgba(255,77,106,0.12);color:var(--red);border:1px solid rgba(255,77,106,0.25)"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>
-            <button type="button" onclick="cerrarModalNota()" class="flex-1 py-2.5 rounded-xl text-sm font-semibold" style="border:2px solid rgba(255,255,255,0.1);color:var(--text2)">Cancelar</button>
-            <button type="button" onclick="guardarNota()" class="flex-1 py-2.5 rounded-xl text-sm font-bold" style="background:linear-gradient(135deg,#B8904D,#D4A85E);color:#1a0f00">Guardar</button>
+            <button
+              id="btn-borrar-nota"
+              type="button"
+              onclick="borrarNota()"
+              class="hidden py-2.5 px-3 rounded-xl text-sm font-semibold flex items-center gap-1"
+              style="
+                background: rgba(255, 77, 106, 0.12);
+                color: var(--red);
+                border: 1px solid rgba(255, 77, 106, 0.25);
+              "
+            >
+              <i data-lucide="trash-2" style="width: 13px; height: 13px"></i>
+            </button>
+            <button
+              type="button"
+              onclick="cerrarModalNota()"
+              class="flex-1 py-2.5 rounded-xl text-sm font-semibold"
+              style="
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                color: var(--text2);
+              "
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              onclick="guardarNota()"
+              class="flex-1 py-2.5 rounded-xl text-sm font-bold"
+              style="
+                background: linear-gradient(135deg, #b8904d, #d4a85e);
+                color: #1a0f00;
+              "
+            >
+              Guardar
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div id="retiro-overlay" onclick="cerrarRetiroModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:55;align-items:flex-end;backdrop-filter:blur(4px)">
-      <div onclick="event.stopPropagation()" style="background:#0c1628;border:1px solid rgba(255,255,255,0.1);border-top:1px solid rgba(255,255,255,0.14);border-radius:20px 20px 0 0;padding:20px;width:100%;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))">
-        <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
-        <p id="retiro-nombre" style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px">Frank</p>
-        <p style="font-size:0.75rem;color:var(--text2);margin-bottom:14px">Profit disponible: <span id="retiro-disponible" style="color:var(--accent-bright);font-weight:700">$0</span></p>
-        <label style="font-size:0.67rem;color:var(--text2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:600">Monto a retirar (COP)</label>
-        <input type="text" id="retiro-input" inputmode="numeric" placeholder="Ej. 1.000.000" oninput="formatMontoInput(this)" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px;color:var(--text);font-size:1.1rem;font-weight:600;box-sizing:border-box;margin-bottom:12px"/>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
-          <button onclick="setRetiroTodo()" style="background:rgba(184,144,77,0.15);border:1px solid rgba(184,144,77,0.35);color:var(--accent-bright);font-weight:700;font-size:0.875rem;padding:13px;border-radius:12px">Retirar todo</button>
-          <button onclick="confirmarRetiro()" style="background:linear-gradient(135deg,#B8904D,#D4A85E);color:#1a0f00;font-weight:800;font-size:0.875rem;padding:13px;border-radius:12px">Confirmar</button>
+    <div
+      id="retiro-overlay"
+      onclick="cerrarRetiroModal()"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        z-index: 55;
+        align-items: flex-end;
+        backdrop-filter: blur(4px);
+      "
+    >
+      <div
+        onclick="event.stopPropagation()"
+        style="
+          background: #0c1628;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-top: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 20px 20px 0 0;
+          padding: 20px;
+          width: 100%;
+          padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        "
+      >
+        <div
+          style="
+            width: 36px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            margin: 0 auto 16px;
+          "
+        ></div>
+        <p
+          id="retiro-nombre"
+          style="
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+          "
+        >
+          Frank
+        </p>
+        <p style="font-size: 0.75rem; color: var(--text2); margin-bottom: 14px">
+          Profit disponible:
+          <span
+            id="retiro-disponible"
+            style="color: var(--accent-bright); font-weight: 700"
+            >$0</span
+          >
+        </p>
+        <label
+          style="
+            font-size: 0.67rem;
+            color: var(--text2);
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+          "
+          >Monto a retirar (COP)</label
+        >
+        <input
+          type="text"
+          id="retiro-input"
+          inputmode="numeric"
+          placeholder="Ej. 1.000.000"
+          oninput="formatMontoInput(this)"
+          style="
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 14px;
+            color: var(--text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+          "
+        />
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+          "
+        >
+          <button
+            onclick="setRetiroTodo()"
+            style="
+              background: rgba(184, 144, 77, 0.15);
+              border: 1px solid rgba(184, 144, 77, 0.35);
+              color: var(--accent-bright);
+              font-weight: 700;
+              font-size: 0.875rem;
+              padding: 13px;
+              border-radius: 12px;
+            "
+          >
+            Retirar todo
+          </button>
+          <button
+            onclick="confirmarRetiro()"
+            style="
+              background: linear-gradient(135deg, #b8904d, #d4a85e);
+              color: #1a0f00;
+              font-weight: 800;
+              font-size: 0.875rem;
+              padding: 13px;
+              border-radius: 12px;
+            "
+          >
+            Confirmar
+          </button>
         </div>
-        <button onclick="cerrarRetiroModal()" style="width:100%;padding:10px;background:transparent;border:none;color:var(--text2);font-size:0.82rem">Cancelar</button>
+        <button
+          onclick="cerrarRetiroModal()"
+          style="
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            color: var(--text2);
+            font-size: 0.82rem;
+          "
+        >
+          Cancelar
+        </button>
       </div>
     </div>
 
@@ -2189,12 +3101,14 @@
       function showTab(tab) {
         closeMasDrawer();
         currentTab = tab;
-        ["resumen", "movimientos", "estadisticas", "nuevo", "notas"].forEach((t) => {
-          const panel = document.getElementById("panel-" + t);
-          if (panel) panel.classList.toggle("hidden", t !== tab);
-          const topBtn = document.getElementById("tab-" + t);
-          if (topBtn) topBtn.classList.toggle("active", t === tab);
-        });
+        ["resumen", "movimientos", "estadisticas", "nuevo", "notas"].forEach(
+          (t) => {
+            const panel = document.getElementById("panel-" + t);
+            if (panel) panel.classList.toggle("hidden", t !== tab);
+            const topBtn = document.getElementById("tab-" + t);
+            if (topBtn) topBtn.classList.toggle("active", t === tab);
+          },
+        );
         // Update bottom nav active states
         ["resumen", "movimientos", "estadisticas"].forEach((t) => {
           const navBtn = document.getElementById("nav-" + t);
@@ -2205,7 +3119,10 @@
         if (navFab) navFab.style.opacity = tab === "nuevo" ? "0.6" : "1";
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
-        if (tab === "notas") { initNotasIfNeeded(); renderNotas(); }
+        if (tab === "notas") {
+          initNotasIfNeeded();
+          renderNotas();
+        }
         lucide.createIcons();
         window.scrollTo({ top: 0, behavior: "instant" });
       }
@@ -2613,8 +3530,10 @@
       // ── Ver más ───────────────────────────────────────────
       let verMasAbierto = false;
       let mostrarTodasCerradas = false;
-      let _lastFrankProfit = 0, _lastCristProfit = 0;
-      let _retiroNombre = "", _retirosDisponible = 0;
+      let _lastFrankProfit = 0,
+        _lastCristProfit = 0;
+      let _retiroNombre = "",
+        _retirosDisponible = 0;
       function toggleVerMas() {
         verMasAbierto = !verMasAbierto;
         document.getElementById("ver-mas-texto").textContent = verMasAbierto
@@ -3156,7 +4075,12 @@
       function renderPubWidget() {
         const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
         const total = transactions
-          .filter(t => t.tipo === "gasto" && t.categoria === "Publicidad" && (t.fecha || "").startsWith(prefix))
+          .filter(
+            (t) =>
+              t.tipo === "gasto" &&
+              t.categoria === "Publicidad" &&
+              (t.fecha || "").startsWith(prefix),
+          )
           .reduce((s, t) => s + t.monto, 0);
         const totEl = document.getElementById("pub-total-mes");
         const lblEl = document.getElementById("pub-periodo-label");
@@ -3250,30 +4174,48 @@
       }
 
       function renderCuentas() {
-        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let frankTotal = 0, cristTotal = 0;
-        let frankRetiroProfit = 0, cristRetiroProfit = 0;
-        const transRango = transactions
-          .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; });
-        transRango
-          .forEach(t => {
-            const r = (t.receptor || "").trim().toLowerCase();
-            const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-            if (r === "frank") {
-              frankTotal += delta;
-              if (t.tipo === "gasto" && t.categoria === "Retiro de Profit") frankRetiroProfit += (t.monto || 0);
-            } else if (r === "cristian") {
-              cristTotal += delta;
-              if (t.tipo === "gasto" && t.categoria === "Retiro de Profit") cristRetiroProfit += (t.monto || 0);
-            }
-          });
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
+          .toISOString()
+          .split("T")[0];
+        let frankTotal = 0,
+          cristTotal = 0;
+        let frankRetiroProfit = 0,
+          cristRetiroProfit = 0;
+        const transRango = transactions.filter((t) => {
+          const f = t.fecha || "";
+          return f >= CUENTAS_DESDE && f <= lastDay;
+        });
+        transRango.forEach((t) => {
+          const r = (t.receptor || "").trim().toLowerCase();
+          const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+          if (r === "frank") {
+            frankTotal += delta;
+            if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
+              frankRetiroProfit += t.monto || 0;
+          } else if (r === "cristian") {
+            cristTotal += delta;
+            if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
+              cristRetiroProfit += t.monto || 0;
+          }
+        });
         // Profit base igual para ambos = (ingresos - gastos operativos) / 2
         // y los gastos personales se reflejan en menor capital de trabajo.
         const totalIngresos = transRango
-          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
+          .filter(
+            (t) =>
+              t.tipo === "ingreso" &&
+              t.categoria !== TRANSFER_CAT &&
+              t.categoria !== CAPITAL_INGRESO_CAT,
+          )
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = transRango
-          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
+          .filter(
+            (t) =>
+              t.tipo === "gasto" &&
+              t.categoria !== TRANSFER_CAT &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
+              t.categoria !== "Retiro de Profit",
+          )
           .reduce((s, t) => s + t.monto, 0);
         const capitalActivo = calcCapitalActivo();
         const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
@@ -3305,47 +4247,88 @@
           void el.offsetWidth;
           el.classList.add("num-flash");
         };
-        setEl("cuenta-frank-val", frankTotal, frankTotal >= 0 ? "var(--green)" : "var(--red)");
-        setEl("cuenta-cristian-val", cristTotal, cristTotal >= 0 ? "var(--green)" : "var(--red)");
-        setEl("cuenta-frank-capital", frankCapital, frankCapital >= 0 ? "var(--blue)" : "var(--red)");
-        setEl("cuenta-cristian-capital", cristCapital, cristCapital >= 0 ? "var(--blue)" : "var(--red)");
-        setEl("cuenta-frank-profit", frankProfit, frankProfit > 0 ? "var(--accent-bright)" : "var(--text2)");
-        setEl("cuenta-cristian-profit", cristProfit, cristProfit > 0 ? "var(--accent-bright)" : "var(--text2)");
+        setEl(
+          "cuenta-frank-val",
+          frankTotal,
+          frankTotal >= 0 ? "var(--green)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-cristian-val",
+          cristTotal,
+          cristTotal >= 0 ? "var(--green)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-frank-capital",
+          frankCapital,
+          frankCapital >= 0 ? "var(--blue)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-cristian-capital",
+          cristCapital,
+          cristCapital >= 0 ? "var(--blue)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-frank-profit",
+          frankProfit,
+          frankProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
+        );
+        setEl(
+          "cuenta-cristian-profit",
+          cristProfit,
+          cristProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
+        );
         const btnRF = document.getElementById("btn-retiro-frank");
         const btnRC = document.getElementById("btn-retiro-cristian");
         if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
         if (btnRC) btnRC.style.display = cristProfit > 100 ? "" : "none";
-        const esMesActual = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        const esMesActual =
+          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         const lEl = document.getElementById("cuentas-mes-label");
-        if (lEl) lEl.textContent = esMesActual ? "Acumulado" : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
+        if (lEl)
+          lEl.textContent = esMesActual
+            ? "Acumulado"
+            : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
         const diff = frankTotal - cristTotal;
         const amount = Math.abs(diff) / 2;
         const sEl = document.getElementById("settlement-text");
         const btnEq = document.getElementById("btn-equilibrar");
         if (sEl) {
           if (Math.abs(diff) < 500) {
-            sEl.innerHTML = '<span style="color:var(--green);font-size:0.8rem">✓ Cuentas equilibradas</span>';
+            sEl.innerHTML =
+              '<span style="color:var(--green);font-size:0.8rem">✓ Cuentas equilibradas</span>';
             if (btnEq) btnEq.style.display = "none";
           } else {
             const nameFrom = diff > 0 ? "Frank" : "Cristian";
-            const nameTo   = diff > 0 ? "Cristian" : "Frank";
+            const nameTo = diff > 0 ? "Cristian" : "Frank";
             sEl.innerHTML = `<div style="font-size:1.1rem;font-weight:800;color:var(--accent-bright)">${fmt(amount)}</div><div style="font-size:0.72rem;color:var(--text2)">${nameFrom} transfiere a ${nameTo}</div>`;
-            if (btnEq) { btnEq.style.display = ""; btnEq.dataset.from = nameFrom; btnEq.dataset.to = nameTo; btnEq.dataset.amount = Math.round(amount); }
+            if (btnEq) {
+              btnEq.style.display = "";
+              btnEq.dataset.from = nameFrom;
+              btnEq.dataset.to = nameTo;
+              btnEq.dataset.amount = Math.round(amount);
+            }
           }
         }
       }
 
       async function retirarProfitSocio(nombre) {
-        const disponible = Math.round(nombre === "Frank" ? _lastFrankProfit : _lastCristProfit);
-        if (disponible <= 0) { showToast("No hay profit disponible para " + nombre, "info"); return; }
+        const disponible = Math.round(
+          nombre === "Frank" ? _lastFrankProfit : _lastCristProfit,
+        );
+        if (disponible <= 0) {
+          showToast("No hay profit disponible para " + nombre, "info");
+          return;
+        }
         abrirRetiroModal(nombre, disponible);
       }
 
       function abrirRetiroModal(nombre, disponible) {
         _retiroNombre = nombre;
         _retirosDisponible = disponible;
-        document.getElementById("retiro-nombre").textContent = "Retiro de Profit · " + nombre;
-        document.getElementById("retiro-disponible").textContent = fmt(disponible);
+        document.getElementById("retiro-nombre").textContent =
+          "Retiro de Profit · " + nombre;
+        document.getElementById("retiro-disponible").textContent =
+          fmt(disponible);
         document.getElementById("retiro-input").value = "";
         const overlay = document.getElementById("retiro-overlay");
         overlay.style.display = "flex";
@@ -3358,72 +4341,153 @@
 
       function setRetiroTodo() {
         const el = document.getElementById("retiro-input");
-        if (el) { el.value = _retirosDisponible ? parseInt(_retirosDisponible, 10).toLocaleString("es-CO") : ""; }
+        if (el) {
+          el.value = _retirosDisponible
+            ? parseInt(_retirosDisponible, 10).toLocaleString("es-CO")
+            : "";
+        }
       }
 
       async function confirmarRetiro() {
-        const raw = (document.getElementById("retiro-input").value || "").replace(/\D/g, "");
+        const raw = (
+          document.getElementById("retiro-input").value || ""
+        ).replace(/\D/g, "");
         const monto = raw ? parseInt(raw, 10) : 0;
-        if (!monto || monto <= 0) { showToast("Ingresa un monto válido", "info"); return; }
-        if (monto > _retirosDisponible + 500) { showToast("Supera el profit disponible (" + fmt(_retirosDisponible) + ")", "delete"); return; }
+        if (!monto || monto <= 0) {
+          showToast("Ingresa un monto válido", "info");
+          return;
+        }
+        if (monto > _retirosDisponible + 500) {
+          showToast(
+            "Supera el profit disponible (" + fmt(_retirosDisponible) + ")",
+            "delete",
+          );
+          return;
+        }
         cerrarRetiroModal();
         try {
           await db.collection("transacciones").add({
-            tipo: "gasto", categoria: "Retiro de Profit", monto,
-            receptor: _retiroNombre, descripcion: "Retiro de Profit " + _retiroNombre,
-            fecha: todayStr, hora: new Date().toTimeString().slice(0,5), medio: "Efectivo", proyecto: ""
+            tipo: "gasto",
+            categoria: "Retiro de Profit",
+            monto,
+            receptor: _retiroNombre,
+            descripcion: "Retiro de Profit " + _retiroNombre,
+            fecha: todayStr,
+            hora: new Date().toTimeString().slice(0, 5),
+            medio: "Efectivo",
+            proyecto: "",
           });
           showToast("Retiro de profit (" + _retiroNombre + ") registrado ✓");
-        } catch(e) { showToast("Error al registrar", "delete"); }
+        } catch (e) {
+          showToast("Error al registrar", "delete");
+        }
       }
 
       async function equilibrarCuentas() {
         const btn = document.getElementById("btn-equilibrar");
         if (!btn) return;
         const nameFrom = btn.dataset.from;
-        const nameTo   = btn.dataset.to;
-        const amount   = parseInt(btn.dataset.amount, 10);
+        const nameTo = btn.dataset.to;
+        const amount = parseInt(btn.dataset.amount, 10);
         if (!nameFrom || !nameTo || !amount || amount < 1) return;
-        if (!confirm("Registrar transferencia de " + fmt(amount) + " de " + nameFrom + " a " + nameTo + "?")) return;
+        if (
+          !confirm(
+            "Registrar transferencia de " +
+              fmt(amount) +
+              " de " +
+              nameFrom +
+              " a " +
+              nameTo +
+              "?",
+          )
+        )
+          return;
         const desc = "Equilibrio: " + nameFrom + " → " + nameTo;
         try {
           const batch = db.batch();
-          batch.set(db.collection("transacciones").doc(), { tipo:"gasto",   categoria:TRANSFER_CAT, monto:amount, receptor:nameFrom, descripcion:desc, fecha:todayStr, hora:new Date().toTimeString().slice(0,5), medio:"Transferencia", proyecto:"" });
-          batch.set(db.collection("transacciones").doc(), { tipo:"ingreso", categoria:TRANSFER_CAT, monto:amount, receptor:nameTo,   descripcion:desc, fecha:todayStr, hora:new Date().toTimeString().slice(0,5), medio:"Transferencia", proyecto:"" });
+          batch.set(db.collection("transacciones").doc(), {
+            tipo: "gasto",
+            categoria: TRANSFER_CAT,
+            monto: amount,
+            receptor: nameFrom,
+            descripcion: desc,
+            fecha: todayStr,
+            hora: new Date().toTimeString().slice(0, 5),
+            medio: "Transferencia",
+            proyecto: "",
+          });
+          batch.set(db.collection("transacciones").doc(), {
+            tipo: "ingreso",
+            categoria: TRANSFER_CAT,
+            monto: amount,
+            receptor: nameTo,
+            descripcion: desc,
+            fecha: todayStr,
+            hora: new Date().toTimeString().slice(0, 5),
+            medio: "Transferencia",
+            proyecto: "",
+          });
           await batch.commit();
-          showToast("Cuentas equilibradas: " + nameFrom + " → " + nameTo + " ✓");
-        } catch(e) { showToast("Error al registrar", "delete"); }
+          showToast(
+            "Cuentas equilibradas: " + nameFrom + " → " + nameTo + " ✓",
+          );
+        } catch (e) {
+          showToast("Error al registrar", "delete");
+        }
       }
 
       function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        const lastDay = corteFecha || new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
-        const proyectosCerradosSet = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
+        const lastDay =
+          corteFecha ||
+          new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const noProjL = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
+        const proyectosCerradosSet = new Set(
+          Object.keys(proyectosEstado).filter(
+            (k) => proyectosEstado[k] && !noProjL.has(k.toLowerCase()),
+          ),
+        );
         return transactions
-          .filter(t => {
+          .filter((t) => {
             const f = t.fecha || "";
             if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
             if (!t.proyecto) return false;
             const pn = t.proyecto.trim().toLowerCase();
             if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
             if (proyectosCerradosSet.has(t.proyecto)) return false;
-            if (t.categoria === TRANSFER_CAT || t.categoria === CAPITAL_INGRESO_CAT || CAPITAL_GASTO_CATS.includes(t.categoria)) return false;
+            if (
+              t.categoria === TRANSFER_CAT ||
+              t.categoria === CAPITAL_INGRESO_CAT ||
+              CAPITAL_GASTO_CATS.includes(t.categoria)
+            )
+              return false;
             return true;
           })
           .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
       }
 
       function renderGlobalKPIs() {
-        const transGlobal = transactions
-          .filter((t) => {
-            const f = t.fecha || "";
-            return f && f <= todayStr;
-          });
+        const transGlobal = transactions.filter((t) => {
+          const f = t.fecha || "";
+          return f && f <= todayStr;
+        });
         const totalIngresos = transGlobal
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = transGlobal
-          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
+          .filter(
+            (t) =>
+              t.tipo === "gasto" &&
+              t.categoria !== TRANSFER_CAT &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
+              t.categoria !== "Retiro de Profit",
+          )
           .reduce((s, t) => s + t.monto, 0);
         // Profit global realizado = ingresos operativos acumulados - gastos operativos acumulados - capital activo actual.
         const capitalActivo = calcCapitalActivo(todayStr, "");
@@ -3431,10 +4495,16 @@
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
-        document.getElementById("g-profit").style.color = profitTotal >= 0 ? "#D4A85E" : "#f87171";
+        document.getElementById("g-profit").style.color =
+          profitTotal >= 0 ? "#D4A85E" : "#f87171";
         const gm = document.getElementById("g-margen");
-        if (gm) { gm.textContent = fmt(capitalActivo); gm.style.color = capitalActivo >= 0 ? "#38BDF8" : "#f87171"; }
-        ["g-ingresos","g-gastos","g-profit","g-margen"].forEach(id => flashEl(id));
+        if (gm) {
+          gm.textContent = fmt(capitalActivo);
+          gm.style.color = capitalActivo >= 0 ? "#38BDF8" : "#f87171";
+        }
+        ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
+          flashEl(id),
+        );
       }
 
       function renderKPIs(mes) {
@@ -3503,12 +4573,24 @@
         const capitalAcKpi = calcCapitalActivo();
         const totalKpi = _frankD + _cristianD;
         const profitKpi = _lastFrankProfit + _lastCristProfit;
-        if (saldoEl) { saldoEl.textContent = fmt(totalKpi); saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)"; }
+        if (saldoEl) {
+          saldoEl.textContent = fmt(totalKpi);
+          saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)";
+        }
         const capEl = document.getElementById("kpi-saldo-capital");
-        if (capEl) { capEl.textContent = fmt(capitalAcKpi); capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)"; }
+        if (capEl) {
+          capEl.textContent = fmt(capitalAcKpi);
+          capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)";
+        }
         const profEl = document.getElementById("kpi-saldo-profit");
-        if (profEl) { profEl.textContent = fmt(profitKpi); profEl.style.color = profitKpi >= 0 ? "var(--accent-bright)" : "var(--red)"; }
-        ["kpi-saldo","kpi-saldo-capital","kpi-saldo-profit"].forEach(id => flashEl(id));
+        if (profEl) {
+          profEl.textContent = fmt(profitKpi);
+          profEl.style.color =
+            profitKpi >= 0 ? "var(--accent-bright)" : "var(--red)";
+        }
+        ["kpi-saldo", "kpi-saldo-capital", "kpi-saldo-profit"].forEach((id) =>
+          flashEl(id),
+        );
       }
 
       function renderResumen(mes) {
@@ -3735,8 +4817,7 @@
             ? `Profit mensual · ${mesSel.y}`
             : "Flujo semanal del mes";
         if (lbl4) lbl4.textContent = `Medios de pago · ${periodoLabel}`;
-        if (lblTop)
-          lblTop.textContent = "Top proyectos por profit · acumulado";
+        if (lblTop) lblTop.textContent = "Top proyectos por profit · acumulado";
         const catLbl = document.getElementById("chart-cat-mes-label");
         if (catLbl) catLbl.textContent = periodoLabel;
 
@@ -4078,7 +5159,14 @@
         }
 
         // Top proyectos por profit (progress bars) — totales acumulados
-        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const _noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
         const projMap = {};
         transactions.forEach((t) => {
           if (!t.proyecto) return;
@@ -4087,7 +5175,8 @@
           if (t.categoria === TRANSFER_CAT) return;
           if (t.categoria === CAPITAL_INGRESO_CAT) return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
-          if (!projMap[t.proyecto]) projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
+          if (!projMap[t.proyecto])
+            projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
           else projMap[t.proyecto].gastos += t.monto;
         });
@@ -4133,17 +5222,24 @@
       async function toggleProyectoCerrado(nombre) {
         // Animate the card out before re-rendering
         let card = null;
-        document.querySelectorAll(".proj-card").forEach(el => { if (el.dataset.proyecto === nombre) card = el; });
+        document.querySelectorAll(".proj-card").forEach((el) => {
+          if (el.dataset.proyecto === nombre) card = el;
+        });
         if (card) {
           card.style.transition = "opacity 0.22s ease, transform 0.22s ease";
           card.style.opacity = "0";
           card.style.transform = "scale(0.93) translateX(22px)";
-          await new Promise(r => setTimeout(r, 230));
+          await new Promise((r) => setTimeout(r, 230));
         }
         proyectosEstado[nombre] = !proyectosEstado[nombre];
         try {
-          await db.collection("config").doc("proyectos_estado").set(proyectosEstado);
-        } catch(e) { console.error("Error guardando estado de proyecto:", e); }
+          await db
+            .collection("config")
+            .doc("proyectos_estado")
+            .set(proyectosEstado);
+        } catch (e) {
+          console.error("Error guardando estado de proyecto:", e);
+        }
         renderProyectos();
       }
 
@@ -4213,48 +5309,78 @@
       }
 
       function renderProfitMes() {
-        const noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
-        const isNonProject = n => { const nl = (n || '').trim().toLowerCase(); return !nl || noProj.has(nl) || nl.startsWith('publicidad'); };
+        const noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
+        const isNonProject = (n) => {
+          const nl = (n || "").trim().toLowerCase();
+          return !nl || noProj.has(nl) || nl.startsWith("publicidad");
+        };
         const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
         // Proyectos que recibieron Saldo Final este mes
         const conSaldoFinal = new Set(
-          transactions.filter(t =>
-            t.categoria === "Saldo Final" &&
-            (t.fecha || "").startsWith(prefix) &&
-            t.proyecto && !isNonProject(t.proyecto)
-          ).map(t => t.proyecto)
+          transactions
+            .filter(
+              (t) =>
+                t.categoria === "Saldo Final" &&
+                (t.fecha || "").startsWith(prefix) &&
+                t.proyecto &&
+                !isNonProject(t.proyecto),
+            )
+            .map((t) => t.proyecto),
         );
         const section = document.getElementById("profit-mes-section");
-        const list    = document.getElementById("profit-mes-list");
+        const list = document.getElementById("profit-mes-list");
         const totalEl = document.getElementById("profit-mes-total");
-        const perEl   = document.getElementById("profit-mes-periodo");
+        const perEl = document.getElementById("profit-mes-periodo");
         if (!section || !list) return;
-        if (conSaldoFinal.size === 0) { section.style.display = "none"; return; }
+        if (conSaldoFinal.size === 0) {
+          section.style.display = "none";
+          return;
+        }
         section.style.display = "";
         if (perEl) perEl.textContent = "· " + MESES[mesSel.m] + " " + mesSel.y;
         const proyectos = [];
-        conSaldoFinal.forEach(nombre => {
-          const txP = transactions.filter(t =>
-            t.proyecto === nombre &&
-            t.categoria !== TRANSFER_CAT &&
-            t.categoria !== CAPITAL_INGRESO_CAT &&
-            !CAPITAL_GASTO_CATS.includes(t.categoria)
+        conSaldoFinal.forEach((nombre) => {
+          const txP = transactions.filter(
+            (t) =>
+              t.proyecto === nombre &&
+              t.categoria !== TRANSFER_CAT &&
+              t.categoria !== CAPITAL_INGRESO_CAT &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria),
           );
-          const ingresos = txP.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
-          const gastos   = txP.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
+          const ingresos = txP
+            .filter((t) => t.tipo === "ingreso")
+            .reduce((s, t) => s + t.monto, 0);
+          const gastos = txP
+            .filter((t) => t.tipo === "gasto")
+            .reduce((s, t) => s + t.monto, 0);
           const net = ingresos - gastos;
           proyectos.push({ nombre, ingresos, gastos, net });
         });
         proyectos.sort((a, b) => b.net - a.net);
         const totalProfit = proyectos.reduce((s, p) => s + p.net, 0);
-        if (totalEl) { totalEl.textContent = fmt(totalProfit); totalEl.style.color = totalProfit >= 0 ? "var(--green)" : "var(--red)"; }
+        if (totalEl) {
+          totalEl.textContent = fmt(totalProfit);
+          totalEl.style.color =
+            totalProfit >= 0 ? "var(--green)" : "var(--red)";
+        }
         list.innerHTML = "";
-        proyectos.forEach(p => {
+        proyectos.forEach((p) => {
           const netColor = p.net >= 0 ? "var(--green)" : "var(--red)";
-          const margen   = p.ingresos > 0 ? ((p.net / p.ingresos) * 100).toFixed(0) + "%" : "--";
+          const margen =
+            p.ingresos > 0
+              ? ((p.net / p.ingresos) * 100).toFixed(0) + "%"
+              : "--";
           const div = document.createElement("div");
           div.className = "rounded-xl p-3 transition";
-          div.style.cssText = "background:rgba(34,214,138,0.06);border:1px solid rgba(34,214,138,0.2);cursor:pointer";
+          div.style.cssText =
+            "background:rgba(34,214,138,0.06);border:1px solid rgba(34,214,138,0.2);cursor:pointer";
           div.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
   <span style="font-size:0.875rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%">${escapeHtml(p.nombre)}</span>
   <span class="sv" style="font-size:0.875rem;font-weight:800;color:${netColor};flex-shrink:0">${fmt(p.net)}</span>
@@ -4270,7 +5396,14 @@
       }
 
       function renderProyectos() {
-        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const _noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
         const projMap = {};
         transactions.forEach((t) => {
           if (!t.proyecto) return;
@@ -4341,7 +5474,7 @@
           list.appendChild(h);
           activos.forEach((p, i) => {
             const card = crearTarjetaProyecto(p);
-            card.style.animationDelay = (i * 0.06) + "s";
+            card.style.animationDelay = i * 0.06 + "s";
             list.appendChild(card);
           });
         }
@@ -4354,24 +5487,38 @@
           list.appendChild(h2);
           // Sort by most recent transaction date
           const lastFechaMap = {};
-          transactions.forEach(t => {
+          transactions.forEach((t) => {
             if (!t.proyecto || !t.fecha) return;
-            if (!lastFechaMap[t.proyecto] || t.fecha > lastFechaMap[t.proyecto]) lastFechaMap[t.proyecto] = t.fecha;
+            if (!lastFechaMap[t.proyecto] || t.fecha > lastFechaMap[t.proyecto])
+              lastFechaMap[t.proyecto] = t.fecha;
           });
-          cerrados.sort((a, b) => (lastFechaMap[b.nombre]||"").localeCompare(lastFechaMap[a.nombre]||""));
+          cerrados.sort((a, b) =>
+            (lastFechaMap[b.nombre] || "").localeCompare(
+              lastFechaMap[a.nombre] || "",
+            ),
+          );
           const MAX_C = 4;
-          const visibleC = mostrarTodasCerradas ? cerrados : cerrados.slice(0, MAX_C);
+          const visibleC = mostrarTodasCerradas
+            ? cerrados
+            : cerrados.slice(0, MAX_C);
           visibleC.forEach((p, i) => {
             const card = crearTarjetaProyecto(p);
-            card.style.animationDelay = ((activos.length + i + 1) * 0.06) + "s";
+            card.style.animationDelay = (activos.length + i + 1) * 0.06 + "s";
             list.appendChild(card);
           });
           if (cerrados.length > MAX_C) {
             const btnM = document.createElement("button");
-            btnM.className = "w-full text-xs font-semibold py-2 rounded-xl mt-2 transition";
-            btnM.style.cssText = "background:rgba(184,144,77,0.1);border:1px solid rgba(184,144,77,0.25);color:var(--accent)";
-            btnM.textContent = mostrarTodasCerradas ? "Ver menos" : "Ver " + (cerrados.length - MAX_C) + " más";
-            btnM.addEventListener("click", () => { mostrarTodasCerradas = !mostrarTodasCerradas; renderProyectos(); });
+            btnM.className =
+              "w-full text-xs font-semibold py-2 rounded-xl mt-2 transition";
+            btnM.style.cssText =
+              "background:rgba(184,144,77,0.1);border:1px solid rgba(184,144,77,0.25);color:var(--accent)";
+            btnM.textContent = mostrarTodasCerradas
+              ? "Ver menos"
+              : "Ver " + (cerrados.length - MAX_C) + " más";
+            btnM.addEventListener("click", () => {
+              mostrarTodasCerradas = !mostrarTodasCerradas;
+              renderProyectos();
+            });
             list.appendChild(btnM);
           }
         }
@@ -4580,17 +5727,34 @@
       lucide.createIcons();
 
       // ── Notas ─────────────────────────────────────────────────────
-      let _notas = [], _notasInitialized = false;
-      const NOTA_COLORS = ["#B8904D","#22D68A","#38BDF8","#FF4D6A","#A78BFA","#F97316","#EC4899","#EEF2FF"];
-      let _notaEditandoId = null, _notaColor = NOTA_COLORS[0], _notaTipo = "nota";
+      let _notas = [],
+        _notasInitialized = false;
+      const NOTA_COLORS = [
+        "#B8904D",
+        "#22D68A",
+        "#38BDF8",
+        "#FF4D6A",
+        "#A78BFA",
+        "#F97316",
+        "#EC4899",
+        "#EEF2FF",
+      ];
+      let _notaEditandoId = null,
+        _notaColor = NOTA_COLORS[0],
+        _notaTipo = "nota";
 
       function initNotasIfNeeded() {
         if (_notasInitialized || !db) return;
         _notasInitialized = true;
-        db.collection("notas_cbd").orderBy("creadoEn","desc").onSnapshot(snap => {
-          _notas = snap.docs.map(d => ({id:d.id,...d.data()}));
-          if (currentTab === "notas") renderNotas();
-        }, err => console.error("notas:", err));
+        db.collection("notas_cbd")
+          .orderBy("creadoEn", "desc")
+          .onSnapshot(
+            (snap) => {
+              _notas = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+              if (currentTab === "notas") renderNotas();
+            },
+            (err) => console.error("notas:", err),
+          );
       }
 
       function renderNotas() {
@@ -4598,56 +5762,81 @@
         if (!c) return;
         if (_notas.length === 0) {
           c.innerHTML = `<button class="nota-add-btn" onclick="abrirModalNota()" style="grid-column:span 2;min-height:150px"><i data-lucide="plus" style="width:28px;height:28px;opacity:0.3"></i><span>Crear primera nota</span><span style="font-size:0.62rem;color:var(--text3)">Texto · Lista · Link</span></button>`;
-          lucide.createIcons(); return;
+          lucide.createIcons();
+          return;
         }
-        c.innerHTML = `<button class="nota-add-btn" onclick="abrirModalNota()"><i data-lucide="plus" style="width:20px;height:20px;opacity:0.4"></i><span>Nueva</span></button>` + _notas.map(buildNotaCard).join('');
+        c.innerHTML =
+          `<button class="nota-add-btn" onclick="abrirModalNota()"><i data-lucide="plus" style="width:20px;height:20px;opacity:0.4"></i><span>Nueva</span></button>` +
+          _notas.map(buildNotaCard).join("");
         lucide.createIcons();
       }
 
       function buildNotaCard(nota) {
         const color = nota.color || NOTA_COLORS[0];
         const ts = nota.actualizadoEn || nota.creadoEn;
-        const tsHtml = ts ? `<p style="font-size:0.58rem;color:var(--text3);margin-top:5px">${_fmtNotaTs(ts)}</p>` : "";
+        const tsHtml = ts
+          ? `<p style="font-size:0.58rem;color:var(--text3);margin-top:5px">${_fmtNotaTs(ts)}</p>`
+          : "";
         const bar = `<div class="nota-color-bar" style="background:${color}"></div>`;
-        const header = nota.titulo ? `<p class="nota-title">${escapeHtml(nota.titulo)}</p>` : '<div style="margin-top:5px"></div>';
+        const header = nota.titulo
+          ? `<p class="nota-title">${escapeHtml(nota.titulo)}</p>`
+          : '<div style="margin-top:5px"></div>';
         const click = `onclick="abrirModalNota('${nota.id}')"`;
         if (nota.tipo === "link") {
           const domain = nota.linkDomain || "";
           const title = nota.linkTitle || nota.linkUrl || "";
-          const favicon = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=32` : "";
+          const favicon = domain
+            ? `https://www.google.com/s2/favicons?domain=${domain}&sz=32`
+            : "";
           return `<div class="nota-card" ${click}>${bar}${header}<div class="nota-link-card"><img src="${favicon}" onerror="this.style.display='none'"><div><p class="nota-link-domain">${domain}</p><p class="nota-link-title">${escapeHtml(title)}</p></div></div>${tsHtml}</div>`;
         }
         if (nota.tipo === "lista") {
-          const items = (nota.items||[]).slice(0,6);
-          const itemsHtml = items.map(it => `<div class="nota-item-check ${it.checked?'done':''}"><input type="checkbox" ${it.checked?'checked':''} onclick="_toggleNotaItem('${nota.id}','${it.id}',event)"><span>${escapeHtml(it.texto||'')}</span></div>`).join('');
-          const extra = (nota.items||[]).length > 6 ? `<div style="color:var(--text3);font-size:0.62rem;margin-top:2px">+${nota.items.length-6} más</div>` : '';
+          const items = (nota.items || []).slice(0, 6);
+          const itemsHtml = items
+            .map(
+              (it) =>
+                `<div class="nota-item-check ${it.checked ? "done" : ""}"><input type="checkbox" ${it.checked ? "checked" : ""} onclick="_toggleNotaItem('${nota.id}','${it.id}',event)"><span>${escapeHtml(it.texto || "")}</span></div>`,
+            )
+            .join("");
+          const extra =
+            (nota.items || []).length > 6
+              ? `<div style="color:var(--text3);font-size:0.62rem;margin-top:2px">+${nota.items.length - 6} más</div>`
+              : "";
           return `<div class="nota-card" ${click}>${bar}${header}<div class="nota-body">${itemsHtml}${extra}</div>${tsHtml}</div>`;
         }
-        return `<div class="nota-card" ${click}>${bar}${header}<p class="nota-body">${escapeHtml(nota.texto||'')}</p>${tsHtml}</div>`;
+        return `<div class="nota-card" ${click}>${bar}${header}<p class="nota-body">${escapeHtml(nota.texto || "")}</p>${tsHtml}</div>`;
       }
 
       function _fmtNotaTs(iso) {
-        const d = new Date(iso), now = new Date(), diffMin = Math.floor((now-d)/60000);
+        const d = new Date(iso),
+          now = new Date(),
+          diffMin = Math.floor((now - d) / 60000);
         if (diffMin < 1) return "ahora";
         if (diffMin < 60) return `hace ${diffMin} min`;
-        if (diffMin < 1440) return `hace ${Math.floor(diffMin/60)} h`;
-        const dd = Math.floor(diffMin/1440);
+        if (diffMin < 1440) return `hace ${Math.floor(diffMin / 60)} h`;
+        const dd = Math.floor(diffMin / 1440);
         return dd === 1 ? "ayer" : `hace ${dd} d`;
       }
 
       async function _toggleNotaItem(notaId, itemId, ev) {
         ev.stopPropagation();
-        const nota = _notas.find(n => n.id === notaId);
+        const nota = _notas.find((n) => n.id === notaId);
         if (!nota) return;
-        const items = nota.items.map(i => i.id === itemId ? {...i, checked: !i.checked} : i);
-        await db.collection("notas_cbd").doc(notaId).update({items, actualizadoEn: new Date().toISOString()});
+        const items = nota.items.map((i) =>
+          i.id === itemId ? { ...i, checked: !i.checked } : i,
+        );
+        await db
+          .collection("notas_cbd")
+          .doc(notaId)
+          .update({ items, actualizadoEn: new Date().toISOString() });
       }
 
       function abrirModalNota(notaId = null) {
         const modal = document.getElementById("modal-nota");
         if (!modal) return;
         modal.classList.remove("hidden");
-        _notaEditandoId = null; _notaColor = NOTA_COLORS[0];
+        _notaEditandoId = null;
+        _notaColor = NOTA_COLORS[0];
         document.getElementById("nota-titulo").value = "";
         document.getElementById("nota-texto").value = "";
         document.getElementById("nota-url").value = "";
@@ -4655,16 +5844,21 @@
         document.getElementById("nota-items-list").innerHTML = "";
         document.getElementById("btn-borrar-nota").classList.add("hidden");
         if (notaId) {
-          const nota = _notas.find(n => n.id === notaId);
+          const nota = _notas.find((n) => n.id === notaId);
           if (!nota) return;
-          _notaEditandoId = notaId; _notaColor = nota.color || NOTA_COLORS[0];
+          _notaEditandoId = notaId;
+          _notaColor = nota.color || NOTA_COLORS[0];
           document.getElementById("nota-titulo").value = nota.titulo || "";
           setNotaTipo(nota.tipo || "nota");
-          if (nota.tipo === "lista") (nota.items||[]).forEach(addNotaItemRow);
-          else if (nota.tipo === "link") { document.getElementById("nota-url").value = nota.linkUrl||""; previewNotaLink(nota.linkUrl||""); }
-          else document.getElementById("nota-texto").value = nota.texto || "";
+          if (nota.tipo === "lista") (nota.items || []).forEach(addNotaItemRow);
+          else if (nota.tipo === "link") {
+            document.getElementById("nota-url").value = nota.linkUrl || "";
+            previewNotaLink(nota.linkUrl || "");
+          } else document.getElementById("nota-texto").value = nota.texto || "";
           document.getElementById("btn-borrar-nota").classList.remove("hidden");
-        } else { setNotaTipo("nota"); }
+        } else {
+          setNotaTipo("nota");
+        }
         renderColorPickerNota();
         lucide.createIcons();
       }
@@ -4677,20 +5871,30 @@
 
       function setNotaTipo(tipo) {
         _notaTipo = tipo;
-        document.getElementById("nota-section-texto").classList.toggle("hidden", tipo !== "nota");
-        document.getElementById("nota-section-lista").classList.toggle("hidden", tipo !== "lista");
-        document.getElementById("nota-section-link").classList.toggle("hidden", tipo !== "link");
-        ["nota","lista","link"].forEach(t => {
-          const btn = document.getElementById("btn-tipo-"+t);
+        document
+          .getElementById("nota-section-texto")
+          .classList.toggle("hidden", tipo !== "nota");
+        document
+          .getElementById("nota-section-lista")
+          .classList.toggle("hidden", tipo !== "lista");
+        document
+          .getElementById("nota-section-link")
+          .classList.toggle("hidden", tipo !== "link");
+        ["nota", "lista", "link"].forEach((t) => {
+          const btn = document.getElementById("btn-tipo-" + t);
           if (!btn) return;
-          if (tipo === t) btn.classList.add("active-nota-tipo"); else btn.classList.remove("active-nota-tipo");
+          if (tipo === t) btn.classList.add("active-nota-tipo");
+          else btn.classList.remove("active-nota-tipo");
         });
       }
 
       function renderColorPickerNota() {
         const picker = document.getElementById("nota-color-picker");
         if (!picker) return;
-        picker.innerHTML = NOTA_COLORS.map(c => `<div class="color-dot ${c===_notaColor?'selected':''}" style="background:${c}" onclick="selectNotaColor('${c}')"></div>`).join('');
+        picker.innerHTML = NOTA_COLORS.map(
+          (c) =>
+            `<div class="color-dot ${c === _notaColor ? "selected" : ""}" style="background:${c}" onclick="selectNotaColor('${c}')"></div>`,
+        ).join("");
         const bar = document.getElementById("nota-modal-colorbar");
         if (bar) bar.style.background = _notaColor;
       }
@@ -4701,11 +5905,17 @@
       }
 
       function addNotaItemRow(item = null) {
-        const id = item ? item.id : "item_"+Date.now()+"_"+Math.random().toString(36).substr(2,5);
+        const id = item
+          ? item.id
+          : "item_" +
+            Date.now() +
+            "_" +
+            Math.random().toString(36).substr(2, 5);
         const list = document.getElementById("nota-items-list");
         const div = document.createElement("div");
-        div.className = "nota-check-input"; div.dataset.id = id;
-        div.innerHTML = `<input type="checkbox" ${item&&item.checked?'checked':''}><input type="text" placeholder="Elemento…" value="${item?item.texto.replace(/"/g,'&quot;'):''}"><button type="button" class="del-item" onclick="this.closest('.nota-check-input').remove()"><i data-lucide="x" style="width:12px;height:12px"></i></button>`;
+        div.className = "nota-check-input";
+        div.dataset.id = id;
+        div.innerHTML = `<input type="checkbox" ${item && item.checked ? "checked" : ""}><input type="text" placeholder="Elemento…" value="${item ? item.texto.replace(/"/g, "&quot;") : ""}"><button type="button" class="del-item" onclick="this.closest('.nota-check-input').remove()"><i data-lucide="x" style="width:12px;height:12px"></i></button>`;
         list.appendChild(div);
         lucide.createIcons();
         if (!item) div.querySelector('input[type="text"]').focus();
@@ -4714,35 +5924,74 @@
       async function previewNotaLink(url) {
         const preview = document.getElementById("nota-link-preview");
         if (!preview) return;
-        if (!url || !url.startsWith("http")) { preview.innerHTML = ""; return; }
+        if (!url || !url.startsWith("http")) {
+          preview.innerHTML = "";
+          return;
+        }
         try {
           const domain = new URL(url).hostname;
           const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
           preview.innerHTML = `<div class="nota-link-card"><img src="${favicon}" onerror="this.style.display='none'"><div><p class="nota-link-domain">${domain}</p><p class="nota-link-title">${url}</p></div></div>`;
-        } catch { preview.innerHTML = ""; }
+        } catch {
+          preview.innerHTML = "";
+        }
       }
 
       async function guardarNota() {
-        const titulo = (document.getElementById("nota-titulo").value||"").trim();
-        const data = { titulo, color: _notaColor, tipo: _notaTipo, actualizadoEn: new Date().toISOString() };
+        const titulo = (
+          document.getElementById("nota-titulo").value || ""
+        ).trim();
+        const data = {
+          titulo,
+          color: _notaColor,
+          tipo: _notaTipo,
+          actualizadoEn: new Date().toISOString(),
+        };
         if (_notaTipo === "lista") {
           const items = [];
-          document.querySelectorAll("#nota-items-list .nota-check-input").forEach(row => {
-            const texto = row.querySelector('input[type="text"]').value.trim();
-            if (texto) items.push({id:row.dataset.id, texto, checked:row.querySelector('input[type="checkbox"]').checked});
-          });
-          data.items = items; data.texto = "";
-          if (!titulo && !items.length) { cerrarModalNota(); return; }
+          document
+            .querySelectorAll("#nota-items-list .nota-check-input")
+            .forEach((row) => {
+              const texto = row
+                .querySelector('input[type="text"]')
+                .value.trim();
+              if (texto)
+                items.push({
+                  id: row.dataset.id,
+                  texto,
+                  checked: row.querySelector('input[type="checkbox"]').checked,
+                });
+            });
+          data.items = items;
+          data.texto = "";
+          if (!titulo && !items.length) {
+            cerrarModalNota();
+            return;
+          }
         } else if (_notaTipo === "link") {
-          const url = (document.getElementById("nota-url").value||"").trim();
-          if (!url && !titulo) { cerrarModalNota(); return; }
+          const url = (document.getElementById("nota-url").value || "").trim();
+          if (!url && !titulo) {
+            cerrarModalNota();
+            return;
+          }
           data.linkUrl = url;
-          try { data.linkDomain = new URL(url).hostname; } catch { data.linkDomain = ""; }
-          data.linkTitle = url; data.texto = ""; data.items = [];
-        } else {
-          data.texto = (document.getElementById("nota-texto").value||"").trim();
+          try {
+            data.linkDomain = new URL(url).hostname;
+          } catch {
+            data.linkDomain = "";
+          }
+          data.linkTitle = url;
+          data.texto = "";
           data.items = [];
-          if (!titulo && !data.texto) { cerrarModalNota(); return; }
+        } else {
+          data.texto = (
+            document.getElementById("nota-texto").value || ""
+          ).trim();
+          data.items = [];
+          if (!titulo && !data.texto) {
+            cerrarModalNota();
+            return;
+          }
         }
         try {
           if (_notaEditandoId) {
@@ -4754,7 +6003,9 @@
             showToast("Nota guardada \u2713");
           }
           cerrarModalNota();
-        } catch(e) { showToast("Error al guardar", "delete"); }
+        } catch (e) {
+          showToast("Error al guardar", "delete");
+        }
       }
 
       async function borrarNota() {
@@ -4765,26 +6016,48 @@
         cerrarModalNota();
       }
 
-
       // ── Privacy mode ──
       function applySvClass() {
-        ["g-ingresos","g-gastos","g-profit","g-margen",
-         "cuenta-cristian-val","cuenta-frank-val",
-         "cuenta-cristian-capital","cuenta-frank-capital",
-         "cuenta-cristian-profit","cuenta-frank-profit",
-         "kpi-ingresos","kpi-gastos","kpi-profit","kpi-margen",
-         "kpi-aportes-capital","kpi-retiros-capital",
-         "proj-capital-trabajo","profit-mes-total","pub-total-mes",
-         "kpi-saldo","kpi-saldo-capital","kpi-saldo-profit"
-        ].forEach(id => { const el = document.getElementById(id); if (el) el.classList.add("sv"); });
+        [
+          "g-ingresos",
+          "g-gastos",
+          "g-profit",
+          "g-margen",
+          "cuenta-cristian-val",
+          "cuenta-frank-val",
+          "cuenta-cristian-capital",
+          "cuenta-frank-capital",
+          "cuenta-cristian-profit",
+          "cuenta-frank-profit",
+          "kpi-ingresos",
+          "kpi-gastos",
+          "kpi-profit",
+          "kpi-margen",
+          "kpi-aportes-capital",
+          "kpi-retiros-capital",
+          "proj-capital-trabajo",
+          "profit-mes-total",
+          "pub-total-mes",
+          "kpi-saldo",
+          "kpi-saldo-capital",
+          "kpi-saldo-profit",
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.classList.add("sv");
+        });
       }
       function togglePrivacy() {
         privacyMode = !privacyMode;
         const app = document.getElementById("main-app");
         if (app) app.classList.toggle("privacy-mode", privacyMode);
         const icon = document.getElementById("privacy-icon");
-        if (icon) { icon.setAttribute("data-lucide", privacyMode ? "eye-off" : "eye"); lucide.createIcons(); }
-        try { localStorage.setItem("cbd_privacy", privacyMode ? "1" : "0"); } catch(e) {}
+        if (icon) {
+          icon.setAttribute("data-lucide", privacyMode ? "eye-off" : "eye");
+          lucide.createIcons();
+        }
+        try {
+          localStorage.setItem("cbd_privacy", privacyMode ? "1" : "0");
+        } catch (e) {}
       }
       function flashEl(id) {
         const el = document.getElementById(id);
@@ -4800,9 +6073,12 @@
           const app = document.getElementById("main-app");
           if (app) app.classList.add("privacy-mode");
           const icon = document.getElementById("privacy-icon");
-          if (icon) { icon.setAttribute("data-lucide", "eye-off"); lucide.createIcons(); }
+          if (icon) {
+            icon.setAttribute("data-lucide", "eye-off");
+            lucide.createIcons();
+          }
         }
-      } catch(e) {}
+      } catch (e) {}
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
