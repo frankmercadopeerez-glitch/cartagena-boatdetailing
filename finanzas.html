@@ -3406,7 +3406,7 @@
             return f >= CUENTAS_DESDE && f <= todayStr;
           });
         const totalIngresos = transGlobal
-          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
+          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = transGlobal
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
