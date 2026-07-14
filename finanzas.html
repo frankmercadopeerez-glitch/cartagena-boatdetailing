@@ -2292,7 +2292,7 @@
               .doc("proyectos_estado")
               .onSnapshot((snap) => {
                 proyectosEstado = snap.exists ? snap.data() || {} : {};
-                if (_firstDataLoaded) renderProyectos();
+                if (_firstDataLoaded) renderAll();
               });
           } else {
             try {
@@ -2535,6 +2535,7 @@
 
       // ── Ver más ───────────────────────────────────────────
       let verMasAbierto = false;
+      let mostrarTodasCerradas = false;
       function toggleVerMas() {
         verMasAbierto = !verMasAbierto;
         document.getElementById("ver-mas-texto").textContent = verMasAbierto
@@ -4244,11 +4245,28 @@
             "font-size:0.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;margin-top:16px";
           h2.textContent = "Cerrados · Profit real";
           list.appendChild(h2);
-          cerrados.forEach((p, i) => {
+          // Sort by most recent transaction date
+          const lastFechaMap = {};
+          transactions.forEach(t => {
+            if (!t.proyecto || !t.fecha) return;
+            if (!lastFechaMap[t.proyecto] || t.fecha > lastFechaMap[t.proyecto]) lastFechaMap[t.proyecto] = t.fecha;
+          });
+          cerrados.sort((a, b) => (lastFechaMap[b.nombre]||"").localeCompare(lastFechaMap[a.nombre]||""));
+          const MAX_C = 4;
+          const visibleC = mostrarTodasCerradas ? cerrados : cerrados.slice(0, MAX_C);
+          visibleC.forEach((p, i) => {
             const card = crearTarjetaProyecto(p);
             card.style.animationDelay = ((activos.length + i + 1) * 0.06) + "s";
             list.appendChild(card);
           });
+          if (cerrados.length > MAX_C) {
+            const btnM = document.createElement("button");
+            btnM.className = "w-full text-xs font-semibold py-2 rounded-xl mt-2 transition";
+            btnM.style.cssText = "background:rgba(184,144,77,0.1);border:1px solid rgba(184,144,77,0.25);color:var(--accent)";
+            btnM.textContent = mostrarTodasCerradas ? "Ver menos" : "Ver " + (cerrados.length - MAX_C) + " más";
+            btnM.addEventListener("click", () => { mostrarTodasCerradas = !mostrarTodasCerradas; renderProyectos(); });
+            list.appendChild(btnM);
+          }
         }
       }
 
