@@ -1213,6 +1213,17 @@
             </div>
           </div>
 
+          <!-- PROFIT DEL MES -->
+          <div id="profit-mes-section" class="mb-5" style="display:none">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="check-circle" class="w-4 h-4" style="color:var(--green)"></i>
+              <h2 class="text-sm font-semibold" style="color:var(--text)">Profit del mes</h2>
+              <span class="text-xs" id="profit-mes-periodo" style="color:var(--text2)"></span>
+              <span class="ml-auto text-xs font-bold" id="profit-mes-total" style="color:var(--green)">$0</span>
+            </div>
+            <div id="profit-mes-list" class="space-y-2"></div>
+          </div>
+
           <!-- TABS CARD - hidden, navigation handled by bottom nav -->
           <div class="glass-card mb-5 hidden">
             <div
@@ -3063,6 +3074,7 @@
         renderCuentas();
         renderKPIs(mes);
         renderPubWidget();
+        renderProfitMes();
         renderProyectos();
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
@@ -4001,6 +4013,63 @@
             toggleProyectoCerrado(p.nombre);
           });
         return div;
+      }
+
+      function renderProfitMes() {
+        const noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const isNonProject = n => { const nl = (n || '').trim().toLowerCase(); return !nl || noProj.has(nl) || nl.startsWith('publicidad'); };
+        const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
+        // Proyectos que recibieron Saldo Final este mes
+        const conSaldoFinal = new Set(
+          transactions.filter(t =>
+            t.categoria === "Saldo Final" &&
+            (t.fecha || "").startsWith(prefix) &&
+            t.proyecto && !isNonProject(t.proyecto)
+          ).map(t => t.proyecto)
+        );
+        const section = document.getElementById("profit-mes-section");
+        const list    = document.getElementById("profit-mes-list");
+        const totalEl = document.getElementById("profit-mes-total");
+        const perEl   = document.getElementById("profit-mes-periodo");
+        if (!section || !list) return;
+        if (conSaldoFinal.size === 0) { section.style.display = "none"; return; }
+        section.style.display = "";
+        if (perEl) perEl.textContent = "· " + MESES[mesSel.m] + " " + mesSel.y;
+        const proyectos = [];
+        conSaldoFinal.forEach(nombre => {
+          const txP = transactions.filter(t =>
+            t.proyecto === nombre &&
+            t.categoria !== TRANSFER_CAT &&
+            t.categoria !== CAPITAL_INGRESO_CAT &&
+            !CAPITAL_GASTO_CATS.includes(t.categoria)
+          );
+          const ingresos = txP.filter(t => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0);
+          const gastos   = txP.filter(t => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0);
+          const net = ingresos - gastos;
+          proyectos.push({ nombre, ingresos, gastos, net });
+        });
+        proyectos.sort((a, b) => b.net - a.net);
+        const totalProfit = proyectos.reduce((s, p) => s + p.net, 0);
+        if (totalEl) { totalEl.textContent = fmt(totalProfit); totalEl.style.color = totalProfit >= 0 ? "var(--green)" : "var(--red)"; }
+        list.innerHTML = "";
+        proyectos.forEach(p => {
+          const netColor = p.net >= 0 ? "var(--green)" : "var(--red)";
+          const margen   = p.ingresos > 0 ? ((p.net / p.ingresos) * 100).toFixed(0) + "%" : "--";
+          const div = document.createElement("div");
+          div.className = "rounded-xl p-3 transition";
+          div.style.cssText = "background:rgba(34,214,138,0.06);border:1px solid rgba(34,214,138,0.2);cursor:pointer";
+          div.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+  <span style="font-size:0.875rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%">${escapeHtml(p.nombre)}</span>
+  <span style="font-size:0.875rem;font-weight:800;color:${netColor};flex-shrink:0">${fmt(p.net)}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
+  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Ingresos</p><p style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p></div>
+  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Gastos</p><p style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p></div>
+  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Margen</p><p style="font-size:0.8rem;font-weight:700;color:var(--text)">${margen}</p></div>
+</div>`;
+          div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
+          list.appendChild(div);
+        });
       }
 
       function renderProyectos() {
