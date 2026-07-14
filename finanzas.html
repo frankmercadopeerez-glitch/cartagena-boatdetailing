@@ -3473,9 +3473,6 @@
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
           .toISOString()
           .split("T")[0];
-        // Disponible = suma de socios desde inicio del periodo (solo positivos)
-        // Si un socio va negativo (invirtió de su bolsillo) no reduce el efectivo en cuenta.
-        // Solo muestra negativo si los DOS están en negativo.
         let _frankD = 0,
           _cristianD = 0;
         transactions
@@ -3489,15 +3486,10 @@
             if (r === "frank") _frankD += d;
             else if (r === "cristian") _cristianD += d;
           });
-        const saldo =
-          _frankD <= 0 && _cristianD <= 0
-            ? _frankD + _cristianD
-            : Math.max(0, _frankD) + Math.max(0, _cristianD);
         const saldoEl = document.getElementById("kpi-saldo");
         const capitalAcKpi = calcCapitalActivo();
-        const totalKpi = _frankD + _cristianD;
         const profitKpi = _lastFrankProfit + _lastCristProfit;
-        if (saldoEl) { saldoEl.textContent = fmt(totalKpi); saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)"; }
+        if (saldoEl) { saldoEl.textContent = fmt(profitKpi); saldoEl.style.color = profitKpi >= 0 ? "var(--green)" : "var(--red)"; }
         const capEl = document.getElementById("kpi-saldo-capital");
         if (capEl) { capEl.textContent = fmt(capitalAcKpi); capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)"; }
         const profEl = document.getElementById("kpi-saldo-profit");
