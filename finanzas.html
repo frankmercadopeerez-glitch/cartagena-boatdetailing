@@ -1011,104 +1011,68 @@
                   class="text-xs font-semibold uppercase tracking-wide mb-1"
                   style="color: rgba(255, 255, 255, 0.4)"
                 >
-                  Margen Global
+                  Capital Activo
                 </p>
                 <p
-                  class="font-bold text-amber-300 leading-tight"
-                  style="font-size: clamp(1rem, 4vw, 1.7rem)"
+                  class="font-bold leading-tight"
+                  style="font-size: clamp(1rem, 4vw, 1.7rem); color: #38bdf8"
                   id="g-margen"
                 >
-                  0%
+                  $0
                 </p>
               </div>
             </div>
           </div>
 
           <!-- CUENTAS PERSONALES -->
-          <div
-            class="rounded-2xl mb-4 p-4"
-            style="
-              background: linear-gradient(135deg, #071428 0%, #111111 100%);
-              border: 1px solid rgba(184, 144, 77, 0.2);
-            "
-          >
+          <div class="rounded-2xl mb-4 p-4" style="background:linear-gradient(135deg,#071428 0%,#111111 100%);border:1px solid rgba(184,144,77,0.2)">
             <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="users" class="w-4 h-4" style="color: #b8904d"></i>
-              <span
-                class="text-xs font-bold uppercase tracking-widest"
-                style="color: #b8904d"
-                >Cuentas · Balance por Socio</span
-              >
-              <span
-                class="text-xs ml-auto"
-                style="color: rgba(255, 255, 255, 0.3)"
-                id="cuentas-mes-label"
-                >Acumulado</span
-              >
+              <i data-lucide="users" class="w-4 h-4" style="color:#b8904d"></i>
+              <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Balance · Socios</span>
+              <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)" id="cuentas-mes-label">Acumulado</span>
             </div>
-            <div
-              class="grid grid-cols-2 mb-3"
-              style="
-                gap: 0;
-                border: 1px solid rgba(255, 255, 255, 0.07);
-                border-radius: 12px;
-                overflow: hidden;
-              "
-            >
-              <div
-                class="p-3"
-                style="border-right: 1px solid rgba(255, 255, 255, 0.07)"
-              >
-                <p
-                  class="text-xs font-semibold uppercase tracking-widest mb-2"
-                  style="
-                    color: rgba(255, 255, 255, 0.35);
-                    letter-spacing: 0.08em;
-                  "
-                >
-                  Cristian
-                </p>
-                <p
-                  class="font-bold leading-none"
-                  id="cuenta-cristian-val"
-                  style="
-                    font-size: clamp(1.1rem, 4.5vw, 1.6rem);
-                    color: var(--green);
-                  "
-                >
-                  $0
-                </p>
+            <!-- Cristian -->
+            <div class="rounded-xl p-3 mb-2" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)">
+              <div class="flex items-center justify-between mb-2">
+                <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Cristian</p>
+                <p class="text-sm font-bold" id="cuenta-cristian-val" style="color:var(--green)">$0</p>
               </div>
-              <div class="p-3 text-right">
-                <p
-                  class="text-xs font-semibold uppercase tracking-widest mb-2"
-                  style="
-                    color: rgba(255, 255, 255, 0.35);
-                    letter-spacing: 0.08em;
-                  "
-                >
-                  Frank
-                </p>
-                <p
-                  class="font-bold leading-none"
-                  id="cuenta-frank-val"
-                  style="
-                    font-size: clamp(1.1rem, 4.5vw, 1.6rem);
-                    color: var(--green);
-                  "
-                >
-                  $0
-                </p>
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
+                  <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
+                  <p class="text-sm font-bold" id="cuenta-cristian-capital" style="color:var(--blue)">$0</p>
+                </div>
+                <div class="rounded-lg p-2" style="background:rgba(184,144,77,0.08);border:1px solid rgba(184,144,77,0.15)">
+                  <p class="text-xs mb-0.5" style="color:rgba(184,144,77,0.7)">Profit disponible</p>
+                  <p class="text-sm font-bold" id="cuenta-cristian-profit" style="color:var(--accent-bright)">$0</p>
+                </div>
               </div>
+              <button id="btn-retiro-cristian" onclick="retirarProfitSocio('Cristian')" class="w-full text-xs font-bold py-1.5 rounded-lg transition" style="background:rgba(184,144,77,0.12);border:1px solid rgba(184,144,77,0.3);color:var(--accent-bright);display:none">Retirar Profit</button>
             </div>
-            <div
-              class="pt-2"
-              id="settlement-text"
-              style="border-top: 1px solid rgba(255, 255, 255, 0.07)"
-            >
-              <span style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.25)"
-                >Calculando…</span
-              >
+            <!-- Frank -->
+            <div class="rounded-xl p-3 mb-3" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)">
+              <div class="flex items-center justify-between mb-2">
+                <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Frank</p>
+                <p class="text-sm font-bold" id="cuenta-frank-val" style="color:var(--green)">$0</p>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
+                  <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
+                  <p class="text-sm font-bold" id="cuenta-frank-capital" style="color:var(--blue)">$0</p>
+                </div>
+                <div class="rounded-lg p-2" style="background:rgba(184,144,77,0.08);border:1px solid rgba(184,144,77,0.15)">
+                  <p class="text-xs mb-0.5" style="color:rgba(184,144,77,0.7)">Profit disponible</p>
+                  <p class="text-sm font-bold" id="cuenta-frank-profit" style="color:var(--accent-bright)">$0</p>
+                </div>
+              </div>
+              <button id="btn-retiro-frank" onclick="retirarProfitSocio('Frank')" class="w-full text-xs font-bold py-1.5 rounded-lg transition" style="background:rgba(184,144,77,0.12);border:1px solid rgba(184,144,77,0.3);color:var(--accent-bright);display:none">Retirar Profit</button>
+            </div>
+            <!-- Settlement -->
+            <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <div id="settlement-text" style="flex:1">
+                <span style="font-size:0.72rem;color:rgba(255,255,255,0.25)">Calculando…</span>
+              </div>
+              <button id="btn-equilibrar" onclick="equilibrarCuentas()" class="text-xs font-bold py-1.5 px-3 rounded-lg transition" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3);color:var(--blue);display:none;flex-shrink:0">Equilibrar</button>
             </div>
           </div>
 
@@ -1153,39 +1117,6 @@
             <span class="text-xs text-slate-400 font-medium"
               >Detalle mensual</span
             >
-          </div>
-
-          <!-- SALDO ACUMULADO EN CUENTA -->
-          <div
-            class="kpi-card mb-3"
-            style="
-              background: linear-gradient(135deg, #071428 0%, #111111 100%);
-              border-left: 4px solid #b8904d;
-              border-color: rgba(184, 144, 77, 0.35);
-            "
-          >
-            <div class="flex items-center justify-between">
-              <div style="flex: 1; min-width: 0">
-                <p class="kpi-label" style="color: rgba(255, 255, 255, 0.45)">
-                  Dinero disponible en cuenta
-                </p>
-                <p class="kpi-value" id="kpi-saldo" style="color: #22c55e">
-                  $0
-                </p>
-              </div>
-              <i
-                data-lucide="wallet"
-                class="w-9 h-9 flex-shrink-0 ml-3"
-                style="color: #b8904d; opacity: 0.45"
-              ></i>
-            </div>
-            <p
-              class="text-xs mt-1"
-              id="kpi-saldo-label"
-              style="color: rgba(255, 255, 255, 0.3)"
-            >
-              acumulado hasta hoy
-            </p>
           </div>
 
           <!-- KPIs MENSUALES -->
@@ -1361,73 +1292,15 @@
                 Exportar mes
               </button>
             </div>
-            <div class="grid grid-cols-2 gap-3 mb-4">
-              <div
-                class="rounded-xl p-3"
-                style="
-                  background: rgba(56, 189, 248, 0.08);
-                  border: 1px solid rgba(56, 189, 248, 0.2);
-                "
-              >
-                <p
-                  class="text-xs font-semibold uppercase tracking-widest mb-1.5"
-                  style="
-                    color: rgba(56, 189, 248, 0.75);
-                    letter-spacing: 0.07em;
-                  "
-                >
-                  Capital de Trabajo
-                </p>
-                <p
-                  class="font-bold leading-none"
-                  id="proj-capital-trabajo"
-                  style="
-                    font-size: clamp(1rem, 4vw, 1.5rem);
-                    color: var(--blue);
-                  "
-                >
-                  $0
-                </p>
-                <p
-                  class="text-xs mt-1"
-                  style="color: rgba(255, 255, 255, 0.28)"
-                >
-                  proyectos activos
-                </p>
+            <div class="rounded-xl p-3 mb-4" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2)">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(56,189,248,0.75);letter-spacing:.07em">Capital en proyectos activos</p>
+                  <p class="font-bold leading-none" id="proj-capital-trabajo" style="font-size:clamp(1rem,4vw,1.5rem);color:var(--blue)">$0</p>
+                </div>
+                <i data-lucide="activity" class="w-8 h-8 flex-shrink-0" style="color:rgba(56,189,248,0.25)"></i>
               </div>
-              <div
-                class="rounded-xl p-3"
-                style="
-                  background: rgba(184, 144, 77, 0.07);
-                  border: 1px solid rgba(184, 144, 77, 0.2);
-                "
-              >
-                <p
-                  class="text-xs font-semibold uppercase tracking-widest mb-1.5"
-                  style="
-                    color: rgba(212, 168, 94, 0.85);
-                    letter-spacing: 0.07em;
-                  "
-                >
-                  Profit Real
-                </p>
-                <p
-                  class="font-bold leading-none"
-                  id="proj-profit-real"
-                  style="
-                    font-size: clamp(1rem, 4vw, 1.5rem);
-                    color: var(--accent-bright);
-                  "
-                >
-                  $0
-                </p>
-                <p
-                  class="text-xs mt-1"
-                  style="color: rgba(255, 255, 255, 0.28)"
-                >
-                  proyectos cerrados
-                </p>
-              </div>
+            </div>
             </div>
             <div id="proyectos-list" class="space-y-2"></div>
           </div>
@@ -3218,54 +3091,116 @@
       }
 
       function renderCuentas() {
-        // Acumulado desde inicio del periodo (CUENTAS_DESDE) hasta fin del mes seleccionado
-        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
-          .toISOString()
-          .split("T")[0];
-        let frank = 0,
-          cristian = 0;
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const nonProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
+        const proyectosCerrados = new Set(
+          Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !nonProj.has(k))
+        );
+        let frankTotal = 0, frankProfitBruto = 0, frankRetiros = 0;
+        let cristTotal = 0, cristProfitBruto = 0, cristRetiros = 0;
         transactions
-          .filter((t) => {
-            const f = t.fecha || "";
-            return f >= CUENTAS_DESDE && f <= lastDay;
-          })
-          .forEach((t) => {
+          .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
+          .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-            if (r === "frank") frank += delta;
-            else if (r === "cristian") cristian += delta;
+            const esCerrado = t.proyecto && proyectosCerrados.has(t.proyecto);
+            const esCapital = t.categoria === CAPITAL_INGRESO_CAT || CAPITAL_GASTO_CATS.includes(t.categoria) || t.categoria === TRANSFER_CAT;
+            if (r === "frank") {
+              frankTotal += delta;
+              if (esCerrado && !esCapital) frankProfitBruto += delta;
+              if (CAPITAL_GASTO_CATS.includes(t.categoria)) frankRetiros += (t.monto || 0);
+            } else if (r === "cristian") {
+              cristTotal += delta;
+              if (esCerrado && !esCapital) cristProfitBruto += delta;
+              if (CAPITAL_GASTO_CATS.includes(t.categoria)) cristRetiros += (t.monto || 0);
+            }
           });
-
-        const fEl = document.getElementById("cuenta-frank-val");
-        const cEl = document.getElementById("cuenta-cristian-val");
-        const sEl = document.getElementById("settlement-text");
+        const frankProfit = frankProfitBruto - frankRetiros;
+        const cristProfit = cristProfitBruto - cristRetiros;
+        const frankCapital = frankTotal - frankProfit;
+        const cristCapital = cristTotal - cristProfit;
+        const setEl = (id, val, color) => { const el = document.getElementById(id); if (el) { el.textContent = fmt(val); el.style.color = color; } };
+        setEl("cuenta-frank-val", frankTotal, frankTotal >= 0 ? "var(--green)" : "var(--red)");
+        setEl("cuenta-cristian-val", cristTotal, cristTotal >= 0 ? "var(--green)" : "var(--red)");
+        setEl("cuenta-frank-capital", frankCapital, frankCapital >= 0 ? "var(--blue)" : "var(--red)");
+        setEl("cuenta-cristian-capital", cristCapital, cristCapital >= 0 ? "var(--blue)" : "var(--red)");
+        setEl("cuenta-frank-profit", frankProfit, frankProfit > 0 ? "var(--accent-bright)" : "var(--text2)");
+        setEl("cuenta-cristian-profit", cristProfit, cristProfit > 0 ? "var(--accent-bright)" : "var(--text2)");
+        const btnRF = document.getElementById("btn-retiro-frank");
+        const btnRC = document.getElementById("btn-retiro-cristian");
+        if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
+        if (btnRC) btnRC.style.display = cristProfit > 100 ? "" : "none";
+        const esMesActual = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         const lEl = document.getElementById("cuentas-mes-label");
-
-        fEl.textContent = fmt(frank);
-        fEl.style.color = frank >= 0 ? "var(--green)" : "var(--red)";
-        cEl.textContent = fmt(cristian);
-        cEl.style.color = cristian >= 0 ? "var(--green)" : "var(--red)";
-
-        const esMesActual =
-          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        if (lEl)
-          lEl.textContent = esMesActual
-            ? "Acumulado"
-            : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
-
-        const diff = frank - cristian;
+        if (lEl) lEl.textContent = esMesActual ? "Acumulado" : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
+        const diff = frankTotal - cristTotal;
         const amount = Math.abs(diff) / 2;
-        if (Math.abs(diff) < 500) {
-          sEl.innerHTML =
-            '<span style="color:var(--green)">✓ Cuentas equilibradas</span>';
-        } else {
-          const nameFrom = diff > 0 ? "Frank" : "Cristian";
-          const nameTo = diff > 0 ? "Cristian" : "Frank";
-          sEl.innerHTML = `<div style="font-size:1.5rem;font-weight:800;color:var(--accent-bright);text-align:center;margin:6px 0 2px">${fmt(amount)}</div><div style="font-size:0.72rem;text-align:center;color:var(--text2)">${nameFrom} transfiere a ${nameTo} para quedar iguales</div>`;
+        const sEl = document.getElementById("settlement-text");
+        const btnEq = document.getElementById("btn-equilibrar");
+        if (sEl) {
+          if (Math.abs(diff) < 500) {
+            sEl.innerHTML = '<span style="color:var(--green);font-size:0.8rem">✓ Cuentas equilibradas</span>';
+            if (btnEq) btnEq.style.display = "none";
+          } else {
+            const nameFrom = diff > 0 ? "Frank" : "Cristian";
+            const nameTo   = diff > 0 ? "Cristian" : "Frank";
+            sEl.innerHTML = `<div style="font-size:1.1rem;font-weight:800;color:var(--accent-bright)">${fmt(amount)}</div><div style="font-size:0.72rem;color:var(--text2)">${nameFrom} transfiere a ${nameTo}</div>`;
+            if (btnEq) { btnEq.style.display = ""; btnEq.dataset.from = nameFrom; btnEq.dataset.to = nameTo; btnEq.dataset.amount = Math.round(amount); }
+          }
         }
       }
 
+      async function retirarProfitSocio(nombre) {
+        const nonProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
+        const proyectosCerrados = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !nonProj.has(k)));
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const r = nombre.toLowerCase();
+        let profitBruto = 0, retiros = 0;
+        transactions
+          .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
+          .forEach(t => {
+            if ((t.receptor || "").trim().toLowerCase() !== r) return;
+            const esCerrado = t.proyecto && proyectosCerrados.has(t.proyecto);
+            const esCapital = t.categoria === CAPITAL_INGRESO_CAT || CAPITAL_GASTO_CATS.includes(t.categoria) || t.categoria === TRANSFER_CAT;
+            if (esCerrado && !esCapital) profitBruto += (t.tipo === "ingreso" ? t.monto : -t.monto);
+            if (CAPITAL_GASTO_CATS.includes(t.categoria)) retiros += (t.monto || 0);
+          });
+        const monto = Math.round(profitBruto - retiros);
+        if (monto <= 0) { showToast("No hay profit disponible para " + nombre, "info"); return; }
+        if (!confirm("Registrar retiro de profit de " + fmt(monto) + " para " + nombre + "?")) return;
+        try {
+          await db.collection("transacciones").add({
+            tipo: "gasto", categoria: "Retiro de Profit", monto,
+            receptor: nombre, descripcion: "Retiro de Profit " + nombre,
+            fecha: todayStr, hora: new Date().toTimeString().slice(0,5), medio: "Efectivo", proyecto: ""
+          });
+          showToast("Retiro de profit (" + nombre + ") registrado ✓");
+        } catch(e) { showToast("Error al registrar", "delete"); }
+      }
+
+      async function equilibrarCuentas() {
+        const btn = document.getElementById("btn-equilibrar");
+        if (!btn) return;
+        const nameFrom = btn.dataset.from;
+        const nameTo   = btn.dataset.to;
+        const amount   = parseInt(btn.dataset.amount, 10);
+        if (!nameFrom || !nameTo || !amount || amount < 1) return;
+        if (!confirm("Registrar transferencia de " + fmt(amount) + " de " + nameFrom + " a " + nameTo + "?")) return;
+        const desc = "Equilibrio: " + nameFrom + " → " + nameTo;
+        try {
+          const batch = db.batch();
+          batch.set(db.collection("transacciones").doc(), { tipo:"gasto",   categoria:TRANSFER_CAT, monto:amount, receptor:nameFrom, descripcion:desc, fecha:todayStr, hora:new Date().toTimeString().slice(0,5), medio:"Transferencia", proyecto:"" });
+          batch.set(db.collection("transacciones").doc(), { tipo:"ingreso", categoria:TRANSFER_CAT, monto:amount, receptor:nameTo,   descripcion:desc, fecha:todayStr, hora:new Date().toTimeString().slice(0,5), medio:"Transferencia", proyecto:"" });
+          await batch.commit();
+          showToast("Cuentas equilibradas: " + nameFrom + " → " + nameTo + " ✓");
+        } catch(e) { showToast("Error al registrar", "delete"); }
+      }
+
       function renderGlobalKPIs() {
+        const nonProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
+        const proyectosCerrados = new Set(
+          Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !nonProj.has(k))
+        );
         const totalIngresos = transactions
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
@@ -3273,24 +3208,22 @@
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const retirosCapital = transactions
-          .filter(
-            (t) =>
-              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
-          )
+          .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
           .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos + retirosCapital;
-        const margen =
-          totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
+        // Profit = net de proyectos cerrados
+        const profitCerrados = transactions
+          .filter(t => t.proyecto && proyectosCerrados.has(t.proyecto) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria))
+          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
+        // Capital = net de proyectos activos
+        const capitalActivo = transactions
+          .filter(t => t.proyecto && !proyectosCerrados.has(t.proyecto) && !nonProj.has(t.proyecto) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria))
+          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent = fmt(
-          totalGastos - retirosCapital,
-        );
-        document.getElementById("g-profit").textContent = fmt(profit);
-        document.getElementById("g-profit").style.color =
-          profit >= 0 ? "#D4A85E" : "#f87171";
-        document.getElementById("g-margen").textContent = margen + "%";
-        document.getElementById("g-margen").style.color =
-          profit >= 0 ? "#fcd34d" : "#f87171";
+        document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
+        document.getElementById("g-profit").textContent = fmt(profitCerrados);
+        document.getElementById("g-profit").style.color = profitCerrados >= 0 ? "#D4A85E" : "#f87171";
+        const gm = document.getElementById("g-margen");
+        if (gm) { gm.textContent = fmt(capitalActivo); gm.style.color = capitalActivo >= 0 ? "#38BDF8" : "#f87171"; }
       }
 
       function renderKPIs(mes) {
@@ -3363,16 +3296,15 @@
             ? _frankD + _cristianD
             : Math.max(0, _frankD) + Math.max(0, _cristianD);
         const saldoEl = document.getElementById("kpi-saldo");
-        saldoEl.textContent = (saldo >= 0 ? "" : "-") + fmt(Math.abs(saldo));
-        saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
-        const esHoy =
-          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        document.getElementById("kpi-saldo-label").textContent = esHoy
-          ? "disponible actual en cuenta"
-          : "disponible acumulado hasta fin de " +
-            MESES[mesSel.m].toLowerCase() +
-            " " +
-            mesSel.y;
+        if (saldoEl) {
+          saldoEl.textContent = (saldo >= 0 ? "" : "-") + fmt(Math.abs(saldo));
+          saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
+          const esHoy2 = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+          const kslEl = document.getElementById("kpi-saldo-label");
+          if (kslEl) kslEl.textContent = esHoy2
+            ? "disponible actual en cuenta"
+            : "disponible acumulado hasta fin de " + MESES[mesSel.m].toLowerCase() + " " + mesSel.y;
+        }
       }
 
       function renderResumen(mes) {
