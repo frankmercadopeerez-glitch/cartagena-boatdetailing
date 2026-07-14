@@ -953,7 +953,7 @@
               <i data-lucide="eye" id="privacy-icon" class="w-4 h-4"></i>
             </button>
             <button
-              onclick="logout()"
+              onclick="if(confirm('\u00bfCerrar sesi\u00f3n?')) logout();"
               class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
             >
               <i data-lucide="log-out" class="w-4 h-4"></i>
@@ -3162,7 +3162,10 @@
 
       function renderCuentas() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const proyectosCerrados = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
         let frankTotal = 0, cristTotal = 0;
+        let frankCapital = 0, cristCapital = 0;
         transactions
           .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
           .forEach(t => {
@@ -3170,9 +3173,17 @@
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
             if (r === "frank") frankTotal += delta;
             else if (r === "cristian") cristTotal += delta;
+            // Per-person active project capital (same date range)
+            if (!t.proyecto) return;
+            const pn = t.proyecto.trim().toLowerCase();
+            if (noProjL.has(pn) || pn.startsWith("publicidad")) return;
+            if (proyectosCerrados.has(t.proyecto)) return;
+            if (t.categoria === TRANSFER_CAT || t.categoria === CAPITAL_INGRESO_CAT || CAPITAL_GASTO_CATS.includes(t.categoria)) return;
+            if (r === "frank") frankCapital += delta;
+            else if (r === "cristian") cristCapital += delta;
           });
-        const frankProfit = (frankTotal + cristTotal - calcCapitalActivo()) / 2;
-        const cristProfit = frankProfit;
+        const frankProfit = frankTotal - frankCapital;
+        const cristProfit = cristTotal - cristCapital;
         const frankCapital = frankTotal - frankProfit;
         const cristCapital = cristTotal - cristProfit;
         const setEl = (id, val, color) => {
@@ -3216,13 +3227,24 @@
 
       async function retirarProfitSocio(nombre) {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let frankT = 0, cristT = 0;
-        transactions.filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay; }).forEach(t => {
-          const r = (t.receptor||"").trim().toLowerCase();
-          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-          if (r==="frank") frankT += d; else if (r==="cristian") cristT += d;
-        });
-        const monto = Math.round(((frankT + cristT) - calcCapitalActivo()) / 2);
+        const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const proyectosCerrados = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
+        const r = nombre.toLowerCase();
+        let total = 0, capital = 0;
+        transactions
+          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay; })
+          .forEach(t => {
+            if ((t.receptor||"").trim().toLowerCase() !== r) return;
+            const delta = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
+            total += delta;
+            if (!t.proyecto) return;
+            const pn = t.proyecto.trim().toLowerCase();
+            if (noProjL.has(pn) || pn.startsWith("publicidad")) return;
+            if (proyectosCerrados.has(t.proyecto)) return;
+            if (t.categoria === TRANSFER_CAT || t.categoria === CAPITAL_INGRESO_CAT || CAPITAL_GASTO_CATS.includes(t.categoria)) return;
+            capital += delta;
+          });
+        const monto = Math.round(total - capital);
         if (monto <= 0) { showToast("No hay profit disponible para " + nombre, "info"); return; }
         if (!confirm("Registrar retiro de profit de " + fmt(monto) + " para " + nombre + "?")) return;
         try {
@@ -3254,10 +3276,13 @@
       }
 
       function calcCapitalActivo() {
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
-        const proyectosCerradosSet = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())).map(k => k));
+        const proyectosCerradosSet = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
         return transactions
           .filter(t => {
+            const f = t.fecha || "";
+            if (f < CUENTAS_DESDE || f > lastDay) return false;
             if (!t.proyecto) return false;
             const pn = t.proyecto.trim().toLowerCase();
             if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
