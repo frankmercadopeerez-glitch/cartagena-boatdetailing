@@ -682,6 +682,15 @@
         stroke-width: 2.5;
       }
 
+      /* Ensure no residual top gap in non-home panels */
+      #panel-movimientos,
+      #panel-estadisticas,
+      #panel-nuevo,
+      #panel-notas {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+
       /* ── Más Drawer ── */
       #mas-drawer-overlay {
         position: fixed;
@@ -3124,7 +3133,15 @@
           renderNotas();
         }
         lucide.createIcons();
-        window.scrollTo({ top: 0, behavior: "instant" });
+        // Safari does not support behavior:"instant"; use a hard reset.
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        });
       }
 
       // ── Mes ───────────────────────────────────────────────
