@@ -1629,80 +1629,26 @@
               </button>
             </div>
           </div>
-          <!-- PUBLICIDAD WIDGET -->
-          <div class="pub-widget px-4 pt-4 pb-3 mb-5">
-            <div class="flex items-center gap-2.5 mb-3">
-              <div
-                class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                style="background: rgba(245, 158, 11, 0.18)"
-              >
-                <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
+          <!-- PUBLICIDAD -->
+          <div class="pub-widget px-4 py-3 mb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.18)">
+                <i data-lucide="megaphone" class="w-4 h-4 text-yellow-400"></i>
               </div>
-              <div>
-                <p
-                  class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none"
-                >
-                  Publicidad
-                </p>
-                <p class="text-xs text-slate-400 mt-0.5" id="pub-semana-label">
-                  Esta semana
-                </p>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none">Publicidad</p>
+                <p class="font-bold text-white leading-none mt-1" id="pub-total-mes" style="font-size:clamp(1rem,4vw,1.4rem)">$0</p>
+                <p class="text-xs text-slate-400 mt-0.5" id="pub-periodo-label">este mes</p>
               </div>
-            </div>
-            <div class="grid grid-cols-2 gap-3 mb-3">
-              <div
-                class="rounded-xl px-3 py-2.5"
-                style="background: rgba(255, 255, 255, 0.05)"
-              >
-                <p class="text-xs text-slate-400 mb-1">Semana actual</p>
-                <p
-                  class="text-xl font-bold text-white leading-none"
-                  id="pub-monto-semana"
-                >
-                  $0
-                </p>
-                <p class="text-xs text-slate-500 mt-1" id="pub-count-semana">
-                  0 registros
-                </p>
+              <div class="flex gap-2 flex-shrink-0">
+                <button onclick="filtrarPorPublicidad()" class="text-xs font-semibold py-1.5 px-3 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center gap-1" style="border-color:rgba(184,144,77,0.4)">
+                  <i data-lucide="filter" class="w-3 h-3"></i> Ver
+                </button>
+                <button onclick="abrirGastoPublicidad()" class="text-xs font-bold py-1.5 px-3 rounded-xl flex items-center gap-1 transition" style="background:rgba(184,144,77,0.2);border:1px solid rgba(184,144,77,0.45)">
+                  <i data-lucide="plus" class="w-3 h-3" style="color:#b8904d"></i>
+                  <span style="color:#d4a85e">Agregar</span>
+                </button>
               </div>
-              <div
-                class="rounded-xl px-3 py-2.5"
-                style="background: rgba(255, 255, 255, 0.05)"
-              >
-                <p class="text-xs text-slate-400 mb-1">Total año</p>
-                <p
-                  class="text-xl font-bold leading-none"
-                  style="color: #d4a85e"
-                  id="pub-total-anio"
-                >
-                  $0
-                </p>
-                <p class="text-xs text-slate-500 mt-1">acumulado</p>
-              </div>
-            </div>
-            <div class="flex gap-2">
-              <button
-                onclick="filtrarPorPublicidad()"
-                class="flex-1 text-xs font-semibold py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center justify-center gap-1.5"
-                style="border-color: rgba(184, 144, 77, 0.4)"
-              >
-                <i data-lucide="filter" class="w-3.5 h-3.5"></i> Ver movimientos
-              </button>
-              <button
-                onclick="abrirGastoPublicidad()"
-                class="flex-1 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition"
-                style="
-                  background: rgba(184, 144, 77, 0.2);
-                  border: 1px solid rgba(184, 144, 77, 0.45);
-                "
-              >
-                <i
-                  data-lucide="plus"
-                  class="w-3.5 h-3.5"
-                  style="color: #b8904d"
-                ></i>
-                <span style="color: #d4a85e">Registrar gasto</span>
-              </button>
             </div>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -1755,7 +1701,7 @@
               class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4"
             >
               <span id="chart-top-label"
-                >Top proyectos por profit · este mes</span
+                >Top proyectos por profit · acumulado</span
               >
             </p>
             <div id="top-proyectos" class="space-y-3"></div>
@@ -3178,49 +3124,14 @@
 
       // ── Publicidad widget ─────────────────────────────────
       function renderPubWidget() {
-        const allPub = transactions.filter(
-          (t) => t.tipo === "gasto" && t.categoria === "Publicidad",
-        );
-        // Semana actual lunes-domingo
-        const { desde: semDesde, hasta: semHasta } = getSemanaActual();
-        // Un registro cuenta esta semana si:
-        // - tiene pub_desde/pub_hasta y su rango toca esta semana, O
-        // - no tiene pub_desde y su fecha cae dentro de esta semana
-        const inSemana = allPub.filter((t) => {
-          if (t.pub_desde && t.pub_hasta) {
-            return t.pub_hasta >= semDesde && t.pub_desde <= semHasta;
-          }
-          const d = t.fecha || "";
-          return d >= semDesde && d <= semHasta;
-        });
-        const totalSemana = inSemana.reduce((s, t) => s + t.monto, 0);
-        const countSemana = inSemana.length;
-        // Label del rango: usa el de la entrada más reciente con rango explícito,
-        // o si no, el rango de la semana actual
-        const fmtD = (iso) => {
-          const d = new Date(iso + "T12:00:00");
-          return d.getDate() + " " + MESES[d.getMonth()].slice(0, 3);
-        };
-        const withRange = allPub
-          .filter((t) => t.pub_desde && t.pub_hasta)
-          .sort((a, b) => b.pub_hasta.localeCompare(a.pub_hasta));
-        let rangeLabel;
-        if (withRange.length > 0) {
-          rangeLabel =
-            fmtD(withRange[0].pub_desde) + " – " + fmtD(withRange[0].pub_hasta);
-        } else {
-          rangeLabel = fmtD(semDesde) + " – " + fmtD(semHasta);
-        }
-        const yearPrefix = String(new Date().getFullYear()) + "-";
-        const totalAnio = allPub
-          .filter((t) => (t.fecha || "").startsWith(yearPrefix))
+        const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
+        const total = transactions
+          .filter(t => t.tipo === "gasto" && t.categoria === "Publicidad" && (t.fecha || "").startsWith(prefix))
           .reduce((s, t) => s + t.monto, 0);
-        document.getElementById("pub-semana-label").textContent = rangeLabel;
-        document.getElementById("pub-monto-semana").textContent =
-          fmt(totalSemana);
-        document.getElementById("pub-count-semana").textContent =
-          countSemana + (countSemana === 1 ? " registro" : " registros");
-        document.getElementById("pub-total-anio").textContent = fmt(totalAnio);
+        const totEl = document.getElementById("pub-total-mes");
+        const lblEl = document.getElementById("pub-periodo-label");
+        if (totEl) totEl.textContent = fmt(total);
+        if (lblEl) lblEl.textContent = MESES[mesSel.m] + " " + mesSel.y;
       }
 
       async function seedMayoCierre() {
@@ -3689,7 +3600,7 @@
             : "Flujo semanal del mes";
         if (lbl4) lbl4.textContent = `Medios de pago · ${periodoLabel}`;
         if (lblTop)
-          lblTop.textContent = `Top proyectos por profit · ${periodoLabel}`;
+          lblTop.textContent = "Top proyectos por profit · acumulado";
         const catLbl = document.getElementById("chart-cat-mes-label");
         if (catLbl) catLbl.textContent = periodoLabel;
 
@@ -4030,18 +3941,18 @@
             '<p class="text-center text-slate-400 text-sm flex items-center justify-center h-full">Sin datos este mes</p>';
         }
 
-        // Top proyectos por profit (progress bars)
+        // Top proyectos por profit (progress bars) — totales acumulados
+        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
         const projMap = {};
-        mes.forEach((t) => {
+        transactions.forEach((t) => {
+          if (!t.proyecto) return;
+          if (_noProj.has(t.proyecto)) return;
           if (t.categoria === TRANSFER_CAT) return;
           if (t.categoria === CAPITAL_INGRESO_CAT) return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
-          const key =
-            t.proyecto || (t.tipo === "gasto" ? "Operación General" : null);
-          if (!key) return;
-          if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
-          if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
-          else projMap[key].gastos += t.monto;
+          if (!projMap[t.proyecto]) projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
+          if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
+          else projMap[t.proyecto].gastos += t.monto;
         });
         const projSorted = Object.entries(projMap)
           .map(([k, v]) => ({
@@ -4059,7 +3970,7 @@
         tp.innerHTML = "";
         if (projSorted.length === 0) {
           tp.innerHTML =
-            '<p class="text-slate-400 text-sm text-center py-4">Sin datos este mes</p>';
+            '<p class="text-slate-400 text-sm text-center py-4">Sin proyectos registrados</p>';
           return;
         }
         projSorted.slice(0, 7).forEach((p) => {
@@ -4160,9 +4071,11 @@
       }
 
       function renderProyectos() {
+        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
         const projMap = {};
         transactions.forEach((t) => {
           if (!t.proyecto) return;
+          if (_noProj.has(t.proyecto)) return;
           if (t.categoria === TRANSFER_CAT) return;
           if (t.categoria === CAPITAL_INGRESO_CAT) return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
