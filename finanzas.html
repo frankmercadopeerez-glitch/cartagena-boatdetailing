@@ -3487,8 +3487,9 @@
           });
         const saldoEl = document.getElementById("kpi-saldo");
         const capitalAcKpi = calcCapitalActivo();
+        const totalKpi = _frankD + _cristianD;
         const profitKpi = _lastFrankProfit + _lastCristProfit;
-        if (saldoEl) { saldoEl.textContent = fmt(profitKpi); saldoEl.style.color = profitKpi >= 0 ? "var(--green)" : "var(--red)"; }
+        if (saldoEl) { saldoEl.textContent = fmt(totalKpi); saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)"; }
         const capEl = document.getElementById("kpi-saldo-capital");
         if (capEl) { capEl.textContent = fmt(capitalAcKpi); capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)"; }
         const profEl = document.getElementById("kpi-saldo-profit");
