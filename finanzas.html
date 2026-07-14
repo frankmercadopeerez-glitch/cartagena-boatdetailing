@@ -3243,8 +3243,9 @@
       function renderCuentas() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         let frankTotal = 0, cristTotal = 0;
-        transactions
-          .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
+        const transRango = transactions
+          .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; });
+        transRango
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
@@ -3256,17 +3257,29 @@
           });
         // Profit base igual para ambos = (ingresos - gastos operativos) / 2
         // y los gastos personales se reflejan en menor capital de trabajo.
-        const totalIngresos = transactions
+        const totalIngresos = transRango
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
           .reduce((s, t) => s + t.monto, 0);
-        const totalGastos = transactions
+        const totalGastos = transRango
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
           .reduce((s, t) => s + t.monto, 0);
-        const profitBase = (totalIngresos - totalGastos) / 2;
-        const frankProfit = profitBase;
-        const cristProfit = profitBase;
-        const frankCapital = frankTotal - frankProfit;
-        const cristCapital = cristTotal - cristProfit;
+        const capitalActivo = calcCapitalActivo();
+        const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
+
+        let frankProfit = profitBase;
+        let cristProfit = profitBase;
+        let frankCapital = frankTotal - frankProfit;
+        let cristCapital = cristTotal - cristProfit;
+
+        // Gasto personal primero consume capital; solo reduce profit si capital se agotó.
+        if (frankCapital < 0) {
+          frankProfit += frankCapital;
+          frankCapital = 0;
+        }
+        if (cristCapital < 0) {
+          cristProfit += cristCapital;
+          cristCapital = 0;
+        }
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
@@ -3387,15 +3400,21 @@
       }
 
       function renderGlobalKPIs() {
-        const totalIngresos = transactions
+        const lastDayG = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const transRango = transactions
+          .filter((t) => {
+            const f = t.fecha || "";
+            return f >= CUENTAS_DESDE && f <= lastDayG;
+          });
+        const totalIngresos = transRango
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
           .reduce((s, t) => s + t.monto, 0);
-        const totalGastos = transactions
+        const totalGastos = transRango
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
           .reduce((s, t) => s + t.monto, 0);
-        // Profit Total = ingresos - gastos operativos (sin incluir retiros de profit/capital)
+        // Profit Total Realizado = ingresos operativos - gastos operativos - capital activo no cerrado.
         const capitalActivo = calcCapitalActivo();
-        const profitTotal = totalIngresos - totalGastos;
+        const profitTotal = totalIngresos - totalGastos - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
