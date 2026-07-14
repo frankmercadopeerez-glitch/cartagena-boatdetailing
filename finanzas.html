@@ -1337,7 +1337,7 @@
                 >
               </button>
               <button
-                onclick="showTab('movimientos')"
+                onclick="onMovimientosTabClick()"
                 id="tab-movimientos"
                 class="tab-btn"
               >
@@ -1973,7 +1973,7 @@
       <button
         class="nav-item"
         id="nav-movimientos"
-        onclick="showTab('movimientos')"
+        onclick="onMovimientosTabClick()"
       >
         <i data-lucide="list"></i>
         <span>Movimientos</span>
@@ -2706,9 +2706,18 @@
         document.getElementById("filter-proyecto").value = "";
         document.getElementById("filter-tipo").value = "";
         document.getElementById("filter-semana").value = "";
+        const todosMesesEl = document.getElementById("toggle-todos-meses");
+        if (todosMesesEl) todosMesesEl.checked = false;
         filterCats.clear();
         updateCatLabel();
         renderMovimientos();
+      }
+      function onMovimientosTabClick() {
+        if (currentTab === "movimientos") {
+          limpiarFiltros();
+          return;
+        }
+        showTab("movimientos");
       }
       function filtrarPorPublicidad() {
         showTab("movimientos");
