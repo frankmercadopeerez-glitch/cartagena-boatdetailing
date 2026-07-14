@@ -731,6 +731,33 @@
       .mas-item:hover {
         background: var(--glass);
       }
+
+      /* ── Number update animation ── */
+      @keyframes numFlash {
+        0%   { opacity:1; transform:scale(1); }
+        28%  { opacity:0.3; transform:scale(0.93); }
+        100% { opacity:1; transform:scale(1); }
+      }
+      .num-flash { animation: numFlash 0.42s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+      /* ── Project card entry animation ── */
+      @keyframes cardSlideIn {
+        from { opacity:0; transform:translateY(14px) scale(0.96); }
+        to   { opacity:1; transform:translateY(0)   scale(1); }
+      }
+      .proj-card { animation: cardSlideIn 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+      /* ── Privacy / blur mode ── */
+      #main-app.privacy-mode .sv {
+        filter: blur(8px);
+        user-select: none;
+        transition: filter 0.25s ease;
+        border-radius: 4px;
+      }
+      @media (hover: hover) {
+        #main-app.privacy-mode .sv:hover { filter: blur(0); }
+      }
+      #main-app.privacy-mode .sv:active { filter: blur(0); }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -916,6 +943,14 @@
             >
               <i data-lucide="download" class="w-4 h-4"></i>
               <span class="hidden sm:inline">CSV</span>
+            </button>
+            <button
+              id="btn-privacy"
+              onclick="togglePrivacy()"
+              class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition"
+              title="Ocultar saldos"
+            >
+              <i data-lucide="eye" id="privacy-icon" class="w-4 h-4"></i>
             </button>
             <button
               onclick="logout()"
@@ -2009,7 +2044,8 @@
         auth = null,
         transactions = [],
         filterCats = new Set(),
-        proyectosEstado = {};
+        proyectosEstado = {},
+        privacyMode = false;
       let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
@@ -3076,6 +3112,7 @@
         renderPubWidget();
         renderProfitMes();
         renderProyectos();
+        setTimeout(applySvClass, 50);
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
         if (!seedMayoDone && transactions.length > 0) {
@@ -3131,7 +3168,15 @@
         const cristProfit = cristProfitBruto - cristRetiros;
         const frankCapital = frankTotal - frankProfit;
         const cristCapital = cristTotal - cristProfit;
-        const setEl = (id, val, color) => { const el = document.getElementById(id); if (el) { el.textContent = fmt(val); el.style.color = color; } };
+        const setEl = (id, val, color) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.textContent = fmt(val);
+          el.style.color = color;
+          el.classList.remove("num-flash");
+          void el.offsetWidth;
+          el.classList.add("num-flash");
+        };
         setEl("cuenta-frank-val", frankTotal, frankTotal >= 0 ? "var(--green)" : "var(--red)");
         setEl("cuenta-cristian-val", cristTotal, cristTotal >= 0 ? "var(--green)" : "var(--red)");
         setEl("cuenta-frank-capital", frankCapital, frankCapital >= 0 ? "var(--blue)" : "var(--red)");
@@ -3236,6 +3281,7 @@
         document.getElementById("g-profit").style.color = profitCerrados >= 0 ? "#D4A85E" : "#f87171";
         const gm = document.getElementById("g-margen");
         if (gm) { gm.textContent = fmt(capitalActivo); gm.style.color = capitalActivo >= 0 ? "#38BDF8" : "#f87171"; }
+        ["g-ingresos","g-gastos","g-profit","g-margen"].forEach(id => flashEl(id));
       }
 
       function renderKPIs(mes) {
@@ -3939,15 +3985,19 @@
       }
 
       async function toggleProyectoCerrado(nombre) {
+        // Animate the card out before re-rendering
+        let card = null;
+        document.querySelectorAll(".proj-card").forEach(el => { if (el.dataset.proyecto === nombre) card = el; });
+        if (card) {
+          card.style.transition = "opacity 0.22s ease, transform 0.22s ease";
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.93) translateX(22px)";
+          await new Promise(r => setTimeout(r, 230));
+        }
         proyectosEstado[nombre] = !proyectosEstado[nombre];
         try {
-          await db
-            .collection("config")
-            .doc("proyectos_estado")
-            .set(proyectosEstado);
-        } catch (e) {
-          console.error("Error guardando estado de proyecto:", e);
-        }
+          await db.collection("config").doc("proyectos_estado").set(proyectosEstado);
+        } catch(e) { console.error("Error guardando estado de proyecto:", e); }
         renderProyectos();
       }
 
@@ -3974,7 +4024,8 @@
         const statusBg = p.cerrado
           ? "rgba(184,144,77,0.15)"
           : "rgba(56,189,248,0.12)";
-        div.className = "rounded-xl p-3 transition";
+        div.className = "rounded-xl p-3 proj-card";
+        div.dataset.proyecto = p.nombre;
         div.style.cssText = `background:${bgColor};border:1px solid ${borderColor};margin-bottom:8px;cursor:pointer`;
         div.innerHTML = `<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px">
   <div style="flex:1;min-width:0">
@@ -3994,15 +4045,15 @@
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
   <div>
     <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Ingresos</p>
-    <p style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p>
+    <p class="sv" style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p>
   </div>
   <div>
     <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Gastos</p>
-    <p style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p>
+    <p class="sv" style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p>
   </div>
   <div>
     <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">${profitLabel}</p>
-    <p style="font-size:0.8rem;font-weight:700;color:${netColor}">${fmt(p.net)}</p>
+    <p class="sv" style="font-size:0.8rem;font-weight:700;color:${netColor}">${fmt(p.net)}</p>
   </div>
 </div>`;
         div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
@@ -4060,11 +4111,11 @@
           div.style.cssText = "background:rgba(34,214,138,0.06);border:1px solid rgba(34,214,138,0.2);cursor:pointer";
           div.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
   <span style="font-size:0.875rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%">${escapeHtml(p.nombre)}</span>
-  <span style="font-size:0.875rem;font-weight:800;color:${netColor};flex-shrink:0">${fmt(p.net)}</span>
+  <span class="sv" style="font-size:0.875rem;font-weight:800;color:${netColor};flex-shrink:0">${fmt(p.net)}</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
-  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Ingresos</p><p style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p></div>
-  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Gastos</p><p style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p></div>
+  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Ingresos</p><p class="sv" style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p></div>
+  <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Gastos</p><p class="sv" style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p></div>
   <div><p style="font-size:0.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em">Margen</p><p style="font-size:0.8rem;font-weight:700;color:var(--text)">${margen}</p></div>
 </div>`;
           div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
@@ -4142,7 +4193,11 @@
             "font-size:0.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;margin-top:4px";
           h.textContent = "En proceso · Capital de trabajo";
           list.appendChild(h);
-          activos.forEach((p) => list.appendChild(crearTarjetaProyecto(p)));
+          activos.forEach((p, i) => {
+            const card = crearTarjetaProyecto(p);
+            card.style.animationDelay = (i * 0.06) + "s";
+            list.appendChild(card);
+          });
         }
 
         if (cerrados.length > 0) {
@@ -4151,7 +4206,11 @@
             "font-size:0.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;margin-top:16px";
           h2.textContent = "Cerrados · Profit real";
           list.appendChild(h2);
-          cerrados.forEach((p) => list.appendChild(crearTarjetaProyecto(p)));
+          cerrados.forEach((p, i) => {
+            const card = crearTarjetaProyecto(p);
+            card.style.animationDelay = ((activos.length + i + 1) * 0.06) + "s";
+            list.appendChild(card);
+          });
         }
       }
 
@@ -4356,6 +4415,44 @@
       });
       buildCatDropdown();
       lucide.createIcons();
+
+      // ── Privacy mode ──
+      function applySvClass() {
+        ["g-ingresos","g-gastos","g-profit","g-margen",
+         "cuenta-cristian-val","cuenta-frank-val",
+         "cuenta-cristian-capital","cuenta-frank-capital",
+         "cuenta-cristian-profit","cuenta-frank-profit",
+         "kpi-ingresos","kpi-gastos","kpi-profit","kpi-margen",
+         "kpi-aportes-capital","kpi-retiros-capital",
+         "proj-capital-trabajo","profit-mes-total","pub-total-mes"
+        ].forEach(id => { const el = document.getElementById(id); if (el) el.classList.add("sv"); });
+      }
+      function togglePrivacy() {
+        privacyMode = !privacyMode;
+        const app = document.getElementById("main-app");
+        if (app) app.classList.toggle("privacy-mode", privacyMode);
+        const icon = document.getElementById("privacy-icon");
+        if (icon) { icon.setAttribute("data-lucide", privacyMode ? "eye-off" : "eye"); lucide.createIcons(); }
+        try { localStorage.setItem("cbd_privacy", privacyMode ? "1" : "0"); } catch(e) {}
+      }
+      function flashEl(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove("num-flash");
+        void el.offsetWidth;
+        el.classList.add("num-flash");
+      }
+      // Restore privacy state
+      try {
+        if (localStorage.getItem("cbd_privacy") === "1") {
+          privacyMode = true;
+          const app = document.getElementById("main-app");
+          if (app) app.classList.add("privacy-mode");
+          const icon = document.getElementById("privacy-icon");
+          if (icon) { icon.setAttribute("data-lucide", "eye-off"); lucide.createIcons(); }
+        }
+      } catch(e) {}
+
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker.register("/sw.js").catch(() => {});
