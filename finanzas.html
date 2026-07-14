@@ -3386,14 +3386,14 @@
         } catch(e) { showToast("Error al registrar", "delete"); }
       }
 
-      function calcCapitalActivo(corteFecha) {
+      function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
         const lastDay = corteFecha || new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
         const proyectosCerradosSet = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
         return transactions
           .filter(t => {
             const f = t.fecha || "";
-            if (f < CUENTAS_DESDE || f > lastDay) return false;
+            if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
             if (!t.proyecto) return false;
             const pn = t.proyecto.trim().toLowerCase();
             if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
@@ -3408,7 +3408,7 @@
         const transGlobal = transactions
           .filter((t) => {
             const f = t.fecha || "";
-            return f >= CUENTAS_DESDE && f <= todayStr;
+            return f && f <= todayStr;
           });
         const totalIngresos = transGlobal
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
@@ -3417,7 +3417,7 @@
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
           .reduce((s, t) => s + t.monto, 0);
         // Profit global realizado = ingresos operativos acumulados - gastos operativos acumulados - capital activo actual.
-        const capitalActivo = calcCapitalActivo(todayStr);
+        const capitalActivo = calcCapitalActivo(todayStr, "");
         const profitTotal = totalIngresos - totalGastos - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos);
