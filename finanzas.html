@@ -989,7 +989,7 @@
                 >Todos los registros históricos</span
               >
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
               <div
                 onclick="irAMovimientosFiltrado('ingreso', '', true)"
                 style="cursor: pointer"
@@ -1072,7 +1072,7 @@
                 <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Cristian</p>
                 <p class="text-sm font-bold" id="cuenta-cristian-val" style="color:var(--green)">$0</p>
               </div>
-              <div class="grid grid-cols-2 gap-2 mb-2">
+              <div class="grid grid-cols-2 gap-2 mb-2 text-center">
                 <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
                   <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
                   <p class="text-sm font-bold" id="cuenta-cristian-capital" style="color:var(--blue)">$0</p>
@@ -1090,7 +1090,7 @@
                 <p class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);letter-spacing:.08em">Frank</p>
                 <p class="text-sm font-bold" id="cuenta-frank-val" style="color:var(--green)">$0</p>
               </div>
-              <div class="grid grid-cols-2 gap-2 mb-2">
+              <div class="grid grid-cols-2 gap-2 mb-2 text-center">
                 <div class="rounded-lg p-2" style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.15)">
                   <p class="text-xs mb-0.5" style="color:rgba(56,189,248,0.7)">Capital de trabajo</p>
                   <p class="text-sm font-bold" id="cuenta-frank-capital" style="color:var(--blue)">$0</p>
@@ -1271,11 +1271,14 @@
 
           <!-- PROFIT DEL MES -->
           <div id="profit-mes-section" class="mb-5" style="display:none">
-            <div class="flex items-center gap-2 mb-3">
+            <div class="flex items-center gap-2 mb-2">
               <i data-lucide="check-circle" class="w-4 h-4" style="color:var(--green)"></i>
               <h2 class="text-sm font-semibold" style="color:var(--text)">Profit del mes</h2>
               <span class="text-xs" id="profit-mes-periodo" style="color:var(--text2)"></span>
-              <span class="ml-auto text-xs font-bold" id="profit-mes-total" style="color:var(--green)">$0</span>
+            </div>
+            <div class="rounded-xl p-3 mb-3 text-center" style="background:rgba(34,214,138,0.07);border:1px solid rgba(34,214,138,0.2)">
+              <p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:rgba(34,214,138,0.6);letter-spacing:.07em">Total cerrado este mes</p>
+              <p class="font-bold sv" id="profit-mes-total" style="font-size:clamp(1.3rem,5vw,2rem);color:var(--green);line-height:1.1">$0</p>
             </div>
             <div id="profit-mes-list" class="space-y-2"></div>
           </div>
@@ -2016,6 +2019,22 @@
 
     <div id="toast"></div>
 
+    <!-- MODAL RETIRO DE PROFIT -->
+    <div id="retiro-overlay" onclick="cerrarRetiroModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:55;align-items:flex-end;backdrop-filter:blur(4px)">
+      <div onclick="event.stopPropagation()" style="background:#0c1628;border:1px solid rgba(255,255,255,0.1);border-top:1px solid rgba(255,255,255,0.14);border-radius:20px 20px 0 0;padding:20px;width:100%;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))">
+        <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
+        <p id="retiro-nombre" style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px">Frank</p>
+        <p style="font-size:0.75rem;color:var(--text2);margin-bottom:14px">Profit disponible: <span id="retiro-disponible" style="color:var(--accent-bright);font-weight:700">$0</span></p>
+        <label style="font-size:0.67rem;color:var(--text2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:600">Monto a retirar (COP)</label>
+        <input type="text" id="retiro-input" inputmode="numeric" placeholder="Ej. 1.000.000" oninput="formatMontoInput(this)" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px;color:var(--text);font-size:1.1rem;font-weight:600;box-sizing:border-box;margin-bottom:12px"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
+          <button onclick="setRetiroTodo()" style="background:rgba(184,144,77,0.15);border:1px solid rgba(184,144,77,0.35);color:var(--accent-bright);font-weight:700;font-size:0.875rem;padding:13px;border-radius:12px">Retirar todo</button>
+          <button onclick="confirmarRetiro()" style="background:linear-gradient(135deg,#B8904D,#D4A85E);color:#1a0f00;font-weight:800;font-size:0.875rem;padding:13px;border-radius:12px">Confirmar</button>
+        </div>
+        <button onclick="cerrarRetiroModal()" style="width:100%;padding:10px;background:transparent;border:none;color:var(--text2);font-size:0.82rem">Cancelar</button>
+      </div>
+    </div>
+
     <script>
       const CATS = {
         ingreso: [
@@ -2536,6 +2555,8 @@
       // ── Ver más ───────────────────────────────────────────
       let verMasAbierto = false;
       let mostrarTodasCerradas = false;
+      let _lastFrankProfit = 0, _lastCristProfit = 0;
+      let _retiroNombre = "", _retirosDisponible = 0;
       function toggleVerMas() {
         verMasAbierto = !verMasAbierto;
         document.getElementById("ver-mas-texto").textContent = verMasAbierto
@@ -3163,21 +3184,28 @@
 
       function renderCuentas() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let frankTotal = 0, cristTotal = 0;
+        const _noPrCt = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const _cerradosCt = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !_noPrCt.has(k.toLowerCase())));
+        const closedNet = transactions
+          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay && t.proyecto && _cerradosCt.has(t.proyecto) && !_noPrCt.has((t.proyecto||"").toLowerCase()) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria); })
+          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
+        let frankTotal = 0, cristTotal = 0, frankRetiros = 0, cristRetiros = 0;
         transactions
           .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-            if (r === "frank") frankTotal += delta;
-            else if (r === "cristian") cristTotal += delta;
+            if (r === "frank") { frankTotal += delta; if (CAPITAL_GASTO_CATS.includes(t.categoria)) frankRetiros += (t.monto||0); }
+            else if (r === "cristian") { cristTotal += delta; if (CAPITAL_GASTO_CATS.includes(t.categoria)) cristRetiros += (t.monto||0); }
           });
-        // Capital de trabajo = mitad del total activo (split igualitario entre socios)
-        const halfCapital = calcCapitalActivo() / 2;
-        const frankCapital = halfCapital;
-        const cristCapital = halfCapital;
-        const frankProfit = frankTotal - frankCapital;
-        const cristProfit = cristTotal - cristCapital;
+        // Profit = mitad del net de proyectos cerrados menos retiros personales.
+        // Gastos generales reducen capital de trabajo, no el profit.
+        const frankProfit = closedNet / 2 - frankRetiros;
+        const cristProfit = closedNet / 2 - cristRetiros;
+        const frankCapital = frankTotal - frankProfit;
+        const cristCapital = cristTotal - cristProfit;
+        _lastFrankProfit = frankProfit;
+        _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
           const el = document.getElementById(id);
           if (!el) return;
@@ -3218,28 +3246,44 @@
       }
 
       async function retirarProfitSocio(nombre) {
-        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let frankT = 0, cristT = 0;
-        transactions
-          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay; })
-          .forEach(t => {
-            const r = (t.receptor||"").trim().toLowerCase();
-            const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-            if (r==="frank") frankT += d;
-            else if (r==="cristian") cristT += d;
-          });
-        const personalTotal = nombre === "Frank" ? frankT : cristT;
-        const halfCapital = calcCapitalActivo() / 2;
-        const monto = Math.round(personalTotal - halfCapital);
-        if (monto <= 0) { showToast("No hay profit disponible para " + nombre, "info"); return; }
-        if (!confirm("Registrar retiro de profit de " + fmt(monto) + " para " + nombre + "?")) return;
+        const disponible = Math.round(nombre === "Frank" ? _lastFrankProfit : _lastCristProfit);
+        if (disponible <= 0) { showToast("No hay profit disponible para " + nombre, "info"); return; }
+        abrirRetiroModal(nombre, disponible);
+      }
+
+      function abrirRetiroModal(nombre, disponible) {
+        _retiroNombre = nombre;
+        _retirosDisponible = disponible;
+        document.getElementById("retiro-nombre").textContent = "Retiro de Profit · " + nombre;
+        document.getElementById("retiro-disponible").textContent = fmt(disponible);
+        document.getElementById("retiro-input").value = "";
+        const overlay = document.getElementById("retiro-overlay");
+        overlay.style.display = "flex";
+        setTimeout(() => document.getElementById("retiro-input").focus(), 200);
+      }
+
+      function cerrarRetiroModal() {
+        document.getElementById("retiro-overlay").style.display = "none";
+      }
+
+      function setRetiroTodo() {
+        const el = document.getElementById("retiro-input");
+        if (el) { el.value = _retirosDisponible ? parseInt(_retirosDisponible, 10).toLocaleString("es-CO") : ""; }
+      }
+
+      async function confirmarRetiro() {
+        const raw = (document.getElementById("retiro-input").value || "").replace(/\D/g, "");
+        const monto = raw ? parseInt(raw, 10) : 0;
+        if (!monto || monto <= 0) { showToast("Ingresa un monto válido", "info"); return; }
+        if (monto > _retirosDisponible + 500) { showToast("Supera el profit disponible (" + fmt(_retirosDisponible) + ")", "delete"); return; }
+        cerrarRetiroModal();
         try {
           await db.collection("transacciones").add({
             tipo: "gasto", categoria: "Retiro de Profit", monto,
-            receptor: nombre, descripcion: "Retiro de Profit " + nombre,
+            receptor: _retiroNombre, descripcion: "Retiro de Profit " + _retiroNombre,
             fecha: todayStr, hora: new Date().toTimeString().slice(0,5), medio: "Efectivo", proyecto: ""
           });
-          showToast("Retiro de profit (" + nombre + ") registrado ✓");
+          showToast("Retiro de profit (" + _retiroNombre + ") registrado ✓");
         } catch(e) { showToast("Error al registrar", "delete"); }
       }
 
@@ -3289,16 +3333,13 @@
         const retirosCapital = transactions
           .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
           .reduce((s, t) => s + t.monto, 0);
-        // Profit = total en cuenta - capital activo
-        const lastDayG = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let _fG = 0, _cG = 0;
-        transactions.filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDayG; }).forEach(t => {
-          const r = (t.receptor||"").trim().toLowerCase();
-          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-          if (r==="frank") _fG += d; else if (r==="cristian") _cG += d;
-        });
+        // Profit Total = net histórico de proyectos cerrados
+        const _noPrGb = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
+        const _cerradosGb = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !_noPrGb.has(k.toLowerCase())));
+        const profitTotal = transactions
+          .filter(t => t.proyecto && _cerradosGb.has(t.proyecto) && !_noPrGb.has((t.proyecto||"h").toLowerCase()) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria))
+          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
         const capitalActivo = calcCapitalActivo();
-        const profitTotal = (_fG + _cG) - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
@@ -3380,7 +3421,7 @@
         const saldoEl = document.getElementById("kpi-saldo");
         const capitalAcKpi = calcCapitalActivo();
         const totalKpi = _frankD + _cristianD;
-        const profitKpi = totalKpi - capitalAcKpi;
+        const profitKpi = _lastFrankProfit + _lastCristProfit;
         if (saldoEl) { saldoEl.textContent = fmt(totalKpi); saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)"; }
         const capEl = document.getElementById("kpi-saldo-capital");
         if (capEl) { capEl.textContent = fmt(capitalAcKpi); capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)"; }
