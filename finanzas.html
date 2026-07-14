@@ -758,6 +758,37 @@
         #main-app.privacy-mode .sv:hover { filter: blur(0); }
       }
       #main-app.privacy-mode .sv:active { filter: blur(0); }
+
+      /* ── Notas ── */
+      .notas-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+      @media(min-width:640px) { .notas-grid { grid-template-columns:repeat(3,1fr); } }
+      .nota-card { border-radius:14px; border:1px solid rgba(255,255,255,0.09); background:rgba(255,255,255,0.04); padding:12px; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; min-height:100px; position:relative; overflow:hidden; }
+      .nota-card:active { transform:scale(0.97); }
+      .nota-card:hover { border-color:rgba(255,255,255,0.14); box-shadow:0 6px 20px rgba(0,0,0,0.4); }
+      .nota-color-bar { position:absolute; top:0;left:0;right:0; height:3px; border-radius:14px 14px 0 0; }
+      .nota-title { font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:4px; margin-top:5px; line-height:1.3; }
+      .nota-body { font-size:0.7rem; color:var(--text2); line-height:1.5; display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden; }
+      .nota-item-check { display:flex; align-items:flex-start; gap:5px; margin-bottom:3px; font-size:0.7rem; color:var(--text2); }
+      .nota-item-check.done { color:var(--text3); text-decoration:line-through; }
+      .nota-item-check input[type="checkbox"] { width:12px; height:12px; margin-top:2px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
+      .nota-add-btn { border:2px dashed rgba(255,255,255,0.1); border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100px; cursor:pointer; color:var(--text3); gap:5px; font-size:0.68rem; font-weight:600; background:transparent; width:100%; transition:border-color 0.2s,color 0.2s; }
+      .nota-add-btn:hover { border-color:rgba(184,144,77,0.4); color:var(--accent); }
+      .nota-link-card { display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:7px 10px; margin-top:6px; text-decoration:none; background:rgba(255,255,255,0.04); cursor:pointer; }
+      .nota-link-card img { width:16px; height:16px; border-radius:3px; flex-shrink:0; }
+      .nota-link-domain { font-size:0.62rem; color:var(--accent); font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .nota-link-title { font-size:0.65rem; color:var(--text2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:1px; }
+      .nota-check-input { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+      .nota-check-input input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent); flex-shrink:0; }
+      .nota-check-input input[type="text"] { flex:1; background:transparent!important; border:none!important; color:var(--text)!important; font-size:0.82rem; padding:2px 0!important; box-shadow:none!important; }
+      .nota-check-input .del-item { width:20px;height:20px; cursor:pointer; color:var(--text3); display:flex;align-items:center;justify-content:center; border-radius:50%; border:none; background:transparent; flex-shrink:0; padding:0; }
+      .nota-check-input .del-item:hover { color:var(--red); }
+      .color-dot { width:22px;height:22px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:transform 0.15s,border-color 0.15s; }
+      .color-dot.selected { border-color:white; transform:scale(1.25); }
+      .active-nota-tipo { border-color:var(--accent)!important; color:var(--accent)!important; background:rgba(184,144,77,0.1)!important; }
+      /* ── Mas drawer styled items ── */
+      .mas-drawer-item { display:flex; align-items:center; gap:14px; padding:13px 14px; border-radius:14px; cursor:pointer; background:var(--glass); border:1px solid var(--glass-b); margin-bottom:9px; width:100%; color:var(--text); transition:background 0.2s,border-color 0.2s; text-align:left; }
+      .mas-drawer-item:hover,.mas-drawer-item:active { background:rgba(255,255,255,0.07); border-color:rgba(184,144,77,0.2); }
+      .mas-drawer-icon { width:40px;height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -1378,7 +1409,7 @@
         <!-- /panel-resumen -->
 
         <!-- TAB MOVIMIENTOS -->
-        <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
+        <div id="panel-movimientos" class="pt-2 px-3 pb-6 sm:px-5 hidden">
           <div class="flex items-center justify-between mb-3">
             <label class="flex items-center gap-2 cursor-pointer select-none">
               <div class="relative">
@@ -1510,7 +1541,7 @@
         </div>
 
         <!-- TAB ESTADÍSTICAS -->
-        <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
+        <div id="panel-estadisticas" class="pt-2 px-3 pb-10 sm:px-5 hidden">
           <!-- REPORTES HEADER -->
           <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-1">
@@ -1652,7 +1683,7 @@
         </div>
 
         <!-- TAB NUEVO -->
-        <div id="panel-nuevo" class="p-4 sm:p-6 hidden">
+        <div id="panel-nuevo" class="pt-2 px-3 pb-6 sm:px-5 hidden">
           <div class="max-w-lg mx-auto">
             <div class="flex items-center justify-between mb-5">
               <h2
@@ -1911,6 +1942,19 @@
             </form>
           </div>
         </div>
+        <!-- TAB NOTAS -->
+        <div id="panel-notas" class="pt-2 px-3 pb-6 sm:px-5 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold flex items-center gap-2" style="color:var(--text)">
+              <i data-lucide="notebook-pen" class="w-4 h-4" style="color:#A78BFA"></i>
+              Mis Notas
+            </h2>
+            <button onclick="abrirModalNota()" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl" style="background:rgba(167,139,250,0.12);color:#A78BFA;border:1px solid rgba(167,139,250,0.25)">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Nueva nota
+            </button>
+          </div>
+          <div id="notas-container" class="notas-grid"></div>
+        </div>
       </div>
       <!-- /main container -->
     </div>
@@ -1961,53 +2005,35 @@
 
     <!-- MÁS DRAWER -->
     <div id="mas-drawer">
-      <div
-        style="
-          width: 36px;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.15);
-          border-radius: 2px;
-          margin: 0 auto 16px;
-        "
-      ></div>
-      <p
-        style="
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--text3);
-          margin-bottom: 8px;
-        "
-      >
-        Opciones
-      </p>
-      <button
-        class="mas-item"
-        onclick="
-          closeMasDrawer();
-          document.getElementById('btn-install-ios') &&
-            document.getElementById('btn-install-ios').click();
-        "
-      >
-        <i
-          data-lucide="download"
-          style="color: var(--accent); width: 20px; height: 20px"
-        ></i>
-        Instalar App
+      <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
+      <p style="font-size:0.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px">Herramientas</p>
+      <button class="mas-drawer-item" onclick="closeMasDrawer();showTab('notas')">
+        <div class="mas-drawer-icon" style="background:rgba(167,139,250,0.12)">
+          <i data-lucide="notebook-pen" style="color:#A78BFA;width:20px;height:20px"></i>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold" style="color:var(--text)">Notas</p>
+          <p class="text-xs mt-0.5" style="color:var(--text2)">Apuntes, listas y links</p>
+        </div>
+        <i data-lucide="chevron-right" style="color:var(--text3);width:16px;height:16px;flex-shrink:0"></i>
       </button>
-      <button
-        class="mas-item"
-        onclick="
-          closeMasDrawer();
-          logout();
-        "
-      >
-        <i
-          data-lucide="log-out"
-          style="color: var(--red); width: 20px; height: 20px"
-        ></i>
-        Cerrar sesión
+      <p style="font-size:0.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;margin-top:14px">Cuenta</p>
+      <button class="mas-drawer-item" onclick="closeMasDrawer();document.getElementById('btn-install-ios')&&document.getElementById('btn-install-ios').click()">
+        <div class="mas-drawer-icon" style="background:rgba(184,144,77,0.12)">
+          <i data-lucide="download" style="color:var(--accent);width:20px;height:20px"></i>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold" style="color:var(--text)">Instalar App</p>
+          <p class="text-xs mt-0.5" style="color:var(--text2)">Agregar a pantalla de inicio</p>
+        </div>
+      </button>
+      <button class="mas-drawer-item" onclick="closeMasDrawer();if(confirm('\u00bfCerrar sesi\u00f3n?'))logout()">
+        <div class="mas-drawer-icon" style="background:rgba(255,77,106,0.12)">
+          <i data-lucide="log-out" style="color:var(--red);width:20px;height:20px"></i>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold" style="color:var(--red)">Cerrar sesión</p>
+        </div>
       </button>
     </div>
 
@@ -2019,7 +2045,38 @@
 
     <div id="toast"></div>
 
-    <!-- MODAL RETIRO DE PROFIT -->
+    <!-- MODAL NOTA -->
+    <div id="modal-nota" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center" style="background:rgba(0,0,0,0.7);backdrop-filter:blur(6px)" onclick="if(event.target===this)cerrarModalNota()">
+      <div class="w-full sm:max-w-md" style="background:#0a0e1a;border:1px solid rgba(255,255,255,0.1);border-radius:20px 20px 0 0;max-height:92dvh;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom,0px)" onclick="event.stopPropagation()">
+        <div id="nota-modal-colorbar" style="height:4px;border-radius:20px 20px 0 0;background:var(--accent);transition:background 0.2s"></div>
+        <div class="p-5">
+          <div class="flex gap-2 mb-4">
+            <button id="btn-tipo-nota" type="button" onclick="setNotaTipo('nota')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="file-text" style="width:13px;height:13px"></i> Texto</button>
+            <button id="btn-tipo-lista" type="button" onclick="setNotaTipo('lista')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="check-square" style="width:13px;height:13px"></i> Lista</button>
+            <button id="btn-tipo-link" type="button" onclick="setNotaTipo('link')" class="flex-1 py-2.5 rounded-xl text-xs font-bold border-2 flex items-center justify-center gap-1.5" style="border-color:rgba(255,255,255,0.1);color:var(--text2)"><i data-lucide="link" style="width:13px;height:13px"></i> Link</button>
+          </div>
+          <input type="text" id="nota-titulo" placeholder="Título (opcional)" class="block w-full rounded-xl p-3 mb-3 text-sm font-semibold focus:outline-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"/>
+          <div id="nota-section-texto"><textarea id="nota-texto" placeholder="Escribe tu nota…" rows="5" class="block w-full rounded-xl p-3 mb-3 text-sm focus:outline-none resize-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"></textarea></div>
+          <div id="nota-section-lista" class="hidden">
+            <div id="nota-items-list" class="mb-2"></div>
+            <button type="button" onclick="addNotaItemRow()" class="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-xl mb-3" style="color:var(--text2);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)"><i data-lucide="plus" style="width:13px;height:13px"></i> Agregar elemento</button>
+          </div>
+          <div id="nota-section-link" class="hidden">
+            <input type="url" id="nota-url" placeholder="https://…" oninput="previewNotaLink(this.value)" class="block w-full rounded-xl p-3 mb-2 text-sm focus:outline-none" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text)"/>
+            <div id="nota-link-preview"></div>
+          </div>
+          <div class="mb-5">
+            <p class="text-xs font-semibold uppercase tracking-wide mb-2" style="color:var(--text3)">Color</p>
+            <div id="nota-color-picker" class="flex gap-2.5 flex-wrap"></div>
+          </div>
+          <div class="flex gap-2">
+            <button id="btn-borrar-nota" type="button" onclick="borrarNota()" class="hidden py-2.5 px-3 rounded-xl text-sm font-semibold flex items-center gap-1" style="background:rgba(255,77,106,0.12);color:var(--red);border:1px solid rgba(255,77,106,0.25)"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>
+            <button type="button" onclick="cerrarModalNota()" class="flex-1 py-2.5 rounded-xl text-sm font-semibold" style="border:2px solid rgba(255,255,255,0.1);color:var(--text2)">Cancelar</button>
+            <button type="button" onclick="guardarNota()" class="flex-1 py-2.5 rounded-xl text-sm font-bold" style="background:linear-gradient(135deg,#B8904D,#D4A85E);color:#1a0f00">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="retiro-overlay" onclick="cerrarRetiroModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:55;align-items:flex-end;backdrop-filter:blur(4px)">
       <div onclick="event.stopPropagation()" style="background:#0c1628;border:1px solid rgba(255,255,255,0.1);border-top:1px solid rgba(255,255,255,0.14);border-radius:20px 20px 0 0;padding:20px;width:100%;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))">
         <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
@@ -2132,7 +2189,7 @@
       function showTab(tab) {
         closeMasDrawer();
         currentTab = tab;
-        ["resumen", "movimientos", "estadisticas", "nuevo"].forEach((t) => {
+        ["resumen", "movimientos", "estadisticas", "nuevo", "notas"].forEach((t) => {
           const panel = document.getElementById("panel-" + t);
           if (panel) panel.classList.toggle("hidden", t !== tab);
           const topBtn = document.getElementById("tab-" + t);
@@ -2148,6 +2205,7 @@
         if (navFab) navFab.style.opacity = tab === "nuevo" ? "0.6" : "1";
         if (tab === "estadisticas") renderCharts();
         if (tab === "movimientos") renderMovimientos();
+        if (tab === "notas") { initNotasIfNeeded(); renderNotas(); }
         lucide.createIcons();
         window.scrollTo({ top: 0, behavior: "instant" });
       }
@@ -4497,6 +4555,193 @@
       });
       buildCatDropdown();
       lucide.createIcons();
+
+      // ── Notas ─────────────────────────────────────────────────────
+      let _notas = [], _notasInitialized = false;
+      const NOTA_COLORS = ["#B8904D","#22D68A","#38BDF8","#FF4D6A","#A78BFA","#F97316","#EC4899","#EEF2FF"];
+      let _notaEditandoId = null, _notaColor = NOTA_COLORS[0], _notaTipo = "nota";
+
+      function initNotasIfNeeded() {
+        if (_notasInitialized || !db) return;
+        _notasInitialized = true;
+        db.collection("notas_cbd").orderBy("creadoEn","desc").onSnapshot(snap => {
+          _notas = snap.docs.map(d => ({id:d.id,...d.data()}));
+          if (currentTab === "notas") renderNotas();
+        }, err => console.error("notas:", err));
+      }
+
+      function renderNotas() {
+        const c = document.getElementById("notas-container");
+        if (!c) return;
+        if (_notas.length === 0) {
+          c.innerHTML = `<button class="nota-add-btn" onclick="abrirModalNota()" style="grid-column:span 2;min-height:150px"><i data-lucide="plus" style="width:28px;height:28px;opacity:0.3"></i><span>Crear primera nota</span><span style="font-size:0.62rem;color:var(--text3)">Texto · Lista · Link</span></button>`;
+          lucide.createIcons(); return;
+        }
+        c.innerHTML = `<button class="nota-add-btn" onclick="abrirModalNota()"><i data-lucide="plus" style="width:20px;height:20px;opacity:0.4"></i><span>Nueva</span></button>` + _notas.map(buildNotaCard).join('');
+        lucide.createIcons();
+      }
+
+      function buildNotaCard(nota) {
+        const color = nota.color || NOTA_COLORS[0];
+        const ts = nota.actualizadoEn || nota.creadoEn;
+        const tsHtml = ts ? `<p style="font-size:0.58rem;color:var(--text3);margin-top:5px">${_fmtNotaTs(ts)}</p>` : "";
+        const bar = `<div class="nota-color-bar" style="background:${color}"></div>`;
+        const header = nota.titulo ? `<p class="nota-title">${escapeHtml(nota.titulo)}</p>` : '<div style="margin-top:5px"></div>';
+        const click = `onclick="abrirModalNota('${nota.id}')"`;
+        if (nota.tipo === "link") {
+          const domain = nota.linkDomain || "";
+          const title = nota.linkTitle || nota.linkUrl || "";
+          const favicon = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=32` : "";
+          return `<div class="nota-card" ${click}>${bar}${header}<div class="nota-link-card"><img src="${favicon}" onerror="this.style.display='none'"><div><p class="nota-link-domain">${domain}</p><p class="nota-link-title">${escapeHtml(title)}</p></div></div>${tsHtml}</div>`;
+        }
+        if (nota.tipo === "lista") {
+          const items = (nota.items||[]).slice(0,6);
+          const itemsHtml = items.map(it => `<div class="nota-item-check ${it.checked?'done':''}"><input type="checkbox" ${it.checked?'checked':''} onclick="_toggleNotaItem('${nota.id}','${it.id}',event)"><span>${escapeHtml(it.texto||'')}</span></div>`).join('');
+          const extra = (nota.items||[]).length > 6 ? `<div style="color:var(--text3);font-size:0.62rem;margin-top:2px">+${nota.items.length-6} más</div>` : '';
+          return `<div class="nota-card" ${click}>${bar}${header}<div class="nota-body">${itemsHtml}${extra}</div>${tsHtml}</div>`;
+        }
+        return `<div class="nota-card" ${click}>${bar}${header}<p class="nota-body">${escapeHtml(nota.texto||'')}</p>${tsHtml}</div>`;
+      }
+
+      function _fmtNotaTs(iso) {
+        const d = new Date(iso), now = new Date(), diffMin = Math.floor((now-d)/60000);
+        if (diffMin < 1) return "ahora";
+        if (diffMin < 60) return `hace ${diffMin} min`;
+        if (diffMin < 1440) return `hace ${Math.floor(diffMin/60)} h`;
+        const dd = Math.floor(diffMin/1440);
+        return dd === 1 ? "ayer" : `hace ${dd} d`;
+      }
+
+      async function _toggleNotaItem(notaId, itemId, ev) {
+        ev.stopPropagation();
+        const nota = _notas.find(n => n.id === notaId);
+        if (!nota) return;
+        const items = nota.items.map(i => i.id === itemId ? {...i, checked: !i.checked} : i);
+        await db.collection("notas_cbd").doc(notaId).update({items, actualizadoEn: new Date().toISOString()});
+      }
+
+      function abrirModalNota(notaId = null) {
+        const modal = document.getElementById("modal-nota");
+        if (!modal) return;
+        modal.classList.remove("hidden");
+        _notaEditandoId = null; _notaColor = NOTA_COLORS[0];
+        document.getElementById("nota-titulo").value = "";
+        document.getElementById("nota-texto").value = "";
+        document.getElementById("nota-url").value = "";
+        document.getElementById("nota-link-preview").innerHTML = "";
+        document.getElementById("nota-items-list").innerHTML = "";
+        document.getElementById("btn-borrar-nota").classList.add("hidden");
+        if (notaId) {
+          const nota = _notas.find(n => n.id === notaId);
+          if (!nota) return;
+          _notaEditandoId = notaId; _notaColor = nota.color || NOTA_COLORS[0];
+          document.getElementById("nota-titulo").value = nota.titulo || "";
+          setNotaTipo(nota.tipo || "nota");
+          if (nota.tipo === "lista") (nota.items||[]).forEach(addNotaItemRow);
+          else if (nota.tipo === "link") { document.getElementById("nota-url").value = nota.linkUrl||""; previewNotaLink(nota.linkUrl||""); }
+          else document.getElementById("nota-texto").value = nota.texto || "";
+          document.getElementById("btn-borrar-nota").classList.remove("hidden");
+        } else { setNotaTipo("nota"); }
+        renderColorPickerNota();
+        lucide.createIcons();
+      }
+
+      function cerrarModalNota() {
+        const m = document.getElementById("modal-nota");
+        if (m) m.classList.add("hidden");
+        _notaEditandoId = null;
+      }
+
+      function setNotaTipo(tipo) {
+        _notaTipo = tipo;
+        document.getElementById("nota-section-texto").classList.toggle("hidden", tipo !== "nota");
+        document.getElementById("nota-section-lista").classList.toggle("hidden", tipo !== "lista");
+        document.getElementById("nota-section-link").classList.toggle("hidden", tipo !== "link");
+        ["nota","lista","link"].forEach(t => {
+          const btn = document.getElementById("btn-tipo-"+t);
+          if (!btn) return;
+          if (tipo === t) btn.classList.add("active-nota-tipo"); else btn.classList.remove("active-nota-tipo");
+        });
+      }
+
+      function renderColorPickerNota() {
+        const picker = document.getElementById("nota-color-picker");
+        if (!picker) return;
+        picker.innerHTML = NOTA_COLORS.map(c => `<div class="color-dot ${c===_notaColor?'selected':''}" style="background:${c}" onclick="selectNotaColor('${c}')"></div>`).join('');
+        const bar = document.getElementById("nota-modal-colorbar");
+        if (bar) bar.style.background = _notaColor;
+      }
+
+      function selectNotaColor(color) {
+        _notaColor = color;
+        renderColorPickerNota();
+      }
+
+      function addNotaItemRow(item = null) {
+        const id = item ? item.id : "item_"+Date.now()+"_"+Math.random().toString(36).substr(2,5);
+        const list = document.getElementById("nota-items-list");
+        const div = document.createElement("div");
+        div.className = "nota-check-input"; div.dataset.id = id;
+        div.innerHTML = `<input type="checkbox" ${item&&item.checked?'checked':''}><input type="text" placeholder="Elemento…" value="${item?item.texto.replace(/"/g,'&quot;'):''}"><button type="button" class="del-item" onclick="this.closest('.nota-check-input').remove()"><i data-lucide="x" style="width:12px;height:12px"></i></button>`;
+        list.appendChild(div);
+        lucide.createIcons();
+        if (!item) div.querySelector('input[type="text"]').focus();
+      }
+
+      async function previewNotaLink(url) {
+        const preview = document.getElementById("nota-link-preview");
+        if (!preview) return;
+        if (!url || !url.startsWith("http")) { preview.innerHTML = ""; return; }
+        try {
+          const domain = new URL(url).hostname;
+          const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+          preview.innerHTML = `<div class="nota-link-card"><img src="${favicon}" onerror="this.style.display='none'"><div><p class="nota-link-domain">${domain}</p><p class="nota-link-title">${url}</p></div></div>`;
+        } catch { preview.innerHTML = ""; }
+      }
+
+      async function guardarNota() {
+        const titulo = (document.getElementById("nota-titulo").value||"").trim();
+        const data = { titulo, color: _notaColor, tipo: _notaTipo, actualizadoEn: new Date().toISOString() };
+        if (_notaTipo === "lista") {
+          const items = [];
+          document.querySelectorAll("#nota-items-list .nota-check-input").forEach(row => {
+            const texto = row.querySelector('input[type="text"]').value.trim();
+            if (texto) items.push({id:row.dataset.id, texto, checked:row.querySelector('input[type="checkbox"]').checked});
+          });
+          data.items = items; data.texto = "";
+          if (!titulo && !items.length) { cerrarModalNota(); return; }
+        } else if (_notaTipo === "link") {
+          const url = (document.getElementById("nota-url").value||"").trim();
+          if (!url && !titulo) { cerrarModalNota(); return; }
+          data.linkUrl = url;
+          try { data.linkDomain = new URL(url).hostname; } catch { data.linkDomain = ""; }
+          data.linkTitle = url; data.texto = ""; data.items = [];
+        } else {
+          data.texto = (document.getElementById("nota-texto").value||"").trim();
+          data.items = [];
+          if (!titulo && !data.texto) { cerrarModalNota(); return; }
+        }
+        try {
+          if (_notaEditandoId) {
+            await db.collection("notas_cbd").doc(_notaEditandoId).update(data);
+            showToast("Nota actualizada \u2713");
+          } else {
+            data.creadoEn = new Date().toISOString();
+            await db.collection("notas_cbd").add(data);
+            showToast("Nota guardada \u2713");
+          }
+          cerrarModalNota();
+        } catch(e) { showToast("Error al guardar", "delete"); }
+      }
+
+      async function borrarNota() {
+        if (!_notaEditandoId) return;
+        if (!confirm("\u00bfEliminar esta nota?")) return;
+        await db.collection("notas_cbd").doc(_notaEditandoId).delete();
+        showToast("Nota eliminada", "delete");
+        cerrarModalNota();
+      }
+
 
       // ── Privacy mode ──
       function applySvClass() {
