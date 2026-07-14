@@ -4,22 +4,29 @@
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      (function(){
-        function loadGA(){
-          if(window._gaLoaded)return;
-          window._gaLoaded=true;
-          var s=document.createElement('script');
-          s.async=true;
-          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
           document.head.appendChild(s);
-          gtag('js',new Date());
-          gtag('config','G-01GC6QM018');
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
         }
-        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
-        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){
-          document.addEventListener(e,loadGA,{once:true,passive:true});
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
@@ -73,35 +80,45 @@
       :root {
         --sat: env(safe-area-inset-top, 0px);
         --sab: env(safe-area-inset-bottom, 0px);
-        --bg:  #060c18;
+        --bg: #060c18;
         --bg2: #0c1628;
-        --glass: rgba(255,255,255,0.045);
-        --glass-b: rgba(255,255,255,0.09);
-        --glass-hover: rgba(255,255,255,0.07);
-        --accent: #B8904D;
-        --accent-bright: #D4A85E;
-        --green: #22D68A;
-        --red: #FF4D6A;
-        --blue: #38BDF8;
-        --purple: #A78BFA;
-        --text: #EEF2FF;
-        --text2: #8892B0;
-        --text3: #3D4A6B;
+        --glass: rgba(255, 255, 255, 0.045);
+        --glass-b: rgba(255, 255, 255, 0.09);
+        --glass-hover: rgba(255, 255, 255, 0.07);
+        --accent: #b8904d;
+        --accent-bright: #d4a85e;
+        --green: #22d68a;
+        --red: #ff4d6a;
+        --blue: #38bdf8;
+        --purple: #a78bfa;
+        --text: #eef2ff;
+        --text2: #8892b0;
+        --text3: #3d4a6b;
       }
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
       body {
         font-family: "Poppins", system-ui, sans-serif;
         background: var(--bg);
         background-image:
-          radial-gradient(ellipse 90% 50% at 10% 0%, rgba(184,144,77,0.06) 0%, transparent 60%),
-          radial-gradient(ellipse 70% 60% at 90% 100%, rgba(56,189,248,0.05) 0%, transparent 60%);
+          radial-gradient(
+            ellipse 90% 50% at 10% 0%,
+            rgba(184, 144, 77, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 70% 60% at 90% 100%,
+            rgba(56, 189, 248, 0.05) 0%,
+            transparent 60%
+          );
         background-attachment: fixed;
         color: var(--text);
         min-height: 100dvh;
       }
       nav#main-nav {
         padding-top: env(safe-area-inset-top, 0px);
-        background: rgba(6,12,24,0.8) !important;
+        background: rgba(6, 12, 24, 0.8) !important;
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         border-bottom: 1px solid var(--glass-b) !important;
@@ -120,12 +137,18 @@
         -webkit-backdrop-filter: blur(16px) saturate(160%);
         border: 1px solid var(--glass-b);
         border-radius: 16px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
-        transition: box-shadow 0.25s, border-color 0.25s;
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transition:
+          box-shadow 0.25s,
+          border-color 0.25s;
       }
       .glass-card:hover {
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.09);
-        border-color: rgba(184,144,77,0.2);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.09);
+        border-color: rgba(184, 144, 77, 0.2);
       }
 
       /* ── KPI Cards ── */
@@ -135,14 +158,21 @@
         -webkit-backdrop-filter: blur(16px);
         border: 1px solid var(--glass-b);
         border-radius: 14px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+        box-shadow:
+          0 4px 20px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
         padding: 1rem 1.25rem;
         position: relative;
         overflow: hidden;
         cursor: pointer;
-        transition: opacity 0.15s, transform 0.1s;
+        transition:
+          opacity 0.15s,
+          transform 0.1s;
       }
-      .kpi-card:active { opacity: 0.75; transform: scale(0.97); }
+      .kpi-card:active {
+        opacity: 0.75;
+        transform: scale(0.97);
+      }
       .kpi-card .kpi-icon {
         position: absolute;
         right: 0.75rem;
@@ -171,11 +201,20 @@
         white-space: nowrap;
       }
       .kpi-card.kpi-dark {
-        background: linear-gradient(135deg, rgba(184,144,77,0.08) 0%, rgba(6,12,24,0.6) 100%);
-        border-color: rgba(184,144,77,0.2);
+        background: linear-gradient(
+          135deg,
+          rgba(184, 144, 77, 0.08) 0%,
+          rgba(6, 12, 24, 0.6) 100%
+        );
+        border-color: rgba(184, 144, 77, 0.2);
       }
-      .kpi-card.kpi-dark .kpi-label { color: rgba(255,255,255,0.45); }
-      .kpi-card.kpi-dark .kpi-value { color: var(--accent-bright); font-size: clamp(1rem,4vw,1.8rem); }
+      .kpi-card.kpi-dark .kpi-label {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .kpi-card.kpi-dark .kpi-value {
+        color: var(--accent-bright);
+        font-size: clamp(1rem, 4vw, 1.8rem);
+      }
 
       /* ── Tabs ── */
       .tab-btn {
@@ -184,7 +223,9 @@
         font-weight: 500;
         font-size: 0.82rem;
         padding: 0.65rem 1rem;
-        transition: color 0.15s, background 0.15s;
+        transition:
+          color 0.15s,
+          background 0.15s;
         white-space: nowrap;
         border-radius: 0;
         background: transparent;
@@ -193,39 +234,50 @@
         content: "";
         position: absolute;
         bottom: -1px;
-        left: 0; right: 0;
+        left: 0;
+        right: 0;
         height: 2px;
         background: transparent;
         border-radius: 2px 2px 0 0;
         transition: background 0.15s;
       }
-      .tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
-      .tab-btn.active { color: var(--text); font-weight: 700; }
-      .tab-btn.active::after { background: var(--accent); }
+      .tab-btn:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .tab-btn.active {
+        color: var(--text);
+        font-weight: 700;
+      }
+      .tab-btn.active::after {
+        background: var(--accent);
+      }
 
       /* ── Toggle Buttons ── */
-      .toggle-btn { transition: all 0.15s ease; }
+      .toggle-btn {
+        transition: all 0.15s ease;
+      }
       .toggle-btn.active-green {
         border-color: var(--green);
-        background: rgba(34,214,138,0.12);
+        background: rgba(34, 214, 138, 0.12);
         color: var(--green);
         font-weight: 700;
       }
       .toggle-btn.active-red {
         border-color: var(--red);
-        background: rgba(255,77,106,0.12);
+        background: rgba(255, 77, 106, 0.12);
         color: var(--red);
         font-weight: 700;
       }
       .toggle-btn.active-blue {
         border-color: var(--accent);
-        background: rgba(184,144,77,0.12);
+        background: rgba(184, 144, 77, 0.12);
         color: var(--accent-bright);
         font-weight: 700;
       }
       .toggle-btn.active-indigo {
         border-color: var(--purple);
-        background: rgba(167,139,250,0.12);
+        background: rgba(167, 139, 250, 0.12);
         color: var(--purple);
         font-weight: 700;
       }
@@ -236,7 +288,8 @@
       }
 
       /* ── Forms ── */
-      select, #cat-filter-btn {
+      select,
+      #cat-filter-btn {
         appearance: none;
         -webkit-appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23B8904D' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -244,95 +297,159 @@
         background-position: right 0.75rem center;
         padding-right: 2.5rem !important;
       }
-      input[type="date"], input[type="time"] {
+      input[type="date"],
+      input[type="time"] {
         -webkit-appearance: none;
         appearance: none;
         color: var(--text);
-        width: 100%; min-width: 0; box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
       }
-      input, select, textarea { font-size: 16px; }
-      input:focus, select:focus {
+      input,
+      select,
+      textarea {
+        font-size: 16px;
+      }
+      input:focus,
+      select:focus {
         outline: none;
         border-color: var(--accent) !important;
-        box-shadow: 0 0 0 3px rgba(184,144,77,0.18);
+        box-shadow: 0 0 0 3px rgba(184, 144, 77, 0.18);
       }
 
       /* ── Misc ── */
-      #ios-banner { display: none; padding-bottom: calc(1rem + var(--sab)); }
+      #ios-banner {
+        display: none;
+        padding-bottom: calc(1rem + var(--sab));
+      }
       #proyecto-dropdown {
         background: #0d1a2e;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
       }
       #proyecto-dropdown li {
         padding: 0.65rem 1rem;
         cursor: pointer;
         font-size: 0.875rem;
         color: var(--text);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
-      #proyecto-dropdown li:last-child { border-bottom: none; }
-      #proyecto-dropdown li:hover { background: rgba(184,144,77,0.1); color: var(--accent-bright); }
+      #proyecto-dropdown li:last-child {
+        border-bottom: none;
+      }
+      #proyecto-dropdown li:hover {
+        background: rgba(184, 144, 77, 0.1);
+        color: var(--accent-bright);
+      }
       #cat-dropdown {
         background: #0d1a2e !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
         color: var(--text);
       }
-      #cat-dropdown button, #cat-dropdown [role="button"] {
+      #cat-dropdown button,
+      #cat-dropdown [role="button"] {
         color: var(--text) !important;
       }
-      #cat-dropdown button:hover { background: rgba(184,144,77,0.1) !important; color: var(--accent-bright) !important; }
+      #cat-dropdown button:hover {
+        background: rgba(184, 144, 77, 0.1) !important;
+        color: var(--accent-bright) !important;
+      }
       .pub-widget {
-        background: linear-gradient(135deg, rgba(184,144,77,0.07) 0%, rgba(6,12,24,0.6) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(184, 144, 77, 0.07) 0%,
+          rgba(6, 12, 24, 0.6) 100%
+        );
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-radius: 16px;
-        border: 1px solid rgba(184,144,77,0.25);
-        box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+        border: 1px solid rgba(184, 144, 77, 0.25);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
       }
-      ::-webkit-scrollbar { width: 4px; height: 4px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
 
       /* ── Anti-flash login ──────────────────────── */
-      #login-loading { display: none; }
-      html.fz-resume #login-form { display: none; }
-      html.fz-resume #login-loading { display: flex; }
-      @keyframes fzspin { to { transform: rotate(360deg); } }
+      #login-loading {
+        display: none;
+      }
+      html.fz-resume #login-form {
+        display: none;
+      }
+      html.fz-resume #login-loading {
+        display: flex;
+      }
+      @keyframes fzspin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
       .fz-spinner {
-        width: 28px; height: 28px;
-        border: 3px solid rgba(184,144,77,0.2);
+        width: 28px;
+        height: 28px;
+        border: 3px solid rgba(184, 144, 77, 0.2);
         border-top-color: var(--accent);
         border-radius: 50%;
         animation: fzspin 0.8s linear infinite;
       }
 
       /* ── Skeleton de carga de datos ─────────────── */
-      #data-loading { display: none; }
+      #data-loading {
+        display: none;
+      }
       @keyframes fzshimmer {
-        0%   { background-position: -450px 0; }
-        100% { background-position:  450px 0; }
+        0% {
+          background-position: -450px 0;
+        }
+        100% {
+          background-position: 450px 0;
+        }
       }
       .fz-sk {
-        background: linear-gradient(90deg,
-          rgba(255,255,255,0.04) 25%,
-          rgba(255,255,255,0.09) 37%,
-          rgba(255,255,255,0.04) 63%);
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04) 25%,
+          rgba(255, 255, 255, 0.09) 37%,
+          rgba(255, 255, 255, 0.04) 63%
+        );
         background-size: 900px 100%;
         animation: fzshimmer 1.4s infinite linear;
         border-radius: 14px;
       }
 
       @keyframes panelIn {
-        from { opacity: 0; transform: translateY(8px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      .panel-anim { animation: panelIn 0.2s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+      .panel-anim {
+        animation: panelIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      }
 
       @media (max-width: 640px) {
-        .tab-btn { padding: 0.5rem 0.7rem; font-size: 0.73rem; }
-        .kpi-card { padding: 0.75rem 0.9rem; }
+        .tab-btn {
+          padding: 0.5rem 0.7rem;
+          font-size: 0.73rem;
+        }
+        .kpi-card {
+          padding: 0.75rem 0.9rem;
+        }
       }
 
       /* ── Toast ── */
@@ -342,71 +459,141 @@
         left: 50%;
         transform: translateX(-50%) translateY(4rem);
         z-index: 60;
-        background: rgba(20,83,45,0.92);
+        background: rgba(20, 83, 45, 0.92);
         color: white;
         padding: 0.7rem 1.5rem;
         border-radius: 2rem;
         font-size: 0.82rem;
         font-weight: 600;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        border: 1px solid rgba(34,214,138,0.4);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(34, 214, 138, 0.4);
         backdrop-filter: blur(10px);
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
         opacity: 0;
         pointer-events: none;
         white-space: nowrap;
       }
-      #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-      #toast.toast-success { background: rgba(20,83,45,0.92); border-color: var(--green); }
-      #toast.toast-delete  { background: rgba(127,29,29,0.92); border-color: var(--red); }
-      #toast.toast-info    { background: rgba(30,58,95,0.92);  border-color: var(--blue); }
+      #toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      #toast.toast-success {
+        background: rgba(20, 83, 45, 0.92);
+        border-color: var(--green);
+      }
+      #toast.toast-delete {
+        background: rgba(127, 29, 29, 0.92);
+        border-color: var(--red);
+      }
+      #toast.toast-info {
+        background: rgba(30, 58, 95, 0.92);
+        border-color: var(--blue);
+      }
 
       /* ── Tailwind dark overrides ── */
-      #main-app .bg-white           { background-color: rgba(255,255,255,0.04) !important; }
-      #main-app .bg-slate-50        { background-color: rgba(255,255,255,0.03) !important; }
-      #main-app .bg-slate-100       { background-color: rgba(255,255,255,0.06) !important; }
-      #main-app .text-slate-800     { color: var(--text)  !important; }
-      #main-app .text-slate-700     { color: #CBD5E1 !important; }
-      #main-app .text-slate-600     { color: #94A3B8 !important; }
-      #main-app .text-slate-500     { color: #64748B !important; }
-      #main-app .text-slate-400     { color: #475569 !important; }
-      #main-app .text-slate-300     { color: #475569 !important; }
+      #main-app .bg-white {
+        background-color: rgba(255, 255, 255, 0.04) !important;
+      }
+      #main-app .bg-slate-50 {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+      }
+      #main-app .bg-slate-100 {
+        background-color: rgba(255, 255, 255, 0.06) !important;
+      }
+      #main-app .text-slate-800 {
+        color: var(--text) !important;
+      }
+      #main-app .text-slate-700 {
+        color: #cbd5e1 !important;
+      }
+      #main-app .text-slate-600 {
+        color: #94a3b8 !important;
+      }
+      #main-app .text-slate-500 {
+        color: #64748b !important;
+      }
+      #main-app .text-slate-400 {
+        color: #475569 !important;
+      }
+      #main-app .text-slate-300 {
+        color: #475569 !important;
+      }
       #main-app .border-slate-100,
-      #main-app .border-slate-200   { border-color: rgba(255,255,255,0.08) !important; }
+      #main-app .border-slate-200 {
+        border-color: rgba(255, 255, 255, 0.08) !important;
+      }
       #main-app .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
-      #main-app .divide-slate-50  > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.06) !important; }
+      #main-app .divide-slate-50 > :not([hidden]) ~ :not([hidden]) {
+        border-color: rgba(255, 255, 255, 0.06) !important;
+      }
       #main-app input:not([type="checkbox"]):not([type="radio"]),
       #main-app select,
       #main-app textarea {
-        background-color: rgba(255,255,255,0.04) !important;
+        background-color: rgba(255, 255, 255, 0.04) !important;
         color: var(--text) !important;
-        border-color: rgba(255,255,255,0.1) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
       }
       #main-app select option {
         background-color: #0d1a2e;
-        color: #EEF2FF;
+        color: #eef2ff;
       }
-      #main-app thead, #main-app thead[style] { background: rgba(255,255,255,0.05) !important; }
+      #main-app thead,
+      #main-app thead[style] {
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
       #main-app .hover\:bg-slate-50:hover,
-      #main-app .hover\:bg-white:hover  { background-color: rgba(255,255,255,0.06) !important; }
-      #main-app .bg-green-50         { background-color: rgba(34,214,138,0.08) !important; }
-      #main-app .bg-red-50           { background-color: rgba(255,77,106,0.08)  !important; }
-      #main-app .bg-yellow-50        { background-color: rgba(184,144,77,0.08)  !important; }
-      #main-app .bg-blue-50          { background-color: rgba(56,189,248,0.08)  !important; }
+      #main-app .hover\:bg-white:hover {
+        background-color: rgba(255, 255, 255, 0.06) !important;
+      }
+      #main-app .bg-green-50 {
+        background-color: rgba(34, 214, 138, 0.08) !important;
+      }
+      #main-app .bg-red-50 {
+        background-color: rgba(255, 77, 106, 0.08) !important;
+      }
+      #main-app .bg-yellow-50 {
+        background-color: rgba(184, 144, 77, 0.08) !important;
+      }
+      #main-app .bg-blue-50 {
+        background-color: rgba(56, 189, 248, 0.08) !important;
+      }
       #main-app .bg-f0fdf4,
-      #main-app [style*="background: #f0fdf4"] { background: rgba(34,214,138,0.08) !important; }
+      #main-app [style*="background: #f0fdf4"] {
+        background: rgba(34, 214, 138, 0.08) !important;
+      }
       #main-app .text-green-700,
-      #main-app .text-green-600      { color: var(--green) !important; }
+      #main-app .text-green-600 {
+        color: var(--green) !important;
+      }
       #main-app .text-red-700,
-      #main-app .text-red-600        { color: var(--red) !important; }
+      #main-app .text-red-600 {
+        color: var(--red) !important;
+      }
       #main-app .text-blue-700,
-      #main-app .text-blue-600       { color: var(--blue) !important; }
-      #main-app .text-slate-900      { color: var(--text) !important; }
-      #main-app .border-green-200    { border-color: rgba(34,214,138,0.2)  !important; }
-      #main-app .border-red-200      { border-color: rgba(255,77,106,0.2)  !important; }
-      #main-app .border-blue-200     { border-color: rgba(56,189,248,0.2)  !important; }
-      #main-app .rounded-xl.border.border-slate-200 { background-color: rgba(255,255,255,0.03) !important; }
-      #main-app .mes-selector-btn { background: var(--glass) !important; border-color: var(--glass-b) !important; }
+      #main-app .text-blue-600 {
+        color: var(--blue) !important;
+      }
+      #main-app .text-slate-900 {
+        color: var(--text) !important;
+      }
+      #main-app .border-green-200 {
+        border-color: rgba(34, 214, 138, 0.2) !important;
+      }
+      #main-app .border-red-200 {
+        border-color: rgba(255, 77, 106, 0.2) !important;
+      }
+      #main-app .border-blue-200 {
+        border-color: rgba(56, 189, 248, 0.2) !important;
+      }
+      #main-app .rounded-xl.border.border-slate-200 {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+      }
+      #main-app .mes-selector-btn {
+        background: var(--glass) !important;
+        border-color: var(--glass-b) !important;
+      }
 
       /* ── Bottom Nav ── */
       #bottom-nav {
@@ -416,18 +603,20 @@
         right: 0;
         height: calc(68px + var(--sab));
         padding-bottom: var(--sab);
-        background: rgba(6,12,24,0.85);
+        background: rgba(6, 12, 24, 0.85);
         backdrop-filter: blur(40px) saturate(200%);
         -webkit-backdrop-filter: blur(40px) saturate(200%);
-        border-top: 1px solid rgba(255,255,255,0.06);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
         display: none;
         align-items: center;
         justify-content: space-around;
         z-index: 40;
-        padding-left: max(env(safe-area-inset-left,0px), 4px);
-        padding-right: max(env(safe-area-inset-right,0px), 4px);
+        padding-left: max(env(safe-area-inset-left, 0px), 4px);
+        padding-right: max(env(safe-area-inset-right, 0px), 4px);
       }
-      #bottom-nav.visible { display: flex; }
+      #bottom-nav.visible {
+        display: flex;
+      }
       .nav-item {
         display: flex;
         flex-direction: column;
@@ -440,16 +629,28 @@
         font-size: 0.58rem;
         font-weight: 600;
         letter-spacing: 0.03em;
-        transition: color 0.2s, transform 0.1s;
+        transition:
+          color 0.2s,
+          transform 0.1s;
         flex: 1;
         border: none;
         background: transparent;
         min-width: 0;
       }
-      .nav-item:active { transform: scale(0.9); }
-      .nav-item svg { width: 22px; height: 22px; stroke-width: 1.8; }
-      .nav-item.active { color: var(--accent); }
-      .nav-item.active svg { filter: drop-shadow(0 0 8px rgba(184,144,77,0.55)); }
+      .nav-item:active {
+        transform: scale(0.9);
+      }
+      .nav-item svg {
+        width: 22px;
+        height: 22px;
+        stroke-width: 1.8;
+      }
+      .nav-item.active {
+        color: var(--accent);
+      }
+      .nav-item.active svg {
+        filter: drop-shadow(0 0 8px rgba(184, 144, 77, 0.55));
+      }
       .nav-fab {
         display: flex;
         flex-direction: column;
@@ -458,45 +659,63 @@
         width: 52px;
         height: 52px;
         border-radius: 16px;
-        background: linear-gradient(135deg, #D4A85E 0%, #B8904D 100%);
-        box-shadow: 0 4px 20px rgba(184,144,77,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
+        background: linear-gradient(135deg, #d4a85e 0%, #b8904d 100%);
+        box-shadow:
+          0 4px 20px rgba(184, 144, 77, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
         cursor: pointer;
         border: none;
         color: #1a0f00;
         margin-bottom: 4px;
-        transition: transform 0.15s, box-shadow 0.15s;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
         flex-shrink: 0;
       }
-      .nav-fab:active { transform: scale(0.93); box-shadow: 0 2px 10px rgba(184,144,77,0.3); }
-      .nav-fab svg { width: 24px; height: 24px; stroke-width: 2.5; }
+      .nav-fab:active {
+        transform: scale(0.93);
+        box-shadow: 0 2px 10px rgba(184, 144, 77, 0.3);
+      }
+      .nav-fab svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 2.5;
+      }
 
       /* ── Más Drawer ── */
       #mas-drawer-overlay {
-        position: fixed; inset: 0; z-index: 38;
-        background: rgba(0,0,0,0);
+        position: fixed;
+        inset: 0;
+        z-index: 38;
+        background: rgba(0, 0, 0, 0);
         pointer-events: none;
         transition: background 0.25s;
       }
       #mas-drawer-overlay.open {
-        background: rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.5);
         pointer-events: auto;
       }
       #mas-drawer {
         position: fixed;
-        left: 0; right: 0;
+        left: 0;
+        right: 0;
         bottom: calc(68px + var(--sab));
         z-index: 39;
         background: #0c1628;
-        border: 1px solid rgba(255,255,255,0.09);
+        border: 1px solid rgba(255, 255, 255, 0.09);
         border-bottom: none;
         border-radius: 20px 20px 0 0;
         padding: 16px 20px calc(8px);
         transform: translateY(calc(100% + 68px + var(--sab)));
-        transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
-      #mas-drawer.open { transform: translateY(0); }
+      #mas-drawer.open {
+        transform: translateY(0);
+      }
       .mas-item {
-        display: flex; align-items: center; gap: 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
         padding: 14px 4px;
         border-radius: 12px;
         cursor: pointer;
@@ -509,7 +728,9 @@
         text-align: left;
         transition: background 0.15s;
       }
-      .mas-item:hover { background: var(--glass); }
+      .mas-item:hover {
+        background: var(--glass);
+      }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -576,7 +797,9 @@
         <!-- Spinner mientras Firebase valida la sesión guardada -->
         <div id="login-loading" class="flex-col items-center gap-3 mt-2">
           <div class="fz-spinner"></div>
-          <span class="text-sm" style="color: var(--text2)">Cargando CBD Finanzas…</span>
+          <span class="text-sm" style="color: var(--text2)"
+            >Cargando CBD Finanzas…</span
+          >
         </div>
 
         <!-- Formulario de inicio de sesión -->
@@ -586,20 +809,32 @@
             id="auth-email"
             placeholder="Correo electrónico"
             class="block w-full rounded-xl border p-3 text-center mb-3 text-sm focus:outline-none"
-            style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              border-color: rgba(255, 255, 255, 0.1);
+              color: white;
+            "
           />
           <input
             type="password"
             id="auth-password"
             placeholder="Contraseña"
             class="block w-full rounded-xl border p-3 text-center mb-5 text-sm focus:outline-none"
-            style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: white"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              border-color: rgba(255, 255, 255, 0.1);
+              color: white;
+            "
           />
           <button
             onclick="loginWithEmail()"
             id="login-btn"
             class="w-full font-bold py-3.5 px-4 rounded-2xl text-sm tracking-wide transition"
-            style="background: linear-gradient(135deg, #b8904d, #d4a85e); color: #1a0f00; box-shadow: 0 4px 20px rgba(184,144,77,0.35)"
+            style="
+              background: linear-gradient(135deg, #b8904d, #d4a85e);
+              color: #1a0f00;
+              box-shadow: 0 4px 20px rgba(184, 144, 77, 0.35);
+            "
           >
             Ingresar
           </button>
@@ -609,7 +844,11 @@
     </div>
 
     <!-- SKELETON DE CARGA DE DATOS -->
-    <div id="data-loading" class="fixed inset-0 p-4 sm:p-6" style="z-index: 45; background: var(--bg); transition: opacity 0.35s ease">
+    <div
+      id="data-loading"
+      class="fixed inset-0 p-4 sm:p-6"
+      style="z-index: 45; background: var(--bg); transition: opacity 0.35s ease"
+    >
       <div class="max-w-2xl mx-auto pt-6">
         <div class="fz-sk mb-4" style="height: 120px"></div>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
@@ -689,816 +928,1100 @@
         </div>
       </nav>
 
-      <div class="max-w-7xl mx-auto" style="padding-bottom: calc(68px + env(safe-area-inset-bottom,0px) + 16px)">
+      <div
+        class="max-w-7xl mx-auto"
+        style="
+          padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px) + 16px);
+        "
+      >
         <div id="panel-resumen" class="p-3 sm:p-5 lg:p-7">
-        <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
-        <div
-          class="rounded-2xl mb-4 p-4 sm:p-5"
-          style="
-            background: linear-gradient(135deg, #071428 0%, #111111 100%);
-            border: 1px solid rgba(184, 144, 77, 0.2);
-          "
-        >
-          <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="globe" class="w-4 h-4" style="color: #b8904d"></i>
-            <span
-              class="text-xs font-bold uppercase tracking-widest"
-              style="color: #b8904d"
-              >Balance Global Acumulado</span
-            >
-            <span class="text-xs text-slate-500 ml-auto"
-              >Todos los registros históricos</span
-            >
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div onclick="irAMovimientosFiltrado('ingreso','',true)" style="cursor:pointer">
-              <p
-                class="text-xs font-semibold uppercase tracking-wide mb-1"
-                style="color: rgba(255, 255, 255, 0.4)"
-              >
-                Total Ingresos
-              </p>
-              <p
-                class="font-bold text-green-400 leading-tight"
-                style="font-size: clamp(1rem, 4vw, 1.7rem)"
-                id="g-ingresos"
-              >
-                $0
-              </p>
-            </div>
-            <div onclick="irAMovimientosFiltrado('gasto','',true)" style="cursor:pointer">
-              <p
-                class="text-xs font-semibold uppercase tracking-wide mb-1"
-                style="color: rgba(255, 255, 255, 0.4)"
-              >
-                Gastos Operativos
-              </p>
-              <p
-                class="font-bold text-red-400 leading-tight"
-                style="font-size: clamp(1rem, 4vw, 1.7rem)"
-                id="g-gastos"
-              >
-                $0
-              </p>
-            </div>
-            <div>
-              <p
-                class="text-xs font-semibold uppercase tracking-wide mb-1"
-                style="color: rgba(255, 255, 255, 0.4)"
-              >
-                Profit Total
-              </p>
-              <p
-                class="font-bold leading-tight"
-                style="font-size: clamp(1rem, 4vw, 1.7rem); color: #D4A85E"
-                id="g-profit"
-              >
-                $0
-              </p>
-            </div>
-            <div>
-              <p
-                class="text-xs font-semibold uppercase tracking-wide mb-1"
-                style="color: rgba(255, 255, 255, 0.4)"
-              >
-                Margen Global
-              </p>
-              <p
-                class="font-bold text-amber-300 leading-tight"
-                style="font-size: clamp(1rem, 4vw, 1.7rem)"
-                id="g-margen"
-              >
-                0%
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- CUENTAS PERSONALES -->
-        <div class="rounded-2xl mb-4 p-4" style="background:linear-gradient(135deg,#071428 0%,#111111 100%);border:1px solid rgba(184,144,77,0.2)">
-          <div class="flex items-center gap-2 mb-3">
-            <i data-lucide="users" class="w-4 h-4" style="color:#b8904d"></i>
-            <span class="text-xs font-bold uppercase tracking-widest" style="color:#b8904d">Cuentas · Balance por Socio</span>
-            <span class="text-xs ml-auto" style="color:rgba(255,255,255,0.3)" id="cuentas-mes-label">Acumulado</span>
-          </div>
-          <div class="grid grid-cols-2 mb-3" style="gap:0;border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden">
-            <div class="p-3" style="border-right:1px solid rgba(255,255,255,0.07)">
-              <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.35);letter-spacing:.08em">Cristian</p>
-              <p class="font-bold leading-none" id="cuenta-cristian-val" style="font-size:clamp(1.1rem,4.5vw,1.6rem);color:var(--green)">$0</p>
-            </div>
-            <div class="p-3 text-right">
-              <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.35);letter-spacing:.08em">Frank</p>
-              <p class="font-bold leading-none" id="cuenta-frank-val" style="font-size:clamp(1.1rem,4.5vw,1.6rem);color:var(--green)">$0</p>
-            </div>
-          </div>
-          <div class="pt-2" id="settlement-text" style="border-top:1px solid rgba(255,255,255,0.07)">
-            <span style="font-size:0.72rem;color:rgba(255,255,255,0.25)">Calculando…</span>
-          </div>
-        </div>
-
-        <!-- MES SELECTOR -->
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center gap-1">
-            <button
-              onclick="cambiarMes(-1)"
-              class="p-2 rounded-xl transition"
-              style="background: var(--glass); border: 1px solid var(--glass-b)"
-            >
-              <i data-lucide="chevron-left" class="w-4 h-4" style="color: var(--text2)"></i>
-            </button>
-            <span
-              id="mes-label"
-              class="text-base font-bold min-w-[150px] text-center capitalize px-2"
-              style="color: var(--text)"
-            ></span>
-            <button
-              onclick="cambiarMes(1)"
-              id="btn-mes-sig"
-              class="p-2 rounded-xl transition"
-              style="background: var(--glass); border: 1px solid var(--glass-b)"
-            >
-              <i data-lucide="chevron-right" class="w-4 h-4" style="color: var(--text2)"></i>
-            </button>
-          </div>
-          <span class="text-xs text-slate-400 font-medium"
-            >Detalle mensual</span
-          >
-        </div>
-
-        <!-- SALDO ACUMULADO EN CUENTA -->
-        <div
-          class="kpi-card mb-3"
-          style="
-            background: linear-gradient(135deg, #071428 0%, #111111 100%);
-            border-left: 4px solid #b8904d;
-            border-color: rgba(184, 144, 77, 0.35);
-          "
-        >
-          <div class="flex items-center justify-between">
-            <div style="flex: 1; min-width: 0">
-              <p class="kpi-label" style="color: rgba(255, 255, 255, 0.45)">
-                Dinero disponible en cuenta
-              </p>
-              <p class="kpi-value" id="kpi-saldo" style="color: #22c55e">$0</p>
-            </div>
-            <i
-              data-lucide="wallet"
-              class="w-9 h-9 flex-shrink-0 ml-3"
-              style="color: #b8904d; opacity: 0.45"
-            ></i>
-          </div>
-          <p
-            class="text-xs mt-1"
-            id="kpi-saldo-label"
-            style="color: rgba(255, 255, 255, 0.3)"
-          >
-            acumulado hasta hoy
-          </p>
-        </div>
-
-        <!-- KPIs MENSUALES -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-          <div class="kpi-card border-l-4 border-green-400" onclick="irAMovimientosFiltrado('ingreso','')">
-            <p class="kpi-label">
-              Ingresos operativos
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
-            <i data-lucide="trending-up" class="kpi-icon"></i>
-          </div>
-          <div class="kpi-card border-l-4 border-red-400" onclick="irAMovimientosFiltrado('gasto','')">
-            <p class="kpi-label">
-              Gastos operativos
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
-            <i data-lucide="trending-down" class="kpi-icon"></i>
-          </div>
+          <!-- GLOBAL KPIs ─ siempre acumulados, nunca cambian por mes -->
           <div
-            class="kpi-card"
-            style="background: #f0fdf4; border-left: 4px solid #22c55e"
-            onclick="irAMovimientosFiltrado('','')">
-            <p class="kpi-label">
-              Profit operativo
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value" id="kpi-profit">$0</p>
-            <i data-lucide="bar-chart-2" class="kpi-icon"></i>
-          </div>
-          <div class="kpi-card border-l-4 border-slate-800" onclick="irAMovimientosFiltrado('','')">
-            <p class="kpi-label">
-              Margen
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value text-slate-900 font-bold" id="kpi-margen">0%</p>
-            <i data-lucide="percent" class="kpi-icon"></i>
-          </div>
-          <div class="kpi-card border-l-4 border-emerald-500" onclick="irAMovimientosFiltrado('ingreso','Aporte de Capital')">
-            <p class="kpi-label">
-              Aportes de capital
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value text-emerald-600" id="kpi-aportes-capital">
-              $0
-            </p>
-            <i data-lucide="hand-coins" class="kpi-icon"></i>
-          </div>
-          <div class="kpi-card border-l-4 border-orange-400" onclick="irAMovimientosFiltrado('gasto','Retiro de Profit,Retiro de Capital')">
-            <p class="kpi-label">
-              Retiro de profit
-              <span class="normal-case font-normal text-slate-300">· mes</span>
-            </p>
-            <p class="kpi-value text-orange-600" id="kpi-retiros-capital">$0</p>
-            <i data-lucide="wallet-cards" class="kpi-icon"></i>
-          </div>
-        </div>
-
-        <!-- TABS CARD - hidden, navigation handled by bottom nav -->
-        <div class="glass-card mb-5 hidden">
-          <div
-            class="flex border-b border-slate-100"
+            class="rounded-2xl mb-4 p-4 sm:p-5"
             style="
-              overflow-x: auto;
-              overflow-y: hidden;
-              touch-action: pan-x;
-              overscroll-behavior-x: contain;
-              -webkit-overflow-scrolling: touch;
+              background: linear-gradient(135deg, #071428 0%, #111111 100%);
+              border: 1px solid rgba(184, 144, 77, 0.2);
             "
           >
-            <button
-              onclick="showTab('resumen')"
-              id="tab-resumen"
-              class="tab-btn active"
-            >
-              <span class="flex items-center gap-1.5"
-                ><i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i
-                >Resumen</span
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="globe" class="w-4 h-4" style="color: #b8904d"></i>
+              <span
+                class="text-xs font-bold uppercase tracking-widest"
+                style="color: #b8904d"
+                >Balance Global Acumulado</span
               >
-            </button>
-            <button
-              onclick="showTab('movimientos')"
-              id="tab-movimientos"
-              class="tab-btn"
-            >
-              <span class="flex items-center gap-1.5"
-                ><i data-lucide="list" class="w-3.5 h-3.5"></i>Movimientos</span
+              <span class="text-xs text-slate-500 ml-auto"
+                >Todos los registros históricos</span
               >
-            </button>
-            <button
-              onclick="showTab('estadisticas')"
-              id="tab-estadisticas"
-              class="tab-btn"
-            >
-              <span class="flex items-center gap-1.5"
-                ><i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i
-                >Estadísticas</span
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div
+                onclick="irAMovimientosFiltrado('ingreso', '', true)"
+                style="cursor: pointer"
               >
-            </button>
-            <button onclick="showTab('nuevo')" id="tab-nuevo" class="tab-btn">
-              <span class="flex items-center gap-1.5"
-                ><i data-lucide="plus-circle" class="w-3.5 h-3.5"></i
-                >Nuevo</span
+                <p
+                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  style="color: rgba(255, 255, 255, 0.4)"
+                >
+                  Total Ingresos
+                </p>
+                <p
+                  class="font-bold text-green-400 leading-tight"
+                  style="font-size: clamp(1rem, 4vw, 1.7rem)"
+                  id="g-ingresos"
+                >
+                  $0
+                </p>
+              </div>
+              <div
+                onclick="irAMovimientosFiltrado('gasto', '', true)"
+                style="cursor: pointer"
               >
-            </button>
+                <p
+                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  style="color: rgba(255, 255, 255, 0.4)"
+                >
+                  Gastos Operativos
+                </p>
+                <p
+                  class="font-bold text-red-400 leading-tight"
+                  style="font-size: clamp(1rem, 4vw, 1.7rem)"
+                  id="g-gastos"
+                >
+                  $0
+                </p>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  style="color: rgba(255, 255, 255, 0.4)"
+                >
+                  Profit Total
+                </p>
+                <p
+                  class="font-bold leading-tight"
+                  style="font-size: clamp(1rem, 4vw, 1.7rem); color: #d4a85e"
+                  id="g-profit"
+                >
+                  $0
+                </p>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  style="color: rgba(255, 255, 255, 0.4)"
+                >
+                  Margen Global
+                </p>
+                <p
+                  class="font-bold text-amber-300 leading-tight"
+                  style="font-size: clamp(1rem, 4vw, 1.7rem)"
+                  id="g-margen"
+                >
+                  0%
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- /tabs card -->
 
-        <!-- TAB RESUMEN -->
-        <div class="mt-4">
-            <div class="flex items-center justify-between mb-4">
-              <h2
-                class="text-sm font-semibold text-slate-700 flex items-center gap-2"
+          <!-- CUENTAS PERSONALES -->
+          <div
+            class="rounded-2xl mb-4 p-4"
+            style="
+              background: linear-gradient(135deg, #071428 0%, #111111 100%);
+              border: 1px solid rgba(184, 144, 77, 0.2);
+            "
+          >
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="users" class="w-4 h-4" style="color: #b8904d"></i>
+              <span
+                class="text-xs font-bold uppercase tracking-widest"
+                style="color: #b8904d"
+                >Cuentas · Balance por Socio</span
+              >
+              <span
+                class="text-xs ml-auto"
+                style="color: rgba(255, 255, 255, 0.3)"
+                id="cuentas-mes-label"
+                >Acumulado</span
+              >
+            </div>
+            <div
+              class="grid grid-cols-2 mb-3"
+              style="
+                gap: 0;
+                border: 1px solid rgba(255, 255, 255, 0.07);
+                border-radius: 12px;
+                overflow: hidden;
+              "
+            >
+              <div
+                class="p-3"
+                style="border-right: 1px solid rgba(255, 255, 255, 0.07)"
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-2"
+                  style="
+                    color: rgba(255, 255, 255, 0.35);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Cristian
+                </p>
+                <p
+                  class="font-bold leading-none"
+                  id="cuenta-cristian-val"
+                  style="
+                    font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+                    color: var(--green);
+                  "
+                >
+                  $0
+                </p>
+              </div>
+              <div class="p-3 text-right">
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-2"
+                  style="
+                    color: rgba(255, 255, 255, 0.35);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Frank
+                </p>
+                <p
+                  class="font-bold leading-none"
+                  id="cuenta-frank-val"
+                  style="
+                    font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+                    color: var(--green);
+                  "
+                >
+                  $0
+                </p>
+              </div>
+            </div>
+            <div
+              class="pt-2"
+              id="settlement-text"
+              style="border-top: 1px solid rgba(255, 255, 255, 0.07)"
+            >
+              <span style="font-size: 0.72rem; color: rgba(255, 255, 255, 0.25)"
+                >Calculando…</span
+              >
+            </div>
+          </div>
+
+          <!-- MES SELECTOR -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-1">
+              <button
+                onclick="cambiarMes(-1)"
+                class="p-2 rounded-xl transition"
+                style="
+                  background: var(--glass);
+                  border: 1px solid var(--glass-b);
+                "
               >
                 <i
-                  data-lucide="bar-chart-2"
+                  data-lucide="chevron-left"
+                  class="w-4 h-4"
+                  style="color: var(--text2)"
+                ></i>
+              </button>
+              <span
+                id="mes-label"
+                class="text-base font-bold min-w-[150px] text-center capitalize px-2"
+                style="color: var(--text)"
+              ></span>
+              <button
+                onclick="cambiarMes(1)"
+                id="btn-mes-sig"
+                class="p-2 rounded-xl transition"
+                style="
+                  background: var(--glass);
+                  border: 1px solid var(--glass-b);
+                "
+              >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-4 h-4"
+                  style="color: var(--text2)"
+                ></i>
+              </button>
+            </div>
+            <span class="text-xs text-slate-400 font-medium"
+              >Detalle mensual</span
+            >
+          </div>
+
+          <!-- SALDO ACUMULADO EN CUENTA -->
+          <div
+            class="kpi-card mb-3"
+            style="
+              background: linear-gradient(135deg, #071428 0%, #111111 100%);
+              border-left: 4px solid #b8904d;
+              border-color: rgba(184, 144, 77, 0.35);
+            "
+          >
+            <div class="flex items-center justify-between">
+              <div style="flex: 1; min-width: 0">
+                <p class="kpi-label" style="color: rgba(255, 255, 255, 0.45)">
+                  Dinero disponible en cuenta
+                </p>
+                <p class="kpi-value" id="kpi-saldo" style="color: #22c55e">
+                  $0
+                </p>
+              </div>
+              <i
+                data-lucide="wallet"
+                class="w-9 h-9 flex-shrink-0 ml-3"
+                style="color: #b8904d; opacity: 0.45"
+              ></i>
+            </div>
+            <p
+              class="text-xs mt-1"
+              id="kpi-saldo-label"
+              style="color: rgba(255, 255, 255, 0.3)"
+            >
+              acumulado hasta hoy
+            </p>
+          </div>
+
+          <!-- KPIs MENSUALES -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+            <div
+              class="kpi-card border-l-4 border-green-400"
+              onclick="irAMovimientosFiltrado('ingreso', '')"
+            >
+              <p class="kpi-label">
+                Ingresos operativos
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value text-green-600" id="kpi-ingresos">$0</p>
+              <i data-lucide="trending-up" class="kpi-icon"></i>
+            </div>
+            <div
+              class="kpi-card border-l-4 border-red-400"
+              onclick="irAMovimientosFiltrado('gasto', '')"
+            >
+              <p class="kpi-label">
+                Gastos operativos
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value text-red-600" id="kpi-gastos">$0</p>
+              <i data-lucide="trending-down" class="kpi-icon"></i>
+            </div>
+            <div
+              class="kpi-card"
+              style="background: #f0fdf4; border-left: 4px solid #22c55e"
+              onclick="irAMovimientosFiltrado('', '')"
+            >
+              <p class="kpi-label">
+                Profit operativo
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value" id="kpi-profit">$0</p>
+              <i data-lucide="bar-chart-2" class="kpi-icon"></i>
+            </div>
+            <div
+              class="kpi-card border-l-4 border-slate-800"
+              onclick="irAMovimientosFiltrado('', '')"
+            >
+              <p class="kpi-label">
+                Margen
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value text-slate-900 font-bold" id="kpi-margen">
+                0%
+              </p>
+              <i data-lucide="percent" class="kpi-icon"></i>
+            </div>
+            <div
+              class="kpi-card border-l-4 border-emerald-500"
+              onclick="irAMovimientosFiltrado('ingreso', 'Aporte de Capital')"
+            >
+              <p class="kpi-label">
+                Aportes de capital
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value text-emerald-600" id="kpi-aportes-capital">
+                $0
+              </p>
+              <i data-lucide="hand-coins" class="kpi-icon"></i>
+            </div>
+            <div
+              class="kpi-card border-l-4 border-orange-400"
+              onclick="
+                irAMovimientosFiltrado(
+                  'gasto',
+                  'Retiro de Profit,Retiro de Capital',
+                )
+              "
+            >
+              <p class="kpi-label">
+                Retiro de profit
+                <span class="normal-case font-normal text-slate-300"
+                  >· mes</span
+                >
+              </p>
+              <p class="kpi-value text-orange-600" id="kpi-retiros-capital">
+                $0
+              </p>
+              <i data-lucide="wallet-cards" class="kpi-icon"></i>
+            </div>
+          </div>
+
+          <!-- TABS CARD - hidden, navigation handled by bottom nav -->
+          <div class="glass-card mb-5 hidden">
+            <div
+              class="flex border-b border-slate-100"
+              style="
+                overflow-x: auto;
+                overflow-y: hidden;
+                touch-action: pan-x;
+                overscroll-behavior-x: contain;
+                -webkit-overflow-scrolling: touch;
+              "
+            >
+              <button
+                onclick="showTab('resumen')"
+                id="tab-resumen"
+                class="tab-btn active"
+              >
+                <span class="flex items-center gap-1.5"
+                  ><i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i
+                  >Resumen</span
+                >
+              </button>
+              <button
+                onclick="showTab('movimientos')"
+                id="tab-movimientos"
+                class="tab-btn"
+              >
+                <span class="flex items-center gap-1.5"
+                  ><i data-lucide="list" class="w-3.5 h-3.5"></i
+                  >Movimientos</span
+                >
+              </button>
+              <button
+                onclick="showTab('estadisticas')"
+                id="tab-estadisticas"
+                class="tab-btn"
+              >
+                <span class="flex items-center gap-1.5"
+                  ><i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i
+                  >Estadísticas</span
+                >
+              </button>
+              <button onclick="showTab('nuevo')" id="tab-nuevo" class="tab-btn">
+                <span class="flex items-center gap-1.5"
+                  ><i data-lucide="plus-circle" class="w-3.5 h-3.5"></i
+                  >Nuevo</span
+                >
+              </button>
+            </div>
+          </div>
+          <!-- /tabs card -->
+
+          <!-- PROYECTOS -->
+          <div class="mt-4" id="proyectos-section">
+            <div class="flex items-center justify-between mb-3">
+              <h2
+                class="text-sm font-semibold flex items-center gap-2"
+                style="color: var(--text)"
+              >
+                <i
+                  data-lucide="anchor"
                   class="w-4 h-4"
                   style="color: #b8904d"
                 ></i>
-                <span id="summary-title">Resumen del mes</span>
+                <span>Proyectos</span>
               </h2>
-              <button onclick="exportarResumenCompleto()" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl transition" style="background:rgba(184,144,77,0.15);border:1px solid rgba(184,144,77,0.4);color:#d4a85e">
-                <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i> Exportar mes
-              </button>
               <button
-                id="btn-ver-mas"
-                onclick="toggleVerMas()"
-                class="hidden text-xs font-semibold text-amber-700 hover:text-amber-900 flex items-center gap-1"
+                onclick="exportarResumenCompleto()"
+                class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl transition"
+                style="
+                  background: rgba(184, 144, 77, 0.15);
+                  border: 1px solid rgba(184, 144, 77, 0.4);
+                  color: #d4a85e;
+                "
               >
-                <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i
-                ><span id="ver-mas-texto">Ver todos</span>
+                <i data-lucide="download-cloud" class="w-3.5 h-3.5"></i>
+                Exportar mes
               </button>
             </div>
-            <div id="summary-cards" class="sm:hidden space-y-3"></div>
-            <div
-              class="hidden sm:block overflow-x-auto rounded-xl border border-slate-100"
-            >
-              <table class="min-w-full divide-y divide-slate-100 text-sm">
-                <thead style="background: #f8fafc">
-                  <tr>
-                    <th
-                      class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wide"
-                    >
-                      Proyecto
-                    </th>
-                    <th
-                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
-                    >
-                      Ingresos
-                    </th>
-                    <th
-                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
-                    >
-                      Gastos
-                    </th>
-                    <th
-                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
-                    >
-                      Profit
-                    </th>
-                    <th
-                      class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wide"
-                    >
-                      Margen
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  id="summary-body"
-                  class="bg-white divide-y divide-slate-50"
-                ></tbody>
-              </table>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div
+                class="rounded-xl p-3"
+                style="
+                  background: rgba(56, 189, 248, 0.08);
+                  border: 1px solid rgba(56, 189, 248, 0.2);
+                "
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-1.5"
+                  style="
+                    color: rgba(56, 189, 248, 0.75);
+                    letter-spacing: 0.07em;
+                  "
+                >
+                  Capital de Trabajo
+                </p>
+                <p
+                  class="font-bold leading-none"
+                  id="proj-capital-trabajo"
+                  style="
+                    font-size: clamp(1rem, 4vw, 1.5rem);
+                    color: var(--blue);
+                  "
+                >
+                  $0
+                </p>
+                <p
+                  class="text-xs mt-1"
+                  style="color: rgba(255, 255, 255, 0.28)"
+                >
+                  proyectos activos
+                </p>
+              </div>
+              <div
+                class="rounded-xl p-3"
+                style="
+                  background: rgba(184, 144, 77, 0.07);
+                  border: 1px solid rgba(184, 144, 77, 0.2);
+                "
+              >
+                <p
+                  class="text-xs font-semibold uppercase tracking-widest mb-1.5"
+                  style="
+                    color: rgba(212, 168, 94, 0.85);
+                    letter-spacing: 0.07em;
+                  "
+                >
+                  Profit Real
+                </p>
+                <p
+                  class="font-bold leading-none"
+                  id="proj-profit-real"
+                  style="
+                    font-size: clamp(1rem, 4vw, 1.5rem);
+                    color: var(--accent-bright);
+                  "
+                >
+                  $0
+                </p>
+                <p
+                  class="text-xs mt-1"
+                  style="color: rgba(255, 255, 255, 0.28)"
+                >
+                  proyectos cerrados
+                </p>
+              </div>
             </div>
+            <div id="proyectos-list" class="space-y-2"></div>
           </div>
-        </div><!-- /panel-resumen -->
+        </div>
+        <!-- /panel-resumen -->
 
         <!-- TAB MOVIMIENTOS -->
         <div id="panel-movimientos" class="p-4 sm:p-6 hidden">
-            <div class="flex items-center justify-between mb-3">
-              <label class="flex items-center gap-2 cursor-pointer select-none">
-                <div class="relative">
-                  <input
-                    type="checkbox"
-                    id="toggle-todos-meses"
-                    class="sr-only"
-                    onchange="renderMovimientos()"
-                  />
-                  <div
-                    id="toggle-track"
-                    class="w-10 h-5 rounded-full transition"
-                    style="background: #e2e8f0"
-                  ></div>
-                  <div
-                    id="toggle-thumb"
-                    class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform"
-                  ></div>
-                </div>
-                <span class="text-xs font-semibold" style="color:var(--text)"
-                  >Ver todos los meses</span
-                >
-              </label>
-              <div class="flex items-center gap-3">
-                <span
-                  id="todos-meses-count"
-                  class="text-xs text-slate-400 hidden"
-                  >0 registros totales</span
-                >
-                <button
-                  onclick="exportarCSV()"
-                  class="flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-700 px-3 py-1.5 rounded-xl border border-white/10 hover:bg-white/10 transition"
-                >
-                  <i data-lucide="download" class="w-3.5 h-3.5"></i> CSV
-                </button>
+          <div class="flex items-center justify-between mb-3">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <div class="relative">
+                <input
+                  type="checkbox"
+                  id="toggle-todos-meses"
+                  class="sr-only"
+                  onchange="renderMovimientos()"
+                />
+                <div
+                  id="toggle-track"
+                  class="w-10 h-5 rounded-full transition"
+                  style="background: #e2e8f0"
+                ></div>
+                <div
+                  id="toggle-thumb"
+                  class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform"
+                ></div>
               </div>
-            </div>
-            <div class="flex flex-wrap gap-2 items-center mb-4">
-              <select
-                id="filter-proyecto"
-                class="text-xs rounded-xl border border-white/10 bg-white py-2 pl-3 pr-8 focus:outline-none font-medium text-slate-600"
+              <span class="text-xs font-semibold" style="color: var(--text)"
+                >Ver todos los meses</span
               >
-                <option value="">Todos los proyectos</option>
-              </select>
-              <select
-                id="filter-tipo"
-                class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none font-medium text-slate-600"
+            </label>
+            <div class="flex items-center gap-3">
+              <span id="todos-meses-count" class="text-xs text-slate-400 hidden"
+                >0 registros totales</span
               >
-                <option value="">Ingresos y Gastos</option>
-                <option value="ingreso">Solo Ingresos</option>
-                <option value="gasto">Solo Gastos</option>
-              </select>
-              <select
-                id="filter-semana"
-                class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none font-medium text-slate-600"
-              >
-                <option value="">Todas las semanas</option>
-                <option value="1">Semana 1 (días 1-7)</option>
-                <option value="2">Semana 2 (días 8-14)</option>
-                <option value="3">Semana 3 (días 15-21)</option>
-                <option value="4">Semana 4 (días 22-31)</option>
-              </select>
-              <div id="cat-filter-wrap">
-                <button
-                  type="button"
-                  onclick="toggleCatDropdown()"
-                  id="cat-filter-btn"
-                  class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none cursor-pointer font-medium text-slate-600"
-                >
-                  <span id="cat-filter-label">Categorías</span>
-                </button>
-              </div>
               <button
-                onclick="limpiarFiltros()"
-                class="text-xs text-slate-400 hover:text-slate-600 flex items-center gap-1 px-2 py-2 transition"
+                onclick="exportarCSV()"
+                class="flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-700 px-3 py-1.5 rounded-xl border border-white/10 hover:bg-white/10 transition"
               >
-                <i data-lucide="x" class="w-3 h-3"></i> Limpiar
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> CSV
               </button>
             </div>
-            <div id="tx-cards" class="sm:hidden space-y-2"></div>
-            <div
-              class="hidden sm:block overflow-x-auto rounded-xl border border-slate-100"
+          </div>
+          <div class="flex flex-wrap gap-2 items-center mb-4">
+            <select
+              id="filter-proyecto"
+              class="text-xs rounded-xl border border-white/10 bg-white py-2 pl-3 pr-8 focus:outline-none font-medium text-slate-600"
             >
-              <table class="min-w-full divide-y divide-slate-100 text-sm">
-                <thead style="background: #f8fafc">
-                  <tr>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Fecha
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Proyecto
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Descripción
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Categoría
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Medio
-                    </th>
-                    <th
-                      class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Persona
-                    </th>
-                    <th
-                      class="px-3 py-3 text-right text-xs font-semibold text-slate-400 uppercase"
-                    >
-                      Monto
-                    </th>
-                    <th class="px-3 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody
-                  id="tx-table-body"
-                  class="bg-white divide-y divide-slate-50"
-                ></tbody>
-              </table>
+              <option value="">Todos los proyectos</option>
+            </select>
+            <select
+              id="filter-tipo"
+              class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none font-medium text-slate-600"
+            >
+              <option value="">Ingresos y Gastos</option>
+              <option value="ingreso">Solo Ingresos</option>
+              <option value="gasto">Solo Gastos</option>
+            </select>
+            <select
+              id="filter-semana"
+              class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none font-medium text-slate-600"
+            >
+              <option value="">Todas las semanas</option>
+              <option value="1">Semana 1 (días 1-7)</option>
+              <option value="2">Semana 2 (días 8-14)</option>
+              <option value="3">Semana 3 (días 15-21)</option>
+              <option value="4">Semana 4 (días 22-31)</option>
+            </select>
+            <div id="cat-filter-wrap">
+              <button
+                type="button"
+                onclick="toggleCatDropdown()"
+                id="cat-filter-btn"
+                class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none cursor-pointer font-medium text-slate-600"
+              >
+                <span id="cat-filter-label">Categorías</span>
+              </button>
+            </div>
+            <button
+              onclick="limpiarFiltros()"
+              class="text-xs text-slate-400 hover:text-slate-600 flex items-center gap-1 px-2 py-2 transition"
+            >
+              <i data-lucide="x" class="w-3 h-3"></i> Limpiar
+            </button>
+          </div>
+          <div id="tx-cards" class="sm:hidden space-y-2"></div>
+          <div
+            class="hidden sm:block overflow-x-auto rounded-xl border border-slate-100"
+          >
+            <table class="min-w-full divide-y divide-slate-100 text-sm">
+              <thead style="background: #f8fafc">
+                <tr>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Fecha
+                  </th>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Proyecto
+                  </th>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Descripción
+                  </th>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Categoría
+                  </th>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Medio
+                  </th>
+                  <th
+                    class="px-3 py-3 text-left text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Persona
+                  </th>
+                  <th
+                    class="px-3 py-3 text-right text-xs font-semibold text-slate-400 uppercase"
+                  >
+                    Monto
+                  </th>
+                  <th class="px-3 py-3"></th>
+                </tr>
+              </thead>
+              <tbody
+                id="tx-table-body"
+                class="bg-white divide-y divide-slate-50"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB ESTADÍSTICAS -->
+        <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
+          <!-- REPORTES HEADER -->
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-1">
+              <button
+                onclick="cambiarMes(-1)"
+                class="p-2 rounded-xl transition"
+                style="
+                  background: var(--glass);
+                  border: 1px solid var(--glass-b);
+                "
+              >
+                <i
+                  data-lucide="chevron-left"
+                  class="w-4 h-4"
+                  style="color: var(--text2)"
+                ></i>
+              </button>
+              <span
+                id="reportes-mes-label"
+                class="text-sm font-bold min-w-[120px] text-center capitalize px-1"
+                style="color: var(--text)"
+                >—</span
+              >
+              <button
+                onclick="cambiarMes(1)"
+                id="reportes-btn-sig"
+                class="p-2 rounded-xl transition"
+                style="
+                  background: var(--glass);
+                  border: 1px solid var(--glass-b);
+                "
+              >
+                <i
+                  data-lucide="chevron-right"
+                  class="w-4 h-4"
+                  style="color: var(--text2)"
+                ></i>
+              </button>
+            </div>
+            <div
+              class="flex rounded-xl overflow-hidden"
+              style="border: 1px solid var(--glass-b)"
+            >
+              <button
+                id="rpt-mes-btn"
+                onclick="setReportesVista('mes')"
+                class="text-xs px-3 py-1.5 font-semibold transition"
+                style="background: var(--accent); color: #1a0f00"
+              >
+                Mes
+              </button>
+              <button
+                id="rpt-anio-btn"
+                onclick="setReportesVista('anio')"
+                class="text-xs px-3 py-1.5 font-semibold transition"
+                style="background: transparent; color: var(--text2)"
+              >
+                Año
+              </button>
             </div>
           </div>
-
-          <!-- TAB ESTADÍSTICAS -->
-          <div id="panel-estadisticas" class="p-4 sm:p-6 hidden">
-            <!-- REPORTES HEADER -->
-            <div class="flex items-center justify-between mb-5">
-              <div class="flex items-center gap-1">
-                <button onclick="cambiarMes(-1)" class="p-2 rounded-xl transition" style="background:var(--glass);border:1px solid var(--glass-b)">
-                  <i data-lucide="chevron-left" class="w-4 h-4" style="color:var(--text2)"></i>
-                </button>
-                <span id="reportes-mes-label" class="text-sm font-bold min-w-[120px] text-center capitalize px-1" style="color:var(--text)">—</span>
-                <button onclick="cambiarMes(1)" id="reportes-btn-sig" class="p-2 rounded-xl transition" style="background:var(--glass);border:1px solid var(--glass-b)">
-                  <i data-lucide="chevron-right" class="w-4 h-4" style="color:var(--text2)"></i>
-                </button>
+          <!-- PUBLICIDAD WIDGET -->
+          <div class="pub-widget px-4 pt-4 pb-3 mb-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <div
+                class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                style="background: rgba(245, 158, 11, 0.18)"
+              >
+                <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
               </div>
-              <div class="flex rounded-xl overflow-hidden" style="border:1px solid var(--glass-b)">
-                <button id="rpt-mes-btn" onclick="setReportesVista('mes')" class="text-xs px-3 py-1.5 font-semibold transition" style="background:var(--accent);color:#1a0f00">Mes</button>
-                <button id="rpt-anio-btn" onclick="setReportesVista('anio')" class="text-xs px-3 py-1.5 font-semibold transition" style="background:transparent;color:var(--text2)">Año</button>
+              <div>
+                <p
+                  class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none"
+                >
+                  Publicidad
+                </p>
+                <p class="text-xs text-slate-400 mt-0.5" id="pub-semana-label">
+                  Esta semana
+                </p>
               </div>
             </div>
-            <!-- PUBLICIDAD WIDGET -->
-            <div class="pub-widget px-4 pt-4 pb-3 mb-5">
-              <div class="flex items-center gap-2.5 mb-3">
-                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.18)">
-                  <i data-lucide="megaphone" class="w-5 h-5 text-yellow-400"></i>
-                </div>
-                <div>
-                  <p class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none">Publicidad</p>
-                  <p class="text-xs text-slate-400 mt-0.5" id="pub-semana-label">Esta semana</p>
-                </div>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+              <div
+                class="rounded-xl px-3 py-2.5"
+                style="background: rgba(255, 255, 255, 0.05)"
+              >
+                <p class="text-xs text-slate-400 mb-1">Semana actual</p>
+                <p
+                  class="text-xl font-bold text-white leading-none"
+                  id="pub-monto-semana"
+                >
+                  $0
+                </p>
+                <p class="text-xs text-slate-500 mt-1" id="pub-count-semana">
+                  0 registros
+                </p>
               </div>
-              <div class="grid grid-cols-2 gap-3 mb-3">
-                <div class="rounded-xl px-3 py-2.5" style="background:rgba(255,255,255,0.05)">
-                  <p class="text-xs text-slate-400 mb-1">Semana actual</p>
-                  <p class="text-xl font-bold text-white leading-none" id="pub-monto-semana">$0</p>
-                  <p class="text-xs text-slate-500 mt-1" id="pub-count-semana">0 registros</p>
-                </div>
-                <div class="rounded-xl px-3 py-2.5" style="background:rgba(255,255,255,0.05)">
-                  <p class="text-xs text-slate-400 mb-1">Total año</p>
-                  <p class="text-xl font-bold leading-none" style="color:#d4a85e" id="pub-total-anio">$0</p>
-                  <p class="text-xs text-slate-500 mt-1">acumulado</p>
-                </div>
-              </div>
-              <div class="flex gap-2">
-                <button onclick="filtrarPorPublicidad()" class="flex-1 text-xs font-semibold py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center justify-center gap-1.5" style="border-color:rgba(184,144,77,0.4)">
-                  <i data-lucide="filter" class="w-3.5 h-3.5"></i> Ver movimientos
-                </button>
-                <button onclick="abrirGastoPublicidad()" class="flex-1 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition" style="background:rgba(184,144,77,0.2);border:1px solid rgba(184,144,77,0.45)">
-                  <i data-lucide="plus" class="w-3.5 h-3.5" style="color:#b8904d"></i>
-                  <span style="color:#d4a85e">Registrar gasto</span>
-                </button>
+              <div
+                class="rounded-xl px-3 py-2.5"
+                style="background: rgba(255, 255, 255, 0.05)"
+              >
+                <p class="text-xs text-slate-400 mb-1">Total año</p>
+                <p
+                  class="text-xl font-bold leading-none"
+                  style="color: #d4a85e"
+                  id="pub-total-anio"
+                >
+                  $0
+                </p>
+                <p class="text-xs text-slate-500 mt-1">acumulado</p>
               </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-              <div class="glass-card p-4">
-                <p
-                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+            <div class="flex gap-2">
+              <button
+                onclick="filtrarPorPublicidad()"
+                class="flex-1 text-xs font-semibold py-2 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center justify-center gap-1.5"
+                style="border-color: rgba(184, 144, 77, 0.4)"
+              >
+                <i data-lucide="filter" class="w-3.5 h-3.5"></i> Ver movimientos
+              </button>
+              <button
+                onclick="abrirGastoPublicidad()"
+                class="flex-1 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition"
+                style="
+                  background: rgba(184, 144, 77, 0.2);
+                  border: 1px solid rgba(184, 144, 77, 0.45);
+                "
+              >
+                <i
+                  data-lucide="plus"
+                  class="w-3.5 h-3.5"
+                  style="color: #b8904d"
+                ></i>
+                <span style="color: #d4a85e">Registrar gasto</span>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="glass-card p-4">
+              <p
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                <span id="chart-1-label"
+                  >Ingresos vs Gastos · Últimos 6 meses</span
                 >
-                  <span id="chart-1-label">Ingresos vs Gastos · Últimos 6 meses</span>
-                </p>
-                <div style="height: 220px">
-                  <canvas id="chart-mensual"></canvas>
-                </div>
-              </div>
-              <div class="glass-card p-4">
-                <p
-                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
-                >
-                  Gastos por categoría ·
-                  <span id="chart-cat-mes-label">este mes</span>
-                </p>
-                <div id="chart-cat-wrap" style="height: 220px">
-                  <canvas id="chart-categorias"></canvas>
-                </div>
-              </div>
-              <div class="glass-card p-4">
-                <p
-                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
-                >
-                  <span id="chart-3-label">Flujo semanal del mes</span>
-                </p>
-                <div style="height: 200px">
-                  <canvas id="chart-semanal"></canvas>
-                </div>
-              </div>
-              <div class="glass-card p-4">
-                <p
-                  class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
-                >
-                  <span id="chart-4-label">Medios de pago · este mes</span>
-                </p>
-                <div id="chart-medios-wrap" style="height: 200px">
-                  <canvas id="chart-medios"></canvas>
-                </div>
+              </p>
+              <div style="height: 220px">
+                <canvas id="chart-mensual"></canvas>
               </div>
             </div>
             <div class="glass-card p-4">
               <p
-                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4"
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
               >
-                <span id="chart-top-label">Top proyectos por profit · este mes</span>
+                Gastos por categoría ·
+                <span id="chart-cat-mes-label">este mes</span>
               </p>
-              <div id="top-proyectos" class="space-y-3"></div>
+              <div id="chart-cat-wrap" style="height: 220px">
+                <canvas id="chart-categorias"></canvas>
+              </div>
+            </div>
+            <div class="glass-card p-4">
+              <p
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                <span id="chart-3-label">Flujo semanal del mes</span>
+              </p>
+              <div style="height: 200px">
+                <canvas id="chart-semanal"></canvas>
+              </div>
+            </div>
+            <div class="glass-card p-4">
+              <p
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                <span id="chart-4-label">Medios de pago · este mes</span>
+              </p>
+              <div id="chart-medios-wrap" style="height: 200px">
+                <canvas id="chart-medios"></canvas>
+              </div>
             </div>
           </div>
+          <div class="glass-card p-4">
+            <p
+              class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4"
+            >
+              <span id="chart-top-label"
+                >Top proyectos por profit · este mes</span
+              >
+            </p>
+            <div id="top-proyectos" class="space-y-3"></div>
+          </div>
+        </div>
 
-          <!-- TAB NUEVO -->
-          <div id="panel-nuevo" class="p-4 sm:p-6 hidden">
-            <div class="max-w-lg mx-auto">
-              <div class="flex items-center justify-between mb-5">
-                <h2
-                  class="text-sm font-semibold text-slate-700 flex items-center gap-2"
+        <!-- TAB NUEVO -->
+        <div id="panel-nuevo" class="p-4 sm:p-6 hidden">
+          <div class="max-w-lg mx-auto">
+            <div class="flex items-center justify-between mb-5">
+              <h2
+                class="text-sm font-semibold text-slate-700 flex items-center gap-2"
+              >
+                <i
+                  data-lucide="plus-circle"
+                  class="w-4 h-4"
+                  style="color: #b8904d"
+                ></i>
+                Nuevo Registro
+              </h2>
+            </div>
+            <form id="tx-form" class="space-y-4">
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Fecha</label
                 >
-                  <i
-                    data-lucide="plus-circle"
-                    class="w-4 h-4"
-                    style="color: #b8904d"
-                  ></i>
-                  Nuevo Registro
-                </h2>
+                <input
+                  type="date"
+                  id="tx-fecha"
+                  class="block w-full rounded-xl border border-white/10 p-3 text-sm text-slate-800 focus:outline-none bg-white"
+                />
               </div>
-              <form id="tx-form" class="space-y-4">
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Fecha</label
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Hora</label
+                >
+                <input
+                  type="time"
+                  id="tx-hora"
+                  class="block w-full rounded-xl border border-white/10 p-3 text-sm text-slate-800 focus:outline-none bg-white"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Tipo</label
+                >
+                <div class="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    id="btn-ingreso"
+                    onclick="setTipo('ingreso')"
+                    class="toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
                   >
-                  <input
-                    type="date"
-                    id="tx-fecha"
-                    class="block w-full rounded-xl border border-white/10 p-3 text-sm text-slate-800 focus:outline-none bg-white"
-                  />
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>Ingreso
+                  </button>
+                  <button
+                    type="button"
+                    id="btn-gasto"
+                    onclick="setTipo('gasto')"
+                    class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                  >
+                    <i data-lucide="trending-down" class="w-4 h-4"></i>Gasto
+                  </button>
+                  <button
+                    type="button"
+                    id="btn-tipo-transfer"
+                    onclick="setTipo('transferencia')"
+                    class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                  >
+                    <i data-lucide="arrow-left-right" class="w-4 h-4"></i
+                    >Transfer
+                  </button>
                 </div>
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Hora</label
-                  >
-                  <input
-                    type="time"
-                    id="tx-hora"
-                    class="block w-full rounded-xl border border-white/10 p-3 text-sm text-slate-800 focus:outline-none bg-white"
-                  />
-                </div>
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Tipo</label
-                  >
-                  <div class="grid grid-cols-3 gap-2">
-                    <button
-                      type="button"
-                      id="btn-ingreso"
-                      onclick="setTipo('ingreso')"
-                      class="toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
+                <input type="hidden" id="tx-tipo" value="ingreso" />
+              </div>
+              <!-- CAMPO TRANSFERENCIA (visible solo cuando tipo=transferencia) -->
+              <div id="campo-transferencia" class="hidden">
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide"
+                  >Transferencia interna entre socios</label
+                >
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs text-slate-400 mb-1"
+                      >De (quien envía)</label
                     >
-                      <i data-lucide="trending-up" class="w-4 h-4"></i>Ingreso
-                    </button>
-                    <button
-                      type="button"
-                      id="btn-gasto"
-                      onclick="setTipo('gasto')"
-                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
-                    >
-                      <i data-lucide="trending-down" class="w-4 h-4"></i>Gasto
-                    </button>
-                    <button
-                      type="button"
-                      id="btn-tipo-transfer"
-                      onclick="setTipo('transferencia')"
-                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold"
-                    >
-                      <i data-lucide="arrow-left-right" class="w-4 h-4"></i>Transfer
-                    </button>
-                  </div>
-                  <input type="hidden" id="tx-tipo" value="ingreso" />
-                </div>
-                <!-- CAMPO TRANSFERENCIA (visible solo cuando tipo=transferencia) -->
-                <div id="campo-transferencia" class="hidden">
-                  <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">Transferencia interna entre socios</label>
-                  <div class="grid grid-cols-2 gap-3">
-                    <div>
-                      <label class="block text-xs text-slate-400 mb-1">De (quien envía)</label>
-                      <select id="tx-de" class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none">
-                        <option value="Frank">Frank</option>
-                        <option value="Cristian">Cristian</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label class="block text-xs text-slate-400 mb-1">Para (quien recibe)</label>
-                      <select id="tx-para" class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none">
-                        <option value="Cristian">Cristian</option>
-                        <option value="Frank">Frank</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div id="campo-proyecto">
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Proyecto / Cliente
-                    <span
-                      id="proyecto-opcional"
-                      class="normal-case font-normal text-slate-400 ml-1"
-                      >(requerido)</span
-                    ></label
-                  >
-                  <div class="relative">
-                    <input
-                      type="text"
-                      id="tx-proyecto"
-                      placeholder="Ej. Yate Oceana 74 Ft"
-                      autocomplete="off"
-                      oninput="filtrarProyectos(this.value)"
-                      onfocus="mostrarProyectos()"
+                    <select
+                      id="tx-de"
                       class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none"
-                    />
-                    <ul
-                      id="proyecto-dropdown"
-                      class="absolute z-50 left-0 right-0 mt-1 rounded-xl hidden max-h-48 overflow-y-auto"
-                    ></ul>
+                    >
+                      <option value="Frank">Frank</option>
+                      <option value="Cristian">Cristian</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs text-slate-400 mb-1"
+                      >Para (quien recibe)</label
+                    >
+                    <select
+                      id="tx-para"
+                      class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none"
+                    >
+                      <option value="Cristian">Cristian</option>
+                      <option value="Frank">Frank</option>
+                    </select>
                   </div>
                 </div>
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Descripción</label
-                  >
+              </div>
+              <div id="campo-proyecto">
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Proyecto / Cliente
+                  <span
+                    id="proyecto-opcional"
+                    class="normal-case font-normal text-slate-400 ml-1"
+                    >(requerido)</span
+                  ></label
+                >
+                <div class="relative">
                   <input
                     type="text"
-                    id="tx-descripcion"
-                    placeholder="Ej. Anticipo 50% PPF casco"
+                    id="tx-proyecto"
+                    placeholder="Ej. Yate Oceana 74 Ft"
+                    autocomplete="off"
+                    oninput="filtrarProyectos(this.value)"
+                    onfocus="mostrarProyectos()"
                     class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none"
                   />
+                  <ul
+                    id="proyecto-dropdown"
+                    class="absolute z-50 left-0 right-0 mt-1 rounded-xl hidden max-h-48 overflow-y-auto"
+                  ></ul>
                 </div>
-                <div id="campo-categoria-wrap">
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Categoría</label
-                  >
-                  <select
-                    id="tx-categoria"
-                    onchange="onCategoriaChange()"
-                    class="block w-full rounded-xl border border-white/10 bg-white p-3 text-sm focus:outline-none"
-                  ></select>
-                </div>
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Monto (COP)</label
-                  >
-                  <input
-                    type="text"
-                    id="tx-monto"
-                    placeholder="Ej. 3.000.000"
-                    required
-                    inputmode="numeric"
-                    autocomplete="off"
-                    oninput="formatMontoInput(this)"
-                    class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none font-semibold text-slate-800"
-                  />
-                </div>
-                <div>
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    >Medio de pago</label
-                  >
-                  <div class="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onclick="setMedio('Efectivo')"
-                      id="btn-efectivo"
-                      class="toggle-btn active-green py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
-                    >
-                      <i data-lucide="banknote" class="w-4 h-4"></i>Efectivo
-                    </button>
-                    <button
-                      type="button"
-                      onclick="setMedio('Transferencia')"
-                      id="btn-transferencia"
-                      class="toggle-btn inactive py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
-                    >
-                      <i data-lucide="building-2" class="w-4 h-4"></i>Cuenta
-                    </button>
-                  </div>
-                  <input type="hidden" id="tx-medio" value="Efectivo" />
-                </div>
-                <div id="retiro-profit-hint" class="hidden rounded-xl p-3 text-xs font-medium" style="background:rgba(255,77,106,0.08);border:1px solid rgba(255,77,106,0.25);color:var(--text2)">
-                  <i data-lucide="split" class="w-3.5 h-3.5 inline mr-1" style="color:var(--red)"></i>
-                  Se divide automáticamente a partes iguales entre <strong style="color:var(--text)">Frank</strong> y <strong style="color:var(--text)">Cristian</strong>
-                </div>
-                <div id="campo-receptor">
-                  <label
-                    class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
-                    ><span id="label-receptor">Lo recibe</span></label
-                  >
-                  <div class="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onclick="setReceptor('Cristian')"
-                      id="btn-cristian"
-                      class="toggle-btn active-blue py-3 rounded-xl border-2 text-sm font-semibold"
-                    >
-                      Cristian
-                    </button>
-                    <button
-                      type="button"
-                      onclick="setReceptor('Frank')"
-                      id="btn-frank"
-                      class="toggle-btn inactive py-3 rounded-xl border-2 text-sm font-semibold"
-                    >
-                      Frank
-                    </button>
-                  </div>
-                  <input type="hidden" id="tx-receptor" value="Cristian" />
-                </div>
-                <button
-                  type="submit"
-                  id="btn-submit"
-                  class="w-full text-white font-semibold py-3.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-sm tracking-wide"
-                  style="background: linear-gradient(135deg, #b8904d, #d4a85e); color: #1a0f00;"
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Descripción</label
                 >
-                  <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
-                </button>
-                <button
-                  type="button"
-                  id="btn-cancelar-edicion"
-                  onclick="cancelarEdicion()"
-                  class="hidden w-full font-semibold py-3 px-4 rounded-xl border-2 border-white/10 text-slate-500 hover:bg-white/10 transition flex items-center justify-center gap-2 text-sm"
+                <input
+                  type="text"
+                  id="tx-descripcion"
+                  placeholder="Ej. Anticipo 50% PPF casco"
+                  class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none"
+                />
+              </div>
+              <div id="campo-categoria-wrap">
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Categoría</label
                 >
-                  <i data-lucide="x" class="w-4 h-4"></i> Cancelar edición
-                </button>
-              </form>
-            </div>
+                <select
+                  id="tx-categoria"
+                  onchange="onCategoriaChange()"
+                  class="block w-full rounded-xl border border-white/10 bg-white p-3 text-sm focus:outline-none"
+                ></select>
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Monto (COP)</label
+                >
+                <input
+                  type="text"
+                  id="tx-monto"
+                  placeholder="Ej. 3.000.000"
+                  required
+                  inputmode="numeric"
+                  autocomplete="off"
+                  oninput="formatMontoInput(this)"
+                  class="block w-full rounded-xl border border-white/10 p-3 text-sm focus:outline-none font-semibold text-slate-800"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  >Medio de pago</label
+                >
+                <div class="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onclick="setMedio('Efectivo')"
+                    id="btn-efectivo"
+                    class="toggle-btn active-green py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
+                    <i data-lucide="banknote" class="w-4 h-4"></i>Efectivo
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setMedio('Transferencia')"
+                    id="btn-transferencia"
+                    class="toggle-btn inactive py-3 rounded-xl border-2 text-xs font-semibold flex flex-col items-center gap-1"
+                  >
+                    <i data-lucide="building-2" class="w-4 h-4"></i>Cuenta
+                  </button>
+                </div>
+                <input type="hidden" id="tx-medio" value="Efectivo" />
+              </div>
+              <div
+                id="retiro-profit-hint"
+                class="hidden rounded-xl p-3 text-xs font-medium"
+                style="
+                  background: rgba(255, 77, 106, 0.08);
+                  border: 1px solid rgba(255, 77, 106, 0.25);
+                  color: var(--text2);
+                "
+              >
+                <i
+                  data-lucide="split"
+                  class="w-3.5 h-3.5 inline mr-1"
+                  style="color: var(--red)"
+                ></i>
+                Se divide automáticamente a partes iguales entre
+                <strong style="color: var(--text)">Frank</strong> y
+                <strong style="color: var(--text)">Cristian</strong>
+              </div>
+              <div id="campo-receptor">
+                <label
+                  class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide"
+                  ><span id="label-receptor">Lo recibe</span></label
+                >
+                <div class="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onclick="setReceptor('Cristian')"
+                    id="btn-cristian"
+                    class="toggle-btn active-blue py-3 rounded-xl border-2 text-sm font-semibold"
+                  >
+                    Cristian
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setReceptor('Frank')"
+                    id="btn-frank"
+                    class="toggle-btn inactive py-3 rounded-xl border-2 text-sm font-semibold"
+                  >
+                    Frank
+                  </button>
+                </div>
+                <input type="hidden" id="tx-receptor" value="Cristian" />
+              </div>
+              <button
+                type="submit"
+                id="btn-submit"
+                class="w-full text-white font-semibold py-3.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-sm tracking-wide"
+                style="
+                  background: linear-gradient(135deg, #b8904d, #d4a85e);
+                  color: #1a0f00;
+                "
+              >
+                <i data-lucide="save" class="w-4 h-4"></i> Guardar Registro
+              </button>
+              <button
+                type="button"
+                id="btn-cancelar-edicion"
+                onclick="cancelarEdicion()"
+                class="hidden w-full font-semibold py-3 px-4 rounded-xl border-2 border-white/10 text-slate-500 hover:bg-white/10 transition flex items-center justify-center gap-2 text-sm"
+              >
+                <i data-lucide="x" class="w-4 h-4"></i> Cancelar edición
+              </button>
+            </form>
           </div>
+        </div>
       </div>
       <!-- /main container -->
     </div>
@@ -1506,18 +2029,35 @@
 
     <!-- BOTTOM NAV -->
     <nav id="bottom-nav">
-      <button class="nav-item active" id="nav-resumen" onclick="showTab('resumen')">
+      <button
+        class="nav-item active"
+        id="nav-resumen"
+        onclick="showTab('resumen')"
+      >
         <i data-lucide="home"></i>
         <span>Inicio</span>
       </button>
-      <button class="nav-item" id="nav-movimientos" onclick="showTab('movimientos')">
+      <button
+        class="nav-item"
+        id="nav-movimientos"
+        onclick="showTab('movimientos')"
+      >
         <i data-lucide="list"></i>
         <span>Movimientos</span>
       </button>
-      <button class="nav-fab" id="nav-nuevo" onclick="showTab('nuevo')" title="Nuevo registro">
+      <button
+        class="nav-fab"
+        id="nav-nuevo"
+        onclick="showTab('nuevo')"
+        title="Nuevo registro"
+      >
         <i data-lucide="plus"></i>
       </button>
-      <button class="nav-item" id="nav-estadisticas" onclick="showTab('estadisticas')">
+      <button
+        class="nav-item"
+        id="nav-estadisticas"
+        onclick="showTab('estadisticas')"
+      >
         <i data-lucide="bar-chart-2"></i>
         <span>Reportes</span>
       </button>
@@ -1532,14 +2072,52 @@
 
     <!-- MÁS DRAWER -->
     <div id="mas-drawer">
-      <div style="width:36px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 16px"></div>
-      <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Opciones</p>
-      <button class="mas-item" onclick="closeMasDrawer(); document.getElementById('btn-install-ios') && document.getElementById('btn-install-ios').click()">
-        <i data-lucide="download" style="color:var(--accent);width:20px;height:20px"></i>
+      <div
+        style="
+          width: 36px;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 2px;
+          margin: 0 auto 16px;
+        "
+      ></div>
+      <p
+        style="
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--text3);
+          margin-bottom: 8px;
+        "
+      >
+        Opciones
+      </p>
+      <button
+        class="mas-item"
+        onclick="
+          closeMasDrawer();
+          document.getElementById('btn-install-ios') &&
+            document.getElementById('btn-install-ios').click();
+        "
+      >
+        <i
+          data-lucide="download"
+          style="color: var(--accent); width: 20px; height: 20px"
+        ></i>
         Instalar App
       </button>
-      <button class="mas-item" onclick="closeMasDrawer(); logout()">
-        <i data-lucide="log-out" style="color:var(--red);width:20px;height:20px"></i>
+      <button
+        class="mas-item"
+        onclick="
+          closeMasDrawer();
+          logout();
+        "
+      >
+        <i
+          data-lucide="log-out"
+          style="color: var(--red); width: 20px; height: 20px"
+        ></i>
         Cerrar sesión
       </button>
     </div>
@@ -1600,7 +2178,8 @@
       let db = null,
         auth = null,
         transactions = [],
-        filterCats = new Set();
+        filterCats = new Set(),
+        proyectosEstado = {};
       let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
@@ -1608,7 +2187,9 @@
         const dl = document.getElementById("data-loading");
         if (!dl) return;
         dl.style.opacity = "0";
-        setTimeout(() => { dl.style.display = "none"; }, 350);
+        setTimeout(() => {
+          dl.style.display = "none";
+        }, 350);
         _firstDataLoaded = true;
       }
       const nowD = new Date();
@@ -1688,11 +2269,17 @@
         btn.style.opacity = esHoy ? "0.3" : "1";
         btn.disabled = esHoy;
         const btnSig2 = document.getElementById("reportes-btn-sig");
-        if (btnSig2) { btnSig2.style.opacity = esHoy && reportesVista==="mes" ? "0.3" : "1"; btnSig2.disabled = esHoy && reportesVista==="mes"; }
-        document.getElementById("summary-title").textContent =
-          "Resumen · " + mesNombre;
+        if (btnSig2) {
+          btnSig2.style.opacity =
+            esHoy && reportesVista === "mes" ? "0.3" : "1";
+          btnSig2.disabled = esHoy && reportesVista === "mes";
+        }
+        const _stEl = document.getElementById("summary-title");
+        if (_stEl) _stEl.textContent = "Resumen · " + mesNombre;
         const rptLbl = document.getElementById("reportes-mes-label");
-        if (rptLbl) rptLbl.textContent = reportesVista === "anio" ? "Año " + mesSel.y : mesNombre;
+        if (rptLbl)
+          rptLbl.textContent =
+            reportesVista === "anio" ? "Año " + mesSel.y : mesNombre;
         const lbl = document.getElementById("chart-cat-mes-label");
         if (lbl) lbl.textContent = MESES[mesSel.m].toLowerCase();
       }
@@ -1731,7 +2318,9 @@
         const drawer = document.getElementById("mas-drawer");
         const overlay = document.getElementById("mas-drawer-overlay");
         const isOpen = drawer.classList.contains("open");
-        if (isOpen) { closeMasDrawer(); } else {
+        if (isOpen) {
+          closeMasDrawer();
+        } else {
           drawer.classList.add("open");
           overlay.classList.add("open");
           lucide.createIcons();
@@ -1754,11 +2343,16 @@
         db = firebase.firestore();
         auth.onAuthStateChanged((user) => {
           if (user) {
-            try { localStorage.setItem("cbd_hadSession", "1"); } catch (e) {}
+            try {
+              localStorage.setItem("cbd_hadSession", "1");
+            } catch (e) {}
             // Mostrar skeleton hasta que lleguen los datos
             if (!_firstDataLoaded) {
               const dl = document.getElementById("data-loading");
-              if (dl) { dl.style.display = "block"; dl.style.opacity = "1"; }
+              if (dl) {
+                dl.style.display = "block";
+                dl.style.opacity = "1";
+              }
               setTimeout(hideDataLoading, 8000); // seguridad: nunca dejar skeleton atascado
             }
             document.getElementById("lock-screen").classList.add("hidden");
@@ -1807,8 +2401,16 @@
                 },
                 (err) => console.error("Firestore:", err),
               );
+            db.collection("config")
+              .doc("proyectos_estado")
+              .onSnapshot((snap) => {
+                proyectosEstado = snap.exists ? snap.data() || {} : {};
+                if (_firstDataLoaded) renderProyectos();
+              });
           } else {
-            try { localStorage.removeItem("cbd_hadSession"); } catch (e) {}
+            try {
+              localStorage.removeItem("cbd_hadSession");
+            } catch (e) {}
             document.documentElement.classList.remove("fz-resume");
             document.getElementById("lock-screen").classList.remove("hidden");
             document.getElementById("main-app").classList.add("hidden");
@@ -1825,15 +2427,20 @@
         const bi = document.getElementById("btn-ingreso");
         const bg = document.getElementById("btn-gasto");
         const bt = document.getElementById("btn-tipo-transfer");
-        const inact = "toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
-        bi.className = inact; bg.className = inact; if (bt) bt.className = inact;
+        const inact =
+          "toggle-btn inactive py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+        bi.className = inact;
+        bg.className = inact;
+        if (bt) bt.className = inact;
         const campoTransfer = document.getElementById("campo-transferencia");
         const campoProyecto = document.getElementById("campo-proyecto");
         const campoCat = document.getElementById("campo-categoria-wrap");
 
         const campoReceptor = document.getElementById("campo-receptor");
         if (tipo === "transferencia") {
-          if (bt) bt.className = "toggle-btn active-indigo py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          if (bt)
+            bt.className =
+              "toggle-btn active-indigo py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           if (campoTransfer) campoTransfer.classList.remove("hidden");
           if (campoProyecto) campoProyecto.classList.add("hidden");
           if (campoCat) campoCat.classList.add("hidden");
@@ -1850,17 +2457,20 @@
         if (campoReceptor) campoReceptor.classList.remove("hidden");
 
         if (tipo === "ingreso") {
-          bi.className = "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          bi.className =
+            "toggle-btn active-green py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("label-receptor").textContent = "Lo recibe";
         } else {
-          bg.className = "toggle-btn active-red py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
+          bg.className =
+            "toggle-btn active-red py-3 rounded-xl border-2 text-sm flex items-center justify-center gap-2 font-semibold";
           document.getElementById("label-receptor").textContent = "Quién paga";
         }
         const sel = document.getElementById("tx-categoria");
         sel.innerHTML = "";
         CATS[tipo].forEach((c) => {
           const o = document.createElement("option");
-          o.value = c; o.textContent = c;
+          o.value = c;
+          o.textContent = c;
           sel.appendChild(o);
         });
         onCategoriaChange();
@@ -2076,7 +2686,8 @@
         dd.innerHTML = "";
         const allBtn = document.createElement("button");
         allBtn.type = "button";
-        allBtn.className = "w-full text-left text-xs px-2 py-1.5 rounded font-semibold mb-1";
+        allBtn.className =
+          "w-full text-left text-xs px-2 py-1.5 rounded font-semibold mb-1";
         allBtn.style.cssText = "color:var(--text2);";
         allBtn.textContent = "Todas las categorías";
         allBtn.onclick = (e) => {
@@ -2088,13 +2699,15 @@
         };
         dd.appendChild(allBtn);
         const hr = document.createElement("hr");
-        hr.style.cssText = "border-color:rgba(255,255,255,0.08);margin-bottom:4px;";
+        hr.style.cssText =
+          "border-color:rgba(255,255,255,0.08);margin-bottom:4px;";
         dd.appendChild(hr);
         cats.forEach((cat) => {
           const sel = filterCats.has(cat);
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "w-full text-left text-xs px-2 py-1.5 rounded flex items-center gap-2";
+          btn.className =
+            "w-full text-left text-xs px-2 py-1.5 rounded flex items-center gap-2";
           btn.style.cssText = sel
             ? "background:rgba(184,144,77,0.18);color:var(--accent-bright);font-weight:600;"
             : "color:var(--text);";
@@ -2212,37 +2825,66 @@
         const mesLabel = MESES[mesSel.m] + " " + mesSel.y;
 
         // Global acumulado
-        const gIng = transactions.filter(t=>t.tipo==="ingreso").reduce((s,t)=>s+t.monto,0);
-        const gGas = transactions.filter(t=>t.tipo==="gasto").reduce((s,t)=>s+t.monto,0);
-        const gRet = transactions.filter(t=>t.tipo==="gasto"&&t.categoria===CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
+        const gIng = transactions
+          .filter((t) => t.tipo === "ingreso")
+          .reduce((s, t) => s + t.monto, 0);
+        const gGas = transactions
+          .filter((t) => t.tipo === "gasto")
+          .reduce((s, t) => s + t.monto, 0);
+        const gRet = transactions
+          .filter(
+            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
         const gProfit = gIng - gGas + gRet;
 
         // Mes actual
-        const mIng = mes.filter(t=>t.tipo==="ingreso"&&t.categoria!==CAPITAL_INGRESO_CAT).reduce((s,t)=>s+t.monto,0);
-        const mGas = mes.filter(t=>t.tipo==="gasto"&&t.categoria!==CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
-        const mRet = mes.filter(t=>t.tipo==="gasto"&&t.categoria===CAPITAL_GASTO_CAT).reduce((s,t)=>s+t.monto,0);
-        const mApo = mes.filter(t=>t.tipo==="ingreso"&&t.categoria===CAPITAL_INGRESO_CAT).reduce((s,t)=>s+t.monto,0);
+        const mIng = mes
+          .filter(
+            (t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const mGas = mes
+          .filter(
+            (t) => t.tipo === "gasto" && t.categoria !== CAPITAL_GASTO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const mRet = mes
+          .filter(
+            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const mApo = mes
+          .filter(
+            (t) => t.tipo === "ingreso" && t.categoria === CAPITAL_INGRESO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
         const mProfit = mIng - mGas + mRet;
-        const mMargen = mIng > 0 ? ((mProfit/mIng)*100).toFixed(1)+"%" : "0%";
+        const mMargen =
+          mIng > 0 ? ((mProfit / mIng) * 100).toFixed(1) + "%" : "0%";
 
         // Cuentas personales
-        let frank = 0, cristian = 0;
-        mes.forEach(t => {
-          const r = (t.receptor||"").trim().toLowerCase();
-          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-          if (r==="frank") frank += d;
-          else if (r==="cristian") cristian += d;
+        let frank = 0,
+          cristian = 0;
+        mes.forEach((t) => {
+          const r = (t.receptor || "").trim().toLowerCase();
+          const d = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+          if (r === "frank") frank += d;
+          else if (r === "cristian") cristian += d;
         });
         const diff = frank - cristian;
-        const settlement = Math.abs(diff)/2;
-        const settlementText = Math.abs(diff) < 500
-          ? "Equilibradas"
-          : diff > 0
-            ? "Frank transfiere " + fmt(settlement) + " a Cristian"
-            : "Cristian transfiere " + fmt(settlement) + " a Frank";
+        const settlement = Math.abs(diff) / 2;
+        const settlementText =
+          Math.abs(diff) < 500
+            ? "Equilibradas"
+            : diff > 0
+              ? "Frank transfiere " + fmt(settlement) + " a Cristian"
+              : "Cristian transfiere " + fmt(settlement) + " a Frank";
 
         // Publicidad del mes
-        const pubMes = mes.filter(t=>t.tipo==="gasto"&&t.categoria==="Publicidad").reduce((s,t)=>s+t.monto,0);
+        const pubMes = mes
+          .filter((t) => t.tipo === "gasto" && t.categoria === "Publicidad")
+          .reduce((s, t) => s + t.monto, 0);
 
         const rows = [];
         rows.push(["CBD FINANZAS — RESUMEN COMPLETO", mesLabel]);
@@ -2270,21 +2912,47 @@
         rows.push(["Liquidacion", settlementText]);
         rows.push([]);
         rows.push(["MOVIMIENTOS DEL MES — " + mesLabel.toUpperCase()]);
-        rows.push(["Fecha","Hora","Tipo","Proyecto","Descripcion","Categoria","Monto","Medio","Persona"]);
-        [...mes].sort((a,b)=>((b.fecha||"")+(b.hora||"")).localeCompare((a.fecha||"")+(a.hora||""))).forEach(t=>{
-          rows.push([t.fecha||"",t.hora||"",t.tipo||"",
-            (t.proyecto||"").replace(/,/g,";"),
-            (t.descripcion||"").replace(/,/g,";"),
-            (t.categoria||"").replace(/,/g,";"),
-            t.monto||0, t.medio||"", t.receptor||""]);
-        });
+        rows.push([
+          "Fecha",
+          "Hora",
+          "Tipo",
+          "Proyecto",
+          "Descripcion",
+          "Categoria",
+          "Monto",
+          "Medio",
+          "Persona",
+        ]);
+        [...mes]
+          .sort((a, b) =>
+            ((b.fecha || "") + (b.hora || "")).localeCompare(
+              (a.fecha || "") + (a.hora || ""),
+            ),
+          )
+          .forEach((t) => {
+            rows.push([
+              t.fecha || "",
+              t.hora || "",
+              t.tipo || "",
+              (t.proyecto || "").replace(/,/g, ";"),
+              (t.descripcion || "").replace(/,/g, ";"),
+              (t.categoria || "").replace(/,/g, ";"),
+              t.monto || 0,
+              t.medio || "",
+              t.receptor || "",
+            ]);
+          });
 
-        const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
-        const blob = new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8;"});
+        const csv = rows
+          .map((r) =>
+            r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","),
+          )
+          .join("\n");
+        const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "CBD-Resumen-"+mesLabel.replace(" ","-")+".csv";
+        a.download = "CBD-Resumen-" + mesLabel.replace(" ", "-") + ".csv";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -2294,34 +2962,74 @@
 
       function exportarTodo() {
         const rows = [];
-        rows.push(["CBD FINANZAS — EXPORTACIÓN COMPLETA", new Date().toLocaleDateString("es-CO")]);
+        rows.push([
+          "CBD FINANZAS — EXPORTACIÓN COMPLETA",
+          new Date().toLocaleDateString("es-CO"),
+        ]);
         rows.push([]);
-        const gIng = transactions.filter(t=>t.tipo==="ingreso"&&t.categoria!==TRANSFER_CAT).reduce((s,t)=>s+t.monto,0);
-        const gGas = transactions.filter(t=>t.tipo==="gasto"&&t.categoria!==TRANSFER_CAT).reduce((s,t)=>s+t.monto,0);
-        const gRet = transactions.filter(t=>t.tipo==="gasto"&&CAPITAL_GASTO_CATS.includes(t.categoria)).reduce((s,t)=>s+t.monto,0);
+        const gIng = transactions
+          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
+          .reduce((s, t) => s + t.monto, 0);
+        const gGas = transactions
+          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT)
+          .reduce((s, t) => s + t.monto, 0);
+        const gRet = transactions
+          .filter(
+            (t) =>
+              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
+          )
+          .reduce((s, t) => s + t.monto, 0);
         rows.push(["BALANCE GLOBAL ACUMULADO"]);
-        rows.push(["Total Ingresos",gIng]);
-        rows.push(["Gastos Operativos",gGas-gRet]);
-        rows.push(["Retiro de Profit distribuido",gRet]);
-        rows.push(["Profit Total",gIng-gGas+gRet]);
+        rows.push(["Total Ingresos", gIng]);
+        rows.push(["Gastos Operativos", gGas - gRet]);
+        rows.push(["Retiro de Profit distribuido", gRet]);
+        rows.push(["Profit Total", gIng - gGas + gRet]);
         rows.push([]);
         rows.push(["TODOS LOS MOVIMIENTOS"]);
-        rows.push(["Fecha","Hora","Tipo","Proyecto","Descripcion","Categoria","Monto","Medio","Persona"]);
+        rows.push([
+          "Fecha",
+          "Hora",
+          "Tipo",
+          "Proyecto",
+          "Descripcion",
+          "Categoria",
+          "Monto",
+          "Medio",
+          "Persona",
+        ]);
         [...transactions]
-          .sort((a,b)=>((b.fecha||"")+(b.hora||"")).localeCompare((a.fecha||"")+(a.hora||"")))
-          .forEach(t=>{
-            rows.push([t.fecha||"",t.hora||"",t.tipo||"",
-              (t.proyecto||"").replace(/"/g,'""'),
-              (t.descripcion||"").replace(/"/g,'""'),
-              (t.categoria||"").replace(/"/g,'""'),
-              t.monto||0,t.medio||"",t.receptor||""]);
+          .sort((a, b) =>
+            ((b.fecha || "") + (b.hora || "")).localeCompare(
+              (a.fecha || "") + (a.hora || ""),
+            ),
+          )
+          .forEach((t) => {
+            rows.push([
+              t.fecha || "",
+              t.hora || "",
+              t.tipo || "",
+              (t.proyecto || "").replace(/"/g, '""'),
+              (t.descripcion || "").replace(/"/g, '""'),
+              (t.categoria || "").replace(/"/g, '""'),
+              t.monto || 0,
+              t.medio || "",
+              t.receptor || "",
+            ]);
           });
-        const csv = rows.map(r=>r.map(c=>`"${String(c)}"`).join(",")).join("\n");
-        const blob = new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8;"});
+        const csv = rows
+          .map((r) => r.map((c) => `"${String(c)}"`).join(","))
+          .join("\n");
+        const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
-        a.href=url; a.download="CBD-Finanzas-Completo-"+new Date().toISOString().split("T")[0]+".csv";
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        a.href = url;
+        a.download =
+          "CBD-Finanzas-Completo-" +
+          new Date().toISOString().split("T")[0] +
+          ".csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
         showToast("Exportación completa ✓");
       }
@@ -2329,18 +3037,32 @@
       async function seedAbrilRetiro() {
         if (!db) return;
         const MARKER_F = "Cierre profit Abril 2026 - Frank";
-        const snap = await db.collection("transacciones").where("descripcion","==",MARKER_F).limit(1).get();
+        const snap = await db
+          .collection("transacciones")
+          .where("descripcion", "==", MARKER_F)
+          .limit(1)
+          .get();
         if (!snap.empty) return;
         const batch = db.batch();
         batch.set(db.collection("transacciones").doc(), {
-          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
-          receptor:"Frank", descripcion:MARKER_F,
-          fecha:"2026-04-30", hora:"23:59", medio:"Efectivo"
+          tipo: "gasto",
+          categoria: "Retiro de Profit",
+          monto: 170348,
+          receptor: "Frank",
+          descripcion: MARKER_F,
+          fecha: "2026-04-30",
+          hora: "23:59",
+          medio: "Efectivo",
         });
         batch.set(db.collection("transacciones").doc(), {
-          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
-          receptor:"Cristian", descripcion:"Cierre profit Abril 2026 - Cristian",
-          fecha:"2026-04-30", hora:"23:59", medio:"Efectivo"
+          tipo: "gasto",
+          categoria: "Retiro de Profit",
+          monto: 170348,
+          receptor: "Cristian",
+          descripcion: "Cierre profit Abril 2026 - Cristian",
+          fecha: "2026-04-30",
+          hora: "23:59",
+          medio: "Efectivo",
         });
         await batch.commit();
         showToast("Cierre de Abril 2026 registrado ✓");
@@ -2349,18 +3071,34 @@
       async function seedJunioAjuste() {
         if (!db) return;
         const MARKER = "Ajuste de saldo Junio 2026 - Frank";
-        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        const snap = await db
+          .collection("transacciones")
+          .where("descripcion", "==", MARKER)
+          .limit(1)
+          .get();
         if (!snap.empty) return;
         const batch = db.batch();
         batch.set(db.collection("transacciones").doc(), {
-          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
-          receptor:"Frank", descripcion:MARKER,
-          fecha:"2026-06-24", hora:"23:59", medio:"Efectivo", proyecto:""
+          tipo: "gasto",
+          categoria: "Retiro de Profit",
+          monto: 170348,
+          receptor: "Frank",
+          descripcion: MARKER,
+          fecha: "2026-06-24",
+          hora: "23:59",
+          medio: "Efectivo",
+          proyecto: "",
         });
         batch.set(db.collection("transacciones").doc(), {
-          tipo:"gasto", categoria:"Retiro de Profit", monto:170348,
-          receptor:"Cristian", descripcion:"Ajuste de saldo Junio 2026 - Cristian",
-          fecha:"2026-06-24", hora:"23:59", medio:"Efectivo", proyecto:""
+          tipo: "gasto",
+          categoria: "Retiro de Profit",
+          monto: 170348,
+          receptor: "Cristian",
+          descripcion: "Ajuste de saldo Junio 2026 - Cristian",
+          fecha: "2026-06-24",
+          hora: "23:59",
+          medio: "Efectivo",
+          proyecto: "",
         });
         await batch.commit();
         showToast("Ajuste de saldo Junio 2026 registrado ✓");
@@ -2370,7 +3108,11 @@
         // Cleanup: elimina el ingreso sin receptor que se agregó por error.
         if (!db) return;
         const MARKER = "Saldo anterior - Ajuste Junio 2026";
-        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        const snap = await db
+          .collection("transacciones")
+          .where("descripcion", "==", MARKER)
+          .limit(1)
+          .get();
         if (snap.empty) return;
         await snap.docs[0].ref.delete();
       }
@@ -2379,13 +3121,23 @@
         // Los retiros de $170k pertenecen al cierre de mayo, no a junio.
         // Actualiza cualquier entrada que NO esté ya en 2026-05-31.
         if (!db) return;
-        const MARKERS = ["Ajuste de saldo Junio 2026 - Frank", "Ajuste de saldo Junio 2026 - Cristian"];
+        const MARKERS = [
+          "Ajuste de saldo Junio 2026 - Frank",
+          "Ajuste de saldo Junio 2026 - Cristian",
+        ];
         const batch = db.batch();
         let changed = false;
         for (const marker of MARKERS) {
-          const snap = await db.collection("transacciones").where("descripcion","==",marker).limit(1).get();
+          const snap = await db
+            .collection("transacciones")
+            .where("descripcion", "==", marker)
+            .limit(1)
+            .get();
           if (!snap.empty && snap.docs[0].data().fecha !== "2026-05-31") {
-            batch.update(snap.docs[0].ref, { fecha: "2026-05-31", hora: "23:58" });
+            batch.update(snap.docs[0].ref, {
+              fecha: "2026-05-31",
+              hora: "23:58",
+            });
             changed = true;
           }
         }
@@ -2474,23 +3226,47 @@
       async function seedMayoCierre() {
         if (!db || !transactions.length) return;
         const MARKER = "Cierre cuentas Mayo 2026";
-        const snap = await db.collection("transacciones").where("descripcion","==",MARKER).limit(1).get();
+        const snap = await db
+          .collection("transacciones")
+          .where("descripcion", "==", MARKER)
+          .limit(1)
+          .get();
         if (!snap.empty) return;
-        const mayo = transactions.filter(t => (t.fecha||"").startsWith("2026-05"));
-        let frank = 0, cristian = 0;
-        mayo.forEach(t => {
-          const r = (t.receptor||"").trim().toLowerCase();
-          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-          if (r==="frank") frank += d;
-          else if (r==="cristian") cristian += d;
+        const mayo = transactions.filter((t) =>
+          (t.fecha || "").startsWith("2026-05"),
+        );
+        let frank = 0,
+          cristian = 0;
+        mayo.forEach((t) => {
+          const r = (t.receptor || "").trim().toLowerCase();
+          const d = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+          if (r === "frank") frank += d;
+          else if (r === "cristian") cristian += d;
         });
         if (Math.abs(frank) < 1 && Math.abs(cristian) < 1) return;
         const batch = db.batch();
-        const base = { descripcion:MARKER, fecha:"2026-05-31", hora:"23:59", medio:"Efectivo", proyecto:"", categoria:TRANSFER_CAT };
+        const base = {
+          descripcion: MARKER,
+          fecha: "2026-05-31",
+          hora: "23:59",
+          medio: "Efectivo",
+          proyecto: "",
+          categoria: TRANSFER_CAT,
+        };
         if (Math.abs(frank) >= 1)
-          batch.set(db.collection("transacciones").doc(), { ...base, tipo:frank<0?"ingreso":"gasto", monto:Math.round(Math.abs(frank)), receptor:"Frank" });
+          batch.set(db.collection("transacciones").doc(), {
+            ...base,
+            tipo: frank < 0 ? "ingreso" : "gasto",
+            monto: Math.round(Math.abs(frank)),
+            receptor: "Frank",
+          });
         if (Math.abs(cristian) >= 1)
-          batch.set(db.collection("transacciones").doc(), { ...base, tipo:cristian<0?"ingreso":"gasto", monto:Math.round(Math.abs(cristian)), receptor:"Cristian" });
+          batch.set(db.collection("transacciones").doc(), {
+            ...base,
+            tipo: cristian < 0 ? "ingreso" : "gasto",
+            monto: Math.round(Math.abs(cristian)),
+            receptor: "Cristian",
+          });
         await batch.commit();
         showToast("Cierre de Mayo 2026 registrado ✓");
       }
@@ -2503,7 +3279,7 @@
         renderCuentas();
         renderKPIs(mes);
         renderPubWidget();
-        renderResumen(mes);
+        renderProyectos();
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
         if (!seedMayoDone && transactions.length > 0) {
@@ -2517,7 +3293,12 @@
         document.getElementById("filter-proyecto").value = "";
         document.getElementById("filter-semana").value = "";
         filterCats.clear();
-        if (cats) cats.split(",").map(c=>c.trim()).filter(Boolean).forEach(c=>filterCats.add(c));
+        if (cats)
+          cats
+            .split(",")
+            .map((c) => c.trim())
+            .filter(Boolean)
+            .forEach((c) => filterCats.add(c));
         updateCatLabel();
         if (todosMeses !== undefined) {
           document.getElementById("toggle-todos-meses").checked = !!todosMeses;
@@ -2527,14 +3308,17 @@
 
       function renderCuentas() {
         // Acumulado desde inicio del periodo (CUENTAS_DESDE) hasta fin del mes seleccionado
-        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let frank = 0, cristian = 0;
+        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
+          .toISOString()
+          .split("T")[0];
+        let frank = 0,
+          cristian = 0;
         transactions
-          .filter(t => {
+          .filter((t) => {
             const f = t.fecha || "";
             return f >= CUENTAS_DESDE && f <= lastDay;
           })
-          .forEach(t => {
+          .forEach((t) => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
             if (r === "frank") frank += delta;
@@ -2551,16 +3335,21 @@
         cEl.textContent = fmt(cristian);
         cEl.style.color = cristian >= 0 ? "var(--green)" : "var(--red)";
 
-        const esMesActual = mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
-        if (lEl) lEl.textContent = esMesActual ? "Acumulado" : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
+        const esMesActual =
+          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        if (lEl)
+          lEl.textContent = esMesActual
+            ? "Acumulado"
+            : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
 
         const diff = frank - cristian;
         const amount = Math.abs(diff) / 2;
         if (Math.abs(diff) < 500) {
-          sEl.innerHTML = '<span style="color:var(--green)">✓ Cuentas equilibradas</span>';
+          sEl.innerHTML =
+            '<span style="color:var(--green)">✓ Cuentas equilibradas</span>';
         } else {
           const nameFrom = diff > 0 ? "Frank" : "Cristian";
-          const nameTo   = diff > 0 ? "Cristian" : "Frank";
+          const nameTo = diff > 0 ? "Cristian" : "Frank";
           sEl.innerHTML = `<div style="font-size:1.5rem;font-weight:800;color:var(--accent-bright);text-align:center;margin:6px 0 2px">${fmt(amount)}</div><div style="font-size:0.72rem;text-align:center;color:var(--text2)">${nameFrom} transfiere a ${nameTo} para quedar iguales</div>`;
         }
       }
@@ -2573,13 +3362,18 @@
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const retirosCapital = transactions
-          .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
+          .filter(
+            (t) =>
+              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
+          )
           .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos + retirosCapital;
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(1) : 0;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
+        document.getElementById("g-gastos").textContent = fmt(
+          totalGastos - retirosCapital,
+        );
         document.getElementById("g-profit").textContent = fmt(profit);
         document.getElementById("g-profit").style.color =
           profit >= 0 ? "#D4A85E" : "#f87171";
@@ -2591,12 +3385,18 @@
       function renderKPIs(mes) {
         const totalIngresos = mes
           .filter(
-            (t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT && t.categoria !== TRANSFER_CAT,
+            (t) =>
+              t.tipo === "ingreso" &&
+              t.categoria !== CAPITAL_INGRESO_CAT &&
+              t.categoria !== TRANSFER_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = mes
           .filter(
-            (t) => t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== TRANSFER_CAT,
+            (t) =>
+              t.tipo === "gasto" &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
+              t.categoria !== TRANSFER_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
         const aportesCapitalMes = mes
@@ -2606,7 +3406,8 @@
           .reduce((s, t) => s + t.monto, 0);
         const retirosCapitalMes = mes
           .filter(
-            (t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
+            (t) =>
+              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
         const profit = totalIngresos - totalGastos;
@@ -2633,18 +3434,23 @@
         // Disponible = suma de socios desde inicio del periodo (solo positivos)
         // Si un socio va negativo (invirtió de su bolsillo) no reduce el efectivo en cuenta.
         // Solo muestra negativo si los DOS están en negativo.
-        let _frankD = 0, _cristianD = 0;
+        let _frankD = 0,
+          _cristianD = 0;
         transactions
-          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay; })
-          .forEach(t => {
-            const r = (t.receptor||"").trim().toLowerCase();
-            const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-            if (r==="frank") _frankD += d;
-            else if (r==="cristian") _cristianD += d;
+          .filter((t) => {
+            const f = t.fecha || "";
+            return f >= CUENTAS_DESDE && f <= lastDay;
+          })
+          .forEach((t) => {
+            const r = (t.receptor || "").trim().toLowerCase();
+            const d = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
+            if (r === "frank") _frankD += d;
+            else if (r === "cristian") _cristianD += d;
           });
-        const saldo = (_frankD <= 0 && _cristianD <= 0)
-          ? _frankD + _cristianD
-          : Math.max(0, _frankD) + Math.max(0, _cristianD);
+        const saldo =
+          _frankD <= 0 && _cristianD <= 0
+            ? _frankD + _cristianD
+            : Math.max(0, _frankD) + Math.max(0, _cristianD);
         const saldoEl = document.getElementById("kpi-saldo");
         saldoEl.textContent = (saldo >= 0 ? "" : "-") + fmt(Math.abs(saldo));
         saldoEl.style.color = saldo >= 0 ? "#22c55e" : "#f87171";
@@ -2659,6 +3465,9 @@
       }
 
       function renderResumen(mes) {
+        const _sc = document.getElementById("summary-cards");
+        const _sb = document.getElementById("summary-body");
+        if (!_sc || !_sb) return;
         mes = mes || txDelMes(transactions);
         const projMap = {};
         mes.forEach((t) => {
@@ -2722,7 +3531,10 @@
         // Update toggle visuals
         const track = document.getElementById("toggle-track");
         const thumb = document.getElementById("toggle-thumb");
-        if (track) track.style.background = todosMeses ? "var(--accent)" : "rgba(255,255,255,0.18)";
+        if (track)
+          track.style.background = todosMeses
+            ? "var(--accent)"
+            : "rgba(255,255,255,0.18)";
         if (thumb)
           thumb.style.transform = todosMeses
             ? "translateX(1.25rem)"
@@ -2840,41 +3652,74 @@
         reportesVista = vista;
         const mb = document.getElementById("rpt-mes-btn");
         const ab = document.getElementById("rpt-anio-btn");
-        if (mb) { mb.style.background = vista==="mes"?"var(--accent)":"transparent"; mb.style.color = vista==="mes"?"#1a0f00":"var(--text2)"; }
-        if (ab) { ab.style.background = vista==="anio"?"var(--accent)":"transparent"; ab.style.color = vista==="anio"?"#1a0f00":"var(--text2)"; }
+        if (mb) {
+          mb.style.background =
+            vista === "mes" ? "var(--accent)" : "transparent";
+          mb.style.color = vista === "mes" ? "#1a0f00" : "var(--text2)";
+        }
+        if (ab) {
+          ab.style.background =
+            vista === "anio" ? "var(--accent)" : "transparent";
+          ab.style.color = vista === "anio" ? "#1a0f00" : "var(--text2)";
+        }
         actualizarMesLabel();
         renderCharts();
       }
 
       function renderCharts() {
         const isAnio = reportesVista === "anio";
-        const anioPool = transactions.filter(t => (t.fecha||"").startsWith(String(mesSel.y)));
+        const anioPool = transactions.filter((t) =>
+          (t.fecha || "").startsWith(String(mesSel.y)),
+        );
         const mes = isAnio ? anioPool : txDelMes(transactions);
-        const periodoLabel = isAnio ? `año ${mesSel.y}` : MESES[mesSel.m].toLowerCase();
+        const periodoLabel = isAnio
+          ? `año ${mesSel.y}`
+          : MESES[mesSel.m].toLowerCase();
         const lbl1 = document.getElementById("chart-1-label");
         const lbl3 = document.getElementById("chart-3-label");
         const lbl4 = document.getElementById("chart-4-label");
         const lblTop = document.getElementById("chart-top-label");
-        if (lbl1) lbl1.textContent = isAnio ? `Ingresos vs Gastos · ${mesSel.y}` : "Ingresos vs Gastos · Últimos 6 meses";
-        if (lbl3) lbl3.textContent = isAnio ? `Profit mensual · ${mesSel.y}` : "Flujo semanal del mes";
+        if (lbl1)
+          lbl1.textContent = isAnio
+            ? `Ingresos vs Gastos · ${mesSel.y}`
+            : "Ingresos vs Gastos · Últimos 6 meses";
+        if (lbl3)
+          lbl3.textContent = isAnio
+            ? `Profit mensual · ${mesSel.y}`
+            : "Flujo semanal del mes";
         if (lbl4) lbl4.textContent = `Medios de pago · ${periodoLabel}`;
-        if (lblTop) lblTop.textContent = `Top proyectos por profit · ${periodoLabel}`;
+        if (lblTop)
+          lblTop.textContent = `Top proyectos por profit · ${periodoLabel}`;
         const catLbl = document.getElementById("chart-cat-mes-label");
         if (catLbl) catLbl.textContent = periodoLabel;
 
         // Chart 1 — Ingresos vs Gastos
         destroyChart("mensual");
         const range = isAnio
-          ? Array.from({length:12},(_,i)=>({y:mesSel.y,m:i,label:MESES[i].slice(0,3)}))
+          ? Array.from({ length: 12 }, (_, i) => ({
+              y: mesSel.y,
+              m: i,
+              label: MESES[i].slice(0, 3),
+            }))
           : getMonthRange(6);
-        const ingsArr = [], gastArr = [], lblArr = [];
+        const ingsArr = [],
+          gastArr = [],
+          lblArr = [];
         range.forEach(({ y, m, label }) => {
           const prefix = y + "-" + String(m + 1).padStart(2, "0");
           const txM = transactions.filter((t) =>
             (t.fecha || "").startsWith(prefix),
           );
-          ingsArr.push(txM.filter((t) => t.tipo === "ingreso").reduce((s, t) => s + t.monto, 0));
-          gastArr.push(txM.filter((t) => t.tipo === "gasto").reduce((s, t) => s + t.monto, 0));
+          ingsArr.push(
+            txM
+              .filter((t) => t.tipo === "ingreso")
+              .reduce((s, t) => s + t.monto, 0),
+          );
+          gastArr.push(
+            txM
+              .filter((t) => t.tipo === "gasto")
+              .reduce((s, t) => s + t.monto, 0),
+          );
           lblArr.push(label);
         });
         const ctx1 = document.getElementById("chart-mensual").getContext("2d");
@@ -2996,38 +3841,130 @@
         destroyChart("semanal");
         const ctx3 = document.getElementById("chart-semanal").getContext("2d");
         if (isAnio) {
-          const mesesLbl = MESES.map(m=>m.slice(0,3));
-          const profitMeses = Array.from({length:12},(_,i)=>{
-            const pref = mesSel.y+"-"+String(i+1).padStart(2,"0");
-            const txM = transactions.filter(t=>(t.fecha||"").startsWith(pref));
-            return txM.filter(t=>t.tipo==="ingreso").reduce((s,t)=>s+t.monto,0)
-                 - txM.filter(t=>t.tipo==="gasto").reduce((s,t)=>s+t.monto,0);
+          const mesesLbl = MESES.map((m) => m.slice(0, 3));
+          const profitMeses = Array.from({ length: 12 }, (_, i) => {
+            const pref = mesSel.y + "-" + String(i + 1).padStart(2, "0");
+            const txM = transactions.filter((t) =>
+              (t.fecha || "").startsWith(pref),
+            );
+            return (
+              txM
+                .filter((t) => t.tipo === "ingreso")
+                .reduce((s, t) => s + t.monto, 0) -
+              txM
+                .filter((t) => t.tipo === "gasto")
+                .reduce((s, t) => s + t.monto, 0)
+            );
           });
           charts["semanal"] = new Chart(ctx3, {
-            type:"bar",
-            data:{ labels:mesesLbl, datasets:[{ label:"Profit", data:profitMeses,
-              backgroundColor: profitMeses.map(v=>v>=0?"rgba(34,197,94,0.8)":"rgba(239,68,68,0.8)"),
-              borderRadius:6, borderSkipped:false }] },
-            options:{ responsive:true, maintainAspectRatio:false,
-              plugins:{ legend:{display:false}, tooltip:{callbacks:{label:(c)=>" "+fmt(c.raw)}} },
-              scales:{ y:{ticks:{callback:(v)=>"$"+(v>=1e6?(v/1e6).toFixed(1)+"M":(v/1e3).toFixed(0)+"k"),font:{size:10}},grid:{color:"#f1f5f9"}},
-                x:{ticks:{font:{size:10}},grid:{display:false}} } }
+            type: "bar",
+            data: {
+              labels: mesesLbl,
+              datasets: [
+                {
+                  label: "Profit",
+                  data: profitMeses,
+                  backgroundColor: profitMeses.map((v) =>
+                    v >= 0 ? "rgba(34,197,94,0.8)" : "rgba(239,68,68,0.8)",
+                  ),
+                  borderRadius: 6,
+                  borderSkipped: false,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: (c) => " " + fmt(c.raw) } },
+              },
+              scales: {
+                y: {
+                  ticks: {
+                    callback: (v) =>
+                      "$" +
+                      (v >= 1e6
+                        ? (v / 1e6).toFixed(1) + "M"
+                        : (v / 1e3).toFixed(0) + "k"),
+                    font: { size: 10 },
+                  },
+                  grid: { color: "#f1f5f9" },
+                },
+                x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+              },
+            },
           });
         } else {
-          const semanasLbl = ["Sem 1 (1-7)","Sem 2 (8-14)","Sem 3 (15-21)","Sem 4 (22-31)"];
-          const ingSem=[0,0,0,0], gastSem=[0,0,0,0];
-          mes.forEach(t=>{
-            const i=parseInt(getSemana(t.fecha),10)-1;
-            if(t.tipo==="ingreso") ingSem[i]+=t.monto; else gastSem[i]+=t.monto;
+          const semanasLbl = [
+            "Sem 1 (1-7)",
+            "Sem 2 (8-14)",
+            "Sem 3 (15-21)",
+            "Sem 4 (22-31)",
+          ];
+          const ingSem = [0, 0, 0, 0],
+            gastSem = [0, 0, 0, 0];
+          mes.forEach((t) => {
+            const i = parseInt(getSemana(t.fecha), 10) - 1;
+            if (t.tipo === "ingreso") ingSem[i] += t.monto;
+            else gastSem[i] += t.monto;
           });
-          charts["semanal"] = new Chart(ctx3,{
-            type:"line", data:{ labels:semanasLbl, datasets:[
-              {label:"Ingresos",data:ingSem,borderColor:"#22c55e",backgroundColor:"rgba(34,197,94,0.1)",tension:0.35,fill:true,pointRadius:5,pointBackgroundColor:"#22c55e",borderWidth:2},
-              {label:"Gastos",data:gastSem,borderColor:"#ef4444",backgroundColor:"rgba(239,68,68,0.07)",tension:0.35,fill:true,pointRadius:5,pointBackgroundColor:"#ef4444",borderWidth:2}]},
-            options:{responsive:true,maintainAspectRatio:false,
-              plugins:{legend:{labels:{font:{family:"Poppins",size:11},boxWidth:12,padding:16}}},
-              scales:{y:{ticks:{callback:(v)=>"$"+(v>=1e6?(v/1e6).toFixed(1)+"M":(v/1e3).toFixed(0)+"k"),font:{size:10}},grid:{color:"#f1f5f9"}},
-                x:{ticks:{font:{size:10}},grid:{display:false}}}}
+          charts["semanal"] = new Chart(ctx3, {
+            type: "line",
+            data: {
+              labels: semanasLbl,
+              datasets: [
+                {
+                  label: "Ingresos",
+                  data: ingSem,
+                  borderColor: "#22c55e",
+                  backgroundColor: "rgba(34,197,94,0.1)",
+                  tension: 0.35,
+                  fill: true,
+                  pointRadius: 5,
+                  pointBackgroundColor: "#22c55e",
+                  borderWidth: 2,
+                },
+                {
+                  label: "Gastos",
+                  data: gastSem,
+                  borderColor: "#ef4444",
+                  backgroundColor: "rgba(239,68,68,0.07)",
+                  tension: 0.35,
+                  fill: true,
+                  pointRadius: 5,
+                  pointBackgroundColor: "#ef4444",
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  labels: {
+                    font: { family: "Poppins", size: 11 },
+                    boxWidth: 12,
+                    padding: 16,
+                  },
+                },
+              },
+              scales: {
+                y: {
+                  ticks: {
+                    callback: (v) =>
+                      "$" +
+                      (v >= 1e6
+                        ? (v / 1e6).toFixed(1) + "M"
+                        : (v / 1e3).toFixed(0) + "k"),
+                    font: { size: 10 },
+                  },
+                  grid: { color: "#f1f5f9" },
+                },
+                x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+              },
+            },
           });
         }
 
@@ -3096,9 +4033,12 @@
         // Top proyectos por profit (progress bars)
         const projMap = {};
         mes.forEach((t) => {
+          if (t.categoria === TRANSFER_CAT) return;
+          if (t.categoria === CAPITAL_INGRESO_CAT) return;
+          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
           const key =
-            t.proyecto ||
-            (t.tipo === "gasto" ? "Operación General" : "Sin Proyecto");
+            t.proyecto || (t.tipo === "gasto" ? "Operación General" : null);
+          if (!key) return;
           if (!projMap[key]) projMap[key] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[key].ingresos += t.monto;
           else projMap[key].gastos += t.monto;
@@ -3132,6 +4072,173 @@
         });
       }
 
+      // ── Proyectos ─────────────────────────────────────────
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      async function toggleProyectoCerrado(nombre) {
+        proyectosEstado[nombre] = !proyectosEstado[nombre];
+        try {
+          await db
+            .collection("config")
+            .doc("proyectos_estado")
+            .set(proyectosEstado);
+        } catch (e) {
+          console.error("Error guardando estado de proyecto:", e);
+        }
+        renderProyectos();
+      }
+
+      function crearTarjetaProyecto(p) {
+        const div = document.createElement("div");
+        const borderColor = p.cerrado
+          ? "rgba(184,144,77,0.3)"
+          : "rgba(56,189,248,0.2)";
+        const bgColor = p.cerrado ? "rgba(184,144,77,0.07)" : "var(--glass)";
+        const netColor =
+          p.net >= 0
+            ? p.cerrado
+              ? "var(--accent-bright)"
+              : "var(--green)"
+            : "var(--red)";
+        const checkBg = p.cerrado ? "var(--accent)" : "rgba(255,255,255,0.15)";
+        const checkTranslate = p.cerrado
+          ? "translateX(1.25rem)"
+          : "translateX(0.13rem)";
+        const toggleLabel = p.cerrado ? "Abrir" : "Cerrar";
+        const profitLabel = p.cerrado ? "Profit" : "Balance";
+        const statusText = p.cerrado ? "Cerrado" : "Activo";
+        const statusColor = p.cerrado ? "var(--accent)" : "var(--blue)";
+        const statusBg = p.cerrado
+          ? "rgba(184,144,77,0.15)"
+          : "rgba(56,189,248,0.12)";
+        div.className = "rounded-xl p-3 transition";
+        div.style.cssText = `background:${bgColor};border:1px solid ${borderColor};margin-bottom:8px;cursor:pointer`;
+        div.innerHTML = `<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px">
+  <div style="flex:1;min-width:0">
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px">
+      <span style="font-size:0.875rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px">${escapeHtml(p.nombre)}</span>
+      <span style="font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:999px;background:${statusBg};color:${statusColor};flex-shrink:0">${statusText}</span>
+    </div>
+  </div>
+  <label style="display:flex;align-items:center;gap:5px;flex-shrink:0;cursor:pointer" class="proj-toggle-label">
+    <span style="font-size:0.67rem;font-weight:600;color:var(--text2)">${toggleLabel}</span>
+    <div style="position:relative;width:2.25rem;height:1.15rem;flex-shrink:0">
+      <div style="position:absolute;inset:0;border-radius:9999px;background:${checkBg};transition:background .2s"></div>
+      <div style="position:absolute;top:0.13rem;border-radius:50%;width:0.87rem;height:0.87rem;background:white;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .2s;transform:${checkTranslate}"></div>
+    </div>
+  </label>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
+  <div>
+    <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Ingresos</p>
+    <p style="font-size:0.8rem;font-weight:700;color:var(--green)">${fmt(p.ingresos)}</p>
+  </div>
+  <div>
+    <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Gastos</p>
+    <p style="font-size:0.8rem;font-weight:700;color:var(--red)">${fmt(p.gastos)}</p>
+  </div>
+  <div>
+    <p style="font-size:0.62rem;color:var(--text2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">${profitLabel}</p>
+    <p style="font-size:0.8rem;font-weight:700;color:${netColor}">${fmt(p.net)}</p>
+  </div>
+</div>`;
+        div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
+        const lbl = div.querySelector(".proj-toggle-label");
+        if (lbl)
+          lbl.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleProyectoCerrado(p.nombre);
+          });
+        return div;
+      }
+
+      function renderProyectos() {
+        const projMap = {};
+        transactions.forEach((t) => {
+          if (!t.proyecto) return;
+          if (t.categoria === TRANSFER_CAT) return;
+          if (t.categoria === CAPITAL_INGRESO_CAT) return;
+          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
+          if (!projMap[t.proyecto])
+            projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
+          if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
+          else projMap[t.proyecto].gastos += t.monto;
+        });
+
+        let capitalTrabajo = 0,
+          profitReal = 0;
+        const activos = [],
+          cerrados = [];
+        Object.entries(projMap).forEach(([nombre, v]) => {
+          const net = v.ingresos - v.gastos;
+          const esCerrado = !!proyectosEstado[nombre];
+          const entry = {
+            nombre,
+            ingresos: v.ingresos,
+            gastos: v.gastos,
+            net,
+            cerrado: esCerrado,
+          };
+          if (esCerrado) {
+            profitReal += net;
+            cerrados.push(entry);
+          } else {
+            capitalTrabajo += net;
+            activos.push(entry);
+          }
+        });
+
+        const ctEl = document.getElementById("proj-capital-trabajo");
+        const prEl = document.getElementById("proj-profit-real");
+        if (ctEl) {
+          ctEl.textContent = fmt(capitalTrabajo);
+          ctEl.style.color = capitalTrabajo >= 0 ? "var(--blue)" : "var(--red)";
+        }
+        if (prEl) {
+          prEl.textContent = fmt(profitReal);
+          prEl.style.color =
+            profitReal >= 0 ? "var(--accent-bright)" : "var(--red)";
+        }
+
+        const list = document.getElementById("proyectos-list");
+        if (!list) return;
+        list.innerHTML = "";
+
+        activos.sort((a, b) => b.net - a.net);
+        cerrados.sort((a, b) => b.net - a.net);
+
+        if (activos.length === 0 && cerrados.length === 0) {
+          list.innerHTML =
+            '<p class="text-center py-6 text-sm" style="color:var(--text2)">No hay proyectos con movimientos registrados.<br><span style="font-size:0.75rem;color:var(--text3)">Agrega registros con un proyecto asignado.</span></p>';
+          return;
+        }
+
+        if (activos.length > 0) {
+          const h = document.createElement("p");
+          h.style.cssText =
+            "font-size:0.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;margin-top:4px";
+          h.textContent = "En proceso · Capital de trabajo";
+          list.appendChild(h);
+          activos.forEach((p) => list.appendChild(crearTarjetaProyecto(p)));
+        }
+
+        if (cerrados.length > 0) {
+          const h2 = document.createElement("p");
+          h2.style.cssText =
+            "font-size:0.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;margin-top:16px";
+          h2.textContent = "Cerrados · Profit real";
+          list.appendChild(h2);
+          cerrados.forEach((p) => list.appendChild(crearTarjetaProyecto(p)));
+        }
+      }
+
       // ── Submit ────────────────────────────────────────────
       document
         .getElementById("tx-form")
@@ -3145,32 +4252,57 @@
           if (tipo === "transferencia") {
             const de = document.getElementById("tx-de").value;
             const para = document.getElementById("tx-para").value;
-            if (de === para) { showToast("Emisor y receptor deben ser distintos", "delete"); return; }
+            if (de === para) {
+              showToast("Emisor y receptor deben ser distintos", "delete");
+              return;
+            }
             const fecha = document.getElementById("tx-fecha").value || todayStr;
-            const hora2 = document.getElementById("tx-hora").value || new Date().toTimeString().slice(0,5);
+            const hora2 =
+              document.getElementById("tx-hora").value ||
+              new Date().toTimeString().slice(0, 5);
             const desc = document.getElementById("tx-descripcion").value.trim();
             const medio = document.getElementById("tx-medio").value;
             const btn2 = e.target.querySelector("button[type=submit]");
-            btn2.disabled = true; btn2.textContent = "Guardando...";
+            btn2.disabled = true;
+            btn2.textContent = "Guardando...";
             try {
               const batch = db.batch();
               batch.set(db.collection("transacciones").doc(), {
-                tipo:"gasto", categoria:TRANSFER_CAT, monto, receptor:de,
-                descripcion:desc||`Transferencia a ${para}`, fecha:fecha, hora:hora2, medio
+                tipo: "gasto",
+                categoria: TRANSFER_CAT,
+                monto,
+                receptor: de,
+                descripcion: desc || `Transferencia a ${para}`,
+                fecha: fecha,
+                hora: hora2,
+                medio,
               });
               batch.set(db.collection("transacciones").doc(), {
-                tipo:"ingreso", categoria:TRANSFER_CAT, monto, receptor:para,
-                descripcion:desc||`Transferencia de ${de}`, fecha:fecha, hora:hora2, medio
+                tipo: "ingreso",
+                categoria: TRANSFER_CAT,
+                monto,
+                receptor: para,
+                descripcion: desc || `Transferencia de ${de}`,
+                fecha: fecha,
+                hora: hora2,
+                medio,
               });
               await batch.commit();
               showToast(`Transferencia ${de} → ${para} registrada ✓`);
-            } catch(err) { showToast("Error al registrar", "delete"); }
+            } catch (err) {
+              showToast("Error al registrar", "delete");
+            }
             btn2.disabled = false;
-            btn2.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
+            btn2.innerHTML =
+              '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
             e.target.reset();
             document.getElementById("tx-fecha").value = todayStr;
-            document.getElementById("tx-hora").value = new Date().toTimeString().slice(0,5);
-            setTipo("ingreso"); setMedio("Efectivo"); setReceptor("Cristian");
+            document.getElementById("tx-hora").value = new Date()
+              .toTimeString()
+              .slice(0, 5);
+            setTipo("ingreso");
+            setMedio("Efectivo");
+            setReceptor("Cristian");
             lucide.createIcons();
             showTab("resumen");
             return;
@@ -3181,33 +4313,60 @@
 
           // ── Retiro de Profit — se divide entre ambos socios ─
           if (CAPITAL_GASTO_CATS.includes(cat)) {
-            const fecha2 = document.getElementById("tx-fecha").value || todayStr;
-            const hora2  = document.getElementById("tx-hora").value || new Date().toTimeString().slice(0,5);
-            const desc2  = document.getElementById("tx-descripcion").value.trim() || "Retiro de Profit";
+            const fecha2 =
+              document.getElementById("tx-fecha").value || todayStr;
+            const hora2 =
+              document.getElementById("tx-hora").value ||
+              new Date().toTimeString().slice(0, 5);
+            const desc2 =
+              document.getElementById("tx-descripcion").value.trim() ||
+              "Retiro de Profit";
             const medio2 = document.getElementById("tx-medio").value;
             const mitadF = Math.floor(monto / 2);
             const mitadC = monto - mitadF;
             const btn3 = e.target.querySelector("button[type=submit]");
-            btn3.disabled = true; btn3.textContent = "Guardando...";
+            btn3.disabled = true;
+            btn3.textContent = "Guardando...";
             try {
               const batch = db.batch();
               batch.set(db.collection("transacciones").doc(), {
-                tipo:"gasto", categoria:cat, monto:mitadF, receptor:"Frank",
-                descripcion:desc2, fecha:fecha2, hora:hora2, medio:medio2, proyecto:""
+                tipo: "gasto",
+                categoria: cat,
+                monto: mitadF,
+                receptor: "Frank",
+                descripcion: desc2,
+                fecha: fecha2,
+                hora: hora2,
+                medio: medio2,
+                proyecto: "",
               });
               batch.set(db.collection("transacciones").doc(), {
-                tipo:"gasto", categoria:cat, monto:mitadC, receptor:"Cristian",
-                descripcion:desc2, fecha:fecha2, hora:hora2, medio:medio2, proyecto:""
+                tipo: "gasto",
+                categoria: cat,
+                monto: mitadC,
+                receptor: "Cristian",
+                descripcion: desc2,
+                fecha: fecha2,
+                hora: hora2,
+                medio: medio2,
+                proyecto: "",
               });
               await batch.commit();
               showToast("Retiro de Profit registrado (Frank + Cristian) ✓");
-            } catch(err) { showToast("Error al registrar", "delete"); }
+            } catch (err) {
+              showToast("Error al registrar", "delete");
+            }
             btn3.disabled = false;
-            btn3.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
+            btn3.innerHTML =
+              '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
             e.target.reset();
             document.getElementById("tx-fecha").value = todayStr;
-            document.getElementById("tx-hora").value = new Date().toTimeString().slice(0,5);
-            setTipo("ingreso"); setMedio("Efectivo"); setReceptor("Cristian");
+            document.getElementById("tx-hora").value = new Date()
+              .toTimeString()
+              .slice(0, 5);
+            setTipo("ingreso");
+            setMedio("Efectivo");
+            setReceptor("Cristian");
             lucide.createIcons();
             showTab("resumen");
             return;
