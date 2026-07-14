@@ -3874,11 +3874,12 @@
         }
 
         // Top proyectos por profit (progress bars) — totales acumulados
-        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
+        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
         const projMap = {};
         transactions.forEach((t) => {
           if (!t.proyecto) return;
-          if (_noProj.has(t.proyecto)) return;
+          const _pn = t.proyecto.trim().toLowerCase();
+          if (_noProj.has(_pn) || _pn.startsWith("publicidad")) return;
           if (t.categoria === TRANSFER_CAT) return;
           if (t.categoria === CAPITAL_INGRESO_CAT) return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
@@ -4003,11 +4004,12 @@
       }
 
       function renderProyectos() {
-        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"]);
+        const _noProj = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
         const projMap = {};
         transactions.forEach((t) => {
           if (!t.proyecto) return;
-          if (_noProj.has(t.proyecto)) return;
+          const _pn = t.proyecto.trim().toLowerCase();
+          if (_noProj.has(_pn) || _pn.startsWith("publicidad")) return;
           if (t.categoria === TRANSFER_CAT) return;
           if (t.categoria === CAPITAL_INGRESO_CAT) return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
