@@ -182,7 +182,11 @@
       }
     </style>
     <!-- Preload critical fonts -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link
       rel="preload"
@@ -813,7 +817,15 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="css/styles.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
     <style>
       /* Custom Styles for that premium feel */
@@ -862,16 +874,28 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">
       <div class="container mx-auto px-6 flex justify-between items-center">
-        <a href="/" class="flex items-center group" style="display:flex;align-items:center;gap:16px">
+        <a
+          href="/"
+          class="flex items-center group"
+          style="display: flex; align-items: center; gap: 16px"
+        >
           <img
             src="images/cbdlogo-gold.svg"
             alt="Colombia Boat Detailing"
-            class="flex-shrink-0 transition-transform duration-300 group-hover:scale-110" style="width:32px;height:32px"
+            class="flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+            style="width: 32px; height: 32px"
             width="32"
             height="32"
             loading="eager"
           />
-          <div style="width:1px;height:28px;background:rgba(212,175,55,0.4);flex-shrink:0"></div>
+          <div
+            style="
+              width: 1px;
+              height: 28px;
+              background: rgba(212, 175, 55, 0.4);
+              flex-shrink: 0;
+            "
+          ></div>
           <div class="flex flex-col">
             <span
               class="text-white text-lg tracking-[0.2em] font-light leading-none"
