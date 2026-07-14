@@ -3248,17 +3248,25 @@
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-            if (r === "frank") frankTotal += delta;
-            else if (r === "cristian") cristTotal += delta;
+            if (r === "frank") {
+              frankTotal += delta;
+            } else if (r === "cristian") {
+              cristTotal += delta;
+            }
           });
-        // Capital de trabajo = mitad del capital activo total (split igualitario).
-        // Profit = saldo personal − su parte del capital.
-        // Si alguien hace gastos, su profit baja (capital fijo hasta que cambien los proyectos).
-        const halfCapital = calcCapitalActivo() / 2;
-        const frankCapital = halfCapital;
-        const cristCapital = halfCapital;
-        const frankProfit = frankTotal - frankCapital;
-        const cristProfit = cristTotal - cristCapital;
+        // Profit base igual para ambos = (ingresos - gastos operativos) / 2
+        // y los gastos personales se reflejan en menor capital de trabajo.
+        const totalIngresos = transactions
+          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = transactions
+          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
+          .reduce((s, t) => s + t.monto, 0);
+        const profitBase = (totalIngresos - totalGastos) / 2;
+        const frankProfit = profitBase;
+        const cristProfit = profitBase;
+        const frankCapital = frankTotal - frankProfit;
+        const cristCapital = cristTotal - cristProfit;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
@@ -3380,26 +3388,16 @@
 
       function renderGlobalKPIs() {
         const totalIngresos = transactions
-          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
+          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
           .reduce((s, t) => s + t.monto, 0);
         const totalGastos = transactions
-          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT)
+          .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
           .reduce((s, t) => s + t.monto, 0);
-        const retirosCapital = transactions
-          .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
-          .reduce((s, t) => s + t.monto, 0);
-        // Profit Total = total en cuenta - capital activo
-        const lastDayG = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        let _fG = 0, _cG = 0;
-        transactions.filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDayG; }).forEach(t => {
-          const r = (t.receptor||"").trim().toLowerCase();
-          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
-          if (r==="frank") _fG += d; else if (r==="cristian") _cG += d;
-        });
+        // Profit Total = ingresos - gastos operativos (sin incluir retiros de profit/capital)
         const capitalActivo = calcCapitalActivo();
-        const profitTotal = (_fG + _cG) - capitalActivo;
+        const profitTotal = totalIngresos - totalGastos;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
+        document.getElementById("g-gastos").textContent = fmt(totalGastos);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
         document.getElementById("g-profit").style.color = profitTotal >= 0 ? "#D4A85E" : "#f87171";
         const gm = document.getElementById("g-margen");
