@@ -3243,6 +3243,7 @@
       function renderCuentas() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         let frankTotal = 0, cristTotal = 0;
+        let frankRetiroProfit = 0, cristRetiroProfit = 0;
         const transRango = transactions
           .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; });
         transRango
@@ -3251,8 +3252,10 @@
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
             if (r === "frank") {
               frankTotal += delta;
+              if (t.tipo === "gasto" && t.categoria === "Retiro de Profit") frankRetiroProfit += (t.monto || 0);
             } else if (r === "cristian") {
               cristTotal += delta;
+              if (t.tipo === "gasto" && t.categoria === "Retiro de Profit") cristRetiroProfit += (t.monto || 0);
             }
           });
         // Profit base igual para ambos = (ingresos - gastos operativos) / 2
@@ -3266,8 +3269,10 @@
         const capitalActivo = calcCapitalActivo();
         const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
 
-        let frankProfit = profitBase;
-        let cristProfit = profitBase;
+        // El retiro de profit descuenta del profit disponible del socio,
+        // no de su capital de trabajo.
+        let frankProfit = profitBase - frankRetiroProfit;
+        let cristProfit = profitBase - cristRetiroProfit;
         let frankCapital = frankTotal - frankProfit;
         let cristCapital = cristTotal - cristProfit;
 
