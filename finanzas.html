@@ -3381,8 +3381,8 @@
         } catch(e) { showToast("Error al registrar", "delete"); }
       }
 
-      function calcCapitalActivo() {
-        const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+      function calcCapitalActivo(corteFecha) {
+        const lastDay = corteFecha || new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
         const noProjL = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
         const proyectosCerradosSet = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !noProjL.has(k.toLowerCase())));
         return transactions
@@ -3400,20 +3400,19 @@
       }
 
       function renderGlobalKPIs() {
-        const lastDayG = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const transRango = transactions
+        const transGlobal = transactions
           .filter((t) => {
             const f = t.fecha || "";
-            return f >= CUENTAS_DESDE && f <= lastDayG;
+            return f >= CUENTAS_DESDE && f <= todayStr;
           });
-        const totalIngresos = transRango
+        const totalIngresos = transGlobal
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT)
           .reduce((s, t) => s + t.monto, 0);
-        const totalGastos = transRango
+        const totalGastos = transGlobal
           .filter((t) => t.tipo === "gasto" && t.categoria !== TRANSFER_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== "Retiro de Profit")
           .reduce((s, t) => s + t.monto, 0);
-        // Profit Total Realizado = ingresos operativos - gastos operativos - capital activo no cerrado.
-        const capitalActivo = calcCapitalActivo();
+        // Profit global realizado = ingresos operativos acumulados - gastos operativos acumulados - capital activo actual.
+        const capitalActivo = calcCapitalActivo(todayStr);
         const profitTotal = totalIngresos - totalGastos - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos);
