@@ -3242,26 +3242,23 @@
 
       function renderCuentas() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const _noPrCt = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
-        const _cerradosCt = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !_noPrCt.has(k.toLowerCase())));
-        const closedNet = transactions
-          .filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDay && t.proyecto && _cerradosCt.has(t.proyecto) && !_noPrCt.has((t.proyecto||"").toLowerCase()) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria); })
-          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
-        let frankTotal = 0, cristTotal = 0, frankRetiros = 0, cristRetiros = 0;
+        let frankTotal = 0, cristTotal = 0;
         transactions
           .filter(t => { const f = t.fecha || ""; return f >= CUENTAS_DESDE && f <= lastDay; })
           .forEach(t => {
             const r = (t.receptor || "").trim().toLowerCase();
             const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-            if (r === "frank") { frankTotal += delta; if (CAPITAL_GASTO_CATS.includes(t.categoria)) frankRetiros += (t.monto||0); }
-            else if (r === "cristian") { cristTotal += delta; if (CAPITAL_GASTO_CATS.includes(t.categoria)) cristRetiros += (t.monto||0); }
+            if (r === "frank") frankTotal += delta;
+            else if (r === "cristian") cristTotal += delta;
           });
-        // Profit = mitad del net de proyectos cerrados menos retiros personales.
-        // Gastos generales reducen capital de trabajo, no el profit.
-        const frankProfit = closedNet / 2 - frankRetiros;
-        const cristProfit = closedNet / 2 - cristRetiros;
-        const frankCapital = frankTotal - frankProfit;
-        const cristCapital = cristTotal - cristProfit;
+        // Capital de trabajo = mitad del capital activo total (split igualitario).
+        // Profit = saldo personal − su parte del capital.
+        // Si alguien hace gastos, su profit baja (capital fijo hasta que cambien los proyectos).
+        const halfCapital = calcCapitalActivo() / 2;
+        const frankCapital = halfCapital;
+        const cristCapital = halfCapital;
+        const frankProfit = frankTotal - frankCapital;
+        const cristProfit = cristTotal - cristCapital;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
@@ -3391,13 +3388,16 @@
         const retirosCapital = transactions
           .filter((t) => t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria))
           .reduce((s, t) => s + t.monto, 0);
-        // Profit Total = net histórico de proyectos cerrados
-        const _noPrGb = new Set([...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(s => s.toLowerCase()));
-        const _cerradosGb = new Set(Object.keys(proyectosEstado).filter(k => proyectosEstado[k] && !_noPrGb.has(k.toLowerCase())));
-        const profitTotal = transactions
-          .filter(t => t.proyecto && _cerradosGb.has(t.proyecto) && !_noPrGb.has((t.proyecto||"h").toLowerCase()) && t.categoria !== TRANSFER_CAT && t.categoria !== CAPITAL_INGRESO_CAT && !CAPITAL_GASTO_CATS.includes(t.categoria))
-          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
+        // Profit Total = total en cuenta - capital activo
+        const lastDayG = new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        let _fG = 0, _cG = 0;
+        transactions.filter(t => { const f = t.fecha||""; return f >= CUENTAS_DESDE && f <= lastDayG; }).forEach(t => {
+          const r = (t.receptor||"").trim().toLowerCase();
+          const d = (t.tipo==="ingreso"?1:-1)*(t.monto||0);
+          if (r==="frank") _fG += d; else if (r==="cristian") _cG += d;
+        });
         const capitalActivo = calcCapitalActivo();
+        const profitTotal = (_fG + _cG) - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos - retirosCapital);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
