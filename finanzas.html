@@ -4230,67 +4230,74 @@
           cristTotal = 0;
         let frankRetiroProfit = 0,
           cristRetiroProfit = 0;
-        let frankCapital = 0,
-          cristCapital = 0;
+        // Neto de proyectos CERRADOS que recibió físicamente cada socio
+        // (profit realizado que quedó guardado en su cuenta).
+        let frankClosedNet = 0,
+          cristClosedNet = 0;
         const transRango = transactions.filter((t) => {
           const f = t.fecha || "";
           return f >= CUENTAS_DESDE && f <= lastDay;
         });
-        // ── MODELO DE BUCKETS ────────────────────────────────
-        // Cuenta total (frankTotal/cristTotal) = plata física que tiene el socio.
-        // Capital de trabajo = todo el movimiento del socio MENOS:
-        //   · los flujos de proyectos CERRADOS (esos se vuelven profit realizado)
-        //   · los retiros de profit (esos salen del profit, no del capital)
-        // Así, un gasto de operación general / proyecto activo / etc. consume
-        // SIEMPRE el capital de trabajo del socio que lo hizo, nunca el profit
-        // del otro socio. Un ingreso a un proyecto activo sube el capital de ese
-        // socio sin tocar al otro. El profit solo se toca si el capital se agota.
         transRango.forEach((t) => {
           const r = (t.receptor || "").trim().toLowerCase();
           if (r !== "frank" && r !== "cristian") return;
           const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-          const esProyReal = esFlujoProyecto(t);
-          const esCerrado = esProyReal && !!proyectosEstado[t.proyecto];
+          const esCerrado = esFlujoProyecto(t) && !!proyectosEstado[t.proyecto];
           const esRetiroProfit =
             t.tipo === "gasto" && t.categoria === "Retiro de Profit";
-          // El capital de trabajo excluye flujos de proyectos cerrados (profit)
-          // y los retiros de profit (se descuentan del profit, no del capital).
-          const cuentaComoCapital = !esCerrado && !esRetiroProfit;
           if (r === "frank") {
             frankTotal += delta;
             if (esRetiroProfit) frankRetiroProfit += t.monto || 0;
-            if (cuentaComoCapital) frankCapital += delta;
+            if (esCerrado) frankClosedNet += delta;
           } else {
             cristTotal += delta;
             if (esRetiroProfit) cristRetiroProfit += t.monto || 0;
-            if (cuentaComoCapital) cristCapital += delta;
+            if (esCerrado) cristClosedNet += delta;
           }
         });
 
-        // profitRealizado = ganancia neta SOLO de proyectos cerrados (histórico
-        // completo). Se reparte 50/50 entre los socios (menos lo ya retirado).
-        let profitRealizado = 0;
-        {
-          const projMapR = {};
-          transactions.forEach((t) => {
-            if (!esFlujoProyecto(t)) return;
-            if (!proyectosEstado[t.proyecto]) return; // solo cerrados
-            projMapR[t.proyecto] =
-              (projMapR[t.proyecto] || 0) +
-              (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-          });
-          profitRealizado = Object.values(projMapR).reduce((s, v) => s + v, 0);
-        }
+        // ── PROFIT 50/50 (misma magnitud que antes) ───────────
+        // profitBase = (ingresos − gastos DE PROYECTOS − capital en proyectos
+        // activos) / 2. Los gastos SIN proyecto (operación general, personales)
+        // NO reducen el profit compartido: salen del capital de trabajo del
+        // socio que los hizo (se reflejan al bajar su cuenta total).
+        const totalIngresos = transRango
+          .filter(
+            (t) =>
+              t.tipo === "ingreso" &&
+              t.categoria !== TRANSFER_CAT &&
+              t.categoria !== CAPITAL_INGRESO_CAT,
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const totalGastos = transRango
+          .filter(
+            (t) =>
+              t.tipo === "gasto" &&
+              t.categoria !== TRANSFER_CAT &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
+              esNombreProyectoReal(t.proyecto),
+          )
+          .reduce((s, t) => s + t.monto, 0);
+        const capitalActivo = calcCapitalActivo();
+        const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
 
-        // Profit por socio = mitad del profit realizado − lo que ya retiró.
-        const profitMitad = profitRealizado / 2;
-        let frankProfit = profitMitad - frankRetiroProfit;
-        let cristProfit = profitMitad - cristRetiroProfit;
+        // El retiro de profit descuenta del profit disponible del socio.
+        let frankProfit = profitBase - frankRetiroProfit;
+        let cristProfit = profitBase - cristRetiroProfit;
         if (frankProfit < 0) frankProfit = 0;
         if (cristProfit < 0) cristProfit = 0;
 
-        // Si el capital de trabajo de un socio se agota (negativo), recién
-        // ahí su gasto empieza a consumir su propio profit.
+        // ── CAPITAL DE TRABAJO = cuenta total − profit reservado ──
+        // El profit se reclama 50/50, pero el dinero físico de un proyecto
+        // cerrado queda en la cuenta de quien lo recibió. Corregimos el
+        // desbalance: quien tiene de más el efectivo del proyecto cerrado
+        // reserva de más; el otro socio NO ve caer su capital por eso.
+        const desbalance = (frankClosedNet - cristClosedNet) / 2;
+        let frankCapital = frankTotal - frankProfit - desbalance;
+        let cristCapital = cristTotal - cristProfit + desbalance;
+
+        // Un gasto primero consume capital; solo reduce el profit del socio
+        // si su capital de trabajo ya se agotó.
         if (frankCapital < 0) {
           frankProfit = Math.max(0, frankProfit + frankCapital);
           frankCapital = 0;
