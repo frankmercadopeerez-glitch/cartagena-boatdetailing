@@ -4247,9 +4247,6 @@
               cristRetiroProfit += t.monto || 0;
           }
         });
-        // Profit base igual para ambos = (ingresos - gastos de proyectos) / 2
-        // Los gastos SIN proyecto (operación general, personales) NO reducen el
-        // profit compartido: salen del capital de trabajo del socio que los hizo.
         const totalIngresos = transRango
           .filter(
             (t) =>
@@ -4258,14 +4255,17 @@
               t.categoria !== CAPITAL_INGRESO_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
+        // Profit base igual para ambos = (ingresos - gastos operativos - capital
+        // activo) / 2. TODOS los gastos operativos (incluida operación general)
+        // reducen el profit compartido; así el capital de trabajo de los socios
+        // suma exactamente el Capital Activo (plata metida en proyectos).
         const totalGastos = transRango
           .filter(
             (t) =>
               t.tipo === "gasto" &&
               t.categoria !== TRANSFER_CAT &&
               !CAPITAL_GASTO_CATS.includes(t.categoria) &&
-              t.categoria !== "Retiro de Profit" &&
-              esNombreProyectoReal(t.proyecto),
+              t.categoria !== "Retiro de Profit",
           )
           .reduce((s, t) => s + t.monto, 0);
         const capitalActivo = calcCapitalActivo();
