@@ -3098,6 +3098,21 @@
         return (t.fecha || "") >= GASTO_SOLO_CAPITAL_DESDE;
       }
 
+      function socioKey(nombre) {
+        const n = (nombre || "").trim().toLowerCase();
+        if (n === "frank") return "frank";
+        if (n === "cristian") return "cristian";
+        return "";
+      }
+
+      function estaEnRangoContable(t, corteFecha, desdeFecha = CUENTAS_DESDE) {
+        const f = (t && t.fecha) || "";
+        if (!f) return false;
+        if (desdeFecha && f < desdeFecha) return false;
+        if (corteFecha && f > corteFecha) return false;
+        return true;
+      }
+
       const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
         authDomain: "finanzas-boat-detailing.firebaseapp.com",
@@ -3794,7 +3809,8 @@
           .reduce((s, t) => s + t.monto, 0);
         const gRet = transactions
           .filter(
-            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+            (t) =>
+              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
         const gProfit = gIng - gGas + gRet;
@@ -3807,12 +3823,14 @@
           .reduce((s, t) => s + t.monto, 0);
         const mGas = mes
           .filter(
-            (t) => t.tipo === "gasto" && t.categoria !== CAPITAL_GASTO_CAT,
+            (t) =>
+              t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
         const mRet = mes
           .filter(
-            (t) => t.tipo === "gasto" && t.categoria === CAPITAL_GASTO_CAT,
+            (t) =>
+              t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
         const mApo = mes
@@ -4507,33 +4525,17 @@
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const noProjL = new Set(
-          [
-            ...CATS.gasto,
-            ...CATS.ingreso,
-            "Operación General",
-            "Sin Proyecto",
-          ].map((s) => s.toLowerCase()),
-        );
         const proyectosCerradosSet = new Set(
-          Object.keys(proyectosEstado).filter(
-            (k) => proyectosEstado[k] && !noProjL.has(k.toLowerCase()),
-          ),
+          Object.keys(proyectosEstado)
+            .filter((k) => proyectosEstado[k] && esNombreProyectoReal(k))
+            .map((k) => k.trim().toLowerCase()),
         );
         return transactions.filter((t) => {
-          const f = t.fecha || "";
-          if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
-          if (!t.proyecto) return false;
-          const pn = t.proyecto.trim().toLowerCase();
-          if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
-          if (proyectosCerradosSet.has(t.proyecto)) return false;
-          if (
-            t.categoria === TRANSFER_CAT ||
-            t.categoria === CAPITAL_INGRESO_CAT ||
-            CAPITAL_GASTO_CATS.includes(t.categoria)
-          )
-            return false;
-          return true;
+          if (!estaEnRangoContable(t, lastDay, desdeFecha)) return false;
+          if (!esFlujoProyecto(t)) return false;
+          return !proyectosCerradosSet.has(
+            String(t.proyecto || "").trim().toLowerCase(),
+          );
         });
       }
 
@@ -4544,16 +4546,24 @@
         );
       }
 
-      // Reparto del capital activo por socio: cada socio "financia" el neto
-      // (ingresos - gastos) de los proyectos activos según quién recibió/pagó
-      // cada movimiento. La suma frank+cristian = calcCapitalActivo().
+      // Reparto del capital activo por socio: los proyectos activos pertenecen
+      // 50/50 a los socios. Los gastos operativos sin proyecto desde la fecha de
+      // corte son la excepcion: bajan solo el capital de quien los pago.
       function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        const acc = { frank: 0, cristian: 0 };
-        _txProyectosActivos(corteFecha, desdeFecha).forEach((t) => {
-          const r = (t.receptor || "").trim().toLowerCase();
-          const delta = t.tipo === "ingreso" ? t.monto : -t.monto;
-          if (r === "frank") acc.frank += delta;
-          else if (r === "cristian") acc.cristian += delta;
+        const totalActivo = Math.round(calcCapitalActivo(corteFecha, desdeFecha));
+        const mitadFrank = Math.floor(totalActivo / 2);
+        const acc = {
+          frank: mitadFrank,
+          cristian: totalActivo - mitadFrank,
+        };
+        const lastDay =
+          corteFecha ||
+          new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        transactions.forEach((t) => {
+          if (!estaEnRangoContable(t, lastDay, desdeFecha)) return;
+          if (!esGastoSoloCapital(t)) return;
+          const r = socioKey(t.receptor);
+          if (r) acc[r] -= t.monto || 0;
         });
         return acc;
       }
@@ -4564,7 +4574,12 @@
           return f && f <= todayStr;
         });
         const totalIngresos = transGlobal
-          .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
+          .filter(
+            (t) =>
+              t.tipo === "ingreso" &&
+              t.categoria !== TRANSFER_CAT &&
+              t.categoria !== CAPITAL_INGRESO_CAT,
+          )
           .reduce((s, t) => s + t.monto, 0);
         // Gasto total operativo mostrado en el KPI "Gastos" (incluye todo).
         const totalGastos = transGlobal
@@ -4623,6 +4638,15 @@
               t.categoria !== TRANSFER_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
+        const gastosProfitMes = mes
+          .filter(
+            (t) =>
+              t.tipo === "gasto" &&
+              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
+              t.categoria !== TRANSFER_CAT &&
+              !esGastoSoloCapital(t),
+          )
+          .reduce((s, t) => s + t.monto, 0);
         const aportesCapitalMes = mes
           .filter(
             (t) => t.tipo === "ingreso" && t.categoria === CAPITAL_INGRESO_CAT,
@@ -4634,7 +4658,7 @@
               t.tipo === "gasto" && CAPITAL_GASTO_CATS.includes(t.categoria),
           )
           .reduce((s, t) => s + t.monto, 0);
-        const profit = totalIngresos - totalGastos;
+        const profit = totalIngresos - gastosProfitMes;
         const margen =
           totalIngresos > 0 ? ((profit / totalIngresos) * 100).toFixed(0) : 0;
         document.getElementById("kpi-ingresos").textContent =
@@ -5495,22 +5519,9 @@
       }
 
       function renderProyectos() {
-        const _noProj = new Set(
-          [
-            ...CATS.gasto,
-            ...CATS.ingreso,
-            "Operación General",
-            "Sin Proyecto",
-          ].map((s) => s.toLowerCase()),
-        );
         const projMap = {};
         transactions.forEach((t) => {
-          if (!t.proyecto) return;
-          const _pn = t.proyecto.trim().toLowerCase();
-          if (_noProj.has(_pn) || _pn.startsWith("publicidad")) return;
-          if (t.categoria === TRANSFER_CAT) return;
-          if (t.categoria === CAPITAL_INGRESO_CAT) return;
-          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
+          if (!esFlujoProyecto(t)) return;
           if (!projMap[t.proyecto])
             projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
