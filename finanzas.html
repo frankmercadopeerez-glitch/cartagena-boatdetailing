@@ -1906,7 +1906,9 @@
                 border: 1px solid rgba(56, 189, 248, 0.2);
               "
             >
-              <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center sm:text-left">
+              <div
+                class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center sm:text-left"
+              >
                 <div class="w-full sm:w-auto">
                   <p
                     class="text-xs font-semibold uppercase tracking-widest mb-1"
@@ -3054,9 +3056,12 @@
       // publicidad y "sin proyecto". Se comparan en minúsculas y sin depender
       // de la tilde para que "operacion general" también quede excluido.
       const _NO_PROJ_NAMES = new Set(
-        [...CATS.gasto, ...CATS.ingreso, "Operación General", "Sin Proyecto"].map(
-          (s) => s.trim().toLowerCase(),
-        ),
+        [
+          ...CATS.gasto,
+          ...CATS.ingreso,
+          "Operación General",
+          "Sin Proyecto",
+        ].map((s) => s.trim().toLowerCase()),
       );
       function esNombreProyectoReal(nombre) {
         if (!nombre) return false;
@@ -4225,13 +4230,6 @@
           cristTotal = 0;
         let frankRetiroProfit = 0,
           cristRetiroProfit = 0;
-        // Neto de proyectos CERRADOS que recibió físicamente cada socio, y neto
-        // de transferencias internas (equilibrar) para saber dónde está el
-        // efectivo de ese profit realizado.
-        let frankClosedNet = 0,
-          cristClosedNet = 0;
-        let frankTransferNet = 0,
-          cristTransferNet = 0;
         const transRango = transactions.filter((t) => {
           const f = t.fecha || "";
           return f >= CUENTAS_DESDE && f <= lastDay;
@@ -4239,21 +4237,14 @@
         transRango.forEach((t) => {
           const r = (t.receptor || "").trim().toLowerCase();
           const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-          const esCerrado =
-            esFlujoProyecto(t) && !!proyectosEstado[t.proyecto];
-          const esTransfer = t.categoria === TRANSFER_CAT;
           if (r === "frank") {
             frankTotal += delta;
             if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
               frankRetiroProfit += t.monto || 0;
-            if (esCerrado) frankClosedNet += delta;
-            if (esTransfer) frankTransferNet += delta;
           } else if (r === "cristian") {
             cristTotal += delta;
             if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
               cristRetiroProfit += t.monto || 0;
-            if (esCerrado) cristClosedNet += delta;
-            if (esTransfer) cristTransferNet += delta;
           }
         });
         // Profit base igual para ambos = (ingresos - gastos de proyectos) / 2
@@ -4281,30 +4272,15 @@
         const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
 
         // El retiro de profit descuenta del profit disponible del socio,
-        // no de su capital de trabajo.
+        // no de su capital de trabajo. El profit es igual para ambos (50/50).
         let frankProfit = profitBase - frankRetiroProfit;
         let cristProfit = profitBase - cristRetiroProfit;
-        // Capital de trabajo = cuenta total − profit reservado. El profit se
-        // reclama 50/50, pero el efectivo de un proyecto cerrado queda en la
-        // cuenta de quien lo recibió (hasta que se equilibra con una
-        // transferencia interna). Corregimos ese desbalance para que cerrar un
-        // proyecto no le baje el capital al otro socio, y para que al equilibrar
-        // las cuentas los números queden consistentes.
-        const frankProfitHeld = frankClosedNet + frankTransferNet;
-        const cristProfitHeld = cristClosedNet + cristTransferNet;
-        const desbalance = (frankProfitHeld - cristProfitHeld) / 2;
-        let frankCapital = frankTotal - frankProfit - desbalance;
-        let cristCapital = cristTotal - cristProfit + desbalance;
-
-        // Gasto personal primero consume capital; solo reduce profit si capital se agotó.
-        if (frankCapital < 0) {
-          frankProfit += frankCapital;
-          frankCapital = 0;
-        }
-        if (cristCapital < 0) {
-          cristProfit += cristCapital;
-          cristCapital = 0;
-        }
+        // Capital de trabajo = cuenta total − profit. Invariante estricto:
+        // total = profit + capital. Los gastos de operación general (sin
+        // proyecto) reducen SOLO el capital del socio que los hizo; el capital
+        // puede quedar NEGATIVO sin consumir nunca el profit.
+        let frankCapital = frankTotal - frankProfit;
+        let cristCapital = cristTotal - cristProfit;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
