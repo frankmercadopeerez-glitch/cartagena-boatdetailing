@@ -1906,9 +1906,7 @@
                 border: 1px solid rgba(56, 189, 248, 0.2);
               "
             >
-              <div
-                class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center sm:text-left"
-              >
+              <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-center sm:text-left">
                 <div class="w-full sm:w-auto">
                   <p
                     class="text-xs font-semibold uppercase tracking-widest mb-1"
@@ -3051,36 +3049,6 @@
       const CUENTAS_DESDE = "2026-06-01"; // inicio del periodo contable actual (ambos socios en $0)
       const TRANSFER_CAT = "Transferencia Interna";
 
-      // ── Helpers de proyectos ──────────────────────────────
-      // Nombres que NO son proyectos reales: categorías, operación general,
-      // publicidad y "sin proyecto". Se comparan sin acentos para evitar que
-      // "operacion general" (sin tilde) se cuele como proyecto.
-      const _NO_PROJ_NAMES = new Set(
-        [
-          ...CATS.gasto,
-          ...CATS.ingreso,
-          "Operación General",
-          "Sin Proyecto",
-        ].map((s) => s.trim().toLowerCase()),
-      );
-      function esNombreProyectoReal(nombre) {
-        if (!nombre) return false;
-        const n = String(nombre).trim().toLowerCase();
-        if (!n) return false;
-        if (_NO_PROJ_NAMES.has(n)) return false;
-        if (n.startsWith("publicidad")) return false;
-        if (n.startsWith("operaci")) return false; // operación/operacion general
-        return true;
-      }
-      // ¿La transacción pertenece al flujo de un proyecto real (no capital/transfer)?
-      function esFlujoProyecto(t) {
-        if (!t || !esNombreProyectoReal(t.proyecto)) return false;
-        if (t.categoria === TRANSFER_CAT) return false;
-        if (t.categoria === CAPITAL_INGRESO_CAT) return false;
-        if (CAPITAL_GASTO_CATS.includes(t.categoria)) return false;
-        return true;
-      }
-
       const FIREBASE_CONFIG = {
         apiKey: "AIzaSyDkfuUmyWPdJws2wbkT_zKOLm-hXGpKdOw",
         authDomain: "finanzas-boat-detailing.firebaseapp.com",
@@ -3443,15 +3411,15 @@
       function getRecentProjects(query) {
         const all = [
           ...new Set(
-            transactions
-              .filter((t) => esNombreProyectoReal(t.proyecto))
-              .map((t) => t.proyecto),
+            transactions.filter((t) => t.proyecto).map((t) => t.proyecto),
           ),
         ];
         const byDate = {};
         transactions.forEach((t) => {
-          if (!esNombreProyectoReal(t.proyecto)) return;
-          if (!byDate[t.proyecto] || t.fecha > byDate[t.proyecto])
+          if (
+            t.proyecto &&
+            (!byDate[t.proyecto] || t.fecha > byDate[t.proyecto])
+          )
             byDate[t.proyecto] = t.fecha;
         });
         const sorted = all
@@ -4230,37 +4198,25 @@
           cristTotal = 0;
         let frankRetiroProfit = 0,
           cristRetiroProfit = 0;
-        // Neto de proyectos CERRADOS que recibió físicamente cada socio
-        // (profit realizado que quedó guardado en su cuenta).
-        let frankClosedNet = 0,
-          cristClosedNet = 0;
         const transRango = transactions.filter((t) => {
           const f = t.fecha || "";
           return f >= CUENTAS_DESDE && f <= lastDay;
         });
         transRango.forEach((t) => {
           const r = (t.receptor || "").trim().toLowerCase();
-          if (r !== "frank" && r !== "cristian") return;
           const delta = (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
-          const esCerrado = esFlujoProyecto(t) && !!proyectosEstado[t.proyecto];
-          const esRetiroProfit =
-            t.tipo === "gasto" && t.categoria === "Retiro de Profit";
           if (r === "frank") {
             frankTotal += delta;
-            if (esRetiroProfit) frankRetiroProfit += t.monto || 0;
-            if (esCerrado) frankClosedNet += delta;
-          } else {
+            if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
+              frankRetiroProfit += t.monto || 0;
+          } else if (r === "cristian") {
             cristTotal += delta;
-            if (esRetiroProfit) cristRetiroProfit += t.monto || 0;
-            if (esCerrado) cristClosedNet += delta;
+            if (t.tipo === "gasto" && t.categoria === "Retiro de Profit")
+              cristRetiroProfit += t.monto || 0;
           }
         });
-
-        // ── PROFIT 50/50 (misma magnitud que antes) ───────────
-        // profitBase = (ingresos − gastos DE PROYECTOS − capital en proyectos
-        // activos) / 2. Los gastos SIN proyecto (operación general, personales)
-        // NO reducen el profit compartido: salen del capital de trabajo del
-        // socio que los hizo (se reflejan al bajar su cuenta total).
+        // Profit base igual para ambos = (ingresos - gastos operativos) / 2
+        // y los gastos personales se reflejan en menor capital de trabajo.
         const totalIngresos = transRango
           .filter(
             (t) =>
@@ -4275,35 +4231,26 @@
               t.tipo === "gasto" &&
               t.categoria !== TRANSFER_CAT &&
               !CAPITAL_GASTO_CATS.includes(t.categoria) &&
-              esNombreProyectoReal(t.proyecto),
+              t.categoria !== "Retiro de Profit",
           )
           .reduce((s, t) => s + t.monto, 0);
         const capitalActivo = calcCapitalActivo();
         const profitBase = (totalIngresos - totalGastos - capitalActivo) / 2;
 
-        // El retiro de profit descuenta del profit disponible del socio.
+        // El retiro de profit descuenta del profit disponible del socio,
+        // no de su capital de trabajo.
         let frankProfit = profitBase - frankRetiroProfit;
         let cristProfit = profitBase - cristRetiroProfit;
-        if (frankProfit < 0) frankProfit = 0;
-        if (cristProfit < 0) cristProfit = 0;
+        let frankCapital = frankTotal - frankProfit;
+        let cristCapital = cristTotal - cristProfit;
 
-        // ── CAPITAL DE TRABAJO = cuenta total − profit reservado ──
-        // El profit se reclama 50/50, pero el dinero físico de un proyecto
-        // cerrado queda en la cuenta de quien lo recibió. Corregimos el
-        // desbalance: quien tiene de más el efectivo del proyecto cerrado
-        // reserva de más; el otro socio NO ve caer su capital por eso.
-        const desbalance = (frankClosedNet - cristClosedNet) / 2;
-        let frankCapital = frankTotal - frankProfit - desbalance;
-        let cristCapital = cristTotal - cristProfit + desbalance;
-
-        // Un gasto primero consume capital; solo reduce el profit del socio
-        // si su capital de trabajo ya se agotó.
+        // Gasto personal primero consume capital; solo reduce profit si capital se agotó.
         if (frankCapital < 0) {
-          frankProfit = Math.max(0, frankProfit + frankCapital);
+          frankProfit += frankCapital;
           frankCapital = 0;
         }
         if (cristCapital < 0) {
-          cristProfit = Math.max(0, cristProfit + cristCapital);
+          cristProfit += cristCapital;
           cristCapital = 0;
         }
         _lastFrankProfit = frankProfit;
@@ -4510,12 +4457,33 @@
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const noProjL = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
+        const proyectosCerradosSet = new Set(
+          Object.keys(proyectosEstado).filter(
+            (k) => proyectosEstado[k] && !noProjL.has(k.toLowerCase()),
+          ),
+        );
         return transactions
           .filter((t) => {
             const f = t.fecha || "";
             if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
-            if (!esFlujoProyecto(t)) return false;
-            if (proyectosEstado[t.proyecto]) return false; // excluir cerrados
+            if (!t.proyecto) return false;
+            const pn = t.proyecto.trim().toLowerCase();
+            if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
+            if (proyectosCerradosSet.has(t.proyecto)) return false;
+            if (
+              t.categoria === TRANSFER_CAT ||
+              t.categoria === CAPITAL_INGRESO_CAT ||
+              CAPITAL_GASTO_CATS.includes(t.categoria)
+            )
+              return false;
             return true;
           })
           .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
@@ -5208,9 +5176,22 @@
         }
 
         // Top proyectos por profit (progress bars) — totales acumulados
+        const _noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
         const projMap = {};
         transactions.forEach((t) => {
-          if (!esFlujoProyecto(t)) return;
+          if (!t.proyecto) return;
+          const _pn = t.proyecto.trim().toLowerCase();
+          if (_noProj.has(_pn) || _pn.startsWith("publicidad")) return;
+          if (t.categoria === TRANSFER_CAT) return;
+          if (t.categoria === CAPITAL_INGRESO_CAT) return;
+          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
           if (!projMap[t.proyecto])
             projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
@@ -5345,7 +5326,18 @@
       }
 
       function renderProfitMes() {
-        const isNonProject = (n) => !esNombreProyectoReal(n);
+        const noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
+        const isNonProject = (n) => {
+          const nl = (n || "").trim().toLowerCase();
+          return !nl || noProj.has(nl) || nl.startsWith("publicidad");
+        };
         const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
         // Proyectos que recibieron Saldo Final este mes
         const conSaldoFinal = new Set(
@@ -5421,9 +5413,22 @@
       }
 
       function renderProyectos() {
+        const _noProj = new Set(
+          [
+            ...CATS.gasto,
+            ...CATS.ingreso,
+            "Operación General",
+            "Sin Proyecto",
+          ].map((s) => s.toLowerCase()),
+        );
         const projMap = {};
         transactions.forEach((t) => {
-          if (!esFlujoProyecto(t)) return;
+          if (!t.proyecto) return;
+          const _pn = t.proyecto.trim().toLowerCase();
+          if (_noProj.has(_pn) || _pn.startsWith("publicidad")) return;
+          if (t.categoria === TRANSFER_CAT) return;
+          if (t.categoria === CAPITAL_INGRESO_CAT) return;
+          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
           if (!projMap[t.proyecto])
             projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
           if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
