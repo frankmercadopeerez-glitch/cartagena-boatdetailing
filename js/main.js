@@ -3,10 +3,11 @@ function getLayoutContext() {
     t = /\/blog\/[^/]+\/index\.html$/.test(e),
     a = /\/blog\//.test(e),
     n = /\/cotizaciones\//.test(e),
-    o = /\/facturas\//.test(e);
+    o = /\/facturas\//.test(e),
+    r = /\/guias\//.test(e);
   let i = "";
   return (
-    t ? (i = "../../") : (a || n || o) && (i = "../"),
+    t ? (i = "../../") : (a || n || o || r) && (i = "../"),
     {
       pathname: e,
       prefix: i,
