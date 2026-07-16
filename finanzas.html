@@ -4255,19 +4255,17 @@
               t.categoria !== CAPITAL_INGRESO_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
-        // Profit base igual para ambos = (ingresos - gastos de proyecto - capital
-        // activo) / 2. SOLO los gastos ligados a un proyecto real reducen el
-        // profit compartido. Los gastos sin proyecto (operación general:
-        // materiales, herramientas, publicidad, arriendo, ARL, etc.) NO tocan el
-        // profit: bajan únicamente el capital de trabajo del socio que pagó.
+        // Profit base igual para ambos = (ingresos - gastos operativos - capital
+        // activo) / 2. TODOS los gastos operativos (incluida operación general)
+        // reducen el profit compartido; así el capital de trabajo de los socios
+        // suma exactamente el Capital Activo (plata metida en proyectos).
         const totalGastos = transRango
           .filter(
             (t) =>
               t.tipo === "gasto" &&
               t.categoria !== TRANSFER_CAT &&
               !CAPITAL_GASTO_CATS.includes(t.categoria) &&
-              t.categoria !== "Retiro de Profit" &&
-              esNombreProyectoReal(t.proyecto),
+              t.categoria !== "Retiro de Profit",
           )
           .reduce((s, t) => s + t.monto, 0);
         const capitalActivo = calcCapitalActivo();
@@ -4527,7 +4525,6 @@
         const totalIngresos = transGlobal
           .filter((t) => t.tipo === "ingreso" && t.categoria !== TRANSFER_CAT)
           .reduce((s, t) => s + t.monto, 0);
-        // Gasto total operativo mostrado en el KPI "Gastos" (incluye todo).
         const totalGastos = transGlobal
           .filter(
             (t) =>
@@ -4537,22 +4534,9 @@
               t.categoria !== "Retiro de Profit",
           )
           .reduce((s, t) => s + t.monto, 0);
-        // Solo los gastos ligados a un proyecto real reducen el profit realizado.
-        // Los gastos sin proyecto (operación general) no tocan el profit: bajan
-        // únicamente el capital de trabajo del socio que pagó.
-        const gastosProyecto = transGlobal
-          .filter(
-            (t) =>
-              t.tipo === "gasto" &&
-              t.categoria !== TRANSFER_CAT &&
-              !CAPITAL_GASTO_CATS.includes(t.categoria) &&
-              t.categoria !== "Retiro de Profit" &&
-              esNombreProyectoReal(t.proyecto),
-          )
-          .reduce((s, t) => s + t.monto, 0);
-        // Profit global realizado = ingresos de proyecto - gastos de proyecto - capital activo actual.
+        // Profit global realizado = ingresos operativos acumulados - gastos operativos acumulados - capital activo actual.
         const capitalActivo = calcCapitalActivo(todayStr, "");
-        const profitTotal = totalIngresos - gastosProyecto - capitalActivo;
+        const profitTotal = totalIngresos - totalGastos - capitalActivo;
         document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
         document.getElementById("g-gastos").textContent = fmt(totalGastos);
         document.getElementById("g-profit").textContent = fmt(profitTotal);
