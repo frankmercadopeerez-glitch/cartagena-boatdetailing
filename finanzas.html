@@ -4546,16 +4546,18 @@
         );
       }
 
-      // Reparto del capital activo por socio: los proyectos activos pertenecen
-      // 50/50 a los socios. Los gastos operativos sin proyecto desde la fecha de
-      // corte son la excepcion: bajan solo el capital de quien los pago.
+      // Reparto del capital activo por socio: mientras el proyecto esta abierto,
+      // el capital se queda en la cuenta de quien recibio o pago ese movimiento.
+      // Al cerrar el proyecto, sale de capital activo y pasa al profit compartido.
+      // Los gastos operativos sin proyecto desde la fecha de corte tambien bajan
+      // solo el capital del socio que los pago.
       function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        const totalActivo = Math.round(calcCapitalActivo(corteFecha, desdeFecha));
-        const mitadFrank = Math.floor(totalActivo / 2);
-        const acc = {
-          frank: mitadFrank,
-          cristian: totalActivo - mitadFrank,
-        };
+        const acc = { frank: 0, cristian: 0 };
+        _txProyectosActivos(corteFecha, desdeFecha).forEach((t) => {
+          const r = socioKey(t.receptor);
+          const delta = t.tipo === "ingreso" ? t.monto || 0 : -(t.monto || 0);
+          if (r) acc[r] += delta;
+        });
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
