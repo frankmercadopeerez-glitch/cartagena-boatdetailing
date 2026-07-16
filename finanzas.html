@@ -4294,12 +4294,13 @@
         // no de su capital de trabajo. El profit es igual para ambos (50/50).
         let frankProfit = profitBase - frankRetiroProfit;
         let cristProfit = profitBase - cristRetiroProfit;
-        // Capital de trabajo = cuenta total − profit. Invariante estricto:
-        // total = profit + capital. Los gastos de operación general (sin
-        // proyecto) reducen SOLO el capital del socio que los hizo; el capital
-        // puede quedar NEGATIVO sin consumir nunca el profit.
-        let frankCapital = frankTotal - frankProfit;
-        let cristCapital = cristTotal - cristProfit;
+        // Capital de trabajo por socio = SU parte del capital metido en proyectos
+        // activos (reparto de calcCapitalActivo según quién recibió/pagó). La suma
+        // frank+cristian = Capital Activo (922...), y es DESIGUAL entre socios.
+        // El profit disponible se muestra aparte (compartido 50/50 − retiros).
+        const capSocio = calcCapitalActivoPorSocio();
+        let frankCapital = capSocio.frank;
+        let cristCapital = capSocio.cristian;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
@@ -4500,7 +4501,9 @@
         }
       }
 
-      function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
+      // Transacciones de proyectos ABIERTOS (no cerrados) dentro del rango.
+      // Base compartida para el capital activo total y el reparto por socio.
+      function _txProyectosActivos(corteFecha, desdeFecha = CUENTAS_DESDE) {
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
@@ -4517,23 +4520,42 @@
             (k) => proyectosEstado[k] && !noProjL.has(k.toLowerCase()),
           ),
         );
-        return transactions
-          .filter((t) => {
-            const f = t.fecha || "";
-            if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
-            if (!t.proyecto) return false;
-            const pn = t.proyecto.trim().toLowerCase();
-            if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
-            if (proyectosCerradosSet.has(t.proyecto)) return false;
-            if (
-              t.categoria === TRANSFER_CAT ||
-              t.categoria === CAPITAL_INGRESO_CAT ||
-              CAPITAL_GASTO_CATS.includes(t.categoria)
-            )
-              return false;
-            return true;
-          })
-          .reduce((s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto), 0);
+        return transactions.filter((t) => {
+          const f = t.fecha || "";
+          if ((desdeFecha && f < desdeFecha) || f > lastDay) return false;
+          if (!t.proyecto) return false;
+          const pn = t.proyecto.trim().toLowerCase();
+          if (noProjL.has(pn) || pn.startsWith("publicidad")) return false;
+          if (proyectosCerradosSet.has(t.proyecto)) return false;
+          if (
+            t.categoria === TRANSFER_CAT ||
+            t.categoria === CAPITAL_INGRESO_CAT ||
+            CAPITAL_GASTO_CATS.includes(t.categoria)
+          )
+            return false;
+          return true;
+        });
+      }
+
+      function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
+        return _txProyectosActivos(corteFecha, desdeFecha).reduce(
+          (s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto),
+          0,
+        );
+      }
+
+      // Reparto del capital activo por socio: cada socio "financia" el neto
+      // (ingresos - gastos) de los proyectos activos según quién recibió/pagó
+      // cada movimiento. La suma frank+cristian = calcCapitalActivo().
+      function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
+        const acc = { frank: 0, cristian: 0 };
+        _txProyectosActivos(corteFecha, desdeFecha).forEach((t) => {
+          const r = (t.receptor || "").trim().toLowerCase();
+          const delta = t.tipo === "ingreso" ? t.monto : -t.monto;
+          if (r === "frank") acc.frank += delta;
+          else if (r === "cristian") acc.cristian += delta;
+        });
+        return acc;
       }
 
       function renderGlobalKPIs() {
