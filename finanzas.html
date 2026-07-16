@@ -4546,28 +4546,47 @@
         );
       }
 
-      // Reparto del capital activo por socio: mientras el proyecto esta abierto,
-      // el capital se queda en la cuenta de quien recibio o pago ese movimiento.
-      // Al cerrar el proyecto, sale de capital activo y pasa al profit compartido.
-      // Los gastos operativos sin proyecto desde la fecha de corte tambien bajan
-      // solo el capital del socio que los pago.
-      function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        const acc = { frank: 0, cristian: 0 };
-        _txProyectosActivos(corteFecha, desdeFecha).forEach((t) => {
-          const r = socioKey(t.receptor);
-          const delta = t.tipo === "ingreso" ? t.monto || 0 : -(t.monto || 0);
-          if (r) acc[r] += delta;
-        });
+      function calcSaldoSocios(corteFecha, desdeFecha = CUENTAS_DESDE) {
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
+        const proyectosCerradosSet = new Set(
+          Object.keys(proyectosEstado)
+            .filter((k) => proyectosEstado[k] && esNombreProyectoReal(k))
+            .map((k) => k.trim().toLowerCase()),
+        );
+        const acc = { frank: 0, cristian: 0 };
         transactions.forEach((t) => {
           if (!estaEnRangoContable(t, lastDay, desdeFecha)) return;
-          if (!esGastoSoloCapital(t)) return;
+          if (
+            esFlujoProyecto(t) &&
+            proyectosCerradosSet.has(
+              String(t.proyecto || "").trim().toLowerCase(),
+            )
+          )
+            return;
+          if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
+          if (t.categoria === CAPITAL_INGRESO_CAT) return;
           const r = socioKey(t.receptor);
-          if (r) acc[r] -= t.monto || 0;
+          if (!r) return;
+          acc[r] += (t.tipo === "ingreso" ? 1 : -1) * (t.monto || 0);
         });
         return acc;
+      }
+
+      // Capital por socio = mitad del capital activo ajustada por la diferencia
+      // real de cuentas. Asi, si Frank recibe 1.5M de Orchid abierto, todo sube
+      // a su capital; cuando Orchid se cierra, sale de capital y queda como
+      // profit compartido con una transferencia pendiente para equilibrar.
+      function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
+        const capitalActivo = Math.round(calcCapitalActivo(corteFecha, desdeFecha));
+        const saldos = calcSaldoSocios(corteFecha, desdeFecha);
+        const diff = saldos.frank - saldos.cristian;
+        const frank = Math.round((capitalActivo + diff) / 2);
+        return {
+          frank,
+          cristian: capitalActivo - frank,
+        };
       }
 
       function renderGlobalKPIs() {
