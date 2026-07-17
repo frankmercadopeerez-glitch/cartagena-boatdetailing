@@ -1031,6 +1031,96 @@
         justify-content: center;
         flex-shrink: 0;
       }
+
+      /* High-contrast finance theme */
+      :root {
+        --bg: #020304;
+        --bg2: #070a0e;
+        --glass: rgba(11, 15, 20, 0.96);
+        --glass-b: rgba(255, 255, 255, 0.28);
+        --glass-hover: rgba(255, 255, 255, 0.12);
+        --text: #ffffff;
+        --text2: #d2d9e5;
+        --text3: #929daf;
+        --accent: #d9a85c;
+        --accent-bright: #ffd27d;
+        --green: #45f0a8;
+        --red: #ff6b86;
+        --blue: #68d4ff;
+      }
+
+      html,
+      body,
+      #main-app {
+        background: #020304 !important;
+        background-image: none !important;
+      }
+
+      nav#main-nav {
+        background: rgba(2, 3, 4, 0.96) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.3) !important;
+      }
+
+      #main-app .glass-card,
+      #main-app .kpi-card,
+      #main-app .proj-card {
+        background: #0b0f14 !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        box-shadow:
+          0 8px 28px rgba(0, 0, 0, 0.65),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+      }
+
+      #main-app #panel-resumen > .rounded-2xl[style*="linear-gradient"] {
+        background: #0b0f14 !important;
+        border-color: rgba(255, 255, 255, 0.34) !important;
+        box-shadow:
+          0 8px 28px rgba(0, 0, 0, 0.65),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+      }
+
+      #main-app [style*="rgba(255, 255, 255, 0.07)"],
+      #main-app [style*="rgba(255, 255, 255, 0.09)"],
+      #main-app [style*="rgba(255, 255, 255, 0.04)"] {
+        background: #0f141b !important;
+        border-color: rgba(255, 255, 255, 0.28) !important;
+      }
+
+      #main-app .text-slate-500,
+      #main-app [style*="color: rgba(255, 255, 255, 0.3)"],
+      #main-app [style*="color: rgba(255, 255, 255, 0.4)"] {
+        color: #aeb9c9 !important;
+      }
+
+      #main-app .text-slate-400 {
+        color: #c7d0dd !important;
+      }
+
+      #main-app input,
+      #main-app select,
+      #main-app textarea {
+        background-color: #090c10 !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        color: var(--text) !important;
+      }
+
+      #main-app input::placeholder,
+      #main-app textarea::placeholder {
+        color: #9ba6b7 !important;
+        opacity: 1;
+      }
+
+      #main-app .tab-btn:hover,
+      #main-app .mas-drawer-item:hover,
+      #main-app .mas-drawer-item:active {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.38) !important;
+      }
+
+      #main-app .tab-btn.active::after {
+        background: var(--accent-bright) !important;
+        height: 3px;
+      }
     </style>
   </head>
   <body class="antialiased min-h-screen">
