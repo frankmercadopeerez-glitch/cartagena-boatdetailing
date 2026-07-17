@@ -241,4 +241,20 @@ function assertValid(state) {
   assert.equal(state.balanceByPartner.cristian, before.balanceByPartner.cristian);
 }
 
+// Una transaccion fechada el mismo dia de apertura tambien actualiza el saldo
+// del responsable.
+{
+  const before = calculate([]);
+  const state = calculate([
+    event("expense", {
+      fecha: "2026-07-16",
+      responsible: "Cristian",
+      monto: 2500,
+      project: "",
+    }),
+  ]);
+  assertValid(state);
+  assert.equal(state.balanceByPartner.cristian, before.balanceByPartner.cristian - 2500);
+}
+
 console.log("finance-engine: all tests passed");

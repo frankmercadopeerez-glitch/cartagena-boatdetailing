@@ -3175,7 +3175,7 @@
         return (
           transaction &&
           transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-          String(transaction.fecha || "") > FINANCE_OPENING.asOf &&
+          String(transaction.fecha || "") >= FINANCE_OPENING.asOf &&
           (transaction.tipo === "ingreso" || transaction.tipo === "gasto")
         );
       }
