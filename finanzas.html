@@ -4316,9 +4316,10 @@
         // activos (reparto de calcCapitalActivo según quién recibió/pagó). La suma
         // frank+cristian = Capital Activo (922...), y es DESIGUAL entre socios.
         // El profit disponible se muestra aparte (compartido 50/50 − retiros).
-        const capSocio = calcCapitalActivoPorSocio();
-        let frankCapital = capSocio.frank;
-        let cristCapital = capSocio.cristian;
+        // El saldo de cada socio se divide en dos bolsas que deben cerrar entre
+        // si: capital de trabajo + profit disponible = saldo total.
+        let frankCapital = Math.round(frankTotal - frankProfit);
+        let cristCapital = Math.round(cristTotal - cristProfit);
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
