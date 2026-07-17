@@ -67,6 +67,8 @@
   function eventType(event) {
     if (!event || event.motorVersion !== ENGINE_VERSION) return "";
     if (event.motorType) return event.motorType;
+    if (event.reversalOf) return "project_reopen";
+    if (!event.tipo && !event.categoria && projectName(event)) return "project_close";
     if (event.tipo === "ingreso") return "income";
     if (event.tipo === "gasto") return "expense";
     return "";

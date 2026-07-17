@@ -3113,6 +3113,7 @@
       // ¿La transacción pertenece al flujo de un proyecto real?
       function esFlujoProyecto(t) {
         if (!t || !esNombreProyectoReal(t.proyecto)) return false;
+        if (isInternalFinanceEvent(t)) return false;
         if (t.categoria === TRANSFER_CAT) return false;
         if (t.categoria === CAPITAL_INGRESO_CAT) return false;
         if (CAPITAL_GASTO_CATS.includes(t.categoria)) return false;
@@ -3171,16 +3172,33 @@
         return String(value || "").trim().toLowerCase();
       }
 
+      function isInternalFinanceEvent(transaction) {
+        if (!transaction) return false;
+        if (["project_close", "project_reopen"].includes(transaction.motorType)) return true;
+        return (
+          !transaction.tipo &&
+          !transaction.categoria &&
+          transaction.proyecto &&
+          !transaction.monto &&
+          !transaction.amount
+        );
+      }
+
       function isPostOpeningLegacyTransaction(transaction) {
         return (
           transaction &&
           transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
           String(transaction.fecha || "") >= FINANCE_OPENING.asOf &&
-          (transaction.tipo === "ingreso" || transaction.tipo === "gasto")
+          (transaction.tipo === "ingreso" ||
+            transaction.tipo === "gasto" ||
+            isInternalFinanceEvent(transaction))
         );
       }
 
       function legacyMotorType(transaction) {
+        if (isInternalFinanceEvent(transaction)) {
+          return transaction.reversalOf ? "project_reopen" : "project_close";
+        }
         if (transaction.categoria === "Retiro de Profit") return "profit_withdrawal";
         if (transaction.categoria === CAPITAL_INGRESO_CAT) return "capital_contribution";
         if (transaction.categoria === "Retiro de Capital") return "capital_withdrawal";
@@ -3513,7 +3531,9 @@
       }
       function txDelMes(list) {
         const prefix = mesSel.y + "-" + String(mesSel.m + 1).padStart(2, "0");
-        return list.filter((t) => (t.fecha || "").startsWith(prefix));
+        return list.filter(
+          (t) => !isInternalFinanceEvent(t) && (t.fecha || "").startsWith(prefix),
+        );
       }
 
       // ── Auth ──────────────────────────────────────────────
@@ -3898,7 +3918,7 @@
           style: "currency",
           currency: "COP",
           maximumFractionDigits: 0,
-        }).format(n);
+        }).format(Number.isFinite(Number(n)) ? Number(n) : 0);
       const fmtDate = (s) => (s ? s.split("-").reverse().join("/") : "--");
       function getSemana(fechaStr) {
         const dia = parseInt((fechaStr || "").split("-")[2] || "1", 10);
@@ -4038,7 +4058,9 @@
       function exportarCSV() {
         const todosMeses =
           document.getElementById("toggle-todos-meses").checked;
-        const pool = todosMeses ? transactions : txDelMes(transactions);
+        const pool = todosMeses
+          ? transactions.filter((t) => !isInternalFinanceEvent(t))
+          : txDelMes(transactions);
         const filterProy = document.getElementById("filter-proyecto").value;
         const filterTipo = document.getElementById("filter-tipo").value;
         const filterSemana = document.getElementById("filter-semana").value;
@@ -5299,7 +5321,7 @@
         if (countEl) {
           countEl.classList.toggle("hidden", !todosMeses);
           if (todosMeses)
-            countEl.textContent = transactions.length + " registros totales";
+            countEl.textContent = pool.length + " registros totales";
         }
 
         const filterProy = document.getElementById("filter-proyecto").value;
