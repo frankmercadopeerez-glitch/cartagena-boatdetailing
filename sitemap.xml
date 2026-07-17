@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
@@ -920,5 +920,40 @@
       <image:title>Cubierta EVA Foamdeck para yates en Cartagena — Instalación y Precios 2026</image:title>
       <image:caption>Instalación profesional de cubierta EVA foamdeck en Cartagena de Indias, Colombia</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/inspeccion-precompra-yate-cartagena/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.86</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/blog/detailing-naval-cartagena.webp</image:loc><image:title>Inspección precompra de yates en Cartagena</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/humedad-moho-interior-yate-cartagena/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/blog/cuidado-cojineria.webp</image:loc><image:title>Humedad y moho en el interior de un yate</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-sentina-yate-cartagena/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/blog/mantenimiento-anodos-casco.webp</image:loc><image:title>Mantenimiento de sentina de yate en Cartagena</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/limpieza-acero-inoxidable-marino-cartagena/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/brillo.webp</image:loc><image:title>Protección de acero inoxidable marino en Cartagena</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/mantenimiento-aire-acondicionado-yate-cartagena/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/header.webp</image:loc><image:title>Mantenimiento de aire acondicionado marino</image:title></image:image>
   </url>
 </urlset>
