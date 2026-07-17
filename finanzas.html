@@ -1424,6 +1424,13 @@
                   </p>
                 </div>
               </div>
+              <p
+                id="cuenta-cristian-gastos"
+                class="text-xs text-right mb-2"
+                style="color: rgba(255, 255, 255, 0.35)"
+              >
+                Gastos pagados: $0
+              </p>
               <button
                 id="btn-retiro-cristian"
                 onclick="retirarProfitSocio('Cristian')"
@@ -1508,6 +1515,13 @@
                   </p>
                 </div>
               </div>
+              <p
+                id="cuenta-frank-gastos"
+                class="text-xs text-right mb-2"
+                style="color: rgba(255, 255, 255, 0.35)"
+              >
+                Gastos pagados: $0
+              </p>
               <button
                 id="btn-retiro-frank"
                 onclick="retirarProfitSocio('Frank')"
@@ -3611,7 +3625,9 @@
         const proyectoEl = document.getElementById("tx-proyecto");
         const opc = document.getElementById("proyecto-opcional");
         const requiereProyecto =
-          cat !== "Retiro de Profit" && tipo !== "transferencia";
+          tipo === "ingreso" ||
+          cat === CAPITAL_INGRESO_CAT ||
+          cat === "Retiro de Capital";
 
         proyectoEl.required = requiereProyecto;
         opc.textContent = requiereProyecto ? "(requerido)" : "(opcional)";
@@ -4513,6 +4529,14 @@
           cristianProfit,
           cristianProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
         );
+        const cristianGastos = document.getElementById("cuenta-cristian-gastos");
+        const frankGastos = document.getElementById("cuenta-frank-gastos");
+        if (cristianGastos)
+          cristianGastos.textContent =
+            "Gastos pagados: " + fmt(state.partnerExpenses.cristian);
+        if (frankGastos)
+          frankGastos.textContent =
+            "Gastos pagados: " + fmt(state.partnerExpenses.frank);
         const btnRF = document.getElementById("btn-retiro-frank");
         const btnRC = document.getElementById("btn-retiro-cristian");
         if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
@@ -6179,7 +6203,10 @@
                   : tipo === "ingreso"
                     ? "income"
                     : "expense";
-          const requiresProject = motorType !== "profit_withdrawal";
+          const requiresProject =
+            motorType === "income" ||
+            motorType === "capital_contribution" ||
+            motorType === "capital_withdrawal";
           if (requiresProject && !proyecto) {
             document.getElementById("tx-proyecto").focus();
             showToast("Esta operacion requiere un proyecto.", "info");
@@ -6245,7 +6272,8 @@
               }),
             ]);
             if (saved) {
-              const capitalAfter = getFinanceState().capital;
+              const savedState = getFinanceState();
+              const capitalAfter = savedState.capital;
               if (motorType === "capital_contribution") {
                 showToast(
                   "Capital actualizado: Frank " +
@@ -6255,12 +6283,16 @@
                 );
               } else if (motorType === "income") {
                 showToast(
-                  "Entrada guardada. El capital no cambia hasta registrar un aporte.",
+                  "Entrada guardada. El balance se reconoce al cerrar el proyecto.",
                   "info",
                 );
               } else if (motorType === "expense") {
                 showToast(
-                  "Gasto guardado. Baja caja y gastos; el capital se conserva.",
+                  "Gasto guardado. Balance de " +
+                    responsable +
+                    ": " +
+                    fmt(savedState.balanceByPartner[responsable.toLowerCase()]) +
+                    ".",
                   "info",
                 );
               } else {

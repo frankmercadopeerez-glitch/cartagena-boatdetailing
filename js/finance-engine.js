@@ -59,6 +59,7 @@
       capitalActive: money(source.capitalActive),
       capital: clonePartners(source.capital),
       profitAvailable: clonePartners(source.profitAvailable),
+      partnerExpenses: clonePartners(source.partnerExpenses),
     };
   }
 
@@ -181,19 +182,16 @@
     const amount = requireAmount(state, event);
     const partner = requirePartner(state, event, "responsible");
     const project = projectName(event);
-    if (!project) {
-      addError(state, "PROJECT_REQUIRED", "Todo gasto nuevo requiere un proyecto.", event);
-      return;
-    }
     if (!amount || !partner) return;
-    const target = ensureProject(state.projects, project);
-    if (target.closed) {
+    const target = project ? ensureProject(state.projects, project) : null;
+    if (target && target.closed) {
       addError(state, "PROJECT_CLOSED", "No se puede registrar un gasto en un proyecto cerrado.", event);
       return;
     }
     state.cash -= amount;
     state.totalExpenses += amount;
-    target.expenses += amount;
+    state.partnerExpenses[partner] += amount;
+    if (target) target.expenses += amount;
   }
 
   function applyCapitalContribution(state, event) {
@@ -381,6 +379,7 @@
       capitalActive: opening.capitalActive,
       capital: clonePartners(opening.capital),
       profitAvailable: clonePartners(opening.profitAvailable),
+      partnerExpenses: clonePartners(opening.partnerExpenses),
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
       projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
@@ -406,10 +405,11 @@
     state.totalIncome = money(state.totalIncome);
     state.totalExpenses = money(state.totalExpenses);
     state.profitAvailableTotal = money(state.profitAvailable.frank + state.profitAvailable.cristian);
+    state.partnerExpensesTotal = money(state.partnerExpenses.frank + state.partnerExpenses.cristian);
     state.capitalPartnersTotal = money(state.capital.frank + state.capital.cristian);
     state.balanceByPartner = {
-      frank: money(state.capital.frank + state.profitAvailable.frank),
-      cristian: money(state.capital.cristian + state.profitAvailable.cristian),
+      frank: money(state.capital.frank + state.profitAvailable.frank - state.partnerExpenses.frank),
+      cristian: money(state.capital.cristian + state.profitAvailable.cristian - state.partnerExpenses.cristian),
     };
 
     const expectedCash = money(

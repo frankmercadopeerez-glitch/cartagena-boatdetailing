@@ -46,6 +46,8 @@ function assertValid(state) {
   assert.equal(state.cash, 8957137);
   assert.equal(state.totalIncome, 26429510);
   assert.equal(state.totalExpenses, 14548959);
+  assert.equal(state.balanceByPartner.frank, 2553499.5 - 2000000 + 1357568.5);
+  assert.equal(state.balanceByPartner.cristian, 688500.5 + 1357568.5);
 }
 
 // Cierre: libera el capital del proyecto y pasa su utilidad al profit 50/50.
@@ -207,11 +209,18 @@ function assertValid(state) {
   assert.equal(state.profitAvailable.cristian, 410000);
 }
 
-// Un gasto incompleto no puede convertirse en un estado financiero guardado.
+// Una compra general puede quedar sin proyecto y solo afecta al socio que paga.
 {
+  const before = calculate([]);
   const state = calculate([event("expense", { responsible: "Frank", monto: 1000, project: "" })]);
-  assert.equal(state.validation.valid, false);
-  assert.equal(state.validation.errors[0].code, "PROJECT_REQUIRED");
+  assertValid(state);
+  assert.equal(state.cash, before.cash - 1000);
+  assert.equal(state.totalExpenses, before.totalExpenses + 1000);
+  assert.equal(state.capital.frank, before.capital.frank);
+  assert.equal(state.capital.cristian, before.capital.cristian);
+  assert.equal(state.profitAvailable.frank, before.profitAvailable.frank);
+  assert.equal(state.balanceByPartner.frank, before.balanceByPartner.frank - 1000);
+  assert.equal(state.balanceByPartner.cristian, before.balanceByPartner.cristian);
 }
 
 console.log("finance-engine: all tests passed");
