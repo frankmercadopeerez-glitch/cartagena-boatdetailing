@@ -775,6 +775,18 @@
       .proj-card {
         animation: cardSlideIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
       }
+      .proj-card.is-toggling {
+        opacity: 0.72;
+        transform: scale(0.98);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+        pointer-events: none;
+      }
+      .proj-card.is-toggling .project-toggle-knob {
+        transform: translateX(1.25rem) !important;
+      }
+      .proj-card.is-toggling.is-opening .project-toggle-knob {
+        transform: translateX(0.13rem) !important;
+      }
 
       /* ── Privacy / blur mode ── */
       #main-app.privacy-mode .sv {
@@ -5606,26 +5618,24 @@
       }
 
       async function toggleProyectoCerrado(nombre) {
-        // Animate the card out before re-rendering
+        const state = getFinanceState();
+        const project = state.projects[nombre];
+        if (!project) {
+          showToast(
+            "Este proyecto pertenece al historial congelado y no puede cerrarse desde el motor nuevo.",
+            "info",
+          );
+          return;
+        }
         let card = null;
         document.querySelectorAll(".proj-card").forEach((el) => {
           if (el.dataset.proyecto === nombre) card = el;
         });
         if (card) {
-          card.style.transition = "opacity 0.22s ease, transform 0.22s ease";
-          card.style.opacity = "0";
-          card.style.transform = "scale(0.93) translateX(22px)";
-          await new Promise((r) => setTimeout(r, 230));
-        }
-        const state = getFinanceState();
-        const project = state.projects[nombre];
-        if (!project) {
-          showToast(
-            "Este proyecto pertenece al historial congelado. Registra sus nuevas operaciones para abrirlo en el motor v1.",
-            "info",
-          );
-          renderProyectos();
-          return;
+          card.classList.add("is-toggling");
+          card.classList.toggle("is-opening", project.closed);
+          card.classList.toggle("is-closing", !project.closed);
+          await new Promise((resolve) => setTimeout(resolve, 320));
         }
         try {
           if (project.closed) {
@@ -5657,6 +5667,7 @@
           }
         } catch (e) {
           showToast("Error al cambiar estado: " + e.message, "delete");
+          if (card) card.classList.remove("is-toggling", "is-opening", "is-closing");
         }
         renderProyectos();
       }
@@ -5699,7 +5710,7 @@
     <span style="font-size:0.67rem;font-weight:600;color:var(--text2)">${toggleLabel}</span>
     <div style="position:relative;width:2.25rem;height:1.15rem;flex-shrink:0">
       <div style="position:absolute;inset:0;border-radius:9999px;background:${checkBg};transition:background .2s"></div>
-      <div style="position:absolute;top:0.13rem;border-radius:50%;width:0.87rem;height:0.87rem;background:white;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .2s;transform:${checkTranslate}"></div>
+    <div class="project-toggle-knob" style="position:absolute;top:0.13rem;border-radius:50%;width:0.87rem;height:0.87rem;background:white;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .2s;transform:${checkTranslate}"></div>
     </div>
   </label>
 </div>
@@ -5717,11 +5728,22 @@
     <p class="sv" style="font-size:0.8rem;font-weight:700;color:${netColor}">${fmt(p.net)}</p>
   </div>
 </div>`;
-        div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
+        div.addEventListener("click", (event) => {
+          if (event.target.closest(".proj-toggle-label")) return;
+          filtrarPorProyecto(p.nombre);
+        });
         const lbl = div.querySelector(".proj-toggle-label");
-        if (lbl && !esHistorial)
+        if (lbl)
           lbl.addEventListener("click", (e) => {
+            e.preventDefault();
             e.stopPropagation();
+            if (esHistorial) {
+              showToast(
+                "Este proyecto pertenece al historial congelado y no puede cerrarse desde el motor nuevo.",
+                "info",
+              );
+              return;
+            }
             toggleProyectoCerrado(p.nombre);
           });
         return div;

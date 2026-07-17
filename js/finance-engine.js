@@ -277,18 +277,29 @@
       addError(state, "INVALID_SPLIT", "El reparto del proyecto debe sumar 100%.", event);
       return;
     }
-    const profitByPartner = {
-      frank: money(utility * frankShare),
-      cristian: money(utility * cristianShare),
-    };
     const releasedCapital = clonePartners(target.capital);
     const releasedTotal = releasedCapital.frank + releasedCapital.cristian;
+    const distributable = money(releasedTotal + utility);
+    const targetProfit = money(
+      (state.profitAvailable.frank +
+        state.profitAvailable.cristian +
+        distributable) /
+        2,
+    );
+    // El cierre no vuelve a dividir el capital. Libera el capital del proyecto
+    // y distribuye capital + utilidad para que ambos profits terminen iguales.
+    // Si uno ya tiene mas profit, su asignacion puede ser menor (o negativa)
+    // porque esta operación también corrige el desequilibrio acumulado.
+    const profitByPartner = {
+      frank: money(targetProfit - state.profitAvailable.frank),
+      cristian: money(targetProfit - state.profitAvailable.cristian),
+    };
     PARTNERS.forEach((partner) => {
       state.capital[partner] -= releasedCapital[partner];
       state.profitAvailable[partner] += profitByPartner[partner];
     });
     state.capitalActive -= releasedTotal;
-    state.profitTotal += utility;
+    state.profitTotal += distributable;
     target.profit = utility;
     target.closed = true;
     target.closeId = event.id || null;
@@ -296,6 +307,7 @@
       income: target.income,
       expenses: target.expenses,
       utility,
+      distributable,
       releasedCapital,
       profitByPartner,
     };
@@ -315,7 +327,7 @@
       state.profitAvailable[partner] -= snapshot.profitByPartner[partner];
     });
     state.capitalActive += snapshot.releasedCapital.frank + snapshot.releasedCapital.cristian;
-    state.profitTotal -= snapshot.utility;
+    state.profitTotal -= snapshot.distributable;
     target.profit = 0;
     target.closed = false;
     target.closeId = null;

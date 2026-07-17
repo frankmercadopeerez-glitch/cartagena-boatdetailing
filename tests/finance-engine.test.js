@@ -58,10 +58,33 @@ function assertValid(state) {
   assertValid(state);
   assert.equal(state.capitalActive, 1742000);
   assert.equal(state.capital.frank, 1053499.5);
-  assert.equal(state.profitAvailable.frank, 2857568.5);
-  assert.equal(state.profitAvailable.cristian, 2857568.5);
+  assert.equal(state.profitAvailable.frank, 3607568.5);
+  assert.equal(state.profitAvailable.cristian, 3607568.5);
+  assert.equal(state.profitTotal, 11638551);
   assert.equal(state.projects.Orchid.closed, true);
   assert.equal(state.projects.Orchid.profit, 3000000);
+}
+
+// Si los profits llegan desiguales al cierre, el socio con menos recibe mas.
+{
+  const opening = {
+    asOf: "2026-07-16",
+    cash: 1000,
+    totalIncome: 0,
+    totalExpenses: 0,
+    profitTotal: 100,
+    capitalActive: 1000,
+    capital: { frank: 1000, cristian: 0 },
+    profitAvailable: { frank: 100, cristian: 0 },
+  };
+  const state = calculate([
+    event("capital_contribution", { project: "Equalize", responsible: "Frank", monto: 1000 }),
+    event("project_close", { project: "Equalize" }),
+  ], opening);
+  assertValid(state);
+  assert.equal(state.capitalActive, 1000);
+  assert.equal(state.profitAvailable.frank, 550);
+  assert.equal(state.profitAvailable.cristian, 550);
 }
 
 // Retiro de profit: solo toca caja y el profit del socio que retira.
