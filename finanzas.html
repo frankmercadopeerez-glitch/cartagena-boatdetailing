@@ -3153,6 +3153,10 @@
       let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
+      function normalizeProjectName(value) {
+        return String(value || "").trim().toLowerCase();
+      }
+
       function getOpeningProjectSnapshots(sourceTransactions) {
         const source = Array.isArray(sourceTransactions)
           ? sourceTransactions
@@ -3161,20 +3165,20 @@
           .filter(
             (transaction) =>
               transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-              esFlujoProyecto(transaction) &&
-              String(transaction.proyecto || "")
-                .trim()
-                .toLowerCase()
-                .includes("orchid"),
+              esNombreProyectoReal(transaction.proyecto) &&
+              normalizeProjectName(transaction.proyecto).includes("orchid"),
           )
           .map((transaction) => transaction.proyecto.trim())
           .sort()[0];
-        if (!orchidName) return {};
+        const activeOrchidName = orchidName || "Bote ORCHID";
         const projectTransactions = source.filter(
           (transaction) =>
             transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-            esFlujoProyecto(transaction) &&
-            transaction.proyecto.trim().toLowerCase() === orchidName.toLowerCase(),
+            esNombreProyectoReal(transaction.proyecto) &&
+            transaction.categoria !== TRANSFER_CAT &&
+            !CAPITAL_GASTO_CATS.includes(transaction.categoria) &&
+            transaction.categoria !== CAPITAL_INGRESO_CAT &&
+            normalizeProjectName(transaction.proyecto) === normalizeProjectName(activeOrchidName),
         );
         const income = projectTransactions
           .filter((transaction) => transaction.tipo === "ingreso")
@@ -3195,7 +3199,7 @@
           capital.cristian = legacyCapital - capital.frank;
         }
         return {
-          [orchidName]: { income, expenses, capital, legacyCapital },
+          [activeOrchidName]: { income, expenses, capital, legacyCapital },
         };
       }
 
@@ -3241,6 +3245,14 @@
         );
       }
 
+      function calculateCandidateFinanceState(candidate) {
+        return FINANCE_ENGINE.calculate({
+          transactions: candidate,
+          opening: FINANCE_OPENING,
+          openingProjects: getOpeningProjectSnapshots(candidate),
+        });
+      }
+
       async function saveFinanceEvents(events) {
         if (!db || !Array.isArray(events) || events.length === 0) return false;
         const createdAt = Date.now();
@@ -3252,17 +3264,51 @@
         const candidate = transactions.concat(
           stampedEvents.map((event, index) => ({ id: refs[index].id, ...event })),
         );
-        const nextState = FINANCE_ENGINE.calculate({
-          transactions: candidate,
-          opening: FINANCE_OPENING,
-          openingProjects: getOpeningProjectSnapshots(candidate),
-        });
+        const nextState = calculateCandidateFinanceState(candidate);
         if (hasFinanceErrors(nextState)) {
           throw new Error(financeErrorMessage(nextState));
         }
         const batch = db.batch();
         stampedEvents.forEach((event, index) => batch.set(refs[index], event));
         await batch.commit();
+        transactions = candidate;
+        financeState = nextState;
+        renderAll();
+        return true;
+      }
+
+      async function replaceFinanceEvent(id, values) {
+        const current = transactions.find((transaction) => transaction.id === id);
+        if (!current) throw new Error("No se encontro el registro.");
+        const candidate = transactions.map((transaction) =>
+          transaction.id === id ? { id, ...values } : transaction,
+        );
+        const nextState = calculateCandidateFinanceState(candidate);
+        if (hasFinanceErrors(nextState)) {
+          throw new Error(financeErrorMessage(nextState));
+        }
+        const payload = { ...values };
+        delete payload.id;
+        await db.collection("transacciones").doc(id).set(payload);
+        transactions = candidate;
+        financeState = nextState;
+        renderAll();
+        return true;
+      }
+
+      async function deleteFinanceEvents(ids) {
+        const idSet = new Set(ids);
+        const candidate = transactions.filter((transaction) => !idSet.has(transaction.id));
+        const nextState = calculateCandidateFinanceState(candidate);
+        if (hasFinanceErrors(nextState)) {
+          throw new Error(financeErrorMessage(nextState));
+        }
+        const batch = db.batch();
+        ids.forEach((id) => batch.delete(db.collection("transacciones").doc(id)));
+        await batch.commit();
+        transactions = candidate;
+        financeState = nextState;
+        renderAll();
         return true;
       }
       let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() };
@@ -3666,11 +3712,11 @@
       function editTransaction(id) {
         const tx = transactions.find((t) => t.id === id);
         if (!tx) return;
-        showToast(
-          "El libro financiero es inmutable. Registra un ajuste nuevo en vez de editarlo.",
-          "info",
-        );
-        return;
+        if (["project_close", "project_reopen", "capital_transfer"].includes(tx.motorType)) {
+          showToast("Este movimiento se edita desde el cierre o la transferencia correspondiente.", "info");
+          return;
+        }
+        editandoId = id;
         document.getElementById("tx-fecha").value = tx.fecha || todayStr;
         document.getElementById("tx-hora").value = tx.hora || "";
         setTipo(tx.tipo || "ingreso");
@@ -3706,19 +3752,30 @@
         lucide.createIcons();
       }
       async function deleteTransaction(id) {
-        showToast(
-          "El libro financiero es inmutable. Registra un ajuste nuevo en vez de borrarlo.",
-          "info",
-        );
+        const tx = transactions.find((transaction) => transaction.id === id);
+        if (!tx) return;
+        const relatedIds = tx.transferId
+          ? transactions
+              .filter((transaction) => transaction.transferId === tx.transferId)
+              .map((transaction) => transaction.id)
+          : [id];
+        const suffix = relatedIds.length > 1 ? " y su movimiento relacionado" : "";
+        if (!confirm("Eliminar este registro" + suffix + "?\nEsta accion no se puede deshacer.")) return;
+        try {
+          await deleteFinanceEvents(relatedIds);
+          showToast("Registro eliminado", "delete");
+        } catch (err) {
+          showToast("No se puede eliminar: " + err.message, "delete");
+        }
         return;
-        if (
+        /* if (false &&
           !confirm(
             "¿Eliminar este registro?\nEsta acción no se puede deshacer.",
           )
         )
           return;
         await db.collection("transacciones").doc(id).delete();
-        showToast("Registro eliminado", "delete");
+        showToast("Registro eliminado", "delete"); */
       }
 
       function resetTransactionForm() {
@@ -5671,7 +5728,11 @@
 
       async function toggleProyectoCerrado(nombre) {
         const state = getFinanceState();
-        const project = state.projects[nombre];
+        const projectEntry = Object.entries(state.projects).find(
+          ([projectName]) => normalizeProjectName(projectName) === normalizeProjectName(nombre),
+        );
+        const project = projectEntry ? projectEntry[1] : null;
+        const projectName = project ? project.name : nombre;
         if (!project) {
           showToast(
             "Este proyecto pertenece al historial congelado y no puede cerrarse desde el motor nuevo.",
@@ -5694,7 +5755,7 @@
             const closeEvent = transactions.find(
               (event) =>
                 event.motorType === "project_close" &&
-                (event.project || event.proyecto) === nombre &&
+                normalizeProjectName(event.project || event.proyecto) === normalizeProjectName(projectName) &&
                 event.id === project.closeId,
             );
             if (!closeEvent) {
@@ -5703,16 +5764,16 @@
             }
             await saveFinanceEvents([
               makeFinanceEvent("project_reopen", {
-                project: nombre,
-                proyecto: nombre,
+                project: projectName,
+                proyecto: projectName,
                 reversalOf: closeEvent.id,
               }),
             ]);
           } else {
             await saveFinanceEvents([
               makeFinanceEvent("project_close", {
-                project: nombre,
-                proyecto: nombre,
+                project: projectName,
+                proyecto: projectName,
                 split: { frank: 0.5, cristian: 0.5 },
               }),
             ]);
@@ -5915,7 +5976,10 @@
           cerrados = [];
         Object.entries(projMap).forEach(([nombre, v]) => {
           const net = v.ingresos - v.gastos;
-          const engineProject = engineState.projects[nombre];
+          const engineEntry = Object.entries(engineState.projects).find(
+            ([projectName]) => normalizeProjectName(projectName) === normalizeProjectName(nombre),
+          );
+          const engineProject = engineEntry ? engineEntry[1] : null;
           const esCerrado = engineProject
             ? engineProject.closed
             : LEGACY_ALWAYS_OPEN_PROJECTS.has(nombre.trim().toLowerCase())
@@ -5927,7 +5991,7 @@
             gastos: v.gastos,
             net: engineProject && engineProject.closed ? engineProject.profit : net,
             cerrado: esCerrado,
-            legacy: !v.engine,
+            legacy: !engineProject,
           };
           if (esCerrado) {
             if (engineProject) profitReal += engineProject.profit;
@@ -6125,6 +6189,41 @@
           btnMotor.disabled = true;
           btnMotor.innerHTML = "Guardando...";
           try {
+            if (editandoId) {
+              const original = transactions.find((transaction) => transaction.id === editandoId);
+              if (!original) throw new Error("No se encontro el registro.");
+              const edited = {
+                ...original,
+                tipo,
+                categoria: cat,
+                monto,
+                proyecto,
+                descripcion: document.getElementById("tx-descripcion").value.trim(),
+                fecha: document.getElementById("tx-fecha").value || todayStr,
+                hora:
+                  document.getElementById("tx-hora").value ||
+                  new Date().toTimeString().slice(0, 5),
+                medio: document.getElementById("tx-medio").value,
+                receptor: responsable,
+              };
+              if (original.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) {
+                edited.motorVersion = FINANCE_ENGINE.ENGINE_VERSION;
+                edited.motorType = motorType;
+                edited.project = proyecto;
+                edited.responsible = responsable;
+              } else {
+                delete edited.motorVersion;
+                delete edited.motorType;
+                delete edited.project;
+                delete edited.responsible;
+              }
+              await replaceFinanceEvent(editandoId, edited);
+              showToast("Registro actualizado");
+              btnMotor.disabled = false;
+              resetTransactionForm();
+              showTab("resumen");
+              return;
+            }
             const saved = await saveFinanceEvents([
               makeFinanceEvent(motorType, {
                 tipo: tipo,
