@@ -6214,7 +6214,10 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/sw.js").catch(() => {});
+          navigator.serviceWorker
+            .register("/sw.js?build=3a1e338", { updateViaCache: "none" })
+            .then((registration) => registration.update())
+            .catch(() => {});
         });
       }
     </script>

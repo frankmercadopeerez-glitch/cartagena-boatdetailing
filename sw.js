@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v1";
 const CACHE_PAGES = "cbd-pages-v1";
-const FINANZAS_CACHE = "cbd-finanzas-v21";
+const FINANZAS_CACHE = "cbd-finanzas-v22";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -64,7 +64,7 @@ self.addEventListener("fetch", (e) => {
   }
 
   // Recursos estáticos (CSS, JS, fonts, images): cache-first
-  const isStatic = /\.(css|js|woff2?|webp|svg|png|jpg|ico)$/.test(path);
+  const isStatic = path !== "/sw.js" && /\.(css|js|woff2?|webp|svg|png|jpg|ico)$/.test(path);
   if (isStatic) {
     e.respondWith(
       caches.open(CACHE_STATIC).then((cache) => {
