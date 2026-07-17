@@ -89,6 +89,19 @@ function assertValid(state) {
   assert.equal(state.projects.Orchid.profit, 4500000);
 }
 
+// Un evento antiguo de reapertura nunca revierte un cierre definitivo.
+{
+  const state = calculate([
+    event("project_close", { id: "cierre-definitivo", project: "Orchid" }),
+    event("project_reopen", {
+      project: "Orchid",
+      reversalOf: "cierre-definitivo",
+    }),
+  ]);
+  assertValid(state);
+  assert.equal(state.projects.Orchid.closed, true);
+}
+
 // Si los profits llegan desiguales al cierre, el socio con menos recibe mas.
 {
   const opening = {

@@ -346,33 +346,10 @@
   }
 
   function applyProjectReopen(state, event, eventIndex, events) {
-    const name = projectName(event);
-    const target = state.projects[name];
-    const close = events.find((candidate) => candidate.id === event.reversalOf);
-    if (!target || !close || !target.closed || !target.closeSnapshot) {
-      addError(state, "CLOSE_NOT_FOUND", "No se encontro un cierre reversible para el proyecto.", event);
-      return;
-    }
-    const snapshot = target.closeSnapshot;
-    PARTNERS.forEach((partner) => {
-      state.capital[partner] += snapshot.releasedCapital[partner];
-      state.partnerIncome[partner] += snapshot.settledIncome[partner];
-      state.profitAvailable[partner] -= snapshot.profitByPartner[partner];
-    });
-    state.capitalActive += snapshot.releasedCapital.frank + snapshot.releasedCapital.cristian;
-    state.profitTotal -= snapshot.distributable;
-    target.profit = 0;
-    target.closed = false;
-    target.closeId = null;
-    target.closeSnapshot = null;
-    if (eventIndex < events.length - 1) {
-      const later = events.slice(eventIndex + 1).some(
-        (candidate) => projectName(candidate) === name && eventType(candidate) !== "project_reopen",
-      );
-      if (later) {
-        addError(state, "REOPEN_ORDER", "No se puede reabrir un proyecto con operaciones posteriores al cierre.", event);
-      }
-    }
+    // Los cierres son definitivos. Se conserva el reconocimiento de eventos
+    // antiguos de reapertura para que no rompan el libro, pero nunca revierten
+    // el capital ni el profit de un proyecto ya cerrado.
+    return;
   }
 
   function calculate(input) {

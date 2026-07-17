@@ -2058,6 +2058,29 @@
                 ></i>
               </div>
             </div>
+            <div
+              class="rounded-xl p-3 mb-4 flex items-start gap-2"
+              style="
+                background: rgba(255, 193, 7, 0.1);
+                border: 1px solid rgba(255, 210, 125, 0.55);
+                color: var(--text2);
+              "
+              role="note"
+              aria-label="Aviso de cierre definitivo"
+            >
+              <i
+                data-lucide="lock-keyhole"
+                class="w-4 h-4 flex-shrink-0 mt-0.5"
+                style="color: var(--accent-bright)"
+              ></i>
+              <p class="text-xs leading-relaxed">
+                <strong style="color: var(--accent-bright)">
+                  Cierre definitivo:
+                </strong>
+                cierra un proyecto solo cuando hayan terminado todos sus movimientos.
+                Al cerrarlo, su capital pasa a profit y no se puede abrir de nuevo.
+              </p>
+            </div>
             <div id="proyectos-list" class="space-y-2"></div>
           </div>
         </div>
@@ -3177,7 +3200,8 @@
       // (reducen el profit compartido), para no descuadrar los valores ya cerrados.
       const GASTO_SOLO_CAPITAL_DESDE = "2026-07-16";
       const TRANSFER_CAT = "Transferencia Interna";
-      const LEGACY_ALWAYS_OPEN_PROJECTS = new Set(["orchid"]);
+      const ORCHID_PROJECT_NAME = "Bote ORCHID";
+      const ORCHID_PROJECT_KEY = "orchid";
 
       // ── Helpers de proyectos ──────────────────────────────
       // Nombres que NO son proyectos reales: categorías, operación general,
@@ -3256,6 +3280,8 @@
       const FINANCE_OPENING = FINANCE_ENGINE.OPENING_STATE;
       let financeState = null;
       let _firstDataLoaded = false;
+      let proyectosEstadoLoaded = false;
+      let orchidCloseMigrationRunning = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
       function normalizeProjectName(value) {
@@ -3317,48 +3343,59 @@
         const source = Array.isArray(sourceTransactions)
           ? sourceTransactions
           : transactions;
-        const orchidName = source
-          .filter(
+        const projectNames = [
+          ...new Set(
+            source
+              .filter(
+                (transaction) =>
+                  !isPostOpeningLegacyTransaction(transaction) &&
+                  transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+                  esNombreProyectoReal(transaction.proyecto),
+              )
+              .map((transaction) => transaction.proyecto.trim()),
+          ),
+        ];
+        const activeNames = projectNames.filter((name) => {
+          if (normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)) return true;
+          if (!proyectosEstadoLoaded) return true;
+          const statusKey = Object.keys(proyectosEstado).find(
+            (key) => normalizeProjectName(key) === normalizeProjectName(name),
+          );
+          return !statusKey || !proyectosEstado[statusKey];
+        });
+        const snapshots = {};
+        activeNames.forEach((name) => {
+          const projectTransactions = source.filter(
             (transaction) =>
               !isPostOpeningLegacyTransaction(transaction) &&
               transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
               esNombreProyectoReal(transaction.proyecto) &&
-              normalizeProjectName(transaction.proyecto).includes("orchid"),
-          )
-          .map((transaction) => transaction.proyecto.trim())
-          .sort()[0];
-        const activeOrchidName = orchidName || "Bote ORCHID";
-        const projectTransactions = source.filter(
-          (transaction) =>
-            !isPostOpeningLegacyTransaction(transaction) &&
-            transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-            esNombreProyectoReal(transaction.proyecto) &&
-            transaction.categoria !== TRANSFER_CAT &&
-            !CAPITAL_GASTO_CATS.includes(transaction.categoria) &&
-            transaction.categoria !== CAPITAL_INGRESO_CAT &&
-            normalizeProjectName(transaction.proyecto) === normalizeProjectName(activeOrchidName),
-        );
-        const income = projectTransactions
-          .filter((transaction) => transaction.tipo === "ingreso")
-          .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
-        const expenses = projectTransactions
-          .filter((transaction) => transaction.tipo === "gasto")
-          .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
-        const legacyCapital = income - expenses;
-        const capital = { frank: 0, cristian: 0 };
-        projectTransactions.forEach((transaction) => {
-          const partner = socioKey(transaction.receptor);
-          if (!partner) return;
-          capital[partner] +=
-            (transaction.tipo === "ingreso" ? 1 : -1) * (transaction.monto || 0);
+              transaction.categoria !== TRANSFER_CAT &&
+              !CAPITAL_GASTO_CATS.includes(transaction.categoria) &&
+              transaction.categoria !== CAPITAL_INGRESO_CAT &&
+              normalizeProjectName(transaction.proyecto) === normalizeProjectName(name),
+          );
+          const income = projectTransactions
+            .filter((transaction) => transaction.tipo === "ingreso")
+            .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
+          const expenses = projectTransactions
+            .filter((transaction) => transaction.tipo === "gasto")
+            .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
+          const legacyCapital = income - expenses;
+          const capital = { frank: 0, cristian: 0 };
+          projectTransactions.forEach((transaction) => {
+            const partner = socioKey(transaction.receptor || transaction.responsible);
+            if (!partner) return;
+            capital[partner] +=
+              (transaction.tipo === "ingreso" ? 1 : -1) * (transaction.monto || 0);
+          });
+          if (Math.abs(capital.frank + capital.cristian - legacyCapital) > 0.01) {
+            capital.frank = legacyCapital / 2;
+            capital.cristian = legacyCapital - capital.frank;
+          }
+          snapshots[name] = { income, expenses, capital, legacyCapital };
         });
-        if (capital.frank + capital.cristian !== legacyCapital) {
-          capital.frank = legacyCapital / 2;
-          capital.cristian = legacyCapital - capital.frank;
-        }
-        return {
-          [activeOrchidName]: { income, expenses, capital, legacyCapital },
-        };
+        return snapshots;
       }
 
       function hideDataLoading() {
@@ -3464,7 +3501,11 @@
           ...event,
           createdAt: event.createdAt || createdAt + index,
         }));
-        const refs = stampedEvents.map(() => db.collection("transacciones").doc());
+        const refs = stampedEvents.map((event) =>
+          event.id
+            ? db.collection("transacciones").doc(event.id)
+            : db.collection("transacciones").doc(),
+        );
         const candidate = transactions.concat(
           stampedEvents.map((event, index) => ({ id: refs[index].id, ...event })),
         );
@@ -3479,6 +3520,52 @@
         financeState = nextState;
         renderAll();
         return true;
+      }
+
+      function hasProjectEvent(source, type, name) {
+        return source.some((transaction) => {
+          const transactionType =
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+              ? FINANCE_ENGINE.eventType(transaction)
+              : legacyMotorType(transaction);
+          return (
+            transactionType === type &&
+            normalizeProjectName(transaction.project || transaction.proyecto) ===
+              normalizeProjectName(name)
+          );
+        });
+      }
+
+      async function ensureOrchidClosed() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        const snapshots = getOpeningProjectSnapshots(transactions);
+        const orchidEntry = Object.entries(snapshots).find(([name]) =>
+          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+        );
+        if (!orchidEntry || hasProjectEvent(transactions, "project_close", orchidEntry[0])) {
+          return;
+        }
+        orchidCloseMigrationRunning = true;
+        try {
+          await saveFinanceEvents([
+            makeFinanceEvent("project_close", {
+              id: "system-orchid-close-v1",
+              project: orchidEntry[0],
+              proyecto: orchidEntry[0],
+              split: { frank: 0.5, cristian: 0.5 },
+              descripcion: "Cierre inicial de " + ORCHID_PROJECT_NAME,
+              systemMigration: "orchid-close-v1",
+            }),
+          ]);
+          showToast(
+            "Bote ORCHID cerrado: su capital de trabajo paso a profit.",
+            "info",
+          );
+        } catch (error) {
+          showToast("No se pudo cerrar Bote ORCHID: " + error.message, "delete");
+        } finally {
+          orchidCloseMigrationRunning = false;
+        }
       }
 
       async function replaceFinanceEvent(id, values) {
@@ -3730,6 +3817,7 @@
                     id: d.id,
                     ...d.data(),
                   }));
+                  await ensureOrchidClosed();
                   hideDataLoading();
                   renderAll();
                 },
@@ -3739,6 +3827,7 @@
               .doc("proyectos_estado")
               .onSnapshot((snap) => {
                 proyectosEstado = snap.exists ? snap.data() || {} : {};
+                proyectosEstadoLoaded = true;
                 if (_firstDataLoaded) renderAll();
               });
           } else {
@@ -5963,7 +6052,14 @@
         const projectName = project ? project.name : nombre;
         if (!project) {
           showToast(
-            "Este proyecto pertenece al historial congelado y no puede cerrarse desde el motor nuevo.",
+            "Este proyecto no tiene un estado financiero activo para cerrarse.",
+            "info",
+          );
+          return;
+        }
+        if (project.closed) {
+          showToast(
+            "Este proyecto ya esta cerrado y no se puede abrir de nuevo.",
             "info",
           );
           return;
@@ -5979,33 +6075,13 @@
           await new Promise((resolve) => setTimeout(resolve, 320));
         }
         try {
-          if (project.closed) {
-            const closeEvent = transactions.find(
-              (event) =>
-                event.motorType === "project_close" &&
-                normalizeProjectName(event.project || event.proyecto) === normalizeProjectName(projectName) &&
-                event.id === project.closeId,
-            );
-            if (!closeEvent) {
-              showToast("No se encontro el cierre del proyecto.", "delete");
-              return;
-            }
-            await saveFinanceEvents([
-              makeFinanceEvent("project_reopen", {
-                project: projectName,
-                proyecto: projectName,
-                reversalOf: closeEvent.id,
-              }),
-            ]);
-          } else {
-            await saveFinanceEvents([
-              makeFinanceEvent("project_close", {
-                project: projectName,
-                proyecto: projectName,
-                split: { frank: 0.5, cristian: 0.5 },
-              }),
-            ]);
-          }
+          await saveFinanceEvents([
+            makeFinanceEvent("project_close", {
+              project: projectName,
+              proyecto: projectName,
+              split: { frank: 0.5, cristian: 0.5 },
+            }),
+          ]);
         } catch (e) {
           showToast("Error al cambiar estado: " + e.message, "delete");
           if (card) card.classList.remove("is-toggling", "is-opening", "is-closing");
@@ -6030,7 +6106,11 @@
         const checkTranslate = p.cerrado
           ? "translateX(1.25rem)"
           : "translateX(0.13rem)";
-        const toggleLabel = esHistorial ? "Historial" : p.cerrado ? "Abrir" : "Cerrar";
+        const toggleLabel = esHistorial
+          ? "Historial"
+          : p.cerrado
+            ? "Cerrado"
+            : "Cerrar";
         const profitLabel = p.cerrado ? "Profit" : "Balance";
         const statusText = esHistorial ? "Historial" : p.cerrado ? "Cerrado" : "Activo";
         const statusColor = p.cerrado ? "var(--accent)" : "var(--blue)";
@@ -6080,7 +6160,14 @@
             e.stopPropagation();
             if (esHistorial) {
               showToast(
-                "Este proyecto pertenece al historial congelado y no puede cerrarse desde el motor nuevo.",
+                "Este proyecto pertenece al historial y no tiene cierre activo.",
+                "info",
+              );
+              return;
+            }
+            if (p.cerrado) {
+              showToast(
+                "Este proyecto ya esta cerrado y no se puede abrir de nuevo.",
                 "info",
               );
               return;
@@ -6210,9 +6297,7 @@
           const engineProject = engineEntry ? engineEntry[1] : null;
           const esCerrado = engineProject
             ? engineProject.closed
-            : LEGACY_ALWAYS_OPEN_PROJECTS.has(nombre.trim().toLowerCase())
-              ? false
-              : !!proyectosEstado[nombre];
+            : !!proyectosEstado[nombre];
           const entry = {
             nombre,
             ingresos: v.ingresos,
@@ -7009,14 +7094,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-02bbd20";
+          const swReloadKey = "cbd-finanzas-sw-project-close-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=02bbd20", { updateViaCache: "none" })
+            .register("/sw.js?build=project-close-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
