@@ -3273,6 +3273,52 @@
         return financeState;
       }
 
+      function getWorkingCapital(state) {
+        const current = state && state.workingCapital;
+        if (current && Number.isFinite(Number(current.frank)) && Number.isFinite(Number(current.cristian))) {
+          return current;
+        }
+        const capital = (state && state.capital) || {};
+        const income = { frank: 0, cristian: 0 };
+        const expenses = { frank: 0, cristian: 0 };
+        getEngineTransactions(transactions).forEach((transaction) => {
+          const partner = socioKey(
+            transaction.motorType === "income"
+              ? transaction.receptor
+              : transaction.responsible,
+          );
+          if (!partner) return;
+          if (transaction.motorType === "income") income[partner] += transaction.monto || 0;
+          if (transaction.motorType === "expense") expenses[partner] += transaction.monto || 0;
+        });
+        const storedIncome = (state && state.partnerIncome) || {};
+        const storedExpenses = (state && state.partnerExpenses) || {};
+        income.frank += storedIncome.frank || 0;
+        income.cristian += storedIncome.cristian || 0;
+        expenses.frank += storedExpenses.frank || 0;
+        expenses.cristian += storedExpenses.cristian || 0;
+        return {
+          frank: (capital.frank || 0) + (income.frank || 0) - (expenses.frank || 0),
+          cristian: (capital.cristian || 0) + (income.cristian || 0) - (expenses.cristian || 0),
+        };
+      }
+
+      function getPartnerBalances(state) {
+        const workingCapital = getWorkingCapital(state);
+        const profitAvailable = (state && state.profitAvailable) || {};
+        return {
+          frank: workingCapital.frank + (profitAvailable.frank || 0),
+          cristian: workingCapital.cristian + (profitAvailable.cristian || 0),
+        };
+      }
+
+      function getWorkingCapitalActive(state) {
+        const workingCapital = getWorkingCapital(state);
+        return Number.isFinite(Number(state && state.workingCapitalActive))
+          ? state.workingCapitalActive
+          : workingCapital.frank + workingCapital.cristian;
+      }
+
       function hasFinanceErrors(state) {
         return !!(state && state.validation && !state.validation.valid);
       }
@@ -4520,6 +4566,8 @@
 
       function renderCuentas() {
         const state = getFinanceState();
+        const workingCapital = getWorkingCapital(state);
+        const partnerBalances = getPartnerBalances(state);
         const setEl = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
@@ -4529,21 +4577,21 @@
           void element.offsetWidth;
           element.classList.add("num-flash");
         };
-        const frankCapital = state.workingCapital.frank;
-        const cristianCapital = state.workingCapital.cristian;
+        const frankCapital = workingCapital.frank;
+        const cristianCapital = workingCapital.cristian;
         const frankProfit = state.profitAvailable.frank;
         const cristianProfit = state.profitAvailable.cristian;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristianProfit;
         setEl(
           "cuenta-frank-val",
-          state.balanceByPartner.frank,
-          state.balanceByPartner.frank >= 0 ? "var(--green)" : "var(--red)",
+          partnerBalances.frank,
+          partnerBalances.frank >= 0 ? "var(--green)" : "var(--red)",
         );
         setEl(
           "cuenta-cristian-val",
-          state.balanceByPartner.cristian,
-          state.balanceByPartner.cristian >= 0 ? "var(--green)" : "var(--red)",
+          partnerBalances.cristian,
+          partnerBalances.cristian >= 0 ? "var(--green)" : "var(--red)",
         );
         setEl(
           "cuenta-frank-capital",
@@ -4912,7 +4960,7 @@
       }
 
       function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        return getFinanceState().workingCapitalActive;
+        return getWorkingCapitalActive(getFinanceState());
         /* Legacy implementation kept below for historical reference only.
         return _txProyectosActivos(corteFecha, desdeFecha).reduce(
           (s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto),
@@ -4973,6 +5021,7 @@
 
       function renderGlobalKPIs() {
         const state = getFinanceState();
+        const workingCapitalActive = getWorkingCapitalActive(state);
         const setValue = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
@@ -4988,8 +5037,8 @@
         );
         setValue(
           "g-margen",
-          state.workingCapitalActive,
-          state.workingCapitalActive >= 0 ? "#38BDF8" : "#f87171",
+          workingCapitalActive,
+          workingCapitalActive >= 0 ? "#38BDF8" : "#f87171",
         );
         ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
           flashEl(id),
@@ -5038,7 +5087,7 @@
         const shownIncome = engineState.totalIncome;
         const shownExpenses = engineState.totalExpenses;
         const shownProfit = engineState.profitTotal;
-        const shownCapital = engineState.workingCapitalActive;
+        const shownCapital = getWorkingCapitalActive(engineState);
         document.getElementById("g-ingresos").textContent = fmt(shownIncome);
         document.getElementById("g-gastos").textContent = fmt(shownExpenses);
         document.getElementById("g-profit").textContent = fmt(shownProfit);
@@ -5151,8 +5200,9 @@
           saldoEl.style.color = engineBalance >= 0 ? "var(--green)" : "var(--red)";
         }
         if (capEl) {
-          capEl.textContent = fmt(engineState.workingCapitalActive);
-          capEl.style.color = engineState.workingCapitalActive >= 0 ? "var(--blue)" : "var(--red)";
+          const workingCapitalActive = getWorkingCapitalActive(engineState);
+          capEl.textContent = fmt(workingCapitalActive);
+          capEl.style.color = workingCapitalActive >= 0 ? "var(--blue)" : "var(--red)";
         }
         if (profEl) {
           profEl.textContent = fmt(engineState.profitAvailableTotal);
@@ -6036,7 +6086,7 @@
           };
         });
 
-        let capitalTrabajo = engineState.workingCapitalActive;
+        let capitalTrabajo = getWorkingCapitalActive(engineState);
         let profitReal = 0;
         const activos = [],
           cerrados = [];
@@ -6316,6 +6366,7 @@
             if (saved) {
               const savedState = getFinanceState();
               const capitalAfter = savedState.capital;
+              const partnerBalances = getPartnerBalances(savedState);
               if (motorType === "capital_contribution") {
                 showToast(
                   "Capital actualizado: Frank " +
@@ -6328,7 +6379,7 @@
                   "Entrada guardada. Balance de " +
                     responsable +
                     ": " +
-                    fmt(savedState.balanceByPartner[responsable.toLowerCase()]) +
+                    fmt(partnerBalances[responsable.toLowerCase()]) +
                     ".",
                   "info",
                 );
@@ -6337,7 +6388,7 @@
                   "Gasto guardado. Balance de " +
                     responsable +
                     ": " +
-                    fmt(savedState.balanceByPartner[responsable.toLowerCase()]) +
+                    fmt(partnerBalances[responsable.toLowerCase()]) +
                     ".",
                   "info",
                 );
@@ -6846,14 +6897,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-795c262";
+          const swReloadKey = "cbd-finanzas-sw-02bbd20";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=795c262", { updateViaCache: "none" })
+            .register("/sw.js?build=02bbd20", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
