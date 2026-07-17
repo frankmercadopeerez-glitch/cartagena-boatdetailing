@@ -30,12 +30,12 @@ function assertValid(state) {
   assertValid(state);
 }
 
-// Aporte, ingreso y gasto: solo cambia caja en ingresos/gastos; el capital
-// solo cambia con el aporte y el otro socio permanece intacto.
+// Aporte, ingreso y gasto: ingresos y gastos actualizan el saldo del socio
+// correspondiente, mientras el capital solo cambia con el aporte.
 {
   const state = calculate([
     event("capital_contribution", { project: "Orchid", responsible: "Frank", monto: 1500000 }),
-    event("income", { project: "Orchid", monto: 5000000 }),
+    event("income", { project: "Orchid", receptor: "Frank", monto: 5000000 }),
     event("expense", { project: "Orchid", responsible: "Frank", monto: 2000000 }),
   ]);
   assertValid(state);
@@ -46,15 +46,33 @@ function assertValid(state) {
   assert.equal(state.cash, 8957137);
   assert.equal(state.totalIncome, 26429510);
   assert.equal(state.totalExpenses, 14548959);
-  assert.equal(state.balanceByPartner.frank, 2553499.5 - 2000000 + 1357568.5);
+  assert.equal(state.balanceByPartner.frank, 2553499.5 + 5000000 - 2000000 + 1357568.5);
   assert.equal(state.balanceByPartner.cristian, 688500.5 + 1357568.5);
+}
+
+// El receptor de una entrada ve el aumento de su cuenta inmediatamente; al
+// cerrar, la entrada pendiente se convierte en profit y no se duplica.
+{
+  const before = calculate([]);
+  const open = calculate([
+    event("income", { project: "Recepcion", receptor: "Cristian", monto: 1500000 }),
+  ]);
+  assertValid(open);
+  assert.equal(open.balanceByPartner.frank, before.balanceByPartner.frank);
+  assert.equal(open.balanceByPartner.cristian, before.balanceByPartner.cristian + 1500000);
+  const closed = calculate([
+    event("income", { project: "Recepcion", receptor: "Cristian", monto: 1500000 }),
+    event("project_close", { id: "cierre-recepcion", project: "Recepcion" }),
+  ]);
+  assertValid(closed);
+  assert.equal(closed.partnerIncome.cristian, 0);
 }
 
 // Cierre: libera el capital del proyecto y pasa su utilidad al profit 50/50.
 {
   const state = calculate([
     event("capital_contribution", { id: "aporte-orchid", project: "Orchid", responsible: "Frank", monto: 1500000 }),
-    event("income", { project: "Orchid", monto: 5000000 }),
+    event("income", { project: "Orchid", receptor: "Cristian", monto: 5000000 }),
     event("expense", { project: "Orchid", responsible: "Cristian", monto: 2000000 }),
     event("project_close", { id: "cierre-orchid", project: "Orchid", split: { frank: 0.5, cristian: 0.5 } }),
   ]);
@@ -144,7 +162,7 @@ function assertValid(state) {
   const state = calculate([
     event("capital_contribution", { project: "A", responsible: "Frank", monto: 461000 }),
     event("capital_contribution", { project: "B", responsible: "Cristian", monto: 300000 }),
-    event("income", { project: "A", monto: 1000000 }),
+    event("income", { project: "A", receptor: "Frank", monto: 1000000 }),
     event("expense", { project: "B", responsible: "Cristian", monto: 100000 }),
   ]);
   assertValid(state);

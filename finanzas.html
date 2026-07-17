@@ -1429,7 +1429,7 @@
                 class="text-xs text-right mb-2"
                 style="color: rgba(255, 255, 255, 0.35)"
               >
-                Gastos pagados: $0
+                Entradas recibidas: $0 · Gastos pagados: $0
               </p>
               <button
                 id="btn-retiro-cristian"
@@ -1520,7 +1520,7 @@
                 class="text-xs text-right mb-2"
                 style="color: rgba(255, 255, 255, 0.35)"
               >
-                Gastos pagados: $0
+                Entradas recibidas: $0 · Gastos pagados: $0
               </p>
               <button
                 id="btn-retiro-frank"
@@ -4533,10 +4533,16 @@
         const frankGastos = document.getElementById("cuenta-frank-gastos");
         if (cristianGastos)
           cristianGastos.textContent =
-            "Gastos pagados: " + fmt(state.partnerExpenses.cristian);
+            "Entradas recibidas: " +
+            fmt(state.partnerIncome.cristian) +
+            " · Gastos pagados: " +
+            fmt(state.partnerExpenses.cristian);
         if (frankGastos)
           frankGastos.textContent =
-            "Gastos pagados: " + fmt(state.partnerExpenses.frank);
+            "Entradas recibidas: " +
+            fmt(state.partnerIncome.frank) +
+            " · Gastos pagados: " +
+            fmt(state.partnerExpenses.frank);
         const btnRF = document.getElementById("btn-retiro-frank");
         const btnRC = document.getElementById("btn-retiro-cristian");
         if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
@@ -6283,7 +6289,11 @@
                 );
               } else if (motorType === "income") {
                 showToast(
-                  "Entrada guardada. El balance se reconoce al cerrar el proyecto.",
+                  "Entrada guardada. Balance de " +
+                    responsable +
+                    ": " +
+                    fmt(savedState.balanceByPartner[responsable.toLowerCase()]) +
+                    ".",
                   "info",
                 );
               } else if (motorType === "expense") {
