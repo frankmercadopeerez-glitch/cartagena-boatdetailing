@@ -102,12 +102,31 @@
         income: 0,
         expenses: 0,
         capital: { frank: 0, cristian: 0 },
+        legacyCapital: 0,
         profit: 0,
         closed: false,
         closeId: null,
       };
     }
     return projects[name];
+  }
+
+  function cloneOpeningProjects(source) {
+    const result = {};
+    Object.entries(source || {}).forEach(([name, project]) => {
+      result[name] = {
+        name,
+        income: money(project.income),
+        expenses: money(project.expenses),
+        capital: clonePartners(project.capital),
+        legacyCapital: money(project.legacyCapital),
+        profit: 0,
+        closed: false,
+        closeId: null,
+        closeSnapshot: null,
+      };
+    });
+    return result;
   }
 
   function addError(state, code, message, event) {
@@ -263,7 +282,9 @@
       addError(state, "PROJECT_ALREADY_CLOSED", "El proyecto ya esta cerrado.", event);
       return;
     }
-    const utility = money(target.income - target.expenses);
+    const utility = money(
+      target.income - target.expenses - money(target.legacyCapital),
+    );
     const split = event.split || DEFAULT_SPLIT;
     const frankShare = Number(split.frank);
     const cristianShare = Number(split.cristian);
@@ -300,13 +321,14 @@
     });
     state.capitalActive -= releasedTotal;
     state.profitTotal += distributable;
-    target.profit = utility;
+    target.profit = distributable;
     target.closed = true;
     target.closeId = event.id || null;
     target.closeSnapshot = {
       income: target.income,
       expenses: target.expenses,
       utility,
+      legacyCapital: money(target.legacyCapital),
       distributable,
       releasedCapital,
       profitByPartner,
@@ -360,7 +382,7 @@
       capital: clonePartners(opening.capital),
       profitAvailable: clonePartners(opening.profitAvailable),
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
-      projects: {},
+      projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
       validation: { valid: true, errors: [], checks: {} },
     };

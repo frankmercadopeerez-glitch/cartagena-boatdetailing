@@ -1,10 +1,11 @@
 const assert = require("assert");
 const engine = require("../js/finance-engine.js");
 
-function calculate(events, opening) {
+function calculate(events, opening, openingProjects) {
   return engine.calculate({
     transactions: events,
     opening: opening || engine.OPENING_STATE,
+    openingProjects,
   });
 }
 
@@ -62,7 +63,7 @@ function assertValid(state) {
   assert.equal(state.profitAvailable.cristian, 3607568.5);
   assert.equal(state.profitTotal, 11638551);
   assert.equal(state.projects.Orchid.closed, true);
-  assert.equal(state.projects.Orchid.profit, 3000000);
+  assert.equal(state.projects.Orchid.profit, 4500000);
 }
 
 // Si los profits llegan desiguales al cierre, el socio con menos recibe mas.
@@ -172,6 +173,38 @@ function assertValid(state) {
   assert.equal(state.capitalActive, 922000);
   assert.equal(state.capital.frank, 461000);
   assert.equal(state.capital.cristian, 461000);
+}
+
+// Un proyecto historico puede abrirse como ejemplo sin cambiar el estado
+// global de apertura; su cierre queda disponible para las nuevas operaciones.
+{
+  const opening = {
+    asOf: "2026-07-16",
+    cash: 820000,
+    totalIncome: 1495000,
+    totalExpenses: 675000,
+    profitTotal: 820000,
+    capitalActive: 820000,
+    capital: { frank: 410000, cristian: 410000 },
+    profitAvailable: { frank: 0, cristian: 0 },
+  };
+  const state = calculate(
+    [event("project_close", { project: "Bote ORCHID" })],
+    opening,
+    {
+      "Bote ORCHID": {
+        income: 1495000,
+        expenses: 675000,
+        capital: { frank: 410000, cristian: 410000 },
+        legacyCapital: 820000,
+      },
+    },
+  );
+  assertValid(state);
+  assert.equal(state.projects["Bote ORCHID"].closed, true);
+  assert.equal(state.capitalActive, 0);
+  assert.equal(state.profitAvailable.frank, 410000);
+  assert.equal(state.profitAvailable.cristian, 410000);
 }
 
 // Un gasto incompleto no puede convertirse en un estado financiero guardado.

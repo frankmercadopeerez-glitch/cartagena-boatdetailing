@@ -474,7 +474,11 @@
           opacity 0.3s ease;
         opacity: 0;
         pointer-events: none;
-        white-space: nowrap;
+        width: min(560px, calc(100vw - 1.5rem));
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
       }
       #toast.show {
         transform: translateX(-50%) translateY(0);
@@ -3149,6 +3153,52 @@
       let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
+      function getOpeningProjectSnapshots(sourceTransactions) {
+        const source = Array.isArray(sourceTransactions)
+          ? sourceTransactions
+          : transactions;
+        const orchidName = source
+          .filter(
+            (transaction) =>
+              transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+              esFlujoProyecto(transaction) &&
+              String(transaction.proyecto || "")
+                .trim()
+                .toLowerCase()
+                .includes("orchid"),
+          )
+          .map((transaction) => transaction.proyecto.trim())
+          .sort()[0];
+        if (!orchidName) return {};
+        const projectTransactions = source.filter(
+          (transaction) =>
+            transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+            esFlujoProyecto(transaction) &&
+            transaction.proyecto.trim().toLowerCase() === orchidName.toLowerCase(),
+        );
+        const income = projectTransactions
+          .filter((transaction) => transaction.tipo === "ingreso")
+          .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
+        const expenses = projectTransactions
+          .filter((transaction) => transaction.tipo === "gasto")
+          .reduce((sum, transaction) => sum + (transaction.monto || 0), 0);
+        const legacyCapital = income - expenses;
+        const capital = { frank: 0, cristian: 0 };
+        projectTransactions.forEach((transaction) => {
+          const partner = socioKey(transaction.receptor);
+          if (!partner) return;
+          capital[partner] +=
+            (transaction.tipo === "ingreso" ? 1 : -1) * (transaction.monto || 0);
+        });
+        if (capital.frank + capital.cristian !== legacyCapital) {
+          capital.frank = legacyCapital / 2;
+          capital.cristian = legacyCapital - capital.frank;
+        }
+        return {
+          [orchidName]: { income, expenses, capital, legacyCapital },
+        };
+      }
+
       function hideDataLoading() {
         const dl = document.getElementById("data-loading");
         if (!dl) return;
@@ -3164,6 +3214,7 @@
         financeState = FINANCE_ENGINE.calculate({
           transactions,
           opening: FINANCE_OPENING,
+          openingProjects: getOpeningProjectSnapshots(transactions),
         });
         return financeState;
       }
@@ -3204,6 +3255,7 @@
         const nextState = FINANCE_ENGINE.calculate({
           transactions: candidate,
           opening: FINANCE_OPENING,
+          openingProjects: getOpeningProjectSnapshots(candidate),
         });
         if (hasFinanceErrors(nextState)) {
           throw new Error(financeErrorMessage(nextState));
