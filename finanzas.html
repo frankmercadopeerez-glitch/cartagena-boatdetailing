@@ -3057,6 +3057,7 @@
       // (reducen el profit compartido), para no descuadrar los valores ya cerrados.
       const GASTO_SOLO_CAPITAL_DESDE = "2026-07-16";
       const TRANSFER_CAT = "Transferencia Interna";
+      const LEGACY_ALWAYS_OPEN_PROJECTS = new Set(["orchid"]);
 
       // ── Helpers de proyectos ──────────────────────────────
       // Nombres que NO son proyectos reales: categorías, operación general,
@@ -5843,7 +5844,9 @@
           const engineProject = engineState.projects[nombre];
           const esCerrado = engineProject
             ? engineProject.closed
-            : !!proyectosEstado[nombre];
+            : LEGACY_ALWAYS_OPEN_PROJECTS.has(nombre.trim().toLowerCase())
+              ? false
+              : !!proyectosEstado[nombre];
           const entry = {
             nombre,
             ingresos: v.ingresos,
