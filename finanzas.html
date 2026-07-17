@@ -3171,6 +3171,40 @@
         return String(value || "").trim().toLowerCase();
       }
 
+      function isPostOpeningLegacyTransaction(transaction) {
+        return (
+          transaction &&
+          transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+          String(transaction.fecha || "") > FINANCE_OPENING.asOf &&
+          (transaction.tipo === "ingreso" || transaction.tipo === "gasto")
+        );
+      }
+
+      function legacyMotorType(transaction) {
+        if (transaction.categoria === "Retiro de Profit") return "profit_withdrawal";
+        if (transaction.categoria === CAPITAL_INGRESO_CAT) return "capital_contribution";
+        if (transaction.categoria === "Retiro de Capital") return "capital_withdrawal";
+        return transaction.tipo === "ingreso" ? "income" : "expense";
+      }
+
+      function getEngineTransactions(sourceTransactions) {
+        const source = Array.isArray(sourceTransactions) ? sourceTransactions : transactions;
+        return source.map((transaction) => {
+          if (transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) return transaction;
+          if (!isPostOpeningLegacyTransaction(transaction)) return null;
+          const motorType = legacyMotorType(transaction);
+          const partner = transaction.receptor || "Cristian";
+          return {
+            ...transaction,
+            motorVersion: FINANCE_ENGINE.ENGINE_VERSION,
+            motorType,
+            project: transaction.proyecto || "",
+            responsible: partner,
+            receptor: partner,
+          };
+        }).filter(Boolean);
+      }
+
       function getOpeningProjectSnapshots(sourceTransactions) {
         const source = Array.isArray(sourceTransactions)
           ? sourceTransactions
@@ -3178,6 +3212,7 @@
         const orchidName = source
           .filter(
             (transaction) =>
+              !isPostOpeningLegacyTransaction(transaction) &&
               transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
               esNombreProyectoReal(transaction.proyecto) &&
               normalizeProjectName(transaction.proyecto).includes("orchid"),
@@ -3187,6 +3222,7 @@
         const activeOrchidName = orchidName || "Bote ORCHID";
         const projectTransactions = source.filter(
           (transaction) =>
+            !isPostOpeningLegacyTransaction(transaction) &&
             transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
             esNombreProyectoReal(transaction.proyecto) &&
             transaction.categoria !== TRANSFER_CAT &&
@@ -3230,7 +3266,7 @@
 
       function getFinanceState() {
         financeState = FINANCE_ENGINE.calculate({
-          transactions,
+          transactions: getEngineTransactions(transactions),
           opening: FINANCE_OPENING,
           openingProjects: getOpeningProjectSnapshots(transactions),
         });
@@ -3261,7 +3297,7 @@
 
       function calculateCandidateFinanceState(candidate) {
         return FINANCE_ENGINE.calculate({
-          transactions: candidate,
+          transactions: getEngineTransactions(candidate),
           opening: FINANCE_OPENING,
           openingProjects: getOpeningProjectSnapshots(candidate),
         });
@@ -6810,8 +6846,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
+          const swReloadKey = "cbd-finanzas-sw-795c262";
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (sessionStorage.getItem(swReloadKey)) return;
+            sessionStorage.setItem(swReloadKey, "1");
+            window.location.reload();
+          });
           navigator.serviceWorker
-            .register("/sw.js?build=3a1e338", { updateViaCache: "none" })
+            .register("/sw.js?build=795c262", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
