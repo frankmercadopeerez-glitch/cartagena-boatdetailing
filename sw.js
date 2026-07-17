@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v1";
 const CACHE_PAGES = "cbd-pages-v1";
-const FINANZAS_CACHE = "cbd-finanzas-v22";
+const FINANZAS_CACHE = "cbd-finanzas-v23";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -15,7 +15,11 @@ const STATIC_SHELL = [
   "/vendor/phosphor/icons.css",
 ];
 
-const FINANZAS_PATHS = ["/finanzas.html", "/finanzas-manifest.json"];
+const FINANZAS_PATHS = [
+  "/finanzas.html",
+  "/finanzas-manifest.json",
+  "/js/finance-engine.js",
+];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(

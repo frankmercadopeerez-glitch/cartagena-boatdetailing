@@ -63,6 +63,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/finance-engine.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -3037,6 +3038,7 @@
           "Herramientas / Equipos",
           "Mano de Obra",
           "Retiro de Profit",
+          "Retiro de Capital",
           "ARL / Seguro",
           "Logistica / Transporte",
           "Arriendo / Local",
@@ -3128,6 +3130,9 @@
         filterCats = new Set(),
         proyectosEstado = {},
         privacyMode = false;
+      const FINANCE_ENGINE = window.CBDFinanceEngine;
+      const FINANCE_OPENING = FINANCE_ENGINE.OPENING_STATE;
+      let financeState = null;
       let _firstDataLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
 
@@ -3141,6 +3146,60 @@
         _firstDataLoaded = true;
       }
       const nowD = new Date();
+
+      function getFinanceState() {
+        financeState = FINANCE_ENGINE.calculate({
+          transactions,
+          opening: FINANCE_OPENING,
+        });
+        return financeState;
+      }
+
+      function hasFinanceErrors(state) {
+        return !!(state && state.validation && !state.validation.valid);
+      }
+
+      function financeErrorMessage(state) {
+        const first = state && state.validation && state.validation.errors[0];
+        return first ? first.message : "La operacion no cuadra financieramente.";
+      }
+
+      function makeFinanceEvent(type, values) {
+        return FINANCE_ENGINE.makeEvent(
+          type,
+          Object.assign(
+            {
+              fecha: todayStr,
+              hora: new Date().toTimeString().slice(0, 5),
+            },
+            values || {},
+          ),
+        );
+      }
+
+      async function saveFinanceEvents(events) {
+        if (!db || !Array.isArray(events) || events.length === 0) return false;
+        const createdAt = Date.now();
+        const stampedEvents = events.map((event, index) => ({
+          ...event,
+          createdAt: event.createdAt || createdAt + index,
+        }));
+        const refs = stampedEvents.map(() => db.collection("transacciones").doc());
+        const candidate = transactions.concat(
+          stampedEvents.map((event, index) => ({ id: refs[index].id, ...event })),
+        );
+        const nextState = FINANCE_ENGINE.calculate({
+          transactions: candidate,
+          opening: FINANCE_OPENING,
+        });
+        if (hasFinanceErrors(nextState)) {
+          throw new Error(financeErrorMessage(nextState));
+        }
+        const batch = db.batch();
+        stampedEvents.forEach((event, index) => batch.set(refs[index], event));
+        await batch.commit();
+        return true;
+      }
       let mesSel = { y: nowD.getFullYear(), m: nowD.getMonth() };
       const MESES = [
         "Enero",
@@ -3346,10 +3405,6 @@
                 lucide.createIcons();
               }
             }
-            seedAbrilRetiro();
-            seedJunioAjuste();
-            seedSaldoAnteriorJunio();
-            migrarRetiroJunioAMayo();
             db.collection("transacciones")
               .orderBy("fecha", "desc")
               .onSnapshot(
@@ -3445,7 +3500,7 @@
         const proyectoEl = document.getElementById("tx-proyecto");
         const opc = document.getElementById("proyecto-opcional");
         const requiereProyecto =
-          tipo === "ingreso" && cat !== CAPITAL_INGRESO_CAT;
+          cat !== "Retiro de Profit" && tipo !== "transferencia";
 
         proyectoEl.required = requiereProyecto;
         opc.textContent = requiereProyecto ? "(requerido)" : "(opcional)";
@@ -3546,7 +3601,11 @@
       function editTransaction(id) {
         const tx = transactions.find((t) => t.id === id);
         if (!tx) return;
-        editandoId = id;
+        showToast(
+          "El libro financiero es inmutable. Registra un ajuste nuevo en vez de editarlo.",
+          "info",
+        );
+        return;
         document.getElementById("tx-fecha").value = tx.fecha || todayStr;
         document.getElementById("tx-hora").value = tx.hora || "";
         setTipo(tx.tipo || "ingreso");
@@ -3582,6 +3641,11 @@
         lucide.createIcons();
       }
       async function deleteTransaction(id) {
+        showToast(
+          "El libro financiero es inmutable. Registra un ajuste nuevo en vez de borrarlo.",
+          "info",
+        );
+        return;
         if (
           !confirm(
             "¿Eliminar este registro?\nEsta acción no se puede deshacer.",
@@ -3590,6 +3654,22 @@
           return;
         await db.collection("transacciones").doc(id).delete();
         showToast("Registro eliminado", "delete");
+      }
+
+      function resetTransactionForm() {
+        editandoId = null;
+        document.getElementById("tx-form").reset();
+        document.getElementById("tx-fecha").value = todayStr;
+        document.getElementById("tx-hora").value = new Date()
+          .toTimeString()
+          .slice(0, 5);
+        setTipo("ingreso");
+        setMedio("Efectivo");
+        setReceptor("Cristian");
+        document.getElementById("btn-submit").innerHTML =
+          '<i data-lucide="save" class="w-4 h-4"></i> Guardar Registro';
+        document.getElementById("btn-cancelar-edicion").classList.add("hidden");
+        lucide.createIcons();
       }
 
       // ── Format ────────────────────────────────────────────
@@ -4138,11 +4218,22 @@
       function onCategoriaChange() {
         updateProyectoRequirement();
         const cat = document.getElementById("tx-categoria").value;
-        const isRetiro = CAPITAL_GASTO_CATS.includes(cat);
+        const isRetiro = cat === "Retiro de Profit";
         const hint = document.getElementById("retiro-profit-hint");
         const receptor = document.getElementById("campo-receptor");
         if (hint) hint.classList.toggle("hidden", !isRetiro);
-        if (receptor) receptor.classList.toggle("hidden", isRetiro);
+        if (receptor) receptor.classList.remove("hidden");
+        const label = document.getElementById("label-receptor");
+        if (label) {
+          label.textContent =
+            cat === CAPITAL_INGRESO_CAT
+              ? "Socio que aporta"
+              : cat === "Retiro de Profit" || cat === "Retiro de Capital"
+                ? "Socio que retira"
+                : document.getElementById("tx-tipo").value === "ingreso"
+                  ? "Lo recibe"
+                  : "Quien paga";
+        }
         lucide.createIcons();
       }
       function abrirGastoPublicidad() {
@@ -4233,10 +4324,6 @@
         setTimeout(applySvClass, 50);
         if (currentTab === "movimientos") renderMovimientos();
         if (currentTab === "estadisticas") renderCharts();
-        if (!seedMayoDone && transactions.length > 0) {
-          seedMayoDone = true;
-          seedMayoCierre();
-        }
       }
 
       function irAMovimientosFiltrado(tipo, cats, todosMeses) {
@@ -4258,6 +4345,87 @@
       }
 
       function renderCuentas() {
+        const state = getFinanceState();
+        const setEl = (id, value, color) => {
+          const element = document.getElementById(id);
+          if (!element) return;
+          element.textContent = fmt(value);
+          element.style.color = color;
+          element.classList.remove("num-flash");
+          void element.offsetWidth;
+          element.classList.add("num-flash");
+        };
+        const frankCapital = state.capital.frank;
+        const cristianCapital = state.capital.cristian;
+        const frankProfit = state.profitAvailable.frank;
+        const cristianProfit = state.profitAvailable.cristian;
+        _lastFrankProfit = frankProfit;
+        _lastCristProfit = cristianProfit;
+        setEl(
+          "cuenta-frank-val",
+          state.balanceByPartner.frank,
+          state.balanceByPartner.frank >= 0 ? "var(--green)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-cristian-val",
+          state.balanceByPartner.cristian,
+          state.balanceByPartner.cristian >= 0 ? "var(--green)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-frank-capital",
+          frankCapital,
+          frankCapital >= 0 ? "var(--blue)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-cristian-capital",
+          cristianCapital,
+          cristianCapital >= 0 ? "var(--blue)" : "var(--red)",
+        );
+        setEl(
+          "cuenta-frank-profit",
+          frankProfit,
+          frankProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
+        );
+        setEl(
+          "cuenta-cristian-profit",
+          cristianProfit,
+          cristianProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
+        );
+        const btnRF = document.getElementById("btn-retiro-frank");
+        const btnRC = document.getElementById("btn-retiro-cristian");
+        if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
+        if (btnRC) btnRC.style.display = cristianProfit > 100 ? "" : "none";
+        const esMesActual =
+          mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
+        const label = document.getElementById("cuentas-mes-label");
+        if (label)
+          label.textContent = esMesActual
+            ? "Acumulado"
+            : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
+        const diff = frankCapital - cristianCapital;
+        const amount = Math.abs(diff) / 2;
+        const settlement = document.getElementById("settlement-text");
+        const equalize = document.getElementById("btn-equilibrar");
+        if (!settlement) return;
+        if (Math.abs(diff) < 1) {
+          settlement.innerHTML =
+            '<span style="color:var(--green);font-size:0.8rem">Cuentas equilibradas</span>';
+          if (equalize) equalize.style.display = "none";
+          return;
+        }
+        const from = diff > 0 ? "Frank" : "Cristian";
+        const to = diff > 0 ? "Cristian" : "Frank";
+        settlement.innerHTML =
+          `<div style="font-size:1.1rem;font-weight:800;color:var(--accent-bright)">${fmt(amount)}</div><div style="font-size:0.72rem;color:var(--text2)">${from} transfiere a ${to}</div>`;
+        if (equalize) {
+          equalize.style.display = "";
+          equalize.dataset.from = from;
+          equalize.dataset.to = to;
+          equalize.dataset.amount = Math.round(amount);
+        }
+      }
+
+      function renderCuentasLegacyUnused() {
         const lastDay = new Date(mesSel.y, mesSel.m + 1, 0)
           .toISOString()
           .split("T")[0];
@@ -4320,6 +4488,13 @@
         // si: capital de trabajo + profit disponible = saldo total.
         let frankCapital = Math.round(frankTotal - frankProfit);
         let cristCapital = Math.round(cristTotal - cristProfit);
+        const engineState = getFinanceState();
+        frankTotal = engineState.balanceByPartner.frank;
+        cristTotal = engineState.balanceByPartner.cristian;
+        frankCapital = engineState.capital.frank;
+        cristCapital = engineState.capital.cristian;
+        frankProfit = engineState.profitAvailable.frank;
+        cristProfit = engineState.profitAvailable.cristian;
         _lastFrankProfit = frankProfit;
         _lastCristProfit = cristProfit;
         const setEl = (id, val, color) => {
@@ -4372,7 +4547,7 @@
           lEl.textContent = esMesActual
             ? "Acumulado"
             : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
-        const diff = frankTotal - cristTotal;
+        const diff = frankCapital - cristCapital;
         const amount = Math.abs(diff) / 2;
         const sEl = document.getElementById("settlement-text");
         const btnEq = document.getElementById("btn-equilibrar");
@@ -4450,17 +4625,21 @@
         }
         cerrarRetiroModal();
         try {
-          await db.collection("transacciones").add({
-            tipo: "gasto",
-            categoria: "Retiro de Profit",
-            monto,
-            receptor: _retiroNombre,
-            descripcion: "Retiro de Profit " + _retiroNombre,
-            fecha: todayStr,
-            hora: new Date().toTimeString().slice(0, 5),
-            medio: "Efectivo",
-            proyecto: "",
-          });
+          const saved = await saveFinanceEvents([
+            makeFinanceEvent("profit_withdrawal", {
+              tipo: "gasto",
+              categoria: "Retiro de Profit",
+              monto,
+              receptor: _retiroNombre,
+              responsible: _retiroNombre,
+              descripcion: "Retiro de Profit " + _retiroNombre,
+              fecha: todayStr,
+              hora: new Date().toTimeString().slice(0, 5),
+              medio: "Efectivo",
+              proyecto: "",
+            }),
+          ]);
+          if (!saved) return;
           showToast("Retiro de profit (" + _retiroNombre + ") registrado ✓");
         } catch (e) {
           showToast("Error al registrar", "delete");
@@ -4488,30 +4667,34 @@
           return;
         const desc = "Equilibrio: " + nameFrom + " → " + nameTo;
         try {
-          const batch = db.batch();
-          batch.set(db.collection("transacciones").doc(), {
+          const transferId = "equilibrio-" + Date.now();
+          const common = {
             tipo: "gasto",
             categoria: TRANSFER_CAT,
             monto: amount,
-            receptor: nameFrom,
             descripcion: desc,
             fecha: todayStr,
             hora: new Date().toTimeString().slice(0, 5),
             medio: "Transferencia",
             proyecto: "",
-          });
-          batch.set(db.collection("transacciones").doc(), {
-            tipo: "ingreso",
-            categoria: TRANSFER_CAT,
-            monto: amount,
-            receptor: nameTo,
-            descripcion: desc,
-            fecha: todayStr,
-            hora: new Date().toTimeString().slice(0, 5),
-            medio: "Transferencia",
-            proyecto: "",
-          });
-          await batch.commit();
+            from: nameFrom,
+            to: nameTo,
+            transferId,
+          };
+          const saved = await saveFinanceEvents([
+            makeFinanceEvent("capital_transfer", {
+              ...common,
+              receptor: nameFrom,
+              motorDirection: "from",
+            }),
+            makeFinanceEvent("capital_transfer", {
+              ...common,
+              tipo: "ingreso",
+              receptor: nameTo,
+              motorDirection: "to",
+            }),
+          ]);
+          if (!saved) return;
           showToast(
             "Cuentas equilibradas: " + nameFrom + " → " + nameTo + " ✓",
           );
@@ -4541,10 +4724,13 @@
       }
 
       function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
+        return getFinanceState().capitalActive;
+        /* Legacy implementation kept below for historical reference only.
         return _txProyectosActivos(corteFecha, desdeFecha).reduce(
           (s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto),
           0,
         );
+        */
       }
 
       function calcSaldoSocios(corteFecha, desdeFecha = CUENTAS_DESDE) {
@@ -4580,6 +4766,12 @@
       // a su capital; cuando Orchid se cierra, sale de capital y queda como
       // profit compartido con una transferencia pendiente para equilibrar.
       function calcCapitalActivoPorSocio(corteFecha, desdeFecha = CUENTAS_DESDE) {
+        const state = getFinanceState();
+        return {
+          frank: state.capital.frank,
+          cristian: state.capital.cristian,
+        };
+        /* Legacy implementation kept below for historical reference only.
         const capitalActivo = Math.round(calcCapitalActivo(corteFecha, desdeFecha));
         const saldos = calcSaldoSocios(corteFecha, desdeFecha);
         const diff = saldos.frank - saldos.cristian;
@@ -4588,9 +4780,35 @@
           frank,
           cristian: capitalActivo - frank,
         };
+        */
       }
 
       function renderGlobalKPIs() {
+        const state = getFinanceState();
+        const setValue = (id, value, color) => {
+          const element = document.getElementById(id);
+          if (!element) return;
+          element.textContent = fmt(value);
+          if (color) element.style.color = color;
+        };
+        setValue("g-ingresos", state.totalIncome);
+        setValue("g-gastos", state.totalExpenses);
+        setValue(
+          "g-profit",
+          state.profitTotal,
+          state.profitTotal >= 0 ? "#D4A85E" : "#f87171",
+        );
+        setValue(
+          "g-margen",
+          state.capitalActive,
+          state.capitalActive >= 0 ? "#38BDF8" : "#f87171",
+        );
+        ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
+          flashEl(id),
+        );
+      }
+
+      function renderGlobalKPIsLegacyUnused() {
         const transGlobal = transactions.filter((t) => {
           const f = t.fecha || "";
           return f && f <= todayStr;
@@ -4628,15 +4846,20 @@
         // Profit global realizado = ingresos operativos - gastos que afectan profit - capital activo actual.
         const capitalActivo = calcCapitalActivo(todayStr, "");
         const profitTotal = totalIngresos - gastosProfit - capitalActivo;
-        document.getElementById("g-ingresos").textContent = fmt(totalIngresos);
-        document.getElementById("g-gastos").textContent = fmt(totalGastos);
-        document.getElementById("g-profit").textContent = fmt(profitTotal);
+        const engineState = getFinanceState();
+        const shownIncome = engineState.totalIncome;
+        const shownExpenses = engineState.totalExpenses;
+        const shownProfit = engineState.profitTotal;
+        const shownCapital = engineState.capitalActive;
+        document.getElementById("g-ingresos").textContent = fmt(shownIncome);
+        document.getElementById("g-gastos").textContent = fmt(shownExpenses);
+        document.getElementById("g-profit").textContent = fmt(shownProfit);
         document.getElementById("g-profit").style.color =
-          profitTotal >= 0 ? "#D4A85E" : "#f87171";
+          shownProfit >= 0 ? "#D4A85E" : "#f87171";
         const gm = document.getElementById("g-margen");
         if (gm) {
-          gm.textContent = fmt(capitalActivo);
-          gm.style.color = capitalActivo >= 0 ? "#38BDF8" : "#f87171";
+          gm.textContent = fmt(shownCapital);
+          gm.style.color = shownCapital >= 0 ? "#38BDF8" : "#f87171";
         }
         ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
           flashEl(id),
@@ -4732,6 +4955,23 @@
           profEl.textContent = fmt(profitKpi);
           profEl.style.color =
             profitKpi >= 0 ? "var(--accent-bright)" : "var(--red)";
+        }
+        const engineState = getFinanceState();
+        const engineBalance = engineState.cash;
+        if (saldoEl) {
+          saldoEl.textContent = fmt(engineBalance);
+          saldoEl.style.color = engineBalance >= 0 ? "var(--green)" : "var(--red)";
+        }
+        if (capEl) {
+          capEl.textContent = fmt(engineState.capitalActive);
+          capEl.style.color = engineState.capitalActive >= 0 ? "var(--blue)" : "var(--red)";
+        }
+        if (profEl) {
+          profEl.textContent = fmt(engineState.profitAvailableTotal);
+          profEl.style.color =
+            engineState.profitAvailableTotal >= 0
+              ? "var(--accent-bright)"
+              : "var(--red)";
         }
         ["kpi-saldo", "kpi-saldo-capital", "kpi-saldo-profit"].forEach((id) =>
           flashEl(id),
@@ -5376,20 +5616,53 @@
           card.style.transform = "scale(0.93) translateX(22px)";
           await new Promise((r) => setTimeout(r, 230));
         }
-        proyectosEstado[nombre] = !proyectosEstado[nombre];
+        const state = getFinanceState();
+        const project = state.projects[nombre];
+        if (!project) {
+          showToast(
+            "Este proyecto pertenece al historial congelado. Registra sus nuevas operaciones para abrirlo en el motor v1.",
+            "info",
+          );
+          renderProyectos();
+          return;
+        }
         try {
-          await db
-            .collection("config")
-            .doc("proyectos_estado")
-            .set(proyectosEstado);
+          if (project.closed) {
+            const closeEvent = transactions.find(
+              (event) =>
+                event.motorType === "project_close" &&
+                (event.project || event.proyecto) === nombre &&
+                event.id === project.closeId,
+            );
+            if (!closeEvent) {
+              showToast("No se encontro el cierre del proyecto.", "delete");
+              return;
+            }
+            await saveFinanceEvents([
+              makeFinanceEvent("project_reopen", {
+                project: nombre,
+                proyecto: nombre,
+                reversalOf: closeEvent.id,
+              }),
+            ]);
+          } else {
+            await saveFinanceEvents([
+              makeFinanceEvent("project_close", {
+                project: nombre,
+                proyecto: nombre,
+                split: { frank: 0.5, cristian: 0.5 },
+              }),
+            ]);
+          }
         } catch (e) {
-          console.error("Error guardando estado de proyecto:", e);
+          showToast("Error al cambiar estado: " + e.message, "delete");
         }
         renderProyectos();
       }
 
       function crearTarjetaProyecto(p) {
         const div = document.createElement("div");
+        const esHistorial = !!p.legacy;
         const borderColor = p.cerrado
           ? "rgba(184,144,77,0.3)"
           : "rgba(56,189,248,0.2)";
@@ -5404,9 +5677,9 @@
         const checkTranslate = p.cerrado
           ? "translateX(1.25rem)"
           : "translateX(0.13rem)";
-        const toggleLabel = p.cerrado ? "Abrir" : "Cerrar";
+        const toggleLabel = esHistorial ? "Historial" : p.cerrado ? "Abrir" : "Cerrar";
         const profitLabel = p.cerrado ? "Profit" : "Balance";
-        const statusText = p.cerrado ? "Cerrado" : "Activo";
+        const statusText = esHistorial ? "Historial" : p.cerrado ? "Cerrado" : "Activo";
         const statusColor = p.cerrado ? "var(--accent)" : "var(--blue)";
         const statusBg = p.cerrado
           ? "rgba(184,144,77,0.15)"
@@ -5445,7 +5718,7 @@
 </div>`;
         div.addEventListener("click", () => filtrarPorProyecto(p.nombre));
         const lbl = div.querySelector(".proj-toggle-label");
-        if (lbl)
+        if (lbl && !esHistorial)
           lbl.addEventListener("click", (e) => {
             e.stopPropagation();
             toggleProyectoCerrado(p.nombre);
@@ -5541,8 +5814,10 @@
       }
 
       function renderProyectos() {
+        const engineState = getFinanceState();
         const projMap = {};
         transactions.forEach((t) => {
+          if (t.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) return;
           if (!esFlujoProyecto(t)) return;
           if (!projMap[t.proyecto])
             projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
@@ -5550,25 +5825,37 @@
           else projMap[t.proyecto].gastos += t.monto;
         });
 
-        let capitalTrabajo = 0,
-          profitReal = 0;
+        Object.values(engineState.projects).forEach((project) => {
+          projMap[project.name] = {
+            ingresos: project.income,
+            gastos: project.expenses,
+            engine: true,
+            profit: project.profit,
+          };
+        });
+
+        let capitalTrabajo = engineState.capitalActive;
+        let profitReal = 0;
         const activos = [],
           cerrados = [];
         Object.entries(projMap).forEach(([nombre, v]) => {
           const net = v.ingresos - v.gastos;
-          const esCerrado = !!proyectosEstado[nombre];
+          const engineProject = engineState.projects[nombre];
+          const esCerrado = engineProject
+            ? engineProject.closed
+            : !!proyectosEstado[nombre];
           const entry = {
             nombre,
             ingresos: v.ingresos,
             gastos: v.gastos,
-            net,
+            net: engineProject && engineProject.closed ? engineProject.profit : net,
             cerrado: esCerrado,
+            legacy: !v.engine,
           };
           if (esCerrado) {
-            profitReal += net;
+            if (engineProject) profitReal += engineProject.profit;
             cerrados.push(entry);
           } else {
-            capitalTrabajo += net;
             activos.push(entry);
           }
         });
@@ -5683,28 +5970,40 @@
             btn2.disabled = true;
             btn2.textContent = "Guardando...";
             try {
-              const batch = db.batch();
-              batch.set(db.collection("transacciones").doc(), {
-                tipo: "gasto",
-                categoria: TRANSFER_CAT,
-                monto,
-                receptor: de,
-                descripcion: desc || `Transferencia a ${para}`,
-                fecha: fecha,
-                hora: hora2,
-                medio,
-              });
-              batch.set(db.collection("transacciones").doc(), {
-                tipo: "ingreso",
-                categoria: TRANSFER_CAT,
-                monto,
-                receptor: para,
-                descripcion: desc || `Transferencia de ${de}`,
-                fecha: fecha,
-                hora: hora2,
-                medio,
-              });
-              await batch.commit();
+              const transferId = "transferencia-" + Date.now();
+              const saved = await saveFinanceEvents([
+                makeFinanceEvent("capital_transfer", {
+                  tipo: "gasto",
+                  categoria: TRANSFER_CAT,
+                  monto,
+                  receptor: de,
+                  from: de,
+                  to: para,
+                  motorDirection: "from",
+                  transferId,
+                  descripcion: desc || `Transferencia a ${para}`,
+                  fecha,
+                  hora: hora2,
+                  medio,
+                  proyecto: "",
+                }),
+                makeFinanceEvent("capital_transfer", {
+                  tipo: "ingreso",
+                  categoria: TRANSFER_CAT,
+                  monto,
+                  receptor: para,
+                  from: de,
+                  to: para,
+                  motorDirection: "to",
+                  transferId,
+                  descripcion: desc || `Transferencia de ${de}`,
+                  fecha,
+                  hora: hora2,
+                  medio,
+                  proyecto: "",
+                }),
+              ]);
+              if (!saved) return;
               showToast(`Transferencia ${de} → ${para} registrada ✓`);
             } catch (err) {
               showToast("Error al registrar", "delete");
@@ -5727,6 +6026,55 @@
 
           const cat = document.getElementById("tx-categoria").value;
           const proyecto = document.getElementById("tx-proyecto").value.trim();
+
+          const responsable = document.getElementById("tx-receptor").value;
+          const motorType =
+            cat === "Retiro de Profit"
+              ? "profit_withdrawal"
+              : cat === CAPITAL_INGRESO_CAT
+                ? "capital_contribution"
+                : cat === "Retiro de Capital"
+                  ? "capital_withdrawal"
+                  : tipo === "ingreso"
+                    ? "income"
+                    : "expense";
+          const requiresProject = motorType !== "profit_withdrawal";
+          if (requiresProject && !proyecto) {
+            document.getElementById("tx-proyecto").focus();
+            showToast("Esta operacion requiere un proyecto.", "info");
+            return;
+          }
+          const btnMotor = e.target.querySelector("button[type=submit]");
+          btnMotor.disabled = true;
+          btnMotor.innerHTML = "Guardando...";
+          try {
+            const saved = await saveFinanceEvents([
+              makeFinanceEvent(motorType, {
+                tipo: tipo,
+                categoria: cat,
+                monto,
+                proyecto,
+                project: proyecto,
+                receptor: responsable,
+                responsible: responsable,
+                descripcion: document
+                  .getElementById("tx-descripcion")
+                  .value.trim(),
+                fecha: document.getElementById("tx-fecha").value || todayStr,
+                hora:
+                  document.getElementById("tx-hora").value ||
+                  new Date().toTimeString().slice(0, 5),
+                medio: document.getElementById("tx-medio").value,
+              }),
+            ]);
+            if (saved) showToast("Registro financiero guardado");
+          } catch (err) {
+            showToast("Error al registrar: " + err.message, "delete");
+          }
+          btnMotor.disabled = false;
+          resetTransactionForm();
+          showTab("resumen");
+          return;
 
           // ── Retiro de Profit — se divide entre ambos socios ─
           if (CAPITAL_GASTO_CATS.includes(cat)) {
