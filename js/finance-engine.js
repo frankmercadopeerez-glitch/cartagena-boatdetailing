@@ -424,6 +424,13 @@
       frank: money(state.capital.frank + state.profitAvailable.frank + state.partnerIncome.frank - state.partnerExpenses.frank),
       cristian: money(state.capital.cristian + state.profitAvailable.cristian + state.partnerIncome.cristian - state.partnerExpenses.cristian),
     };
+    state.workingCapital = {
+      frank: money(state.capital.frank + state.partnerIncome.frank - state.partnerExpenses.frank),
+      cristian: money(state.capital.cristian + state.partnerIncome.cristian - state.partnerExpenses.cristian),
+    };
+    state.workingCapitalActive = money(
+      state.workingCapital.frank + state.workingCapital.cristian,
+    );
 
     const expectedCash = money(
       opening.cash +

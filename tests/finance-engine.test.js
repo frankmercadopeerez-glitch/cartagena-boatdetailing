@@ -25,6 +25,7 @@ function assertValid(state) {
   assert.equal(state.totalExpenses, 12548959);
   assert.equal(state.profitTotal, 7138551);
   assert.equal(state.capitalActive, 1742000);
+  assert.equal(state.workingCapitalActive, 1742000);
   assert.equal(Math.round(state.capital.frank), 1053500);
   assert.equal(Math.round(state.capital.cristian), 688501);
   assertValid(state);
@@ -48,6 +49,8 @@ function assertValid(state) {
   assert.equal(state.totalExpenses, 14548959);
   assert.equal(state.balanceByPartner.frank, 2553499.5 + 5000000 - 2000000 + 1357568.5);
   assert.equal(state.balanceByPartner.cristian, 688500.5 + 1357568.5);
+  assert.equal(state.workingCapital.frank, 2553499.5 + 5000000 - 2000000);
+  assert.equal(state.workingCapital.cristian, 688500.5);
 }
 
 // El receptor de una entrada ve el aumento de su cuenta inmediatamente; al
@@ -255,6 +258,7 @@ function assertValid(state) {
   ]);
   assertValid(state);
   assert.equal(state.balanceByPartner.cristian, before.balanceByPartner.cristian - 2500);
+  assert.equal(state.workingCapital.cristian, before.workingCapital.cristian - 2500);
 }
 
 console.log("finance-engine: all tests passed");

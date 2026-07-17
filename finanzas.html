@@ -4529,8 +4529,8 @@
           void element.offsetWidth;
           element.classList.add("num-flash");
         };
-        const frankCapital = state.capital.frank;
-        const cristianCapital = state.capital.cristian;
+        const frankCapital = state.workingCapital.frank;
+        const cristianCapital = state.workingCapital.cristian;
         const frankProfit = state.profitAvailable.frank;
         const cristianProfit = state.profitAvailable.cristian;
         _lastFrankProfit = frankProfit;
@@ -4912,7 +4912,7 @@
       }
 
       function calcCapitalActivo(corteFecha, desdeFecha = CUENTAS_DESDE) {
-        return getFinanceState().capitalActive;
+        return getFinanceState().workingCapitalActive;
         /* Legacy implementation kept below for historical reference only.
         return _txProyectosActivos(corteFecha, desdeFecha).reduce(
           (s, t) => s + (t.tipo === "ingreso" ? t.monto : -t.monto),
@@ -4988,8 +4988,8 @@
         );
         setValue(
           "g-margen",
-          state.capitalActive,
-          state.capitalActive >= 0 ? "#38BDF8" : "#f87171",
+          state.workingCapitalActive,
+          state.workingCapitalActive >= 0 ? "#38BDF8" : "#f87171",
         );
         ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
           flashEl(id),
@@ -5038,7 +5038,7 @@
         const shownIncome = engineState.totalIncome;
         const shownExpenses = engineState.totalExpenses;
         const shownProfit = engineState.profitTotal;
-        const shownCapital = engineState.capitalActive;
+        const shownCapital = engineState.workingCapitalActive;
         document.getElementById("g-ingresos").textContent = fmt(shownIncome);
         document.getElementById("g-gastos").textContent = fmt(shownExpenses);
         document.getElementById("g-profit").textContent = fmt(shownProfit);
@@ -5151,8 +5151,8 @@
           saldoEl.style.color = engineBalance >= 0 ? "var(--green)" : "var(--red)";
         }
         if (capEl) {
-          capEl.textContent = fmt(engineState.capitalActive);
-          capEl.style.color = engineState.capitalActive >= 0 ? "var(--blue)" : "var(--red)";
+          capEl.textContent = fmt(engineState.workingCapitalActive);
+          capEl.style.color = engineState.workingCapitalActive >= 0 ? "var(--blue)" : "var(--red)";
         }
         if (profEl) {
           profEl.textContent = fmt(engineState.profitAvailableTotal);
@@ -6036,7 +6036,7 @@
           };
         });
 
-        let capitalTrabajo = engineState.capitalActive;
+        let capitalTrabajo = engineState.workingCapitalActive;
         let profitReal = 0;
         const activos = [],
           cerrados = [];
