@@ -6188,6 +6188,7 @@
           const btnMotor = e.target.querySelector("button[type=submit]");
           btnMotor.disabled = true;
           btnMotor.innerHTML = "Guardando...";
+          const capitalBefore = { ...getFinanceState().capital };
           try {
             if (editandoId) {
               const original = transactions.find((transaction) => transaction.id === editandoId);
@@ -6243,7 +6244,36 @@
                 medio: document.getElementById("tx-medio").value,
               }),
             ]);
-            if (saved) showToast("Registro financiero guardado");
+            if (saved) {
+              const capitalAfter = getFinanceState().capital;
+              if (motorType === "capital_contribution") {
+                showToast(
+                  "Capital actualizado: Frank " +
+                    fmt(capitalAfter.frank) +
+                    " · Cristian " +
+                    fmt(capitalAfter.cristian),
+                );
+              } else if (motorType === "income") {
+                showToast(
+                  "Entrada guardada. El capital no cambia hasta registrar un aporte.",
+                  "info",
+                );
+              } else if (motorType === "expense") {
+                showToast(
+                  "Gasto guardado. Baja caja y gastos; el capital se conserva.",
+                  "info",
+                );
+              } else {
+                showToast("Registro financiero guardado");
+              }
+              if (
+                motorType !== "capital_contribution" &&
+                (capitalBefore.frank !== capitalAfter.frank ||
+                  capitalBefore.cristian !== capitalAfter.cristian)
+              ) {
+                showToast("El capital cambio por una operacion relacionada.");
+              }
+            }
           } catch (err) {
             showToast("Error al registrar: " + err.message, "delete");
           }
