@@ -36,6 +36,19 @@ Allow: /images/*.webp
 Allow: /images/*.jpg
 Allow: /images/*.png
 
+# Googlebot has its own group, so repeat the private-area exclusions here.
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.git/
+Disallow: /cotizaciones/
+Disallow: /facturas/
+Disallow: /contratos/
+Disallow: /guias/
+Disallow: /tools/
+Disallow: /finanzas.html
+Disallow: /business-card.html
+Disallow: /calendario-seo-2026.html
+
 # Permitir recursos para renderizado
 User-agent: Googlebot-Image
 Allow: /images/
@@ -46,6 +59,14 @@ Allow: /images/
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
+Disallow: /cotizaciones/
+Disallow: /facturas/
+Disallow: /contratos/
+Disallow: /guias/
+Disallow: /tools/
+Disallow: /finanzas.html
+Disallow: /business-card.html
+Disallow: /calendario-seo-2026.html
 
 User-agent: msnbot
 Allow: /
