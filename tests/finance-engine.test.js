@@ -33,6 +33,35 @@ function assertValid(state) {
   assertValid(state);
 }
 
+// La apertura incluye todo hasta la transferencia de igualacion. Los eventos
+// anteriores o de ese mismo minuto se conservan fuera del libro nuevo.
+{
+  const state = calculate([
+    event("income", {
+      fecha: "2026-07-12",
+      hora: "19:01",
+      project: "Orchid",
+      receptor: "Frank",
+      monto: 1495000,
+    }),
+    event("income", {
+      fecha: "2026-07-12",
+      hora: "19:03",
+      project: "Orchid",
+      receptor: "Cristian",
+      monto: 1495000,
+    }),
+  ]);
+  assertValid(state);
+  assert.equal(state.totalIncome, engine.OPENING_STATE.totalIncome + 1495000);
+  assert.equal(state.cash, engine.OPENING_STATE.cash + 1495000);
+  assert.equal(state.balanceByPartner.frank, engine.OPENING_STATE.capital.frank);
+  assert.equal(
+    state.balanceByPartner.cristian,
+    engine.OPENING_STATE.capital.cristian + 1495000,
+  );
+}
+
 // Aporte, ingreso y gasto: ingresos y gastos actualizan el saldo del socio
 // correspondiente, mientras el capital solo cambia con el aporte.
 {

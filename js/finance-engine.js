@@ -15,7 +15,8 @@
   // Estos valores son la apertura oficial del motor. El historial existente
   // queda fuera del libro nuevo y no se vuelve a recalcular.
   const OPENING_STATE = Object.freeze({
-    asOf: "2026-07-16",
+    asOf: "2026-07-12",
+    asOfTime: "19:02",
     cash: 5302137,
     totalIncome: 21429510,
     totalExpenses: 11703959,
@@ -52,6 +53,7 @@
     const source = opening || OPENING_STATE;
     return {
       asOf: source.asOf || OPENING_STATE.asOf,
+      asOfTime: source.asOfTime || "00:00",
       cash: money(source.cash),
       totalIncome: money(source.totalIncome),
       totalExpenses: money(source.totalExpenses),
@@ -85,6 +87,13 @@
 
   function eventTime(event) {
     return String((event && event.hora) || "00:00");
+  }
+
+  function isAfterOpening(event, opening) {
+    const eventKey = eventDate(event) + "T" + eventTime(event);
+    const openingKey = String(opening.asOf || "0000-00-00") + "T" +
+      String(opening.asOfTime || "00:00");
+    return eventKey > openingKey;
   }
 
   function compareEvents(a, b) {
@@ -386,7 +395,12 @@
     const opening = normalizeOpening(input && input.opening);
     const allEvents = Array.isArray(input && input.transactions) ? input.transactions : [];
     const events = allEvents
-      .filter((event) => event && event.motorVersion === ENGINE_VERSION)
+      .filter(
+        (event) =>
+          event &&
+          event.motorVersion === ENGINE_VERSION &&
+          isAfterOpening(event, opening),
+      )
       .slice()
       .sort(compareEvents);
     const state = {

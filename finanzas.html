@@ -3296,6 +3296,22 @@
         return String(value || "").trim().toLowerCase();
       }
 
+      function financeEventKey(transaction) {
+        return (
+          String(transaction && transaction.fecha ? transaction.fecha : "0000-00-00") +
+          "T" +
+          String(transaction && transaction.hora ? transaction.hora : "00:00")
+        );
+      }
+
+      function isAfterFinanceOpening(transaction) {
+        const openingKey =
+          String(FINANCE_OPENING.asOf || "0000-00-00") +
+          "T" +
+          String(FINANCE_OPENING.asOfTime || "00:00");
+        return financeEventKey(transaction) > openingKey;
+      }
+
       function isInternalFinanceEvent(transaction) {
         if (!transaction) return false;
         if (["project_close", "project_reopen"].includes(transaction.motorType)) return true;
@@ -3312,7 +3328,7 @@
         return (
           transaction &&
           transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-          String(transaction.fecha || "") >= FINANCE_OPENING.asOf &&
+          isAfterFinanceOpening(transaction) &&
           (transaction.tipo === "ingreso" ||
             transaction.tipo === "gasto" ||
             isInternalFinanceEvent(transaction))
@@ -3329,11 +3345,41 @@
         return transaction.tipo === "ingreso" ? "income" : "expense";
       }
 
+      function movementFingerprint(transaction) {
+        const type =
+          transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+            ? FINANCE_ENGINE.eventType(transaction)
+            : legacyMotorType(transaction);
+        const partner =
+          transaction.receptor || transaction.responsible || transaction.persona || "";
+        return [
+          type,
+          financeEventKey(transaction),
+          Number(transaction.monto != null ? transaction.monto : transaction.amount) || 0,
+          normalizeProjectName(transaction.project || transaction.proyecto),
+          normalizeProjectName(transaction.categoria),
+          normalizeProjectName(partner),
+        ].join("|");
+      }
+
       function getEngineTransactions(sourceTransactions) {
         const source = Array.isArray(sourceTransactions) ? sourceTransactions : transactions;
+        const activeEngineEvents = source.filter(
+          (transaction) =>
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION &&
+            isAfterFinanceOpening(transaction),
+        );
+        const restoredMovementKeys = new Set(
+          activeEngineEvents
+            .filter((transaction) => transaction.id && transaction.id.startsWith("restored-"))
+            .map((transaction) => movementFingerprint(transaction)),
+        );
         return source.map((transaction) => {
-          if (transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) return transaction;
+          if (transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) {
+            return isAfterFinanceOpening(transaction) ? transaction : null;
+          }
           if (!isPostOpeningLegacyTransaction(transaction)) return null;
+          if (restoredMovementKeys.has(movementFingerprint(transaction))) return null;
           const motorType = legacyMotorType(transaction);
           const partner = transaction.receptor || "Cristian";
           return {
@@ -3598,13 +3644,10 @@
         try {
           if (localStorage.getItem(LEYLA_CUTOFF_RESET_KEY) === "1") return;
         } catch (error) {}
-        const cleanupEvents = transactions.filter((transaction) => {
-          const isLegacyAfterCutoff = isPostOpeningLegacyTransaction(transaction);
-          const isEngineAfterCutoff =
-            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION &&
-            String(transaction.fecha || "") >= FINANCE_OPENING.asOf;
-          return isLegacyAfterCutoff || isEngineAfterCutoff;
-        });
+        // La apertura ya representa el saldo de la igualacion. Este antiguo
+        // reseteo eliminaba movimientos posteriores y podia borrar operaciones
+        // validas al abrir la app en un dispositivo nuevo.
+        const cleanupEvents = [];
         if (cleanupEvents.length === 0) {
           try {
             localStorage.setItem(LEYLA_CUTOFF_RESET_KEY, "1");
