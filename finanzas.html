@@ -794,19 +794,13 @@
 
       /* ── Privacy / blur mode ── */
       #main-app.privacy-mode .sv {
-        filter: blur(8px);
+        filter: blur(9px);
         user-select: none;
         transition: filter 0.25s ease;
         border-radius: 4px;
+        cursor: pointer;
       }
-      @media (hover: hover) {
-        #main-app.privacy-mode .sv:hover {
-          filter: blur(0);
-        }
-      }
-      #main-app.privacy-mode .sv:active {
-        filter: blur(0);
-      }
+      #main-app .sv { transition: filter 0.25s ease; }
 
       /* ── Notas ── */
       .notas-grid {
@@ -1034,8 +1028,8 @@
 
       /* High-contrast finance theme */
       :root {
-        --bg: #020304;
-        --bg2: #070a0e;
+        --bg: #000000;
+        --bg2: #050607;
         --glass: rgba(11, 15, 20, 0.96);
         --glass-b: rgba(255, 255, 255, 0.28);
         --glass-hover: rgba(255, 255, 255, 0.12);
@@ -1052,28 +1046,28 @@
       html,
       body,
       #main-app {
-        background: #020304 !important;
+        background: #000000 !important;
         background-image: none !important;
       }
 
       nav#main-nav {
-        background: rgba(2, 3, 4, 0.96) !important;
+        background: rgba(0, 0, 0, 0.97) !important;
         border-bottom-color: rgba(255, 255, 255, 0.3) !important;
       }
 
       #main-app .glass-card,
       #main-app .kpi-card,
       #main-app .proj-card {
-        background: #0b0f14 !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
+        background: #090c10 !important;
+        border-color: rgba(255, 255, 255, 0.34) !important;
         box-shadow:
           0 8px 28px rgba(0, 0, 0, 0.65),
           inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
       }
 
       #main-app #panel-resumen > .rounded-2xl[style*="linear-gradient"] {
-        background: #0b0f14 !important;
-        border-color: rgba(255, 255, 255, 0.34) !important;
+        background: #090c10 !important;
+        border-color: rgba(255, 255, 255, 0.38) !important;
         box-shadow:
           0 8px 28px rgba(0, 0, 0, 0.65),
           inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
@@ -1124,6 +1118,21 @@
 
       #main-app .partner-profit-private {
         display: none !important;
+      }
+
+      #main-app .partner-balance-card {
+        background: #080b0f !important;
+        border: 1px solid rgba(255, 255, 255, 0.34) !important;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 12px 30px rgba(0,0,0,0.5);
+      }
+      #main-app .partner-balance-value {
+        font-size: clamp(1.35rem, 5vw, 2.15rem);
+        line-height: 1.1;
+        color: var(--green) !important;
+        text-align: center;
+        width: 100%;
+        letter-spacing: -0.035em;
+        text-shadow: 0 0 24px rgba(69,240,168,0.16);
       }
 
       #main-app #btn-retiro-cristian,
@@ -1461,13 +1470,13 @@
             <div class="grid grid-cols-2 gap-2 mb-3">
             <!-- Cristian -->
             <div
-              class="rounded-xl p-2 sm:p-3 min-w-0"
+              class="rounded-xl p-4 sm:p-5 min-w-0 partner-balance-card"
               style="
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.07);
               "
             >
-              <div class="flex items-center justify-between mb-2">
+              <div class="flex flex-col items-center justify-center gap-3 min-h-[112px]">
                 <p
                   class="text-xs font-bold uppercase tracking-widest"
                   style="
@@ -1478,35 +1487,13 @@
                   Cristian
                 </p>
                 <p
-                  class="text-sm font-bold"
+                  class="font-black sv partner-balance-value"
                   id="cuenta-cristian-val"
-                  style="color: var(--green)"
                 >
                   $0
                 </p>
               </div>
               <div class="grid grid-cols-1 gap-2 mb-2 text-center">
-                <div
-                  class="rounded-lg p-2"
-                  style="
-                    background: rgba(56, 189, 248, 0.08);
-                    border: 1px solid rgba(56, 189, 248, 0.15);
-                  "
-                >
-                  <p
-                    class="text-xs mb-0.5"
-                    style="color: rgba(56, 189, 248, 0.7)"
-                  >
-                    Dinero en cuenta
-                  </p>
-                  <p
-                    class="text-sm font-bold"
-                    id="cuenta-cristian-capital"
-                    style="color: var(--blue)"
-                  >
-                    $0
-                  </p>
-                </div>
                 <div
                   class="rounded-lg p-2 partner-profit-private"
                   style="
@@ -1552,13 +1539,13 @@
             </div>
             <!-- Frank -->
             <div
-              class="rounded-xl p-2 sm:p-3 min-w-0"
+              class="rounded-xl p-4 sm:p-5 min-w-0 partner-balance-card"
               style="
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.07);
               "
             >
-              <div class="flex items-center justify-between mb-2">
+              <div class="flex flex-col items-center justify-center gap-3 min-h-[112px]">
                 <p
                   class="text-xs font-bold uppercase tracking-widest"
                   style="
@@ -1569,35 +1556,13 @@
                   Frank
                 </p>
                 <p
-                  class="text-sm font-bold"
+                  class="font-black sv partner-balance-value"
                   id="cuenta-frank-val"
-                  style="color: var(--green)"
                 >
                   $0
                 </p>
               </div>
               <div class="grid grid-cols-1 gap-2 mb-2 text-center">
-                <div
-                  class="rounded-lg p-2"
-                  style="
-                    background: rgba(56, 189, 248, 0.08);
-                    border: 1px solid rgba(56, 189, 248, 0.15);
-                  "
-                >
-                  <p
-                    class="text-xs mb-0.5"
-                    style="color: rgba(56, 189, 248, 0.7)"
-                  >
-                    Dinero en cuenta
-                  </p>
-                  <p
-                    class="text-sm font-bold"
-                    id="cuenta-frank-capital"
-                    style="color: var(--blue)"
-                  >
-                    $0
-                  </p>
-                </div>
                 <div
                   class="rounded-lg p-2 partner-profit-private"
                   style="
@@ -5403,11 +5368,8 @@
         const setEl = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
-          element.textContent = fmt(value);
+          animateNumber(element, value);
           element.style.color = color;
-          element.classList.remove("num-flash");
-          void element.offsetWidth;
-          element.classList.add("num-flash");
         };
         const frankCapital = partnerBalances.frank;
         const cristianCapital = partnerBalances.cristian;
@@ -5831,7 +5793,7 @@
         const setValue = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
-          element.textContent = fmt(value);
+          animateNumber(element, value);
           if (color) element.style.color = color;
         };
         setValue("g-ingresos", state.totalIncome);
@@ -7726,14 +7688,53 @@
         const app = document.getElementById("main-app");
         if (app) app.classList.toggle("privacy-mode", privacyMode);
         const icon = document.getElementById("privacy-icon");
+        const button = document.getElementById("btn-privacy");
         if (icon) {
           icon.setAttribute("data-lucide", privacyMode ? "eye-off" : "eye");
           lucide.createIcons();
         }
+        if (button) button.title = privacyMode ? "Mostrar saldos" : "Ocultar saldos";
         try {
           localStorage.setItem("cbd_privacy", privacyMode ? "1" : "0");
         } catch (e) {}
       }
+
+      const prefersReducedMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function animateNumber(element, target, render = (value) => fmt(Math.round(value)), duration = 650) {
+        if (!element) return;
+        const numericTarget = Number(target) || 0;
+        const previous = Number.parseFloat(element.dataset.value);
+        const from = Number.isFinite(previous) ? previous : 0;
+        element.dataset.value = numericTarget;
+        if (element._numberFrame) cancelAnimationFrame(element._numberFrame);
+        if (prefersReducedMotion || from === numericTarget) {
+          element.textContent = render(numericTarget);
+          return;
+        }
+        const startedAt = performance.now();
+        const step = (now) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = render(from + (numericTarget - from) * eased);
+          if (progress < 1) element._numberFrame = requestAnimationFrame(step);
+          else element._numberFrame = null;
+        };
+        element._numberFrame = requestAnimationFrame(step);
+      }
+
+      document.addEventListener(
+        "click",
+        (event) => {
+          const app = document.getElementById("main-app");
+          if (!privacyMode || !app || !event.target.closest(".sv")) return;
+          event.preventDefault();
+          event.stopPropagation();
+          togglePrivacy();
+        },
+        true,
+      );
       function flashEl(id) {
         const el = document.getElementById(id);
         if (!el) return;
