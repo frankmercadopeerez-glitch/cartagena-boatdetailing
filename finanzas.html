@@ -1724,7 +1724,7 @@
               <span
                 class="text-xs font-bold uppercase tracking-widest"
                 style="color: #b8904d"
-                >Dinero total en cuenta</span
+                >Dinero disponible en cuenta</span
               >
             </div>
             <p
@@ -1739,7 +1739,7 @@
             >
               $0
             </p>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 gap-2">
               <div
                 class="rounded-xl p-3"
                 style="
@@ -1774,7 +1774,7 @@
                 </p>
               </div>
               <div
-                class="rounded-xl p-3"
+                class="rounded-xl p-3 hidden"
                 style="
                   background: rgba(184, 144, 77, 0.08);
                   border: 1px solid rgba(184, 144, 77, 0.18);
@@ -2079,10 +2079,10 @@
               ></i>
               <p class="text-xs leading-relaxed">
                 <strong style="color: var(--accent-bright)">
-                  Cierre definitivo:
+                  Aviso: cierre irreversible.
                 </strong>
                 cierra un proyecto solo cuando hayan terminado todos sus movimientos.
-                Al cerrarlo, su capital pasa a profit y no se puede abrir de nuevo.
+                Confirma el cierre porque no se puede abrir de nuevo y su capital pasa a profit.
               </p>
             </div>
             <div id="proyectos-list" class="space-y-2"></div>
@@ -3288,6 +3288,7 @@
       let orchidCloseMigrationRunning = false;
       const todayStr = new Date().toISOString().split("T")[0];
       const LEYLA_CUTOFF_RESET_KEY = "cbd-finanzas-leyla-cutoff-reset-v1";
+      const MUSIQUITA_REOPEN_KEY = "cbd-finanzas-musiquita-reopen-v1";
 
       function normalizeProjectName(value) {
         return String(value || "").trim().toLowerCase();
@@ -3617,6 +3618,58 @@
           );
         } catch (error) {
           showToast("No se pudo restaurar el corte: " + error.message, "delete");
+        } finally {
+          orchidCloseMigrationRunning = false;
+        }
+      }
+
+      async function ensureMusiquitaOpenAfterAccidentalClose() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        try {
+          if (localStorage.getItem(MUSIQUITA_REOPEN_KEY) === "1") return;
+        } catch (error) {}
+        const closeEvents = transactions.filter((transaction) => {
+          const type =
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+              ? FINANCE_ENGINE.eventType(transaction)
+              : legacyMotorType(transaction);
+          return (
+            type === "project_close" &&
+            normalizeProjectName(
+              transaction.project || transaction.proyecto,
+            ).includes("musiquita")
+          );
+        });
+        if (closeEvents.length === 0) {
+          try {
+            localStorage.setItem(MUSIQUITA_REOPEN_KEY, "1");
+          } catch (error) {}
+          return;
+        }
+        orchidCloseMigrationRunning = true;
+        try {
+          const candidate = transactions.filter(
+            (transaction) =>
+              !closeEvents.some((event) => event.id === transaction.id),
+          );
+          const nextState = calculateCandidateFinanceState(candidate);
+          if (hasFinanceErrors(nextState)) {
+            throw new Error(financeErrorMessage(nextState));
+          }
+          const batch = db.batch();
+          closeEvents.forEach((event) =>
+            batch.delete(db.collection("transacciones").doc(event.id)),
+          );
+          await batch.commit();
+          transactions = candidate;
+          financeState = nextState;
+          try {
+            localStorage.setItem(MUSIQUITA_REOPEN_KEY, "1");
+          } catch (error) {}
+          renderAll();
+          showToast("Musiquita quedo abierto nuevamente.", "info");
+        } catch (error) {
+          showToast("No se pudo reabrir Musiquita: " + error.message, "delete");
         } finally {
           orchidCloseMigrationRunning = false;
         }
@@ -4025,6 +4078,7 @@
                     ...d.data(),
                   }));
                   await ensureOrchidOpenForManualClose();
+                  await ensureMusiquitaOpenAfterAccidentalClose();
                   hideDataLoading();
                   renderAll();
                 },
@@ -6269,6 +6323,15 @@
             "Este proyecto ya esta cerrado y no se puede abrir de nuevo.",
             "info",
           );
+          return;
+        }
+        if (
+          !window.confirm(
+            "Vas a cerrar " +
+              projectName +
+              ". El cierre es irreversible y no se podra abrir de nuevo. ¿Continuar?",
+          )
+        ) {
           return;
         }
         let card = null;
