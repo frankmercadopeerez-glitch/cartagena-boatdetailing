@@ -1786,7 +1786,7 @@
                 </p>
               </div>
               <div
-                class="rounded-xl p-3 hidden"
+                class="rounded-xl p-3"
                 style="
                   background: rgba(184, 144, 77, 0.08);
                   border: 1px solid rgba(184, 144, 77, 0.18);
@@ -1796,7 +1796,7 @@
                   class="text-xs font-semibold uppercase tracking-widest mb-1"
                   style="color: rgba(212, 168, 94, 0.8); letter-spacing: 0.06em"
                 >
-                  Profit
+                  Profit actual en cuentas
                 </p>
                 <p
                   class="font-bold sv text-center"
@@ -1812,7 +1812,7 @@
                   class="text-xs mt-0.5"
                   style="color: rgba(255, 255, 255, 0.25)"
                 >
-                  disponible
+                  disponible después de proyectos activos
                 </p>
               </div>
             </div>
@@ -3590,11 +3590,16 @@
         return Object.values((state && state.projects) || {}).reduce(
           (total, project) =>
             total +
-            (project.closed
+            (isProjectClosed(project.name, state)
               ? 0
               : Number(project.income || 0) - Number(project.expenses || 0)),
           0,
         );
+      }
+
+      function getAvailableProfitInAccounts(state) {
+        const cash = Number((state && state.cash) || 0);
+        return Math.round((cash - getOpenProjectsBalance(state)) * 100) / 100;
       }
 
       function hasSavedProjectClose(name) {
@@ -5979,7 +5984,7 @@
         const engineState = getFinanceState();
         const capitalAcKpi = getOpenProjectsBalance(engineState);
         const totalKpi = _frankD + _cristianD;
-        const profitKpi = _lastFrankProfit + _lastCristProfit;
+        const profitKpi = getAvailableProfitInAccounts(engineState);
         if (saldoEl) {
           saldoEl.textContent = fmt(totalKpi);
           saldoEl.style.color = totalKpi >= 0 ? "var(--green)" : "var(--red)";
@@ -6005,9 +6010,9 @@
           capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)";
         }
         if (profEl) {
-          profEl.textContent = fmt(engineState.profitAvailableTotal);
+          profEl.textContent = fmt(profitKpi);
           profEl.style.color =
-            engineState.profitAvailableTotal >= 0
+            profitKpi >= 0
               ? "var(--accent-bright)"
               : "var(--red)";
         }
