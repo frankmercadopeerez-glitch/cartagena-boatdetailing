@@ -3906,8 +3906,6 @@
                     id: d.id,
                     ...d.data(),
                   }));
-                  await ensureOrchidClosed();
-                  await ensureOrchidLaborPaymentAndClose();
                   hideDataLoading();
                   renderAll();
                 },
@@ -7184,14 +7182,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-orchid-labor-v1";
+          const swReloadKey = "cbd-finanzas-sw-orchid-manual-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=orchid-labor-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=orchid-manual-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
