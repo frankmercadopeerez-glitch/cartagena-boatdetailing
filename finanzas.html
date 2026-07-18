@@ -3286,9 +3286,11 @@
       let _firstDataLoaded = false;
       let proyectosEstadoLoaded = false;
       let orchidCloseMigrationRunning = false;
+      let recreatedMovementsRunning = false;
       const todayStr = new Date().toISOString().split("T")[0];
       const LEYLA_CUTOFF_RESET_KEY = "cbd-finanzas-leyla-cutoff-reset-v1";
       const MUSIQUITA_REOPEN_KEY = "cbd-finanzas-musiquita-reopen-v1";
+      const RECREATED_MOVEMENTS_KEY = "cbd-finanzas-recreated-movements-v1";
 
       function normalizeProjectName(value) {
         return String(value || "").trim().toLowerCase();
@@ -3683,6 +3685,185 @@
           showToast("No se pudo reabrir Musiquita: " + error.message, "delete");
         } finally {
           orchidCloseMigrationRunning = false;
+        }
+      }
+
+      async function ensureRecreatedPostEqualizationMovements() {
+        if (recreatedMovementsRunning || !db || !transactions.length) return;
+        try {
+          if (localStorage.getItem(RECREATED_MOVEMENTS_KEY) === "1") return;
+        } catch (error) {}
+
+        const movements = [
+          makeFinanceEvent("income", {
+            id: "restored-orchid-advance-20260712-1901",
+            fecha: "2026-07-12",
+            hora: "19:01",
+            tipo: "ingreso",
+            categoria: "Anticipo",
+            monto: 1495000,
+            proyecto: "Bote ORCHID",
+            project: "Bote ORCHID",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Anticipo trabajos de pulido y ceramica",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("capital_transfer", {
+            id: "restored-transfer-frank-cristian-20260712-from",
+            fecha: "2026-07-12",
+            hora: "19:02",
+            tipo: "gasto",
+            categoria: TRANSFER_CAT,
+            monto: 396500,
+            receptor: "Frank",
+            responsible: "Frank",
+            from: "Frank",
+            to: "Cristian",
+            motorDirection: "from",
+            transferId: "restored-transfer-frank-cristian-20260712",
+            descripcion: "Transferencia a Cristian",
+            medio: "Transferencia",
+            proyecto: "",
+            project: "",
+          }),
+          makeFinanceEvent("capital_transfer", {
+            id: "restored-transfer-frank-cristian-20260712-to",
+            fecha: "2026-07-12",
+            hora: "19:02",
+            tipo: "ingreso",
+            categoria: TRANSFER_CAT,
+            monto: 396500,
+            receptor: "Cristian",
+            responsible: "Cristian",
+            from: "Frank",
+            to: "Cristian",
+            motorDirection: "to",
+            transferId: "restored-transfer-frank-cristian-20260712",
+            descripcion: "Transferencia de Frank",
+            medio: "Transferencia",
+            proyecto: "",
+            project: "",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-musiquita-calcomanias-20260712-1909",
+            fecha: "2026-07-12",
+            hora: "19:09",
+            tipo: "gasto",
+            categoria: "Materiales / Insumos",
+            monto: 100000,
+            proyecto: "Bote Musiquita",
+            project: "Bote Musiquita",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Calcomanias Dilson",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("income", {
+            id: "restored-haya-advance-20260712-1912",
+            fecha: "2026-07-12",
+            hora: "19:12",
+            tipo: "ingreso",
+            categoria: "Anticipo",
+            monto: 425000,
+            proyecto: "Yate Haya",
+            project: "Yate Haya",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Anticipo limpieza de tapiceria",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-haya-arl-20260713-1617",
+            fecha: "2026-07-13",
+            hora: "16:17",
+            tipo: "gasto",
+            categoria: "ARL / Seguro",
+            monto: 70000,
+            proyecto: "Yate Haya",
+            project: "Yate Haya",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Pago de ARL yerferson",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-haya-labor-20260713-2347",
+            fecha: "2026-07-13",
+            hora: "23:47",
+            tipo: "gasto",
+            categoria: "Mano de Obra",
+            monto: 100000,
+            proyecto: "Yate Haya",
+            project: "Yate Haya",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Anticipo a hijo de Yovani",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-orchid-arl-20260714-0827",
+            fecha: "2026-07-14",
+            hora: "08:27",
+            tipo: "gasto",
+            categoria: "ARL / Seguro",
+            monto: 70000,
+            proyecto: "Bote ORCHID",
+            project: "Bote ORCHID",
+            receptor: "Frank",
+            responsible: "Frank",
+            descripcion: "Pago de ARL de Yovani",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-orchid-materials-20260714-1653",
+            fecha: "2026-07-14",
+            hora: "16:53",
+            tipo: "gasto",
+            categoria: "Materiales / Insumos",
+            monto: 105000,
+            proyecto: "Bote ORCHID",
+            project: "Bote ORCHID",
+            receptor: "Cristian",
+            responsible: "Cristian",
+            descripcion: "Compra de paso 1 y 2 pequena cuna",
+            medio: "Transferencia",
+          }),
+          makeFinanceEvent("expense", {
+            id: "restored-orchid-labor-20260715-2032",
+            fecha: "2026-07-15",
+            hora: "20:32",
+            tipo: "gasto",
+            categoria: "Mano de Obra",
+            monto: 500000,
+            proyecto: "Bote ORCHID",
+            project: "Bote ORCHID",
+            receptor: "Cristian",
+            responsible: "Cristian",
+            descripcion: "Anticipo a Yiovanni",
+            medio: "Transferencia",
+          }),
+        ];
+        const missing = movements.filter(
+          (movement) => !transactions.some((transaction) => transaction.id === movement.id),
+        );
+        if (missing.length === 0) {
+          try {
+            localStorage.setItem(RECREATED_MOVEMENTS_KEY, "1");
+          } catch (error) {}
+          return;
+        }
+        recreatedMovementsRunning = true;
+        try {
+          await saveFinanceEvents(missing);
+          try {
+            localStorage.setItem(RECREATED_MOVEMENTS_KEY, "1");
+          } catch (error) {}
+          showToast("Se restauraron los movimientos posteriores a la igualacion.", "info");
+        } catch (error) {
+          showToast("No se pudieron restaurar los movimientos: " + error.message, "delete");
+        } finally {
+          recreatedMovementsRunning = false;
         }
       }
 
@@ -4090,6 +4271,7 @@
                   }));
                   await ensureOrchidOpenForManualClose();
                   await ensureMusiquitaOpenAfterAccidentalClose();
+                  await ensureRecreatedPostEqualizationMovements();
                   hideDataLoading();
                   renderAll();
                 },
@@ -7375,14 +7557,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-leyla-reset-v1";
+          const swReloadKey = "cbd-finanzas-sw-recreate-movements-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=leyla-reset-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=recreate-movements-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
