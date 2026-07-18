@@ -6798,18 +6798,37 @@
 
       function renderProyectos() {
         const engineState = getFinanceState();
+        const engineProjectsByKey = {};
+        Object.values(engineState.projects).forEach((project) => {
+          const key = normalizeProjectName(project.name);
+          const current = engineProjectsByKey[key];
+          if (!current || (!current.closed && project.closed)) {
+            engineProjectsByKey[key] = project;
+          }
+        });
         const projMap = {};
+        const addProjectFlow = (name, income, expenses) => {
+          const key = normalizeProjectName(name);
+          if (!key) return;
+          if (!projMap[key]) {
+            projMap[key] = { name, ingresos: 0, gastos: 0 };
+          }
+          projMap[key].ingresos += income;
+          projMap[key].gastos += expenses;
+        };
         transactions.forEach((t) => {
           if (t.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) return;
           if (!esFlujoProyecto(t)) return;
-          if (!projMap[t.proyecto])
-            projMap[t.proyecto] = { ingresos: 0, gastos: 0 };
-          if (t.tipo === "ingreso") projMap[t.proyecto].ingresos += t.monto;
-          else projMap[t.proyecto].gastos += t.monto;
+          addProjectFlow(
+            t.proyecto,
+            t.tipo === "ingreso" ? t.monto : 0,
+            t.tipo === "gasto" ? t.monto : 0,
+          );
         });
 
-        Object.values(engineState.projects).forEach((project) => {
-          projMap[project.name] = {
+        Object.values(engineProjectsByKey).forEach((project) => {
+          projMap[normalizeProjectName(project.name)] = {
+            name: project.name,
             ingresos: project.income,
             gastos: project.expenses,
             engine: true,
@@ -6821,15 +6840,16 @@
         let profitReal = 0;
         const activos = [],
           cerrados = [];
-        Object.entries(projMap).forEach(([nombre, v]) => {
+        Object.entries(projMap).forEach(([projectKey, v]) => {
+          const nombre = v.name;
           const net = v.ingresos - v.gastos;
-          const engineEntry = Object.entries(engineState.projects).find(
-            ([projectName]) => normalizeProjectName(projectName) === normalizeProjectName(nombre),
+          const engineProject = engineProjectsByKey[projectKey] || null;
+          const statusKey = Object.keys(proyectosEstado).find(
+            (key) => normalizeProjectName(key) === projectKey,
           );
-          const engineProject = engineEntry ? engineEntry[1] : null;
           const esCerrado = engineProject
             ? engineProject.closed
-            : !!proyectosEstado[nombre];
+            : !!statusKey && !!proyectosEstado[statusKey];
           const entry = {
             nombre,
             ingresos: v.ingresos,
