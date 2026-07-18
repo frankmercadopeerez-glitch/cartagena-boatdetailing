@@ -16,13 +16,13 @@
   // queda fuera del libro nuevo y no se vuelve a recalcular.
   const OPENING_STATE = Object.freeze({
     asOf: "2026-07-16",
-    cash: 4457137,
+    cash: 5302137,
     totalIncome: 21429510,
-    totalExpenses: 12548959,
-    profitTotal: 7138551,
-    capitalActive: 1742000,
-    capital: Object.freeze({ frank: 1053499.5, cristian: 688500.5 }),
-    profitAvailable: Object.freeze({ frank: 1357568.5, cristian: 1357568.5 }),
+    totalExpenses: 11703959,
+    profitTotal: 9725551,
+    capitalActive: 820000,
+    capital: Object.freeze({ frank: 2651068.5, cristian: 2651068.5 }),
+    profitAvailable: Object.freeze({ frank: 0, cristian: 0 }),
   });
 
   function money(value) {

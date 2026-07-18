@@ -22,12 +22,14 @@ function assertValid(state) {
 {
   const state = calculate([]);
   assert.equal(state.totalIncome, 21429510);
-  assert.equal(state.totalExpenses, 12548959);
-  assert.equal(state.profitTotal, 7138551);
-  assert.equal(state.capitalActive, 1742000);
-  assert.equal(state.workingCapitalActive, 1742000);
-  assert.equal(Math.round(state.capital.frank), 1053500);
-  assert.equal(Math.round(state.capital.cristian), 688501);
+  assert.equal(state.totalExpenses, 11703959);
+  assert.equal(state.profitTotal, 9725551);
+  assert.equal(state.capitalActive, 820000);
+  assert.equal(state.workingCapitalActive, 5302137);
+  assert.equal(Math.round(state.capital.frank), 2651069);
+  assert.equal(Math.round(state.capital.cristian), 2651069);
+  assert.equal(state.profitAvailable.frank, 0);
+  assert.equal(state.profitAvailable.cristian, 0);
   assertValid(state);
 }
 
@@ -40,17 +42,17 @@ function assertValid(state) {
     event("expense", { project: "Orchid", responsible: "Frank", monto: 2000000 }),
   ]);
   assertValid(state);
-  assert.equal(state.capital.frank, 2553499.5);
-  assert.equal(state.capital.cristian, 688500.5);
-  assert.equal(state.profitAvailable.frank, 1357568.5);
-  assert.equal(state.profitAvailable.cristian, 1357568.5);
-  assert.equal(state.cash, 8957137);
+  assert.equal(state.capital.frank, 4151068.5);
+  assert.equal(state.capital.cristian, 2651068.5);
+  assert.equal(state.profitAvailable.frank, 0);
+  assert.equal(state.profitAvailable.cristian, 0);
+  assert.equal(state.cash, 9802137);
   assert.equal(state.totalIncome, 26429510);
-  assert.equal(state.totalExpenses, 14548959);
-  assert.equal(state.balanceByPartner.frank, 2553499.5 + 5000000 - 2000000 + 1357568.5);
-  assert.equal(state.balanceByPartner.cristian, 688500.5 + 1357568.5);
-  assert.equal(state.workingCapital.frank, 2553499.5 + 5000000 - 2000000);
-  assert.equal(state.workingCapital.cristian, 688500.5);
+  assert.equal(state.totalExpenses, 13703959);
+  assert.equal(state.balanceByPartner.frank, 4151068.5 + 5000000 - 2000000);
+  assert.equal(state.balanceByPartner.cristian, 2651068.5);
+  assert.equal(state.workingCapital.frank, 4151068.5 + 5000000 - 2000000);
+  assert.equal(state.workingCapital.cristian, 2651068.5);
 }
 
 // El receptor de una entrada ve el aumento de su cuenta inmediatamente; al
@@ -107,11 +109,11 @@ function assertValid(state) {
     event("project_close", { id: "cierre-orchid", project: "Orchid", split: { frank: 0.5, cristian: 0.5 } }),
   ]);
   assertValid(state);
-  assert.equal(state.capitalActive, 1742000);
-  assert.equal(state.capital.frank, 1053499.5);
-  assert.equal(state.profitAvailable.frank, 3607568.5);
-  assert.equal(state.profitAvailable.cristian, 3607568.5);
-  assert.equal(state.profitTotal, 11638551);
+  assert.equal(state.capitalActive, 820000);
+  assert.equal(state.capital.frank, 2651068.5);
+  assert.equal(state.profitAvailable.frank, 2250000);
+  assert.equal(state.profitAvailable.cristian, 2250000);
+  assert.equal(state.profitTotal, 14225551);
   assert.equal(state.projects.Orchid.closed, true);
   assert.equal(state.projects.Orchid.profit, 4500000);
 }
@@ -184,14 +186,21 @@ function assertValid(state) {
   );
   assertValid(state);
   assert.equal(state.projects["Bote ORCHID"].profit, 320000);
-  assert.equal(state.workingCapitalActive, 922000);
+  assert.equal(state.workingCapitalActive, 4482137);
   assert.equal(state.activePartnerExpenses.cristian, 0);
 }
 
 // Retiro de profit: solo toca caja y el profit del socio que retira.
 {
-  const before = calculate([]);
-  const state = calculate([event("profit_withdrawal", { responsible: "Frank", monto: 500000 })]);
+  const opening = Object.assign({}, engine.OPENING_STATE, {
+    profitTotal: 500000,
+    profitAvailable: { frank: 500000, cristian: 0 },
+  });
+  const before = calculate([], opening);
+  const state = calculate(
+    [event("profit_withdrawal", { responsible: "Frank", monto: 500000 })],
+    opening,
+  );
   assertValid(state);
   assert.equal(state.profitAvailable.frank, before.profitAvailable.frank - 500000);
   assert.equal(state.profitAvailable.cristian, before.profitAvailable.cristian);

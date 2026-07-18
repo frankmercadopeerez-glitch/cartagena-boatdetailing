@@ -3574,29 +3574,38 @@
 
       async function ensureOrchidOpenForManualClose() {
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
-        const systemEvents = transactions.filter((transaction) => {
+        const cleanupEvents = transactions.filter((transaction) => {
           const project = normalizeProjectName(
             transaction.project || transaction.proyecto,
           );
+          const orchidSystemEvent =
+            transaction.id === "system-orchid-close-v1" ||
+            transaction.systemMigration === "orchid-close-v1" ||
+            transaction.id === "system-orchid-labor-yiovannis-v1" ||
+            transaction.id === "system-orchid-income-frank-v1" ||
+            transaction.systemMigration === "orchid-income-frank-v1";
+          const orchidFinalIncome =
+            transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+            isPostOpeningLegacyTransaction(transaction) &&
+            transaction.tipo === "ingreso" &&
+            Number(transaction.monto) === 1495000;
           return (
             project.includes(ORCHID_PROJECT_KEY) &&
-            (transaction.id === "system-orchid-close-v1" ||
-              transaction.systemMigration === "orchid-close-v1" ||
-              transaction.id === "system-orchid-labor-yiovannis-v1")
+            (orchidSystemEvent || orchidFinalIncome)
           );
         });
-        if (systemEvents.length === 0) return;
+        if (cleanupEvents.length === 0) return;
         orchidCloseMigrationRunning = true;
         try {
           const candidate = transactions.filter(
-            (transaction) => !systemEvents.some((event) => event.id === transaction.id),
+            (transaction) => !cleanupEvents.some((event) => event.id === transaction.id),
           );
           const nextState = calculateCandidateFinanceState(candidate);
           if (hasFinanceErrors(nextState)) {
             throw new Error(financeErrorMessage(nextState));
           }
           const batch = db.batch();
-          systemEvents.forEach((event) =>
+          cleanupEvents.forEach((event) =>
             batch.delete(db.collection("transacciones").doc(event.id)),
           );
           await batch.commit();
@@ -3604,7 +3613,7 @@
           financeState = nextState;
           renderAll();
           showToast(
-            "Orchid quedo abierto, sin repartir profit. Puedes cerrarlo cuando terminen sus movimientos.",
+            "Restaurado el corte de Leyla. Orchid quedo abierto sin pago final.",
             "info",
           );
         } catch (error) {
@@ -4017,8 +4026,6 @@
                     ...d.data(),
                   }));
                   await ensureOrchidOpenForManualClose();
-                  await ensureOrchidIncomeAssignedToFrank();
-                  await ensureOtherProjectsClosed();
                   hideDataLoading();
                   renderAll();
                 },
