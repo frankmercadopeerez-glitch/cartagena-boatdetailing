@@ -3613,13 +3613,24 @@
         });
       }
 
+      function currentAuditActor() {
+        const user = auth && auth.currentUser;
+        return {
+          actorUid: user ? user.uid : "",
+          actorEmail: user && user.email ? user.email : "",
+        };
+      }
+
       async function saveFinanceEvents(events, removeIds = []) {
         if (!db || !Array.isArray(events) || events.length === 0) return false;
         const createdAt = Date.now();
+        const actor = currentAuditActor();
         const idsToRemove = new Set(removeIds.filter(Boolean));
         const stampedEvents = events.map((event, index) => ({
           ...event,
           createdAt: event.createdAt || createdAt + index,
+          createdBy: event.createdBy || actor.actorUid,
+          createdByEmail: event.createdByEmail || actor.actorEmail,
         }));
         const refs = stampedEvents.map((event) =>
           event.id
@@ -3637,7 +3648,12 @@
         }
         const batch = db.batch();
         idsToRemove.forEach((id) =>
-          batch.delete(db.collection("transacciones").doc(id)),
+          batch.update(db.collection("transacciones").doc(id), {
+            archived: true,
+            archivedAt: createdAt,
+            archivedBy: actor.actorUid,
+            archivedByEmail: actor.actorEmail,
+          }),
         );
         stampedEvents.forEach((event, index) => batch.set(refs[index], event));
         await batch.commit();
@@ -4181,7 +4197,14 @@
         if (hasFinanceErrors(nextState)) {
           throw new Error(financeErrorMessage(nextState));
         }
-        const payload = { ...values };
+        const actor = currentAuditActor();
+        const payload = {
+          ...current,
+          ...values,
+          updatedAt: Date.now(),
+          updatedBy: actor.actorUid,
+          updatedByEmail: actor.actorEmail,
+        };
         delete payload.id;
         await db.collection("transacciones").doc(id).set(payload);
         transactions = candidate;
@@ -4197,8 +4220,17 @@
         if (hasFinanceErrors(nextState)) {
           throw new Error(financeErrorMessage(nextState));
         }
+        const actor = currentAuditActor();
+        const archivedAt = Date.now();
         const batch = db.batch();
-        ids.forEach((id) => batch.delete(db.collection("transacciones").doc(id)));
+        ids.forEach((id) =>
+          batch.update(db.collection("transacciones").doc(id), {
+            archived: true,
+            archivedAt,
+            archivedBy: actor.actorUid,
+            archivedByEmail: actor.actorEmail,
+          }),
+        );
         await batch.commit();
         transactions = candidate;
         financeState = nextState;
@@ -4416,10 +4448,9 @@
               .orderBy("fecha", "desc")
               .onSnapshot(
                 async (snap) => {
-                  transactions = snap.docs.map((d) => ({
-                    id: d.id,
-                    ...d.data(),
-                  }));
+                  transactions = snap.docs
+                    .map((d) => ({ id: d.id, ...d.data() }))
+                    .filter((transaction) => transaction.archived !== true);
                   await ensureOrchidOpenForManualClose();
                   await ensureMusiquitaOpenAfterAccidentalClose();
                   await ensureRecreatedPostEqualizationMovements();
@@ -4664,12 +4695,19 @@
               .map((transaction) => transaction.id)
           : [id];
         const suffix = relatedIds.length > 1 ? " y su movimiento relacionado" : "";
-        if (!confirm("Eliminar este registro" + suffix + "?\nEsta accion no se puede deshacer.")) return;
+        if (
+          !confirm(
+            "Archivar este registro" +
+              suffix +
+              "?\nDejara de afectar los saldos, pero permanecera recuperable en la base de datos.",
+          )
+        )
+          return;
         try {
           await deleteFinanceEvents(relatedIds);
-          showToast("Registro eliminado", "delete");
+          showToast("Registro archivado de forma segura", "delete");
         } catch (err) {
-          showToast("No se puede eliminar: " + err.message, "delete");
+          showToast("No se puede archivar: " + err.message, "delete");
         }
         return;
         /* if (false &&

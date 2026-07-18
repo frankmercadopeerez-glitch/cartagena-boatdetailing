@@ -401,4 +401,23 @@ function assertValid(state) {
   assert.equal(state.workingCapital.cristian, before.workingCapital.cristian - 2500);
 }
 
+// Archivar conserva el documento para auditoria, pero lo excluye de las cuentas.
+{
+  const before = calculate([]);
+  const state = calculate([
+    event("expense", {
+      responsible: "Frank",
+      monto: 195000,
+      project: "Yate Haya",
+      archived: true,
+      archivedAt: Date.now(),
+    }),
+  ]);
+  assertValid(state);
+  assert.equal(state.eventCount, 0);
+  assert.equal(state.cash, before.cash);
+  assert.equal(state.totalExpenses, before.totalExpenses);
+  assert.equal(state.balanceByPartner.frank, before.balanceByPartner.frank);
+}
+
 console.log("finance-engine: all tests passed");

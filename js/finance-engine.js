@@ -407,6 +407,7 @@
       .filter(
         (event) =>
           event &&
+          event.archived !== true &&
           event.motorVersion === ENGINE_VERSION &&
           isAfterOpening(event, opening),
       )
