@@ -61,6 +61,7 @@
       profitAvailable: clonePartners(source.profitAvailable),
       partnerExpenses: clonePartners(source.partnerExpenses),
       partnerIncome: clonePartners(source.partnerIncome),
+      activePartnerExpenses: clonePartners(source.activePartnerExpenses),
     };
   }
 
@@ -106,6 +107,7 @@
         income: 0,
         incomeByPartner: { frank: 0, cristian: 0 },
         expenses: 0,
+        expenseByPartner: { frank: 0, cristian: 0 },
         capital: { frank: 0, cristian: 0 },
         legacyCapital: 0,
         profit: 0,
@@ -124,6 +126,7 @@
         income: money(project.income),
         incomeByPartner: clonePartners(project.incomeByPartner),
         expenses: money(project.expenses),
+        expenseByPartner: clonePartners(project.expenseByPartner),
         capital: clonePartners(project.capital),
         legacyCapital: money(project.legacyCapital),
         profit: 0,
@@ -200,7 +203,11 @@
     state.cash -= amount;
     state.totalExpenses += amount;
     state.partnerExpenses[partner] += amount;
-    if (target) target.expenses += amount;
+    state.activePartnerExpenses[partner] += amount;
+    if (target) {
+      target.expenses += amount;
+      target.expenseByPartner[partner] += amount;
+    }
   }
 
   function applyCapitalContribution(state, event) {
@@ -307,6 +314,7 @@
     }
     const releasedCapital = clonePartners(target.capital);
     const settledIncome = clonePartners(target.incomeByPartner);
+    const settledExpenses = clonePartners(target.expenseByPartner);
     const releasedTotal = releasedCapital.frank + releasedCapital.cristian;
     const distributable = money(releasedTotal + utility);
     const targetProfit = money(
@@ -326,6 +334,7 @@
     PARTNERS.forEach((partner) => {
       state.capital[partner] -= releasedCapital[partner];
       state.partnerIncome[partner] -= settledIncome[partner];
+      state.activePartnerExpenses[partner] -= settledExpenses[partner];
       state.profitAvailable[partner] += profitByPartner[partner];
     });
     state.capitalActive -= releasedTotal;
@@ -341,6 +350,7 @@
       distributable,
       releasedCapital,
       settledIncome,
+      settledExpenses,
       profitByPartner,
     };
   }
@@ -371,6 +381,7 @@
       profitAvailable: clonePartners(opening.profitAvailable),
       partnerExpenses: clonePartners(opening.partnerExpenses),
       partnerIncome: clonePartners(opening.partnerIncome),
+      activePartnerExpenses: clonePartners(opening.activePartnerExpenses),
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
       projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
@@ -399,13 +410,13 @@
     state.partnerExpensesTotal = money(state.partnerExpenses.frank + state.partnerExpenses.cristian);
     state.partnerIncomeTotal = money(state.partnerIncome.frank + state.partnerIncome.cristian);
     state.capitalPartnersTotal = money(state.capital.frank + state.capital.cristian);
-    state.balanceByPartner = {
-      frank: money(state.capital.frank + state.profitAvailable.frank + state.partnerIncome.frank - state.partnerExpenses.frank),
-      cristian: money(state.capital.cristian + state.profitAvailable.cristian + state.partnerIncome.cristian - state.partnerExpenses.cristian),
-    };
     state.workingCapital = {
-      frank: money(state.capital.frank + state.partnerIncome.frank - state.partnerExpenses.frank),
-      cristian: money(state.capital.cristian + state.partnerIncome.cristian - state.partnerExpenses.cristian),
+      frank: money(state.capital.frank + state.partnerIncome.frank - state.activePartnerExpenses.frank),
+      cristian: money(state.capital.cristian + state.partnerIncome.cristian - state.activePartnerExpenses.cristian),
+    };
+    state.balanceByPartner = {
+      frank: money(state.workingCapital.frank + state.profitAvailable.frank),
+      cristian: money(state.workingCapital.cristian + state.profitAvailable.cristian),
     };
     state.workingCapitalActive = money(
       state.workingCapital.frank + state.workingCapital.cristian,

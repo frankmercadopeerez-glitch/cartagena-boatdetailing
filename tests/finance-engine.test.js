@@ -124,6 +124,43 @@ function assertValid(state) {
   assert.equal(state.profitAvailable.cristian, 550);
 }
 
+// Los gastos de un proyecto cerrado afectan su profit, pero no el capital de
+// trabajo de los proyectos que siguen activos.
+{
+  const state = calculate(
+    [
+      event("expense", {
+        id: "mano-obra-orchid",
+        project: "Bote ORCHID",
+        responsible: "Cristian",
+        receptor: "Cristian",
+        categoria: "Mano de Obra",
+        tipo: "gasto",
+        monto: 500000,
+        hora: "12:00",
+      }),
+      event("project_close", {
+        id: "cierre-orchid-con-gasto",
+        project: "Bote ORCHID",
+        hora: "23:59",
+      }),
+    ],
+    engine.OPENING_STATE,
+    {
+      "Bote ORCHID": {
+        income: 1495000,
+        expenses: 675000,
+        capital: { frank: 410000, cristian: 410000 },
+        legacyCapital: 820000,
+      },
+    },
+  );
+  assertValid(state);
+  assert.equal(state.projects["Bote ORCHID"].profit, 320000);
+  assert.equal(state.workingCapitalActive, 922000);
+  assert.equal(state.activePartnerExpenses.cristian, 0);
+}
+
 // Retiro de profit: solo toca caja y el profit del socio que retira.
 {
   const before = calculate([]);
