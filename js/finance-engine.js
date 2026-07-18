@@ -190,6 +190,26 @@
     target.incomeByPartner[partner] += amount;
   }
 
+  function applyLegacyIncomeAllocation(state, event) {
+    const amount = requireAmount(state, event);
+    const partner = requirePartner(state, event, "receptor");
+    const project = projectName(event);
+    if (!project) {
+      addError(state, "PROJECT_REQUIRED", "La asignacion requiere un proyecto.", event);
+      return;
+    }
+    if (!amount || !partner) return;
+    const target = ensureProject(state.projects, project);
+    if (target.closed) {
+      addError(state, "PROJECT_CLOSED", "No se puede asignar ingreso a un proyecto cerrado.", event);
+      return;
+    }
+    // El ingreso ya existe en el historico global. Aqui solo se asigna a la
+    // cuenta del socio sin duplicar caja, ingresos ni el balance del proyecto.
+    state.partnerIncome[partner] += amount;
+    target.incomeByPartner[partner] += amount;
+  }
+
   function applyExpense(state, event) {
     const amount = requireAmount(state, event);
     const partner = requirePartner(state, event, "responsible");
@@ -391,6 +411,7 @@
     events.forEach((event, index) => {
       const type = eventType(event);
       if (type === "income") applyIncome(state, event);
+      else if (type === "legacy_income_allocation") applyLegacyIncomeAllocation(state, event);
       else if (type === "expense") applyExpense(state, event);
       else if (type === "capital_contribution") applyCapitalContribution(state, event);
       else if (type === "capital_withdrawal") applyCapitalWithdrawal(state, event);

@@ -71,6 +71,33 @@ function assertValid(state) {
   assert.equal(closed.partnerIncome.cristian, 0);
 }
 
+// Una entrada historica puede asignarse a un socio sin duplicar los totales
+// globales ni el balance del proyecto.
+{
+  const state = calculate(
+    [
+      event("legacy_income_allocation", {
+        project: "Orchid",
+        receptor: "Frank",
+        monto: 1495000,
+      }),
+    ],
+    engine.OPENING_STATE,
+    {
+      Orchid: {
+        income: 1495000,
+        expenses: 675000,
+        legacyCapital: 820000,
+        capital: { frank: 410000, cristian: 410000 },
+      },
+    },
+  );
+  assertValid(state);
+  assert.equal(state.totalIncome, engine.OPENING_STATE.totalIncome);
+  assert.equal(state.projects.Orchid.income, 1495000);
+  assert.equal(state.partnerIncome.frank, 1495000);
+}
+
 // Cierre: libera el capital del proyecto y pasa su utilidad al profit 50/50.
 {
   const state = calculate([

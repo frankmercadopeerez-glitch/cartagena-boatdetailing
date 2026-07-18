@@ -1121,6 +1121,10 @@
         background: var(--accent-bright) !important;
         height: 3px;
       }
+
+      #main-app .partner-profit-private {
+        display: none !important;
+      }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -1470,7 +1474,7 @@
                   $0
                 </p>
               </div>
-              <div class="grid grid-cols-2 gap-2 mb-2 text-center">
+              <div class="grid grid-cols-1 gap-2 mb-2 text-center">
                 <div
                   class="rounded-lg p-2"
                   style="
@@ -1493,7 +1497,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-lg p-2"
+                  class="rounded-lg p-2 partner-profit-private"
                   style="
                     background: rgba(184, 144, 77, 0.08);
                     border: 1px solid rgba(184, 144, 77, 0.15);
@@ -1524,7 +1528,7 @@
               <button
                 id="btn-retiro-cristian"
                 onclick="retirarProfitSocio('Cristian')"
-                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition partner-profit-private"
                 style="
                   background: rgba(184, 144, 77, 0.12);
                   border: 1px solid rgba(184, 144, 77, 0.3);
@@ -1561,7 +1565,7 @@
                   $0
                 </p>
               </div>
-              <div class="grid grid-cols-2 gap-2 mb-2 text-center">
+              <div class="grid grid-cols-1 gap-2 mb-2 text-center">
                 <div
                   class="rounded-lg p-2"
                   style="
@@ -1584,7 +1588,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-lg p-2"
+                  class="rounded-lg p-2 partner-profit-private"
                   style="
                     background: rgba(184, 144, 77, 0.08);
                     border: 1px solid rgba(184, 144, 77, 0.15);
@@ -1615,7 +1619,7 @@
               <button
                 id="btn-retiro-frank"
                 onclick="retirarProfitSocio('Frank')"
-                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition partner-profit-private"
                 style="
                   background: rgba(184, 144, 77, 0.12);
                   border: 1px solid rgba(184, 144, 77, 0.3);
@@ -3570,25 +3574,32 @@
 
       async function ensureOrchidOpenForManualClose() {
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
-        const closeEvent = transactions.find(
-          (transaction) =>
+        const systemEvents = transactions.filter((transaction) => {
+          const project = normalizeProjectName(
+            transaction.project || transaction.proyecto,
+          );
+          return (
+            project.includes(ORCHID_PROJECT_KEY) &&
             (transaction.id === "system-orchid-close-v1" ||
-              transaction.systemMigration === "orchid-close-v1") &&
-            normalizeProjectName(transaction.project || transaction.proyecto).includes(
-              ORCHID_PROJECT_KEY,
-            ),
-        );
-        if (!closeEvent) return;
+              transaction.systemMigration === "orchid-close-v1" ||
+              transaction.id === "system-orchid-labor-yiovannis-v1")
+          );
+        });
+        if (systemEvents.length === 0) return;
         orchidCloseMigrationRunning = true;
         try {
           const candidate = transactions.filter(
-            (transaction) => transaction.id !== closeEvent.id,
+            (transaction) => !systemEvents.some((event) => event.id === transaction.id),
           );
           const nextState = calculateCandidateFinanceState(candidate);
           if (hasFinanceErrors(nextState)) {
             throw new Error(financeErrorMessage(nextState));
           }
-          await db.collection("transacciones").doc(closeEvent.id).delete();
+          const batch = db.batch();
+          systemEvents.forEach((event) =>
+            batch.delete(db.collection("transacciones").doc(event.id)),
+          );
+          await batch.commit();
           transactions = candidate;
           financeState = nextState;
           renderAll();
@@ -3600,6 +3611,70 @@
           showToast("No se pudo abrir Orchid: " + error.message, "delete");
         } finally {
           orchidCloseMigrationRunning = false;
+        }
+      }
+
+      async function ensureOrchidIncomeAssignedToFrank() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        if (
+          transactions.some(
+            (transaction) =>
+              transaction.id === "system-orchid-income-frank-v1" ||
+              transaction.systemMigration === "orchid-income-frank-v1",
+          )
+        ) {
+          return;
+        }
+        const orchidName = Object.keys(getFinanceState().projects).find((name) =>
+          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+        );
+        if (!orchidName) return;
+        try {
+          await saveFinanceEvents([
+            makeFinanceEvent("legacy_income_allocation", {
+              id: "system-orchid-income-frank-v1",
+              systemMigration: "orchid-income-frank-v1",
+              tipo: "ingreso",
+              categoria: "Asignacion historica",
+              monto: 1495000,
+              project: orchidName,
+              proyecto: orchidName,
+              receptor: "Frank",
+              responsible: "Frank",
+              descripcion: "Ingreso historico de Orchid asignado a Frank",
+            }),
+          ]);
+        } catch (error) {
+          showToast("No se pudo asignar el ingreso de Orchid: " + error.message, "delete");
+        }
+      }
+
+      async function ensureOtherProjectsClosed() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        const activeProjects = Object.values(getFinanceState().projects).filter(
+          (project) =>
+            !project.closed &&
+            !normalizeProjectName(project.name).includes(ORCHID_PROJECT_KEY),
+        );
+        if (activeProjects.length === 0) return;
+        try {
+          const closeEvents = activeProjects.map((project) => ({
+            ...makeFinanceEvent("project_close", {
+              id:
+                "system-close-" +
+                normalizeProjectName(project.name).replace(/[^a-z0-9]+/g, "-") +
+                "-v1",
+              systemMigration: "close-other-projects-v1",
+              project: project.name,
+              proyecto: project.name,
+              split: { frank: 0.5, cristian: 0.5 },
+              descripcion: "Cierre inicial de proyecto historico",
+              hora: "23:58",
+            }),
+          }));
+          await saveFinanceEvents(closeEvents);
+        } catch (error) {
+          showToast("No se pudieron cerrar los proyectos restantes: " + error.message, "delete");
         }
       }
 
@@ -3942,6 +4017,8 @@
                     ...d.data(),
                   }));
                   await ensureOrchidOpenForManualClose();
+                  await ensureOrchidIncomeAssignedToFrank();
+                  await ensureOtherProjectsClosed();
                   hideDataLoading();
                   renderAll();
                 },
@@ -4902,8 +4979,8 @@
           void element.offsetWidth;
           element.classList.add("num-flash");
         };
-        const frankCapital = workingCapital.frank;
-        const cristianCapital = workingCapital.cristian;
+        const frankCapital = partnerBalances.frank;
+        const cristianCapital = partnerBalances.cristian;
         const frankProfit = state.profitAvailable.frank;
         const cristianProfit = state.profitAvailable.cristian;
         _lastFrankProfit = frankProfit;
@@ -7218,14 +7295,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-orchid-open-v1";
+          const swReloadKey = "cbd-finanzas-sw-capital-only-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=orchid-open-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=capital-only-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
