@@ -3287,6 +3287,7 @@
       let proyectosEstadoLoaded = false;
       let orchidCloseMigrationRunning = false;
       const todayStr = new Date().toISOString().split("T")[0];
+      const LEYLA_CUTOFF_RESET_KEY = "cbd-finanzas-leyla-cutoff-reset-v1";
 
       function normalizeProjectName(value) {
         return String(value || "").trim().toLowerCase();
@@ -3574,27 +3575,22 @@
 
       async function ensureOrchidOpenForManualClose() {
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        try {
+          if (localStorage.getItem(LEYLA_CUTOFF_RESET_KEY) === "1") return;
+        } catch (error) {}
         const cleanupEvents = transactions.filter((transaction) => {
-          const project = normalizeProjectName(
-            transaction.project || transaction.proyecto,
-          );
-          const orchidSystemEvent =
-            transaction.id === "system-orchid-close-v1" ||
-            transaction.systemMigration === "orchid-close-v1" ||
-            transaction.id === "system-orchid-labor-yiovannis-v1" ||
-            transaction.id === "system-orchid-income-frank-v1" ||
-            transaction.systemMigration === "orchid-income-frank-v1";
-          const orchidFinalIncome =
-            transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-            isPostOpeningLegacyTransaction(transaction) &&
-            transaction.tipo === "ingreso" &&
-            Number(transaction.monto) === 1495000;
-          return (
-            project.includes(ORCHID_PROJECT_KEY) &&
-            (orchidSystemEvent || orchidFinalIncome)
-          );
+          const isLegacyAfterCutoff = isPostOpeningLegacyTransaction(transaction);
+          const isEngineAfterCutoff =
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION &&
+            String(transaction.fecha || "") >= FINANCE_OPENING.asOf;
+          return isLegacyAfterCutoff || isEngineAfterCutoff;
         });
-        if (cleanupEvents.length === 0) return;
+        if (cleanupEvents.length === 0) {
+          try {
+            localStorage.setItem(LEYLA_CUTOFF_RESET_KEY, "1");
+          } catch (error) {}
+          return;
+        }
         orchidCloseMigrationRunning = true;
         try {
           const candidate = transactions.filter(
@@ -3611,13 +3607,16 @@
           await batch.commit();
           transactions = candidate;
           financeState = nextState;
+          try {
+            localStorage.setItem(LEYLA_CUTOFF_RESET_KEY, "1");
+          } catch (error) {}
           renderAll();
           showToast(
             "Restaurado el corte de Leyla. Orchid quedo abierto sin pago final.",
             "info",
           );
         } catch (error) {
-          showToast("No se pudo abrir Orchid: " + error.message, "delete");
+          showToast("No se pudo restaurar el corte: " + error.message, "delete");
         } finally {
           orchidCloseMigrationRunning = false;
         }
@@ -7302,14 +7301,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-capital-only-v1";
+          const swReloadKey = "cbd-finanzas-sw-leyla-reset-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=capital-only-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=leyla-reset-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
