@@ -3470,6 +3470,17 @@
           : workingCapital.frank + workingCapital.cristian;
       }
 
+      function getOpenProjectsBalance(state) {
+        return Object.values((state && state.projects) || {}).reduce(
+          (total, project) =>
+            total +
+            (project.closed
+              ? 0
+              : Number(project.income || 0) - Number(project.expenses || 0)),
+          0,
+        );
+      }
+
       function hasFinanceErrors(state) {
         return !!(state && state.validation && !state.validation.valid);
       }
@@ -5637,7 +5648,8 @@
             else if (r === "cristian") _cristianD += d;
           });
         const saldoEl = document.getElementById("kpi-saldo");
-        const capitalAcKpi = calcCapitalActivo();
+        const engineState = getFinanceState();
+        const capitalAcKpi = getOpenProjectsBalance(engineState);
         const totalKpi = _frankD + _cristianD;
         const profitKpi = _lastFrankProfit + _lastCristProfit;
         if (saldoEl) {
@@ -5655,16 +5667,14 @@
           profEl.style.color =
             profitKpi >= 0 ? "var(--accent-bright)" : "var(--red)";
         }
-        const engineState = getFinanceState();
         const engineBalance = engineState.cash;
         if (saldoEl) {
           saldoEl.textContent = fmt(engineBalance);
           saldoEl.style.color = engineBalance >= 0 ? "var(--green)" : "var(--red)";
         }
         if (capEl) {
-          const workingCapitalActive = getWorkingCapitalActive(engineState);
-          capEl.textContent = fmt(workingCapitalActive);
-          capEl.style.color = workingCapitalActive >= 0 ? "var(--blue)" : "var(--red)";
+          capEl.textContent = fmt(capitalAcKpi);
+          capEl.style.color = capitalAcKpi >= 0 ? "var(--blue)" : "var(--red)";
         }
         if (profEl) {
           profEl.textContent = fmt(engineState.profitAvailableTotal);
@@ -6555,7 +6565,7 @@
           };
         });
 
-        let capitalTrabajo = getWorkingCapitalActive(engineState);
+        let capitalTrabajo = 0;
         let profitReal = 0;
         const activos = [],
           cerrados = [];
@@ -6583,6 +6593,7 @@
             activos.push(entry);
           }
         });
+        capitalTrabajo = activos.reduce((total, project) => total + project.net, 0);
 
         const ctEl = document.getElementById("proj-capital-trabajo");
         const prEl = document.getElementById("proj-profit-real");
