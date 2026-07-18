@@ -2063,8 +2063,10 @@
               </div>
             </div>
             <div
+              id="cierre-aviso-banner"
               class="rounded-xl p-3 mb-4 flex items-start gap-2"
               style="
+                display: none;
                 background: rgba(255, 193, 7, 0.1);
                 border: 1px solid rgba(255, 210, 125, 0.55);
                 color: var(--text2);
@@ -6517,6 +6519,12 @@
           );
           return;
         }
+        const warningBanner = document.getElementById("cierre-aviso-banner");
+        if (warningBanner) {
+          warningBanner.style.display = "flex";
+          warningBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        await new Promise((resolve) => setTimeout(resolve, 180));
         if (
           !window.confirm(
             "Vas a cerrar " +
@@ -6524,7 +6532,13 @@
               ". El cierre es irreversible y no se podra abrir de nuevo. ¿Continuar?",
           )
         ) {
+          if (warningBanner) warningBanner.style.display = "none";
           return;
+        }
+        if (warningBanner) {
+          setTimeout(() => {
+            warningBanner.style.display = "none";
+          }, 5000);
         }
         let card = null;
         document.querySelectorAll(".proj-card").forEach((el) => {
