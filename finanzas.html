@@ -3568,6 +3568,95 @@
         }
       }
 
+      async function ensureOrchidLaborPaymentAndClose() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        const snapshots = getOpeningProjectSnapshots(transactions);
+        const orchidEntry = Object.entries(snapshots).find(([name]) =>
+          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+        );
+        if (!orchidEntry) return;
+        const orchidName = orchidEntry[0];
+        const alreadyRecorded = transactions.some((transaction) => {
+          if (transaction.id === "system-orchid-labor-yiovannis-v1") return true;
+          return (
+            normalizeProjectName(transaction.project || transaction.proyecto) ===
+              normalizeProjectName(orchidName) &&
+            transaction.tipo === "gasto" &&
+            transaction.categoria === "Mano de Obra" &&
+            Number(transaction.monto) === 500000 &&
+            socioKey(transaction.responsible || transaction.receptor) === "cristian" &&
+            /yiovannis/i.test(transaction.descripcion || "")
+          );
+        });
+        if (alreadyRecorded) return;
+        const closeEvent = transactions.find(
+          (transaction) =>
+            transaction.id &&
+            (transaction.motorType === "project_close" ||
+              legacyMotorType(transaction) === "project_close") &&
+            normalizeProjectName(transaction.project || transaction.proyecto) ===
+              normalizeProjectName(orchidName),
+        );
+        if (!closeEvent) return;
+        orchidCloseMigrationRunning = true;
+        try {
+          const now = new Date();
+          const laborEvent = makeFinanceEvent("expense", {
+            id: "system-orchid-labor-yiovannis-v1",
+            tipo: "gasto",
+            categoria: "Mano de Obra",
+            monto: 500000,
+            proyecto: orchidName,
+            project: orchidName,
+            receptor: "Cristian",
+            responsible: "Cristian",
+            descripcion: "Pago de mano de obra a Yiovannis",
+            medio: "Efectivo",
+            fecha: todayStr,
+            hora: now.toTimeString().slice(0, 5),
+            createdAt: Date.now(),
+          });
+          const updatedClose = {
+            ...closeEvent,
+            fecha: todayStr,
+            hora: "23:59",
+            project: orchidName,
+            proyecto: orchidName,
+          };
+          const candidate = transactions
+            .map((transaction) =>
+              transaction.id === closeEvent.id ? updatedClose : transaction,
+            )
+            .concat(laborEvent);
+          const nextState = calculateCandidateFinanceState(candidate);
+          if (hasFinanceErrors(nextState)) {
+            throw new Error(financeErrorMessage(nextState));
+          }
+          const batch = db.batch();
+          const closePayload = { ...updatedClose };
+          const laborPayload = { ...laborEvent };
+          delete closePayload.id;
+          delete laborPayload.id;
+          batch.set(db.collection("transacciones").doc(closeEvent.id), closePayload);
+          batch.set(
+            db.collection("transacciones").doc(laborEvent.id),
+            laborPayload,
+          );
+          await batch.commit();
+          transactions = candidate;
+          financeState = nextState;
+          renderAll();
+          showToast(
+            "Pago de mano de obra registrado y Orchid cerrado definitivamente.",
+            "info",
+          );
+        } catch (error) {
+          showToast("No se pudo registrar el pago de Orchid: " + error.message, "delete");
+        } finally {
+          orchidCloseMigrationRunning = false;
+        }
+      }
+
       async function replaceFinanceEvent(id, values) {
         const current = transactions.find((transaction) => transaction.id === id);
         if (!current) throw new Error("No se encontro el registro.");
@@ -3818,6 +3907,7 @@
                     ...d.data(),
                   }));
                   await ensureOrchidClosed();
+                  await ensureOrchidLaborPaymentAndClose();
                   hideDataLoading();
                   renderAll();
                 },
@@ -7094,14 +7184,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-project-close-v1";
+          const swReloadKey = "cbd-finanzas-sw-orchid-labor-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=project-close-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=orchid-labor-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
