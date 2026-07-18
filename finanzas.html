@@ -3296,6 +3296,13 @@
         return String(value || "").trim().toLowerCase();
       }
 
+      function canonicalProjectName(value) {
+        const name = String(value || "").trim();
+        return normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)
+          ? ORCHID_PROJECT_NAME
+          : name;
+      }
+
       function financeEventKey(transaction) {
         return (
           String(transaction && transaction.fecha ? transaction.fecha : "0000-00-00") +
@@ -3376,7 +3383,13 @@
         );
         return source.map((transaction) => {
           if (transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) {
-            return isAfterFinanceOpening(transaction) ? transaction : null;
+            if (!isAfterFinanceOpening(transaction)) return null;
+            const project = canonicalProjectName(
+              transaction.project || transaction.proyecto,
+            );
+            return project
+              ? { ...transaction, project, proyecto: project }
+              : transaction;
           }
           if (!isPostOpeningLegacyTransaction(transaction)) return null;
           if (restoredMovementKeys.has(movementFingerprint(transaction))) return null;
@@ -3386,7 +3399,7 @@
             ...transaction,
             motorVersion: FINANCE_ENGINE.ENGINE_VERSION,
             motorType,
-            project: transaction.proyecto || "",
+            project: canonicalProjectName(transaction.proyecto || ""),
             responsible: partner,
             receptor: partner,
           };
@@ -3397,18 +3410,22 @@
         const source = Array.isArray(sourceTransactions)
           ? sourceTransactions
           : transactions;
-        const projectNames = [
-          ...new Set(
-            source
-              .filter(
-                (transaction) =>
-                  !isPostOpeningLegacyTransaction(transaction) &&
-                  transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
-                  esNombreProyectoReal(transaction.proyecto),
-              )
-              .map((transaction) => transaction.proyecto.trim()),
-          ),
-        ];
+        const projectNamesByKey = {};
+        source
+          .filter(
+            (transaction) =>
+              !isPostOpeningLegacyTransaction(transaction) &&
+              transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+              esNombreProyectoReal(transaction.proyecto),
+          )
+          .forEach((transaction) => {
+            const name = canonicalProjectName(transaction.proyecto);
+            const key = normalizeProjectName(name);
+            if (!projectNamesByKey[key] || name === ORCHID_PROJECT_NAME) {
+              projectNamesByKey[key] = name;
+            }
+          });
+        const projectNames = Object.values(projectNamesByKey);
         const activeNames = projectNames.filter((name) => {
           if (normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)) return true;
           if (!proyectosEstadoLoaded) return true;
@@ -3427,7 +3444,8 @@
               transaction.categoria !== TRANSFER_CAT &&
               !CAPITAL_GASTO_CATS.includes(transaction.categoria) &&
               transaction.categoria !== CAPITAL_INGRESO_CAT &&
-              normalizeProjectName(transaction.proyecto) === normalizeProjectName(name),
+              normalizeProjectName(canonicalProjectName(transaction.proyecto)) ===
+                normalizeProjectName(name),
           );
           const income = projectTransactions
             .filter((transaction) => transaction.tipo === "ingreso")
@@ -3527,6 +3545,22 @@
               : Number(project.income || 0) - Number(project.expenses || 0)),
           0,
         );
+      }
+
+      function hasSavedProjectClose(name) {
+        const key = normalizeProjectName(canonicalProjectName(name));
+        return transactions.some((transaction) => {
+          const type =
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+              ? FINANCE_ENGINE.eventType(transaction)
+              : legacyMotorType(transaction);
+          return (
+            type === "project_close" &&
+            normalizeProjectName(
+              canonicalProjectName(transaction.project || transaction.proyecto),
+            ) === key
+          );
+        });
       }
 
       function hasFinanceErrors(state) {
@@ -6849,6 +6883,7 @@
         });
         const projMap = {};
         const addProjectFlow = (name, income, expenses) => {
+          name = canonicalProjectName(name);
           const key = normalizeProjectName(name);
           if (!key) return;
           if (!projMap[key]) {
@@ -6888,9 +6923,9 @@
           const statusKey = Object.keys(proyectosEstado).find(
             (key) => normalizeProjectName(key) === projectKey,
           );
-          const esCerrado = engineProject
-            ? engineProject.closed
-            : !!statusKey && !!proyectosEstado[statusKey];
+          const esCerrado =
+            hasSavedProjectClose(nombre) ||
+            (engineProject ? engineProject.closed : !!statusKey && !!proyectosEstado[statusKey]);
           const entry = {
             nombre,
             ingresos: v.ingresos,
