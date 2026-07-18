@@ -3568,6 +3568,41 @@
         }
       }
 
+      async function ensureOrchidOpenForManualClose() {
+        if (orchidCloseMigrationRunning || !db || !transactions.length) return;
+        const closeEvent = transactions.find(
+          (transaction) =>
+            (transaction.id === "system-orchid-close-v1" ||
+              transaction.systemMigration === "orchid-close-v1") &&
+            normalizeProjectName(transaction.project || transaction.proyecto).includes(
+              ORCHID_PROJECT_KEY,
+            ),
+        );
+        if (!closeEvent) return;
+        orchidCloseMigrationRunning = true;
+        try {
+          const candidate = transactions.filter(
+            (transaction) => transaction.id !== closeEvent.id,
+          );
+          const nextState = calculateCandidateFinanceState(candidate);
+          if (hasFinanceErrors(nextState)) {
+            throw new Error(financeErrorMessage(nextState));
+          }
+          await db.collection("transacciones").doc(closeEvent.id).delete();
+          transactions = candidate;
+          financeState = nextState;
+          renderAll();
+          showToast(
+            "Orchid quedo abierto, sin repartir profit. Puedes cerrarlo cuando terminen sus movimientos.",
+            "info",
+          );
+        } catch (error) {
+          showToast("No se pudo abrir Orchid: " + error.message, "delete");
+        } finally {
+          orchidCloseMigrationRunning = false;
+        }
+      }
+
       async function ensureOrchidLaborPaymentAndClose() {
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
         const snapshots = getOpeningProjectSnapshots(transactions);
@@ -3906,6 +3941,7 @@
                     id: d.id,
                     ...d.data(),
                   }));
+                  await ensureOrchidOpenForManualClose();
                   hideDataLoading();
                   renderAll();
                 },
@@ -7182,14 +7218,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-orchid-manual-v1";
+          const swReloadKey = "cbd-finanzas-sw-orchid-open-v1";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=orchid-manual-v1", { updateViaCache: "none" })
+            .register("/sw.js?build=orchid-open-v1", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
