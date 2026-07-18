@@ -1126,6 +1126,11 @@
         display: none !important;
       }
 
+      #main-app #btn-retiro-cristian,
+      #main-app #btn-retiro-frank {
+        display: none !important;
+      }
+
       #main-app #cuenta-cristian-gastos,
       #main-app #cuenta-frank-gastos {
         display: none !important;
@@ -3360,6 +3365,25 @@
         return transaction.tipo === "ingreso" ? "income" : "expense";
       }
 
+      function isProjectCloseRecord(transaction) {
+        if (!transaction) return false;
+        if (
+          transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION &&
+          FINANCE_ENGINE.eventType(transaction) === "project_close"
+        ) {
+          return true;
+        }
+        if (transaction.motorType === "project_close") return true;
+        const project = transaction.project || transaction.proyecto;
+        const description = normalizeProjectName(transaction.descripcion);
+        return (
+          project &&
+          ((!transaction.tipo && !transaction.categoria && !transaction.monto && !transaction.amount) ||
+            description.includes("cierre de proyecto") ||
+            description.includes("cierre de orchid"))
+        );
+      }
+
       function movementFingerprint(transaction) {
         const type =
           transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
@@ -3558,12 +3582,8 @@
       function hasSavedProjectClose(name) {
         const key = normalizeProjectName(canonicalProjectName(name));
         return transactions.some((transaction) => {
-          const type =
-            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
-              ? FINANCE_ENGINE.eventType(transaction)
-              : legacyMotorType(transaction);
           return (
-            type === "project_close" &&
+            isProjectCloseRecord(transaction) &&
             normalizeProjectName(
               canonicalProjectName(transaction.project || transaction.proyecto),
             ) === key
@@ -3965,12 +3985,8 @@
         );
         if (orchidEntries.length === 0) return;
         const orchidCloseEvents = transactions.filter((transaction) => {
-          const type =
-            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
-              ? FINANCE_ENGINE.eventType(transaction)
-              : legacyMotorType(transaction);
           return (
-            type === "project_close" &&
+            isProjectCloseRecord(transaction) &&
             sameCanonicalProject(transaction.project || transaction.proyecto, ORCHID_PROJECT_NAME)
           );
         });
@@ -4001,7 +4017,10 @@
           } catch (error) {}
           showToast("Orchid quedo cerrado con sus movimientos registrados.", "info");
         } catch (error) {
-          showToast("No se pudo cerrar Orchid: " + error.message, "delete");
+          console.error("No se pudo reparar el cierre de Orchid:", error);
+          try {
+            localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
+          } catch (storageError) {}
         } finally {
           orchidCloseMigrationRunning = false;
         }
