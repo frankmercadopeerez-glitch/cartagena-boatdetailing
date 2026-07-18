@@ -237,6 +237,31 @@ function assertValid(state) {
   assert.equal(state.cash, before.cash - 500000);
 }
 
+// Un retiro puede salir del dinero total de la cuenta aunque no exista profit
+// individual disponible; el saldo baja sin tocar el capital de los proyectos.
+{
+  const opening = {
+    asOf: "2026-07-12",
+    asOfTime: "19:02",
+    cash: 1000,
+    totalIncome: 0,
+    totalExpenses: 0,
+    profitTotal: 0,
+    capitalActive: 0,
+    capital: { frank: 1000, cristian: 0 },
+    profitAvailable: { frank: 0, cristian: 0 },
+  };
+  const state = calculate(
+    [event("profit_withdrawal", { responsible: "Frank", monto: 600 })],
+    opening,
+  );
+  assertValid(state);
+  assert.equal(state.cash, 400);
+  assert.equal(state.profitAvailable.frank, 0);
+  assert.equal(state.workingCapital.frank, 400);
+  assert.equal(state.balanceByPartner.frank, 400);
+}
+
 // Equilibrio: mueve exclusivamente capital y no cambia caja ni profit.
 {
   const before = calculate([]);

@@ -1492,7 +1492,7 @@
                     class="text-xs mb-0.5"
                     style="color: rgba(56, 189, 248, 0.7)"
                   >
-                    Capital de trabajo
+                    Dinero en cuenta
                   </p>
                   <p
                     class="text-sm font-bold"
@@ -1534,7 +1534,7 @@
               <button
                 id="btn-retiro-cristian"
                 onclick="retirarProfitSocio('Cristian')"
-                class="w-full text-xs font-bold py-1.5 rounded-lg transition partner-profit-private"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
                 style="
                   background: rgba(184, 144, 77, 0.12);
                   border: 1px solid rgba(184, 144, 77, 0.3);
@@ -1542,7 +1542,7 @@
                   display: none;
                 "
               >
-                Retirar Profit
+                Retirar dinero
               </button>
             </div>
             <!-- Frank -->
@@ -1583,7 +1583,7 @@
                     class="text-xs mb-0.5"
                     style="color: rgba(56, 189, 248, 0.7)"
                   >
-                    Capital de trabajo
+                    Dinero en cuenta
                   </p>
                   <p
                     class="text-sm font-bold"
@@ -1625,7 +1625,7 @@
               <button
                 id="btn-retiro-frank"
                 onclick="retirarProfitSocio('Frank')"
-                class="w-full text-xs font-bold py-1.5 rounded-lg transition partner-profit-private"
+                class="w-full text-xs font-bold py-1.5 rounded-lg transition"
                 style="
                   background: rgba(184, 144, 77, 0.12);
                   border: 1px solid rgba(184, 144, 77, 0.3);
@@ -1633,7 +1633,7 @@
                   display: none;
                 "
               >
-                Retirar Profit
+                Retirar dinero
               </button>
             </div>
             </div>
@@ -3072,7 +3072,7 @@
           Frank
         </p>
         <p style="font-size: 0.75rem; color: var(--text2); margin-bottom: 14px">
-          Profit disponible:
+          Dinero disponible en cuenta:
           <span
             id="retiro-disponible"
             style="color: var(--accent-bright); font-weight: 700"
@@ -5369,8 +5369,8 @@
         const cristianCapital = partnerBalances.cristian;
         const frankProfit = state.profitAvailable.frank;
         const cristianProfit = state.profitAvailable.cristian;
-        _lastFrankProfit = frankProfit;
-        _lastCristProfit = cristianProfit;
+        _lastFrankProfit = partnerBalances.frank;
+        _lastCristProfit = partnerBalances.cristian;
         setEl(
           "cuenta-frank-val",
           partnerBalances.frank,
@@ -5403,8 +5403,8 @@
         );
         const btnRF = document.getElementById("btn-retiro-frank");
         const btnRC = document.getElementById("btn-retiro-cristian");
-        if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
-        if (btnRC) btnRC.style.display = cristianProfit > 100 ? "" : "none";
+        if (btnRF) btnRF.style.display = partnerBalances.frank > 100 ? "" : "none";
+        if (btnRC) btnRC.style.display = partnerBalances.cristian > 100 ? "" : "none";
         const esMesActual =
           mesSel.y === nowD.getFullYear() && mesSel.m === nowD.getMonth();
         const label = document.getElementById("cuentas-mes-label");
@@ -5585,7 +5585,7 @@
           nombre === "Frank" ? _lastFrankProfit : _lastCristProfit,
         );
         if (disponible <= 0) {
-          showToast("No hay profit disponible para " + nombre, "info");
+          showToast("No hay dinero disponible en cuenta para " + nombre, "info");
           return;
         }
         abrirRetiroModal(nombre, disponible);
@@ -5598,6 +5598,8 @@
           "Retiro de Profit · " + nombre;
         document.getElementById("retiro-disponible").textContent =
           fmt(disponible);
+        document.getElementById("retiro-nombre").textContent =
+          "Retirar dinero - " + nombre;
         document.getElementById("retiro-input").value = "";
         const overlay = document.getElementById("retiro-overlay");
         overlay.style.display = "flex";
@@ -5628,7 +5630,7 @@
         }
         if (monto > _retirosDisponible + 500) {
           showToast(
-            "Supera el profit disponible (" + fmt(_retirosDisponible) + ")",
+            "Supera el dinero disponible en cuenta (" + fmt(_retirosDisponible) + ")",
             "delete",
           );
           return;
@@ -5642,7 +5644,7 @@
               monto,
               receptor: _retiroNombre,
               responsible: _retiroNombre,
-              descripcion: "Retiro de Profit " + _retiroNombre,
+              descripcion: "Retiro de dinero " + _retiroNombre,
               fecha: todayStr,
               hora: new Date().toTimeString().slice(0, 5),
               medio: "Efectivo",

@@ -61,6 +61,7 @@
       capitalActive: money(source.capitalActive),
       capital: clonePartners(source.capital),
       profitAvailable: clonePartners(source.profitAvailable),
+      accountWithdrawals: clonePartners(source.accountWithdrawals),
       partnerExpenses: clonePartners(source.partnerExpenses),
       partnerIncome: clonePartners(source.partnerIncome),
       activePartnerExpenses: clonePartners(source.activePartnerExpenses),
@@ -287,13 +288,21 @@
     const amount = requireAmount(state, event);
     const partner = requirePartner(state, event, "responsible");
     if (!amount || !partner) return;
-    if (state.profitAvailable[partner] < amount) {
-      addError(state, "PROFIT_INSUFFICIENT", "El retiro supera el profit disponible del socio.", event);
+    const accountBalance =
+      state.capital[partner] +
+      state.partnerIncome[partner] -
+      state.activePartnerExpenses[partner] -
+      state.accountWithdrawals[partner] +
+      state.profitAvailable[partner];
+    if (accountBalance < amount) {
+      addError(state, "ACCOUNT_INSUFFICIENT", "El retiro supera el dinero disponible en cuenta del socio.", event);
       return;
     }
     state.cash -= amount;
-    state.profitAvailable[partner] -= amount;
-    state.profitWithdrawals += amount;
+    const profitPortion = Math.min(state.profitAvailable[partner], amount);
+    state.profitAvailable[partner] -= profitPortion;
+    state.accountWithdrawals[partner] += amount - profitPortion;
+    state.profitWithdrawals += profitPortion;
   }
 
   function applyCapitalTransfer(state, event) {
@@ -413,6 +422,7 @@
       capitalActive: opening.capitalActive,
       capital: clonePartners(opening.capital),
       profitAvailable: clonePartners(opening.profitAvailable),
+      accountWithdrawals: clonePartners(opening.accountWithdrawals),
       partnerExpenses: clonePartners(opening.partnerExpenses),
       partnerIncome: clonePartners(opening.partnerIncome),
       activePartnerExpenses: clonePartners(opening.activePartnerExpenses),
@@ -446,8 +456,18 @@
     state.partnerIncomeTotal = money(state.partnerIncome.frank + state.partnerIncome.cristian);
     state.capitalPartnersTotal = money(state.capital.frank + state.capital.cristian);
     state.workingCapital = {
-      frank: money(state.capital.frank + state.partnerIncome.frank - state.activePartnerExpenses.frank),
-      cristian: money(state.capital.cristian + state.partnerIncome.cristian - state.activePartnerExpenses.cristian),
+      frank: money(
+        state.capital.frank +
+          state.partnerIncome.frank -
+          state.activePartnerExpenses.frank -
+          state.accountWithdrawals.frank,
+      ),
+      cristian: money(
+        state.capital.cristian +
+          state.partnerIncome.cristian -
+          state.activePartnerExpenses.cristian -
+          state.accountWithdrawals.cristian,
+      ),
     };
     state.balanceByPartner = {
       frank: money(state.workingCapital.frank + state.profitAvailable.frank),
