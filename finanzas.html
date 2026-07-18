@@ -3918,26 +3918,24 @@
 
       async function ensureOrchidClosedAfterRecordedMovements() {
         if (recreatedMovementsRunning || orchidCloseMigrationRunning || !db) return;
-        try {
-          if (localStorage.getItem(ORCHID_CLOSE_ONCE_KEY) === "1") return;
-        } catch (error) {}
         const state = getFinanceState();
-        const projectEntry = Object.entries(state.projects).find(([name, project]) =>
-          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY) && !project.closed,
+        const orchidEntries = Object.entries(state.projects).filter(([name]) =>
+          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
         );
-        if (!projectEntry) {
-          const existingClose = Object.values(state.projects).some(
-            (project) =>
-              project.closed &&
-              normalizeProjectName(project.name).includes(ORCHID_PROJECT_KEY),
-          );
-          if (existingClose) {
-            try {
-              localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
-            } catch (error) {}
-          }
+        const closedEntry = orchidEntries.find(([, project]) => project.closed);
+        if (closedEntry) {
+          try {
+            localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
+          } catch (error) {}
           return;
         }
+        const projectEntry = orchidEntries
+          .slice()
+          .sort(([, left], [, right]) =>
+            Number(right.income || 0) + Number(right.expenses || 0) -
+            (Number(left.income || 0) + Number(left.expenses || 0)),
+          )[0];
+        if (!projectEntry) return;
         orchidCloseMigrationRunning = true;
         try {
           const projectName = projectEntry[1].name;
