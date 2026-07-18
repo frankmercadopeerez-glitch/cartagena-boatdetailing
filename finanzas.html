@@ -3315,6 +3315,24 @@
         );
       }
 
+      function projectStatusEntries(name) {
+        return Object.entries(proyectosEstado).filter(([storedName]) =>
+          sameCanonicalProject(storedName, name),
+        );
+      }
+
+      function isProjectClosed(name, state) {
+        const finance = state || getFinanceState();
+        const engineProject = Object.values((finance && finance.projects) || {}).find(
+          (project) => sameCanonicalProject(project.name, name),
+        );
+        return (
+          hasSavedProjectClose(name) ||
+          !!(engineProject && engineProject.closed) ||
+          projectStatusEntries(name).some(([, closed]) => closed === true)
+        );
+      }
+
       function financeEventKey(transaction) {
         return (
           String(transaction && transaction.fecha ? transaction.fecha : "0000-00-00") +
@@ -4431,7 +4449,8 @@
                   await ensureOrchidOpenForManualClose();
                   await ensureMusiquitaOpenAfterAccidentalClose();
                   await ensureRecreatedPostEqualizationMovements();
-                  await ensureOrchidClosedAfterRecordedMovements();
+                  // Los cierres se realizan de forma explícita. No reparar Orchid
+                  // automáticamente al abrir la app: podía reemplazar eventos válidos.
                   hideDataLoading();
                   renderAll();
                 },
@@ -5741,17 +5760,10 @@
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const proyectosCerradosSet = new Set(
-          Object.keys(proyectosEstado)
-            .filter((k) => proyectosEstado[k] && esNombreProyectoReal(k))
-            .map((k) => k.trim().toLowerCase()),
-        );
         return transactions.filter((t) => {
           if (!estaEnRangoContable(t, lastDay, desdeFecha)) return false;
           if (!esFlujoProyecto(t)) return false;
-          return !proyectosCerradosSet.has(
-            String(t.proyecto || "").trim().toLowerCase(),
-          );
+          return !isProjectClosed(t.proyecto);
         });
       }
 
@@ -5769,19 +5781,12 @@
         const lastDay =
           corteFecha ||
           new Date(mesSel.y, mesSel.m + 1, 0).toISOString().split("T")[0];
-        const proyectosCerradosSet = new Set(
-          Object.keys(proyectosEstado)
-            .filter((k) => proyectosEstado[k] && esNombreProyectoReal(k))
-            .map((k) => k.trim().toLowerCase()),
-        );
         const acc = { frank: 0, cristian: 0 };
         transactions.forEach((t) => {
           if (!estaEnRangoContable(t, lastDay, desdeFecha)) return;
           if (
             esFlujoProyecto(t) &&
-            proyectosCerradosSet.has(
-              String(t.proyecto || "").trim().toLowerCase(),
-            )
+            isProjectClosed(t.proyecto)
           )
             return;
           if (CAPITAL_GASTO_CATS.includes(t.categoria)) return;
@@ -6709,6 +6714,18 @@
             ],
             staleCloseIds,
           );
+          const canonicalName = canonicalProjectName(projectName);
+          await db
+            .collection("config")
+            .doc("proyectos_estado")
+            .set({ [canonicalName]: true }, { merge: true });
+          proyectosEstado[canonicalName] = true;
+          Object.keys(proyectosEstado).forEach((storedName) => {
+            if (storedName !== canonicalName && sameCanonicalProject(storedName, canonicalName)) {
+              proyectosEstado[storedName] = true;
+            }
+          });
+          showToast(projectName + " quedó cerrado correctamente ✓");
         } catch (e) {
           showToast("Error al cambiar estado: " + e.message, "delete");
           if (card) card.classList.remove("is-toggling", "is-opening", "is-closing");
@@ -6940,12 +6957,7 @@
           const nombre = v.name;
           const net = v.ingresos - v.gastos;
           const engineProject = engineProjectsByKey[projectKey] || null;
-          const statusKey = Object.keys(proyectosEstado).find(
-            (key) => normalizeProjectName(key) === projectKey,
-          );
-          const esCerrado =
-            hasSavedProjectClose(nombre) ||
-            (engineProject ? engineProject.closed : !!statusKey && !!proyectosEstado[statusKey]);
+          const esCerrado = isProjectClosed(nombre, engineState);
           const entry = {
             nombre,
             ingresos: v.ingresos,
