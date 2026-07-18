@@ -3293,6 +3293,7 @@
       const LEYLA_CUTOFF_RESET_KEY = "cbd-finanzas-leyla-cutoff-reset-v1";
       const MUSIQUITA_REOPEN_KEY = "cbd-finanzas-musiquita-reopen-v1";
       const RECREATED_MOVEMENTS_KEY = "cbd-finanzas-recreated-movements-v1";
+      const ORCHID_CLOSE_ONCE_KEY = "cbd-finanzas-orchid-close-once-v1";
 
       function normalizeProjectName(value) {
         return String(value || "").trim().toLowerCase();
@@ -3875,6 +3876,67 @@
         }
       }
 
+      async function ensureOrchidClosedAfterRecordedMovements() {
+        if (recreatedMovementsRunning || orchidCloseMigrationRunning || !db) return;
+        try {
+          if (localStorage.getItem(ORCHID_CLOSE_ONCE_KEY) === "1") return;
+        } catch (error) {}
+        const state = getFinanceState();
+        const projectEntry = Object.entries(state.projects).find(([name, project]) =>
+          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY) && !project.closed,
+        );
+        if (!projectEntry) {
+          const existingClose = Object.values(state.projects).some(
+            (project) =>
+              project.closed &&
+              normalizeProjectName(project.name).includes(ORCHID_PROJECT_KEY),
+          );
+          if (existingClose) {
+            try {
+              localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
+            } catch (error) {}
+          }
+          return;
+        }
+        orchidCloseMigrationRunning = true;
+        try {
+          const projectName = projectEntry[1].name;
+          const staleCloseIds = transactions
+            .filter((transaction) => {
+              const type =
+                transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+                  ? FINANCE_ENGINE.eventType(transaction)
+                  : legacyMotorType(transaction);
+              return (
+                type === "project_close" &&
+                normalizeProjectName(
+                  transaction.project || transaction.proyecto,
+                ) === normalizeProjectName(projectName)
+              );
+            })
+            .map((transaction) => transaction.id);
+          await saveFinanceEvents(
+            [
+              makeFinanceEvent("project_close", {
+                project: projectName,
+                proyecto: projectName,
+                split: { frank: 0.5, cristian: 0.5 },
+                descripcion: "Cierre de Orchid con movimientos registrados",
+              }),
+            ],
+            staleCloseIds,
+          );
+          try {
+            localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
+          } catch (error) {}
+          showToast("Orchid quedo cerrado con sus movimientos registrados.", "info");
+        } catch (error) {
+          showToast("No se pudo cerrar Orchid: " + error.message, "delete");
+        } finally {
+          orchidCloseMigrationRunning = false;
+        }
+      }
+
       async function ensureOrchidIncomeAssignedToFrank() {
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
         if (
@@ -4280,6 +4342,7 @@
                   await ensureOrchidOpenForManualClose();
                   await ensureMusiquitaOpenAfterAccidentalClose();
                   await ensureRecreatedPostEqualizationMovements();
+                  await ensureOrchidClosedAfterRecordedMovements();
                   hideDataLoading();
                   renderAll();
                 },
