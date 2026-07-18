@@ -2151,16 +2151,6 @@
               <option value="ingreso">Solo Ingresos</option>
               <option value="gasto">Solo Gastos</option>
             </select>
-            <select
-              id="filter-semana"
-              class="text-xs rounded-xl border border-white/10 bg-white p-2 focus:outline-none font-medium text-slate-600"
-            >
-              <option value="">Todas las semanas</option>
-              <option value="1">Semana 1 (días 1-7)</option>
-              <option value="2">Semana 2 (días 8-14)</option>
-              <option value="3">Semana 3 (días 15-21)</option>
-              <option value="4">Semana 4 (días 22-31)</option>
-            </select>
             <div id="cat-filter-wrap">
               <button
                 type="button"
@@ -4736,7 +4726,6 @@
       function limpiarFiltros() {
         document.getElementById("filter-proyecto").value = "";
         document.getElementById("filter-tipo").value = "";
-        document.getElementById("filter-semana").value = "";
         const todosMesesEl = document.getElementById("toggle-todos-meses");
         if (todosMesesEl) todosMesesEl.checked = false;
         filterCats.clear();
@@ -4774,16 +4763,11 @@
           : txDelMes(transactions);
         const filterProy = document.getElementById("filter-proyecto").value;
         const filterTipo = document.getElementById("filter-tipo").value;
-        const filterSemana = document.getElementById("filter-semana").value;
         let displayed = pool;
         if (filterProy)
           displayed = displayed.filter((t) => t.proyecto === filterProy);
         if (filterTipo)
           displayed = displayed.filter((t) => t.tipo === filterTipo);
-        if (!todosMeses && filterSemana)
-          displayed = displayed.filter(
-            (t) => getSemana(t.fecha) === filterSemana,
-          );
         if (filterCats.size > 0)
           displayed = displayed.filter((t) => filterCats.has(t.categoria));
         const sorted = [...displayed].sort((a, b) =>
@@ -5282,7 +5266,6 @@
       function irAMovimientosFiltrado(tipo, cats, todosMeses) {
         document.getElementById("filter-tipo").value = tipo || "";
         document.getElementById("filter-proyecto").value = "";
-        document.getElementById("filter-semana").value = "";
         filterCats.clear();
         if (cats)
           cats
@@ -6022,8 +6005,6 @@
 
         const filterProy = document.getElementById("filter-proyecto").value;
         const filterTipo = document.getElementById("filter-tipo").value;
-        const filterSemana = document.getElementById("filter-semana").value;
-
         const projects = [
           ...new Set(pool.filter((t) => t.proyecto).map((t) => t.proyecto)),
         ].sort();
@@ -6043,10 +6024,6 @@
           displayed = displayed.filter((t) => t.proyecto === filterProy);
         if (filterTipo)
           displayed = displayed.filter((t) => t.tipo === filterTipo);
-        if (!todosMeses && filterSemana)
-          displayed = displayed.filter(
-            (t) => getSemana(t.fecha) === filterSemana,
-          );
         if (filterCats.size > 0)
           displayed = displayed.filter((t) => filterCats.has(t.categoria));
 
@@ -7283,9 +7260,6 @@
         buildCatDropdown();
         renderMovimientos();
       });
-      document
-        .getElementById("filter-semana")
-        .addEventListener("change", renderMovimientos);
       document.addEventListener("click", (e) => {
         const wrap = document.getElementById("cat-filter-wrap");
         if (wrap && !wrap.contains(e.target))
