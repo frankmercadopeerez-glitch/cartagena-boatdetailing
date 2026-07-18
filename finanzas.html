@@ -3329,10 +3329,11 @@
       function isInternalFinanceEvent(transaction) {
         if (!transaction) return false;
         if (["project_close", "project_reopen"].includes(transaction.motorType)) return true;
+        const project = transaction.proyecto || transaction.project;
         return (
           !transaction.tipo &&
           !transaction.categoria &&
-          transaction.proyecto &&
+          project &&
           !transaction.monto &&
           !transaction.amount
         );
