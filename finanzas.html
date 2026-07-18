@@ -3515,9 +3515,10 @@
         });
       }
 
-      async function saveFinanceEvents(events) {
+      async function saveFinanceEvents(events, removeIds = []) {
         if (!db || !Array.isArray(events) || events.length === 0) return false;
         const createdAt = Date.now();
+        const idsToRemove = new Set(removeIds.filter(Boolean));
         const stampedEvents = events.map((event, index) => ({
           ...event,
           createdAt: event.createdAt || createdAt + index,
@@ -3527,14 +3528,19 @@
             ? db.collection("transacciones").doc(event.id)
             : db.collection("transacciones").doc(),
         );
-        const candidate = transactions.concat(
+        const candidate = transactions
+          .filter((transaction) => !idsToRemove.has(transaction.id))
+          .concat(
           stampedEvents.map((event, index) => ({ id: refs[index].id, ...event })),
-        );
+          );
         const nextState = calculateCandidateFinanceState(candidate);
         if (hasFinanceErrors(nextState)) {
           throw new Error(financeErrorMessage(nextState));
         }
         const batch = db.batch();
+        idsToRemove.forEach((id) =>
+          batch.delete(db.collection("transacciones").doc(id)),
+        );
         stampedEvents.forEach((event, index) => batch.set(refs[index], event));
         await batch.commit();
         transactions = candidate;
@@ -6551,13 +6557,30 @@
           await new Promise((resolve) => setTimeout(resolve, 320));
         }
         try {
-          await saveFinanceEvents([
-            makeFinanceEvent("project_close", {
-              project: projectName,
-              proyecto: projectName,
-              split: { frank: 0.5, cristian: 0.5 },
-            }),
-          ]);
+          const staleCloseIds = transactions
+            .filter((transaction) => {
+              const type =
+                transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+                  ? FINANCE_ENGINE.eventType(transaction)
+                  : legacyMotorType(transaction);
+              return (
+                type === "project_close" &&
+                normalizeProjectName(
+                  transaction.project || transaction.proyecto,
+                ) === normalizeProjectName(projectName)
+              );
+            })
+            .map((transaction) => transaction.id);
+          await saveFinanceEvents(
+            [
+              makeFinanceEvent("project_close", {
+                project: projectName,
+                proyecto: projectName,
+                split: { frank: 0.5, cristian: 0.5 },
+              }),
+            ],
+            staleCloseIds,
+          );
         } catch (e) {
           showToast("Error al cambiar estado: " + e.message, "delete");
           if (card) card.classList.remove("is-toggling", "is-opening", "is-closing");
