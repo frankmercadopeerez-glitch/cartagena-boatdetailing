@@ -1125,6 +1125,11 @@
       #main-app .partner-profit-private {
         display: none !important;
       }
+
+      #main-app #cuenta-cristian-gastos,
+      #main-app #cuenta-frank-gastos {
+        display: none !important;
+      }
     </style>
   </head>
   <body class="antialiased min-h-screen">
@@ -1448,9 +1453,10 @@
                 >Acumulado</span
               >
             </div>
+            <div class="grid grid-cols-2 gap-2 mb-3">
             <!-- Cristian -->
             <div
-              class="rounded-xl p-3 mb-2"
+              class="rounded-xl p-2 sm:p-3 min-w-0"
               style="
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.07);
@@ -1541,7 +1547,7 @@
             </div>
             <!-- Frank -->
             <div
-              class="rounded-xl p-3 mb-3"
+              class="rounded-xl p-2 sm:p-3 min-w-0"
               style="
                 background: rgba(255, 255, 255, 0.04);
                 border: 1px solid rgba(255, 255, 255, 0.07);
@@ -1629,6 +1635,7 @@
               >
                 Retirar Profit
               </button>
+            </div>
             </div>
             <!-- Settlement -->
             <div
@@ -5339,20 +5346,6 @@
           cristianProfit,
           cristianProfit > 0 ? "var(--accent-bright)" : "var(--text2)",
         );
-        const cristianGastos = document.getElementById("cuenta-cristian-gastos");
-        const frankGastos = document.getElementById("cuenta-frank-gastos");
-        if (cristianGastos)
-          cristianGastos.textContent =
-            "Entradas recibidas: " +
-            fmt(state.partnerIncome.cristian) +
-            " · Gastos pagados: " +
-            fmt(state.partnerExpenses.cristian);
-        if (frankGastos)
-          frankGastos.textContent =
-            "Entradas recibidas: " +
-            fmt(state.partnerIncome.frank) +
-            " · Gastos pagados: " +
-            fmt(state.partnerExpenses.frank);
         const btnRF = document.getElementById("btn-retiro-frank");
         const btnRC = document.getElementById("btn-retiro-cristian");
         if (btnRF) btnRF.style.display = frankProfit > 100 ? "" : "none";
