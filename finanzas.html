@@ -3303,6 +3303,13 @@
           : name;
       }
 
+      function sameCanonicalProject(left, right) {
+        return (
+          normalizeProjectName(canonicalProjectName(left)) ===
+          normalizeProjectName(canonicalProjectName(right))
+        );
+      }
+
       function financeEventKey(transaction) {
         return (
           String(transaction && transaction.fecha ? transaction.fecha : "0000-00-00") +
@@ -3635,8 +3642,7 @@
               : legacyMotorType(transaction);
           return (
             transactionType === type &&
-            normalizeProjectName(transaction.project || transaction.proyecto) ===
-              normalizeProjectName(name)
+            sameCanonicalProject(transaction.project || transaction.proyecto, name)
           );
         });
       }
@@ -3956,42 +3962,33 @@
         const orchidEntries = Object.entries(state.projects).filter(([name]) =>
           normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
         );
-        const closedEntry = orchidEntries.find(([, project]) => project.closed);
-        if (closedEntry) {
+        if (orchidEntries.length === 0) return;
+        const orchidCloseEvents = transactions.filter((transaction) => {
+          const type =
+            transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
+              ? FINANCE_ENGINE.eventType(transaction)
+              : legacyMotorType(transaction);
+          return (
+            type === "project_close" &&
+            sameCanonicalProject(transaction.project || transaction.proyecto, ORCHID_PROJECT_NAME)
+          );
+        });
+        const orchidIsClosed = orchidEntries.some(([, project]) => project.closed);
+        if (orchidIsClosed && state.validation.valid && orchidCloseEvents.length === 1) {
           try {
             localStorage.setItem(ORCHID_CLOSE_ONCE_KEY, "1");
           } catch (error) {}
           return;
         }
-        const projectEntry = orchidEntries
-          .slice()
-          .sort(([, left], [, right]) =>
-            Number(right.income || 0) + Number(right.expenses || 0) -
-            (Number(left.income || 0) + Number(left.expenses || 0)),
-          )[0];
-        if (!projectEntry) return;
         orchidCloseMigrationRunning = true;
         try {
-          const projectName = projectEntry[1].name;
-          const staleCloseIds = transactions
-            .filter((transaction) => {
-              const type =
-                transaction.motorVersion === FINANCE_ENGINE.ENGINE_VERSION
-                  ? FINANCE_ENGINE.eventType(transaction)
-                  : legacyMotorType(transaction);
-              return (
-                type === "project_close" &&
-                normalizeProjectName(
-                  transaction.project || transaction.proyecto,
-                ) === normalizeProjectName(projectName)
-              );
-            })
-            .map((transaction) => transaction.id);
+          const staleCloseIds = orchidCloseEvents.map((transaction) => transaction.id);
           await saveFinanceEvents(
             [
               makeFinanceEvent("project_close", {
-                project: projectName,
-                proyecto: projectName,
+                id: "system-orchid-close-final-" + Date.now(),
+                project: ORCHID_PROJECT_NAME,
+                proyecto: ORCHID_PROJECT_NAME,
                 split: { frank: 0.5, cristian: 0.5 },
                 descripcion: "Cierre de Orchid con movimientos registrados",
               }),
@@ -6673,9 +6670,10 @@
                   : legacyMotorType(transaction);
               return (
                 type === "project_close" &&
-                normalizeProjectName(
+                sameCanonicalProject(
                   transaction.project || transaction.proyecto,
-                ) === normalizeProjectName(projectName)
+                  projectName,
+                )
               );
             })
             .map((transaction) => transaction.id);
