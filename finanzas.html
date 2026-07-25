@@ -1137,6 +1137,10 @@
         letter-spacing: -0.035em;
         text-shadow: 0 0 24px rgba(69,240,168,0.16);
       }
+      #main-app .partner-balance-value.is-negative {
+        color: var(--red) !important;
+        text-shadow: 0 0 24px rgba(255,107,134,0.2);
+      }
 
       #main-app #btn-retiro-cristian,
       #main-app #btn-retiro-frank {
@@ -3555,10 +3559,9 @@
 
       function getPartnerBalances(state) {
         const workingCapital = getWorkingCapital(state);
-        const profitAvailable = (state && state.profitAvailable) || {};
         return {
-          frank: workingCapital.frank + (profitAvailable.frank || 0),
-          cristian: workingCapital.cristian + (profitAvailable.cristian || 0),
+          frank: workingCapital.frank,
+          cristian: workingCapital.cristian,
         };
       }
 
@@ -5425,6 +5428,7 @@
           if (!element) return;
           animateNumber(element, value);
           element.style.color = color;
+          element.classList.toggle("is-negative", Number(value) < 0);
         };
         const frankCapital = partnerBalances.frank;
         const cristianCapital = partnerBalances.cristian;
@@ -5844,7 +5848,7 @@
 
       function renderGlobalKPIs() {
         const state = getFinanceState();
-        const workingCapitalActive = getWorkingCapitalActive(state);
+        const openProjectsBalance = getOpenProjectsBalance(state);
         const setValue = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
@@ -5860,8 +5864,8 @@
         );
         setValue(
           "g-margen",
-          workingCapitalActive,
-          workingCapitalActive >= 0 ? "#38BDF8" : "#f87171",
+          openProjectsBalance,
+          openProjectsBalance >= 0 ? "#38BDF8" : "#f87171",
         );
         ["g-ingresos", "g-gastos", "g-profit", "g-margen"].forEach((id) =>
           flashEl(id),

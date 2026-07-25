@@ -293,8 +293,7 @@
       state.capital[partner] +
       state.partnerIncome[partner] -
       state.activePartnerExpenses[partner] -
-      state.accountWithdrawals[partner] +
-      state.profitAvailable[partner];
+      state.accountWithdrawals[partner];
     if (accountBalance < amount) {
       addError(state, "ACCOUNT_INSUFFICIENT", "El retiro supera el dinero disponible en cuenta del socio.", event);
       return;
@@ -302,7 +301,7 @@
     state.cash -= amount;
     const profitPortion = Math.min(state.profitAvailable[partner], amount);
     state.profitAvailable[partner] -= profitPortion;
-    state.accountWithdrawals[partner] += amount - profitPortion;
+    state.accountWithdrawals[partner] += amount;
     state.profitWithdrawals += profitPortion;
   }
 
@@ -352,8 +351,6 @@
       return;
     }
     const releasedCapital = clonePartners(target.capital);
-    const settledIncome = clonePartners(target.incomeByPartner);
-    const settledExpenses = clonePartners(target.expenseByPartner);
     const releasedTotal = releasedCapital.frank + releasedCapital.cristian;
     const distributable = money(releasedTotal + utility);
     const targetProfit = money(
@@ -371,12 +368,10 @@
       cristian: money(targetProfit - state.profitAvailable.cristian),
     };
     PARTNERS.forEach((partner) => {
-      state.capital[partner] -= releasedCapital[partner];
-      state.partnerIncome[partner] -= settledIncome[partner];
-      state.activePartnerExpenses[partner] -= settledExpenses[partner];
       state.profitAvailable[partner] += profitByPartner[partner];
     });
     state.capitalActive -= releasedTotal;
+    state.releasedProjectCapital += releasedTotal;
     state.profitTotal += distributable;
     target.profit = distributable;
     target.closed = true;
@@ -388,8 +383,8 @@
       legacyCapital: money(target.legacyCapital),
       distributable,
       releasedCapital,
-      settledIncome,
-      settledExpenses,
+      settledIncome: clonePartners(target.incomeByPartner),
+      settledExpenses: clonePartners(target.expenseByPartner),
       profitByPartner,
     };
   }
@@ -429,6 +424,7 @@
       partnerIncome: clonePartners(opening.partnerIncome),
       activePartnerExpenses: clonePartners(opening.activePartnerExpenses),
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
+      releasedProjectCapital: 0,
       projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
       validation: { valid: true, errors: [], checks: {} },
@@ -472,8 +468,8 @@
       ),
     };
     state.balanceByPartner = {
-      frank: money(state.workingCapital.frank + state.profitAvailable.frank),
-      cristian: money(state.workingCapital.cristian + state.profitAvailable.cristian),
+      frank: state.workingCapital.frank,
+      cristian: state.workingCapital.cristian,
     };
     state.workingCapitalActive = money(
       state.workingCapital.frank + state.workingCapital.cristian,
@@ -492,16 +488,20 @@
     );
     const openingCapitalDifference = money(opening.capital.frank + opening.capital.cristian - opening.capitalActive);
     const capitalDifference = money(state.capitalPartnersTotal - state.capitalActive);
+    const expectedCapitalDifference = money(
+      openingCapitalDifference + state.releasedProjectCapital,
+    );
     const expectedProfitTotal = money(
       state.profitAvailableTotal + state.profitWithdrawals,
     );
 
     state.validation.checks = {
       capital: {
-        valid: capitalDifference === openingCapitalDifference,
+        valid: capitalDifference === expectedCapitalDifference,
         partners: state.capitalPartnersTotal,
         active: state.capitalActive,
         openingRounding: openingCapitalDifference,
+        released: state.releasedProjectCapital,
       },
       profit: {
         valid: expectedProfitTotal === state.profitTotal,

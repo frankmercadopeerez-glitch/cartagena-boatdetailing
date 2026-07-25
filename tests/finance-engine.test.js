@@ -99,7 +99,11 @@ function assertValid(state) {
     event("project_close", { id: "cierre-recepcion", project: "Recepcion" }),
   ]);
   assertValid(closed);
-  assert.equal(closed.partnerIncome.cristian, 0);
+  assert.equal(closed.partnerIncome.cristian, 1500000);
+  assert.equal(
+    closed.balanceByPartner.cristian,
+    open.balanceByPartner.cristian,
+  );
 }
 
 // Una entrada historica puede asignarse a un socio sin duplicar los totales
@@ -139,9 +143,11 @@ function assertValid(state) {
   ]);
   assertValid(state);
   assert.equal(state.capitalActive, 820000);
-  assert.equal(state.capital.frank, 2651068.5);
+  assert.equal(state.capital.frank, 4151068.5);
   assert.equal(state.profitAvailable.frank, 2250000);
   assert.equal(state.profitAvailable.cristian, 2250000);
+  assert.equal(state.balanceByPartner.frank, 4151068.5);
+  assert.equal(state.balanceByPartner.cristian, 5651068.5);
   assert.equal(state.profitTotal, 14225551);
   assert.equal(state.projects.Orchid.closed, true);
   assert.equal(state.projects.Orchid.profit, 4500000);
@@ -256,8 +262,8 @@ function assertValid(state) {
   );
   assertValid(state);
   assert.equal(state.projects["Bote ORCHID"].profit, 320000);
-  assert.equal(state.workingCapitalActive, 4482137);
-  assert.equal(state.activePartnerExpenses.cristian, 0);
+  assert.equal(state.workingCapitalActive, 4802137);
+  assert.equal(state.activePartnerExpenses.cristian, 500000);
 }
 
 // Retiro de profit: solo toca caja y el profit del socio que retira.
