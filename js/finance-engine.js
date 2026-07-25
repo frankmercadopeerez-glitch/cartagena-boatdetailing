@@ -91,7 +91,6 @@
   }
 
   function isAfterOpening(event, opening) {
-    if (event && event.accountingAfterOpening === true) return true;
     const eventKey = eventDate(event) + "T" + eventTime(event);
     const openingKey = String(opening.asOf || "0000-00-00") + "T" +
       String(opening.asOfTime || "00:00");

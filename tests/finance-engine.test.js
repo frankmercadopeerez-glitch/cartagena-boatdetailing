@@ -153,19 +153,15 @@ function assertValid(state) {
   assert.equal(state.projects.Orchid.profit, 4500000);
 }
 
-// Un movimiento restaurado puede conservar su hora visible anterior al corte,
-// pero debe contabilizarse despues si no formaba parte del saldo de apertura.
+// El primer pago de Orchid ya pertenece al saldo de apertura. El saldo final
+// posterior completa el proyecto sin volver a sumar el primer pago a la caja.
 {
   const state = calculate(
     [
       event("income", {
-        id: "restored-orchid-advance-20260712-1901",
         project: "Bote ORCHID",
         receptor: "Frank",
         monto: 1495000,
-        fecha: "2026-07-12",
-        hora: "19:01",
-        accountingAfterOpening: true,
       }),
       event("expense", {
         project: "Bote ORCHID",

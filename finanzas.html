@@ -66,7 +66,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=partner-balances-v2"></script>
+    <script src="/js/finance-engine.js?v=opening-orchid-v3"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -3269,7 +3269,7 @@
       const MUSIQUITA_REOPEN_KEY = "cbd-finanzas-musiquita-reopen-v1";
       const RECREATED_MOVEMENTS_KEY = "cbd-finanzas-recreated-movements-v1";
       const ORCHID_CLOSE_ONCE_KEY = "cbd-finanzas-orchid-close-once-v1";
-      const POST_OPENING_ACCOUNTING_EVENT_IDS = new Set([
+      const OPENING_PROJECT_EVENT_IDS = new Set([
         "restored-orchid-advance-20260712-1901",
       ]);
 
@@ -3318,12 +3318,6 @@
       }
 
       function isAfterFinanceOpening(transaction) {
-        if (
-          transaction &&
-          POST_OPENING_ACCOUNTING_EVENT_IDS.has(transaction.id)
-        ) {
-          return true;
-        }
         const openingKey =
           String(FINANCE_OPENING.asOf || "0000-00-00") +
           "T" +
@@ -3419,14 +3413,9 @@
             const project = canonicalProjectName(
               transaction.project || transaction.proyecto,
             );
-            const normalized = POST_OPENING_ACCOUNTING_EVENT_IDS.has(
-              transaction.id,
-            )
-              ? { ...transaction, accountingAfterOpening: true }
-              : transaction;
             return project
-              ? { ...normalized, project, proyecto: project }
-              : normalized;
+              ? { ...transaction, project, proyecto: project }
+              : transaction;
           }
           if (!isPostOpeningLegacyTransaction(transaction)) return null;
           if (restoredMovementKeys.has(movementFingerprint(transaction))) return null;
@@ -3451,8 +3440,9 @@
         source
           .filter(
             (transaction) =>
-              !isPostOpeningLegacyTransaction(transaction) &&
-              transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+              (OPENING_PROJECT_EVENT_IDS.has(transaction.id) ||
+                (!isPostOpeningLegacyTransaction(transaction) &&
+                  transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION)) &&
               esNombreProyectoReal(transaction.proyecto),
           )
           .forEach((transaction) => {
@@ -3475,8 +3465,9 @@
         activeNames.forEach((name) => {
           const projectTransactions = source.filter(
             (transaction) =>
-              !isPostOpeningLegacyTransaction(transaction) &&
-              transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION &&
+              (OPENING_PROJECT_EVENT_IDS.has(transaction.id) ||
+                (!isPostOpeningLegacyTransaction(transaction) &&
+                  transaction.motorVersion !== FINANCE_ENGINE.ENGINE_VERSION)) &&
               esNombreProyectoReal(transaction.proyecto) &&
               transaction.categoria !== TRANSFER_CAT &&
               !CAPITAL_GASTO_CATS.includes(transaction.categoria) &&
@@ -7831,7 +7822,7 @@
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=partner-balances-v34", { updateViaCache: "none" })
+            .register("/sw.js?build=opening-orchid-v35", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
