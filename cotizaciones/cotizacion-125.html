@@ -250,6 +250,65 @@
         color: var(--primary-color);
       }
 
+      .bold-box {
+        background: #f0faf5;
+        border: 1px solid rgba(31, 122, 74, 0.35);
+        border-left: 3px solid var(--ok-color);
+        border-radius: 3px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+      }
+
+      .bold-box h4 {
+        color: var(--ok-color);
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .bold-box p {
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+
+      .warranty-box {
+        background: #f8fafc;
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .terms-section {
+        background: #f8fafc;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .warranty-box h4,
+      .terms-section h4 {
+        color: var(--primary-color);
+        margin-bottom: 6px;
+        font-size: 12px;
+      }
+
+      .terms-section ul,
+      .warranty-box ul {
+        margin-left: 15px;
+        line-height: 1.6;
+      }
+
       footer {
         border-top: 1px solid var(--border-color);
         margin-top: 12px;
@@ -270,6 +329,9 @@
         .quote-info {
           text-align: left;
         }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media print {
@@ -283,9 +345,21 @@
           max-width: 100%;
           width: 100%;
           margin: 0;
-          padding: 0;
+          padding: 5mm 6mm;
           box-shadow: none;
-          border-top-width: 5px;
+        }
+
+        .totals-section,
+        .bold-box,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
         }
       }
     </style>
@@ -345,10 +419,13 @@
       <div class="diagnostico-box">
         <h4>Diagnóstico y alcance</h4>
         <p>
-          Se identifican rayones profundos distribuidos en la zona azul del casco, junto con un
-          <strong>golpe profundo en la proa</strong> con deformación y pérdida de material de gelcoat.
-          El objetivo del trabajo es lograr un <strong>color uniforme en toda la zona afectada</strong>,
-          disimulando los rayones y el impacto de proa mediante relleno, igualación de tono y pulido final.
+          Se identifican rayones profundos distribuidos en la zona azul del
+          casco, junto con un
+          <strong>golpe profundo en la proa</strong> con deformación y pérdida
+          de material de gelcoat. El objetivo del trabajo es lograr un
+          <strong>color uniforme en toda la zona afectada</strong>, disimulando
+          los rayones y el impacto de proa mediante relleno, igualación de tono
+          y pulido final.
         </p>
       </div>
 
@@ -369,9 +446,9 @@
                 golpe de proa
               </div>
               <div class="item-desc">
-                Restauración completa de las zonas dañadas del gelcoat azul
-                para lograr un <strong>acabado visualmente uniforme</strong> en
-                todo el casco. El trabajo incluye:
+                Restauración completa de las zonas dañadas del gelcoat azul para
+                lograr un <strong>acabado visualmente uniforme</strong> en todo
+                el casco. El trabajo incluye:
                 <ul>
                   <li>
                     <strong>Golpe profundo en proa:</strong> relleno y
@@ -420,9 +497,42 @@
         </div>
       </div>
 
+      <div class="bold-box">
+        <h4>&#128279; Pago en linea — Bold</h4>
+        <p>
+          Una vez aprobada esta cotización, se enviará el link de pago
+          personalizado. Podrá realizar el pago de forma segura con tarjeta de
+          crédito, débito o transferencia bancaria a través de la plataforma
+          <strong>Bold</strong>. El anticipo del 50% activa la programación del
+          servicio.
+        </p>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>&#9200; Tiempo estimado de ejecución</h4>
+          <ul>
+            <li>
+              Corrección de rayones profundos, golpes y golpe de proa:
+              <strong>2 días hábiles</strong>.
+            </li>
+            <li>Equipo de trabajo: <strong>2 técnicos especializados</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo del 50% para programar el trabajo.</li>
+            <li>Saldo 50% contra entrega a satisfacción.</li>
+            <li>Costos de ingreso a la marina por cuenta del cliente.</li>
+          </ul>
+        </div>
+      </div>
+
       <footer>
-        Colombia Boat Detailing · Cartagena de Indias ·
-        www.colombiaboatdetailing.com
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Gracias por confiar en los especialistas en estética naval.</p>
       </footer>
     </div>
   </body>

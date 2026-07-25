@@ -4,22 +4,29 @@
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      (function(){
-        function loadGA(){
-          if(window._gaLoaded)return;
-          window._gaLoaded=true;
-          var s=document.createElement('script');
-          s.async=true;
-          s.src='https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018';
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        function loadGA() {
+          if (window._gaLoaded) return;
+          window._gaLoaded = true;
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-01GC6QM018";
           document.head.appendChild(s);
-          gtag('js',new Date());
-          gtag('config','G-01GC6QM018');
+          gtag("js", new Date());
+          gtag("config", "G-01GC6QM018");
         }
-        if(document.readyState==='complete'){setTimeout(loadGA,2000);}
-        else{window.addEventListener('load',function(){setTimeout(loadGA,2000);});}
-        ['click','touchstart','scroll','keydown'].forEach(function(e){
-          document.addEventListener(e,loadGA,{once:true,passive:true});
+        if (document.readyState === "complete") {
+          setTimeout(loadGA, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            setTimeout(loadGA, 2000);
+          });
+        }
+        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+          document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
@@ -448,10 +455,22 @@
         }
       }
     </style>
-      <!-- Preload critical fonts -->
-    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
-</head>
+    <!-- Preload critical fonts -->
+    <link
+      rel="preload"
+      href="../fonts/inter-normal-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/playfair-display-normal-700-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
   <body>
     <header>
       <div class="header-inner">
@@ -1177,7 +1196,9 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">ORCHID</h3>
-            <p class="card-subtitle">Jet Speed Marine · Marina Nautica Integral</p>
+            <p class="card-subtitle">
+              Jet Speed Marine · Marina Nautica Integral
+            </p>
             <div class="card-divider"></div>
             <div class="card-meta">
               <div class="card-meta-row">
@@ -1190,7 +1211,9 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Pulido integral de gelcoat + proteccion cojineria</span>
+                <span class="value"
+                  >Pulido integral de gelcoat + proteccion cojineria</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
@@ -1224,7 +1247,9 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">ORCHID</h3>
-            <p class="card-subtitle">Reparación de rayones profundos y golpes</p>
+            <p class="card-subtitle">
+              Reparación de rayones profundos y golpes
+            </p>
             <div class="card-divider"></div>
             <div class="card-meta">
               <div class="card-meta-row">
@@ -1237,7 +1262,9 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Reparación gelcoat · igualación de color</span>
+                <span class="value"
+                  >Reparación gelcoat · igualación de color</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
@@ -1284,7 +1311,9 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Restauracion integral — casco, cubierta, antifouling</span>
+                <span class="value"
+                  >Restauracion integral — casco, cubierta, antifouling</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
@@ -1331,7 +1360,9 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Pintura tapa motor + caucho borda + foam deck</span>
+                <span class="value"
+                  >Pintura tapa motor + caucho borda + foam deck</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
@@ -1365,7 +1396,9 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">Suerte</h3>
-            <p class="card-subtitle">Manuel Zapata · Sea Ray Sundancer 46 pies</p>
+            <p class="card-subtitle">
+              Manuel Zapata · Sea Ray Sundancer 46 pies
+            </p>
             <div class="card-divider"></div>
             <div class="card-meta">
               <div class="card-meta-row">
@@ -1378,16 +1411,31 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Carpa, cubierta teka, madera interna, pintura radares</span>
+                <span class="value"
+                  >Carpa, cubierta teka, madera interna, pintura radares</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
-                <span class="value" style="color:var(--accent-color);font-style:italic;">Valoracion pendiente</span>
+                <span
+                  class="value"
+                  style="color: var(--accent-color); font-style: italic"
+                  >Valoracion pendiente</span
+                >
               </div>
             </div>
             <span class="card-cta">
               Ver cotización
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
@@ -1398,7 +1446,11 @@
         <!-- ── COTIZACIÓN #114 — HAYA AZIMUT 46 (ACTUALIZACIÓN) ── -->
         <a class="card" href="cotizacion-114.html">
           <div class="card-image-wrap">
-            <img src="images/haya/HAYA%20(1).jpeg" alt="Yate HAYA" onerror="this.style.display='none'" />
+            <img
+              src="images/haya/HAYA%20(1).jpeg"
+              alt="Yate HAYA"
+              onerror="this.style.display = 'none'"
+            />
             <span class="card-badge">CBD-2026-114</span>
           </div>
           <div class="card-body">
@@ -1416,7 +1468,10 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Informe de avance — pisos, iluminación, acrilicos, polarizado, lona, botes RIB</span>
+                <span class="value"
+                  >Informe de avance — pisos, iluminación, acrilicos,
+                  polarizado, lona, botes RIB</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total comprometido</span>
@@ -1425,7 +1480,16 @@
             </div>
             <span class="card-cta">
               Ver cotización
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
@@ -1441,7 +1505,9 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">Leyla</h3>
-            <p class="card-subtitle">Rayones profundos · acrílicos · parabrisas curvo</p>
+            <p class="card-subtitle">
+              Rayones profundos · acrílicos · parabrisas curvo
+            </p>
             <div class="card-divider"></div>
             <div class="card-meta">
               <div class="card-meta-row">
@@ -1454,16 +1520,27 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Corrección rayones · acrílicos · parabrisas curvo</span>
+                <span class="value"
+                  >Corrección rayones · acrílicos · parabrisas curvo</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
-                <span class="value price">$ 5.600.000 COP</span>
+                <span class="value price">$ 5.800.000 COP</span>
               </div>
             </div>
             <span class="card-cta">
               Ver cotización
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
@@ -1492,7 +1569,9 @@
               </div>
               <div class="card-meta-row">
                 <span class="label">Servicio</span>
-                <span class="value">Pulido 3 capas espejo + limpieza cojineria</span>
+                <span class="value"
+                  >Pulido 3 capas espejo + limpieza cojineria</span
+                >
               </div>
               <div class="card-meta-row">
                 <span class="label">Total</span>
