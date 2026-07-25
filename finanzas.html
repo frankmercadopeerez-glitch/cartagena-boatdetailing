@@ -4468,8 +4468,7 @@
                   await ensureOrchidOpenForManualClose();
                   await ensureMusiquitaOpenAfterAccidentalClose();
                   await ensureRecreatedPostEqualizationMovements();
-                  // Los cierres se realizan de forma explícita. No reparar Orchid
-                  // automáticamente al abrir la app: podía reemplazar eventos válidos.
+                  await ensureOrchidClosedAfterRecordedMovements();
                   hideDataLoading();
                   renderAll();
                 },
