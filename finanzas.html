@@ -3265,6 +3265,9 @@
       const MUSIQUITA_REOPEN_KEY = "cbd-finanzas-musiquita-reopen-v1";
       const RECREATED_MOVEMENTS_KEY = "cbd-finanzas-recreated-movements-v1";
       const ORCHID_CLOSE_ONCE_KEY = "cbd-finanzas-orchid-close-once-v1";
+      const POST_OPENING_ACCOUNTING_EVENT_IDS = new Set([
+        "restored-orchid-advance-20260712-1901",
+      ]);
 
       function normalizeProjectName(value) {
         return String(value || "").trim().toLowerCase();
@@ -3311,6 +3314,12 @@
       }
 
       function isAfterFinanceOpening(transaction) {
+        if (
+          transaction &&
+          POST_OPENING_ACCOUNTING_EVENT_IDS.has(transaction.id)
+        ) {
+          return true;
+        }
         const openingKey =
           String(FINANCE_OPENING.asOf || "0000-00-00") +
           "T" +
@@ -3406,9 +3415,14 @@
             const project = canonicalProjectName(
               transaction.project || transaction.proyecto,
             );
-            return project
-              ? { ...transaction, project, proyecto: project }
+            const normalized = POST_OPENING_ACCOUNTING_EVENT_IDS.has(
+              transaction.id,
+            )
+              ? { ...transaction, accountingAfterOpening: true }
               : transaction;
+            return project
+              ? { ...normalized, project, proyecto: project }
+              : normalized;
           }
           if (!isPostOpeningLegacyTransaction(transaction)) return null;
           if (restoredMovementKeys.has(movementFingerprint(transaction))) return null;

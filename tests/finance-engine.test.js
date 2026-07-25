@@ -147,6 +147,47 @@ function assertValid(state) {
   assert.equal(state.projects.Orchid.profit, 4500000);
 }
 
+// Un movimiento restaurado puede conservar su hora visible anterior al corte,
+// pero debe contabilizarse despues si no formaba parte del saldo de apertura.
+{
+  const state = calculate(
+    [
+      event("income", {
+        id: "restored-orchid-advance-20260712-1901",
+        project: "Bote ORCHID",
+        receptor: "Frank",
+        monto: 1495000,
+        fecha: "2026-07-12",
+        hora: "19:01",
+        accountingAfterOpening: true,
+      }),
+      event("expense", {
+        project: "Bote ORCHID",
+        responsible: "Cristian",
+        monto: 500000,
+      }),
+      event("project_close", {
+        project: "Bote ORCHID",
+      }),
+    ],
+    engine.OPENING_STATE,
+    {
+      "Bote ORCHID": {
+        income: 1495000,
+        expenses: 675000,
+        capital: { frank: 410000, cristian: 410000 },
+        legacyCapital: 820000,
+      },
+    },
+  );
+  assertValid(state);
+  assert.equal(state.projects["Bote ORCHID"].income, 2990000);
+  assert.equal(state.projects["Bote ORCHID"].expenses, 1175000);
+  assert.equal(state.projects["Bote ORCHID"].profit, 1815000);
+  assert.equal(state.totalIncome, engine.OPENING_STATE.totalIncome + 1495000);
+  assert.equal(state.profitTotal, engine.OPENING_STATE.profitTotal + 1815000);
+}
+
 // Un evento antiguo de reapertura nunca revierte un cierre definitivo.
 {
   const state = calculate([
