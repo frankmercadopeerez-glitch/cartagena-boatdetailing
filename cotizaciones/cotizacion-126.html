@@ -333,6 +333,40 @@
           grid-template-columns: 1fr;
         }
       }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 10mm;
+        }
+
+        body {
+          padding: 0;
+          margin: 0;
+          background: white;
+        }
+
+        .invoice-container {
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 5mm 6mm;
+          box-shadow: none;
+        }
+
+        .totals-section,
+        .bold-box,
+        .bottom-grid,
+        .warranty-box,
+        .terms-section,
+        footer {
+          break-inside: avoid;
+        }
+
+        tr {
+          break-inside: avoid;
+        }
+      }
     </style>
     <link
       rel="preload"
