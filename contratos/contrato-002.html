@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contrato CBD-SN-002-2026 — Restauración Botes RIB / Yate HAYA - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #374151;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+        --warn-color: #b45309;
+        --danger-color: #9b1c1c;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      @page { size: A4; margin: 10mm; }
+
+      body {
+        background: #edf2f7;
+        color: var(--text-color);
+        padding: 16px;
+        font-size: 12px;
+        line-height: 1.65;
+      }
+
+      .contract-container {
+        max-width: 780px;
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-top: 8px solid var(--primary-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 24px 28px 22px;
+      }
+
+      /* ── HEADER ── */
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 14px;
+        margin-bottom: 14px;
+      }
+
+      .brand-info { display: flex; align-items: center; gap: 10px; }
+      .brand-info img { height: 50px; width: auto; }
+
+      .brand-text h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--primary-color);
+        font-size: 21px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 3px;
+      }
+
+      .brand-text p {
+        color: var(--accent-color);
+        font-size: 9.5px;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        font-weight: 700;
+      }
+
+      .contract-ref { text-align: right; font-size: 11.5px; }
+
+      .contract-ref h2 {
+        color: var(--secondary-color);
+        font-size: 14px;
+        font-family: Georgia, serif;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .contract-ref p { color: var(--text-light); margin-bottom: 2px; }
+
+      .confidential-badge {
+        display: inline-block;
+        background: var(--danger-color);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 3px;
+        margin-top: 6px;
+      }
+
+      /* ── PARTIES ── */
+      .parties-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .party-card {
+        background: #f8fafc;
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+      }
+
+      .party-card.cliente { border-left-color: var(--accent-color); }
+
+      .party-card h3 {
+        font-size: 9px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+
+      .party-card p {
+        color: var(--primary-color);
+        font-size: 11.5px;
+        margin-bottom: 2px;
+      }
+
+      .party-card strong { color: var(--secondary-color); }
+
+      /* ── INTRO ── */
+      .intro-box {
+        background: rgba(184, 144, 77, 0.1);
+        border: 1px solid rgba(184, 144, 77, 0.3);
+        border-radius: 3px;
+        padding: 11px 14px;
+        margin-bottom: 14px;
+        font-size: 11.5px;
+        line-height: 1.65;
+        color: var(--text-color);
+      }
+
+      .intro-box strong { color: var(--secondary-color); }
+
+      /* ── CLAUSES ── */
+      .clause-number {
+        display: inline-block;
+        background: var(--primary-color);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        padding: 3px 9px;
+        border-radius: 2px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      .clause-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 13px;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin: 16px 0 7px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .clause-title.important { border-bottom-color: var(--accent-color); }
+      .clause-title.warning { border-bottom-color: var(--danger-color); }
+
+      .clause-body {
+        font-size: 11.5px;
+        line-height: 1.7;
+        color: var(--text-color);
+        margin-bottom: 4px;
+      }
+
+      .clause-body p { margin-bottom: 6px; }
+
+      .clause-body ul, .clause-body ol {
+        margin: 6px 0 6px 18px;
+        line-height: 1.75;
+      }
+
+      .clause-body li { margin-bottom: 3px; }
+      .clause-body strong { color: var(--secondary-color); }
+      .clause-body em { color: var(--danger-color); font-style: normal; font-weight: 600; }
+
+      /* ── BOXES ── */
+      .highlight-box {
+        background: rgba(5, 11, 20, 0.05);
+        border-left: 3px solid var(--primary-color);
+        padding: 8px 12px;
+        margin: 8px 0;
+        font-size: 11.5px;
+        line-height: 1.65;
+      }
+
+      .highlight-box.warning {
+        background: rgba(155, 28, 28, 0.05);
+        border-left-color: var(--danger-color);
+        color: var(--danger-color);
+      }
+
+      .highlight-box.success {
+        background: rgba(31, 122, 74, 0.07);
+        border-left-color: var(--ok-color);
+      }
+
+      .highlight-box.accent {
+        background: rgba(184, 144, 77, 0.08);
+        border-left-color: var(--accent-color);
+      }
+
+      /* ── PHASE TABLE ── */
+      .phase-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 11px;
+      }
+
+      .phase-table th {
+        background: var(--primary-color);
+        color: #fff;
+        padding: 7px 10px;
+        text-align: left;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .phase-table th:last-child { text-align: right; }
+
+      .phase-table td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px 10px;
+        vertical-align: top;
+      }
+
+      .phase-table td:last-child { text-align: right; font-weight: 700; }
+
+      .phase-table tr:nth-child(even) td { background: #f8fafc; }
+
+      .phase-table .total-row td {
+        background: var(--secondary-color);
+        color: #fff;
+        font-weight: 700;
+        font-size: 12px;
+        border: none;
+      }
+
+      .phase-table .total-row td:last-child { color: #fff; }
+
+      /* ── SCOPE TABLE ── */
+      .scope-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0;
+        font-size: 11px;
+      }
+
+      .scope-table th {
+        background: var(--secondary-color);
+        color: #fff;
+        padding: 7px 10px;
+        text-align: left;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .scope-table td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 7px 10px;
+        vertical-align: top;
+      }
+
+      .scope-table tr:nth-child(even) td { background: #f8fafc; }
+
+      /* ── INCENTIVE TABLE ── */
+      .incentive-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 10px 0;
+      }
+
+      .incentive-box {
+        padding: 10px 12px;
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      .incentive-box.bonus {
+        background: rgba(31, 122, 74, 0.07);
+        border-left: 3px solid var(--ok-color);
+      }
+
+      .incentive-box.penalty {
+        background: rgba(155, 28, 28, 0.06);
+        border-left: 3px solid var(--danger-color);
+      }
+
+      .incentive-box h4 {
+        font-size: 11px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .incentive-box.bonus h4 { color: var(--ok-color); }
+      .incentive-box.penalty h4 { color: var(--danger-color); }
+      .incentive-box ul { margin-left: 14px; }
+
+      /* ── SIGNATURE ── */
+      .signature-section { margin-top: 24px; page-break-inside: avoid; }
+
+      .sig-title {
+        font-family: Georgia, serif;
+        font-size: 13px;
+        color: var(--primary-color);
+        border-bottom: 1px solid var(--accent-color);
+        padding-bottom: 4px;
+        margin-bottom: 14px;
+        font-weight: 700;
+      }
+
+      .sig-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 10px;
+      }
+
+      .sig-block { padding-top: 8px; font-size: 11px; }
+
+      .sig-line {
+        border-top: 1px solid #4a5568;
+        margin-bottom: 5px;
+        margin-top: 56px;
+      }
+
+      .sig-name { font-weight: 700; color: var(--primary-color); font-size: 11.5px; }
+      .sig-role { color: var(--text-light); font-size: 10.5px; }
+      .sig-id { color: var(--text-light); font-size: 10.5px; margin-top: 2px; }
+
+      /* ── DECLARATION BOX ── */
+      .declaration-box {
+        background: var(--primary-color);
+        color: #e2e8f0;
+        padding: 12px 14px;
+        margin: 14px 0;
+        font-size: 11px;
+        line-height: 1.7;
+        border-radius: 3px;
+      }
+
+      .declaration-box strong { color: var(--accent-color); }
+
+      footer {
+        border-top: 1px solid var(--border-color);
+        margin-top: 16px;
+        padding-top: 8px;
+        text-align: center;
+        font-size: 10px;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 760px) {
+        .contract-container { padding: 16px; }
+        header, .parties-box { flex-direction: column; grid-template-columns: 1fr; }
+        .sig-grid { grid-template-columns: 1fr; }
+        .contract-ref { text-align: left; }
+        .incentive-grid { grid-template-columns: 1fr; }
+      }
+
+      @media print {
+        @page { size: A4; margin: 0; }
+        body { padding: 0; margin: 0; background: white; }
+        .contract-container {
+          max-width: 100%; width: 100%; margin: 0;
+          padding: 5mm 6mm; box-shadow: none;
+        }
+        .signature-section { page-break-before: always; break-before: always; }
+        .clause-title, .sig-grid, .incentive-grid { break-inside: avoid; }
+        .phase-table, .scope-table { break-inside: avoid; }
+      }
+    </style>
+    <link rel="preload" href="../fonts/inter-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../fonts/playfair-display-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div class="contract-container">
+
+      <!-- ══ ENCABEZADO ══ -->
+      <header>
+        <div class="brand-info">
+          <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" />
+          <div class="brand-text">
+            <h1>Colombia Boat Detailing</h1>
+            <p>INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S</p>
+          </div>
+        </div>
+        <div class="contract-ref">
+          <h2>Contrato de Servicios<br />Navales por Fases</h2>
+          <p><strong>No.:</strong> CBD-SN-002-2026</p>
+          <p><strong>Fecha:</strong> 25 de julio de 2026</p>
+          <p><strong>Ref. cotización:</strong> CBD-2026-114 (ítem G)</p>
+          <span class="confidential-badge">Documento Confidencial</span>
+        </div>
+      </header>
+
+      <!-- ══ PARTES ══ -->
+      <div class="parties-box">
+        <div class="party-card">
+          <h3>El Prestador del Servicio</h3>
+          <p><strong>INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S</strong></p>
+          <p>Marca comercial: <strong>Colombia Boat Detailing</strong></p>
+          <p>NIT: <strong>902071074-0</strong></p>
+          <p>Representante: <strong>Frank Mercado</strong></p>
+          <p>Ciudad: Cartagena de Indias, Bolívar</p>
+          <p>Tel.: 301 373 5999</p>
+          <p style="margin-top: 5px">
+            En adelante <strong>"EL PRESTADOR"</strong>.
+          </p>
+        </div>
+        <div class="party-card cliente">
+          <h3>El Cliente</h3>
+          <p><strong>____________________________________</strong></p>
+          <p>Documento de identidad: <strong>_________________</strong></p>
+          <p>Propietario del Yate: <strong>HAYA (Azimut 46 pies)</strong></p>
+          <p>Embarcaciones: <strong>2 botes semirígidos RIB</strong></p>
+          <p>Ubicación actual: <strong>Marina Portobello, Cartagena</strong></p>
+          <p style="margin-top: 5px">
+            En adelante <strong>"EL CLIENTE"</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- ══ PREÁMBULO ══ -->
+      <div class="intro-box">
+        Las partes identificadas anteriormente, obrando de buena fe y con plena capacidad legal,
+        acuerdan celebrar el presente <strong>Contrato de Servicios Navales por Fases</strong>,
+        que se rige por las disposiciones del Código Civil colombiano sobre contratos de prestación
+        de servicios (artículos 1495 y siguientes), la Ley 80 de 1993 en lo aplicable, y las
+        demás normas concordantes del ordenamiento jurídico de la República de Colombia.
+        El presente documento establece con precisión el alcance, las fases de ejecución,
+        los valores acordados, el esquema de pagos, los incentivos por adelanto, las penalidades
+        por mora, las causales de fuerza mayor y los derechos y obligaciones de cada parte.
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 1 — OBJETO
+      ═══════════════════════════════ -->
+      <div class="clause-title important">
+        <span class="clause-number">Cláusula 1</span> Objeto del Contrato
+      </div>
+      <div class="clause-body">
+        <p>
+          EL PRESTADOR se obliga a ejecutar, de forma profesional y bajo su propio criterio técnico,
+          la <strong>restauración integral y puesta en funcionamiento total de dos (2) embarcaciones
+          semirígidas RIB</strong> de propiedad de EL CLIENTE, actualmente ubicadas en Marina Portobello,
+          Cartagena de Indias, comprendiendo los trabajos de conversión de borda inflable a fibra de
+          vidrio, pintura, pulido, restauración del motor fuera de borda, sistemas hidráulico y eléctrico,
+          y dotación de accesorios náuticos, de acuerdo con el alcance técnico detallado en la
+          Cláusula 3 del presente contrato.
+        </p>
+        <p>
+          EL CLIENTE se obliga a realizar los pagos en los términos y plazos estipulados en este documento
+          y a garantizar las condiciones de acceso, espacio y facilidades necesarias para la correcta
+          ejecución de los trabajos.
+        </p>
+        <div class="highlight-box accent">
+          <strong>Referencia técnica:</strong> El alcance completo de este contrato corresponde al
+          ítem G — "Restauración integral 2 botes semirígidos RIB" de la Cotización Técnica
+          CBD-2026-114, emitida el 20 de junio de 2026, cuyo contenido se incorpora al presente
+          contrato como anexo técnico de referencia.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 2 — DESCRIPCIÓN DE TRABAJOS
+      ═══════════════════════════════ -->
+      <div class="clause-title important">
+        <span class="clause-number">Cláusula 2</span> Descripción General de los Trabajos
+      </div>
+      <div class="clause-body">
+        <p>
+          Los trabajos objeto del presente contrato comprenden la totalidad de las intervenciones
+          necesarias para entregar ambas embarcaciones en plenas condiciones de operatividad,
+          seguridad y estética náutica de primer nivel:
+        </p>
+
+        <table class="scope-table">
+          <thead>
+            <tr>
+              <th style="width: 28%">Trabajo</th>
+              <th>Descripción técnica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Conversión a fibra de vidrio</strong></td>
+              <td>Retiro de la borda neumática existente en cada embarcación. Fabricación e instalación de nueva borda en laminado de fibra de vidrio con acabado en gelcoat marino. La estructura central se conserva. Resistencia estructural certificada y mantenimiento mínimo.</td>
+            </tr>
+            <tr>
+              <td><strong>Pintura y pulido</strong></td>
+              <td>Preparación de superficie, aplicación de pintura de grado marino con imprimante anticorrosivo, acabado en color acordado con el cliente. Pulido final de todas las superficies de gelcoat para entregar cada embarcación con brillo espejo.</td>
+            </tr>
+            <tr>
+              <td><strong>Restauración motor 20 HP</strong></td>
+              <td>Desmontaje total del motor fuera de borda de 20 HP. Limpieza profunda, revisión y sustitución de componentes internos en mal estado, afinación completa, pintura exterior. Puesta en marcha con pruebas de funcionamiento hasta confirmar operación correcta.</td>
+            </tr>
+            <tr>
+              <td><strong>Sistema hidráulico de dirección</strong></td>
+              <td>Montaje completo en ambas embarcaciones: cilindro hidráulico, bomba de dirección, mangueras de alta presión certificadas para uso marino y accesorios de conexión. Prueba funcional incluida.</td>
+            </tr>
+            <tr>
+              <td><strong>Instalación eléctrica completa</strong></td>
+              <td>Cableado con cable marino homologado, panel de interruptores etiquetado, luces de navegación reglamentarias, circuito de arranque, fusibles y protecciones. Cumple estándares de seguridad náutica internacionales.</td>
+            </tr>
+            <tr>
+              <td><strong>Accesorios y dotación</strong></td>
+              <td>Bombas de achique automáticas con flotador (una por embarcación), brújulas náuticas, cornamusas, argollas de amarre, tapas de acceso, pasacables y demás herrajes según estándar de marina. Instalación incluida.</td>
+            </tr>
+            <tr>
+              <td><strong>Transporte y logística</strong></td>
+              <td>Traslado en grúa de ambas embarcaciones desde Marina Portobello hasta el taller de EL PRESTADOR para ejecución de los trabajos. Entrega final en el Club Náutico de Manga. <strong>Transporte incluido en el valor total del contrato.</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box warning">
+          <strong>No incluido:</strong> El presente contrato no contempla la adquisición de un motor fuera de borda nuevo. Cualquier trabajo adicional no descrito en esta cláusula deberá acordarse mediante otrosí escrito y firmado por ambas partes antes de su ejecución.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 3 — FASES, PLAZOS Y CRONOGRAMA
+      ═══════════════════════════════ -->
+      <div class="clause-title important">
+        <span class="clause-number">Cláusula 3</span> Fases de Ejecución, Plazos y Cronograma
+      </div>
+      <div class="clause-body">
+        <p>
+          Los trabajos se ejecutarán en <strong>cuatro (4) fases secuenciales</strong>.
+          El plazo se computa en <strong>días hábiles</strong> a partir del primer desembolso
+          de anticipo de la Fase 1. El plazo total de entrega de ambas embarcaciones completamente
+          terminadas es de <strong>cuarenta y cinco (45) días hábiles</strong>.
+        </p>
+        <p>
+          La secuencia comienza por el bote más pequeño. El inicio de cada fase está condicionado
+          al recibo del anticipo correspondiente a esa fase (Cláusula 4).
+        </p>
+
+        <table class="phase-table">
+          <thead>
+            <tr>
+              <th style="width: 7%">Fase</th>
+              <th style="width: 30%">Alcance</th>
+              <th style="width: 15%">Embarcación</th>
+              <th style="width: 13%">Días hábiles</th>
+              <th style="width: 13%">Días acumulados</th>
+              <th>Valor fase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:var(--secondary-color);">1</td>
+              <td>Conversión a fibra de vidrio + pintura + pulido</td>
+              <td>Bote menor</td>
+              <td style="text-align:center;">15</td>
+              <td style="text-align:center;">1 – 15</td>
+              <td>$ 9.000.000</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:var(--secondary-color);">2</td>
+              <td>Conversión a fibra de vidrio + pintura + pulido</td>
+              <td>Bote mayor</td>
+              <td style="text-align:center;">15</td>
+              <td style="text-align:center;">16 – 30</td>
+              <td>$ 11.000.000</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:var(--secondary-color);">3</td>
+              <td>Restauración motor 20 HP + sistema hidráulico (ambos botes)</td>
+              <td>Ambos</td>
+              <td style="text-align:center;">8</td>
+              <td style="text-align:center;">31 – 38</td>
+              <td>$ 6.000.000</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:var(--secondary-color);">4</td>
+              <td>Instalación eléctrica + accesorios + pruebas y entrega formal</td>
+              <td>Ambos</td>
+              <td style="text-align:center;">7</td>
+              <td style="text-align:center;">39 – 45</td>
+              <td>$ 4.000.000</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4"><strong>TOTAL CONTRATO — Entrega completa de ambas embarcaciones</strong></td>
+              <td style="text-align:center;"><strong>45 días</strong></td>
+              <td><strong>$ 30.000.000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>Acta de entrega por fase:</strong> Al concluir cada fase, EL PRESTADOR notificará
+          por escrito (WhatsApp o correo electrónico) a EL CLIENTE para que este realice la
+          inspección dentro de los dos (2) días hábiles siguientes. Si EL CLIENTE no realiza
+          observaciones dentro de ese plazo, la fase se considera entregada y aceptada a satisfacción,
+          y el saldo correspondiente es exigible de inmediato.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 4 — VALOR Y FORMA DE PAGO
+      ═══════════════════════════════ -->
+      <div class="clause-title important">
+        <span class="clause-number">Cláusula 4</span> Valor Total, Anticipo y Forma de Pago
+      </div>
+      <div class="clause-body">
+        <div class="highlight-box success" style="font-size:13px;font-weight:700;text-align:center;padding:10px 14px;">
+          TREINTA MILLONES DE PESOS COLOMBIANOS ($ 30.000.000 COP)
+        </div>
+
+        <p style="margin-top: 8px">
+          El valor total del contrato es de <strong>$ 30.000.000 COP</strong> (sin IVA).
+          Si EL CLIENTE requiere factura electrónica, se adicionará el IVA vigente al momento
+          de la facturación. El pago se estructura <strong>por fases</strong>, de la siguiente manera:
+        </p>
+
+        <table class="phase-table" style="margin-top:8px;">
+          <thead>
+            <tr>
+              <th>Fase</th>
+              <th>Valor fase</th>
+              <th>Anticipo 30% (antes de iniciar)</th>
+              <th>Saldo 70% (al entregar)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fase 1</strong> — Bote menor / fibra + pintura + pulido</td>
+              <td>$ 9.000.000</td>
+              <td><strong>$ 2.700.000</strong></td>
+              <td><strong>$ 6.300.000</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Fase 2</strong> — Bote mayor / fibra + pintura + pulido</td>
+              <td>$ 11.000.000</td>
+              <td><strong>$ 3.300.000</strong></td>
+              <td><strong>$ 7.700.000</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Fase 3</strong> — Motor + hidráulica (ambos)</td>
+              <td>$ 6.000.000</td>
+              <td><strong>$ 1.800.000</strong></td>
+              <td><strong>$ 4.200.000</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Fase 4</strong> — Eléctrica + accesorios + entrega</td>
+              <td>$ 4.000.000</td>
+              <td><strong>$ 1.200.000</strong></td>
+              <td><strong>$ 2.800.000</strong></td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>TOTALES</strong></td>
+              <td><strong>$ 30.000.000</strong></td>
+              <td><strong>$ 9.000.000</strong></td>
+              <td><strong>$ 21.000.000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top:8px;"><strong>Condiciones aplicables a todos los pagos:</strong></p>
+        <ol>
+          <li>
+            <strong>Anticipo como condición de inicio:</strong> EL PRESTADOR no iniciará ninguna
+            fase sin haber recibido el anticipo del treinta por ciento (30%) correspondiente.
+            La recepción del anticipo activa el cronograma de esa fase. Ningún anticipo es
+            reembolsable si EL PRESTADOR ya ha iniciado los trabajos de la fase.
+          </li>
+          <li>
+            <strong>Saldo al momento de la entrega:</strong> El saldo del setenta por ciento (70%)
+            es exigible al momento en que EL CLIENTE acepte formalmente la entrega de cada fase
+            (o transcurran dos días hábiles sin observaciones desde la notificación del PRESTADOR).
+            EL PRESTADOR no iniciará la siguiente fase mientras el saldo de la fase anterior esté
+            pendiente de pago.
+          </li>
+          <li>
+            <strong>Mora en el pago del saldo:</strong> Si EL CLIENTE no cancela el saldo de una
+            fase dentro de los cinco (5) días hábiles siguientes a la notificación de entrega,
+            EL PRESTADOR podrá suspender los trabajos de la fase siguiente sin incurrir en
+            penalidad por incumplimiento de plazo, y el tiempo de suspensión no se computará
+            dentro del cronograma contractual.
+          </li>
+          <li>
+            <strong>Medios de pago:</strong> Transferencia bancaria, efectivo o pago mediante
+            plataforma Bold. Los datos bancarios serán suministrados por EL PRESTADOR al momento
+            de cada cobro.
+          </li>
+        </ol>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 5 — INCENTIVOS Y PENALIDADES
+      ═══════════════════════════════ -->
+      <div class="clause-title important">
+        <span class="clause-number">Cláusula 5</span> Incentivos por Adelanto y Penalidades por Mora
+      </div>
+      <div class="clause-body">
+        <p>
+          A iniciativa de EL CLIENTE, las partes acuerdan un sistema de incentivos y penalidades
+          por desempeño aplicable a cada fase de forma independiente:
+        </p>
+
+        <div class="incentive-grid">
+          <div class="incentive-box bonus">
+            <h4>&#10003; Bono por entrega anticipada</h4>
+            <ul>
+              <li>Si EL PRESTADOR entrega una fase <strong>antes del plazo acordado</strong>, EL CLIENTE reconocerá un <strong>bono del 2 % del valor de esa fase por cada día hábil de adelanto</strong>.</li>
+              <li>El bono máximo por fase es del <strong>6 %</strong> (equivalente a 3 días de adelanto).</li>
+              <li>El bono se suma al saldo de la fase y se cancela en el mismo pago.</li>
+              <li><em>Ejemplo: Fase 1 ($9.000.000) entregada 3 días antes → bono de $540.000.</em></li>
+            </ul>
+          </div>
+          <div class="incentive-box penalty">
+            <h4>&#9888; Penalidad por mora en la entrega</h4>
+            <ul>
+              <li>Si EL PRESTADOR entrega una fase <strong>después del plazo acordado</strong> (sin que apliquen causales de exención de la Cláusula 6), EL CLIENTE descontará del saldo de esa fase un <strong>1,5 % por cada día hábil de retraso</strong>.</li>
+              <li>La penalidad máxima por fase es del <strong>12 %</strong> (equivalente a 8 días de retraso).</li>
+              <li>Superado el máximo, el contrato sigue vigente pero sin descuento adicional.</li>
+              <li><em>Ejemplo: Fase 2 ($11.000.000) con 4 días de retraso → descuento de $660.000.</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <p style="margin-top:6px;">
+          El cómputo de días de adelanto o mora se realizará a partir de la fecha de notificación
+          de entrega de EL PRESTADOR versus la fecha límite de la fase establecida en la
+          Cláusula 3. Los días de suspensión por mora de EL CLIENTE en el pago (Cláusula 4)
+          o los días eximidos por fuerza mayor (Cláusula 6) <strong>no se contabilizan</strong>
+          dentro del plazo de cada fase.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 6 — FUERZA MAYOR Y DEMORAS CLIMÁTICAS
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 6</span> Fuerza Mayor, Eventos Climáticos y Causales de Extensión de Plazo
+      </div>
+      <div class="clause-body">
+        <p>
+          EL PRESTADOR no incurrirá en penalidad por mora cuando el retraso en la entrega
+          de una fase sea consecuencia directa de alguno de los siguientes eventos, que las
+          partes reconocen como causales de fuerza mayor o circunstancias exógenas no imputables
+          al PRESTADOR:
+        </p>
+        <ol>
+          <li>
+            <strong>Condiciones climáticas adversas:</strong> Lluvias torrenciales continuas,
+            tormentas eléctricas activas, vientos sostenidos superiores a 40 km/h durante más
+            de cuatro (4) horas consecutivas, alertas de marejada o cualquier otro fenómeno
+            meteorológico que impida técnica o legalmente la ejecución de los trabajos.
+            Estas condiciones se acreditan con el reporte oficial del Instituto de Hidrología,
+            Meteorología y Estudios Ambientales (<strong>IDEAM</strong>) o con la notificación
+            de la <strong>Capitanía de Puerto de Cartagena</strong>.
+          </li>
+          <li>
+            <strong>Fenómenos naturales o desastres:</strong> Terremotos, inundaciones, eventos
+            naturales de fuerza mayor que impidan el acceso al taller o a la marina.
+          </li>
+          <li>
+            <strong>Paros, bloqueos o situaciones de orden público:</strong> Eventos que impidan
+            la movilización del personal o el suministro de materiales en Cartagena de Indias.
+          </li>
+          <li>
+            <strong>Incumplimiento de EL CLIENTE:</strong> Mora en los pagos de anticipo o saldo
+            de una fase, que obligue a EL PRESTADOR a suspender el trabajo de conformidad
+            con la Cláusula 4, numeral 3.
+          </li>
+          <li>
+            <strong>Falta de disponibilidad de materiales:</strong> Demoras en la importación o
+            entrega de insumos específicos de fibra de vidrio, gelcoat o componentes mecánicos
+            no disponibles en el mercado local, siempre que EL PRESTADOR demuestre haber
+            realizado el pedido con la debida anticipación.
+          </li>
+        </ol>
+
+        <div class="highlight-box">
+          <strong>Procedimiento de notificación:</strong> EL PRESTADOR deberá notificar a EL CLIENTE
+          dentro de las <strong>veinticuatro (24) horas siguientes</strong> al inicio de la causal,
+          por mensaje de WhatsApp o correo electrónico, indicando la naturaleza del evento, la fecha
+          de inicio y el impacto estimado en el plazo. Cada día de causal debidamente notificada
+          extiende automáticamente el plazo de la fase afectada en un (1) día hábil.
+          El límite máximo de extensión por causales climáticas es de <strong>diez (10) días
+          hábiles acumulados por fase</strong>.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 7 — GARANTÍAS
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 7</span> Garantías sobre los Trabajos Realizados
+      </div>
+      <div class="clause-body">
+        <p>
+          EL PRESTADOR otorga las siguientes garantías sobre los trabajos ejecutados, contadas
+          desde la fecha de entrega formal de cada fase:
+        </p>
+        <table class="scope-table">
+          <thead>
+            <tr>
+              <th>Trabajo</th>
+              <th>Plazo de garantía</th>
+              <th>Cobertura</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Conversión de borda a fibra de vidrio</td>
+              <td><strong>6 meses</strong></td>
+              <td>Delaminación, fisuras o desprendimientos estructurales del laminado no atribuibles a golpes externos.</td>
+            </tr>
+            <tr>
+              <td>Pintura y pulido</td>
+              <td><strong>6 meses</strong></td>
+              <td>Descascaramiento, pérdida de adherencia o despigmentación bajo condiciones normales de uso marino.</td>
+            </tr>
+            <tr>
+              <td>Instalación eléctrica</td>
+              <td><strong>12 meses</strong></td>
+              <td>Fallas de conexiones, empalmes o fallos en el sistema atribuibles a la instalación.</td>
+            </tr>
+            <tr>
+              <td>Sistema hidráulico de dirección</td>
+              <td><strong>6 meses</strong></td>
+              <td>Fugas en mangueras, fallas del cilindro o bomba derivadas de la instalación.</td>
+            </tr>
+            <tr>
+              <td>Restauración del motor 20 HP</td>
+              <td><strong>3 meses</strong></td>
+              <td>Averías directamente atribuibles a defectos de la reparación ejecutada, siempre que el motor haya recibido mantenimiento adecuado.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:6px;">
+          Las garantías quedan <strong>automáticamente anuladas</strong> en caso de uso inadecuado,
+          accidentes, negligencia de mantenimiento, intervención de terceros no autorizados o
+          exposición a condiciones extremas no propias del uso marino recreativo normal.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 8 — OBLIGACIONES DEL CLIENTE
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 8</span> Obligaciones de EL CLIENTE
+      </div>
+      <div class="clause-body">
+        <ol>
+          <li>Realizar los pagos de anticipo y saldo en los plazos establecidos en la Cláusula 4.</li>
+          <li>Gestionar y costear los permisos de ingreso a Marina Portobello para el retiro de las embarcaciones y la logística de transporte en grúa acordada.</li>
+          <li>Suministrar toda la documentación de las embarcaciones que sea requerida para trámites ante las autoridades náuticas (matrícula, documentos de propiedad).</li>
+          <li>Informar oportunamente a EL PRESTADOR sobre cualquier daño preexistente, reparación anterior o condición técnica especial de las embarcaciones que pueda afectar el alcance de los trabajos.</li>
+          <li>Realizar la inspección de cada fase dentro de los dos (2) días hábiles siguientes a la notificación de entrega de EL PRESTADOR. Pasado ese plazo sin observaciones escritas, la fase se considerará aceptada.</li>
+          <li>Designar un representante con plenas facultades para aceptar o rechazar entregas, firmar actas y tomar decisiones durante la ejecución del contrato.</li>
+          <li>No interferir en los procesos técnicos de EL PRESTADOR ni introducir modificaciones al alcance sin acuerdo previo por escrito.</li>
+        </ol>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 9 — OBLIGACIONES DEL PRESTADOR
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 9</span> Obligaciones de EL PRESTADOR
+      </div>
+      <div class="clause-body">
+        <ol>
+          <li>Ejecutar los trabajos con personal técnico calificado, herramientas especializadas y materiales de grado marino de primera calidad.</li>
+          <li>Custodiar las embarcaciones con diligencia durante el tiempo que permanezcan en el taller. En caso de daño imputable a EL PRESTADOR por negligencia, este responderá por su reparación o indemnización.</li>
+          <li>Mantener informado a EL CLIENTE sobre el avance de cada fase mediante reportes periódicos por WhatsApp o correo electrónico, con una frecuencia mínima de dos (2) veces por semana.</li>
+          <li>Notificar de inmediato cualquier hallazgo técnico imprevisto que requiera trabajos adicionales, con cotización escrita antes de proceder. Ningún trabajo adicional se ejecutará sin autorización expresa de EL CLIENTE.</li>
+          <li>Ejecutar el transporte de ambas embarcaciones (desde Marina Portobello al taller y desde el taller al Club Náutico de Manga) de forma segura, asumiendo la responsabilidad por daños durante el traslado.</li>
+          <li>Entregar ambas embarcaciones completamente terminadas, operativas y limpias, acompañadas de documentación técnica básica de los sistemas instalados.</li>
+        </ol>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 10 — MATERIALES Y SUMINISTROS
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 10</span> Materiales, Insumos y Suministros
+      </div>
+      <div class="clause-body">
+        <p>
+          Todos los materiales, insumos, herramientas y componentes necesarios para la ejecución
+          de los trabajos son responsabilidad de EL PRESTADOR y están incluidos en el valor de cada
+          fase, salvo que las partes acuerden expresamente por escrito que algún componente específico
+          será suministrado por EL CLIENTE.
+        </p>
+        <p>
+          Si EL CLIENTE solicita el uso de materiales distintos a los estándar de EL PRESTADOR
+          (marca específica, color especial, componente importado), el costo diferencial y el tiempo
+          adicional de obtención de dichos materiales se adicionarán al valor de la fase correspondiente
+          mediante otrosí escrito, y el plazo se ajustará en consecuencia.
+        </p>
+        <p>
+          En caso de que EL CLIENTE decida suministrar materiales por su cuenta, EL PRESTADOR no
+          será responsable por defectos, incompatibilidades o resultados derivados de la calidad
+          de dichos materiales.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 11 — MODIFICACIONES AL CONTRATO
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 11</span> Modificaciones al Alcance y Otrosíes
+      </div>
+      <div class="clause-body">
+        <p>
+          Cualquier modificación al alcance, plazo, precio o condiciones del presente contrato
+          deberá formalizarse mediante un <strong>otrosí escrito y firmado por ambas partes</strong>
+          antes de su ejecución. Los otrosíes se identificarán de forma correlativa (Otrosí No. 1,
+          No. 2, etc.) y formarán parte integral del contrato.
+        </p>
+        <p>
+          La ejecución de trabajos adicionales por parte de EL PRESTADOR sin autorización escrita
+          de EL CLIENTE, o la solicitud verbal de cambios sin formalización por escrito, no generarán
+          obligación de pago adicional para EL CLIENTE ni de ejecución para EL PRESTADOR.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 12 — INCUMPLIMIENTO Y TERMINACIÓN
+      ═══════════════════════════════ -->
+      <div class="clause-title warning">
+        <span class="clause-number">Cláusula 12</span> Incumplimiento y Causales de Terminación Anticipada
+      </div>
+      <div class="clause-body">
+        <p>
+          Cualquiera de las partes podrá declarar la terminación anticipada del contrato en los
+          siguientes casos:
+        </p>
+        <ol>
+          <li>
+            <strong>Por parte de EL PRESTADOR:</strong> Si EL CLIENTE incumple el pago de un
+            anticipo o saldo por más de diez (10) días hábiles después de la fecha de vencimiento,
+            EL PRESTADOR podrá suspender los trabajos y posteriormente resolver el contrato mediante
+            comunicación escrita. Los valores correspondientes a la ejecución parcial ya realizada
+            serán exigibles de inmediato y deberán ser cancelados por EL CLIENTE dentro de los
+            cinco (5) días hábiles siguientes a la notificación.
+          </li>
+          <li>
+            <strong>Por parte de EL CLIENTE:</strong> Si EL PRESTADOR acumula más de quince (15)
+            días hábiles de retraso sin justificación válida, excluyendo los eventos de la
+            Cláusula 6, EL CLIENTE podrá notificar la terminación anticipada. En este caso,
+            EL PRESTADOR deberá restituir los anticipos recibidos por las fases no iniciadas y
+            responder por los perjuicios demostrables derivados del incumplimiento.
+          </li>
+        </ol>
+        <div class="highlight-box warning">
+          <strong>Sobre los anticipos:</strong> Los anticipos de fases ya iniciadas no son
+          reembolsables. Solo serán objeto de restitución los anticipos de fases cuyo trabajo
+          no haya comenzado al momento de la terminación del contrato, previa liquidación del
+          avance real de la fase en curso.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 13 — CONFIDENCIALIDAD
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 13</span> Confidencialidad
+      </div>
+      <div class="clause-body">
+        <p>
+          Ambas partes se obligan a guardar estricta confidencialidad sobre el contenido económico
+          de este contrato, los procesos técnicos específicos, los precios acordados y cualquier
+          información de carácter privado de la otra parte a la que tengan acceso en el marco de
+          la ejecución del objeto contractual.
+        </p>
+        <p>
+          EL PRESTADOR podrá utilizar imágenes del proceso y del resultado final de los trabajos
+          con fines de portafolio y promoción comercial, siempre que no revele información personal
+          de EL CLIENTE ni el valor económico del contrato. En caso de que EL CLIENTE prefiera no
+          figurar en el portafolio, deberá manifestarlo por escrito al momento de la firma.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 14 — SOLUCIÓN DE CONTROVERSIAS
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 14</span> Solución de Controversias y Jurisdicción
+      </div>
+      <div class="clause-body">
+        <p>
+          Cualquier diferencia o controversia derivada del presente contrato será resuelta, en
+          primera instancia, mediante negociación directa entre las partes dentro de los diez
+          (10) días hábiles siguientes a la notificación de la discrepancia.
+        </p>
+        <p>
+          Si la negociación directa no prospera, las partes se someten a la jurisdicción de los
+          <strong>jueces civiles de la ciudad de Cartagena de Indias, Colombia</strong>, como
+          juez competente para dirimir cualquier controversia derivada del presente contrato.
+          Las partes renuncian expresamente a cualquier otro fuero que pudiera corresponderles
+          por razón de su domicilio.
+        </p>
+      </div>
+
+      <!-- ══════════════════════════════
+           CLÁUSULA 15 — VIGENCIA E INTEGRALIDAD
+      ═══════════════════════════════ -->
+      <div class="clause-title">
+        <span class="clause-number">Cláusula 15</span> Vigencia e Integralidad del Contrato
+      </div>
+      <div class="clause-body">
+        <p>
+          El presente contrato entra en vigencia en la fecha de su firma por ambas partes y
+          permanece vigente hasta la entrega formal y aceptación total de la Fase 4, el pago
+          íntegro del saldo final y el vencimiento del último período de garantía establecido
+          en la Cláusula 7.
+        </p>
+        <p>
+          Este documento, junto con la Cotización Técnica CBD-2026-114 incorporada como referencia,
+          constituye el <strong>acuerdo íntegro y definitivo</strong> entre las partes sobre el
+          objeto descrito. Deja sin efecto cualquier comunicación verbal o escrita previa sobre
+          el mismo objeto. Ninguna cláusula podrá interpretarse de manera aislada; el contrato
+          debe leerse en su totalidad como un instrumento único.
+        </p>
+      </div>
+
+      <!-- ══ DECLARACIÓN FINAL ══ -->
+      <div class="declaration-box">
+        <strong>Declaración conjunta de las partes:</strong> Las partes declaran que el presente
+        contrato ha sido leído y comprendido en su totalidad, que no existe vicio del consentimiento
+        de ninguna naturaleza, que los valores y plazos acordados son justos y equilibrados, y que
+        se obligan a cumplirlo de buena fe, colaborando mutuamente para el éxito de los trabajos
+        contratados.
+      </div>
+
+      <!-- ══ FIRMAS ══ -->
+      <div class="signature-section">
+        <div class="sig-title">Firmas de Aceptación — Cartagena de Indias, 25 de julio de 2026</div>
+
+        <div class="sig-grid">
+          <div class="sig-block">
+            <div class="sig-line"></div>
+            <div class="sig-name">Frank Mercado</div>
+            <div class="sig-role">Representante — Colombia Boat Detailing</div>
+            <div class="sig-id">INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S</div>
+            <div class="sig-id">NIT: 902071074-0</div>
+            <div class="sig-id" style="margin-top:6px;">Cel.: 301 373 5999</div>
+          </div>
+          <div class="sig-block">
+            <div class="sig-line"></div>
+            <div class="sig-name">_____________________________________</div>
+            <div class="sig-role">EL CLIENTE — Propietario Yate HAYA</div>
+            <div class="sig-id">C.C. / Pasaporte: ____________________</div>
+            <div class="sig-id" style="margin-top:6px;">Tel.: _____________________________</div>
+          </div>
+        </div>
+
+        <table class="scope-table" style="margin-top:14px;font-size:10.5px;">
+          <thead>
+            <tr>
+              <th style="width:30%">Fase</th>
+              <th style="width:20%">Anticipo recibido</th>
+              <th style="width:15%">Fecha</th>
+              <th style="width:20%">Saldo cancelado</th>
+              <th style="width:15%">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fase 1 — Bote menor / fibra + pintura</td>
+              <td>$ 2.700.000 ____</td>
+              <td>__________</td>
+              <td>$ 6.300.000 ____</td>
+              <td>__________</td>
+            </tr>
+            <tr>
+              <td>Fase 2 — Bote mayor / fibra + pintura</td>
+              <td>$ 3.300.000 ____</td>
+              <td>__________</td>
+              <td>$ 7.700.000 ____</td>
+              <td>__________</td>
+            </tr>
+            <tr>
+              <td>Fase 3 — Motor + hidráulica</td>
+              <td>$ 1.800.000 ____</td>
+              <td>__________</td>
+              <td>$ 4.200.000 ____</td>
+              <td>__________</td>
+            </tr>
+            <tr>
+              <td>Fase 4 — Eléctrica + accesorios</td>
+              <td>$ 1.200.000 ____</td>
+              <td>__________</td>
+              <td>$ 2.800.000 ____</td>
+              <td>__________</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:10px;color:var(--text-light);margin-top:8px;text-align:center;">
+          La tabla anterior sirve como <strong>registro de pagos</strong>. Cada renglón deberá ser
+          inicialado por ambas partes al momento del pago correspondiente.
+        </p>
+      </div>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> · INVERSORA Y COMERCIALIZADORA GLOBAL SERVICES S.A.S · NIT 902071074-0</p>
+        <p>Contrato CBD-SN-002-2026 · Cartagena de Indias · colombiaboatdetailing.com</p>
+        <p>Documento confidencial — uso exclusivo de las partes firmantes.</p>
+      </footer>
+
+    </div>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
