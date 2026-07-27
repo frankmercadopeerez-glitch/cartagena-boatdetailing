@@ -243,17 +243,32 @@ function prioritizeServicesNavigation() {
         if (e.target.closest("a")) return;
         (e.preventDefault(), e.stopPropagation());
         const t = n.classList.toggle("submenu-open");
-        n.setAttribute("aria-expanded", String(t));
+        (n.setAttribute("aria-expanded", String(t)),
+          o &&
+            Object.assign(o.style, {
+              opacity: t ? "1" : "",
+              visibility: t ? "visible" : "",
+            }));
       }),
       document.addEventListener("click", (e) => {
         e.target.closest(".submenu-item") ||
           (n.classList.remove("submenu-open"),
-          n.setAttribute("aria-expanded", "false"));
+          n.setAttribute("aria-expanded", "false"),
+          o &&
+            Object.assign(o.style, {
+              opacity: "",
+              visibility: "",
+            }));
       }),
       document.addEventListener("keydown", (e) => {
         "Escape" === e.key &&
           (n.classList.remove("submenu-open"),
-          n.setAttribute("aria-expanded", "false"));
+          n.setAttribute("aria-expanded", "false"),
+          o &&
+            Object.assign(o.style, {
+              opacity: "",
+              visibility: "",
+            }));
       }),
       e.append(n),
       e.append(a));
