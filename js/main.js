@@ -218,7 +218,7 @@ function prioritizeServicesNavigation() {
       t.querySelector("[data-primary-service]") ||
         t.insertAdjacentHTML(
           "afterbegin",
-          '<span data-primary-service class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm">★</span>',
+          '<span data-primary-service class="text-[9px] font-black bg-gold-400 text-navy-900 rounded-sm" style="display:inline-flex;width:1.35rem;height:1.35rem;align-items:center;justify-content:center;line-height:1;flex:0 0 1.35rem;padding:0">★</span>',
         ));
     let i = e.querySelector("[data-services-divider]");
     (i ||
@@ -239,6 +239,16 @@ function prioritizeServicesNavigation() {
         }),
       n.setAttribute("aria-haspopup", "true"),
       n.setAttribute("aria-expanded", "false"),
+      n.addEventListener("mouseenter", () => {
+        if (!o) return;
+        (o.style.top = "0"),
+          (o.style.bottom = "auto"),
+          requestAnimationFrame(() => {
+            const e = o.getBoundingClientRect();
+            let t = Math.min(0, window.innerHeight - 12 - e.bottom);
+            ((t = Math.max(t, 12 - e.top)), (o.style.top = `${t}px`));
+          });
+      }),
       n.addEventListener("click", (e) => {
         if (e.target.closest("a")) return;
         (e.preventDefault(), e.stopPropagation());
@@ -248,6 +258,13 @@ function prioritizeServicesNavigation() {
             Object.assign(o.style, {
               opacity: t ? "1" : "",
               visibility: t ? "visible" : "",
+            }),
+          t &&
+            o &&
+            requestAnimationFrame(() => {
+              const e = o.getBoundingClientRect();
+              let t = Math.min(0, window.innerHeight - 12 - e.bottom);
+              ((t = Math.max(t, 12 - e.top)), (o.style.top = `${t}px`));
             }));
       }),
       document.addEventListener("click", (e) => {
