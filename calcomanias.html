@@ -37,6 +37,13 @@
       Colombia Boat Detailing
     </title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link
+      rel="preload"
+      href="images/services/calcomanias-hero-v2.webp"
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+    />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -77,7 +84,7 @@
     />
     <meta
       property="og:image"
-      content="https://www.colombiaboatdetailing.com/images/services/calcomanias-graficos.webp"
+      content="https://www.colombiaboatdetailing.com/images/services/calcomanias-hero-v2.webp"
     />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Colombia Boat Detailing" />
@@ -92,7 +99,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://www.colombiaboatdetailing.com/images/services/calcomanias-graficos.webp"
+      content="https://www.colombiaboatdetailing.com/images/services/calcomanias-hero-v2.webp"
     />
 
     <!-- Schema.org Service -->
@@ -109,6 +116,7 @@
         "description": "Instalación profesional de calcomanías, letras de vinilo marino y línea de flotación para yates y botes en Cartagena, Colombia. Materiales 3M y Oracal resistentes al sol y al agua salada.",
         "serviceType": "Boat Graphics & Lettering",
         "url": "https://www.colombiaboatdetailing.com/calcomanias.html",
+        "image": "https://www.colombiaboatdetailing.com/images/services/calcomanias-hero-v2.webp",
         "provider": {
           "@type": "LocalBusiness",
           "@id": "https://www.colombiaboatdetailing.com/#organization",
@@ -187,6 +195,13 @@
           rgba(5, 18, 48, 0.55) 50%,
           rgba(5, 15, 35, 0.12) 100%
         );
+      }
+
+      @media (max-width: 767px) {
+        .calcomanias-hero {
+          padding-top: 6.75rem !important;
+          padding-bottom: 3rem !important;
+        }
       }
     </style>
     <!-- Preload critical fonts -->
@@ -1074,12 +1089,12 @@
 
     <!-- Hero -->
     <section
-      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
+      class="calcomanias-hero pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
       style="
         padding-top: 8rem;
         background-image:
           linear-gradient(to right, rgba(6, 6, 7, 0.9), rgba(6, 6, 7, 0.65)),
-          url(&quot;images/detailing (2).webp&quot;);
+          url(&quot;images/services/calcomanias-hero-v2.webp?v=20260727-1&quot;);
       "
     >
       <div class="absolute inset-0 opacity-10">
@@ -1097,10 +1112,12 @@
               Identidad Visual de tu Embarcación
             </span>
           </div>
-          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+          <h1 class="font-serif text-4xl md:text-6xl mb-6 leading-tight">
             Calcomanías y Gráficos <span class="text-gold-400">para Yates</span>
           </h1>
-          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl mx-auto">
+          <p
+            class="text-lg md:text-xl text-slate-300 font-light mb-8 max-w-2xl mx-auto"
+          >
             Nombre de tu embarcación, número de matrícula, línea de flotación y
             gráficos personalizados en vinilo marino de alta durabilidad. Diseño
             propio o tuyo, instalación profesional. Resistente al sol, sal y
@@ -1114,12 +1131,6 @@
               class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
             >
               Cotizar Diseño <i class="ph ph-whatsapp-logo ml-2"></i>
-            </a>
-            <a
-              href="#servicios"
-              class="inline-flex items-center border border-white/30 text-white px-8 py-4 rounded-sm font-light hover:border-gold-400 hover:text-gold-400 transition"
-            >
-              Ver servicios <i class="ph ph-arrow-down ml-2"></i>
             </a>
           </div>
         </div>
@@ -1145,8 +1156,16 @@
 
           <div class="grid md:grid-cols-2 gap-8 mb-16">
             <div
-              class="bg-slate-50 border border-white/10 p-8 rounded-sm service-card"
+              class="bg-slate-50 border border-slate-300 p-8 rounded-sm service-card"
             >
+              <img
+                src="images/services/calcomanias-nombre-yate.webp"
+                alt="Instalación profesional del nombre en vinilo sobre un yate"
+                class="w-full h-48 object-cover rounded-sm mb-6"
+                width="1400"
+                height="933"
+                loading="lazy"
+              />
               <i class="ph ph-text-aa text-4xl text-gold-400 mb-4"></i>
               <h3 class="font-serif text-xl text-navy-900 mb-3">
                 Nombre de la Embarcación
@@ -1166,8 +1185,16 @@
             </div>
 
             <div
-              class="bg-slate-50 border border-white/10 p-8 rounded-sm service-card"
+              class="bg-slate-50 border border-slate-300 p-8 rounded-sm service-card"
             >
+              <img
+                src="images/services/calcomanias-linea-flotacion.webp"
+                alt="Línea de flotación azul y dorada instalada en el casco de un yate"
+                class="w-full h-48 object-cover rounded-sm mb-6"
+                width="1400"
+                height="933"
+                loading="lazy"
+              />
               <i class="ph ph-minus text-4xl text-gold-400 mb-4"></i>
               <h3 class="font-serif text-xl text-navy-900 mb-3">
                 Línea de Flotación (Boot Stripe)
@@ -1187,8 +1214,16 @@
             </div>
 
             <div
-              class="bg-slate-50 border border-white/10 p-8 rounded-sm service-card"
+              class="bg-slate-50 border border-slate-300 p-8 rounded-sm service-card"
             >
+              <img
+                src="images/services/calcomanias-matricula-grafico.webp"
+                alt="Matrícula náutica en vinilo instalada sobre un casco blanco"
+                class="w-full h-48 object-cover rounded-sm mb-6"
+                width="1400"
+                height="933"
+                loading="lazy"
+              />
               <i
                 class="ph ph-identification-badge text-4xl text-gold-400 mb-4"
               ></i>
@@ -1210,8 +1245,16 @@
             </div>
 
             <div
-              class="bg-slate-50 border border-white/10 p-8 rounded-sm service-card"
+              class="bg-slate-50 border border-slate-300 p-8 rounded-sm service-card"
             >
+              <img
+                src="images/services/calcomanias-hero-v2.webp"
+                alt="Yate con gráficos personalizados y franjas decorativas en vinilo marino"
+                class="w-full h-48 object-cover rounded-sm mb-6"
+                width="1672"
+                height="941"
+                loading="lazy"
+              />
               <i class="ph ph-image text-4xl text-gold-400 mb-4"></i>
               <h3 class="font-serif text-xl text-navy-900 mb-3">
                 Logos, Escudos y Gráficos
@@ -1438,7 +1481,7 @@
         <div class="grid md:grid-cols-2 gap-6">
           <a
             href="blog/calcomanias-yate-cartagena/"
-            class="bg-white border border-white/10 p-6 rounded-sm hover:border-gold-400 transition"
+            class="bg-white border border-slate-300 p-6 rounded-sm hover:border-gold-400 transition"
           >
             <span
               class="text-gold-400 text-xs font-bold uppercase tracking-wider"
@@ -1454,7 +1497,7 @@
           </a>
           <a
             href="blog/polarizado-ventanas-yate-cartagena/"
-            class="bg-white border border-white/10 p-6 rounded-sm hover:border-gold-400 transition"
+            class="bg-white border border-slate-300 p-6 rounded-sm hover:border-gold-400 transition"
           >
             <span
               class="text-gold-400 text-xs font-bold uppercase tracking-wider"
@@ -1608,7 +1651,7 @@
       <i class="ph ph-whatsapp-logo text-3xl"></i>
     </a>
 
-    <script defer src="js/main.js?v=20260726-2"></script>
+    <script defer src="js/main.js?v=20260727-1"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

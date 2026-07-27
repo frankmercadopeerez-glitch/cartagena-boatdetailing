@@ -946,6 +946,25 @@
         );
       }
 
+      /* Mantiene las acciones completas dentro del primer viewport en
+         portátiles y pantallas de escritorio de poca altura. */
+      @media (min-width: 768px) and (max-height: 950px) {
+        .home-hero-content {
+          transform: translateY(-2rem);
+        }
+        .home-hero-title {
+          font-size: clamp(4.5rem, 6.2vw, 7rem);
+          line-height: 0.98;
+        }
+        .home-hero-description {
+          margin-bottom: 1.25rem;
+          line-height: 1.5;
+        }
+        .home-hero-actions {
+          gap: 1rem;
+        }
+      }
+
       .service-card {
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
@@ -1326,9 +1345,6 @@
                 Pulido de Gelcoat
               </a>
               <div class="mx-4 h-px bg-white/10 my-1"></div>
-              <a href="hull-cleaning.html" class="nav-dropdown-link"
-                >Limpieza de Casco</a
-              >
               <a href="ppf.html" class="nav-dropdown-link"
                 >PPF (Paint Protection)</a
               >
@@ -1353,9 +1369,22 @@
               <a href="polarizado.html" class="nav-dropdown-link"
                 >Polarizado Nanocerámico</a
               >
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Interiores y Tapicería</a
+              >
+              <a href="anti-corrosion.html" class="nav-dropdown-link"
+                >Control Anticorrosivo</a
+              >
+              <a href="electrical-systems.html" class="nav-dropdown-link"
+                >Electricidad y Aire Acondicionado</a
+              >
+              <a href="technical-wash.html" class="nav-dropdown-link"
+                >Lavado Técnico</a
+              >
               <button
                 type="button"
                 class="submenu-item nav-dropdown-link relative w-full text-left"
+                style="grid-column: 1"
               >
                 Pintura
                 <svg
@@ -1372,7 +1401,16 @@
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-                <div class="submenu-flyout">
+                <div
+                  class="submenu-flyout"
+                  style="
+                    left: 100%;
+                    right: auto;
+                    top: 0;
+                    bottom: auto;
+                    transform: translateX(0);
+                  "
+                >
                   <a
                     href="engine-painting.html"
                     class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm"
@@ -1390,14 +1428,8 @@
                   >
                 </div>
               </button>
-              <a href="interior-detailing.html" class="nav-dropdown-link"
-                >Interiores y Tapicería</a
-              >
-              <a href="anti-corrosion.html" class="nav-dropdown-link"
-                >Control Anticorrosivo</a
-              >
-              <a href="technical-wash.html" class="nav-dropdown-link"
-                >Lavado Técnico</a
+              <a href="hull-cleaning.html" class="nav-dropdown-link"
+                >Limpieza de Casco</a
               >
             </div>
           </div>
@@ -1676,7 +1708,9 @@
         </svg>
       </div>
 
-      <div class="container mx-auto px-6 relative z-10 text-center">
+      <div
+        class="home-hero-content container mx-auto px-6 relative z-10 text-center"
+      >
         <div
           class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-sm mb-4 animate-[fadeIn_1s_ease-out]"
         >
@@ -1687,7 +1721,7 @@
         </div>
 
         <h1
-          class="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight mb-4 drop-shadow-2xl"
+          class="home-hero-title font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight mb-4 drop-shadow-2xl"
         >
           Detailing Naval<br />
           <span class="italic text-gold-400 font-normal text-gold-shimmer"
@@ -1723,7 +1757,7 @@
         </div>
 
         <p
-          class="text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed tracking-wide"
+          class="home-hero-description text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed tracking-wide"
         >
           Preservamos la elegancia y el valor de su embarcación.
           <span class="hidden md:inline"
@@ -1735,7 +1769,7 @@
         </p>
 
         <div
-          class="flex flex-col md:flex-row gap-6 justify-center items-center"
+          class="home-hero-actions flex flex-col md:flex-row gap-6 justify-center items-center"
         >
           <a
             href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
@@ -4354,7 +4388,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260726-2"></script>
+    <script defer src="js/main.js?v=20260727-1"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

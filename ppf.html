@@ -235,6 +235,16 @@
           rgba(5, 15, 35, 0.12) 100%
         );
       }
+
+      .ppf-application-image {
+        min-height: 560px;
+      }
+
+      @media (max-width: 767px) {
+        .ppf-application-image {
+          min-height: 420px;
+        }
+      }
     </style>
     <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
@@ -1256,10 +1266,25 @@
             </div>
 
             <div
-              class="bg-cover bg-center rounded-sm p-12 text-white flex items-center justify-center relative overflow-hidden"
-              style="background-image: url(&quot;images/services/ppf.webp&quot;)"
+              id="ppf-aplicacion"
+              class="ppf-application-image bg-cover rounded-sm text-white flex items-center justify-center relative overflow-hidden shadow-2xl"
+              style="
+                background-image: url(&quot;images/services/ppf.webp?v=20260727-1&quot;);
+                background-position: center 70%;
+              "
+              role="img"
+              aria-label="Instalación profesional de película PPF sobre la pintura de un yate"
             >
-              <div class="absolute inset-0 bg-black/30"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-navy-900/45 via-transparent to-black/10"
+              ></div>
+              <div
+                class="absolute left-6 bottom-6 right-6 border-l-2 border-gold-400 pl-4"
+              >
+                <p class="text-white text-sm font-semibold tracking-wide">
+                  Aplicación real de PPF sobre una embarcación
+                </p>
+              </div>
             </div>
           </div>
 
@@ -1295,6 +1320,21 @@
         </div>
       </div>
     </section>
+
+    <!-- Ola animada: PPF → Proceso -->
+    <div class="ocean-divider" style="background: #001f3f" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 70"
+        preserveAspectRatio="none"
+      >
+        <rect width="1440" height="70" fill="#001f3f" />
+        <path
+          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
+          fill="#ffffff"
+        />
+      </svg>
+    </div>
 
     <!-- Process Section -->
     <section id="proceso" class="py-24 bg-white">
@@ -1438,6 +1478,21 @@
       </div>
     </section>
 
+    <!-- Ola animada: Proceso → Garantía -->
+    <div class="ocean-divider" style="background: #ffffff" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 70"
+        preserveAspectRatio="none"
+      >
+        <rect width="1440" height="70" fill="#ffffff" />
+        <path
+          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
+          fill="#001f3f"
+        />
+      </svg>
+    </div>
+
     <!-- Guaranty Section -->
     <section class="py-24 bg-navy-900">
       <div class="container mx-auto px-6">
@@ -1507,6 +1562,21 @@
         </div>
       </div>
     </section>
+
+    <!-- Ola animada: Garantía → Coberturas -->
+    <div class="ocean-divider" style="background: #001f3f" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 70"
+        preserveAspectRatio="none"
+      >
+        <rect width="1440" height="70" fill="#001f3f" />
+        <path
+          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
+          fill="#f8fafc"
+        />
+      </svg>
+    </div>
 
     <!-- Areas Covered -->
     <section class="py-24 bg-slate-50">
@@ -1851,7 +1921,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260726-2"></script>
+    <script defer src="js/main.js?v=20260727-1"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

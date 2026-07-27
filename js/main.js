@@ -205,6 +205,59 @@ function initGlobalLayout() {
     : document.getElementById("navbar")?.insertAdjacentHTML("afterend", o);
   const s = document.querySelector("footer");
   s ? (s.outerHTML = i) : document.body.insertAdjacentHTML("beforeend", i);
+  prioritizeServicesNavigation();
+}
+function prioritizeServicesNavigation() {
+  document.querySelectorAll(".nav-dropdown-content").forEach((e) => {
+    const t = e.querySelector('a[href$="paint-polishing.html"]'),
+      a = e.querySelector('a[href$="hull-cleaning.html"]'),
+      n = e.querySelector(".submenu-item"),
+      o = n?.querySelector(".submenu-flyout");
+    if (!t || !a || !n) return;
+    (t.classList.add("flex", "items-center", "gap-2"),
+      t.querySelector("[data-primary-service]") ||
+        t.insertAdjacentHTML(
+          "afterbegin",
+          '<span data-primary-service class="text-[9px] font-black tracking-widest bg-gold-400 text-navy-900 px-1.5 py-0.5 rounded-sm">★</span>',
+        ));
+    let i = e.querySelector("[data-services-divider]");
+    (i ||
+      ((i = document.createElement("div")),
+      i.setAttribute("data-services-divider", ""),
+      i.setAttribute("aria-hidden", "true"),
+      (i.className = "mx-4 h-px bg-white/10 my-1")),
+      e.prepend(i),
+      e.prepend(t),
+      (n.style.gridColumn = "1"),
+      o &&
+        Object.assign(o.style, {
+          left: "100%",
+          right: "auto",
+          top: "0",
+          bottom: "auto",
+          transform: "translateX(0)",
+        }),
+      n.setAttribute("aria-haspopup", "true"),
+      n.setAttribute("aria-expanded", "false"),
+      n.addEventListener("click", (e) => {
+        if (e.target.closest("a")) return;
+        (e.preventDefault(), e.stopPropagation());
+        const t = n.classList.toggle("submenu-open");
+        n.setAttribute("aria-expanded", String(t));
+      }),
+      document.addEventListener("click", (e) => {
+        e.target.closest(".submenu-item") ||
+          (n.classList.remove("submenu-open"),
+          n.setAttribute("aria-expanded", "false"));
+      }),
+      document.addEventListener("keydown", (e) => {
+        "Escape" === e.key &&
+          (n.classList.remove("submenu-open"),
+          n.setAttribute("aria-expanded", "false"));
+      }),
+      e.append(n),
+      e.append(a));
+  });
 }
 function initFooterConsistency() {
   ((document.documentElement.style.backgroundColor = "#001f3f"),

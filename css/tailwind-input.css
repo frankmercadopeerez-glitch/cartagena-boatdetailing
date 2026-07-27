@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Los iconos de llamada a WhatsApp usan la misma imagen oficial del botón
+   flotante, en una escala apropiada para CTAs de texto. */
+a[href*="wa.me"]:not(.whatsapp-float):not([class*="fixed"])
+  i[class*="whatsapp-logo"] {
+  display: inline-block !important;
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  flex: 0 0 1.35rem;
+  font-size: 0 !important;
+  background: url("../images/whatsapp.webp") center / contain no-repeat;
+  vertical-align: middle;
+}
+
+/* En superficies claras, border-white/10 quedaba prácticamente invisible.
+   Esta regla conserva la delicadeza del diseño y recupera la separación. */
+.bg-white.border-white\/10,
+.bg-slate-50.border-white\/10,
+section.bg-white .border-white\/10,
+section.bg-slate-50 .border-white\/10 {
+  border-color: #cbd5e1 !important;
+}
+
+/* El submenú de pintura también se abre con clic o teclado, alineado con el
+   botón que lo activa. */
+.submenu-item.submenu-open > .submenu-flyout {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(0) !important;
+}
