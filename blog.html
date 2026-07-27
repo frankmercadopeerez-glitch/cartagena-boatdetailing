@@ -759,7 +759,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/blog-catalog.js"></script>
+    <script defer src="js/blog-catalog.js?v=20260726-1"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const posts = Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [];
@@ -834,6 +834,10 @@
         }
 
         function curateImage(post) {
+          if (post.slug) {
+            return `images/blog/${post.slug}.webp`;
+          }
+
           const category = post.category || "Mantenimiento";
           const pool =
             curatedImagePools[category] || curatedImagePools.Mantenimiento;
@@ -996,7 +1000,7 @@
         renderCards();
       });
     </script>
-    <script defer src="js/main.js"></script>
+    <script defer src="js/main.js?v=20260726-2"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
