@@ -1,5 +1,5 @@
-const CACHE_STATIC = "cbd-static-v2";
-const CACHE_PAGES = "cbd-pages-v1";
+const CACHE_STATIC = "cbd-static-v3";
+const CACHE_PAGES = "cbd-pages-v2";
 const FINANZAS_CACHE = "cbd-finanzas-v35";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
@@ -24,7 +24,7 @@ const FINANZAS_PATHS = [
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches
-      .open(STATIC_SHELL)
+      .open(CACHE_STATIC)
       .then((cache) => cache.addAll(STATIC_SHELL))
       .catch(() => {}),
   );
