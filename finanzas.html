@@ -2774,32 +2774,6 @@
         class="mas-drawer-item"
         onclick="
           closeMasDrawer();
-          document.getElementById('btn-install-ios') &&
-            document.getElementById('btn-install-ios').click();
-        "
-      >
-        <div
-          class="mas-drawer-icon"
-          style="background: rgba(184, 144, 77, 0.12)"
-        >
-          <i
-            data-lucide="download"
-            style="color: var(--accent); width: 20px; height: 20px"
-          ></i>
-        </div>
-        <div class="flex-1">
-          <p class="text-sm font-semibold" style="color: var(--text)">
-            Instalar App
-          </p>
-          <p class="text-xs mt-0.5" style="color: var(--text2)">
-            Agregar a pantalla de inicio
-          </p>
-        </div>
-      </button>
-      <button
-        class="mas-drawer-item"
-        onclick="
-          closeMasDrawer();
           if (confirm('\u00bfCerrar sesi\u00f3n?')) logout();
         "
       >
