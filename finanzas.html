@@ -3429,6 +3429,15 @@
         const projectNames = Object.values(projectNamesByKey);
         const activeNames = projectNames.filter((name) => {
           if (normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)) return true;
+          const hasPostOpeningActivity = source.some(
+            (transaction) =>
+              isAfterFinanceOpening(transaction) &&
+              sameCanonicalProject(
+                transaction.project || transaction.proyecto,
+                name,
+              ),
+          );
+          if (hasPostOpeningActivity) return true;
           if (!proyectosEstadoLoaded) return true;
           const statusKey = Object.keys(proyectosEstado).find(
             (key) => normalizeProjectName(key) === normalizeProjectName(name),
@@ -7796,7 +7805,7 @@
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=opening-orchid-v35", { updateViaCache: "none" })
+            .register("/sw.js?build=cross-cut-projects-v36", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

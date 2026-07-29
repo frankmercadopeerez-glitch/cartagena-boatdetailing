@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v3";
 const CACHE_PAGES = "cbd-pages-v2";
-const FINANZAS_CACHE = "cbd-finanzas-v35";
+const FINANZAS_CACHE = "cbd-finanzas-v36";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [

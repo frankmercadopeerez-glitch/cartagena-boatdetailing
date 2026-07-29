@@ -190,6 +190,41 @@ function assertValid(state) {
   assert.equal(state.profitTotal, engine.OPENING_STATE.profitTotal + 1815000);
 }
 
+// Un proyecto que cruza el corte conserva sus anticipos y gastos anteriores
+// cuando recibe el saldo final y se cierra bajo el motor nuevo.
+{
+  const state = calculate(
+    [
+      event("income", {
+        project: "Bote Musiquita",
+        receptor: "Frank",
+        monto: 1200000,
+      }),
+      event("expense", {
+        project: "Bote Musiquita",
+        responsible: "Frank",
+        monto: 350000,
+      }),
+      event("project_close", {
+        project: "Bote Musiquita",
+      }),
+    ],
+    engine.OPENING_STATE,
+    {
+      "Bote Musiquita": {
+        income: 1000000,
+        expenses: 530000,
+        capital: { frank: 470000, cristian: 0 },
+        legacyCapital: 470000,
+      },
+    },
+  );
+  assertValid(state);
+  assert.equal(state.projects["Bote Musiquita"].income, 2200000);
+  assert.equal(state.projects["Bote Musiquita"].expenses, 880000);
+  assert.equal(state.projects["Bote Musiquita"].profit, 1320000);
+}
+
 // Un evento antiguo de reapertura nunca revierte un cierre definitivo.
 {
   const state = calculate([
