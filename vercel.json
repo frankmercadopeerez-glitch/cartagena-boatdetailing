@@ -133,6 +133,21 @@
   ],
   "redirects": [
     {
+      "source": "/blog/frecuencia-limpieza-casco",
+      "destination": "/blog/limpieza-casco-frecuencia/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/frecuencia-limpieza-casco/",
+      "destination": "/blog/limpieza-casco-frecuencia/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/frecuencia-limpieza-casco/index.html",
+      "destination": "/blog/limpieza-casco-frecuencia/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "colombiaboatdetailing.com" }],
       "destination": "https://www.colombiaboatdetailing.com/:path*",

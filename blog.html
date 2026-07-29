@@ -597,6 +597,32 @@
             id="blog-pagination"
             class="flex flex-wrap justify-center gap-2 mt-10"
           ></div>
+
+          <nav
+            aria-label="Guías navales recomendadas"
+            class="mt-16 border-t border-white/15 pt-10"
+          >
+            <h3 class="font-serif text-2xl text-white mb-3">
+              Guías navales recomendadas
+            </h3>
+            <p class="text-slate-300 text-sm mb-6 max-w-3xl">
+              Accede directamente a nuestras guías especializadas sobre
+              mantenimiento, protección y preparación de yates en Cartagena.
+            </p>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 text-sm"
+            >
+              <a href="blog/ceramic-coating-vs-ppf-marino/" class="text-slate-300 hover:text-gold-400 transition-colors">Ceramic coating frente a PPF marino</a>
+              <a href="blog/tratamiento-osmosis-casco-fibra/" class="text-slate-300 hover:text-gold-400 transition-colors">Tratamiento de ósmosis en cascos de fibra</a>
+              <a href="blog/guia-mantenimiento-yates-cartagena-2027/" class="text-slate-300 hover:text-gold-400 transition-colors">Guía de mantenimiento de yates en Cartagena</a>
+              <a href="blog/limpieza-casco-antes-festival-nautico/" class="text-slate-300 hover:text-gold-400 transition-colors">Limpieza de casco antes de un evento náutico</a>
+              <a href="blog/precio-preparacion-yate-festival-nautico/" class="text-slate-300 hover:text-gold-400 transition-colors">Precio de preparación de un yate</a>
+              <a href="blog/cuidado-yate-despues-bololo-arsenal/" class="text-slate-300 hover:text-gold-400 transition-colors">Cuidado del yate después de un evento</a>
+              <a href="blog/cubierta-espuma-marina-cartagena/" class="text-slate-300 hover:text-gold-400 transition-colors">Cubierta de espuma marina en Cartagena</a>
+              <a href="blog/inspeccion-precompra-yate-cartagena/" class="text-slate-300 hover:text-gold-400 transition-colors">Inspección precompra de yates</a>
+              <a href="blog/mantenimiento-aire-acondicionado-yate-cartagena/" class="text-slate-300 hover:text-gold-400 transition-colors">Aire acondicionado para yates</a>
+            </div>
+          </nav>
         </div>
       </div>
     </section>
@@ -902,7 +928,7 @@
           const href = escapeHtml(post.url || "blog.html");
 
           return `
-            <a href="${href}" class="blog-card group" aria-label="Leer ${title}">
+            <a data-blog-url="${href}" class="blog-card group" aria-label="Leer ${title}">
               <div class="relative overflow-hidden h-40 bg-slate-900">
                 <img src="${image}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                 <span class="absolute top-3 left-3 bg-gold-400 text-navy-900 text-[11px] font-bold px-3 py-1 tracking-wider uppercase">${category}</span>
@@ -924,6 +950,12 @@
             return curatedPosts.filter((p) => p.featured);
           if (currentFilter === "Todos") return curatedPosts;
           return curatedPosts.filter((p) => p.category === currentFilter);
+        }
+
+        function activateCardLinks(container) {
+          container.querySelectorAll("[data-blog-url]").forEach((link) => {
+            link.setAttribute("href", link.getAttribute("data-blog-url"));
+          });
         }
 
         function renderFilters() {
@@ -948,6 +980,7 @@
             currentFilter === "Todos" || currentFilter === "Destacados";
           if (showFeatured) {
             featuredWrap.innerHTML = featuredPosts.map(cardTemplate).join("");
+            activateCardLinks(featuredWrap);
             featuredWrap.style.display = "";
           } else {
             featuredWrap.innerHTML = "";
@@ -991,6 +1024,7 @@
           const pageItems = filtered.slice(start, end);
 
           grid.innerHTML = pageItems.map(cardTemplate).join("");
+          activateCardLinks(grid);
           renderFeatured();
           renderFilters();
           renderPagination(filtered.length);
