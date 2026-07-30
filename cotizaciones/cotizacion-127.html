@@ -312,6 +312,9 @@
         border: 0;
         background: transparent;
       }
+      .intro-grid .info-card:last-child {
+        padding-left: 18px;
+      }
       .info-card h2 {
         margin-bottom: 4px;
         color: #5f6c80;
@@ -438,6 +441,12 @@
         .intro-grid,
         .terms-grid {
           grid-template-columns: 1fr;
+        }
+        .intro-grid {
+          flex-direction: column;
+        }
+        .intro-grid .info-card:last-child {
+          padding-left: 0;
         }
         .table-scroll {
           overflow-x: auto;
