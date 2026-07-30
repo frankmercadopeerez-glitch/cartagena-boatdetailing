@@ -465,91 +465,64 @@
       @media print {
         @page {
           size: A4;
-          margin: 0;
+          margin: 10mm;
         }
-        html,
         body {
-          margin: 0;
           padding: 0;
           background: white;
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
         }
         .sheet {
-          width: 210mm;
-          min-height: 0;
-          height: auto;
-          margin: 0;
+          width: auto;
+          max-width: none;
+          padding: 14px 18px 12px;
           box-shadow: none;
-          page-break-after: avoid;
-          zoom: 0.94;
-        }
-        body {
-          font-size: 10px;
-          line-height: 1.35;
         }
         header {
-          padding: 16px 28px 14px;
+          margin-bottom: 8px;
+          padding: 0 0 8px;
         }
         .brand img {
-          width: 42px;
-          height: 42px;
+          width: auto;
+          height: 40px;
         }
-        .brand-name {
-          font-size: 17px;
+        .brand-copy h1 {
+          font-size: 18px;
         }
         .quote-meta h1 {
           font-size: 18px;
         }
-        main {
-          padding: 15px 28px 16px;
-        }
         .intro-grid {
-          gap: 12px;
-          margin-bottom: 12px;
-        }
-        .info-card,
-        .terms {
-          padding: 9px 11px;
-        }
-        .section-title {
           margin-bottom: 7px;
-          padding-bottom: 5px;
-          font-size: 15px;
-        }
-        th {
           padding: 7px 9px;
         }
+        th,
         td {
-          padding: 8px 9px;
+          padding: 6px 7px;
         }
-        .service-detail li,
-        .terms li {
-          margin-bottom: 1px;
+        .service-detail {
+          font-size: 10px;
+          line-height: 1.38;
         }
         .totals-wrap {
-          margin: 8px 0 10px;
+          margin: 7px 0;
         }
         .totals {
-          padding: 8px 11px;
-        }
-        .grand-total {
-          font-size: 14px;
+          padding: 8px 9px;
         }
         .scope-note {
-          margin-bottom: 10px;
-          padding: 8px 11px;
+          margin-bottom: 7px;
+          padding: 7px 9px;
         }
         .terms-grid {
-          gap: 10px;
+          gap: 8px;
+          margin-top: 7px;
         }
-        .payment {
-          margin-top: 10px;
-          padding: 8px 11px;
+        .terms {
+          padding: 8px 9px;
         }
         footer {
-          padding: 10px 28px;
-          font-size: 9px;
+          margin-top: 8px;
+          padding: 7px 0 0;
         }
       }
     </style>
@@ -643,10 +616,10 @@
         </div>
 
         <div class="scope-note">
-          <strong>Alcance en altura:</strong> esta propuesta no incluye trabajos en mástil,
-          jarcia, estructuras elevadas ni zonas que requieran escalera, andamio, arnés,
-          plataforma o equipo de acceso en altura. El servicio de acero inoxidable se
-          limita a elementos alcanzables de forma segura desde la cubierta.
+          <strong>Alcance en altura:</strong> no incluye mástil, jarcia ni
+          elementos elevados que exijan escalera, andamio, arnés, plataforma o
+          equipo de acceso. Solo se intervendrán elementos alcanzables de forma
+          segura desde la cubierta.
         </div>
 
         <div class="terms-grid">
@@ -673,10 +646,9 @@
         </div>
 
         <div class="scope-note" style="margin-top: 10px">
-          <strong>Exclusiones:</strong> no se incluye desmontaje, descosido o
-          reparación de la carpa; sustitución de acrílicos; desmontaje de
-          herrajes; soldadura, reparación o reemplazo de piezas. La corrosión
-          profunda, las picaduras y la pérdida de recubrimiento pueden
+          <strong>Exclusiones:</strong> no incluye desmontajes, reparación de
+          carpa o acrílicos, soldadura, reparación ni reemplazo de herrajes. La
+          corrosión profunda, las picaduras y la pérdida de recubrimiento pueden
           permanecer visibles después del pulido.
         </div>
       </main>
