@@ -234,6 +234,187 @@
       footer strong {
         color: var(--navy);
       }
+
+      /* Estructura visual homologada con la cotización CBD-2026-120 */
+      body {
+        background: #edf2f7;
+        padding: 16px;
+        color: #2d3748;
+      }
+      .sheet {
+        width: 100%;
+        max-width: 780px;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 22px 24px 18px;
+        border-top: 8px solid #050b14;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+      .topbar {
+        display: none;
+      }
+      header {
+        align-items: flex-start;
+        padding: 0 0 12px;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #b8904d;
+        background: white;
+        color: #2d3748;
+      }
+      .brand img {
+        width: auto;
+        height: 48px;
+      }
+      .brand-copy h1 {
+        margin: 0 0 3px;
+        color: #050b14;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 22px;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+      }
+      .brand-copy p {
+        margin: 0;
+        color: #b8904d;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+      }
+      .quote-meta {
+        color: #5f6c80;
+        font-size: 12px;
+      }
+      .quote-meta h1 {
+        margin-bottom: 4px;
+        color: #112238;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+      .quote-meta p {
+        color: #5f6c80;
+      }
+      main {
+        padding: 0;
+      }
+      .intro-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border-left: 3px solid #050b14;
+        background: #f8fafc;
+      }
+      .info-card {
+        flex: 1;
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+      .info-card h2 {
+        margin-bottom: 4px;
+        color: #5f6c80;
+        font-size: 10px;
+        letter-spacing: 0.8px;
+      }
+      .info-card p {
+        color: #050b14;
+        font-size: 12px;
+      }
+      .section-title {
+        margin: 10px 0 6px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #b8904d;
+        color: #050b14;
+        font-size: 15px;
+      }
+      th {
+        padding: 7px 8px;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #050b14;
+        background: #f8fafc;
+        color: #050b14;
+        font-size: 11px;
+      }
+      td {
+        padding: 8px;
+        border: 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .service-name {
+        color: #112238;
+        font-size: 13px;
+      }
+      .service-detail {
+        color: #2d3748;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .totals-wrap {
+        margin: 8px 0 10px;
+      }
+      .totals {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+      }
+      .grand-total {
+        border-top: 2px solid #050b14;
+        color: #050b14;
+        font-size: 17px;
+      }
+      .scope-note {
+        padding: 10px 12px;
+        border: 1px solid #e2e8f0;
+        border-left: 3px solid #b8904d;
+        background: #f8fafc;
+        font-size: 12px;
+      }
+      .scope-note strong {
+        color: #050b14;
+      }
+      .terms-grid {
+        gap: 8px;
+      }
+      .terms {
+        padding: 10px;
+        font-size: 11px;
+      }
+      .terms:first-child {
+        border: 0;
+        border-left: 3px solid #1f7a4a;
+        background: #f8fafc;
+      }
+      .terms:last-child {
+        border: 0;
+        background: #050b14;
+        color: #e2e8f0;
+      }
+      .terms h3 {
+        color: #050b14;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+      .terms:last-child h3 {
+        color: #b8904d;
+      }
+      .payment {
+        margin-top: 8px;
+        padding: 7px 8px;
+        border-left: 2px solid #b8904d;
+        background: #112238;
+        font-size: 11px;
+      }
+      footer {
+        display: block;
+        margin-top: 12px;
+        padding: 10px 0 0;
+        text-align: center;
+        font-size: 10.5px;
+      }
       @media (max-width: 700px) {
         body {
           background: white;
@@ -364,13 +545,13 @@
       <header>
         <div class="brand">
           <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" />
-          <div class="brand-name">
-            <small>COLOMBIA</small>
-            BOAT DETAILING
+          <div class="brand-copy">
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en estética naval</p>
           </div>
         </div>
         <div class="quote-meta">
-          <h1>COTIZACIÓN</h1>
+          <h1>COTIZACIÓN DE SERVICIOS</h1>
           <p><strong>Número:</strong> CBD-2026-127</p>
           <p><strong>Fecha:</strong> 30/07/2026</p>
           <p><strong>Validez:</strong> 15 días calendario</p>
@@ -381,8 +562,8 @@
         <div class="intro-grid">
           <section class="info-card">
             <h2>Preparada para</h2>
-            <p><strong>Equipo de trabajo del Velero Satori</strong></p>
-            <p>Club de Pesca — Cartagena</p>
+            <p><strong>José Luis Mora</strong></p>
+            <p>Propietario — Velero Satori</p>
           </section>
           <section class="info-card">
             <h2>Embarcación y objeto</h2>
@@ -391,7 +572,15 @@
           </section>
         </div>
 
-        <h2 class="section-title">Servicios propuestos</h2>
+        <div class="scope-note">
+          <strong>Nota técnica sobre los acrílicos:</strong> el pulido busca
+          mejorar transparencia, brillo, opacidad y rayado superficial. El
+          resultado depende del deterioro previo y no garantiza eliminar
+          cuarteamiento interno, amarillamiento, grietas, quemaduras o
+          deformaciones del material.
+        </div>
+
+        <h2 class="section-title">Plan de trabajo</h2>
         <div class="table-scroll">
           <table>
             <thead>
@@ -455,40 +644,39 @@
 
         <div class="terms-grid">
           <section class="terms">
-            <h3>Consideraciones sobre los acrílicos</h3>
+            <h3>Tiempo estimado de ejecución</h3>
             <ul>
-              <li>El resultado depende del estado, espesor y deterioro previo del material.</li>
-              <li>El pulido mejora opacidad y rayas superficiales, pero no garantiza eliminar cuarteamiento interno, amarillamiento, grietas, quemaduras o deformaciones.</li>
-              <li>No se incluye desmontaje, descosido, reparación de la carpa ni sustitución de paneles acrílicos.</li>
+              <li>Duración estimada: <strong>2 a 3 días de trabajo</strong>.</li>
+              <li>Trabajo ejecutado con el velero en el agua en el Club de Pesca.</li>
+              <li>La programación se confirma una vez recibido el anticipo.</li>
             </ul>
           </section>
           <section class="terms">
             <h3>Condiciones del servicio</h3>
             <ul>
-              <li>Los valores incluyen materiales, insumos y mano de obra descritos.</li>
-              <li>No incluye desmontaje de herrajes, soldadura, reparación ni reemplazo de piezas.</li>
-              <li>La corrosión profunda, picaduras o pérdida de recubrimiento pueden permanecer visibles después del pulido.</li>
-              <li>El cliente facilitará acceso autorizado y condiciones seguras de trabajo en la embarcación.</li>
+              <li>Anticipo del <strong>50%</strong> para confirmar y programar el trabajo.</li>
+              <li>Saldo del <strong>50%</strong> contra entrega a satisfacción.</li>
+              <li>Costos de acceso al Club de Pesca <strong>corren por cuenta del cliente</strong>.</li>
             </ul>
+            <div class="payment">
+              La información de facturación se entrega vía WhatsApp al ser
+              aprobada la cotización.
+            </div>
           </section>
         </div>
 
-        <div class="payment">
-          <strong>Forma de pago:</strong> 50% para programación e inicio
-          ($ 952.000 IVA incluido) y 50% contra entrega del servicio
-          ($ 952.000 IVA incluido). Se emitirá la correspondiente factura electrónica.
+        <div class="scope-note" style="margin-top: 10px">
+          <strong>Exclusiones:</strong> no se incluye desmontaje, descosido o
+          reparación de la carpa; sustitución de acrílicos; desmontaje de
+          herrajes; soldadura, reparación o reemplazo de piezas. La corrosión
+          profunda, las picaduras y la pérdida de recubrimiento pueden
+          permanecer visibles después del pulido.
         </div>
       </main>
 
       <footer>
-        <div>
-          <strong>Colombia Boat Detailing</strong><br />
-          Cartagena de Indias, Colombia
-        </div>
-        <div>
-          Tel. 304 430 1112<br />
-          proyectos@colombiaboatdeailing.com
-        </div>
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Gracias por confiar en los especialistas en estética naval.</p>
       </footer>
     </article>
   </body>
