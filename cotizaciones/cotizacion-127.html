@@ -467,16 +467,22 @@
           size: A4;
           margin: 0;
         }
+        html,
         body {
+          margin: 0;
+          padding: 0;
           background: white;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
         }
         .sheet {
           width: 210mm;
-          min-height: 297mm;
+          min-height: 0;
+          height: auto;
           margin: 0;
           box-shadow: none;
+          page-break-after: avoid;
+          zoom: 0.94;
         }
         body {
           font-size: 10px;
