@@ -60,26 +60,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/css/finanzas-tailwind.css?v=37" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/finance-engine.js?v=opening-orchid-v3"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              navy: { 900: "#071428", 800: "#0f172a", 700: "#1e293b" },
-              gold: { 500: "#B8904D" },
-            },
-            fontFamily: { sans: ["Poppins", "system-ui", "sans-serif"] },
-          },
-        },
-      };
-    </script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -7798,14 +7785,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-recreate-movements-v1";
+          const swReloadKey = "cbd-finanzas-sw-local-styles-v2";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=cross-cut-projects-v36", { updateViaCache: "none" })
+            .register("/sw.js?build=finanzas-local-styles-v37", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

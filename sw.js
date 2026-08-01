@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v3";
 const CACHE_PAGES = "cbd-pages-v2";
-const FINANZAS_CACHE = "cbd-finanzas-v36";
+const FINANZAS_CACHE = "cbd-finanzas-v37";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -18,6 +18,7 @@ const STATIC_SHELL = [
 const FINANZAS_PATHS = [
   "/finanzas.html",
   "/finanzas-manifest.json",
+  "/css/finanzas-tailwind.css?v=37",
   "/js/finance-engine.js",
 ];
 
