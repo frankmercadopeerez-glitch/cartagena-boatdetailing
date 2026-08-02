@@ -89,6 +89,38 @@
       * {
         box-sizing: border-box;
       }
+      .settlement-wrap {
+        min-height: 92px;
+        padding: 18px 12px 4px;
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center;
+        gap: 12px !important;
+      }
+      #settlement-text {
+        width: 100%;
+      }
+      .settlement-amount {
+        font-size: clamp(1.75rem, 7vw, 2.35rem);
+        line-height: 1.05;
+        font-weight: 800;
+        color: var(--accent-bright);
+        letter-spacing: -0.035em;
+        text-shadow: 0 0 22px rgba(230, 184, 102, 0.2);
+      }
+      .settlement-label {
+        margin-top: 8px;
+        font-size: clamp(0.9rem, 3.4vw, 1.05rem);
+        line-height: 1.35;
+        font-weight: 500;
+        color: var(--text);
+      }
+      .settlement-balanced {
+        color: var(--green);
+        font-size: 1rem;
+        font-weight: 700;
+      }
       body {
         font-family: "Poppins", system-ui, sans-serif;
         background: var(--bg);
@@ -1603,6 +1635,7 @@
             </div>
             <!-- Settlement -->
             <div
+              class="settlement-wrap"
               style="
                 border-top: 1px solid rgba(255, 255, 255, 0.07);
                 padding-top: 10px;
@@ -5445,14 +5478,14 @@
         if (!settlement) return;
         if (Math.abs(diff) < 1) {
           settlement.innerHTML =
-            '<span style="color:var(--green);font-size:0.8rem">Cuentas equilibradas</span>';
+            '<span class="settlement-balanced">Cuentas equilibradas</span>';
           if (equalize) equalize.style.display = "none";
           return;
         }
         const from = diff > 0 ? "Frank" : "Cristian";
         const to = diff > 0 ? "Cristian" : "Frank";
         settlement.innerHTML =
-          `<div style="font-size:1.1rem;font-weight:800;color:var(--accent-bright)">${fmt(amount)}</div><div style="font-size:0.72rem;color:var(--text2)">${from} transfiere a ${to}</div>`;
+          `<div class="settlement-amount">${fmt(amount)}</div><div class="settlement-label">${from} transfiere a ${to}</div>`;
         if (equalize) {
           equalize.style.display = "";
           equalize.dataset.from = from;
@@ -5590,12 +5623,12 @@
         if (sEl) {
           if (Math.abs(diff) < 500) {
             sEl.innerHTML =
-              '<span style="color:var(--green);font-size:0.8rem">✓ Cuentas equilibradas</span>';
+              '<span class="settlement-balanced">✓ Cuentas equilibradas</span>';
             if (btnEq) btnEq.style.display = "none";
           } else {
             const nameFrom = diff > 0 ? "Frank" : "Cristian";
             const nameTo = diff > 0 ? "Cristian" : "Frank";
-            sEl.innerHTML = `<div style="font-size:1.1rem;font-weight:800;color:var(--accent-bright)">${fmt(amount)}</div><div style="font-size:0.72rem;color:var(--text2)">${nameFrom} transfiere a ${nameTo}</div>`;
+            sEl.innerHTML = `<div class="settlement-amount">${fmt(amount)}</div><div class="settlement-label">${nameFrom} transfiere a ${nameTo}</div>`;
             if (btnEq) {
               btnEq.style.display = "";
               btnEq.dataset.from = nameFrom;
