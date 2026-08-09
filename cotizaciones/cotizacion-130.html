@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Cotización #130 - Colombia Boat Detailing</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --primary-color: #050b14;
+        --secondary-color: #112238;
+        --accent-color: #b8904d;
+        --text-color: #2d3748;
+        --text-light: #5f6c80;
+        --bg-color: #ffffff;
+        --border-color: #e2e8f0;
+        --ok-color: #1f7a4a;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+      body {
+        padding: 16px;
+        background: #edf2f7;
+        color: var(--text-color);
+      }
+      .invoice-container {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 22px 24px 18px;
+        border-top: 8px solid var(--primary-color);
+        background: var(--bg-color);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--accent-color);
+      }
+      .brand-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand-info img {
+        width: auto;
+        height: 48px;
+      }
+      .brand-info h1 {
+        margin-bottom: 3px;
+        color: var(--primary-color);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 22px;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+      }
+      .brand-info p {
+        color: var(--accent-color);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+      }
+      .quote-info {
+        text-align: right;
+        font-size: 12px;
+      }
+      .quote-info h2 {
+        margin-bottom: 4px;
+        color: var(--secondary-color);
+        font-size: 18px;
+      }
+      .quote-info p {
+        margin-bottom: 2px;
+        color: var(--text-light);
+      }
+      .client-section {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border-left: 3px solid var(--primary-color);
+        background: #f8fafc;
+      }
+      .client-section h3 {
+        margin-bottom: 4px;
+        color: var(--text-light);
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+      }
+      .client-section p {
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+      .diagnostico-box {
+        margin-bottom: 10px;
+        padding: 9px 11px;
+        border-left: 3px solid var(--accent-color);
+        background: #fffbf2;
+        color: #3a3a3a;
+        font-size: 11px;
+        line-height: 1.55;
+      }
+      .diagnostico-box h4 {
+        margin-bottom: 3px;
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+      .section-title {
+        margin: 10px 0 6px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--accent-color);
+        color: var(--primary-color);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        padding: 7px 8px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--primary-color);
+        background: #f8fafc;
+        color: var(--primary-color);
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+      td {
+        padding: 8px;
+        border-bottom: 1px solid var(--border-color);
+        vertical-align: top;
+      }
+      .item-title {
+        margin-bottom: 4px;
+        color: var(--secondary-color);
+        font-size: 13px;
+        font-weight: 700;
+        text-align: left;
+      }
+      .item-desc {
+        color: var(--text-color);
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: left;
+      }
+      .item-desc ul {
+        margin: 5px 0 0 16px;
+      }
+      .item-desc li {
+        margin-bottom: 2px;
+      }
+      .detail-label {
+        display: block;
+        margin-top: 7px;
+        color: var(--primary-color);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.45px;
+        text-transform: uppercase;
+      }
+      .special-price {
+        color: var(--primary-color);
+        font-size: 14px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin: 8px 0 10px;
+      }
+      .totals-box {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        background: #f8fafc;
+      }
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 4px;
+        font-size: 12px;
+      }
+      .grand-total {
+        margin-top: 4px;
+        padding-top: 6px;
+        border-top: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        font-size: 17px;
+        font-weight: 800;
+      }
+      .tax-note {
+        margin-top: 4px;
+        color: var(--text-light);
+        font-size: 10px;
+      }
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .warranty-box,
+      .terms-section {
+        padding: 10px;
+        font-size: 11px;
+      }
+      .warranty-box {
+        border-left: 3px solid var(--ok-color);
+        background: #f8fafc;
+      }
+      .terms-section {
+        background: var(--primary-color);
+        color: #e2e8f0;
+      }
+      .warranty-box h4 {
+        margin-bottom: 6px;
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+      .terms-section h4 {
+        margin-bottom: 6px;
+        color: var(--accent-color);
+        font-size: 12px;
+      }
+      .warranty-box ul,
+      .terms-section ul {
+        margin-left: 15px;
+        line-height: 1.55;
+      }
+      .guarantee-section {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid rgba(31, 122, 74, 0.3);
+        border-left: 3px solid var(--ok-color);
+        background: #f0faf5;
+        color: var(--text-color);
+        font-size: 11px;
+      }
+      .guarantee-section h4 {
+        margin-bottom: 6px;
+        color: var(--ok-color);
+        font-size: 12px;
+      }
+      .guarantee-section p {
+        margin: 4px 0;
+      }
+      .optional-section {
+        margin-top: 10px;
+        page-break-inside: avoid;
+        padding: 10px;
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-left: 3px solid var(--accent-color);
+        background: #fffaf0;
+        color: var(--text-color);
+        font-size: 11px;
+      }
+      .optional-section h4 {
+        margin-bottom: 6px;
+        color: var(--primary-color);
+        font-size: 12px;
+      }
+      .optional-section p {
+        margin: 4px 0;
+      }
+      .optional-section ul {
+        margin: 5px 0 0 15px;
+        line-height: 1.5;
+      }
+      .photo-section {
+        margin-top: 14px;
+        page-break-before: auto;
+      }
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .photo-slot img {
+        display: block;
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+      }
+      .photo-caption {
+        margin: 3px 0 0;
+        color: var(--text-light);
+        font-size: 10px;
+        font-style: italic;
+        text-align: center;
+      }
+      footer {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-light);
+        font-size: 10.5px;
+        text-align: center;
+      }
+      @media (max-width: 650px) {
+        body {
+          padding: 0;
+          background: white;
+        }
+        .invoice-container {
+          padding: 18px 14px;
+          box-shadow: none;
+        }
+        header,
+        .client-section {
+          flex-direction: column;
+        }
+        .quote-info {
+          text-align: left;
+        }
+        .table-wrap {
+          overflow-x: auto;
+        }
+        table {
+          min-width: 650px;
+        }
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media print {
+        body {
+          padding: 0;
+          background: white;
+        }
+        .invoice-container {
+          max-width: none;
+          padding: 14px 18px 12px;
+          box-shadow: none;
+        }
+        header {
+          margin-bottom: 8px;
+          padding-bottom: 8px;
+        }
+        .brand-info img {
+          height: 40px;
+        }
+        .brand-info h1 {
+          font-size: 18px;
+        }
+        .diagnostico-box,
+        .client-section {
+          margin-bottom: 7px;
+          padding: 7px 9px;
+        }
+        th,
+        td {
+          padding: 6px 7px;
+        }
+        .item-desc {
+          font-size: 10px;
+          line-height: 1.38;
+        }
+        .bottom-grid {
+          margin-top: 7px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container">
+      <header>
+        <div class="brand-info">
+          <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" />
+          <div>
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en estética naval</p>
+          </div>
+        </div>
+        <div class="quote-info">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-130</p>
+          <p><strong>Fecha:</strong> 09/08/2026</p>
+          <p><strong>Validez:</strong> 15 días</p>
+        </div>
+      </header>
+
+      <div class="client-section">
+        <div>
+          <h3>Preparado para</h3>
+          <p><strong>Propietario de botes Gente de Mar</strong></p>
+          <p>Flota de tres embarcaciones</p>
+        </div>
+        <div>
+          <h3>Embarcación</h3>
+          <p><strong>Flota Gente de Mar</strong></p>
+          <p>Tres botes Triton Firpol de 42 pies — Marina Santa Cruz</p>
+        </div>
+      </div>
+
+      <div class="diagnostico-box">
+        <h4>Diagnóstico y alcance</h4>
+        <p>
+          En la inspección visual realizada el sábado 8 de agosto de 2026 se
+          observaron dos de los tres botes de la flota. Se evidencia desgaste
+          del gelcoat, con posibilidad de recuperar el brillo y la profundidad
+          del color mediante un proceso profesional. En las consolas de mando
+          se observa un desgaste profundo que será tratado con especial
+          cuidado para obtener el mejor resultado posible. El tercer bote no
+          se encontraba en la Marina Santa Cruz y queda sujeto a revisión al
+          momento de iniciar. El servicio se ejecutará con el sistema 3M Marine
+          en tres etapas y los botes deberán estar fuera del agua.
+        </p>
+      </div>
+
+      <h3 class="section-title">Plan de trabajo — Servicio cotizado</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 75%">Descripción del servicio</th>
+              <th style="width: 25%">Valor (antes de IVA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="item-title">
+                  1. Pulido integral de gelcoat — oferta especial por flota
+                </div>
+                <div class="item-desc">
+                  Pulido integral de las superficies accesibles de gelcoat de
+                  los tres botes Triton Firpol de 42 pies para lograr un
+                  <strong>efecto espejo</strong> y recuperar la profundidad del
+                  color. La oferta especial por contratación de los tres botes
+                  establece un valor de <strong>$ 3.000.000 por bote</strong>.
+                  Incluye:
+                  <ul>
+                    <li><strong>Etapa 1 — Compound:</strong> corrección de oxidación, opacidad y rayones superficiales con <strong>3M Marine Heavy Duty Compound</strong>.</li>
+                    <li><strong>Etapa 2 — Polish:</strong> refinado del acabado con <strong>3M Finesse-it / Marine Polish</strong> para recuperar profundidad y eliminar marcas del compound.</li>
+                    <li><strong>Etapa 3 — Cera protectora:</strong> sellado con <strong>3M Ultra Performance Paste Wax</strong> contra radiación UV, agua salada y contaminación marina.</li>
+                    <li>Preparación, limpieza final y revisión del acabado brillante en las áreas intervenidas.</li>
+                  </ul>
+                  El proceso está diseñado para conseguir un acabado uniforme y
+                  brillante. Los resultados pueden variar según la profundidad
+                  de la oxidación, rayones, reparaciones previas o deterioro del
+                  gelcoat, especialmente en las consolas de mando.
+                </div>
+              </td>
+              <td><div class="special-price">$ 9.000.000</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="totals-section">
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span>$ 9.000.000 COP</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total servicios (antes de IVA):</span>
+            <span>$ 9.000.000 COP</span>
+          </div>
+          <div class="tax-note">
+            Si el cliente requiere facturación electrónica, se adicionará el IVA
+            vigente.
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="warranty-box">
+          <h4>&#9200; Alcance y tiempo estimado</h4>
+          <ul>
+            <li>
+              Tiempo estimado: <strong>3 a 4 días de trabajo por cada bote</strong>,
+              incluyendo preparación, pulido por etapas y acabado final,
+              sujeto a las condiciones climáticas. Para los tres botes, la
+              programación estimada será de 9 a 12 días de trabajo.
+            </li>
+            <li>
+              Equipo asignado: <strong>2 técnicos especializados</strong>.
+            </li>
+            <li>Los botes deberán estar fuera del agua en la Marina Santa Cruz al momento de ejecutar cada servicio.</li>
+            <li>Los costos de ingreso del personal de Colombia Boat Detailing a la marina serán asumidos por el cliente.</li>
+            <li>El valor incluye mano de obra y materiales descritos.</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo del 50% para programar e iniciar el trabajo.</li>
+            <li>Saldo del 50% contra entrega a satisfacción.</li>
+            <li>La información de pago y facturación se entregará por WhatsApp al aprobar la cotización.</li>
+            <li>Trabajos adicionales requieren autorización y cotización independiente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guarantee-section">
+        <h4>&#10003; Garantía de brillo y guía de cuidado personalizada</h4>
+        <p>
+          Se otorga <strong>garantía de 6 meses</strong> sobre el brillo
+          restaurado con el sistema profesional 3M Marine aplicado al gelcoat.
+        </p>
+        <p>
+          &#128241; <strong>Guía digital de cuidado personalizada:</strong> al
+          finalizar los trabajos se entrega una guía con instrucciones de
+          mantenimiento para preservar el brillo de la flota Gente de Mar.
+        </p>
+      </div>
+
+      <div class="optional-section">
+        <h4>Servicios adicionales ofrecidos por separado</h4>
+        <p>Estos trabajos no están incluidos en el total de $ 9.000.000 COP y requieren autorización independiente:</p>
+        <ul>
+          <li><strong>Rutas del Mar II — tapa de motor:</strong> reparación de la tapa ubicada en el extremo derecho, incluyendo reparación con fibra de vidrio, acabado y calcomanías originales. <strong>$ 1.300.000 COP</strong>.</li>
+          <li><strong>Gente de Mar I — tapa de motor de estribor:</strong> recuperación de la superficie con mancha o reparación previa, acabado con apariencia de color nuevo y calcomanías originales. <strong>$ 1.200.000 COP</strong>.</li>
+          <li><strong>Tercer bote:</strong> cualquier reparación de tapa de motor quedará sujeta a inspección y cotización después de su entrega en la marina.</li>
+        </ul>
+      </div>
+
+      <div class="photo-section">
+        <h3 class="section-title">Registro fotográfico — Motores de la flota</h3>
+        <div class="photo-grid">
+          <div class="photo-slot"><img src="images/flota-firpol/motores-flota.jpg" alt="Motores Yamaha de la flota Gente de Mar" /><p class="photo-caption">Registro de motores Yamaha durante la inspección</p></div>
+          <div class="photo-slot"><img src="images/flota-firpol/tapa-motor-detalle.jpg" alt="Detalle de tapa de motor Yamaha" /><p class="photo-caption">Detalle de desgaste en tapa de motor</p></div>
+        </div>
+      </div>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Gracias por confiar en los especialistas en estética naval.</p>
+      </footer>
+    </div>
+  </body>
+</html>
