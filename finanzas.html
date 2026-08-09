@@ -6,18 +6,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     />
-    <script>
-      (function normalizePhoneScale() {
-        const root = document.documentElement;
-        const screenWidth = Math.min(screen.width, screen.height);
-        const viewportWidth = root.clientWidth || window.innerWidth;
-        const isPhone = navigator.maxTouchPoints > 0 && screenWidth <= 640;
-        if (!isPhone) return;
-        const ratio = Math.min(2.5, Math.max(1, viewportWidth / screenWidth));
-        root.classList.add("fz-phone");
-        root.style.setProperty("--fz-phone-ratio", ratio.toFixed(3));
-      })();
-    </script>
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -72,27 +60,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/finanzas-tailwind.css?v=37" />
+    <link rel="stylesheet" href="/css/finanzas-tailwind.css?v=41" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/finance-engine.js?v=opening-orchid-v3"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              navy: { 900: "#071428", 800: "#0f172a", 700: "#1e293b" },
-              gold: { 500: "#B8904D" },
-            },
-            fontFamily: { sans: ["Poppins", "system-ui", "sans-serif"] },
-          },
-        },
-      };
-    </script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -493,7 +467,7 @@
 
       @media (max-width: 640px) {
         html {
-          font-size: 22px;
+          font-size: 20px;
           -webkit-text-size-adjust: 100%;
           text-size-adjust: 100%;
         }
@@ -512,95 +486,47 @@
         .nav-item span {
           font-size: 0.68rem !important;
         }
+        .global-kpi-label {
+          min-height: 2.7em;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+        }
+        #main-app .partner-balance-value {
+          font-size: 0.9rem !important;
+          white-space: nowrap;
+        }
+        #btn-ingreso,
+        #btn-gasto,
+        #btn-tipo-transfer {
+          gap: 0.25rem !important;
+          padding-left: 0.25rem;
+          padding-right: 0.25rem;
+          font-size: 0.7rem !important;
+        }
+        .pub-widget-main {
+          flex-wrap: wrap;
+        }
+        .pub-widget-copy {
+          min-width: 7rem;
+        }
+        .pub-widget-actions {
+          width: 100%;
+          justify-content: flex-end;
+          margin-top: 0.4rem;
+          padding-left: 2.75rem;
+        }
       }
 
+      @media (max-width: 360px) {
+        #main-app .partner-balance-card {
+          padding: 0.5rem !important;
+        }
+        #main-app .partner-balance-value {
+          font-size: 0.75rem !important;
+        }
+      }
       /* ── Toast ── */
-      html.fz-phone {
-        font-size: 22px;
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-      html.fz-phone body {
-        width: calc(100% / var(--fz-phone-ratio, 1));
-        min-width: 0;
-        overflow-x: hidden;
-        zoom: var(--fz-phone-ratio, 1);
-      }
-      html.fz-phone .sm\:hidden {
-        display: block !important;
-      }
-      html.fz-phone .sm\:block,
-      html.fz-phone .sm\:inline {
-        display: none !important;
-      }
-      html.fz-phone .sm\:grid-cols-3,
-      html.fz-phone .sm\:grid-cols-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      }
-      html.fz-phone .lg\:grid-cols-2 {
-        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-      }
-      html.fz-phone .sm\:flex-row {
-        flex-direction: column !important;
-      }
-      html.fz-phone .sm\:justify-between {
-        justify-content: center !important;
-      }
-      html.fz-phone .sm\:items-center {
-        align-items: flex-end !important;
-      }
-      html.fz-phone .sm\:text-left {
-        text-align: center !important;
-      }
-      html.fz-phone .sm\:w-auto {
-        width: 100% !important;
-      }
-      html.fz-phone .sm\:max-w-md {
-        max-width: none !important;
-      }
-      html.fz-phone .sm\:p-5,
-      html.fz-phone .sm\:p-6,
-      html.fz-phone .lg\:p-7 {
-        padding: 1rem !important;
-      }
-      html.fz-phone .sm\:px-5 {
-        padding-left: 0.75rem !important;
-        padding-right: 0.75rem !important;
-      }
-      html.fz-phone .md\:py-3 {
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-      }
-      html.fz-phone .md\:text-base {
-        font-size: 0.875rem !important;
-        line-height: 1.25rem !important;
-      }
-      html.fz-phone #main-app .text-xs,
-      html.fz-phone #bottom-nav .text-xs,
-      html.fz-phone #main-app [style*="font-size:0."],
-      html.fz-phone #main-app [style*="font-size: 0."] {
-        font-size: 16px !important;
-        line-height: 1.35;
-      }
-      html.fz-phone #main-app .text-sm,
-      html.fz-phone #bottom-nav .text-sm {
-        font-size: 18px !important;
-        line-height: 1.4;
-      }
-      html.fz-phone #main-app .kpi-label,
-      html.fz-phone #bottom-nav .nav-item span {
-        font-size: 16px !important;
-        line-height: 1.3;
-      }
-      html.fz-phone #main-app [style*="font-size: clamp"] {
-        font-size: 25px !important;
-        line-height: 1.15;
-      }
-      html.fz-phone #main-app .settlement-amount,
-      html.fz-phone #main-app .partner-balance-value {
-        font-size: 30px !important;
-        line-height: 1.1;
-      }
       #toast {
         position: fixed;
         bottom: calc(68px + var(--sab) + 1rem);
@@ -1532,7 +1458,7 @@
                 style="cursor: pointer"
               >
                 <p
-                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  class="global-kpi-label text-xs font-semibold uppercase tracking-wide mb-1"
                   style="color: rgba(255, 255, 255, 0.4)"
                 >
                   Total Ingresos
@@ -1550,7 +1476,7 @@
                 style="cursor: pointer"
               >
                 <p
-                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  class="global-kpi-label text-xs font-semibold uppercase tracking-wide mb-1"
                   style="color: rgba(255, 255, 255, 0.4)"
                 >
                   Gastos Operativos
@@ -1565,7 +1491,7 @@
               </div>
               <div>
                 <p
-                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  class="global-kpi-label text-xs font-semibold uppercase tracking-wide mb-1"
                   style="color: rgba(255, 255, 255, 0.4)"
                 >
                   Profit Total
@@ -1580,7 +1506,7 @@
               </div>
               <div>
                 <p
-                  class="text-xs font-semibold uppercase tracking-wide mb-1"
+                  class="global-kpi-label text-xs font-semibold uppercase tracking-wide mb-1"
                   style="color: rgba(255, 255, 255, 0.4)"
                 >
                   Capital Activo
@@ -2409,14 +2335,14 @@
           </div>
           <!-- PUBLICIDAD -->
           <div class="pub-widget px-4 py-3 mb-5">
-            <div class="flex items-center gap-3">
+            <div class="pub-widget-main flex items-center gap-3">
               <div
                 class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
                 style="background: rgba(245, 158, 11, 0.18)"
               >
                 <i data-lucide="megaphone" class="w-4 h-4 text-yellow-400"></i>
               </div>
-              <div class="flex-1 min-w-0">
+              <div class="pub-widget-copy flex-1 min-w-0">
                 <p
                   class="text-xs font-bold text-yellow-400 uppercase tracking-widest leading-none"
                 >
@@ -2433,7 +2359,7 @@
                   este mes
                 </p>
               </div>
-              <div class="flex gap-2 flex-shrink-0">
+              <div class="pub-widget-actions flex gap-2 flex-shrink-0">
                 <button
                   onclick="filtrarPorPublicidad()"
                   class="text-xs font-semibold py-1.5 px-3 rounded-xl border text-yellow-400 hover:bg-yellow-500/10 transition flex items-center gap-1"
@@ -7943,14 +7869,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-phone-scale-v3";
+          const swReloadKey = "cbd-finanzas-sw-safari-width-v4";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=finanzas-phone-scale-v40", { updateViaCache: "none" })
+            .register("/sw.js?build=finanzas-safari-width-v41", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
