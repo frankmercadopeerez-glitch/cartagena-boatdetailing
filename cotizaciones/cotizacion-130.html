@@ -191,6 +191,31 @@
       .fleet-offer-label {
         color: var(--ok-color);
       }
+      .additional-row td {
+        background: #eef6ff;
+        border-top: 1px solid #bfd7ef;
+        vertical-align: top;
+      }
+      .additional-row .item-title {
+        color: #1f4f7a;
+      }
+      .additional-label {
+        color: #1f4f7a;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.45px;
+        text-transform: uppercase;
+      }
+      .additional-row ul {
+        margin: 5px 0 0 16px;
+      }
+      .additional-price {
+        color: #1f4f7a;
+        font-size: 11px;
+        font-weight: 800;
+        line-height: 1.45;
+        text-align: right;
+      }
       .totals-section {
         display: flex;
         justify-content: flex-end;
@@ -231,6 +256,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 8px;
         margin-top: 10px;
+        page-break-inside: avoid;
       }
       .warranty-box,
       .terms-section {
@@ -277,28 +303,6 @@
       .guarantee-section p {
         margin: 4px 0;
       }
-      .optional-section {
-        margin-top: 10px;
-        page-break-inside: avoid;
-        padding: 10px;
-        border: 1px solid rgba(212, 175, 55, 0.45);
-        border-left: 3px solid var(--accent-color);
-        background: #fffaf0;
-        color: var(--text-color);
-        font-size: 11px;
-      }
-      .optional-section h4 {
-        margin-bottom: 6px;
-        color: var(--primary-color);
-        font-size: 12px;
-      }
-      .optional-section p {
-        margin: 4px 0;
-      }
-      .optional-section ul {
-        margin: 5px 0 0 15px;
-        line-height: 1.5;
-      }
       .photo-section {
         margin-top: 14px;
         page-break-before: auto;
@@ -312,7 +316,7 @@
       .photo-slot img {
         display: block;
         width: 100%;
-        height: 190px;
+        height: 175px;
         object-fit: cover;
         border: 1px solid var(--border-color);
       }
@@ -324,8 +328,8 @@
         text-align: center;
       }
       footer {
-        margin-top: 12px;
-        padding-top: 10px;
+        margin-top: 8px;
+        padding-top: 8px;
         border-top: 1px solid var(--border-color);
         color: var(--text-light);
         font-size: 10.5px;
@@ -360,7 +364,7 @@
           grid-template-columns: repeat(2, 1fr);
         }
         .photo-slot img {
-          height: 180px;
+          height: 160px;
         }
       }
       @media print {
@@ -477,6 +481,7 @@
                     <li><strong>Etapa 1 — Compound:</strong> corrección de oxidación, opacidad y rayones superficiales con <strong>3M Marine Heavy Duty Compound</strong>.</li>
                     <li><strong>Etapa 2 — Polish:</strong> refinado del acabado con <strong>3M Finesse-it / Marine Polish</strong> para recuperar profundidad y eliminar marcas del compound.</li>
                     <li><strong>Etapa 3 — Cera protectora:</strong> sellado con <strong>3M Ultra Performance Paste Wax</strong> contra radiación UV, agua salada y contaminación marina.</li>
+                    <li><strong>Obsequio de cortesía:</strong> cambio de las calcomanías del nombre de <strong>Gente de Mar I</strong>, sin costo adicional.</li>
                     <li>Preparación, limpieza final y revisión del acabado brillante en las áreas intervenidas.</li>
                   </ul>
                   El proceso está diseñado para conseguir un acabado uniforme y
@@ -486,6 +491,23 @@
                 </div>
               </td>
               <td><div class="special-price">$ 9.000.000</div></td>
+            </tr>
+            <tr class="additional-row">
+              <td>
+                <div class="item-title">
+                  2. Servicios adicionales
+                  <span class="additional-label">— No incluidos en el precio</span>
+                </div>
+                <div class="item-desc">
+                  Se ofrecen por separado y solo se ejecutan con autorización del cliente:
+                  <ul>
+                    <li><strong>Rutas del Mar II — tapa de motor:</strong> reparación con fibra de vidrio, pintura, acabado y calcomanías originales. <strong>$ 1.300.000 COP</strong>.</li>
+                    <li><strong>Gente de Mar I — tapa de motor de estribor:</strong> reparación de la superficie, pintura completa para lograr un color uniforme, acabado final y calcomanías originales. <strong>$ 1.400.000 COP</strong>.</li>
+                    <li><strong>Tercer bote:</strong> cualquier reparación de tapa de motor queda sujeta a inspección y cotización.</li>
+                  </ul>
+                </div>
+              </td>
+              <td><div class="additional-price">NO INCLUIDOS<br />EN EL PRECIO</div></td>
             </tr>
           </tbody>
         </table>
@@ -552,17 +574,6 @@
           finalizar los trabajos se entrega una guía con instrucciones de
           mantenimiento para preservar el brillo de la flota Gente de Mar.
         </p>
-      </div>
-
-      <div class="optional-section">
-        <h4>Servicios adicionales ofrecidos por separado</h4>
-        <p>Estos trabajos no están incluidos en el total de $ 9.000.000 COP y requieren autorización independiente:</p>
-        <ul>
-          <li><strong>Rutas del Mar II — tapa de motor:</strong> reparación de la tapa ubicada en el extremo derecho, incluyendo reparación con fibra de vidrio, acabado y calcomanías originales. <strong>$ 1.300.000 COP</strong>.</li>
-          <li><strong>Gente de Mar I — tapa de motor de estribor:</strong> reparación de la superficie con mancha o reparación previa, pintura completa de la tapa para lograr un color uniforme, acabado final y calcomanías originales. <strong>$ 1.400.000 COP</strong>.</li>
-          <li><strong>Gente de Mar I — cambio de calcomanías del nombre:</strong> se realizará como trabajo adicional, sin costo adicional para el cliente.</li>
-          <li><strong>Tercer bote:</strong> cualquier reparación de tapa de motor quedará sujeta a inspección y cotización después de su entrega en la marina.</li>
-        </ul>
       </div>
 
       <div class="photo-section">
