@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=mobile-layout-v42"></script>
+    <script src="/js/finance-engine.js?v=new-project-v43"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -3705,8 +3705,13 @@
           stampedEvents.map((event, index) => ({ id: refs[index].id, ...event })),
           );
         const nextState = calculateCandidateFinanceState(candidate);
-        if (hasFinanceErrors(nextState)) {
-          throw new Error(financeErrorMessage(nextState));
+        const blockingError = FINANCE_ENGINE.findBlockingValidationError(
+          getFinanceState(),
+          nextState,
+          refs.map((ref) => ref.id),
+        );
+        if (blockingError) {
+          throw new Error(blockingError.message);
         }
         const batch = db.batch();
         idsToRemove.forEach((id) =>
@@ -7869,16 +7874,16 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-force-refresh-v5";
+          const swReloadKey = "cbd-finanzas-sw-force-refresh-v6";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "42");
+            refreshedUrl.searchParams.set("_cbd_build", "43");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=finanzas-force-refresh-v42", { updateViaCache: "none" })
+            .register("/sw.js?build=new-project-v43", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

@@ -567,6 +567,31 @@
     );
   }
 
+  function findBlockingValidationError(previousState, nextState, eventIds) {
+    const previousErrors =
+      (previousState && previousState.validation && previousState.validation.errors) || [];
+    const nextErrors =
+      (nextState && nextState.validation && nextState.validation.errors) || [];
+    const currentEventIds = new Set((eventIds || []).filter(Boolean).map(String));
+    const previousKeys = new Set(
+      previousErrors.map((error) =>
+        [error.code || "", error.eventId || ""].map(String).join("|"),
+      ),
+    );
+
+    return (
+      nextErrors.find((error) => {
+        const key = [error.code || "", error.eventId || ""]
+          .map(String)
+          .join("|");
+        return (
+          currentEventIds.has(String(error.eventId || "")) ||
+          !previousKeys.has(key)
+        );
+      }) || null
+    );
+  }
+
   return Object.freeze({
     ENGINE_VERSION,
     PARTNERS,
@@ -574,6 +599,7 @@
     OPENING_STATE,
     calculate,
     eventType,
+    findBlockingValidationError,
     makeEvent,
     partnerKey,
   });

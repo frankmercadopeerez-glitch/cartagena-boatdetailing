@@ -498,4 +498,86 @@ function assertValid(state) {
   assert.equal(state.balanceByPartner.frank, before.balanceByPartner.frank);
 }
 
+// Un error historico no bloquea un proyecto nuevo, pero un movimiento nuevo
+// dirigido a un proyecto cerrado sigue siendo invalido.
+{
+  const previousState = {
+    validation: {
+      errors: [{ code: "PROJECT_CLOSED", eventId: "old-expense" }],
+    },
+  };
+  const newProjectState = {
+    validation: {
+      errors: [{ code: "PROJECT_CLOSED", eventId: "old-expense" }],
+    },
+  };
+  assert.equal(
+    engine.findBlockingValidationError(previousState, newProjectState, ["new-income"]),
+    null,
+  );
+
+  const closedProjectState = {
+    validation: {
+      errors: [
+        { code: "PROJECT_CLOSED", eventId: "old-expense" },
+        { code: "PROJECT_CLOSED", eventId: "new-income", message: "Proyecto cerrado" },
+      ],
+    },
+  };
+  assert.equal(
+    engine.findBlockingValidationError(previousState, closedProjectState, ["new-income"])
+      .message,
+    "Proyecto cerrado",
+  );
+}
+
+// Reproduccion completa: un gasto historico posterior a un cierre conserva su
+// alerta, pero no impide registrar ingresos en un proyecto diferente.
+{
+  const oldEvents = [
+    event("project_close", { id: "old-close", project: "Proyecto Antiguo", hora: "09:00" }),
+    event("expense", {
+      id: "old-expense",
+      project: "Proyecto Antiguo",
+      responsible: "Cristian",
+      monto: 50000,
+      hora: "10:00",
+    }),
+  ];
+  const previousState = calculate(oldEvents);
+  assert.equal(previousState.validation.valid, false);
+
+  const newProjectState = calculate([
+    ...oldEvents,
+    event("income", {
+      id: "new-income",
+      project: "Proyecto Completamente Nuevo",
+      receptor: "Frank",
+      monto: 300000,
+      hora: "11:00",
+    }),
+  ]);
+  assert.equal(
+    engine.findBlockingValidationError(previousState, newProjectState, ["new-income"]),
+    null,
+  );
+
+  const closedProjectState = calculate([
+    ...oldEvents,
+    event("income", {
+      id: "new-closed-income",
+      project: "Proyecto Antiguo",
+      receptor: "Frank",
+      monto: 300000,
+      hora: "11:00",
+    }),
+  ]);
+  assert.equal(
+    engine.findBlockingValidationError(previousState, closedProjectState, [
+      "new-closed-income",
+    ]).code,
+    "PROJECT_CLOSED",
+  );
+}
+
 console.log("finance-engine: all tests passed");
