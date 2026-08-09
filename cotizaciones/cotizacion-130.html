@@ -27,7 +27,7 @@
       }
       @page {
         size: A4;
-        margin: 10mm;
+        margin: 8mm;
       }
       body {
         padding: 16px;
@@ -374,7 +374,7 @@
         }
         .invoice-container {
           max-width: none;
-          padding: 14px 18px 12px;
+          padding: 4mm 5mm 4mm;
           box-shadow: none;
         }
         header {
@@ -402,6 +402,33 @@
         }
         .bottom-grid {
           margin-top: 7px;
+        }
+        .page-two-section {
+          break-before: page;
+          page-break-before: always;
+          padding-top: 5mm;
+        }
+        .guarantee-section {
+          margin-top: 0;
+        }
+        header,
+        .client-section,
+        .diagnostico-box,
+        .totals-section,
+        .bottom-grid,
+        .guarantee-section,
+        .additional-row,
+        footer {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .section-title {
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .photo-slot {
+          break-inside: avoid;
+          page-break-inside: avoid;
         }
       }
     </style>
@@ -433,7 +460,7 @@
         <div>
           <h3>Embarcación</h3>
           <p><strong>Flota Gente de Mar</strong></p>
-          <p>Tres botes Firpol de 42 pies — ubicación por confirmar</p>
+          <p>Tres botes Firpol de 42 pies — Marina Santa Cruz, Manga, Cartagena</p>
         </div>
       </div>
 
@@ -445,9 +472,7 @@
           del gelcoat, con posibilidad de recuperar el brillo y la profundidad
           del color mediante un proceso profesional. En las consolas de mando
           se observa un desgaste profundo que será tratado con especial
-          cuidado para obtener el mejor resultado posible. El tercer bote no
-          se encontraba en el punto de inspección. El tercer bote se
-          inspeccionará al iniciar los trabajos y cualquier alcance adicional
+          cuidado para obtener el mejor resultado posible. El tercer bote no se encontraba en el punto de inspección; se inspeccionará al iniciar los trabajos y cualquier alcance adicional
           se definirá después de esa revisión. El servicio se ejecutará con el
           sistema 3M Marine en tres etapas y los botes deberán estar fuera del
           agua.
@@ -475,9 +500,9 @@
                   los tres botes Firpol de 42 pies para lograr un
                   <strong>efecto espejo</strong> y recuperar la profundidad del
                   color. El valor regular de este servicio para cada bote es de
-                  <strong>$ 3.600.000</strong>. Como oferta especial por la
+                  <strong>$&nbsp;3.600.000</strong>. Como oferta especial por la
                   contratación de los tres botes, se establece un valor de
-                  <strong>$ 3.000.000 por bote</strong>.
+                  <strong>$&nbsp;3.000.000 por bote</strong>.
                   Incluye:
                   <ul>
                     <li><strong>Etapa 1 — Compound:</strong> corrección de oxidación, opacidad y rayones superficiales con <strong>3M Marine Heavy Duty Compound</strong>.</li>
@@ -492,7 +517,7 @@
                   gelcoat, especialmente en las consolas de mando.
                 </div>
               </td>
-              <td><div class="special-price">$ 9.000.000</div></td>
+              <td><div class="special-price">$&nbsp;9.000.000</div></td>
             </tr>
             <tr class="additional-row">
               <td>
@@ -503,8 +528,8 @@
                 <div class="item-desc">
                   Se ofrecen por separado y solo se ejecutan con autorización del cliente:
                   <ul>
-                    <li><strong>Rutas del Mar II — tapa de motor:</strong> se evidencia que la tapa del motor ubicado más a la derecha está partida. Incluye reparación con fibra de vidrio, pintura completa, acabado y calcomanías originales. <strong>$ 1.400.000 COP</strong>.</li>
-                    <li><strong>Gente de Mar I — tapa de motor de estribor:</strong> se observa una mancha oscura y variación de tono, aparentemente asociada a una reparación previa. Incluye pintura completa para lograr un color uniforme, acabado final y calcomanías originales. <strong>$ 1.200.000 COP</strong>.</li>
+                    <li><strong>Rutas del Mar II — tapa de motor:</strong> se evidencia que la tapa del motor ubicado más a la derecha está partida. Incluye reparación con fibra de vidrio, pintura completa, acabado y calcomanías originales. <strong>$&nbsp;1.400.000 COP</strong>.</li>
+                    <li><strong>Gente de Mar I — tapa de motor de estribor:</strong> se observa una mancha oscura y variación de tono, aparentemente asociada a una reparación previa. Incluye pintura completa para lograr un color uniforme, acabado final y calcomanías originales. <strong>$&nbsp;1.200.000 COP</strong>.</li>
                   </ul>
                 </div>
               </td>
@@ -517,16 +542,16 @@
       <div class="totals-section">
         <div class="totals-box">
           <div class="total-row">
-            <span>Valor regular de la flota (3 × $ 3.600.000)</span>
-            <span>$ 10.800.000 COP</span>
+            <span>Valor regular de la flota (3 × $&nbsp;3.600.000)</span>
+            <span>$&nbsp;10.800.000 COP</span>
           </div>
           <div class="total-row discount-row">
             <span>Descuento especial por flota</span>
-            <span>- $ 1.800.000 COP</span>
+            <span>-&nbsp;$&nbsp;1.800.000 COP</span>
           </div>
           <div class="total-row grand-total">
             <span>Total servicios (antes de IVA):</span>
-            <span>$ 9.000.000 COP</span>
+            <span>$&nbsp;9.000.000 COP</span>
           </div>
           <div class="tax-note">
             Si el cliente requiere facturación electrónica, se adicionará el IVA
@@ -564,7 +589,8 @@
         </div>
       </div>
 
-      <div class="guarantee-section">
+      <div class="page-two-section">
+        <div class="guarantee-section">
         <h4>&#10003; Garantía de brillo y guía de cuidado personalizada</h4>
         <p>
           Se otorga <strong>garantía de 6 meses</strong> sobre el brillo
@@ -596,6 +622,7 @@
         <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
         <p>Gracias por confiar en los especialistas en estética naval.</p>
       </footer>
+      </div>
     </div>
   </body>
 </html>
