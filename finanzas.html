@@ -6,6 +6,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     />
+    <script>
+      (function normalizePhoneScale() {
+        const root = document.documentElement;
+        const screenWidth = Math.min(screen.width, screen.height);
+        const viewportWidth = root.clientWidth || window.innerWidth;
+        const isPhone = navigator.maxTouchPoints > 0 && screenWidth <= 640;
+        if (!isPhone) return;
+        const ratio = Math.min(2.5, Math.max(1, viewportWidth / screenWidth));
+        root.classList.add("fz-phone");
+        root.style.setProperty("--fz-phone-ratio", ratio.toFixed(3));
+      })();
+    </script>
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -481,7 +493,7 @@
 
       @media (max-width: 640px) {
         html {
-          font-size: 20px;
+          font-size: 22px;
           -webkit-text-size-adjust: 100%;
           text-size-adjust: 100%;
         }
@@ -503,6 +515,92 @@
       }
 
       /* ── Toast ── */
+      html.fz-phone {
+        font-size: 22px;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      html.fz-phone body {
+        width: calc(100% / var(--fz-phone-ratio, 1));
+        min-width: 0;
+        overflow-x: hidden;
+        zoom: var(--fz-phone-ratio, 1);
+      }
+      html.fz-phone .sm\:hidden {
+        display: block !important;
+      }
+      html.fz-phone .sm\:block,
+      html.fz-phone .sm\:inline {
+        display: none !important;
+      }
+      html.fz-phone .sm\:grid-cols-3,
+      html.fz-phone .sm\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      html.fz-phone .lg\:grid-cols-2 {
+        grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      }
+      html.fz-phone .sm\:flex-row {
+        flex-direction: column !important;
+      }
+      html.fz-phone .sm\:justify-between {
+        justify-content: center !important;
+      }
+      html.fz-phone .sm\:items-center {
+        align-items: flex-end !important;
+      }
+      html.fz-phone .sm\:text-left {
+        text-align: center !important;
+      }
+      html.fz-phone .sm\:w-auto {
+        width: 100% !important;
+      }
+      html.fz-phone .sm\:max-w-md {
+        max-width: none !important;
+      }
+      html.fz-phone .sm\:p-5,
+      html.fz-phone .sm\:p-6,
+      html.fz-phone .lg\:p-7 {
+        padding: 1rem !important;
+      }
+      html.fz-phone .sm\:px-5 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+      html.fz-phone .md\:py-3 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+      }
+      html.fz-phone .md\:text-base {
+        font-size: 0.875rem !important;
+        line-height: 1.25rem !important;
+      }
+      html.fz-phone #main-app .text-xs,
+      html.fz-phone #bottom-nav .text-xs,
+      html.fz-phone #main-app [style*="font-size:0."],
+      html.fz-phone #main-app [style*="font-size: 0."] {
+        font-size: 16px !important;
+        line-height: 1.35;
+      }
+      html.fz-phone #main-app .text-sm,
+      html.fz-phone #bottom-nav .text-sm {
+        font-size: 18px !important;
+        line-height: 1.4;
+      }
+      html.fz-phone #main-app .kpi-label,
+      html.fz-phone #bottom-nav .nav-item span {
+        font-size: 16px !important;
+        line-height: 1.3;
+      }
+      html.fz-phone #main-app [style*="font-size: clamp"] {
+        font-size: 25px !important;
+        line-height: 1.15;
+      }
+      html.fz-phone #main-app .settlement-amount,
+      html.fz-phone #main-app .partner-balance-value {
+        font-size: 30px !important;
+        line-height: 1.1;
+      }
       #toast {
         position: fixed;
         bottom: calc(68px + var(--sab) + 1rem);
@@ -7845,14 +7943,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-mobile-type-v2";
+          const swReloadKey = "cbd-finanzas-sw-phone-scale-v3";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=finanzas-mobile-type-v39", { updateViaCache: "none" })
+            .register("/sw.js?build=finanzas-phone-scale-v40", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
