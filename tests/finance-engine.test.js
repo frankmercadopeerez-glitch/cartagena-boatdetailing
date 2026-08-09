@@ -580,4 +580,25 @@ function assertValid(state) {
   );
 }
 
+// Solo los nombres historicos exactos apuntan al Orchid cerrado. Un nombre con
+// sufijo representa un proyecto nuevo e independiente.
+{
+  assert.equal(engine.canonicalProjectName("Orchid"), "Bote ORCHID");
+  assert.equal(engine.canonicalProjectName("  bote orchid  "), "Bote ORCHID");
+  assert.equal(engine.canonicalProjectName("Bote Orchid 2.0"), "Bote Orchid 2.0");
+  const state = calculate([
+    event("project_close", { project: "Bote ORCHID", hora: "09:00" }),
+    event("income", {
+      project: "Bote Orchid 2.0",
+      receptor: "Frank",
+      monto: 500000,
+      hora: "10:00",
+    }),
+  ]);
+  assertValid(state);
+  assert.equal(state.projects["Bote ORCHID"].closed, true);
+  assert.equal(state.projects["Bote Orchid 2.0"].closed, false);
+  assert.equal(state.projects["Bote Orchid 2.0"].income, 500000);
+}
+
 console.log("finance-engine: all tests passed");

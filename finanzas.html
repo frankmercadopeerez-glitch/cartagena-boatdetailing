@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=new-project-v43"></script>
+    <script src="/js/finance-engine.js?v=orchid-names-v44"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -3227,7 +3227,6 @@
       const GASTO_SOLO_CAPITAL_DESDE = "2026-07-16";
       const TRANSFER_CAT = "Transferencia Interna";
       const ORCHID_PROJECT_NAME = "Bote ORCHID";
-      const ORCHID_PROJECT_KEY = "orchid";
 
       // ── Helpers de proyectos ──────────────────────────────
       // Nombres que NO son proyectos reales: categorías, operación general,
@@ -3323,10 +3322,14 @@
       }
 
       function canonicalProjectName(value) {
-        const name = String(value || "").trim();
-        return normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)
-          ? ORCHID_PROJECT_NAME
-          : name;
+        return FINANCE_ENGINE.canonicalProjectName(value);
+      }
+
+      function isLegacyOrchidProject(value) {
+        return (
+          normalizeProjectName(canonicalProjectName(value)) ===
+          normalizeProjectName(ORCHID_PROJECT_NAME)
+        );
       }
 
       function sameCanonicalProject(left, right) {
@@ -3499,7 +3502,7 @@
           });
         const projectNames = Object.values(projectNamesByKey);
         const activeNames = projectNames.filter((name) => {
-          if (normalizeProjectName(name).includes(ORCHID_PROJECT_KEY)) return true;
+          if (isLegacyOrchidProject(name)) return true;
           const hasPostOpeningActivity = source.some(
             (transaction) =>
               isAfterFinanceOpening(transaction) &&
@@ -3747,7 +3750,7 @@
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
         const snapshots = getOpeningProjectSnapshots(transactions);
         const orchidEntry = Object.entries(snapshots).find(([name]) =>
-          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+          isLegacyOrchidProject(name),
         );
         if (!orchidEntry || hasProjectEvent(transactions, "project_close", orchidEntry[0])) {
           return;
@@ -4056,7 +4059,7 @@
         if (recreatedMovementsRunning || orchidCloseMigrationRunning || !db) return;
         const state = getFinanceState();
         const orchidEntries = Object.entries(state.projects).filter(([name]) =>
-          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+          isLegacyOrchidProject(name),
         );
         if (orchidEntries.length === 0) return;
         const orchidCloseEvents = transactions.filter((transaction) => {
@@ -4113,7 +4116,7 @@
           return;
         }
         const orchidName = Object.keys(getFinanceState().projects).find((name) =>
-          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+          isLegacyOrchidProject(name),
         );
         if (!orchidName) return;
         try {
@@ -4141,7 +4144,7 @@
         const activeProjects = Object.values(getFinanceState().projects).filter(
           (project) =>
             !project.closed &&
-            !normalizeProjectName(project.name).includes(ORCHID_PROJECT_KEY),
+            !isLegacyOrchidProject(project.name),
         );
         if (activeProjects.length === 0) return;
         try {
@@ -4169,7 +4172,7 @@
         if (orchidCloseMigrationRunning || !db || !transactions.length) return;
         const snapshots = getOpeningProjectSnapshots(transactions);
         const orchidEntry = Object.entries(snapshots).find(([name]) =>
-          normalizeProjectName(name).includes(ORCHID_PROJECT_KEY),
+          isLegacyOrchidProject(name),
         );
         if (!orchidEntry) return;
         const orchidName = orchidEntry[0];
@@ -7874,16 +7877,16 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-force-refresh-v6";
+          const swReloadKey = "cbd-finanzas-sw-force-refresh-v7";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "43");
+            refreshedUrl.searchParams.set("_cbd_build", "44");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=new-project-v43", { updateViaCache: "none" })
+            .register("/sw.js?build=orchid-names-v44", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

@@ -44,6 +44,8 @@
   const PARTNERS = ["frank", "cristian"];
   const PARTNER_NAMES = { frank: "Frank", cristian: "Cristian" };
   const DEFAULT_SPLIT = { frank: 0.5, cristian: 0.5 };
+  const ORCHID_PROJECT_NAME = "Bote ORCHID";
+  const ORCHID_PROJECT_ALIASES = new Set(["orchid", "bote orchid"]);
 
   // Estos valores son la apertura oficial del motor. El historial existente
   // queda fuera del libro nuevo y no se vuelve a recalcular.
@@ -73,6 +75,13 @@
   function partnerKey(value) {
     const key = String(value || "").trim().toLowerCase();
     return PARTNERS.includes(key) ? key : "";
+  }
+
+  function canonicalProjectName(value) {
+    const name = String(value || "").trim();
+    return ORCHID_PROJECT_ALIASES.has(name.toLowerCase())
+      ? ORCHID_PROJECT_NAME
+      : name;
   }
 
   function clonePartners(values, fallback = 0) {
@@ -598,6 +607,7 @@
     PARTNER_NAMES,
     OPENING_STATE,
     calculate,
+    canonicalProjectName,
     eventType,
     findBlockingValidationError,
     makeEvent,
