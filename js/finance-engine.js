@@ -1,3 +1,36 @@
+(function installFinanceMobileLayoutRepair(global) {
+  if (!global || typeof document === "undefined") return;
+
+  function repairFinanceMobileLayout() {
+    const root = document.documentElement;
+    root.classList.remove("fz-phone");
+    root.style.removeProperty("--fz-phone-ratio");
+    root.style.removeProperty("zoom");
+    root.style.removeProperty("width");
+
+    if (document.body) {
+      document.body.style.removeProperty("zoom");
+      document.body.style.setProperty("width", "100%", "important");
+      document.body.style.setProperty("max-width", "none", "important");
+    }
+
+    const app = document.getElementById("main-app");
+    if (app) {
+      app.style.removeProperty("zoom");
+      app.style.removeProperty("width");
+      app.style.removeProperty("max-width");
+    }
+  }
+
+  global.CBDFinanceMobileReset = repairFinanceMobileLayout;
+  repairFinanceMobileLayout();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", repairFinanceMobileLayout, { once: true });
+  }
+  global.addEventListener("pageshow", repairFinanceMobileLayout);
+  global.setTimeout(repairFinanceMobileLayout, 0);
+  global.setTimeout(repairFinanceMobileLayout, 500);
+})(typeof window !== "undefined" ? window : null);
 (function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory();

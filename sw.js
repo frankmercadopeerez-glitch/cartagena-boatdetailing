@@ -1,6 +1,6 @@
-const CACHE_STATIC = "cbd-static-v4";
+const CACHE_STATIC = "cbd-static-v5";
 const CACHE_PAGES = "cbd-pages-v2";
-const FINANZAS_CACHE = "cbd-finanzas-v41";
+const FINANZAS_CACHE = "cbd-finanzas-v42";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -35,15 +35,33 @@ self.addEventListener("install", (e) => {
 self.addEventListener("activate", (e) => {
   const keep = [CACHE_STATIC, CACHE_PAGES, FINANZAS_CACHE];
   e.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(
-          keys.filter((k) => !keep.includes(k)).map((k) => caches.delete(k)),
-        ),
-      ),
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys.filter((key) => !keep.includes(key)).map((key) => caches.delete(key)),
+      );
+      await self.clients.claim();
+      await new Promise((resolve) => setTimeout(resolve, 750));
+
+      const windows = await self.clients.matchAll({
+        type: "window",
+        includeUncontrolled: true,
+      });
+      await Promise.all(
+        windows.map((client) => {
+          const url = new URL(client.url);
+          if (
+            url.pathname !== "/finanzas.html" ||
+            url.searchParams.get("_cbd_build") === "42"
+          ) {
+            return Promise.resolve();
+          }
+          url.searchParams.set("_cbd_build", "42");
+          return client.navigate(url.href).catch(() => undefined);
+        }),
+      );
+    })(),
   );
-  self.clients.claim();
 });
 
 self.addEventListener("fetch", (e) => {
@@ -57,7 +75,7 @@ self.addEventListener("fetch", (e) => {
   if (FINANZAS_PATHS.includes(path)) {
     e.respondWith(
       caches.open(FINANZAS_CACHE).then((cache) => {
-        return fetch(e.request)
+        return fetch(e.request, { cache: "no-store" })
           .then((res) => {
             if (res.ok) cache.put(e.request, res.clone());
             return res;
