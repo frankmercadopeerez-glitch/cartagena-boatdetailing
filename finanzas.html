@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="es">
   <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
     <!-- Google Analytics - lazy loaded for better performance -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -37,11 +42,6 @@
         }
       } catch (e) {}
     </script>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
     <title>CBD Finanzas</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="shortcut icon" href="favicon.svg" />
@@ -480,12 +480,25 @@
       }
 
       @media (max-width: 640px) {
+        html {
+          font-size: 20px;
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+        }
+        body {
+          width: 100%;
+          min-width: 0;
+          overflow-x: hidden;
+        }
         .tab-btn {
           padding: 0.5rem 0.7rem;
-          font-size: 0.73rem;
+          font-size: 0.76rem;
         }
         .kpi-card {
           padding: 0.75rem 0.9rem;
+        }
+        .nav-item span {
+          font-size: 0.68rem !important;
         }
       }
 
@@ -7832,14 +7845,14 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-mobile-scale-v1";
+          const swReloadKey = "cbd-finanzas-sw-mobile-type-v2";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             window.location.reload();
           });
           navigator.serviceWorker
-            .register("/sw.js?build=finanzas-mobile-scale-v38", { updateViaCache: "none" })
+            .register("/sw.js?build=finanzas-mobile-type-v39", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
