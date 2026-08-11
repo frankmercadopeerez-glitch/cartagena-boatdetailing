@@ -32,19 +32,27 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pulido de Yates y Botes en Cartagena | Detailing Naval</title>
+    <title>Pulido de Yates en Cartagena | Pisos, Gelcoat y Pintura</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <!-- Preload Tailwind CSS early to avoid FOUC —— el navegador empieza la descarga antes de llegar al <link> bloqueante -->
-    <link rel="preload" href="css/tailwind.css?v=20260727-1" as="style" />
+    <link
+      rel="preload"
+      href="css/tailwind.css?v=20260811-1"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link rel="stylesheet" href="css/tailwind.css?v=20260811-1"
+    /></noscript>
 
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Pulido profesional de yates y botes en Cartagena con acabado espejo. También ofrecemos electricidad naval, pisos sintéticos y detailing náutico."
+      content="Pulido de yates y botes, pisos sintéticos EVA, reparación de gelcoat, pintura y mecánica naval, electricidad y limpieza de cojinería en Cartagena."
     />
     <meta
       name="keywords"
-      content="limpieza de cascos Cartagena, limpieza casco yate Cartagena, limpieza casco velero, pulido de botes Cartagena, pulido de yates Colombia, limpieza embarcaciones Cartagena, hull cleaning Cartagena, buzos limpieza casco, mantenimiento de yates Cartagena, detailing botes Colombia, pulido gelcoat botes, ceramic coating embarcaciones, PPF yates Cartagena, pintura motores marinos, restauración gelcoat, mantenimiento naval Colombia"
+      content="pulido de yates Cartagena, pulido de botes Cartagena, pisos sintéticos EVA yates, reparación gelcoat Cartagena, reparación fibra de vidrio botes, pintura naval Cartagena, mecánica naval Cartagena, reparación motores marinos, electricidad para yates, limpieza cojinería yates"
     />
     <meta name="author" content="Colombia Boat Detailing" />
     <meta
@@ -83,11 +91,11 @@
     <meta property="og:url" content="https://www.colombiaboatdetailing.com/" />
     <meta
       property="og:title"
-      content="Pulido de Yates y Botes en Cartagena | Colombia Boat Detailing"
+      content="Pulido de Yates en Cartagena | Pisos, Gelcoat y Pintura"
     />
     <meta
       property="og:description"
-      content="Pulido profesional de yates y botes con acabado espejo. Electricidad naval, pisos sintéticos y detailing náutico en Cartagena de Indias."
+      content="Pulido de yates, pisos sintéticos EVA, reparación de gelcoat y fibra, pintura naval y limpieza de cojinería en Cartagena."
     />
     <meta
       property="og:image"
@@ -100,11 +108,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Pulido de Yates y Botes en Cartagena | Colombia Boat Detailing"
+      content="Pulido de Yates en Cartagena | Pisos, Gelcoat y Pintura"
     />
     <meta
       name="twitter:description"
-      content="Pulido profesional de yates y botes, electricidad naval y pisos sintéticos en Cartagena de Indias."
+      content="Pulido de yates, pisos sintéticos EVA, reparación de gelcoat y fibra, pintura naval y limpieza de cojinería en Cartagena."
     />
     <meta
       name="twitter:image"
@@ -901,7 +909,6 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
     <link
       rel="preload"
       href="css/styles.css"
@@ -1038,6 +1045,19 @@
         transform: translateY(-5px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       }
+
+      /* Contraste legible para acentos de marca sobre superficies claras. */
+      section.bg-white .text-gold-400,
+      section.bg-slate-50 .text-gold-400 {
+        color: #795b00 !important;
+      }
+      section.bg-slate-50 .text-electric-400 {
+        color: #1540d6 !important;
+      }
+      #soluciones a.bg-gold-400 {
+        background-color: #d4af37 !important;
+        color: #071428 !important;
+      }
     </style>
 
     <!-- Schema.org Structured Data - LocalBusiness -->
@@ -1048,7 +1068,7 @@
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
         "alternateName": "CBD Colombia",
-        "description": "Servicio profesional de detailing, limpieza y mantenimiento de botes y embarcaciones en Cartagena, Colombia. Especialistas en PPF, Ceramic Coating, pintura de motores y restauración de gelcoat.",
+        "description": "Servicios para yates y botes en Cartagena, Colombia. Especialistas en pulido de gelcoat, instalación de pisos sintéticos EVA, reparación de gelcoat y fibra, pintura naval y limpieza de cojinería.",
         "url": "https://www.colombiaboatdetailing.com",
         "telephone": "+57-304-430-1112",
         "email": "proyectos@colombiaboatdetailing.com",
@@ -1112,62 +1132,70 @@
         ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Servicios de Detailing Naval",
+          "name": "Servicios para Yates y Botes en Cartagena",
           "itemListElement": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "PPF - Paint Protection Film",
-                "description": "Película de protección de pintura con garantía de por vida para yates y embarcaciones"
+                "name": "Pulido de Yates y Botes",
+                "description": "Pulido profesional de gelcoat para recuperar brillo, corregir oxidación y mejorar el acabado de la embarcación"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Ceramic Coating",
-                "description": "Revestimiento nano-cerámico hidrofóbico certificado para embarcaciones"
+                "name": "Instalación de Pisos Sintéticos EVA",
+                "description": "Diseño e instalación de pisos náuticos EVA y cubiertas sintéticas para yates y botes"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Pintura de Motores Marinos",
-                "description": "Restauración y pintura profesional de motores fuera de borda y intraborda"
+                "name": "Reparación de Gelcoat y Fibra de Vidrio",
+                "description": "Reparación de rayones, grietas, golpes, ósmosis y daños en cascos de embarcaciones"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Restauración de Gelcoat",
-                "description": "Reparación y restauración de gelcoat dañado u oxidado"
+                "name": "Pintura Naval",
+                "description": "Pintura completa de yates y botes, pintura de casco, antifouling y pintura de motores marinos"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Limpieza de Interiores y Tapicería",
-                "description": "Detailing completo de interiores de embarcaciones"
+                "name": "Limpieza de Cojinería y Tapicería Náutica",
+                "description": "Limpieza profunda, desinfección y cuidado de cojines, tapicería e interiores de yates y botes"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Control Anticorrosivo",
-                "description": "Tratamiento anticorrosivo profesional para embarcaciones"
+                "name": "Electricidad y Aire Acondicionado para Yates",
+                "description": "Instalación y mantenimiento de sistemas eléctricos y aire acondicionado marino"
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Lavado Técnico",
-                "description": "Lavado profesional técnico para embarcaciones"
+                "name": "Mecánica Naval para Yates y Botes",
+                "description": "Diagnóstico, mantenimiento preventivo y reparación de motores marinos, generadores y sistemas auxiliares"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "PPF para Embarcaciones",
+                "description": "Servicio opcional de película de protección de pintura para áreas seleccionadas de la embarcación"
               }
             }
           ]
@@ -1221,34 +1249,34 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "¿Hacen limpieza de casco en el agua sin varar?",
+            "name": "¿Cuánto cuesta pulir un yate o bote en Cartagena?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sí. Realizamos limpieza de casco de yates y veleros en el agua con buzos certificados, sin necesidad de sacar la embarcación del agua."
+              "text": "La tarifa de referencia para pulido de gelcoat es desde $90.000 COP por pie, sin IVA. El precio final depende del tamaño y del estado real del gelcoat, por lo que realizamos una visita técnica antes de confirmar la cotización."
             }
           },
           {
             "@type": "Question",
-            "name": "¿Cuánto cuesta la limpieza de casco en Cartagena?",
+            "name": "¿Instalan pisos sintéticos EVA para yates?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "La tarifa base es $20.000 COP por pie de eslora. También ofrecemos planes de suscripción mensual para mantenimiento recurrente."
+              "text": "Sí. Diseñamos e instalamos pisos náuticos EVA y cubiertas sintéticas a la medida, con plantillas, cortes personalizados, refuerzo de adherencia, sellado de bordes y garantía de instalación."
             }
           },
           {
             "@type": "Question",
-            "name": "¿Qué zonas atienden en Cartagena?",
+            "name": "¿Reparan rayones, grietas y golpes en gelcoat?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Atendemos Cartagena de Indias, Bocagrande, Barú, Islas del Rosario y otras zonas de la bahía de Cartagena."
+              "text": "Sí. Reparamos rayones con gelcoat igualando el color y atendemos grietas, golpes, ósmosis y daños en fibra de vidrio. El valor se define después de inspeccionar cada daño y confirmar si es reparable o si requiere pintura."
             }
           },
           {
             "@type": "Question",
-            "name": "¿Cada cuánto recomiendan limpiar el casco?",
+            "name": "¿Hacen pintura naval y limpieza de cojinería?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "En clima tropical recomendamos limpieza cada 4 a 8 semanas para embarcaciones en uso activo y cada 2 a 3 meses para embarcaciones fondeadas o en marina."
+              "text": "Sí. Ofrecemos pintura completa de botes y yates, pintura de casco, antifouling, pintura de motores y limpieza profunda de cojinería, tapicería e interiores náuticos en Cartagena."
             }
           }
         ]
@@ -1353,20 +1381,17 @@
                 Pulido de Gelcoat
               </a>
               <div class="mx-4 h-px bg-white/10 my-1"></div>
-              <a href="ppf.html" class="nav-dropdown-link"
-                >PPF (Paint Protection)</a
-              >
-              <a href="ceramic-coating.html" class="nav-dropdown-link"
-                >Ceramic Coating</a
+              <a href="cubierta-sintetica.html" class="nav-dropdown-link"
+                >Pisos Sintéticos EVA</a
               >
               <a href="gelcoat.html" class="nav-dropdown-link"
-                >Restauración Gelcoat</a
+                >Reparación de Gelcoat</a
               >
               <a href="fibra.html" class="nav-dropdown-link"
                 >Reparación de Fibra</a
               >
-              <a href="cubierta-sintetica.html" class="nav-dropdown-link"
-                >Cubierta Sintética</a
+              <a href="interior-detailing.html" class="nav-dropdown-link"
+                >Limpieza de Cojinería</a
               >
               <a href="cubierta-teka.html" class="nav-dropdown-link"
                 >Cubierta de Teca</a
@@ -1377,17 +1402,23 @@
               <a href="polarizado.html" class="nav-dropdown-link"
                 >Polarizado Nanocerámico</a
               >
-              <a href="interior-detailing.html" class="nav-dropdown-link"
-                >Interiores y Tapicería</a
-              >
               <a href="anti-corrosion.html" class="nav-dropdown-link"
                 >Control Anticorrosivo</a
               >
               <a href="electrical-systems.html" class="nav-dropdown-link"
                 >Electricidad y Aire Acondicionado</a
               >
+              <a href="mecanica-naval.html" class="nav-dropdown-link"
+                >Mecánica Naval</a
+              >
               <a href="technical-wash.html" class="nav-dropdown-link"
                 >Lavado Técnico</a
+              >
+              <a href="ceramic-coating.html" class="nav-dropdown-link"
+                >Ceramic Coating</a
+              >
+              <a href="ppf.html" class="nav-dropdown-link"
+                >PPF (Servicio Opcional)</a
               >
               <button
                 type="button"
@@ -1731,9 +1762,9 @@
         <h1
           class="home-hero-title font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight mb-4 drop-shadow-2xl"
         >
-          Pulido de Yates y Botes<br />
+          Pulido de Yates y Botes
           <span class="italic text-gold-400 font-normal text-gold-shimmer"
-            >en Cartagena</span
+            ><br />en Cartagena</span
           >
         </h1>
 
@@ -1767,13 +1798,12 @@
         <p
           class="home-hero-description text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed tracking-wide"
         >
-          Recuperamos el brillo y protegemos el valor de su embarcación.
+          Pulido de gelcoat, pisos sintéticos EVA, reparación, pintura naval y
+          limpieza de cojinería para su embarcación.
           <span class="hidden md:inline"
-            >Pulido profesional de gelcoat desde
+            >El pulido profesional de gelcoat está disponible desde
             <strong class="text-gold-400">$90.000/pie</strong>,
-            <a href="electrical-systems.html" class="text-gold-400 hover:text-white transition">electricidad naval</a>
-            y <a href="cubierta-sintetica.html" class="text-gold-400 hover:text-white transition">pisos sintéticos</a>
-            para botes y yates en Cartagena.</span
+            sujeto a visita técnica en Cartagena.</span
           >
         </p>
 
@@ -1861,8 +1891,8 @@
             Servicios Destacados
           </h2>
           <p class="text-slate-600 mt-4 max-w-2xl mx-auto font-light">
-            Soluciones premium de detailing y protección para embarcaciones de
-            alto valor
+            Pulido, pisos náuticos, reparación, pintura y limpieza profesional
+            para yates y botes
           </p>
         </div>
 
@@ -1879,12 +1909,14 @@
               class="featured-star-media relative md:w-2/3 h-48 sm:h-64 md:h-auto overflow-hidden w-full"
             >
               <img
-                src="images/services/pulido-gelcoat.webp"
+                src="images/services/pulido-gelcoat-720.webp"
+                srcset="images/services/pulido-gelcoat-480.webp 480w, images/services/pulido-gelcoat-720.webp 720w, images/services/pulido-gelcoat.webp 941w"
+                sizes="(max-width: 767px) 100vw, 67vw"
                 alt="Pulido de gelcoat en yate y velero en Cartagena Colombia"
                 loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                width="608"
-                height="600"
+                width="720"
+                height="1279"
               />
               <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent to-navy-900/60 md:hidden"
@@ -1969,14 +2001,54 @@
         <div
           class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 justify-items-center"
         >
-          <!-- PPF -->
+          <!-- Pisos Sintéticos EVA -->
           <a
-            href="ppf.html"
+            href="cubierta-sintetica.html"
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/ppf.webp"
-              alt="Aplicación de PPF Paint Protection Film en embarcación Cartagena"
+              src="images/services/cubierta-sintetica.webp"
+              sizes="(max-width: 767px) calc(50vw - 20px), (max-width: 1023px) calc(50vw - 24px), 25vw"
+              alt="Instalación de piso sintético EVA en yate en Cartagena"
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              width="941"
+              height="1672"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"
+            ></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+              <span
+                class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider"
+                >Instalación a Medida</span
+              >
+              <h3
+                class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2"
+              >
+                Pisos EVA
+              </h3>
+              <p
+                class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block"
+              >
+                Pisos sintéticos antideslizantes para yates y botes
+              </p>
+              <span
+                class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform"
+              >
+                Ver más <i class="ph ph-arrow-right ml-1 md:ml-2"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- Reparación de Gelcoat -->
+          <a
+            href="gelcoat.html"
+            class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
+          >
+            <img
+              src="images/services/restauracion-gelcoat.webp"
+              alt="Reparación y restauración de gelcoat en yate en Cartagena"
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               width="608"
@@ -1988,17 +2060,17 @@
             <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
               <span
                 class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider"
-                >Protección Premium</span
+                >Rayones y Grietas</span
               >
               <h3
                 class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2"
               >
-                PPF
+                Reparación Gelcoat
               </h3>
               <p
                 class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block"
               >
-                Paint Protection Film con garantía de por vida
+                Igualación de color y restauración del acabado
               </p>
               <span
                 class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform"
@@ -2008,57 +2080,18 @@
             </div>
           </a>
 
-          <!-- Ceramic Coating -->
-          <a
-            href="ceramic-coating.html"
-            class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
-          >
-            <img
-              src="images/services/ceramic-coating.webp"
-              alt="Ceramic coating nano-cerámico aplicado en yate Cartagena Colombia"
-              loading="lazy"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              width="608"
-              height="600"
-            />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"
-            ></div>
-            <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-              <span
-                class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider"
-                >Brillo Extremo</span
-              >
-              <h3
-                class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2"
-              >
-                Ceramic Coating
-              </h3>
-              <p
-                class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block"
-              >
-                Revestimiento nano-cerámico hidrofóbico
-              </p>
-              <span
-                class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform"
-              >
-                Ver más <i class="ph ph-arrow-right ml-1 md:ml-2"></i>
-              </span>
-            </div>
-          </a>
-
-          <!-- Interior Detailing -->
+          <!-- Limpieza de Cojinería -->
           <a
             href="interior-detailing.html"
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/interiores-tapiceria.webp"
-              alt="Detailing de interiores y tapiceroía de yate en Cartagena"
+              src="images/services/interiores-tapiceria-480.webp"
+              alt="Limpieza de cojinería y tapicería de yate en Cartagena"
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              width="608"
-              height="600"
+              width="480"
+              height="474"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent"
@@ -2071,12 +2104,12 @@
               <h3
                 class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2"
               >
-                Tapicería
+                Limpieza de Cojinería
               </h3>
               <p
                 class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block"
               >
-                Limpieza profunda y restauración de interiores
+                Lavado profundo y desinfección de tapicería náutica
               </p>
               <span
                 class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform"
@@ -2086,18 +2119,19 @@
             </div>
           </a>
 
-          <!-- Hull Cleaning -->
+          <!-- Pintura Naval -->
           <a
-            href="hull-cleaning.html"
+            href="boat-painting.html"
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/limpieza-casco.webp"
-              alt="Limpieza de casco de yate en el agua con buzos en Cartagena Colombia"
+              src="images/services/pintura-completa.webp"
+              sizes="(max-width: 767px) calc(50vw - 20px), (max-width: 1023px) calc(50vw - 24px), 25vw"
+              alt="Pintura naval completa de yate y bote en Cartagena Colombia"
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              width="1440"
-              height="960"
+              width="941"
+              height="1672"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-navy-900/95 via-navy-900/50 to-transparent"
@@ -2106,22 +2140,22 @@
             <div
               class="absolute top-3 left-3 bg-gold-400 text-navy-900 text-[10px] font-black uppercase tracking-widest px-2 py-1"
             >
-              Sin Varar
+              Acabado Profesional
             </div>
             <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6">
               <span
                 class="text-gold-400 text-[10px] md:text-xs font-bold uppercase tracking-wider"
-                >Con Buzos · En el Agua</span
+                >Casco · Cubierta · Motores</span
               >
               <h3
                 class="font-serif text-lg md:text-2xl text-white mt-1 md:mt-2"
               >
-                Limpieza de Casco
+                Pintura Naval
               </h3>
               <p
                 class="text-slate-300 text-xs md:text-sm mt-1 md:mt-2 font-light hidden md:block"
               >
-                Sin sacar la embarcación. Desde $20.000/pie
+                Pintura completa, antifouling y restauración de acabados
               </p>
               <span
                 class="inline-flex items-center text-gold-400 text-xs md:text-sm mt-2 md:mt-4 font-semibold group-hover:translate-x-2 transition-transform"
@@ -2164,16 +2198,16 @@
             <h2
               class="font-serif text-4xl md:text-5xl text-navy-900 mb-8 leading-tight"
             >
-              Pioneros en Detailing<br />
+              Especialistas en Yates y Botes<br />
               <span class="italic text-slate-500"
-                >De Alta Gama en Cartagena.</span
+                >Servicio Profesional en Cartagena.</span
               >
             </h2>
             <p class="text-slate-600 mb-6 text-lg font-light leading-relaxed">
               Somos la primera y única empresa en Cartagena dedicada
-              exclusivamente a la estética náutica avanzada. No somos lavadores
-              de botes; somos técnicos certificados en la preservación de
-              activos marinos.
+              exclusivamente al cuidado, reparación y renovación de
+              embarcaciones. Nuestro trabajo combina pulido, pisos náuticos,
+              gelcoat, fibra, pintura y limpieza especializada.
             </p>
             <p class="text-slate-600 mb-8 text-lg font-light leading-relaxed">
               Ubicados estratégicamente con base en
@@ -2187,11 +2221,11 @@
 
             <div class="border-t border-slate-100 pt-8">
               <div class="depth-counter text-center lg:text-left">
-                <h4 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">
-                  Lifetime
-                </h4>
+                <h3 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">
+                  Visita Técnica
+                </h3>
                 <p class="text-xs text-slate-500 uppercase tracking-widest">
-                  Garantía en PPF
+                  Evaluación Antes de Cotizar
                 </p>
               </div>
             </div>
@@ -2225,12 +2259,12 @@
             ></div>
             <div class="img-zoom img-shine overflow-hidden">
               <img
-                src="images/header%20(2).webp"
-                alt="Proceso de detailing profesional naval en yate en Cartagena de Indias"
+                src="images/header-2-720.webp"
+                alt="Mantenimiento profesional de yate en Cartagena de Indias"
                 loading="lazy"
                 class="shadow-2xl w-full relative z-0"
-                width="800"
-                height="536"
+                width="720"
+                height="482"
               />
             </div>
             <!-- Sonar rings decoration -->
@@ -2305,79 +2339,79 @@
           <div class="gold-separator mx-auto mt-8"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
-          <!-- Service 1: PPF (The Crown Jewel) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6 mb-10">
+          <!-- Service 1: Reparación de Gelcoat y Fibra -->
           <div
             class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors shadow-2xl relative overflow-hidden text-center"
           >
             <div
               class="absolute top-0 right-0 bg-gold-400 text-navy-900 text-[10px] font-bold px-3 py-1 uppercase tracking-wider"
             >
-              Top Tier
+              Alta Demanda
             </div>
             <div
               class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
             >
-              <i class="ph ph-shield-check text-3xl text-gold-400"></i>
+              <i class="ph ph-wrench text-3xl text-gold-400"></i>
             </div>
             <h3 class="font-serif text-xl mb-3 text-white">
-              PPF (Paint Protection Film)
+              Reparación de Gelcoat y Fibra
             </h3>
             <p
               class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
             >
-              La máxima protección existente. Película autorregenerable que
-              absorbe impactos, rasguños y protege contra el ambiente marino
-              agresivo. Garantía de por vida.
+              Corregimos rayones, grietas, golpes, ósmosis y daños en fibra.
+              Igualamos el color del gelcoat para recuperar el acabado original
+              siempre que el estado de la superficie permita repararlo.
             </p>
             <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Garantía de Por Vida</li>
-              <li>Tecnología "Self-Healing"</li>
-              <li>Invisible al ojo humano</li>
-              <li>Ideal para áreas de alto tráfico</li>
+              <li>Retoque de rayones con color igualado</li>
+              <li>Reparación de grietas y golpes</li>
+              <li>Tratamiento de ósmosis</li>
+              <li>Diagnóstico antes de intervenir</li>
             </ul>
             <a
-              href="ppf.html"
+              href="gelcoat.html"
               class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
             >
               Conocer más <i class="ph ph-arrow-right ml-2"></i>
             </a>
           </div>
 
-          <!-- Service 2: Ceramic Coating -->
+          <!-- Service 2: Pisos Sintéticos EVA -->
           <div
             class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors text-center"
           >
             <div
               class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
             >
-              <i class="ph ph-diamond text-3xl text-gold-400"></i>
+              <i class="ph ph-waves text-3xl text-gold-400"></i>
             </div>
             <h3 class="font-serif text-xl mb-3 text-white">
-              Ceramic Coating Certificado
+              Pisos Sintéticos EVA
             </h3>
             <p
               class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
             >
-              Recubrimiento nanotecnológico que crea un enlace químico con el
-              gelcoat, proporcionando hidrofobia extrema y protección UV
-              superior por años.
+              Fabricamos plantillas e instalamos pisos EVA y cubiertas
+              sintéticas a la medida. Una solución antideslizante, cómoda y
+              resistente al uso náutico y al sol de Cartagena.
             </p>
             <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Protección UV garantizada (5+ Años)</li>
-              <li>Facilita la limpieza (efecto Lotus)</li>
-              <li>Previene el amarillamiento</li>
-              <li>Disponible para cascos, vidrios y metales</li>
+              <li>Diseño y corte personalizado</li>
+              <li>Superficie antideslizante</li>
+              <li>Refuerzo de adherencia y sellado</li>
+              <li>Garantía de instalación por un año</li>
             </ul>
             <a
-              href="ceramic-coating.html"
+              href="cubierta-sintetica.html"
               class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
             >
               Conocer más <i class="ph ph-arrow-right ml-2"></i>
             </a>
           </div>
 
-          <!-- Service 3: Engine Painting (New) -->
+          <!-- Service 3: Pintura Naval -->
           <div
             class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors shadow-2xl shadow-black/30 text-center"
           >
@@ -2387,23 +2421,23 @@
               <i class="ph ph-paint-bucket text-3xl text-gold-400"></i>
             </div>
             <h3 class="font-serif text-xl mb-3 text-white">
-              Pintura de Motores
+              Pintura Naval
             </h3>
             <p
               class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
             >
-              Restauración profesional de motores. Devolvemos la vida a sus
-              Yamaha, Mercury y Volvo con acabados OEM. Imprimador epóxico
-              anti-corrosión premium.
+              Pintura completa de yates y botes, casco, antifouling y motores.
+              Preparamos cada superficie y aplicamos sistemas marinos según el
+              material y la condición real de la embarcación.
             </p>
             <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Igualación de color original garantizada</li>
-              <li>Imprimador epóxico anti-corrosión</li>
-              <li>Acabado brillante profesional</li>
-              <li>Garantía de 2 años</li>
+              <li>Pintura completa de casco y cubierta</li>
+              <li>Sistemas antifouling</li>
+              <li>Pintura de motores marinos</li>
+              <li>Preparación e imprimación profesional</li>
             </ul>
             <a
-              href="engine-painting.html"
+              href="boat-painting.html"
               class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
             >
               Conocer más <i class="ph ph-arrow-right ml-2"></i>
@@ -2436,6 +2470,38 @@
             </ul>
             <a
               href="electrical-systems.html"
+              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
+            >
+              Conocer más <i class="ph ph-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 5: Mecánica Naval -->
+          <div
+            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors text-center"
+          >
+            <div
+              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
+            >
+              <i class="ph ph-engine text-3xl text-gold-400"></i>
+            </div>
+            <h3 class="font-serif text-xl mb-3 text-white">
+              Mecánica Naval
+            </h3>
+            <p
+              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
+            >
+              Diagnóstico, mantenimiento preventivo y reparación de motores
+              marinos, generadores y sistemas auxiliares para yates y botes.
+            </p>
+            <ul class="text-sm text-slate-300 feature-list space-y-2">
+              <li>Diagnóstico de fallas</li>
+              <li>Mantenimiento por horas</li>
+              <li>Refrigeración y combustible</li>
+              <li>Pruebas y reparación mecánica</li>
+            </ul>
+            <a
+              href="mecanica-naval.html"
               class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
             >
               Conocer más <i class="ph ph-arrow-right ml-2"></i>
@@ -2553,7 +2619,7 @@
       </svg>
     </div>
 
-    <!-- EDUCATIONAL SECTION: Why Professional Detailing? -->
+    <!-- EDUCATIONAL SECTION: Why Professional Yacht Maintenance? -->
     <section id="experiencia" class="py-24 bg-navy-900 overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row gap-16 items-center">
@@ -2563,12 +2629,13 @@
                 class="absolute -top-4 -left-4 w-24 h-24 bg-gold-400/20 rounded-full z-0"
               ></div>
               <img
-                src="images/services/ppf.webp"
-                alt="Protección completa de embarcación con PPF y ceramic coating en Cartagena"
+                src="images/services/restauracion-gelcoat.webp"
+                sizes="(max-width: 767px) calc(100vw - 24px), 50vw"
+                alt="Reparación y mantenimiento profesional de gelcoat en yate en Cartagena"
                 loading="lazy"
                 class="relative z-10 shadow-xl transition-all duration-500 rounded-sm hover:scale-105"
-                width="608"
-                height="600"
+                width="720"
+                height="1279"
               />
             </div>
           </div>
@@ -2578,7 +2645,7 @@
               >Proteja su Inversión</span
             >
             <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mb-8">
-              Por qué elegir Detailing Profesional
+              Por qué elegir Mantenimiento Profesional
             </h2>
 
             <div class="space-y-8">
@@ -2589,7 +2656,7 @@
                   ></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-white mb-2">Valor de Reventa</h4>
+                  <h3 class="font-bold text-white mb-2">Valor de Reventa</h3>
                   <p class="text-slate-300 text-sm font-light leading-relaxed">
                     Una embarcación bien mantenida no solo se ve mejor, sino que
                     retiene su valor. La oxidación y el desgaste visible son los
@@ -2603,13 +2670,13 @@
                   <i class="ph-fill ph-shield text-gold-400 text-2xl"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-white mb-2">
+                  <h3 class="font-bold text-white mb-2">
                     Longevidad de Materiales
-                  </h4>
+                  </h3>
                   <p class="text-slate-300 text-sm font-light leading-relaxed">
-                    El sol y la sal de Cartagena son implacables. Tratamientos
-                    profesionales como el Ceramic Coating o PPF actúan como
-                    escudo, previniendo daños estructurales costosos.
+                    El sol y la sal de Cartagena deterioran gelcoat, pintura,
+                    pisos y tapicería. El mantenimiento oportuno evita que un
+                    daño reparable termine exigiendo una intervención completa.
                   </p>
                 </div>
               </div>
@@ -2619,9 +2686,9 @@
                   <i class="ph-fill ph-speedometer text-gold-400 text-2xl"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-white mb-2">
+                  <h3 class="font-bold text-white mb-2">
                     Mejora del Rendimiento
-                  </h4>
+                  </h3>
                   <p class="text-slate-300 text-sm font-light leading-relaxed">
                     Un casco liso y libre de contaminantes reduce la fricción
                     (drag) con el agua, mejorando la eficiencia de combustible y
@@ -2635,9 +2702,9 @@
                   <i class="ph-fill ph-money text-gold-400 text-2xl"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-white mb-2">
+                  <h3 class="font-bold text-white mb-2">
                     Prevención de Reparaciones
-                  </h4>
+                  </h3>
                   <p class="text-slate-300 text-sm font-light leading-relaxed">
                     El mantenimiento preventivo regular de metales y superficies
                     minimiza fallos repentinos y reparaciones mayores a futuro.
@@ -2687,9 +2754,9 @@
             >
               01
             </div>
-            <h4 class="text-lg font-bold text-navy-900 mb-3">
+            <h3 class="text-lg font-bold text-navy-900 mb-3">
               Inspección & Diagnóstico
-            </h4>
+            </h3>
             <p class="text-slate-500 text-sm leading-relaxed">
               Evaluamos el estado del gelcoat, pintura y metales. Identificamos
               necesidades de corrección vs protección y diseñamos un plan a
@@ -2703,13 +2770,13 @@
             >
               02
             </div>
-            <h4 class="text-lg font-bold text-navy-900 mb-3">
+            <h3 class="text-lg font-bold text-navy-900 mb-3">
               Ejecución Técnica
-            </h4>
+            </h3>
             <p class="text-slate-500 text-sm leading-relaxed">
-              Aplicamos procesos de detailing avanzados (lavado,
-              descontaminación, pulido, sellado) utilizando productos de grado
-              marino premium.
+              Aplicamos el proceso técnico definido para cada servicio:
+              preparación, reparación, pulido, instalación, pintura o limpieza
+              con productos de grado marino.
             </p>
           </div>
 
@@ -2719,9 +2786,9 @@
             >
               03
             </div>
-            <h4 class="text-lg font-bold text-navy-900 mb-3">
+            <h3 class="text-lg font-bold text-navy-900 mb-3">
               Control & Entrega
-            </h4>
+            </h3>
             <p class="text-slate-500 text-sm leading-relaxed">
               Inspección final detallada ("White Glove Check"). No entregamos
               hasta que cada superficie cumpla con nuestros estándares de
@@ -2861,7 +2928,7 @@
         }
         .rw-boat {
           font-size: 0.68rem;
-          color: #94a3b8;
+          color: #64748b;
         }
         @media (max-width: 768px) {
           .rw-outer {
@@ -2914,8 +2981,8 @@
                 ><i class="ph-fill ph-star"></i>
               </div>
               <p class="rw-quote">
-                "Profesionales expertos en PPF. Atención al detalle impecable.
-                Mi inversión en el bote está protegida al 100%."
+                "Atención al detalle impecable. Explicaron cada etapa del
+                trabajo y entregaron la embarcación con un acabado excelente."
               </p>
               <div class="rw-meta">
                 <p class="rw-name">María Fernández</p>
@@ -3036,8 +3103,8 @@
                 ><i class="ph-fill ph-star"></i>
               </div>
               <p class="rw-quote">
-                "Profesionales expertos en PPF. Atención al detalle impecable.
-                Mi inversión en el bote está protegida al 100%."
+                "Atención al detalle impecable. Explicaron cada etapa del
+                trabajo y entregaron la embarcación con un acabado excelente."
               </p>
               <div class="rw-meta">
                 <p class="rw-name">María Fernández</p>
@@ -3224,8 +3291,8 @@
                 ><i class="ph-fill ph-star"></i>
               </div>
               <p class="rw-quote">
-                "Profesionales expertos en PPF. Atención al detalle impecable.
-                Mi inversión en el bote está protegida al 100%."
+                "Atención al detalle impecable. Explicaron cada etapa del
+                trabajo y entregaron la embarcación con un acabado excelente."
               </p>
               <div class="rw-meta">
                 <p class="rw-name">María Fernández</p>
@@ -3346,8 +3413,8 @@
                 ><i class="ph-fill ph-star"></i>
               </div>
               <p class="rw-quote">
-                "Profesionales expertos en PPF. Atención al detalle impecable.
-                Mi inversión en el bote está protegida al 100%."
+                "Atención al detalle impecable. Explicaron cada etapa del
+                trabajo y entregaron la embarcación con un acabado excelente."
               </p>
               <div class="rw-meta">
                 <p class="rw-name">María Fernández</p>
@@ -3419,7 +3486,7 @@
             Artículos Recientes
           </h2>
           <p class="text-center text-slate-600 mb-16">
-            Consejos profesionales y guías sobre protección marina en Cartagena
+            Guías para cotizar y cuidar su yate o bote en Cartagena
           </p>
 
           <div class="grid md:grid-cols-3 gap-5">
@@ -3466,29 +3533,29 @@
             >
               <div class="blog-img-zoom h-32 overflow-hidden">
                 <img
-                  src="images/services/ppf.webp"
-                  alt="PPF Paint Protection Film para protección de embarcación en Cartagena"
+                  src="images/services/foam-deck-muestrario-yate.webp"
+                  sizes="(max-width: 767px) calc(100vw - 48px), 33vw"
+                  alt="Piso sintético EVA Foam Deck instalado en yate en Cartagena"
                   loading="lazy"
                   class="w-full h-full object-cover"
-                  width="608"
-                  height="192"
+                  width="1500"
+                  height="1000"
                 />
               </div>
               <div class="p-6">
                 <span
                   class="inline-block text-[10px] font-bold text-gold-400 mb-1 uppercase tracking-wider"
-                  >PPF | Protección Marina</span
+                  >Pisos EVA | Precio e Instalación</span
                 >
                 <h3 class="font-serif text-base text-navy-900 mb-1">
-                  Protegiendo tu Embarcación en Cartagena
+                  ¿Cuánto Cuesta Instalar Foam Deck en un Yate?
                 </h3>
                 <p class="text-slate-600 font-light text-xs mb-3 line-clamp-2">
-                  Guía completa sobre Paint Protection Film (PPF) y cómo
-                  proteger tu inversión en embarcaciones contra elementos
-                  marinos, sal y rayos UV en el clima tropical de Cartagena.
+                  Precios por lámina, mano de obra, cantidad estimada y factores
+                  que cambian el valor de instalar un piso EVA a la medida.
                 </p>
                 <a
-                  href="blog/ppf-cartagena/"
+                  href="blog/precio-foam-deck-yate-cartagena/"
                   class="inline-flex items-center text-gold-400 font-semibold hover:text-gold-500 transition"
                 >
                   Leer Más
@@ -3503,29 +3570,28 @@
             >
               <div class="blog-img-zoom h-32 overflow-hidden">
                 <img
-                  src="images/services/ceramic-coating.webp"
-                  alt="Ceramic coating en embarcación brillante yate Cartagena Colombia"
+                  src="images/services/interiores-tapiceria-480.webp"
+                  alt="Limpieza de cojinería y tapicería náutica en yate Cartagena"
                   loading="lazy"
                   class="w-full h-full object-cover"
-                  width="608"
-                  height="192"
+                  width="480"
+                  height="474"
                 />
               </div>
               <div class="p-6">
                 <span
                   class="inline-block text-[10px] font-bold text-gold-400 mb-1 uppercase tracking-wider"
-                  >Ceramic Coating | Durabilidad</span
+                  >Cojinería | Limpieza Náutica</span
                 >
                 <h3 class="font-serif text-base text-navy-900 mb-1">
-                  Ceramic Coating vs. Soluciones Tradicionales
+                  Limpieza de Tapicería Náutica en Cartagena
                 </h3>
                 <p class="text-slate-600 font-light text-xs mb-3 line-clamp-2">
-                  Comparativa detallada entre revestimientos cerámicos de última
-                  generación y métodos tradicionales de protección. Descubre por
-                  qué la tecnología cerámica es superior.
+                  Cómo limpiar, desinfectar y proteger cojines e interiores de
+                  yates expuestos al sol, la humedad y la sal del Caribe.
                 </p>
                 <a
-                  href="blog/ceramic-comparativa/"
+                  href="blog/tapiceria-nautica-cartagena/"
                   class="inline-flex items-center text-gold-400 font-semibold hover:text-gold-500 transition"
                 >
                   Leer Más
@@ -3534,6 +3600,23 @@
               </div>
             </div>
           </div>
+
+          <nav
+            aria-label="Guías para propietarios de yates"
+            class="mt-10 border-t border-slate-200 pt-8"
+          >
+            <p class="text-center text-sm font-semibold text-navy-900 mb-5">
+              Guías prácticas para decidir y cotizar el mantenimiento de su embarcación
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 text-sm">
+              <a href="blog/seguridad-electrica-barco/" class="text-slate-700 hover:text-gold-500 transition">Seguridad eléctrica para yates</a>
+              <a href="blog/mantenimiento-aire-acondicionado-yate-cartagena/" class="text-slate-700 hover:text-gold-500 transition">Aire acondicionado para yates</a>
+              <a href="blog/reparacion-fibra-vidrio-casco/" class="text-slate-700 hover:text-gold-500 transition">Reparación de fibra de vidrio</a>
+              <a href="blog/inspeccion-precompra-yate-cartagena/" class="text-slate-700 hover:text-gold-500 transition">Inspección precompra de yates</a>
+              <a href="blog/costo-mantenimiento-anual-yate-cartagena/" class="text-slate-700 hover:text-gold-500 transition">Costo anual de mantener un yate</a>
+              <a href="blog/preguntas-frecuentes-pulido-gelcoat-cartagena/" class="text-slate-700 hover:text-gold-500 transition">Preguntas sobre pulido de gelcoat</a>
+            </div>
+          </nav>
 
           <div class="text-center mt-16">
             <a
@@ -3584,7 +3667,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cuánto dura la protección con PPF en Cartagena?</span
+                  >¿Cuánto cuesta pulir un yate o bote en Cartagena?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3595,19 +3678,16 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    El Paint Protection Film que utilizamos ofrece
-                    <strong>garantía de por vida</strong> contra defectos de
-                    fabricación y aplicación. La película en sí tiene una
-                    durabilidad de 10-15 años bajo condiciones normales, pero
-                    nuestra garantía cubre cualquier problema que pueda surgir
-                    durante la vida útil del producto.
+                    La tarifa de referencia para pulido de gelcoat es desde
+                    <strong>$90.000 COP por pie, sin IVA</strong>. El precio
+                    depende de la eslora, el nivel de oxidación, los rayones y
+                    la cantidad de corrección necesaria.
                   </p>
                   <p>
-                    En el clima tropical de Cartagena, con exposición a sal
-                    marina, rayos UV intensos y humedad alta, la inversión en
-                    PPF se justifica completamente. Protege la pintura original
-                    de tu embarcación contra el deterioro ambiental más severo
-                    del mercado.
+                    Antes de confirmar el trabajo hacemos una visita técnica.
+                    Si el gelcoat está demasiado deteriorado, explicamos con
+                    claridad si conviene reparar zonas puntuales o realizar
+                    pintura completa.
                   </p>
                 </div>
               </div>
@@ -3621,7 +3701,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cómo funciona el Ceramic Coating y cuánto dura?</span
+                  >¿Cuánto cuesta instalar piso sintético EVA en un yate?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3632,25 +3712,15 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    El Ceramic Coating es un revestimiento líquido que se
-                    adhiere a la pintura creando una capa protectora dura,
-                    hidrofóbica y resistente a químicos. A nivel molecular,
-                    forma una red cristalina que repele agua, sal marina,
-                    contaminantes y rayos UV.
+                    Como referencia, cada lámina EVA de 240 × 90 cm cuesta
+                    <strong>$800.000 COP</strong> y la mano de obra parte de
+                    <strong>$300.000 COP por lámina</strong>. La cantidad se
+                    define después de medir las áreas y diseñar las plantillas.
                   </p>
-                  <p class="mb-3">
-                    <strong>Durabilidad según aplicación:</strong>
-                  </p>
-                  <ul class="list-disc list-inside mb-3 space-y-2">
-                    <li>Ceramic Coating Standard: 2-3 años</li>
-                    <li>Ceramic Coating Premium: 5-7 años</li>
-                    <li>Ceramic Coating Pro (Certificado): 7-10 años</li>
-                  </ul>
                   <p>
-                    En Cartagena, los revestimientos cerámicos requieren
-                    reaplicaciones cada 3-5 años debido a la exposición marina
-                    extrema. Recomendamos inspecciones anuales e hidrofobicidad
-                    profesional para máximo rendimiento.
+                    La instalación incluye refuerzo de adherencia y sellado de
+                    bordes con silicona náutica 3M. Ofrecemos un año de garantía
+                    sobre nuestra instalación.
                   </p>
                 </div>
               </div>
@@ -3705,7 +3775,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cuánto toma el proceso de Detailing completo?</span
+                  >¿Cuánto toman los principales servicios para un yate?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3724,13 +3794,13 @@
                       <strong>Restauración Gelcoat:</strong> 3-5 días según daño
                     </li>
                     <li>
-                      <strong>PPF + Ceramic:</strong> 4-7 días (preparación +
-                      aplicación)
+                      <strong>Pisos sintéticos EVA:</strong> depende del diseño,
+                      plantillas y cantidad de láminas
                     </li>
                     <li><strong>Pintura de Motores:</strong> 2-3 días</li>
                     <li>
-                      <strong>Detailing Completo (interior+exterior):</strong>
-                      1-2 semanas
+                      <strong>Limpieza de cojinería e interiores:</strong>
+                      1-3 días según cantidad y estado
                     </li>
                   </ul>
                   <p>
@@ -3767,7 +3837,7 @@
                   </p>
                   <ul class="list-disc list-inside mb-3 space-y-2">
                     <li>
-                      <strong>PPF:</strong> Garantía de por vida contra defectos
+                      <strong>Pisos EVA:</strong> Un año sobre la instalación
                     </li>
                     <li>
                       <strong>Ceramic Coating:</strong> Garantía de 1-3 años
@@ -3778,8 +3848,8 @@
                       decoloración
                     </li>
                     <li>
-                      <strong>Detailing:</strong> Garantía de 90 días en
-                      acabados
+                      <strong>Pulido y limpieza:</strong> Cobertura sobre la
+                      correcta ejecución del servicio contratado
                     </li>
                     <li>
                       <strong>Reparaciones:</strong> Garantía de 1 año en
@@ -3804,8 +3874,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cuál es la mejor protección para embarcaciones en
-                  Cartagena?</span
+                  >¿Cómo saber si el gelcoat se puede reparar o necesita pintura?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3816,35 +3885,16 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    Para máxima protección en el clima tropical de Cartagena,
-                    recomendamos un enfoque en capas:
+                    Los rayones, poros, grietas y golpes localizados normalmente
+                    pueden repararse con gelcoat y una correcta igualación de
+                    color. También podemos restaurar superficies opacas cuando
+                    todavía existe material suficiente para corregirlas.
                   </p>
-                  <ul class="list-disc list-inside mb-3 space-y-2">
-                    <li>
-                      <strong>Base:</strong> Lavado técnico trimestral (elimina
-                      contaminantes marinos)
-                    </li>
-                    <li>
-                      <strong>Capa 1:</strong> PPF en áreas de alto impacto
-                      (proa, rodos)
-                    </li>
-                    <li>
-                      <strong>Capa 2:</strong> Ceramic Coating Certificado en
-                      casco y estructura
-                    </li>
-                    <li>
-                      <strong>Capa 3:</strong> Control anticorrosivo en sala de
-                      máquinas
-                    </li>
-                    <li>
-                      <strong>Mantenimiento:</strong> Hidrofobicidad anual +
-                      inspección de protectores
-                    </li>
-                  </ul>
                   <p>
-                    Esta estrategia multi-capa previene el 95%+ del deterioro
-                    marino. La inversión inicial se recupera en longevidad y
-                    transferencia de valor al vender la embarcación.
+                    Si el gelcoat está muy delgado, cuarteado, quemado por el sol
+                    o tiene reparaciones extensas anteriores, la pintura completa
+                    puede ser la opción segura. La visita técnica permite definir
+                    el proceso adecuado antes de comprometer un precio.
                   </p>
                 </div>
               </div>
@@ -4100,10 +4150,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="PPF / Protección Máxima"
+                      value="Pulido de Yates y Botes"
                       class="accent-gold-400"
                     />
-                    PPF / Protección Máxima
+                    Pulido de Yates y Botes
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4111,10 +4161,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Pintura de Motores"
+                      value="Pisos Sintéticos EVA"
                       class="accent-gold-400"
                     />
-                    Pintura de Motores
+                    Pisos Sintéticos EVA
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4122,10 +4172,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Cristal Líquido"
+                      value="Reparación de Gelcoat o Fibra"
                       class="accent-gold-400"
                     />
-                    Cristal Líquido
+                    Reparación de Gelcoat o Fibra
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4133,10 +4183,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Restauración de Gelcoat"
+                      value="Pintura Naval"
                       class="accent-gold-400"
                     />
-                    Restauración de Gelcoat
+                    Pintura Naval
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4144,10 +4194,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Tapicería / Interiores"
+                      value="Limpieza de Cojinería y Tapicería"
                       class="accent-gold-400"
                     />
-                    Tapicería / Interiores
+                    Limpieza de Cojinería y Tapicería
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4155,10 +4205,10 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Plan Mantenimiento Mensual"
+                      value="Electricidad y Aire Acondicionado"
                       class="accent-gold-400"
                     />
-                    Plan Mantenimiento Mensual
+                    Electricidad y Aire Acondicionado
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4166,10 +4216,21 @@
                     <input
                       type="checkbox"
                       name="servicio[]"
-                      value="Pulido Integral"
+                      value="Mecánica Naval"
                       class="accent-gold-400"
                     />
-                    Pulido Integral
+                    Mecánica Naval
+                  </label>
+                  <label
+                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servicio[]"
+                      value="Limpieza de Casco"
+                      class="accent-gold-400"
+                    />
+                    Limpieza de Casco
                   </label>
                   <label
                     class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
@@ -4388,7 +4449,7 @@
       aria-label="Cotizar por WhatsApp"
     >
       <img
-        src="images/whatsapp.webp"
+        src="images/whatsapp-96.webp"
         alt="WhatsApp"
         class="whatsapp-float__img"
         width="58"
@@ -4397,7 +4458,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260728-1"></script>
+    <script defer src="js/main.js?v=20260811-1"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

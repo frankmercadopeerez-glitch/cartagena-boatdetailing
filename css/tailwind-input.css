@@ -11,7 +11,7 @@ a[href*="wa.me"]:not(.whatsapp-float):not([class*="fixed"])
   height: 1.35rem !important;
   flex: 0 0 1.35rem;
   font-size: 0 !important;
-  background: url("../images/whatsapp.webp") center / contain no-repeat;
+  background: url("../images/whatsapp-96.webp") center / contain no-repeat;
   vertical-align: middle;
 }
 
