@@ -31,9 +31,11 @@
       })();
     </script>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico?v=20260812" sizes="any" />
+    <link rel="icon" href="/favicon.svg?v=20260812" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulido, Pisos, Gelcoat y Pintura Naval en Cartagena</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -746,12 +748,14 @@
       }
     </style>
     <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
-    <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
+    <!-- Portada de servicios -->
     <link
       rel="preload"
-      href="images/header.webp"
+      href="images/services/mecanica-naval-hero-720.webp"
       as="image"
       type="image/webp"
+      imagesrcset="images/services/mecanica-naval-hero-720.webp 720w, images/services/mecanica-naval-hero.webp 1600w"
+      imagesizes="100vw"
       fetchpriority="high"
     />
     <!-- Phosphor Icons -->
@@ -1047,7 +1051,7 @@
                 >Ceramic Coating</a
               >
               <a href="ppf.html" class="nav-dropdown-link"
-                >PPF (Servicio Opcional)</a
+                >PPF</a
               >
               <a href="anti-corrosion.html" class="nav-dropdown-link"
                 >Control Anticorrosivo</a
@@ -1165,24 +1169,42 @@
 
     <!-- Hero Section -->
     <section
-      class="pt-32 pb-16 bg-gradient-to-b from-navy-900 to-navy-800 text-white relative overflow-hidden"
+      class="min-h-[560px] md:min-h-[620px] pt-32 pb-20 text-white relative overflow-hidden flex items-center"
     >
-      <div class="absolute inset-0 opacity-10">
-        <div
-          class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
-        ></div>
-        <div
-          class="absolute bottom-10 left-10 w-80 h-80 bg-gold-400 rounded-full blur-[100px]"
-        ></div>
-      </div>
+      <picture class="absolute inset-0 block h-full w-full" aria-hidden="true">
+        <source
+          media="(max-width: 767px)"
+          srcset="images/services/mecanica-naval-hero-720.webp"
+        />
+        <img
+          src="images/services/mecanica-naval-hero.webp"
+          srcset="images/services/mecanica-naval-hero-720.webp 720w, images/services/mecanica-naval-hero.webp 1600w"
+          sizes="100vw"
+          alt=""
+          width="1600"
+          height="900"
+          class="h-full w-full object-cover object-center"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-navy-900/95 via-navy-900/80 to-navy-900/35"
+      ></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-navy-900/30"
+      ></div>
 
-      <div class="container mx-auto px-6 relative z-10 text-center">
-        <div class="max-w-4xl mx-auto">
-          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-3xl">
+          <p class="text-gold-400 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-5">
+            Soluciones navales integrales
+          </p>
+          <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight drop-shadow-xl">
             Servicios para
             <span class="text-gold-400">Yates y Botes en Cartagena</span>
           </h1>
-          <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl mx-auto">
+          <p class="text-lg md:text-xl text-slate-200 font-light mb-8 max-w-2xl leading-relaxed drop-shadow-lg">
             Pulido de gelcoat, instalación de pisos sintéticos EVA, reparación
             de gelcoat y fibra, pintura naval, limpieza de cojinería y sistemas
             eléctricos para embarcaciones.
@@ -1236,9 +1258,6 @@
               url(&quot;images/services/cubierta-sintetica.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-tree-palm text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1273,9 +1292,6 @@
               url(&quot;images/services/limpieza-casco.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-wave-sine text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1295,7 +1311,7 @@
               </div>
             </div>
 
-            <!-- Service Card: PPF opcional -->
+            <!-- Service Card: PPF -->
             <div
               class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
             >
@@ -1310,13 +1326,10 @@
               url(&quot;images/services/ppf.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-shield text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  PPF (Servicio Opcional)
+                  PPF
                 </h3>
                 <p class="text-slate-600 text-sm font-light mb-4">
                   Película de protección disponible para clientes que buscan
@@ -1346,7 +1359,6 @@
               url(&quot;images/services/ceramic-coating.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-drop text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1381,9 +1393,6 @@
               url(&quot;images/services/restauracion-gelcoat.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-sparkle text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1417,7 +1426,6 @@
               url(&quot;images/services/pintura-motores.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-gear text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1452,7 +1460,6 @@
               url(&quot;images/services/interiores-tapiceria.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-couch text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1486,9 +1493,6 @@
               url(&quot;images/services/control-anticorrosivo.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-shield-warning text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1523,9 +1527,6 @@
               url(&quot;images/services/sistemas-electricos.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-lightning text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1560,9 +1561,6 @@
                     url(&quot;images/services/mecanica-naval-hero-720.webp&quot;);
                 "
               >
-                <i
-                  class="ph ph-engine text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1598,9 +1596,6 @@
               url(&quot;images/services/reparacion-fibra.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-wrench text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1634,9 +1629,6 @@
               url(&quot;images/services/cubierta-sintetica.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-tree-evergreen text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1670,7 +1662,6 @@
               url(&quot;images/services/cubierta-teca.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-star text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1704,7 +1695,6 @@
               url(&quot;images/services/pintura-antifouling.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-boat text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1738,7 +1728,6 @@
               url(&quot;images/services/lavado-tecnico.webp?v=20260728&quot;);
                 "
               >
-                <i class="ph ph-waves text-5xl text-gold-400 relative z-10"></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1773,9 +1762,6 @@
               url(&quot;images/services/pintura-completa.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-paint-brush text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1810,9 +1796,6 @@
               url(&quot;images/services/pulido-gelcoat.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-sparkle text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1846,9 +1829,6 @@
               url(&quot;images/services/calcomanias-graficos.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-sticker text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">
@@ -1882,9 +1862,6 @@
               url(&quot;images/services/polarizado.webp?v=20260728&quot;);
                 "
               >
-                <i
-                  class="ph ph-sun-dim text-5xl text-gold-400 relative z-10"
-                ></i>
               </div>
               <div class="p-6">
                 <h3 class="font-serif text-xl text-navy-900 mb-2">

@@ -1,9 +1,9 @@
 @font-face {
   font-family: "Phosphor-Fill";
-  src: url("./fill/Phosphor-Fill.woff2") format("woff2");
+  src: url("./fill/Phosphor-Fill-subset.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 .ph-fill {
@@ -145,18 +145,18 @@
 
 @font-face {
   font-family: "Phosphor";
-  src: url("./regular/Phosphor.woff2") format("woff2");
+  src: url("./regular/Phosphor-subset.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Phosphor-Bold";
-  src: url("./bold/Phosphor-Bold.woff2") format("woff2");
+  src: url("./bold/Phosphor-Bold-subset.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 .ph-bold {

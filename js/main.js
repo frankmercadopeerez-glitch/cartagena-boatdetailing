@@ -180,7 +180,7 @@ function initLangAutoDetect() {
   i18nAutoDetect();
 }
 function buildGlobalNavbar(e) {
-  return `\n<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">\n  <div class="container mx-auto px-6 flex justify-between items-center">\n    <a href="${e || "/"}" class="flex items-center gap-4 group" aria-label="Colombia Boat Detailing - Inicio">\n      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-10 w-auto transition-transform duration-300 group-hover:scale-110" width="120" height="40" loading="eager" />\n      <div class="flex flex-col">\n        <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>\n        <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>\n      </div>\n    </a>\n\n    <div class="hidden md:flex items-center gap-10">\n      <div class="nav-dropdown">\n        <button\n          data-dropdown-toggle="servicesDropdown"\n          aria-haspopup="true"\n          aria-expanded="false"\n          aria-controls="servicesDropdown"\n          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"\n        >\n          Servicios\n          <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>\n        </button>\n\n        <div class="nav-dropdown-content" id="servicesDropdown">\n          <a href="${e}paint-polishing.html" class="nav-dropdown-link">Pulido de Yates y Botes</a>\n          <a href="${e}cubierta-sintetica.html" class="nav-dropdown-link">Pisos Sintéticos EVA</a>\n          <a href="${e}gelcoat.html" class="nav-dropdown-link">Reparación de Gelcoat</a>\n          <a href="${e}fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>\n          <a href="${e}interior-detailing.html" class="nav-dropdown-link">Limpieza de Cojinería</a>\n          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left" style="grid-column:1/-1">\n            Pintura Naval <svg class="w-3 h-3 ml-1 inline flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>\n            <div class="submenu-flyout">\n              <a href="${e}engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Pintura de Motores</a>\n              <a href="${e}boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>\n              <a href="${e}bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>\n            </div>\n          </button>\n          <a href="${e}electrical-systems.html" class="nav-dropdown-link">Electricidad y Aire Acondicionado</a>\n          <a href="${e}cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>\n          <a href="${e}calcomanias.html" class="nav-dropdown-link">Calcomanías y Gráficos</a>\n          <a href="${e}polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>\n          <a href="${e}anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>\n          <a href="${e}technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>\n          <a href="${e}hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>\n          <a href="${e}ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>\n          <a href="${e}ppf.html" class="nav-dropdown-link">PPF (Servicio Opcional)</a>\n        </div>\n      </div>\n\n      <a href="${e}about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Sobre Nosotros</a>\n      <a href="${e}blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>\n      ${buildLangSwitcher(e)}\n      <a\n        href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"\n        target="_blank"\n        rel="noopener noreferrer"\n        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"\n      >Agendar Cita</a>\n    </div>\n\n    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">\n      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>\n    </button>\n  </div>\n</nav>`;
+  return `\n<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">\n  <div class="container mx-auto px-6 flex justify-between items-center">\n    <a href="${e || "/"}" class="flex items-center gap-4 group" aria-label="Colombia Boat Detailing - Inicio">\n      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-10 w-auto transition-transform duration-300 group-hover:scale-110" width="120" height="40" loading="eager" />\n      <div class="flex flex-col">\n        <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>\n        <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>\n      </div>\n    </a>\n\n    <div class="hidden md:flex items-center gap-10">\n      <div class="nav-dropdown">\n        <button\n          data-dropdown-toggle="servicesDropdown"\n          aria-haspopup="true"\n          aria-expanded="false"\n          aria-controls="servicesDropdown"\n          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"\n        >\n          Servicios\n          <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>\n        </button>\n\n        <div class="nav-dropdown-content" id="servicesDropdown">\n          <a href="${e}paint-polishing.html" class="nav-dropdown-link">Pulido de Yates y Botes</a>\n          <a href="${e}cubierta-sintetica.html" class="nav-dropdown-link">Pisos Sintéticos EVA</a>\n          <a href="${e}gelcoat.html" class="nav-dropdown-link">Reparación de Gelcoat</a>\n          <a href="${e}fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>\n          <a href="${e}interior-detailing.html" class="nav-dropdown-link">Limpieza de Cojinería</a>\n          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left" style="grid-column:1/-1">\n            Pintura Naval <svg class="w-3 h-3 ml-1 inline flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>\n            <div class="submenu-flyout">\n              <a href="${e}engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Pintura de Motores</a>\n              <a href="${e}boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>\n              <a href="${e}bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>\n            </div>\n          </button>\n          <a href="${e}electrical-systems.html" class="nav-dropdown-link">Electricidad y Aire Acondicionado</a>\n          <a href="${e}cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>\n          <a href="${e}calcomanias.html" class="nav-dropdown-link">Calcomanías y Gráficos</a>\n          <a href="${e}polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>\n          <a href="${e}anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>\n          <a href="${e}technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>\n          <a href="${e}hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>\n          <a href="${e}ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>\n          <a href="${e}ppf.html" class="nav-dropdown-link">PPF</a>\n        </div>\n      </div>\n\n      <a href="${e}about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Sobre Nosotros</a>\n      <a href="${e}blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>\n      ${buildLangSwitcher(e)}\n      <a\n        href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"\n        target="_blank"\n        rel="noopener noreferrer"\n        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"\n      >Agendar Cita</a>\n    </div>\n\n    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">\n      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>\n    </button>\n  </div>\n</nav>`;
 }
 function buildGlobalMobileMenu(e) {
   return `\n<div\n  id="mobile-menu"\n  role="dialog"\n  aria-modal="true"\n  aria-label="Menú de navegación"\n  aria-hidden="true"\n  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-none"\n  style="overflow-y:auto"\n>\n  \x3c!-- Mobile menu header --\x3e\n  <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">\n    <a href="${e || "/"}" class="flex items-center gap-3" aria-label="Inicio">\n      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-9 w-auto" width="43" height="36" loading="lazy" />\n      <div>\n        <p class="text-white text-sm tracking-[0.2em] font-light leading-none">COLOMBIA</p>\n        <p class="text-white font-serif font-bold text-base tracking-widest leading-none">BOAT DETAILING</p>\n      </div>\n    </a>\n    <button id="close-menu-btn" class="text-white/50 hover:text-white p-2" aria-label="Cerrar menú de navegación">\n      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>\n    </button>\n  </div>\n  \x3c!-- Mobile menu links --\x3e\n  <div class="flex flex-col px-6 py-8 gap-1 flex-1">\n    <p class="text-gold-400 text-[10px] font-bold tracking-widest uppercase mb-4">Menú Principal</p>\n    <a href="${e || "/"}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Inicio</a>\n    <a href="${e}services.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Servicios</a>\n    <a href="${e}about.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Sobre Nosotros</a>\n    <a href="${e}blog.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Blog Naval</a>\n    <a href="${e}contacto.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Contacto</a>\n  </div>\n  \x3c!-- Mobile CTA --\x3e\n  <div class="px-6 py-6 border-t border-white/10 flex flex-col items-center text-center">\n    ${buildLangSwitcherMobile(e)}\n    <a\n      href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"\n      target="_blank"\n      rel="noopener noreferrer"\n      class="mobile-link mt-4 w-full text-center block bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all"\n    >Agendar Cita — WhatsApp</a>\n    <a href="tel:+573044301112" class="mobile-link mt-3 w-full text-center block border border-white/20 text-white py-3 text-sm tracking-widest">+57 304 430 1112</a>\n  </div>\n</div>`;
@@ -295,7 +295,8 @@ function styleGlobalMobileMenu() {
 }
 function initGlobalLayout() {
   const { prefix: e, isUtilityPage: t, isLeadOnlyPage: a } = getLayoutContext();
-  if (t || a) return;
+  const path = (window.location.pathname || "/").toLowerCase();
+  if (t || a || path === "/" || path === "/index.html") return;
   const n = buildGlobalNavbar(e),
     o = buildGlobalMobileMenu(e),
     i = buildGlobalFooter(e),
@@ -763,24 +764,50 @@ function updateActiveLink() {
           e.classList.add("border-b", "border-gold-400", "text-gold-400"));
     }));
 }
+function runWhenIdle(callback, timeout) {
+  if ("requestIdleCallback" in window)
+    window.requestIdleCallback(callback, { timeout: timeout || 2500 });
+  else setTimeout(callback, timeout || 1200);
+}
+function isHomePage() {
+  const path = (window.location.pathname || "/").toLowerCase();
+  return path === "/" || path === "/index.html";
+}
+function initDeferredEnhancements() {
+  if (isHomePage()) return;
+  runWhenIdle(function () {
+    (initScrollAnimations(),
+      initClickableCards(),
+      initClickableBlogPreviewCards(),
+      initConversionTracking());
+  }, 1800);
+}
 (Object.keys(I18N_PAIRS).forEach(function (e) {
   I18N_PAIRS_REV[I18N_PAIRS[e]] = e;
 }),
   document.addEventListener("DOMContentLoaded", function () {
+    if (isHomePage()) {
+      (initNavbarScroll(),
+        initMobileMenu(),
+        initDropdownMenu(),
+        initWhatsAppMessages(),
+        initLangSwitcher(),
+        runWhenIdle(function () {
+          (initFormValidation(), initCounters(), initCarousel(), initFAQ());
+        }, 2800));
+      return;
+    }
     (initGlobalLayout(),
       normalizeBlogArticleReadability(),
       initNavbarScroll(),
       initMobileMenu(),
-      initScrollAnimations(),
       initDropdownMenu(),
-      initClickableCards(),
       initWhatsAppMessages(),
       initFooterConsistency(),
       normalizeFloatingWhatsApp(),
       centerBlogArticleHeader(),
-      initClickableBlogPreviewCards(),
-      initConversionTracking(),
-      initLangSwitcher());
+      initLangSwitcher(),
+      initDeferredEnhancements());
   }),
   document.querySelectorAll('a[href^="#"]').forEach((e) => {
     e.addEventListener("click", function (e) {
@@ -793,9 +820,11 @@ function updateActiveLink() {
           .scrollIntoView({ behavior: "smooth", block: "start" }));
     });
   }),
-  document.addEventListener("DOMContentLoaded", initParallax),
-  document.addEventListener("DOMContentLoaded", initFormValidation),
-  window.addEventListener("scroll", updateActiveLink, { passive: !0 }));
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!isHomePage()) (initParallax(), initFormValidation());
+  }),
+  document.querySelector('nav a[href^="#"]') &&
+    window.addEventListener("scroll", updateActiveLink, { passive: !0 }));
 const styleSheet = document.createElement("style");
 function initCarousel() {
   const e = document.querySelector(".carousel-container"),
@@ -999,9 +1028,19 @@ function initConversionTracking() {
   "\n    @keyframes fadeIn {\n        from { opacity: 0; transform: translateY(20px); }\n        to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes slideInUp {\n        from { opacity: 0; transform: translateY(40px); }\n        to { opacity: 1; transform: translateY(0); }\n    }\n    @keyframes scaleIn {\n        from { opacity: 0; transform: scale(0.95); }\n        to { opacity: 1; transform: scale(1); }\n    }\n"),
   document.head.appendChild(styleSheet),
   document.addEventListener("DOMContentLoaded", () => {
-    (initCarousel(), initFAQ());
+    if (!isHomePage()) (initCarousel(), initFAQ());
   }),
-  initCounters(),
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!isHomePage()) initCounters();
+  }),
   window.addEventListener("load", () => {
-    (initNavalParticles(), initWaveRipple(), initCardTilt(), initSonarPulse());
+    const path = (window.location.pathname || "/").toLowerCase();
+    if (path === "/" || path === "/index.html") return;
+    runWhenIdle(() => {
+      (window.innerWidth > 767 && initNavalParticles(),
+        initWaveRipple(),
+        window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+          initCardTilt(),
+        initSonarPulse());
+    }, 3000);
   }));

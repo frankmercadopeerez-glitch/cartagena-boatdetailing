@@ -18,32 +18,23 @@
           gtag("js", new Date());
           gtag("config", "G-01GC6QM018");
         }
-        if (document.readyState === "complete") {
-          setTimeout(loadGA, 2000);
-        } else {
-          window.addEventListener("load", function () {
-            setTimeout(loadGA, 2000);
-          });
+        function scheduleGA() {
+          setTimeout(loadGA, 20000);
         }
-        ["click", "touchstart", "scroll", "keydown"].forEach(function (e) {
+        if (document.readyState === "complete") scheduleGA();
+        else window.addEventListener("load", scheduleGA, { once: true });
+        ["pointerdown", "keydown"].forEach(function (e) {
           document.addEventListener(e, loadGA, { once: true, passive: true });
         });
       })();
     </script>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico?v=20260812" sizes="any" />
+    <link rel="icon" href="/favicon.svg?v=20260812" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulido de Yates en Cartagena | Pisos, Gelcoat y Pintura</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <!-- Preload Tailwind CSS early to avoid FOUC —— el navegador empieza la descarga antes de llegar al <link> bloqueante -->
-    <link
-      rel="preload"
-      href="css/tailwind.css?v=20260811-1"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript
-      ><link rel="stylesheet" href="css/tailwind.css?v=20260811-1"
-    /></noscript>
+    <link rel="stylesheet" href="css/home-bundle.css?v=20260812-2" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -133,9 +124,10 @@
     <!-- Preload LCP image -->
     <link
       rel="preload"
-      href="images/header.webp"
+      href="images/header-480.webp"
       as="image"
       type="image/webp"
+      media="(max-width: 767px)"
       fetchpriority="high"
     />
 
@@ -229,6 +221,7 @@
       as="font"
       type="font/woff2"
       crossorigin
+      media="(min-width: 768px)"
     />
     <link
       rel="preload"
@@ -236,704 +229,9 @@
       as="font"
       type="font/woff2"
       crossorigin
+      media="(min-width: 768px)"
     />
-    <!-- Critical Tailwind utilities — evita layout shift al cargar tailwind async -->
-    <style>
-      *,
-      :after,
-      :before {
-        --tw-translate-x: 0;
-        --tw-translate-y: 0;
-        --tw-rotate: 0;
-        --tw-skew-x: 0;
-        --tw-skew-y: 0;
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-        --tw-shadow: 0 0 #0000;
-        --tw-ring-offset-shadow: 0 0 #0000;
-        --tw-ring-shadow: 0 0 #0000;
-      }
-      .flex {
-        display: flex;
-      }
-      .inline-flex {
-        display: inline-flex;
-      }
-      .hidden {
-        display: none;
-      }
-      .block {
-        display: block;
-      }
-      .inline {
-        display: inline;
-      }
-      .grid {
-        display: grid;
-      }
-      .flex-col {
-        flex-direction: column;
-      }
-      .flex-wrap {
-        flex-wrap: wrap;
-      }
-      .shrink-0,
-      .flex-shrink-0 {
-        flex-shrink: 0;
-      }
-      .items-center {
-        align-items: center;
-      }
-      .items-start {
-        align-items: flex-start;
-      }
-      .items-end {
-        align-items: flex-end;
-      }
-      .justify-center {
-        justify-content: center;
-      }
-      .justify-between {
-        justify-content: space-between;
-      }
-      .gap-1 {
-        gap: 0.25rem;
-      }
-      .gap-2 {
-        gap: 0.5rem;
-      }
-      .gap-3 {
-        gap: 0.75rem;
-      }
-      .gap-4 {
-        gap: 1rem;
-      }
-      .gap-5 {
-        gap: 1.25rem;
-      }
-      .gap-6 {
-        gap: 1.5rem;
-      }
-      .gap-8 {
-        gap: 2rem;
-      }
-      .gap-10 {
-        gap: 2.5rem;
-      }
-      .gap-12 {
-        gap: 3rem;
-      }
-      .mx-auto {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .mx-4 {
-        margin-left: 1rem;
-        margin-right: 1rem;
-      }
-      .px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .px-6 {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-      .px-8 {
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-      .py-2 {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-      }
-      .py-3 {
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-      }
-      .py-1\.5 {
-        padding-top: 0.375rem;
-        padding-bottom: 0.375rem;
-      }
-      .px-1\.5 {
-        padding-left: 0.375rem;
-        padding-right: 0.375rem;
-      }
-      .py-0\.5 {
-        padding-top: 0.125rem;
-        padding-bottom: 0.125rem;
-      }
-      .mb-2 {
-        margin-bottom: 0.5rem;
-      }
-      .mb-4 {
-        margin-bottom: 1rem;
-      }
-      .mb-6 {
-        margin-bottom: 1.5rem;
-      }
-      .mt-2 {
-        margin-top: 0.5rem;
-      }
-      .mt-4 {
-        margin-top: 1rem;
-      }
-      .ml-1 {
-        margin-left: 0.25rem;
-      }
-      .ml-2 {
-        margin-left: 0.5rem;
-      }
-      .my-1 {
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
-      }
-      .text-center {
-        text-align: center;
-      }
-      .text-left {
-        text-align: left;
-      }
-      .text-right {
-        text-align: right;
-      }
-      .fixed {
-        position: fixed;
-      }
-      .absolute {
-        position: absolute;
-      }
-      .relative {
-        position: relative;
-      }
-      .sticky {
-        position: sticky;
-      }
-      .inset-0 {
-        inset: 0;
-      }
-      .top-0 {
-        top: 0;
-      }
-      .left-0 {
-        left: 0;
-      }
-      .top-6 {
-        top: 1.5rem;
-      }
-      .right-6 {
-        right: 1.5rem;
-      }
-      .z-0 {
-        z-index: 0;
-      }
-      .z-10 {
-        z-index: 10;
-      }
-      .z-20 {
-        z-index: 20;
-      }
-      .z-30 {
-        z-index: 30;
-      }
-      .z-40 {
-        z-index: 40;
-      }
-      .z-50 {
-        z-index: 50;
-      }
-      .z-\[1\] {
-        z-index: 1;
-      }
-      .z-\[9999\] {
-        z-index: 9999;
-      }
-      .w-full {
-        width: 100%;
-      }
-      .h-full {
-        height: 100%;
-      }
-      .h-screen {
-        height: 100vh;
-      }
-      .min-h-\[700px\] {
-        min-height: 700px;
-      }
-      .min-h-\[380px\] {
-        min-height: 380px;
-      }
-      .min-h-\[70vh\] {
-        min-height: 70vh;
-      }
-      .min-h-screen {
-        min-height: 100vh;
-      }
-      .max-w-7xl {
-        max-width: 80rem;
-      }
-      .max-w-4xl {
-        max-width: 56rem;
-      }
-      .max-w-3xl {
-        max-width: 48rem;
-      }
-      .h-px {
-        height: 1px;
-      }
-      .overflow-hidden {
-        overflow: hidden;
-      }
-      .object-cover {
-        -o-object-fit: cover;
-        object-fit: cover;
-      }
-      .pointer-events-none {
-        pointer-events: none;
-      }
-      .select-none {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      .truncate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .whitespace-nowrap {
-        white-space: nowrap;
-      }
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
-      }
-      .text-xs {
-        font-size: 0.75rem;
-        line-height: 1rem;
-      }
-      .text-sm {
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-      }
-      .text-base {
-        font-size: 1rem;
-        line-height: 1.5rem;
-      }
-      .text-lg {
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-      }
-      .text-xl {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-      .text-2xl {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-      .text-3xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-      }
-      .text-4xl {
-        font-size: 2.25rem;
-        line-height: 2.5rem;
-      }
-      .text-5xl {
-        font-size: 3rem;
-        line-height: 1;
-      }
-      .font-light {
-        font-weight: 300;
-      }
-      .font-normal {
-        font-weight: 400;
-      }
-      .font-medium {
-        font-weight: 500;
-      }
-      .font-semibold {
-        font-weight: 600;
-      }
-      .font-bold {
-        font-weight: 700;
-      }
-      .font-black {
-        font-weight: 900;
-      }
-      .font-serif {
-        font-family:
-          Playfair Display,
-          serif;
-      }
-      .tracking-widest {
-        letter-spacing: 0.1em;
-      }
-      .tracking-\[0\.2em\] {
-        letter-spacing: 0.2em;
-      }
-      .tracking-wide {
-        letter-spacing: 0.025em;
-      }
-      .tracking-wider {
-        letter-spacing: 0.05em;
-      }
-      .tracking-\[0\.15em\] {
-        letter-spacing: 0.15em;
-      }
-      .leading-none {
-        line-height: 1;
-      }
-      .leading-tight {
-        line-height: 1.25;
-      }
-      .leading-relaxed {
-        line-height: 1.625;
-      }
-      .uppercase {
-        text-transform: uppercase;
-      }
-      .capitalize {
-        text-transform: capitalize;
-      }
-      .antialiased {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .text-white {
-        --tw-text-opacity: 1;
-        color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-      }
-      .text-white\/90 {
-        color: hsla(0, 0%, 100%, 0.9);
-      }
-      .text-white\/80 {
-        color: hsla(0, 0%, 100%, 0.8);
-      }
-      .text-white\/70 {
-        color: hsla(0, 0%, 100%, 0.7);
-      }
-      .text-white\/60 {
-        color: hsla(0, 0%, 100%, 0.6);
-      }
-      .text-white\/50 {
-        color: hsla(0, 0%, 100%, 0.5);
-      }
-      .text-white\/40 {
-        color: hsla(0, 0%, 100%, 0.4);
-      }
-      .text-white\/30 {
-        color: hsla(0, 0%, 100%, 0.3);
-      }
-      .text-gold-400 {
-        --tw-text-opacity: 1;
-        color: rgb(212 175 55 / var(--tw-text-opacity, 1));
-      }
-      .text-gold-500 {
-        --tw-text-opacity: 1;
-        color: rgb(197 160 40 / var(--tw-text-opacity, 1));
-      }
-      .text-gold-600 {
-        --tw-text-opacity: 1;
-        color: rgb(176 141 30 / var(--tw-text-opacity, 1));
-      }
-      .text-navy-900 {
-        --tw-text-opacity: 1;
-        color: rgb(0 31 63 / var(--tw-text-opacity, 1));
-      }
-      .text-slate-300 {
-        --tw-text-opacity: 1;
-        color: rgb(203 213 225 / var(--tw-text-opacity, 1));
-      }
-      .text-slate-400 {
-        --tw-text-opacity: 1;
-        color: rgb(148 163 184 / var(--tw-text-opacity, 1));
-      }
-      .bg-gold-400 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(212 175 55 / var(--tw-bg-opacity, 1));
-      }
-      .bg-gold-500 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(197 160 40 / var(--tw-bg-opacity, 1));
-      }
-      .bg-navy-900 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(0 31 63 / var(--tw-bg-opacity, 1));
-      }
-      .bg-navy-800 {
-        --tw-bg-opacity: 1;
-        background-color: rgb(10 47 94 / var(--tw-bg-opacity, 1));
-      }
-      .bg-white\/10 {
-        background-color: hsla(0, 0%, 100%, 0.1);
-      }
-      .bg-white\/5 {
-        background-color: hsla(0, 0%, 100%, 0.05);
-      }
-      .border {
-        border-width: 1px;
-      }
-      .border-b {
-        border-bottom-width: 1px;
-      }
-      .border-t {
-        border-top-width: 1px;
-      }
-      .border-gold-400 {
-        --tw-border-opacity: 1;
-        border-color: rgb(212 175 55 / var(--tw-border-opacity, 1));
-      }
-      .border-white\/10 {
-        border-color: hsla(0, 0%, 100%, 0.1);
-      }
-      .border-white\/20 {
-        border-color: hsla(0, 0%, 100%, 0.2);
-      }
-      .rounded-sm {
-        border-radius: 0.125rem;
-      }
-      .rounded {
-        border-radius: 0.25rem;
-      }
-      .rounded-md {
-        border-radius: 0.375rem;
-      }
-      .rounded-lg {
-        border-radius: 0.5rem;
-      }
-      .rounded-xl {
-        border-radius: 0.75rem;
-      }
-      .rounded-full {
-        border-radius: 9999px;
-      }
-      .transform {
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
-          scaleY(var(--tw-scale-y));
-      }
-      .translate-x-full {
-        --tw-translate-x: 100%;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
-          scaleY(var(--tw-scale-y));
-      }
-      .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-      }
-      .transition-colors {
-        transition-property:
-          color, background-color, border-color, text-decoration-color, fill,
-          stroke;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-      }
-      .transition-transform {
-        transition-property: transform;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-      }
-      .transition {
-        transition-property:
-          color,
-          background-color,
-          border-color,
-          text-decoration-color,
-          fill,
-          stroke,
-          opacity,
-          box-shadow,
-          transform,
-          filter,
-          -webkit-backdrop-filter,
-          backdrop-filter;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-      }
-      .duration-300 {
-        transition-duration: 0.3s;
-      }
-      .duration-500 {
-        transition-duration: 0.5s;
-      }
-      .opacity-0 {
-        opacity: 0;
-      }
-      .opacity-50 {
-        opacity: 0.5;
-      }
-      .grid-cols-1 {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-      }
-      .grid-cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .grid-cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      @media (min-width: 768px) {
-        .md\:flex {
-          display: flex;
-        }
-        .md\:hidden {
-          display: none;
-        }
-        .md\:gap-10 {
-          gap: 2.5rem;
-        }
-        .md\:text-4xl {
-          font-size: 2.25rem;
-          line-height: 2.5rem;
-        }
-        .md\:text-5xl {
-          font-size: 3rem;
-          line-height: 1;
-        }
-        .md\:text-6xl {
-          font-size: 3.75rem;
-          line-height: 1;
-        }
-        .md\:text-7xl {
-          font-size: 4.5rem;
-          line-height: 1;
-        }
-        .md\:grid-cols-2 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        .md\:grid-cols-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-        .md\:flex-row {
-          flex-direction: row;
-        }
-      }
-      @media (min-width: 1024px) {
-        .lg\:text-8xl {
-          font-size: 6rem;
-          line-height: 1;
-        }
-        .lg\:text-7xl {
-          font-size: 4.5rem;
-          line-height: 1;
-        }
-        .lg\:text-6xl {
-          font-size: 3.75rem;
-          line-height: 1;
-        }
-        .lg\:text-5xl {
-          font-size: 3rem;
-          line-height: 1;
-        }
-        .lg\:text-4xl {
-          font-size: 2.25rem;
-          line-height: 2.5rem;
-        }
-        .lg\:grid-cols-4 {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-        .lg\:grid-cols-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-        .lg\:flex-row {
-          flex-direction: row;
-        }
-        .lg\:flex {
-          display: flex;
-        }
-        .lg\:hidden {
-          display: none;
-        }
-        .lg\:w-1\/2 {
-          width: 50%;
-        }
-        .lg\:text-left {
-          text-align: left;
-        }
-        .lg\:justify-start {
-          justify-content: flex-start;
-        }
-        .lg\:mx-0 {
-          margin-left: 0;
-          margin-right: 0;
-        }
-        .lg\:gap-20 {
-          gap: 5rem;
-        }
-        .lg\:gap-12 {
-          gap: 3rem;
-        }
-        .lg\:gap-10 {
-          gap: 2.5rem;
-        }
-        .lg\:gap-8 {
-          gap: 2rem;
-        }
-        .lg\:gap-6 {
-          gap: 1.5rem;
-        }
-        .lg\:mb-0 {
-          margin-bottom: 0;
-        }
-        .lg\:py-20 {
-          padding-top: 5rem;
-          padding-bottom: 5rem;
-        }
-        .lg\:py-16 {
-          padding-top: 4rem;
-          padding-bottom: 4rem;
-        }
-      }
-      @media (min-width: 1280px) {
-        .xl\:grid-cols-4 {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-        .xl\:grid-cols-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-        .xl\:text-9xl {
-          font-size: 8rem;
-          line-height: 1;
-        }
-      }
-    </style>
-    <link
-      rel="preload"
-      href="css/styles.css"
-      as="style"
-      onload="
-        this.onload = null;
-        this.rel = 'stylesheet';
-      "
-    />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
-
-    <!-- Google Fonts async -->
-    <!-- Phosphor Icons (defer) -->
-    <link
-      rel="preload"
-      href="vendor/phosphor/icons.css"
-      as="style"
-      onload="
-        this.onload = null;
-        this.rel = 'stylesheet';
-      "
-    />
-    <noscript
-      ><link rel="stylesheet" href="vendor/phosphor/icons.css"
-    /></noscript>
+    <!-- El CSS compartido y los iconos ya están en home-bundle.css. -->
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -977,6 +275,74 @@
       .service-card:hover {
         transform: translateY(-5px);
         border-color: #d4af37;
+      }
+
+      /* Evita calcular de inmediato las secciones que aún están fuera de
+         pantalla; conserva su espacio y reduce mucho el trabajo inicial. */
+      body > section,
+      body > .ocean-divider,
+      body > footer,
+      #mobile-menu {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 780px;
+      }
+
+      @media (max-width: 767px) {
+        body {
+          font-family: Arial, Helvetica, sans-serif !important;
+        }
+        .font-serif,
+        .home-hero-title {
+          font-family: Georgia, "Times New Roman", serif !important;
+        }
+        .ph,
+        .ph-bold,
+        .ph-fill {
+          font-family: Arial, Helvetica, sans-serif !important;
+          font-style: normal;
+        }
+        .ph::before,
+        .ph-bold::before,
+        .ph-fill::before {
+          content: "" !important;
+        }
+        .ph-anchor::before { content: "⚓" !important; }
+        .ph-arrow-down::before { content: "↓" !important; }
+        .ph-arrow-right::before { content: "→" !important; }
+        .ph-caret-down::before { content: "▾" !important; }
+        .ph-chart-line-up::before { content: "↗" !important; }
+        .ph-check-circle::before { content: "✓" !important; }
+        .ph-engine::before,
+        .ph-wrench::before { content: "⚙" !important; }
+        .ph-lightning::before { content: "⚡" !important; }
+        .ph-map-pin::before { content: "•" !important; }
+        .ph-money::before { content: "$" !important; }
+        .ph-paint-bucket::before { content: "◈" !important; }
+        .ph-phone::before { content: "☎" !important; }
+        .ph-shield::before { content: "◆" !important; }
+        .ph-speedometer::before { content: "◔" !important; }
+        .ph-star::before { content: "★" !important; }
+        .ph-tag::before { content: "◇" !important; }
+        .ph-waves::before { content: "≋" !important; }
+        .ph-whatsapp-logo::before { content: "◉" !important; }
+        #naval-particles,
+        .compass-rose,
+        .aurora-orb {
+          display: none !important;
+        }
+        .hero-wave-container svg,
+        .ocean-divider svg,
+        .rw-left,
+        .rw-right,
+        .text-gold-shimmer,
+        .whatsapp-float__img,
+        .whatsapp-float::before {
+          animation: none !important;
+        }
+        #reseñas .rw-outer:nth-child(2),
+        #reseñas .rw-card:nth-child(n + 5) {
+          display: none !important;
+        }
       }
 
       .feature-list li {
@@ -1418,7 +784,7 @@
                 >Ceramic Coating</a
               >
               <a href="ppf.html" class="nav-dropdown-link"
-                >PPF (Servicio Opcional)</a
+                >PPF</a
               >
               <button
                 type="button"
@@ -1578,15 +944,23 @@
     >
       <!-- Background -->
       <div class="absolute inset-0 z-0">
-        <img
-          src="images/header.webp"
-          alt="Yate de lujo en Cartagena"
-          class="w-full h-full object-cover"
-          fetchpriority="high"
-          decoding="async"
-          width="1440"
-          height="960"
-        />
+        <picture class="block w-full h-full">
+          <source
+            media="(max-width: 767px)"
+            srcset="images/header-480.webp"
+          />
+          <img
+            src="images/header.webp"
+            srcset="images/header-720.webp 720w, images/header.webp 1440w"
+            sizes="100vw"
+            alt="Yate de lujo en Cartagena"
+            class="w-full h-full object-cover"
+            fetchpriority="high"
+            decoding="async"
+            width="1440"
+            height="960"
+          />
+        </picture>
         <div class="hero-overlay absolute inset-0"></div>
         <!-- Deep sea dark vignette -->
         <div
@@ -1909,14 +1283,14 @@
               class="featured-star-media relative md:w-2/3 h-48 sm:h-64 md:h-auto overflow-hidden w-full"
             >
               <img
-                src="images/services/pulido-gelcoat-720.webp"
-                srcset="images/services/pulido-gelcoat-480.webp 480w, images/services/pulido-gelcoat-720.webp 720w, images/services/pulido-gelcoat.webp 941w"
+                src="images/services/pulido-gelcoat-card-480.webp"
+                srcset="images/services/pulido-gelcoat-card-480.webp 480w, images/services/pulido-gelcoat-card-720.webp 720w"
                 sizes="(max-width: 767px) 100vw, 67vw"
                 alt="Pulido de gelcoat en yate y velero en Cartagena Colombia"
                 loading="lazy"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 width="720"
-                height="1279"
+                height="336"
               />
               <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent to-navy-900/60 md:hidden"
@@ -2007,7 +1381,8 @@
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/cubierta-sintetica.webp"
+              src="images/services/cubierta-sintetica-480.webp"
+              srcset="images/services/cubierta-sintetica-320.webp 320w, images/services/cubierta-sintetica-360.webp 360w, images/services/cubierta-sintetica-480.webp 480w, images/services/cubierta-sintetica.webp 941w"
               sizes="(max-width: 767px) calc(50vw - 20px), (max-width: 1023px) calc(50vw - 24px), 25vw"
               alt="Instalación de piso sintético EVA en yate en Cartagena"
               loading="lazy"
@@ -2047,7 +1422,9 @@
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/restauracion-gelcoat.webp"
+              src="images/services/restauracion-gelcoat-480.webp"
+              srcset="images/services/restauracion-gelcoat-320.webp 320w, images/services/restauracion-gelcoat-360.webp 360w, images/services/restauracion-gelcoat-480.webp 480w, images/services/restauracion-gelcoat.webp 608w"
+              sizes="(max-width: 767px) calc(50vw - 20px), (max-width: 1023px) calc(50vw - 24px), 25vw"
               alt="Reparación y restauración de gelcoat en yate en Cartagena"
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -2125,7 +1502,8 @@
             class="shine-on-hover group relative overflow-hidden rounded-sm shadow-lg aspect-[3/4]"
           >
             <img
-              src="images/services/pintura-completa.webp"
+              src="images/services/pintura-completa-480.webp"
+              srcset="images/services/pintura-completa-320.webp 320w, images/services/pintura-completa-360.webp 360w, images/services/pintura-completa-480.webp 480w, images/services/pintura-completa.webp 941w"
               sizes="(max-width: 767px) calc(50vw - 20px), (max-width: 1023px) calc(50vw - 24px), 25vw"
               alt="Pintura naval completa de yate y bote en Cartagena Colombia"
               loading="lazy"
@@ -3457,6 +2835,17 @@
       <!-- /dual-marquee -->
     </section>
     <!-- /#reseñas -->
+    <script>
+      if (window.innerWidth < 768) {
+        document
+          .querySelectorAll(
+            "#reseñas .rw-outer:nth-child(2), #reseñas .rw-card:nth-child(n + 5)",
+          )
+          .forEach(function (node) {
+            node.remove();
+          });
+      }
+    </script>
 
     <!-- Wave divider: Reseñas → Blog -->
     <div class="ocean-divider" style="background: #001f3f">
@@ -4458,7 +3847,20 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260811-1"></script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="js/home.js?v=20260812-3"></script>
+    <script>
+      window.addEventListener(
+        "load",
+        function () {
+          setTimeout(function () {
+            var s = document.createElement("script");
+            s.src = "/_vercel/insights/script.js";
+            s.defer = true;
+            document.head.appendChild(s);
+          }, 20000);
+        },
+        { once: true },
+      );
+    </script>
   </body>
 </html>
