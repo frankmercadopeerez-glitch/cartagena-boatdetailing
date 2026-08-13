@@ -1,4 +1,4 @@
-﻿﻿﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -100,7 +100,7 @@
           "Polichar Bote Cartagena",
           "Polichar Yate Colombia"
         ],
-        "description": "Servicio profesional de pulido y abrillantado de gelcoat para embarcaciones en Cartagena, Colombia. Tarifa de referencia de $90.000 COP por pie de eslora, sin IVA y sujeta a inspección previa. Retoque de rayones profundos con gelcoat e igualación de color disponible como servicio adicional.",
+        "description": "Servicio profesional de pulido y abrillantado de gelcoat para embarcaciones en Cartagena, Colombia. Tarifa de referencia de $90.000 COP por pie de eslora, más IVA y sujeta a inspección previa. Retoque de rayones profundos con gelcoat e igualación de color disponible como servicio adicional.",
         "serviceType": "Boat Detailing",
         "url": "https://www.colombiaboatdetailing.com/paint-polishing.html",
         "provider": {
@@ -140,13 +140,6 @@
         "@type": "LocalBusiness",
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "47",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "sameAs": "https://maps.app.goo.gl/HnKWMGY6tKthLGde8"
       }
     </script>
@@ -161,7 +154,7 @@
             "name": "¿Cuántas veces al año se recomienda pulir el gelcoat en Cartagena?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Para embarcaciones sin protección cerámica o PPF, recomendamos pulido profesional una vez al año, idealmente antes de la temporada alta en diciembre. La exposición UV del Caribe colombiano degrada el gelcoat mucho más rápido que en latitudes templadas. Con ceramic coating se puede extender a 2-3 años entre pulidos profundos."
+              "text": "La frecuencia se define según el estado del gelcoat, la exposición al sol y al agua salada, el uso y la protección existente. En la visita técnica revisamos la superficie y recomendamos un plan de mantenimiento ajustado a la embarcación."
             }
           },
           {
@@ -169,7 +162,7 @@
             "name": "¿El pulido profesional desgasta o daña el gelcoat?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "El pulido remueve entre 1 y 5 micrones del gelcoat por sesión. Un gelcoat nuevo tiene 400-600 micrones, así que el desgaste anual es mínimo. El riesgo real es el pulido excesivo o mal ejecutado que puede quemar el gelcoat. Por eso medimos el espesor antes de cada trabajo."
+              "text": "El pulido remueve de forma controlada una capa superficial del gelcoat. Antes de intervenir evaluamos su condición y definimos el nivel de corrección viable para no forzar una superficie demasiado delgada, quemada o deteriorada."
             }
           },
           {
@@ -193,7 +186,7 @@
             "name": "¿Cuánto tarda el proceso de pulido de un yate de 40 pies?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Para un yate de 40 pies en estado de mantenimiento normal, el proceso completo toma entre 2 y 3 días. Si el gelcoat está muy oxidado o requiere corrección intensiva, puede extenderse a 4 días."
+              "text": "El plazo se confirma después de inspeccionar el tamaño, el acceso y el estado real del gelcoat. La oxidación, los rayones, las reparaciones previas y la necesidad de proteger áreas sensibles pueden modificar el tiempo de trabajo."
             }
           },
           {
@@ -201,7 +194,7 @@
             "name": "¿Qué pasa si no pulimos el gelcoat durante años?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "El gelcoat descuidado en el Caribe pierde brillo, se vuelve poroso y amarillo, y finalmente la resina se fisura y descasca. En ese estadio avanzado se requiere restauración completa de gelcoat que puede costar entre 3 y 10 veces más que el mantenimiento preventivo anual."
+              "text": "El gelcoat descuidado en el Caribe pierde brillo, puede volverse poroso y presentar decoloración o fisuras. Cuando el deterioro es avanzado, el pulido puede dejar de ser viable y se debe evaluar restauración de gelcoat o pintura completa."
             }
           }
         ]
@@ -263,7 +256,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -852,13 +845,14 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
+    <link rel="stylesheet" href="css/tailwind.css?v=20260813-2" />
     <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
     <link
       rel="preload"
-      href="images/services/pulido-gelcoat.webp"
+      href="images/services/pulido-gelcoat-480.webp"
       as="image"
       type="image/webp"
+      media="(max-width: 767px)"
       fetchpriority="high"
     />
     <link
@@ -866,6 +860,7 @@
       href="images/services/pulido-gelcoat.webp"
       as="image"
       type="image/webp"
+      media="(min-width: 768px)"
       fetchpriority="high"
     />
     <!-- Phosphor Icons -->
@@ -883,8 +878,9 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link rel="preload" href="css/styles.css?v=20260813-2" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20260813-2" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20260813-3" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -1151,18 +1147,30 @@
 
     <!-- Hero -->
     <section
-      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
-      style="
-        padding-top: 8rem;
-        background-image:
-          linear-gradient(
-            to right,
-            rgba(10, 25, 47, 0.85),
-            rgba(10, 25, 47, 0.7)
-          ),
-          url(&quot;images/services/pulido-gelcoat.webp&quot;);
-      "
+      class="pt-32 pb-16 text-white relative overflow-hidden"
+      style="padding-top: 8rem"
     >
+      <picture class="absolute inset-0" aria-hidden="true">
+        <source
+          media="(max-width: 767px)"
+          srcset="images/services/pulido-gelcoat-480.webp"
+        />
+        <img
+          src="images/services/pulido-gelcoat.webp"
+          alt=""
+          class="w-full h-full object-cover object-center"
+          width="941"
+          height="1672"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div
+        class="absolute inset-0"
+        style="background: linear-gradient(to right, rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.7))"
+        aria-hidden="true"
+      ></div>
       <div class="absolute inset-0 opacity-10">
         <div
           class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
@@ -1189,17 +1197,19 @@
             showroom. Incluye pulido exterior, interior, cromos y accesorios.
           </p>
           <a
-            href="#proceso"
+            href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20el%20pulido%20de%20gelcoat%20para%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
           >
-            Descubre el Proceso <i class="ph ph-arrow-down ml-2"></i>
+            Cotizar por WhatsApp <i class="ph-fill ph-whatsapp-logo ml-2"></i>
           </a>
         </div>
       </div>
     </section>
 
     <!-- Overview Section -->
-    <section class="py-24 bg-navy-900">
+    <section class="py-24 bg-slate-50">
       <div class="container mx-auto px-6">
         <div class="w-full mx-auto">
           <h2 class="font-serif text-4xl text-navy-900 mb-12">
@@ -1254,8 +1264,8 @@
                       Brillo Espejo Final
                     </h4>
                     <p class="text-slate-600 text-sm">
-                      Acabado showroom con reflectividad del 95%+ y profundidad
-                      de color
+                      Acabado de alto brillo con mayor definición y profundidad
+                      de color, según la condición viable del gelcoat
                     </p>
                   </div>
                 </li>
@@ -1416,7 +1426,8 @@
                   recubrimiento nanocerámico que forma una capa de protección
                   dura y transparente sobre el gelcoat. Protege de la radiación
                   UV del Caribe, la sal y los contaminantes ambientales,
-                  manteniendo el brillo por años.
+                  ayudando a conservar el brillo según el uso, la exposición y
+                  el mantenimiento posterior.
                 </p>
                 <div class="bg-navy-900 text-white rounded-sm p-5 mt-3">
                   <p
@@ -1440,8 +1451,8 @@
                         Suscripción Trimestral ✦
                       </p>
                       <p class="text-slate-300 font-light text-sm mb-2">
-                        Mantenimiento cada 3 meses para que el brillo y la
-                        protección UV siempre estén como nuevos.
+                        Mantenimiento cada 3 meses para renovar el brillo y la
+                        protección según el estado de la superficie.
                       </p>
                       <p class="text-gold-400 font-bold">
                         $900.000 COP / trimestre
@@ -1564,7 +1575,7 @@
             <div class="h-px w-16 bg-gold-400/40"></div>
           </div>
           <p class="text-slate-400 text-sm mt-2 tracking-widest uppercase">
-            COP por pie de eslora · sin IVA
+            COP por pie de eslora · más IVA
           </p>
         </div>
 
@@ -1657,7 +1668,7 @@
                 <div class="flex justify-between">
                   <span>Tarifa por pie</span
                   ><span class="text-white font-semibold"
-                    >$90.000 COP · sin IVA</span
+                    >$90.000 COP · más IVA</span
                   >
                 </div>
               </div>
@@ -1669,7 +1680,7 @@
                   <p class="text-gold-400 font-serif text-3xl font-bold">
                     $3.420.000
                   </p>
-                  <p class="text-slate-400 text-xs">COP · sin IVA</p>
+                  <p class="text-slate-400 text-xs">COP · más IVA</p>
                 </div>
               </div>
             </div>
@@ -1703,7 +1714,7 @@
                 <div class="flex justify-between">
                   <span>Tarifa por pie</span
                   ><span class="text-white font-semibold"
-                    >$90.000 COP · sin IVA</span
+                    >$90.000 COP · más IVA</span
                   >
                 </div>
               </div>
@@ -1715,14 +1726,14 @@
                   <p class="text-gold-400 font-serif text-3xl font-bold">
                     $5.850.000
                   </p>
-                  <p class="text-slate-400 text-xs">COP · sin IVA</p>
+                  <p class="text-slate-400 text-xs">COP · más IVA</p>
                 </div>
               </div>
             </div>
           </div>
 
           <p class="text-center text-slate-400 text-sm mt-6 leading-relaxed">
-            * Valores de referencia según la eslora, <strong>sin IVA</strong>.
+            * Valores de referencia según la eslora; no incluyen IVA.
             La cotización final está sujeta a una visita para verificar el
             estado real del gelcoat y confirmar que el pulido sea técnicamente
             viable. Cuando la superficie está demasiado deteriorada, quemada,
@@ -1738,7 +1749,7 @@
               class="inline-flex items-center gap-2 bg-gold-400 text-navy-900 font-bold text-sm uppercase tracking-widest px-8 py-4 hover:bg-gold-400 transition"
             >
               <i class="ph-fill ph-whatsapp-logo text-xl"></i>
-              Cotizar Mi Embarcación
+              Cotizar por WhatsApp
             </a>
           </div>
         </div>
@@ -1749,29 +1760,30 @@
     <section class="py-24 bg-navy-900 text-white">
       <div class="container mx-auto px-6 text-center">
         <h2 class="font-serif text-4xl mb-8">
-          Resultados <span class="text-gold-400">Garantizados</span>
+          Un Resultado Definido con <span class="text-gold-400">Criterio Técnico</span>
         </h2>
         <p class="text-slate-300 font-light text-lg max-w-3xl mx-auto mb-12">
-          Garantizamos el brillo espejo por 3-6 meses (con cera) o 2-5 años (con
-          Ceramic Coating). Si el acabado no cumple tus expectativas, repulimos
-          las áreas problemáticas sin costo adicional.
+          Antes de comenzar inspeccionamos el gelcoat y presentamos por escrito
+          el alcance viable. Al terminar verificamos contigo el acabado; la
+          garantía aplicable, sus condiciones y exclusiones quedan vinculadas al
+          servicio efectivamente autorizado.
         </p>
         <div class="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
           <div class="bg-navy-800 p-6 rounded-sm">
-            <h3 class="font-serif text-3xl text-gold-400 mb-2">95%+</h3>
-            <p class="text-slate-300 text-sm">Reflectividad del Gelcoat</p>
+            <h3 class="font-serif text-2xl text-gold-400 mb-2">Visita Técnica</h3>
+            <p class="text-slate-300 text-sm">Evaluación del estado real</p>
           </div>
           <div class="bg-navy-800 p-6 rounded-sm">
-            <h3 class="font-serif text-3xl text-gold-400 mb-2">100%</h3>
-            <p class="text-slate-300 text-sm">Oxidación Removida</p>
+            <h3 class="font-serif text-2xl text-gold-400 mb-2">Alcance Escrito</h3>
+            <p class="text-slate-300 text-sm">Incluye, excluye y valor acordado</p>
           </div>
           <div class="bg-navy-800 p-6 rounded-sm">
-            <h3 class="font-serif text-3xl text-gold-400 mb-2">3-7 Días</h3>
-            <p class="text-slate-300 text-sm">Tiempo de Proceso</p>
+            <h3 class="font-serif text-2xl text-gold-400 mb-2">Proceso Viable</h3>
+            <p class="text-slate-300 text-sm">Corrección según cada superficie</p>
           </div>
           <div class="bg-navy-800 p-6 rounded-sm">
-            <h3 class="font-serif text-3xl text-gold-400 mb-2">2-5 Años</h3>
-            <p class="text-slate-300 text-sm">Duración con Ceramic</p>
+            <h3 class="font-serif text-2xl text-gold-400 mb-2">Seguimiento</h3>
+            <p class="text-slate-300 text-sm">Garantía según el trabajo acordado</p>
           </div>
         </div>
       </div>
@@ -1802,13 +1814,11 @@
                 ></i>
               </summary>
               <div class="px-6 pb-5 text-slate-600 font-light leading-relaxed">
-                Para embarcaciones sin protección cerámica o PPF, recomendamos
-                <strong>pulido profesional una vez al año</strong>, idealmente
-                antes de la temporada alta (diciembre). La exposición UV del
-                Caribe colombiano degrada el gelcoat significativamente más
-                rápido que en latitudes templadas. Embarcaciones con ceramic
-                coating pueden extender el intervalo a 2–3 años entre pulidos
-                profundos, con un sellado anual de mantenimiento.
+                La frecuencia depende del estado del gelcoat, la exposición al
+                sol y al agua salada, el uso y la protección existente. En la
+                visita técnica revisamos la superficie y recomendamos un plan de
+                mantenimiento ajustado a la embarcación, sin imponer un intervalo
+                general que no corresponda a su condición real.
               </div>
             </details>
 
@@ -1823,14 +1833,11 @@
                 ></i>
               </summary>
               <div class="px-6 pb-5 text-slate-600 font-light leading-relaxed">
-                Técnicamente, el pulido remueve una capa microscópica del
-                gelcoat (entre 1 y 5 micrones por sesión). Un gelcoat nuevo
-                tiene entre 400 y 600 micrones de espesor, así que el desgaste
-                por pulido anual es mínimo y no representa un riesgo si se hace
-                con los compuestos y técnicas correctas. El riesgo real es el
-                <strong>pulido excesivo o mal ejecutado</strong> que puede
-                quemar el gelcoat con fricción. Por eso medimos el espesor antes
-                de cada trabajo.
+                El pulido remueve de forma controlada una capa superficial del
+                gelcoat. El riesgo aparece cuando se fuerza una superficie muy
+                delgada, quemada o deteriorada. Por eso evaluamos la condición
+                antes de intervenir y definimos por escrito el nivel de
+                corrección que es técnicamente viable.
               </div>
             </details>
 
@@ -1892,13 +1899,11 @@
                 ></i>
               </summary>
               <div class="px-6 pb-5 text-slate-600 font-light leading-relaxed">
-                Para un yate de 40 pies en estado de mantenimiento normal, el
-                proceso completo (descontaminación + corrección de pintura +
-                pulido en 2 etapas + abrillantado) toma entre
-                <strong>2 y 3 días</strong>. Si el gelcoat está muy oxidado o
-                requiere corrección intensiva de defectos, puede extenderse a 4
-                días. El trabajo se realiza en el muelle o varadero, con la
-                embarcación cubierta del sol directo durante el proceso.
+                El plazo se confirma después de revisar el tamaño, el acceso y
+                el estado real del gelcoat. La oxidación, los rayones, las
+                reparaciones previas y la necesidad de proteger áreas sensibles
+                pueden modificar el tiempo de trabajo. El cronograma queda
+                incluido en la cotización posterior a la visita técnica.
               </div>
             </details>
 
@@ -1919,8 +1924,8 @@
                 resina se fisura y descasca. En ese estadio avanzado, el pulido
                 ya no es suficiente y se requiere
                 <strong>restauración completa de gelcoat</strong> o incluso
-                repintado total, que puede costar entre 3 y 10 veces más que el
-                mantenimiento preventivo anual.
+                pintura total, trabajos que solo se recomiendan después de
+                verificar técnicamente la superficie.
               </div>
             </details>
           </div>
@@ -1929,14 +1934,15 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 bg-navy-900">
+    <section class="py-24 bg-slate-50">
       <div class="container mx-auto px-6 text-center">
         <h2 class="font-serif text-4xl text-navy-900 mb-6">
           Recupera el Brillo Showroom de Tu Embarcación
         </h2>
         <p class="text-slate-600 font-light mb-8 max-w-2xl mx-auto">
-          Ofrecemos inspección gratuita y cotización detallada. Incluye medición
-          de espesor de pintura y evaluación fotográfica del estado actual.
+          Coordinamos una revisión de la superficie y preparamos una cotización
+          detallada según la eslora, el nivel de oxidación y la corrección que
+          realmente necesita la embarcación.
         </p>
         <a
           href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20el%20pulido%20de%20pintura%20para%20mi%20embarcaci%C3%B3n"
@@ -1944,13 +1950,13 @@
           rel="noopener noreferrer"
           class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition"
         >
-          Solicitar Inspección Gratuita
+          Cotizar por WhatsApp
         </a>
       </div>
     </section>
 
     <!-- Cobertura por Zonas -->
-    <section class="py-16 bg-navy-900">
+    <section class="py-16 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center max-w-2xl mx-auto mb-10">
           <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mb-3">
@@ -1965,7 +1971,7 @@
         >
           <a
             href="paint-polishing.html"
-            class="group border border-white/10 rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
+            class="group border border-slate-200 bg-white rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
             aria-current="page"
           >
             <i class="ph ph-map-pin text-3xl text-gold-500 mb-3 block"></i>
@@ -1980,7 +1986,7 @@
           </a>
           <a
             href="pulido-gelcoat-bocagrande.html"
-            class="group border border-white/10 rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
+            class="group border border-slate-200 bg-white rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
           >
             <i class="ph ph-map-pin text-3xl text-gold-500 mb-3 block"></i>
             <div
@@ -1994,7 +2000,7 @@
           </a>
           <a
             href="pulido-gelcoat-baru.html"
-            class="group border border-white/10 rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
+            class="group border border-slate-200 bg-white rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
           >
             <i class="ph ph-map-pin text-3xl text-gold-500 mb-3 block"></i>
             <div
@@ -2008,7 +2014,7 @@
           </a>
           <a
             href="pulido-gelcoat-islas-rosario.html"
-            class="group border border-white/10 rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
+            class="group border border-slate-200 bg-white rounded-sm p-6 text-center hover:border-gold-400 hover:shadow-md transition"
           >
             <i class="ph ph-map-pin text-3xl text-gold-500 mb-3 block"></i>
             <div
@@ -2048,7 +2054,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              Estándares Internacionales de Excelencia Marina desde 2024.
+              Cuidado técnico de embarcaciones en Cartagena.
             </p>
           </div>
           <div>
@@ -2142,7 +2148,7 @@
       />
     </a>
 
-    <script defer src="js/main.js?v=20260727-2"></script>
+    <script defer src="js/main.js?v=20260813-3"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

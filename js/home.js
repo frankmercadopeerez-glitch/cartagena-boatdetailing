@@ -5,18 +5,25 @@
   function init() {
     if (initialized) return;
     initialized = true;
-  var navbar = document.getElementById("navbar");
-  if (navbar) {
-    window.addEventListener(
-      "scroll",
-      function () {
+    var navbar = document.getElementById("navbar");
+    if (navbar) {
+      function updateNavbar() {
         var active = window.scrollY > 50;
         navbar.classList.toggle("glass-nav", active);
         navbar.classList.toggle("shadow-lg", active);
-      },
-      { passive: true },
-    );
-  }
+      }
+      updateNavbar();
+      window.addEventListener("scroll", updateNavbar, { passive: true });
+    }
+
+    document.querySelectorAll(".faq-item").forEach(function (item, index) {
+      var button = item.querySelector(".faq-toggle");
+      var answer = item.querySelector(".faq-answer");
+      if (!button || !answer) return;
+      if (!answer.id) answer.id = "faq-answer-" + (index + 1);
+      button.setAttribute("aria-controls", answer.id);
+      button.setAttribute("aria-expanded", String(item.classList.contains("open")));
+    });
 
   function toggleMobileMenu() {
     var button = document.getElementById("mobile-menu-btn");
@@ -69,9 +76,16 @@
     if (faqToggle) {
       var item = faqToggle.closest(".faq-item");
       document.querySelectorAll(".faq-item.open").forEach(function (other) {
-        if (other !== item) other.classList.remove("open");
+        if (other !== item) {
+          other.classList.remove("open");
+          var otherToggle = other.querySelector(".faq-toggle");
+          if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
+        }
       });
-      if (item) item.classList.toggle("open");
+      if (item) {
+        var isOpen = item.classList.toggle("open");
+        faqToggle.setAttribute("aria-expanded", String(isOpen));
+      }
     }
 
     var language = target.closest(".lang-switch a.lang-opt");
@@ -103,11 +117,9 @@
   });
   }
 
-  ["pointerdown", "keydown", "scroll"].forEach(function (eventName) {
-    document.addEventListener(eventName, init, {
-      once: true,
-      passive: true,
-      capture: true,
-    });
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
 })();

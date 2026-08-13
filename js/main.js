@@ -16,6 +16,83 @@ function getLayoutContext() {
     }
   );
 }
+function isEnglishDocument() {
+  return (document.documentElement.lang || "")
+    .trim()
+    .toLowerCase()
+    .startsWith("en");
+}
+function getSharedLayoutRoutes(e) {
+  const prefix = e || "";
+  if (isEnglishDocument()) {
+    return {
+      home: prefix + "index-en.html",
+      services: prefix + "services-en.html",
+      about: prefix + "about-en.html",
+      cases: prefix + "case-studies.html",
+      blog: prefix + "blog.html",
+      contact: prefix + "contact-en.html",
+      quote: prefix + "contact-en.html",
+    };
+  }
+  return {
+    home: prefix || "/",
+    services: prefix + "services.html",
+    about: prefix + "about.html",
+    cases: prefix + "casos-reales.html",
+    blog: prefix + "blog.html",
+    contact: prefix + "contacto.html",
+    quote: prefix + "cotizar.html",
+  };
+}
+function getEnglishWhatsAppMessage(service) {
+  const messages = {
+    hullCleaning:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for hull cleaning for my vessel.",
+    polishing:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for gelcoat polishing for my vessel.",
+    ceramic:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for ceramic coating for my vessel.",
+    ppf:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for PPF for my vessel.",
+    gelcoat:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for gelcoat repair for my vessel.",
+    fiberglass:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for fiberglass repair for my vessel.",
+    teak:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for teak deck service for my vessel.",
+    syntheticDeck:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for synthetic decking for my vessel.",
+    graphics:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for vessel lettering and graphics.",
+    tint:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine window tinting.",
+    enginePainting:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine engine painting.",
+    boatPainting:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine painting for my vessel.",
+    bottomPaint:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for bottom painting for my vessel.",
+    interior:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine upholstery and interior cleaning.",
+    antiCorrosion:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for anti-corrosion treatment for my vessel.",
+    technicalWash:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for a technical wash for my vessel.",
+    electrical:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine electrical or air-conditioning service.",
+    mechanics:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for marine mechanical service.",
+    default:
+      "Hello, I visited the Colombia Boat Detailing website and would like to request a quote for my vessel.",
+  };
+  return messages[service] || messages.default;
+}
+function buildEnglishWhatsAppUrl(service) {
+  return `https://wa.me/573044301112?text=${encodeURIComponent(
+    getEnglishWhatsAppMessage(service),
+  )}`;
+}
 var I18N_PAIRS = {
     "index.html": "index-en.html",
     "services.html": "services-en.html",
@@ -32,6 +109,10 @@ var I18N_PAIRS = {
     "interior-detailing.html": "interior-detailing-en.html",
     "gelcoat.html": "gelcoat-en.html",
     "anti-corrosion.html": "anti-corrosion-en.html",
+    "cubierta-sintetica.html": "synthetic-decking-en.html",
+    "electrical-systems.html": "electrical-systems-en.html",
+    "mecanica-naval.html": "marine-mechanics-en.html",
+    "casos-reales.html": "case-studies.html",
   },
   I18N_PAIRS_REV = {};
 function i18nCurrentFile() {
@@ -43,9 +124,7 @@ function i18nInfo(e) {
   var t,
     a,
     n = i18nCurrentFile(),
-    o =
-      "en" ===
-      (document.documentElement.lang || "es").slice(0, 2).toLowerCase();
+    o = isEnglishDocument();
   if (o) {
     a = e + n;
     var i = I18N_PAIRS_REV[n];
@@ -62,12 +141,16 @@ function buildLangSwitcher(e) {
     a = "es" === t.current,
     n = "en" === t.current;
   return (
-    '<div class="lang-switch" role="group" aria-label="Idioma / Language"><i class="ph ph-globe" aria-hidden="true"></i>' +
+    '<div class="lang-switch" role="group" aria-label="' +
+    (n ? "Language" : "Idioma / Language") +
+    '"><i class="ph ph-globe" aria-hidden="true"></i>' +
     ('<a href="' +
       (t.esUrl || e || "/") +
       '" class="lang-opt' +
       (a ? " lang-active" : "") +
-      '" lang="es" hreflang="es-CO" aria-label="Ver en espanol"' +
+      '" lang="es" hreflang="es-CO" aria-label="' +
+      (n ? "View in Spanish" : "Ver en espanol") +
+      '"' +
       (a ? ' aria-current="true"' : "") +
       ">ES</a>") +
     '<span class="lang-sep">/</span>' +
@@ -76,7 +159,9 @@ function buildLangSwitcher(e) {
         t.enUrl +
         '" class="lang-opt' +
         (n ? " lang-active" : "") +
-        '" lang="en" hreflang="en" aria-label="View in English"' +
+        '" lang="en" hreflang="en" aria-label="' +
+        (n ? "Current page in English" : "View in English") +
+        '"' +
         (n ? ' aria-current="true"' : "") +
         ">EN</a>"
       : '<button type="button" class="lang-opt" data-translate-help aria-label="Translate this page to English">EN</button>') +
@@ -179,13 +264,242 @@ function initLangSwitcher() {
 function initLangAutoDetect() {
   i18nAutoDetect();
 }
+function buildGlobalNavbarEnglish(e) {
+  const routes = getSharedLayoutRoutes(e);
+  const whatsappUrl = buildEnglishWhatsAppUrl("default");
+  return `
+<nav id="navbar" aria-label="Primary navigation" class="fixed w-full z-50 transition-all duration-300 py-2">
+  <div class="container mx-auto px-6 flex justify-between items-center">
+    <a href="${routes.home}" class="flex items-center gap-4 group" aria-label="Colombia Boat Detailing - Home">
+      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-10 w-auto transition-transform duration-300 group-hover:scale-110" width="120" height="40" loading="eager" />
+      <div class="flex flex-col">
+        <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>
+        <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-10">
+      <div class="nav-dropdown">
+        <button
+          data-dropdown-toggle="servicesDropdown"
+          aria-label="Open services menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicesDropdown"
+          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"
+        >
+          Services
+          <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+
+        <div class="nav-dropdown-content" id="servicesDropdown">
+          <a href="${e}paint-polishing-en.html" class="nav-dropdown-link">Yacht and Boat Polishing</a>
+          <a href="${e}synthetic-decking-en.html" class="nav-dropdown-link">EVA Synthetic Decking</a>
+          <a href="${e}gelcoat-en.html" class="nav-dropdown-link">Gelcoat Repair</a>
+          <a href="${e}fibra.html" class="nav-dropdown-link">Fiberglass Repair</a>
+          <a href="${e}interior-detailing-en.html" class="nav-dropdown-link">Upholstery Cleaning</a>
+          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left" style="grid-column:1/-1">
+            Marine Painting <svg class="w-3 h-3 ml-1 inline flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            <div class="submenu-flyout">
+              <a href="${e}engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Engine Painting</a>
+              <a href="${e}boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Complete Marine Painting</a>
+              <a href="${e}bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Bottom Painting</a>
+            </div>
+          </button>
+          <a href="${e}electrical-systems-en.html" class="nav-dropdown-link">Marine Electrical and A/C</a>
+          <a href="${e}marine-mechanics-en.html" class="nav-dropdown-link">Marine Mechanics</a>
+          <a href="${e}cubierta-teka.html" class="nav-dropdown-link">Teak Decking</a>
+          <a href="${e}calcomanias.html" class="nav-dropdown-link">Vessel Lettering and Graphics</a>
+          <a href="${e}polarizado.html" class="nav-dropdown-link">Marine Window Tinting</a>
+          <a href="${e}anti-corrosion-en.html" class="nav-dropdown-link">Anti-Corrosion Treatment</a>
+          <a href="${e}technical-wash.html" class="nav-dropdown-link">Technical Wash</a>
+          <a href="${e}hull-cleaning-en.html" class="nav-dropdown-link">Hull Cleaning</a>
+          <a href="${e}ceramic-coating-en.html" class="nav-dropdown-link">Ceramic Coating</a>
+          <a href="${e}ppf-en.html" class="nav-dropdown-link">PPF</a>
+          <a href="${routes.services}" class="nav-dropdown-link">View All Services</a>
+          <a href="${routes.contact}" class="nav-dropdown-link">Contact</a>
+        </div>
+      </div>
+
+      <a href="${routes.about}" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">About Us</a>
+      <a href="${routes.blog}" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Marine Blog</a>
+      ${buildLangSwitcher(e)}
+      <a
+        href="${whatsappUrl}"
+        data-whatsapp-layout
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Request a quote on WhatsApp"
+        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+      >Request Quote</a>
+    </div>
+
+    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>`;
+}
+function buildGlobalMobileMenuEnglish(e) {
+  const routes = getSharedLayoutRoutes(e);
+  const whatsappUrl = buildEnglishWhatsAppUrl("default");
+  return `
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+  aria-hidden="true"
+  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-none"
+  style="overflow-y:auto"
+>
+  <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+    <a href="${routes.home}" class="flex items-center gap-3" aria-label="Home">
+      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-9 w-auto" width="43" height="36" loading="lazy" />
+      <div>
+        <p class="text-white text-sm tracking-[0.2em] font-light leading-none">COLOMBIA</p>
+        <p class="text-white font-serif font-bold text-base tracking-widest leading-none">BOAT DETAILING</p>
+      </div>
+    </a>
+    <button id="close-menu-btn" class="text-white/50 hover:text-white p-2" aria-label="Close navigation menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="flex flex-col px-6 py-8 gap-1 flex-1">
+    <p class="text-gold-400 text-[10px] font-bold tracking-widest uppercase mb-4">Main Menu</p>
+    <a href="${routes.home}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Home</a>
+    <a href="${routes.services}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Services</a>
+    <a href="${routes.about}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">About Us</a>
+    <a href="${routes.blog}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Marine Blog</a>
+    <a href="${routes.contact}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Contact</a>
+  </div>
+  <div class="px-6 py-6 border-t border-white/10 flex flex-col items-center text-center">
+    ${buildLangSwitcherMobile(e)}
+    <a
+      href="${whatsappUrl}"
+      data-whatsapp-layout
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Request a quote on WhatsApp"
+      class="mobile-link mt-4 w-full text-center block bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all"
+    >Request Quote — WhatsApp</a>
+    <a href="tel:+573044301112" class="mobile-link mt-3 w-full text-center block border border-white/20 text-white py-3 text-sm tracking-widest" aria-label="Call Colombia Boat Detailing">+57 304 430 1112</a>
+  </div>
+</div>`;
+}
+function buildGlobalFooterEnglish(e) {
+  const routes = getSharedLayoutRoutes(e);
+  const whatsappUrl = buildEnglishWhatsAppUrl("default");
+  return `
+<footer class="bg-navy-900 text-slate-300 border-t border-gold-400/10">
+  <div class="container mx-auto px-6 py-10 md:py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+      <div class="lg:col-span-1">
+        <a href="${routes.home}" class="flex items-center gap-3 mb-5 group" aria-label="Colombia Boat Detailing - Home">
+          <img src="${e}images/cbdlogo-white.svg" alt="" aria-hidden="true" width="56" height="47" class="h-12 w-auto opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />
+          <div>
+            <p class="text-white text-sm tracking-[0.2em] font-light leading-none">COLOMBIA</p>
+            <p class="text-white font-serif font-bold text-lg tracking-widest leading-none">BOAT DETAILING</p>
+          </div>
+        </a>
+        <p class="text-xs text-slate-400 font-light leading-relaxed mb-5">Marine appearance and technical care in Cartagena, with an on-site assessment and written scope before work begins.</p>
+        <div class="flex gap-4 items-center">
+          <a href="${whatsappUrl}" data-whatsapp-layout target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp" class="text-slate-400 hover:text-gold-400 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.022.501 3.927 1.382 5.6L0 24l6.545-1.359A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.653-.513-5.168-1.407l-.37-.22-3.854.8.824-3.75-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          </a>
+          <a href="https://instagram.com/colombiaboatdetailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-slate-400 hover:text-gold-400 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://facebook.com/colombiaboatdetailing" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-slate-400 hover:text-gold-400 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">SERVICES</h4>
+        <ul class="space-y-2 text-xs font-light">
+          <li><a href="${e}paint-polishing-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Yacht and Boat Polishing</a></li>
+          <li><a href="${e}synthetic-decking-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> EVA Synthetic Decking</a></li>
+          <li><a href="${e}gelcoat-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Gelcoat Repair</a></li>
+          <li><a href="${e}fibra.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Fiberglass Repair</a></li>
+          <li><a href="${e}boat-painting.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Marine Painting</a></li>
+          <li><a href="${e}interior-detailing-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Upholstery Cleaning</a></li>
+          <li><a href="${e}electrical-systems-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Marine Electrical and A/C</a></li>
+          <li><a href="${e}marine-mechanics-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Marine Mechanics</a></li>
+          <li><a href="${e}hull-cleaning-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Hull Cleaning</a></li>
+          <li><a href="${routes.services}" class="text-gold-400 hover:text-white transition-colors flex items-center gap-2 font-medium mt-2"><span>→</span> View all services</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="hidden md:block">
+          <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">NAVIGATION</h4>
+          <ul class="space-y-2 text-xs font-light">
+            <li><a href="${routes.home}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Home</a></li>
+            <li><a href="${routes.about}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> About Us</a></li>
+            <li><a href="${routes.blog}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Marine Blog</a></li>
+            <li><a href="${routes.quote}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Request a Quote</a></li>
+            <li><a href="${routes.contact}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Contact</a></li>
+          </ul>
+        </div>
+        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mt-6 mb-4 pb-2 border-b border-gold-400/20">SERVICE AREAS</h4>
+        <ul class="space-y-2 text-xs font-light">
+          <li><a href="${e}hull-cleaning-bocagrande-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Bocagrande</a></li>
+          <li><a href="${e}hull-cleaning-baru-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Barú</a></li>
+          <li><a href="${e}hull-cleaning-rosario-en.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Rosario Islands</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">CONTACT</h4>
+        <ul class="space-y-4 text-xs font-light">
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <div><a href="tel:+573044301112" class="text-slate-300 hover:text-gold-400 transition-colors block">+57 304 430 1112</a><a href="${whatsappUrl}" data-whatsapp-layout target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp" class="text-gold-400 hover:text-white transition-colors text-[10px] tracking-widest">WhatsApp available</a></div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:proyectos@colombiaboatdetailing.com" class="text-slate-300 hover:text-gold-400 transition-colors">proyectos@colombiaboatdetailing.com</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span class="text-slate-300">Cartagena de Indias<br/>Bolívar, Colombia</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-slate-300">Monday to Saturday<br/>7:00 am – 6:00 pm</span>
+          </li>
+        </ul>
+        <a href="${whatsappUrl}" data-whatsapp-layout target="_blank" rel="noopener noreferrer" aria-label="Request a quote on WhatsApp" class="mt-6 inline-flex items-center gap-2 bg-gold-400 hover:bg-gold-500 text-navy-900 px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-700/60">
+    <div class="container mx-auto px-6 py-5 flex flex-col items-center gap-3 text-xs text-slate-500 font-light text-center">
+      <p>&copy; 2026 Colombia Boat Detailing &middot; All rights reserved</p>
+      <div class="flex gap-5">
+        <a href="${e}sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a>
+        <span>&middot;</span>
+        <a href="${routes.quote}" class="hover:text-gold-400 transition">Request a Quote</a>
+        <span>&middot;</span>
+        <a href="${routes.contact}" class="hover:text-gold-400 transition">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>`;
+}
 function buildGlobalNavbar(e) {
+  if (isEnglishDocument()) return buildGlobalNavbarEnglish(e);
   return `\n<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-2">\n  <div class="container mx-auto px-6 flex justify-between items-center">\n    <a href="${e || "/"}" class="flex items-center gap-4 group" aria-label="Colombia Boat Detailing - Inicio">\n      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-10 w-auto transition-transform duration-300 group-hover:scale-110" width="120" height="40" loading="eager" />\n      <div class="flex flex-col">\n        <span class="text-white text-lg tracking-[0.2em] font-light leading-none">COLOMBIA</span>\n        <span class="text-white font-serif font-bold text-xl tracking-widest leading-none group-hover:text-gold-400 transition-colors">BOAT DETAILING</span>\n      </div>\n    </a>\n\n    <div class="hidden md:flex items-center gap-10">\n      <div class="nav-dropdown">\n        <button\n          data-dropdown-toggle="servicesDropdown"\n          aria-haspopup="true"\n          aria-expanded="false"\n          aria-controls="servicesDropdown"\n          class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1"\n        >\n          Servicios\n          <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>\n        </button>\n\n        <div class="nav-dropdown-content" id="servicesDropdown">\n          <a href="${e}paint-polishing.html" class="nav-dropdown-link">Pulido de Yates y Botes</a>\n          <a href="${e}cubierta-sintetica.html" class="nav-dropdown-link">Pisos Sintéticos EVA</a>\n          <a href="${e}gelcoat.html" class="nav-dropdown-link">Reparación de Gelcoat</a>\n          <a href="${e}fibra.html" class="nav-dropdown-link">Reparación de Fibra</a>\n          <a href="${e}interior-detailing.html" class="nav-dropdown-link">Limpieza de Cojinería</a>\n          <button type="button" class="submenu-item nav-dropdown-link relative w-full text-left" style="grid-column:1/-1">\n            Pintura Naval <svg class="w-3 h-3 ml-1 inline flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>\n            <div class="submenu-flyout">\n              <a href="${e}engine-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm">Pintura de Motores</a>\n              <a href="${e}boat-painting.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura Completa</a>\n              <a href="${e}bottom-paint.html" class="block px-4 py-3 text-white hover:bg-white/10 hover:text-gold-400 transition text-sm border-t">Pintura de Casco</a>\n            </div>\n          </button>\n          <a href="${e}electrical-systems.html" class="nav-dropdown-link">Electricidad y Aire Acondicionado</a>\n          <a href="${e}cubierta-teka.html" class="nav-dropdown-link">Cubierta de Teca</a>\n          <a href="${e}calcomanias.html" class="nav-dropdown-link">Calcomanías y Gráficos</a>\n          <a href="${e}polarizado.html" class="nav-dropdown-link">Polarizado Nanocerámico</a>\n          <a href="${e}anti-corrosion.html" class="nav-dropdown-link">Control Anticorrosivo</a>\n          <a href="${e}technical-wash.html" class="nav-dropdown-link">Lavado Técnico</a>\n          <a href="${e}hull-cleaning.html" class="nav-dropdown-link">Limpieza de Casco</a>\n          <a href="${e}ceramic-coating.html" class="nav-dropdown-link">Ceramic Coating</a>\n          <a href="${e}ppf.html" class="nav-dropdown-link">PPF</a>\n        </div>\n      </div>\n\n      <a href="${e}about.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Sobre Nosotros</a>\n      <a href="${e}blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>\n      ${buildLangSwitcher(e)}\n      <a\n        href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"\n        target="_blank"\n        rel="noopener noreferrer"\n        class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"\n      >Agendar Cita</a>\n    </div>\n\n    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">\n      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>\n    </button>\n  </div>\n</nav>`;
 }
 function buildGlobalMobileMenu(e) {
+  if (isEnglishDocument()) return buildGlobalMobileMenuEnglish(e);
   return `\n<div\n  id="mobile-menu"\n  role="dialog"\n  aria-modal="true"\n  aria-label="Menú de navegación"\n  aria-hidden="true"\n  class="fixed inset-0 bg-navy-900 z-[9999] transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-none"\n  style="overflow-y:auto"\n>\n  \x3c!-- Mobile menu header --\x3e\n  <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">\n    <a href="${e || "/"}" class="flex items-center gap-3" aria-label="Inicio">\n      <img src="${e}images/cbdlogo-gold.svg" alt="" aria-hidden="true" class="h-9 w-auto" width="43" height="36" loading="lazy" />\n      <div>\n        <p class="text-white text-sm tracking-[0.2em] font-light leading-none">COLOMBIA</p>\n        <p class="text-white font-serif font-bold text-base tracking-widest leading-none">BOAT DETAILING</p>\n      </div>\n    </a>\n    <button id="close-menu-btn" class="text-white/50 hover:text-white p-2" aria-label="Cerrar menú de navegación">\n      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>\n    </button>\n  </div>\n  \x3c!-- Mobile menu links --\x3e\n  <div class="flex flex-col px-6 py-8 gap-1 flex-1">\n    <p class="text-gold-400 text-[10px] font-bold tracking-widest uppercase mb-4">Menú Principal</p>\n    <a href="${e || "/"}" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Inicio</a>\n    <a href="${e}services.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Servicios</a>\n    <a href="${e}about.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Sobre Nosotros</a>\n    <a href="${e}blog.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Blog Naval</a>\n    <a href="${e}contacto.html" class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">Contacto</a>\n  </div>\n  \x3c!-- Mobile CTA --\x3e\n  <div class="px-6 py-6 border-t border-white/10 flex flex-col items-center text-center">\n    ${buildLangSwitcherMobile(e)}\n    <a\n      href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"\n      target="_blank"\n      rel="noopener noreferrer"\n      class="mobile-link mt-4 w-full text-center block bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-4 font-bold text-sm tracking-widest uppercase transition-all"\n    >Agendar Cita — WhatsApp</a>\n    <a href="tel:+573044301112" class="mobile-link mt-3 w-full text-center block border border-white/20 text-white py-3 text-sm tracking-widest">+57 304 430 1112</a>\n  </div>\n</div>`;
 }
 function buildGlobalFooter(e) {
+  if (isEnglishDocument()) return buildGlobalFooterEnglish(e);
   return `\n<footer class="bg-navy-900 text-slate-300 border-t border-gold-400/10">\n  \x3c!-- Top footer --\x3e\n  <div class="container mx-auto px-6 py-10 md:py-14">\n    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">\n\n      \x3c!-- Brand --\x3e\n      <div class="lg:col-span-1">\n        <a href="${e || "/"}" class="flex items-center gap-3 mb-5 group" aria-label="Colombia Boat Detailing">\n          <img src="${e}images/cbdlogo-white.svg" alt="" aria-hidden="true" width="56" height="47" class="h-12 w-auto opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />\n          <div>\n            <p class="text-white text-sm tracking-[0.2em] font-light leading-none">COLOMBIA</p>\n            <p class="text-white font-serif font-bold text-lg tracking-widest leading-none">BOAT DETAILING</p>\n          </div>\n        </a>\n        <p class="text-xs text-slate-400 font-light leading-relaxed mb-5">Estándares internacionales de excelencia marina en Cartagena de Indias. Desde 2024 protegemos y embellecemos embarcaciones del Caribe colombiano.</p>\n        <div class="flex gap-4 items-center">\n          <a href="https://wa.me/573044301112" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-slate-400 hover:text-gold-400 transition-colors">\n            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.022.501 3.927 1.382 5.6L0 24l6.545-1.359A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.653-.513-5.168-1.407l-.37-.22-3.854.8.824-3.75-.241-.386A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>\n          </a>\n          <a href="https://instagram.com/colombiaboatdetailing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-slate-400 hover:text-gold-400 transition-colors">\n            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>\n          </a>\n          <a href="https://facebook.com/colombiaboatdetailing" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-slate-400 hover:text-gold-400 transition-colors">\n            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>\n          </a>\n        </div>\n      </div>\n\n      \x3c!-- Servicios --\x3e\n      <div>\n        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">SERVICIOS</h4>\n        <ul class="space-y-2 text-xs font-light">\n          <li><a href="${e}paint-polishing.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Pulido de Yates y Botes</a></li>\n          <li><a href="${e}cubierta-sintetica.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Pisos Sintéticos EVA</a></li>\n          <li><a href="${e}gelcoat.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Reparación de Gelcoat</a></li>\n          <li><a href="${e}fibra.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Reparación de Fibra</a></li>\n          <li><a href="${e}boat-painting.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Pintura Naval</a></li>\n          <li><a href="${e}interior-detailing.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Limpieza de Cojinería</a></li>\n          <li><a href="${e}electrical-systems.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Electricidad y Aire Acondicionado</a></li>\n          <li><a href="${e}hull-cleaning.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Limpieza de Casco</a></li>\n          <li><a href="${e}services.html" class="text-gold-400 hover:text-white transition-colors flex items-center gap-2 font-medium mt-2"><span>→</span> Ver todos los servicios</a></li>\n        </ul>\n      </div>\n\n      \x3c!-- Navegación (oculta en móvil, redundante con el menú) --\x3e\n      <div>\n        <div class="hidden md:block">\n        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">NAVEGACIÓN</h4>\n        <ul class="space-y-2 text-xs font-light">\n          <li><a href="${e || "/"}" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Inicio</a></li>\n          <li><a href="${e}about.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Sobre Nosotros</a></li>\n          <li><a href="${e}blog.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Blog Naval</a></li>\n          <li><a href="${e}cotizar.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Cotizar Servicio</a></li>\n          <li><a href="${e}contacto.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Contacto</a></li>\n        </ul>\n        </div>\n        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mt-6 mb-4 pb-2 border-b border-gold-400/20">ZONAS</h4>\n        <ul class="space-y-2 text-xs font-light">\n          <li><a href="${e}limpieza-casco-bocagrande.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Bocagrande</a></li>\n          <li><a href="${e}limpieza-casco-baru.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Barú</a></li>\n          <li><a href="${e}limpieza-casco-islas-del-rosario.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">›</span> Islas del Rosario</a></li>\n        </ul>\n      </div>\n\n      \x3c!-- Contacto --\x3e\n      <div>\n        <h4 class="text-xs font-bold tracking-widest uppercase text-gold-400 mb-5 pb-2 border-b border-gold-400/20">CONTACTO</h4>\n        <ul class="space-y-4 text-xs font-light">\n          <li class="flex items-start gap-3">\n            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>\n            <div><a href="tel:+573044301112" class="text-slate-300 hover:text-gold-400 transition-colors block">+57 304 430 1112</a><a href="https://wa.me/573044301112" target="_blank" rel="noopener" class="text-gold-400 hover:text-white transition-colors text-[10px] tracking-widest">WhatsApp disponible</a></div>\n          </li>\n          <li class="flex items-start gap-3">\n            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>\n            <a href="mailto:proyectos@colombiaboatdetailing.com" class="text-slate-300 hover:text-gold-400 transition-colors">proyectos@colombiaboatdetailing.com</a>\n          </li>\n          <li class="flex items-start gap-3">\n            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>\n            <span class="text-slate-300">Cartagena de Indias<br/>Bolívar, Colombia</span>\n          </li>\n          <li class="flex items-start gap-3">\n            <svg class="w-4 h-4 text-gold-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>\n            <span class="text-slate-300">Lunes a Sábado<br/>7:00 am – 6:00 pm</span>\n          </li>\n        </ul>\n        <a href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 bg-gold-400 hover:bg-gold-500 text-navy-900 px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition-all">\n          Agendar Ahora\n        </a>\n      </div>\n    </div>\n  </div>\n\n  \x3c!-- Bottom footer --\x3e\n  <div class="border-t border-slate-700/60">\n    <div class="container mx-auto px-6 py-5 flex flex-col items-center gap-3 text-xs text-slate-500 font-light text-center">\n      <p>&copy; 2026 Colombia Boat Detailing &middot; Todos los derechos reservados</p>\n      <div class="flex gap-5">\n        <a href="${e}sitemap.xml" class="hover:text-gold-400 transition">Sitemap</a>\n        <span>&middot;</span>\n        <a href="${e}cotizar.html" class="hover:text-gold-400 transition">Cotizar</a>\n        <span>&middot;</span>\n        <a href="${e}contacto.html" class="hover:text-gold-400 transition">Contacto</a>\n      </div>\n    </div>\n  </div>\n</footer>`;
 }
 function styleGlobalMobileMenu() {
@@ -203,7 +517,9 @@ function styleGlobalMobileMenu() {
   });
 
   const header = menu.firstElementChild;
-  const brand = header?.querySelector('a[aria-label="Inicio"]');
+  const brand = header?.querySelector(
+    'a[aria-label="Inicio"], a[aria-label="Home"]',
+  );
   const logo = brand?.querySelector("img");
   const brandText = brand?.querySelector("div");
   const brandLines = brandText?.querySelectorAll("p");
@@ -299,7 +615,10 @@ function initGlobalLayout() {
   if (t || a || path === "/" || path === "/index.html") return;
   const n = buildGlobalNavbar(e),
     o = buildGlobalMobileMenu(e),
-    i = buildGlobalFooter(e),
+    i = buildGlobalFooter(e).replace(
+      "Estándares internacionales de excelencia marina en Cartagena de Indias. Desde 2024 protegemos y embellecemos embarcaciones del Caribe colombiano.",
+      "Cuidado estético y técnico para embarcaciones en Cartagena, con visita previa y alcance definido antes de iniciar.",
+    ),
     r =
       document.querySelector("nav#navbar") ||
       document.querySelector("body > nav") ||
@@ -312,10 +631,45 @@ function initGlobalLayout() {
   styleGlobalMobileMenu();
   const s = document.querySelector("footer");
   s ? (s.outerHTML = i) : document.body.insertAdjacentHTML("beforeend", i);
+  injectRealWorkNavigation(e);
   injectMarineMechanicsNavigation(e);
   prioritizeServicesNavigation();
 }
+function injectRealWorkNavigation(e) {
+  const english = isEnglishDocument();
+  const href = `${e}${english ? "case-studies.html" : "casos-reales.html"}`;
+  const desktopLabel = english ? "Real Work" : "Casos Reales";
+  const navAnchor = document.querySelector(
+    english ? `#navbar a[href$="about-en.html"]` : `#navbar a[href$="about.html"]`,
+  );
+  if (navAnchor && !document.querySelector("#navbar [data-real-work-link]")) {
+    navAnchor.insertAdjacentHTML(
+      "afterend",
+      `<a href="${href}" data-real-work-link class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">${desktopLabel}</a>`,
+    );
+  }
+  const mobileAnchor = document.querySelector(
+    english ? `#mobile-menu a[href$="about-en.html"]` : `#mobile-menu a[href$="about.html"]`,
+  );
+  if (mobileAnchor && !document.querySelector("#mobile-menu [data-real-work-link]")) {
+    mobileAnchor.insertAdjacentHTML(
+      "afterend",
+      `<a href="${href}" data-real-work-link class="mobile-link text-xl font-serif text-white hover:text-gold-400 py-3 border-b border-white/5">${desktopLabel}</a>`,
+    );
+  }
+  const footerAnchor = document.querySelector(
+    english ? `footer a[href$="about-en.html"]` : `footer a[href$="about.html"]`,
+  );
+  if (footerAnchor && !document.querySelector("footer [data-real-work-link]")) {
+    const item = footerAnchor.closest("li");
+    item?.insertAdjacentHTML(
+      "afterend",
+      `<li><a href="${href}" data-real-work-link class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> ${desktopLabel}</a></li>`,
+    );
+  }
+}
 function injectMarineMechanicsNavigation(e) {
+  const label = isEnglishDocument() ? "Marine Mechanics" : "Mecánica Naval";
   document.querySelectorAll(".nav-dropdown-content").forEach((menu) => {
     if (menu.querySelector('a[href$="mecanica-naval.html"]')) return;
     const electricalLink = menu.querySelector(
@@ -324,7 +678,7 @@ function injectMarineMechanicsNavigation(e) {
     if (!electricalLink) return;
     electricalLink.insertAdjacentHTML(
       "afterend",
-      `<a href="${e}mecanica-naval.html" class="nav-dropdown-link">Mecánica Naval</a>`,
+      `<a href="${e}mecanica-naval.html" class="nav-dropdown-link">${label}</a>`,
     );
   });
 
@@ -337,14 +691,18 @@ function injectMarineMechanicsNavigation(e) {
   ) {
     footerElectrical.closest("li")?.insertAdjacentHTML(
       "afterend",
-      `<li><a href="${e}mecanica-naval.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> Mecánica Naval</a></li>`,
+      `<li><a href="${e}mecanica-naval.html" class="text-slate-300 hover:text-gold-400 transition-colors flex items-center gap-2"><span class="text-gold-400 opacity-50">&rsaquo;</span> ${label}</a></li>`,
     );
   }
 }
 function prioritizeServicesNavigation() {
   document.querySelectorAll(".nav-dropdown-content").forEach((e) => {
-    const t = e.querySelector('a[href$="paint-polishing.html"]'),
-      a = e.querySelector('a[href$="hull-cleaning.html"]'),
+    const t = e.querySelector(
+        'a[href$="paint-polishing.html"], a[href$="paint-polishing-en.html"]',
+      ),
+      a = e.querySelector(
+        'a[href$="hull-cleaning.html"], a[href$="hull-cleaning-en.html"]',
+      ),
       n = e.querySelector(".submenu-item"),
       o = n?.querySelector(".submenu-flyout");
     if (!t || !a || !n) return;
@@ -443,11 +801,25 @@ function initFooterConsistency() {
           .querySelectorAll(
             "a[href*='wa.me'], a[href*='api.whatsapp.com'], a[href*='whatsapp.com/send']",
           )
-          .forEach((e) => e.remove()));
+          .forEach((link) => {
+            if (!isEnglishDocument()) return link.remove();
+            link.style.setProperty(
+              "display",
+              link.classList.contains("inline-flex") || link.querySelector("svg")
+                ? "inline-flex"
+                : "inline",
+              "important",
+            );
+          }));
     }));
 }
 function normalizeFloatingWhatsApp() {
-  if (document.querySelector("a.whatsapp-float")) return;
+  const existing = document.querySelector("a.whatsapp-float");
+  if (existing) {
+    if (isEnglishDocument())
+      existing.setAttribute("aria-label", "Request a quote on WhatsApp");
+    return;
+  }
   const e = document.querySelector('a[aria-label="WhatsApp"][href*="wa.me"]');
   if (!e) return;
   const t =
@@ -458,7 +830,12 @@ function normalizeFloatingWhatsApp() {
     (n.className = "whatsapp-float"),
     n.setAttribute("target", "_blank"),
     n.setAttribute("rel", "noopener noreferrer"),
-    n.setAttribute("aria-label", "Cotizar por WhatsApp"),
+    n.setAttribute(
+      "aria-label",
+      isEnglishDocument()
+        ? "Request a quote on WhatsApp"
+        : "Cotizar por WhatsApp",
+    ),
     (n.innerHTML = `<img src="${t}images/whatsapp-96.webp" alt="WhatsApp" class="whatsapp-float__img" width="58" height="58" />`),
     e.replaceWith(n));
 }
@@ -483,85 +860,105 @@ function normalizeBlogArticleReadability() {
 }
 function initWhatsAppMessages() {
   const e = (window.location.pathname.split("/").pop() || "").toLowerCase(),
+    english = isEnglishDocument(),
     t = [
       {
+        service: "hullCleaning",
         re: /hull-cleaning|limpieza-casco/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar limpieza de casco para mi embarcacion.",
       },
       {
+        service: "polishing",
         re: /paint-polishing|pulido-gelcoat/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pulido de gelcoat para mi embarcacion.",
       },
       {
+        service: "ceramic",
         re: /ceramic-coating/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar ceramic coating para mi embarcacion.",
       },
       {
+        service: "ppf",
         re: /ppf/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar PPF para mi embarcacion.",
       },
       {
+        service: "gelcoat",
         re: /gelcoat/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar restauracion de gelcoat para mi embarcacion.",
       },
       {
+        service: "fiberglass",
         re: /fibra/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar reparacion de fibra para mi embarcacion.",
       },
       {
+        service: "teak",
         re: /cubierta-teka/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar servicio para cubierta de teca para mi embarcacion.",
       },
       {
+        service: "syntheticDeck",
         re: /cubierta-sintetica/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar servicio para cubierta sintetica para mi embarcacion.",
       },
       {
+        service: "graphics",
         re: /calcomanias/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar calcomanias y graficos para mi embarcacion.",
       },
       {
+        service: "tint",
         re: /polarizado/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar polarizado nanoceramico para mi embarcacion.",
       },
       {
+        service: "enginePainting",
         re: /engine-painting/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura de motores para mi embarcacion.",
       },
       {
+        service: "boatPainting",
         re: /boat-painting/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura completa para mi embarcacion.",
       },
       {
+        service: "bottomPaint",
         re: /bottom-paint/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar pintura de casco para mi embarcacion.",
       },
       {
+        service: "interior",
         re: /interior-detailing/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar limpieza de cojineria y tapiceria para mi embarcacion.",
       },
       {
+        service: "antiCorrosion",
         re: /anti-corrosion/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar tratamiento anticorrosivo para mi embarcacion.",
       },
       {
+        service: "technicalWash",
         re: /technical-wash/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar lavado tecnico para mi embarcacion.",
       },
       {
+        service: "electrical",
         re: /electrical-systems/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar electricidad o instalacion de aire acondicionado para mi yate.",
       },
       {
+        service: "mechanics",
         re: /mecanica-naval/,
         msg: "Hola, vi la pagina web de Colombia Boat Detailing y quiero cotizar mecanica naval para mi yate o bote.",
       },
     ];
-  let a =
-    "Hola, vi la página web de Colombia Boat Detailing y quiero cotizar un servicio para mi embarcación.";
+  let a = english
+    ? getEnglishWhatsAppMessage("default")
+    : "Hola, vi la página web de Colombia Boat Detailing y quiero cotizar un servicio para mi embarcación.";
   for (const n of t)
     if (n.re.test(e)) {
-      a = n.msg;
+      a = english ? getEnglishWhatsAppMessage(n.service) : n.msg;
       break;
     }
   const n = `https://wa.me/573044301112?text=${encodeURIComponent(a)}`;
@@ -574,8 +971,9 @@ function initWhatsAppMessages() {
         a.includes("cotizar ahora"),
       i = e.classList.contains("whatsapp-float"),
       r = "whatsapp" === t,
-      l = !!e.closest("#navbar, #mobile-menu");
-    (o || i || r || l) && (e.href = n);
+      l = !!e.closest("#navbar, #mobile-menu"),
+      s = e.hasAttribute("data-whatsapp-layout");
+    (o || i || r || l || s) && (e.href = n);
   });
 }
 function initClickableCards() {

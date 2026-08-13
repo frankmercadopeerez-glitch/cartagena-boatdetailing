@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -85,7 +85,7 @@
     />
     <meta
       property="og:image"
-      content="https://www.colombiaboatdetailing.com/images/services/pulido-gelcoat.webp"
+      content="https://www.colombiaboatdetailing.com/images/services/servicios-integrales-hero-v2.webp"
     />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Colombia Boat Detailing" />
@@ -100,7 +100,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://www.colombiaboatdetailing.com/images/services/pulido-gelcoat.webp"
+      content="https://www.colombiaboatdetailing.com/images/services/servicios-integrales-hero-v2.webp"
     />
     <!-- Tailwind CSS (compiled) -->
     <!-- Critical CSS inline — evita flash blanco sin esperar CSS externo -->
@@ -158,7 +158,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -747,17 +747,10 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
+    <link rel="stylesheet" href="css/tailwind.css?v=20260813-2" />
     <!-- Portada de servicios -->
-    <link
-      rel="preload"
-      href="images/services/mecanica-naval-hero-720.webp"
-      as="image"
-      type="image/webp"
-      imagesrcset="images/services/mecanica-naval-hero-720.webp 720w, images/services/mecanica-naval-hero.webp 1600w"
-      imagesizes="100vw"
-      fetchpriority="high"
-    />
+    <link rel="preload" href="images/services/servicios-integrales-hero-v2-720.webp" as="image" type="image/webp" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" href="images/services/servicios-integrales-hero-v2.webp" as="image" type="image/webp" media="(min-width: 768px)" imagesrcset="images/services/servicios-integrales-hero-v2-960.webp 960w, images/services/servicios-integrales-hero-v2.webp 1600w" imagesizes="100vw" fetchpriority="high" />
     <!-- Phosphor Icons -->
     <link
       rel="preload"
@@ -773,8 +766,9 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link rel="preload" href="css/styles.css?v=20260813-2" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20260813-2" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20260813-3" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -1174,22 +1168,22 @@
       <picture class="absolute inset-0 block h-full w-full" aria-hidden="true">
         <source
           media="(max-width: 767px)"
-          srcset="images/services/mecanica-naval-hero-720.webp"
+          srcset="images/services/servicios-integrales-hero-v2-720.webp"
         />
         <img
-          src="images/services/mecanica-naval-hero.webp"
-          srcset="images/services/mecanica-naval-hero-720.webp 720w, images/services/mecanica-naval-hero.webp 1600w"
+          src="images/services/servicios-integrales-hero-v2.webp"
+          srcset="images/services/servicios-integrales-hero-v2-960.webp 960w, images/services/servicios-integrales-hero-v2.webp 1600w"
           sizes="100vw"
           alt=""
           width="1600"
-          height="900"
+          height="747"
           class="h-full w-full object-cover object-center"
           fetchpriority="high"
           decoding="async"
         />
       </picture>
       <div
-        class="absolute inset-0 bg-gradient-to-r from-navy-900/95 via-navy-900/80 to-navy-900/35"
+        class="absolute inset-0 bg-gradient-to-r from-navy-900/95 via-navy-900/70 to-navy-900/10"
       ></div>
       <div
         class="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-transparent to-navy-900/30"
@@ -1198,23 +1192,31 @@
       <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-3xl">
           <p class="text-gold-400 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-5">
-            Soluciones navales integrales
+            Cuidado, reparación y mantenimiento naval
           </p>
           <h1 class="font-serif text-5xl md:text-6xl mb-6 leading-tight drop-shadow-xl">
-            Servicios para
-            <span class="text-gold-400">Yates y Botes en Cartagena</span>
+            Pulido, pisos, gelcoat y mantenimiento
+            <span class="text-gold-400">para Yates en Cartagena</span>
           </h1>
           <p class="text-lg md:text-xl text-slate-200 font-light mb-8 max-w-2xl leading-relaxed drop-shadow-lg">
-            Pulido de gelcoat, instalación de pisos sintéticos EVA, reparación
-            de gelcoat y fibra, pintura naval, limpieza de cojinería y sistemas
-            eléctricos para embarcaciones.
+            Un solo equipo para pulido de gelcoat, instalación de pisos EVA,
+            reparación de fibra, pintura naval, cojinería, electricidad, aire
+            acondicionado y mecánica.
           </p>
-          <a
-            href="#servicios"
-            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
-          >
-            Ver Servicios <i class="ph ph-arrow-down ml-2"></i>
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 items-start">
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-3 bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-white transition"
+            >
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              Cotizar por WhatsApp
+            </a>
+            <a href="#servicios" class="inline-flex items-center text-white px-2 py-4 font-semibold border-b border-white/40 hover:text-gold-400 hover:border-gold-400 transition">
+              Ver servicios <i class="ph ph-arrow-down ml-2"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1233,558 +1235,147 @@
       </svg>
     </div>
 
-    <!-- Services Grid -->
-    <section id="servicios" class="py-20 bg-slate-50">
+    <!-- Services catalog -->
+    <section id="servicios" class="py-20 md:py-24 bg-slate-50 scroll-mt-24">
       <div class="container mx-auto px-6">
-        <div class="w-full mx-auto">
-          <h2 class="font-serif text-4xl text-navy-900 text-center mb-16">
-            Servicios para Yates y Botes en Cartagena
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="text-gold-600 text-xs font-bold uppercase tracking-[0.25em]">Prioridades de nuestros clientes</span>
+          <h2 class="font-serif text-4xl md:text-5xl text-navy-900 mt-4">
+            Servicios más solicitados
           </h2>
+          <p class="text-slate-600 mt-5 text-base md:text-lg leading-relaxed">
+            Cada trabajo parte de una visita técnica. Así definimos si la
+            superficie puede corregirse, qué material necesita y cuál es el
+            alcance real antes de cotizar.
+          </p>
+        </div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Service Card: Cubierta Foam / Teca Sintética -->
-            <div
-              style="order: -9"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/cubierta-sintetica.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pisos Sintéticos y Foam Deck
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Instalación de Foam Deck (EVA) y teca sintética PVC marino.
-                  Antideslizante, resistente al UV tropical, aspecto premium sin
-                  mantenimiento.
-                </p>
-                <a
-                  href="cubierta-sintetica.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
+        <div class="catalog-proof-row">
+          <span><i class="ph ph-map-pin"></i>Atención en Cartagena</span>
+          <span><i class="ph ph-calendar-check"></i>Visita técnica</span>
+          <span><i class="ph ph-check-circle"></i>Alcance por escrito</span>
+          <span><i class="ph ph-shield-check"></i>Garantía definida</span>
+        </div>
 
-            <!-- Service Card 0: Hull Cleaning -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/limpieza-casco.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Limpieza de Casco en Agua
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Limpieza submarina de cascos de yates y veleros con buzos
-                  certificados. Remoción de incrustaciones desde $20.000 COP por
-                  pie.
-                </p>
-                <a
-                  href="hull-cleaning.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+        <div class="service-catalog-grid">
+          <a href="paint-polishing.html" class="service-catalog-card service-catalog-card--featured group">
+            <div class="service-catalog-media">
+              <img src="images/services/pulido-gelcoat-card-720.webp" alt="Pulido profesional de gelcoat en un yate" loading="lazy" width="720" height="405" />
+              <span class="service-catalog-tag">Servicio principal</span>
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Desde $90.000 COP por pie + IVA</span>
+              <h3>Pulido de Yates y Botes</h3>
+              <p>Corrección en varias etapas para recuperar brillo, reducir oxidación, rayones y hologramas en gelcoat.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card: PPF -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/ppf.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  PPF
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Película de protección disponible para clientes que buscan
-                  cubrir zonas específicas de alto contacto o impacto.
-                </p>
-                <a
-                  href="ppf.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="cubierta-sintetica.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/services/cubierta-sintetica-480.webp" alt="Instalación de piso sintético EVA en una embarcación" loading="lazy" width="480" height="853" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Diseño e instalación</span>
+              <h3>Pisos Sintéticos EVA</h3>
+              <p>Plantillas a medida, corte, refuerzo de adherencia, sellado y garantía de instalación.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card 2: Ceramic Coating -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/ceramic-coating.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Ceramic Coating
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Revestimiento cerámico nano-cristalino. Hidrofóbico,
-                  resistente a productos químicos y protección UV extrema.
-                </p>
-                <a
-                  href="ceramic-coating.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="gelcoat.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/services/restauracion-gelcoat-480.webp" alt="Antes y después de restauración de gelcoat azul" loading="lazy" width="480" height="474" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Rayones, grietas y golpes</span>
+              <h3>Reparación de Gelcoat y Fibra</h3>
+              <p>Reparación localizada e igualación de color cuando el estado de la superficie lo permite.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card 3: Gelcoat Restoration -->
-            <div
-              style="order: -8"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/restauracion-gelcoat.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Reparación y Restauración de Gelcoat
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Reparación profesional de grietas, arañazos y decoloración.
-                  Acabado brillante de fábrica restaurado.
-                </p>
-                <a
-                  href="gelcoat.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="boat-painting.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/services/pintura-completa-480.webp" alt="Pintura profesional de casco de yate" loading="lazy" width="480" height="853" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Casco, cubierta y motores</span>
+              <h3>Pintura Naval</h3>
+              <p>Preparación, imprimación y pintura completa con sistemas apropiados para ambiente marino.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card 4: Engine Painting -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/pintura-motores.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pintura de Motores
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Restauración de motores Yamaha, Mercury y Volvo. Imprimador
-                  epóxico anti-corrosión de 2 capas.
-                </p>
-                <a
-                  href="engine-painting.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="interior-detailing.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/services/interiores-tapiceria-480.webp" alt="Antes y después de limpieza de cojinería náutica" loading="lazy" width="480" height="474" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Interiores náuticos</span>
+              <h3>Limpieza de Cojinería</h3>
+              <p>Lavado profundo, desmanchado, desinfección y cuidado de tapicería expuesta a humedad y sal.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card 5: Limpieza de Cojinería -->
-            <div
-              style="order: -5"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/interiores-tapiceria.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Limpieza de Cojinería y Tapicería
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Lavado profundo, desinfección y tratamiento de cojines,
-                  tapicería e interiores náuticos.
-                </p>
-                <a
-                  href="interior-detailing.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="electrical-systems.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/blog/mantenimiento-aire-acondicionado-yate-cartagena.webp" alt="Mantenimiento de aire acondicionado y sistemas eléctricos de un yate" loading="lazy" width="1200" height="675" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Climatización y energía</span>
+              <h3>Electricidad y Aire Acondicionado</h3>
+              <p>Equipos A/C, bombas, controles, tableros, cableado, baterías, iluminación y carga.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
 
-            <!-- Service Card 6: Anti-Corrosion Control -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/control-anticorrosivo.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Control Anticorrosivo
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Protección anticorrosiva especializada para salas de máquinas
-                  y estructuras metálicas. Prevención de oxidación marina.
-                </p>
-                <a
-                  href="anti-corrosion.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+          <a href="mecanica-naval.html" class="service-catalog-card group">
+            <div class="service-catalog-media">
+              <img src="images/services/mecanica-naval-hero-720.webp" alt="Técnico realizando mantenimiento de mecánica naval" loading="lazy" width="720" height="900" />
             </div>
+            <div class="service-catalog-body">
+              <span class="service-catalog-kicker">Diagnóstico y mantenimiento</span>
+              <h3>Mecánica Naval</h3>
+              <p>Motores marinos, generadores, refrigeración, combustible y sistemas auxiliares.</p>
+              <span class="service-catalog-link">Ver servicio <i class="ph ph-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>
 
-            <!-- Service Card: Electricidad y Aire Acondicionado Marino -->
-            <div
-              style="order: -4"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/sistemas-electricos.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Electricidad Naval
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Instalación de equipos A/C para yates, bombas, controles,
-                  tableros, cableado, luces LED, baterías y paneles solares.
-                </p>
-                <a
-                  href="electrical-systems.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
+        <div class="mt-20">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+            <div>
+              <span class="text-gold-600 text-xs font-bold uppercase tracking-[0.25em]">Servicios complementarios</span>
+              <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mt-3">Más soluciones para su embarcación</h2>
             </div>
-
-            <!-- Service Card: Mecánica Naval -->
-            <div
-              style="order: -3"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/mecanica-naval-hero-720.webp&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Mecánica Naval
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Diagnóstico, mantenimiento preventivo y reparación de
-                  motores marinos, generadores y sistemas auxiliares para yates
-                  y botes en Cartagena.
-                </p>
-                <a
-                  href="mecanica-naval.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card: Reparación de Fibra -->
-            <div
-              style="order: -7"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/reparacion-fibra.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Reparación de Fibra
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Reparamos golpes, grietas, osmosis y daños en el laminado.
-                  Acabado idéntico al original con gelcoat a color.
-                </p>
-                <a
-                  href="fibra.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card: Cubierta Sintética -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/cubierta-sintetica.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pisos Sintéticos para Yates
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Madera sintética PVC marino. Aspecto idéntico a la teca, sin
-                  mantenimiento, resistente al UV tropical.
-                </p>
-                <a
-                  href="cubierta-sintetica.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card: Cubierta de Teca -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/cubierta-teca.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Cubierta de Teca
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Teca birmana grado A. El acabado más exclusivo de la náutica.
-                  Instalación artesanal y restauración.
-                </p>
-                <a
-                  href="cubierta-teka.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card 7: Bottom Paint -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/pintura-antifouling.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pintura de Casco
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Pintura antifouling de última generación. Prevención de
-                  incrustaciones marinas en carena.
-                </p>
-                <a
-                  href="bottom-paint.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card 8: Technical Wash -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/lavado-tecnico.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Lavado Técnico
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Eliminación de contaminantes marinos, sal y calcio. Base
-                  profesional para protecciones premium.
-                </p>
-                <a
-                  href="technical-wash.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card 9: Boat Painting -->
-            <div
-              style="order: -6"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/pintura-completa.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pintura Naval para Yates y Botes
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Repintado profesional integral con sistemas premium Awlgrip e
-                  International. Garantía de hasta 5 años.
-                </p>
-                <a
-                  href="boat-painting.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card 10: Paint Polishing -->
-            <div
-              style="order: -10"
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/pulido-gelcoat.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Pulido de Yates y Botes
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Corrección multi-etapa para acabado espejo. Eliminación de
-                  oxidación, swirl marks y arañazos.
-                </p>
-                <a
-                  href="paint-polishing.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card: Calcomanías y Gráficos -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/calcomanias-graficos.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Calcomanías y Gráficos
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Nombre de la embarcación, línea de flotación, matrícula y
-                  gráficos personalizados en vinilo marino de alta durabilidad.
-                </p>
-                <a
-                  href="calcomanias.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Service Card: Polarizado Nanocerámico -->
-            <div
-              class="service-card bg-white border border-slate-200 shadow-sm rounded-sm overflow-hidden hover:shadow-xl transition group"
-            >
-              <div
-                class="h-40 bg-cover bg-center flex items-center justify-center relative overflow-hidden"
-                style="
-                  background-image: url(&quot;images/services/polarizado.webp?v=20260728&quot;);
-                "
-              >
-              </div>
-              <div class="p-6">
-                <h3 class="font-serif text-xl text-navy-900 mb-2">
-                  Polarizado Nanocerámico
-                </h3>
-                <p class="text-slate-600 text-sm font-light mb-4">
-                  Film nanocerámico para ventanas. Reduce el calor hasta 70%,
-                  bloquea 99% UV. Sin interferencia con GPS ni VHF.
-                </p>
-                <a
-                  href="polarizado.html"
-                  class="inline-flex items-center text-gold-400 text-sm font-semibold hover:text-gold-500 transition"
-                >
-                  Ver Detalles <i class="ph ph-arrow-right ml-1"></i>
-                </a>
-              </div>
-            </div>
+            <p class="text-slate-600 max-w-xl">Podemos integrar varios trabajos en una misma visita y presentar el alcance por etapas.</p>
           </div>
+
+          <div class="secondary-service-grid">
+            <a href="calcomanias.html"><strong>Calcomanías y gráficos</strong><span>Nombre, matrícula y línea de flotación</span></a>
+            <a href="ceramic-coating.html"><strong>Ceramic coating</strong><span>Protección de superficies seleccionadas</span></a>
+            <a href="cubierta-teka.html"><strong>Cubierta de teca</strong><span>Instalación y restauración</span></a>
+            <a href="bottom-paint.html"><strong>Antifouling</strong><span>Preparación y pintura de carena</span></a>
+            <a href="engine-painting.html"><strong>Pintura de motores</strong><span>Preparación y acabado anticorrosivo</span></a>
+            <a href="anti-corrosion.html"><strong>Control anticorrosivo</strong><span>Metales y sala de máquinas</span></a>
+            <a href="technical-wash.html"><strong>Lavado técnico</strong><span>Sal, calcio y contaminantes marinos</span></a>
+            <a href="polarizado.html"><strong>Polarizado nanocerámico</strong><span>Confort térmico y protección UV</span></a>
+            <a href="hull-cleaning.html"><strong>Limpieza de casco en agua</strong><span>Servicio submarino programado</span></a>
+            <a href="ppf.html"><strong>PPF</strong><span>Protección localizada bajo cotización</span></a>
+          </div>
+        </div>
+
+        <div class="service-guidance-box">
+          <div>
+            <span>No necesita saber el nombre técnico del servicio.</span>
+            <h3>Envíenos fotos y le orientamos.</h3>
+          </div>
+          <a href="https://wa.me/573044301112?text=Hola%2C%20quiero%20enviar%20fotos%20de%20mi%20embarcaci%C3%B3n%20para%20saber%20qu%C3%A9%20servicio%20necesita" target="_blank" rel="noopener noreferrer">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+            Cotizar por WhatsApp
+          </a>
         </div>
       </div>
     </section>
@@ -1814,19 +1405,20 @@
       <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="font-serif text-4xl mb-6">
-            ¿Listo para proteger tu embarcación?
+            ¿Qué necesita su embarcación?
           </h2>
           <p class="text-lg text-slate-300 font-light mb-8">
-            Contáctanos para una consultoría gratuita y diagnóstico profesional
-            de tu yate.
+            Envíenos fotos, eslora y ubicación. Le orientamos y coordinamos una
+            visita técnica para definir el trabajo correcto.
           </p>
           <a
             href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
+            class="inline-flex items-center gap-3 bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-white transition"
           >
-            Agendar Inspección
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+            Cotizar por WhatsApp
           </a>
         </div>
       </div>
@@ -1858,7 +1450,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              Estándares Internacionales de Excelencia Marina desde 2024.
+              Cuidado técnico de embarcaciones en Cartagena.
             </p>
           </div>
           <div>
@@ -1953,7 +1545,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260728-1"></script>
+    <script defer src="js/main.js?v=20260813-3"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

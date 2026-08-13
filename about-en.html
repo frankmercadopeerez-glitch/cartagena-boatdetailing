@@ -1,4 +1,4 @@
-﻿﻿﻿﻿<!doctype html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -40,7 +40,7 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Colombia Boat Detailing — the first and only company in Cartagena exclusively dedicated to high-end marine aesthetics. Certified technicians, international standards."
+      content="Meet Colombia Boat Detailing: yacht polishing, EVA flooring, gelcoat repair, marine painting and maintenance services in Cartagena."
     />
     <meta
       name="keywords"
@@ -78,15 +78,15 @@
     />
     <meta
       property="og:title"
-        content="Marine Detailing Specialists in Cartagena | Colombia Boat Detailing"
+        content="Marine Maintenance in Cartagena | Colombia Boat Detailing"
     />
     <meta
       property="og:description"
-        content="Specialists in yacht and boat restoration, polishing and marine detailing in Cartagena, working to international standards."
+        content="Learn how we approach yacht polishing, EVA flooring, gelcoat repair, marine painting and maintenance in Cartagena."
     />
     <meta
       property="og:image"
-      content="https://www.colombiaboatdetailing.com/images/header.webp"
+      content="https://www.colombiaboatdetailing.com/images/editorial/equipo-tecnico-1600.webp"
     />
     <meta property="og:locale" content="en_US" />
     <!-- Tailwind CSS (compiled) -->
@@ -149,7 +149,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -738,22 +738,10 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
-    <!-- Google Fonts -->
-    <link
-      rel="preload"
-      href="images/header.webp"
-      as="image"
-      type="image/webp"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      href="images/header.webp"
-      as="image"
-      type="image/webp"
-      fetchpriority="high"
-    />
+    <link rel="stylesheet" href="css/tailwind.css?v=20260813-2" />
+    <link rel="stylesheet" href="css/site-polish.css?v=20260813-3" />
+    <link rel="preload" href="images/editorial/equipo-tecnico-720.webp" as="image" type="image/webp" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" href="images/editorial/equipo-tecnico-1600.webp" as="image" type="image/webp" media="(min-width: 768px)" imagesrcset="images/editorial/equipo-tecnico-960.webp 960w, images/editorial/equipo-tecnico-1600.webp 1600w" imagesizes="100vw" fetchpriority="high" />
     <!-- Phosphor Icons -->
     <link
       rel="preload"
@@ -771,14 +759,14 @@
     <!-- Custom Styles -->
     <link
       rel="preload"
-      href="css/styles.css"
+      href="css/styles.css?v=20260813-2"
       as="style"
       onload="
         this.onload = null;
         this.rel = 'stylesheet';
       "
     />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20260813-2" /></noscript>
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -891,13 +879,13 @@
               <a href="ceramic-coating.html" class="nav-dropdown-link"
                 >Ceramic Coating</a
               >
-              <a href="gelcoat.html" class="nav-dropdown-link"
+              <a href="gelcoat-en.html" class="nav-dropdown-link"
                 >Restauración Gelcoat</a
               >
               <a href="fibra.html" class="nav-dropdown-link"
                 >Reparación de Fibra</a
               >
-              <a href="cubierta-sintetica.html" class="nav-dropdown-link"
+              <a href="synthetic-decking-en.html" class="nav-dropdown-link"
                 >Cubierta Sintética</a
               >
               <a href="cubierta-teka.html" class="nav-dropdown-link"
@@ -936,7 +924,7 @@
                   >
                 </div>
               </button>
-              <a href="interior-detailing.html" class="nav-dropdown-link"
+              <a href="interior-detailing-en.html" class="nav-dropdown-link"
                 >Interior Detailing &amp; Upholstery</a
               >
               <a href="anti-corrosion.html" class="nav-dropdown-link"
@@ -1052,13 +1040,20 @@
       class="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden"
     >
       <div class="absolute inset-0 z-0">
-        <img
-          src="images/detailing%20(2).webp"
-          alt="Equipo profesional de Colombia Boat Detailing realizando detailing naval in Cartagena"
-          fetchpriority="high"
-          decoding="async"
-          class="w-full h-full object-cover"
-        />
+        <picture class="block w-full h-full">
+          <source media="(max-width: 767px)" srcset="images/editorial/equipo-tecnico-720.webp" />
+          <img
+            src="images/editorial/equipo-tecnico-1600.webp"
+            srcset="images/editorial/equipo-tecnico-960.webp 960w, images/editorial/equipo-tecnico-1600.webp 1600w"
+            sizes="100vw"
+            alt="Editorial scene of marine technicians inspecting a yacht"
+            width="1600"
+            height="900"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </picture>
         <div class="hero-overlay absolute inset-0"></div>
       </div>
 
@@ -1066,440 +1061,146 @@
         <h1
           class="font-serif text-5xl md:text-7xl text-white font-medium leading-tight mb-6 drop-shadow-2xl"
         >
-          Our Story of <br />
-          <span class="italic text-gold-400 font-normal">Excellence</span>
+          Marine knowledge,<br />
+          <span class="italic text-gold-400 font-normal">clearly explained work</span>
         </h1>
         <p
           class="text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed tracking-wide"
         >
-          Certified specialists dedicated to preserving and enhancing
-          Cartagena's most valuable yachts and boats.
+          We help owners and managers care for, repair and renew their vessels
+          with an initial assessment and a clearly defined scope.
         </p>
+        <a
+          href="https://wa.me/573044301112?text=Hello%2C%20I%20would%20like%20to%20request%20a%20quote%20for%20my%20vessel"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-3 mt-7 bg-gold-400 text-navy-900 px-7 py-4 font-bold hover:bg-white transition-colors"
+        >
+          <i class="ph-fill ph-whatsapp-logo text-xl" aria-hidden="true"></i>
+          Request a Quote on WhatsApp
+        </a>
       </div>
     </header>
 
-    <!-- Mission & Values -->
-    <section class="py-24 bg-white">
+    <!-- Who we are -->
+    <section class="py-20 md:py-24 bg-white">
       <div class="container mx-auto px-6">
-        <div class="w-full mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-            <div class="fade-in text-center">
-              <div
-                class="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
-              >
-                <i class="ph-bold ph-target text-gold-400 text-3xl"></i>
-              </div>
-              <h3 class="font-serif text-2xl text-navy-900 mb-4">Misión</h3>
-              <p class="text-slate-600 font-light leading-relaxed">
-                Proteger y preservar los activos marinos de our clients mediante
-                técnicas de detailing de clase mundial, utilizando tecnología
-                certificada y materiales premium.
-              </p>
-            </div>
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
+          <div>
+            <span class="text-gold-600 tracking-[0.3em] uppercase text-xs font-bold">Colombia Boat Detailing</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy-900 mt-4 leading-tight">
+              We care for the finish without losing sight of the technical side.
+            </h2>
+            <p class="text-slate-600 mt-6 text-base md:text-lg leading-relaxed">
+              We started in Cartagena to address the real needs of vessels
+              exposed to sun, salt, humidity and constant use. We coordinate
+              aesthetic services, repairs and maintenance through one point of
+              contact.
+            </p>
+            <p class="text-slate-600 mt-4 text-base md:text-lg leading-relaxed">
+              We do not prescribe the same process for every boat. We inspect
+              the surface, explain what can be restored and what needs a larger
+              intervention, then define materials, schedule and price.
+            </p>
+          </div>
 
-            <div class="fade-in text-center">
-              <div
-                class="w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
-              >
-                <i class="ph-bold ph-eye text-navy-900 text-3xl"></i>
-              </div>
-              <h3 class="font-serif text-2xl text-navy-900 mb-4">Visión</h3>
-              <p class="text-slate-600 font-light leading-relaxed">
-                Ser el referente indiscutible en estética náutica avanzada en el
-                Caribe colombiano, reconocidos por nuestro compromiso con la
-                excelencia y la innovación.
-              </p>
+          <div class="grid gap-4">
+            <div class="about-principle-card">
+              <i class="ph ph-check-circle"></i>
+              <div><h3>Assess before promising</h3><p>The recommendation changes with the material, damage, access and vessel use.</p></div>
             </div>
-
-            <div class="fade-in text-center">
-              <div
-                class="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
-              >
-                <i class="ph-bold ph-heart text-gold-400 text-3xl"></i>
-              </div>
-              <h3 class="font-serif text-2xl text-navy-900 mb-4">Values</h3>
-              <p class="text-slate-600 font-light leading-relaxed">
-                Integridad, precisión, innovación y pasión por los detalles.
-                Cada proyecto es una oportunidad para demostrar nuestro
-                compromiso con la calidad.
-              </p>
+            <div class="about-principle-card">
+              <i class="ph ph-camera"></i>
+              <div><h3>Documented process</h3><p>We record the initial condition, relevant progress and the delivery review.</p></div>
+            </div>
+            <div class="about-principle-card">
+              <i class="ph ph-shield-check"></i>
+              <div><h3>Clear warranty conditions</h3><p>Coverage is defined in writing according to service, materials and scope.</p></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="py-24 bg-navy-900 text-white relative">
-      <div class="container mx-auto px-6 relative z-10">
-        <h2
-          class="font-serif text-4xl md:text-5xl text-center mb-20 text-white"
-        >
-          Why Choose Colombia Boat Detailing
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-seal-check text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">
-                Certificación Internacional
-              </h4>
-              <p class="text-slate-300 font-light">
-                Nuestro equipo está certified en estándares globales de
-                detailing marino. Aplicamos solo protocolos probados
-                internacionalmente.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-diamond text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">Materiales Premium</h4>
-              <p class="text-slate-300 font-light">
-                Utilizamos solo productos de grado marino de las marcas líderes
-                mundiales: GYEON, Carpro, Ceramic Pro y Meguiar's.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-wrench text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">Equipamiento Profesional</h4>
-              <p class="text-slate-300 font-light">
-                Invertimos en herramientas y equipos de última generación para
-                garantizar precisión en cada proyecto.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-handshake text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">Garantías Respaldadas</h4>
-              <p class="text-slate-300 font-light">
-                Ofrecemos garantías verificables en todos nuestros tratamientos
-                protectores. Respaldamos nuestro trabajo 100%.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-car text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">Mobile Service Flexible</h4>
-              <p class="text-slate-300 font-light">
-                Base in Cartagena de Indias con capacidad de despliegue a
-                cualquier muelle of Cartagena según su conveniencia.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-6 fade-in">
-            <div class="flex-shrink-0">
-              <div
-                class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-navy-900"
-              >
-                <i class="ph-bold ph-user text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg mb-2">Atención Personalizada</h4>
-              <p class="text-slate-300 font-light">
-                No ofrecemos paquetes genéricos. Cada vessel recibe un plan
-                diagnóstico y tratamiento a medida.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="py-24 bg-navy-900">
+    <!-- Trust -->
+    <section class="py-20 md:py-24 bg-navy-900 text-white">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-20">
-          <span
-            class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
-            >Our Team</span
-          >
-          <h2 class="font-serif text-4xl md:text-5xl mt-4 text-navy-900">
-            Liderazgo Excepcional
-          </h2>
-          <p class="text-slate-600 max-w-3xl mx-auto font-light mt-6">
-            Detrás de cada vessel impecable hay un equipo con décadas de
-            experiencia combinada en detailing de lujo y operaciones náuticas de
-            alto nivel.
-          </p>
-          <div class="w-24 h-1 bg-gold-400 mx-auto mt-8"></div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          <!-- Cristian Jiménez -->
-          <div
-            class="fade-in bg-white/5 border border-white/10 rounded-sm overflow-hidden shadow-lg"
-          >
-            <div class="grid md:grid-cols-5">
-              <div class="md:col-span-2 h-72 md:h-auto bg-slate-200 relative">
-                <img
-                  src="images/detailing.webp"
-                  alt="Cristian Jiménez - Director Técnico"
-                  loading="lazy"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900/90 to-transparent p-4 md:hidden"
-                >
-                  <h4 class="font-serif text-2xl text-white">
-                    Cristian Jiménez
-                  </h4>
-                </div>
-              </div>
-              <div class="md:col-span-3 p-8">
-                <div class="flex items-center gap-2 mb-2">
-                  <i class="ph-fill ph-crown text-gold-400 text-xl"></i>
-                  <span
-                    class="text-gold-400 font-bold text-xs tracking-widest uppercase"
-                    >Director Técnico</span
-                  >
-                </div>
-                <h4
-                  class="font-serif text-3xl text-navy-900 mb-4 hidden md:block"
-                >
-                  Cristian Jiménez
-                </h4>
-                <div class="flex items-center gap-4 mb-4 text-sm">
-                  <span
-                    class="bg-navy-900 text-white px-3 py-1 rounded-sm font-bold"
-                    >+10 Años</span
-                  >
-                  <span class="text-slate-600">Detailing de Lujo</span>
-                </div>
-                <p
-                  class="text-slate-600 font-light text-sm mb-4 leading-relaxed"
-                >
-                  Con más de una década dedicada exclusivamente al detailing de
-                  embarcaciones de alta gama, Cristian ha perfeccionado el arte
-                  de la protección marina trabajando con yachts de lujo en el
-                  Caribe colombiano y marinas internacionales.
-                </p>
-                <p
-                  class="text-slate-600 font-light text-sm mb-6 leading-relaxed"
-                >
-                  Su expertise abarca desde aplicación de PPF y Ceramic Coating
-                  certified hasta restauración completa de gelcoat en
-                  embarcaciones que superan los $500,000 USD. Ha atendido flotas
-                  de prestigiosos clubes náuticos y clientes privados que exigen
-                  los más altos estándares de calidad.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >Ceramic Pro Certified</span
-                  >
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >GYEON Expert</span
-                  >
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >3M PPF Specialist</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Frank Mercado -->
-          <div
-            class="fade-in bg-white/5 border border-white/10 rounded-sm overflow-hidden shadow-lg"
-          >
-            <div class="grid md:grid-cols-5">
-              <div class="md:col-span-2 h-72 md:h-auto bg-slate-200 relative">
-                <img
-                  src="images/detailing%20(3).webp"
-                  alt="Frank Mercado - Founder of Colombia Boat Detailing"
-                  loading="lazy"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900/90 to-transparent p-4 md:hidden"
-                >
-                  <h4 class="font-serif text-2xl text-white"><a href="https://www.frankmercado.com/about/frank-mercado/" rel="author">Frank Mercado</a></h4>
-                </div>
-              </div>
-              <div class="md:col-span-3 p-8">
-                <div class="flex items-center gap-2 mb-2">
-                  <i class="ph-fill ph-anchor text-gold-400 text-xl"></i>
-                  <span
-                    class="text-gold-400 font-bold text-xs tracking-widest uppercase"
-                    >Founder</span
-                  >
-                </div>
-                <h4
-                  class="font-serif text-3xl text-navy-900 mb-4 hidden md:block"
-                >
-                  <a href="https://www.frankmercado.com/about/frank-mercado/" rel="author" class="hover:text-gold-600 transition-colors">Frank Mercado</a>
-                </h4>
-                <div class="flex items-center gap-4 mb-4 text-sm">
-                  <span
-                    class="bg-navy-900 text-white px-3 py-1 rounded-sm font-bold"
-                    >Founder</span
-                  >
-                  <span class="text-slate-600">Armada Nacional</span>
-                </div>
-                <p
-                  class="text-slate-600 font-light text-sm mb-4 leading-relaxed"
-                >
-                  Frank Mercado founded Colombia Boat Detailing in Cartagena.
-                  His background in naval electromechanics and hands-on boat
-                  operations connects premium finish work with the realities of
-                  maintenance, materials, and the marine environment.
-                </p>
-                <p
-                  class="text-slate-600 font-light text-sm mb-6 leading-relaxed"
-                >
-                  He leads the business strategy, customer experience, and
-                  service development. He also builds the digital presence and
-                  operating systems used to document each project clearly.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >Founder</span
-                  >
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >Naval Electromechanics</span
-                  >
-                  <span
-                    class="bg-gold-400/10 text-gold-600 px-3 py-1 text-xs font-bold rounded-sm"
-                    >Marine Operations</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Team Values -->
-        <div class="mt-20 max-w-4xl mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div class="fade-in">
-              <div
-                class="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="ph-bold ph-certificate text-gold-400 text-2xl"></i>
-              </div>
-              <h5 class="font-bold text-navy-900 mb-2">
-                Certificaciones Elite
-              </h5>
-              <p class="text-slate-600 font-light text-sm">
-                Únicos in Cartagena con certificaciones internacionales en PPF,
-                Ceramic Coating y restauración marina.
-              </p>
-            </div>
-            <div class="fade-in">
-              <div
-                class="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="ph-bold ph-users-three text-gold-400 text-2xl"></i>
-              </div>
-              <h5 class="font-bold text-navy-900 mb-2">
-                Experiencia Combinada
-              </h5>
-              <p class="text-slate-600 font-light text-sm">
-                Más de 20 años de experiencia combinada en detailing de lujo y
-                operaciones náuticas profesionales.
-              </p>
-            </div>
-            <div class="fade-in">
-              <div
-                class="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="ph-bold ph-shield-check text-gold-400 text-2xl"></i>
-              </div>
-              <h5 class="font-bold text-navy-900 mb-2">Garantía Profesional</h5>
-              <p class="text-slate-600 font-light text-sm">
-                Respaldamos cada trabajo con garantías escritas y seguimiento
-                post-servicio personalizado.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Standards & Partners -->
-    <section class="py-24 bg-slate-50">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="font-serif text-4xl md:text-5xl text-navy-900 mb-8">
-            Estándares y Alianzas
-          </h2>
-          <p class="text-slate-600 max-w-2xl mx-auto font-light mb-12">
-            Operamos bajo los estándares más rigurosos de la industria y
-            mantenemos alianzas estratégicas con infraestructuras líderes.
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold">How we work</span>
+          <h2 class="font-serif text-4xl md:text-5xl mt-4">Trust built into the process</h2>
+          <p class="text-slate-300 mt-5 text-base md:text-lg leading-relaxed">
+            We prefer to explain limits and alternatives from the beginning.
+            That reduces surprises and supports better decisions for the boat.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
-          <div class="fade-in">
-            <h4
-              class="font-bold text-lg text-navy-900 mb-6 flex items-center gap-2"
-            >
-              <i class="ph-fill ph-seal-check text-gold-400 text-2xl"></i>
-              Certificaciones Internacionales
-            </h4>
-            <ul class="space-y-3 text-slate-600 font-light text-sm">
-              <li class="flex gap-2">
-                <i class="ph-fill ph-check text-gold-400 flex-shrink-0"></i>
-                <span>Ceramic Pro Certified Technician</span>
-              </li>
-              <li class="flex gap-2">
-                <i class="ph-fill ph-check text-gold-400 flex-shrink-0"></i>
-                <span>GYEON Certified Applicator</span>
-              </li>
-              <li class="flex gap-2">
-                <i class="ph-fill ph-check text-gold-400 flex-shrink-0"></i>
-                <span>3M Paint Protection Specialist</span>
-              </li>
-              <li class="flex gap-2">
-                <i class="ph-fill ph-check text-gold-400 flex-shrink-0"></i>
-                <span>Detailing Industry Association</span>
-              </li>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+          <div class="about-trust-card"><span>01</span><h3>Technical visit</h3><p>Visual inspection, dimensions, access and actual condition.</p></div>
+          <div class="about-trust-card"><span>02</span><h3>Detailed proposal</h3><p>Scope, materials, timing and price defined.</p></div>
+          <div class="about-trust-card"><span>03</span><h3>Area protection</h3><p>Preparation and care of surrounding surfaces.</p></div>
+          <div class="about-trust-card"><span>04</span><h3>Delivery control</h3><p>Final review and care recommendations.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership and team -->
+    <section class="py-20 md:py-24 bg-slate-50">
+      <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          <div class="about-founder-brand">
+            <img src="images/cbdlogo-gold.svg" alt="" width="160" height="160" />
+            <span>Founded in Cartagena</span>
+            <strong>COLOMBIA<br />BOAT DETAILING</strong>
+          </div>
+
+          <article class="about-founder-copy">
+            <span class="text-gold-600 tracking-[0.25em] uppercase text-xs font-bold">Founder</span>
+            <h2 class="font-serif text-4xl text-navy-900 mt-3">
+              <a href="https://www.frankmercado.com/about/frank-mercado/" rel="author" class="hover:text-gold-600 transition-colors">Frank Mercado</a>
+            </h2>
+            <p class="text-slate-600 mt-5 leading-relaxed">
+              Frank Mercado founded Colombia Boat Detailing in Cartagena. His
+              background in naval electromechanics and hands-on boat operations
+              connects finish care with real maintenance, materials and marine
+              environment requirements.
+            </p>
+            <p class="text-slate-600 mt-4 leading-relaxed">
+              He leads business strategy, customer experience and service
+              development, including the documentation systems used to explain
+              each project clearly.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-6">
+              <span class="about-skill-tag">Naval electromechanics</span>
+              <span class="about-skill-tag">Marine operations</span>
+              <span class="about-skill-tag">Customer experience</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center mt-16">
+          <div class="overflow-hidden shadow-xl">
+            <img
+              src="images/services/servicios-integrales-hero-v2-960.webp"
+              alt="Technicians carrying out yacht maintenance"
+              loading="lazy"
+              width="960"
+              height="448"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <span class="text-gold-600 tracking-[0.25em] uppercase text-xs font-bold">Specialist team</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mt-3">We coordinate the right technician for each job.</h2>
+            <p class="text-slate-600 mt-5 leading-relaxed">
+              Polishing, flooring, repair, painting, electrical work, climate
+              control and mechanics require different tools and procedures. We
+              organize the service by specialty while maintaining one customer
+              communication channel.
+            </p>
+            <ul class="about-specialty-list">
+              <li><i class="ph ph-check-circle"></i>Responsible specialist and scope identified before work begins</li>
+              <li><i class="ph ph-check-circle"></i>Marina or dock coordination</li>
+              <li><i class="ph ph-check-circle"></i>Progress follow-up and delivery review</li>
             </ul>
           </div>
         </div>
@@ -1510,19 +1211,20 @@
     <section class="py-24 bg-navy-900 text-white">
       <div class="container mx-auto px-6 text-center">
         <h2 class="font-serif text-4xl md:text-5xl mb-8">
-          ¿Listo para Potenciar tu Vessel?
+          Let’s talk about your vessel
         </h2>
         <p class="text-slate-300 max-w-2xl mx-auto mb-12 font-light">
-          Contacta con nuestro equipo profesional para una inspección gratuita y
-          una propuesta personalizada.
+          Send us photos, vessel length and location. We will help you identify
+          the right service and coordinate a technical visit.
         </p>
         <a
           href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase transition-all transform hover:scale-105 shadow-xl inline-block"
+          class="bg-gold-400 hover:bg-white text-navy-900 px-10 py-4 rounded-sm font-bold text-sm tracking-widest uppercase transition-all shadow-xl inline-flex items-center gap-3"
         >
-          Agendar Consulta
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          Quote on WhatsApp
         </a>
       </div>
     </section>
@@ -1553,7 +1255,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              International Standards of Marine Excellence since 2024.
+              Technical yacht and boat care in Cartagena.
             </p>
           </div>
           <div>
@@ -1655,7 +1357,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260727-2"></script>
+    <script defer src="js/main.js?v=20260813-3"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

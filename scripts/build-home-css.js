@@ -15,6 +15,7 @@ const bundle = [
   read("css/tailwind.css"),
   read("css/styles.css"),
   icons,
+  read("css/site-polish.css"),
 ].join("\n");
 
 fs.writeFileSync(path.join(root, "css/home-bundle.css"), bundle + "\n");

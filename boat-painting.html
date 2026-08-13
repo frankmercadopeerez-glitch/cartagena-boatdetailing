@@ -1,4 +1,4 @@
-﻿﻿﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -43,7 +43,7 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Pintura profesional completa para embarcaciones en Cartagena, Colombia. Restauración de gelcoat, pintura marina de alta calidad con garantía. Servicio en Cartagena de Indias."
+      content="Pintura profesional completa para embarcaciones en Cartagena: diagnóstico de superficie, reparación, preparación y sistema marino definido según el estado del bote."
     />
     <meta
       name="keywords"
@@ -70,7 +70,7 @@
     />
     <meta
       property="og:description"
-      content="Pintura profesional completa para embarcaciones en Cartagena con garantía."
+      content="Pintura profesional completa para embarcaciones en Cartagena con alcance y cobertura definidos por escrito."
     />
     <meta
       property="og:image"
@@ -84,7 +84,7 @@
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "Pintura Profesional de Botes en Cartagena",
-        "description": "Pintura marina profesional completa para embarcaciones en Cartagena, Colombia. Restauración de gelcoat, pintura de alta calidad con garantía. Servicio en Cartagena de Indias.",
+        "description": "Pintura marina profesional completa para embarcaciones en Cartagena, Colombia. Diagnóstico de superficie, reparación, preparación y sistema de pintura definido según el estado real del bote.",
         "serviceType": "Boat Painting",
         "url": "https://www.colombiaboatdetailing.com/boat-painting.html",
         "provider": {
@@ -116,13 +116,6 @@
         "@type": "LocalBusiness",
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "47",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "sameAs": "https://maps.app.goo.gl/HnKWMGY6tKthLGde8"
       }
     </script>
@@ -183,7 +176,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -772,13 +765,14 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
+    <link rel="stylesheet" href="css/tailwind.css?v=20260813-2" />
     <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
     <link
       rel="preload"
-      href="images/services/pintura-completa.webp"
+      href="images/services/pintura-completa-480.webp"
       as="image"
       type="image/webp"
+      media="(max-width: 767px)"
       fetchpriority="high"
     />
     <link
@@ -786,6 +780,7 @@
       href="images/services/pintura-completa.webp"
       as="image"
       type="image/webp"
+      media="(min-width: 768px)"
       fetchpriority="high"
     />
     <!-- Phosphor Icons -->
@@ -803,8 +798,9 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link rel="preload" href="css/styles.css?v=20260813-2" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20260813-2" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20260813-3" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -1071,18 +1067,30 @@
 
     <!-- Hero -->
     <section
-      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
-      style="
-        padding-top: 8rem;
-        background-image:
-          linear-gradient(
-            to right,
-            rgba(10, 25, 47, 0.85),
-            rgba(10, 25, 47, 0.7)
-          ),
-          url(&quot;images/services/pintura-completa.webp&quot;);
-      "
+      class="pt-32 pb-16 text-white relative overflow-hidden"
+      style="padding-top: 8rem"
     >
+      <picture class="absolute inset-0" aria-hidden="true">
+        <source
+          media="(max-width: 767px)"
+          srcset="images/services/pintura-completa-480.webp"
+        />
+        <img
+          src="images/services/pintura-completa.webp"
+          alt=""
+          class="w-full h-full object-cover object-center"
+          width="941"
+          height="1672"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div
+        class="absolute inset-0"
+        style="background: linear-gradient(to right, rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.7))"
+        aria-hidden="true"
+      ></div>
       <div class="absolute inset-0 opacity-10">
         <div
           class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
@@ -1105,20 +1113,23 @@
           <p class="text-xl text-slate-300 font-light mb-8 max-w-2xl mx-auto">
             Servicio integral de repintado profesional para embarcaciones.
             Restauramos el gelcoat y aplicamos sistemas de pintura marina de
-            alta calidad con acabados duraderos y garantía de 3-5 años.
+            alta calidad con un alcance y una cobertura definidos por escrito
+            después de revisar el estado real del bote.
           </p>
           <a
-            href="#proceso"
+            href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20la%20pintura%20completa%20de%20mi%20embarcaci%C3%B3n"
+            target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
           >
-            Ver Proceso Completo <i class="ph ph-arrow-down ml-2"></i>
+            Cotizar Pintura <i class="ph ph-whatsapp-logo ml-2"></i>
           </a>
         </div>
       </div>
     </section>
 
     <!-- Overview Section -->
-    <section class="py-24 bg-navy-900">
+    <section class="py-24 bg-slate-50">
       <div class="container mx-auto px-6">
         <div class="w-full mx-auto">
           <h2 class="font-serif text-4xl text-navy-900 mb-12">
@@ -1156,10 +1167,11 @@
                   ></i>
                   <div>
                     <h4 class="font-semibold text-navy-900 mb-1">
-                      Garantía de 3-5 Años
+                      Cobertura Definida
                     </h4>
                     <p class="text-slate-600 text-sm">
-                      Cobertura contra decoloración, agrietamiento y descamación
+                      Se especifica por escrito según el sistema, la preparación
+                      y el alcance contratado
                     </p>
                   </div>
                 </li>
@@ -1360,38 +1372,38 @@
       </div>
     </section>
 
-    <!-- Guarantee Section -->
+    <!-- Scope and coverage section -->
     <section class="py-24 bg-navy-900 text-white">
       <div class="container mx-auto px-6 text-center">
         <h2 class="font-serif text-4xl mb-8">
-          Garantía Profesional de <span class="text-gold-400">3-5 Años</span>
+          Alcance y <span class="text-gold-400">Cobertura por Escrito</span>
         </h2>
         <p class="text-slate-300 font-light text-lg max-w-3xl mx-auto mb-12">
-          Todas nuestras pinturas completas incluyen garantía escrita contra
-          defectos de aplicación, decoloración prematura y falla del sistema de
-          pintura. La garantía cubre mano de obra y materiales, respaldada por
-          los fabricantes de pintura (Awlgrip/International).
+          Antes de iniciar dejamos documentados la preparación, el sistema de
+          pintura, las superficies incluidas y la cobertura aplicable. Su
+          vigencia depende del producto elegido, el estado previo, el uso y el
+          mantenimiento de la embarcación.
         </p>
         <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div class="bg-navy-800 p-8 rounded-sm">
-            <h3 class="font-serif text-2xl text-gold-400 mb-4">3 Años</h3>
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">Diagnóstico</h3>
             <p class="text-slate-300 text-sm">
-              Sistema estándar de pintura marina. Ideal para embarcaciones de
-              uso recreativo moderado.
+              Verificamos si el gelcoat admite restauración o si realmente
+              requiere un sistema completo de pintura.
             </p>
           </div>
           <div class="bg-navy-800 p-8 rounded-sm border-2 border-gold-400">
-            <h3 class="font-serif text-2xl text-gold-400 mb-4">4 Años</h3>
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">Sistema</h3>
             <p class="text-slate-300 text-sm">
-              Sistema premium con clear coat mejorado. Recomendado para
-              embarcaciones de uso frecuente.
+              Definimos imprimación, acabado, número de capas y condiciones de
+              aplicación para cada proyecto.
             </p>
           </div>
           <div class="bg-navy-800 p-8 rounded-sm">
-            <h3 class="font-serif text-2xl text-gold-400 mb-4">5 Años</h3>
+            <h3 class="font-serif text-2xl text-gold-400 mb-4">Entrega</h3>
             <p class="text-slate-300 text-sm">
-              Sistema Awlgrip profesional. Máxima durabilidad para yates de lujo
-              y uso intensivo.
+              Entregamos el alcance realizado, recomendaciones de cuidado y la
+              cobertura que corresponda al trabajo contratado.
             </p>
           </div>
         </div>
@@ -1399,14 +1411,14 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 bg-navy-900">
+    <section class="py-24 bg-slate-50">
       <div class="container mx-auto px-6 text-center">
         <h2 class="font-serif text-4xl text-navy-900 mb-6">
           Renueva Tu Embarcación Completamente
         </h2>
         <p class="text-slate-600 font-light mb-8 max-w-2xl mx-auto">
-          Agenda una inspección gratuita y recibe una cotización detallada.
-          También ofrecemos financiamiento para proyectos grandes.
+          Coordina una visita técnica y recibe una cotización con alcance,
+          preparación y sistema recomendados para tu embarcación.
         </p>
         <a
           href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20la%20pintura%20completa%20del%20bote"
@@ -1414,7 +1426,7 @@
           rel="noopener noreferrer"
           class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition"
         >
-          Solicitar Cotización Gratuita
+          Cotizar por WhatsApp
         </a>
       </div>
     </section>
@@ -1445,7 +1457,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              Estándares Internacionales de Excelencia Marina desde 2024.
+              Cuidado técnico de embarcaciones en Cartagena.
             </p>
           </div>
           <div>
@@ -1539,7 +1551,7 @@
       />
     </a>
 
-    <script defer src="js/main.js?v=20260727-2"></script>
+    <script defer src="js/main.js?v=20260813-3"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

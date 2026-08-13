@@ -11,13 +11,13 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/blog/mantenimiento-aire-acondicionado-yate-cartagena.webp?v=20260726-3</image:loc>
-      <image:title>Colombia Boat Detailing - Detailing Naval Premium</image:title>
-      <image:caption>Servicio de detailing y estética naval en Cartagena, Colombia</image:caption>
+      <image:loc>https://www.colombiaboatdetailing.com/images/header.webp</image:loc>
+      <image:title>Pulido y mantenimiento de yates en Cartagena</image:title>
+      <image:caption>Pulido de gelcoat, reparación, pisos y servicios para yates y botes en Cartagena</image:caption>
       <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
     </image:image>
   </url>
@@ -25,13 +25,13 @@
   <!-- Páginas Principales -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/about.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/contacto.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -43,7 +43,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/services.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -61,9 +61,9 @@
   <!-- PPF - Paint Protection Film -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/ppf.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.65</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/blog/limpieza-acero-inoxidable-marino-cartagena.webp?v=20260726-3</image:loc>
       <image:title>PPF Paint Protection Film para botes en Cartagena</image:title>
@@ -73,9 +73,9 @@
   <!-- Ceramic Coating -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/ceramic-coating.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/polichado.webp</image:loc>
       <image:title>Ceramic Coating para embarcaciones en Cartagena</image:title>
@@ -85,9 +85,9 @@
   <!-- Restauración Gelcoat -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/gelcoat.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/blog/inspeccion-precompra-yate-cartagena.webp?v=20260726-3</image:loc>
       <image:title>Restauración de gelcoat en Cartagena</image:title>
@@ -97,9 +97,9 @@
   <!-- Pintura de Botes -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/boat-painting.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/pintura.webp</image:loc>
       <image:title>Pintura profesional de botes en Cartagena</image:title>
@@ -129,7 +129,7 @@
   <!-- Pulido de Gelcoat - Servicio Estrella -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/paint-polishing.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -149,15 +149,39 @@
   <!-- Instalación Eléctrica Náutica -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/electrical-systems.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/casos-reales.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/haya-foam-deck/despues-01-960.webp</image:loc>
+      <image:title>Trabajos reales en yates y botes de Cartagena</image:title>
+      <image:caption>Instalación de foam deck, pulido integral y pintura naval realizados por Colombia Boat Detailing</image:caption>
+      <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/case-studies.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/electrical-systems-en.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Mecánica Naval -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/mecanica-naval.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -165,13 +189,19 @@
       <image:title>Mecánica naval para yates y botes en Cartagena</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/marine-mechanics-en.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
   <!-- Interiores y Tapicería -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/interior-detailing.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/blog/humedad-moho-interior-yate-cartagena.webp?v=20260726-3</image:loc>
       <image:title>Limpieza de interiores de botes en Cartagena</image:title>
@@ -516,9 +546,9 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/cubierta-sintetica.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.88</priority>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>https://www.colombiaboatdetailing.com/images/services/foam-deck-colores-reales.webp</image:loc>
       <image:caption>Colores de Foam Deck EVA para botes y yates en Cartagena</image:caption>
@@ -922,6 +952,12 @@
       <image:title>Cubierta EVA Foamdeck para yates en Cartagena — Instalación y Precios 2026</image:title>
       <image:caption>Instalación profesional de cubierta EVA foamdeck en Cartagena de Indias, Colombia</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/synthetic-decking-en.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/inspeccion-precompra-yate-cartagena/</loc>

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulido de Yates en Cartagena | Pisos, Gelcoat y Pintura</title>
-    <link rel="stylesheet" href="css/home-bundle.css?v=20260812-2" />
+    <link rel="stylesheet" href="css/home-bundle.css?v=20260813-3" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -225,7 +225,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -288,43 +288,6 @@
       }
 
       @media (max-width: 767px) {
-        body {
-          font-family: Arial, Helvetica, sans-serif !important;
-        }
-        .font-serif,
-        .home-hero-title {
-          font-family: Georgia, "Times New Roman", serif !important;
-        }
-        .ph,
-        .ph-bold,
-        .ph-fill {
-          font-family: Arial, Helvetica, sans-serif !important;
-          font-style: normal;
-        }
-        .ph::before,
-        .ph-bold::before,
-        .ph-fill::before {
-          content: "" !important;
-        }
-        .ph-anchor::before { content: "⚓" !important; }
-        .ph-arrow-down::before { content: "↓" !important; }
-        .ph-arrow-right::before { content: "→" !important; }
-        .ph-caret-down::before { content: "▾" !important; }
-        .ph-chart-line-up::before { content: "↗" !important; }
-        .ph-check-circle::before { content: "✓" !important; }
-        .ph-engine::before,
-        .ph-wrench::before { content: "⚙" !important; }
-        .ph-lightning::before { content: "⚡" !important; }
-        .ph-map-pin::before { content: "•" !important; }
-        .ph-money::before { content: "$" !important; }
-        .ph-paint-bucket::before { content: "◈" !important; }
-        .ph-phone::before { content: "☎" !important; }
-        .ph-shield::before { content: "◆" !important; }
-        .ph-speedometer::before { content: "◔" !important; }
-        .ph-star::before { content: "★" !important; }
-        .ph-tag::before { content: "◇" !important; }
-        .ph-waves::before { content: "≋" !important; }
-        .ph-whatsapp-logo::before { content: "◉" !important; }
         #naval-particles,
         .compass-rose,
         .aurora-orb {
@@ -332,16 +295,10 @@
         }
         .hero-wave-container svg,
         .ocean-divider svg,
-        .rw-left,
-        .rw-right,
         .text-gold-shimmer,
         .whatsapp-float__img,
         .whatsapp-float::before {
           animation: none !important;
-        }
-        #reseñas .rw-outer:nth-child(2),
-        #reseñas .rw-card:nth-child(n + 5) {
-          display: none !important;
         }
       }
 
@@ -356,60 +313,6 @@
         position: absolute;
         left: 0;
         font-size: 0.8rem;
-      }
-
-      /* Infinite Scroll Carousel */
-      @keyframes scroll-left {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-
-      .reviews-carousel-wrapper {
-        width: 100%;
-        overflow: hidden; /* must stay on its own, separate from mask */
-      }
-
-      /* Mask wrapper is a child so mask-image doesn't interfere with overflow clip */
-      .reviews-mask-inner {
-        width: 100%;
-        mask-image: linear-gradient(
-          to right,
-          transparent,
-          black 5%,
-          black 95%,
-          transparent
-        );
-        -webkit-mask-image: linear-gradient(
-          to right,
-          transparent,
-          black 5%,
-          black 95%,
-          transparent
-        );
-      }
-
-      .reviews-track {
-        animation: scroll-left 40s linear infinite;
-        width: fit-content;
-      }
-
-      .reviews-track:hover {
-        animation-play-state: paused;
-      }
-
-      .review-card {
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      .review-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       }
 
       /* Contraste legible para acentos de marca sobre superficies claras. */
@@ -571,13 +474,6 @@
               }
             }
           ]
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "47",
-          "bestRating": "5",
-          "worstRating": "1"
         }
       }
     </script>
@@ -629,10 +525,10 @@
           },
           {
             "@type": "Question",
-            "name": "¿Instalan pisos sintéticos EVA para yates?",
+            "name": "¿Cuánto cuesta instalar piso sintético EVA en un yate?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sí. Diseñamos e instalamos pisos náuticos EVA y cubiertas sintéticas a la medida, con plantillas, cortes personalizados, refuerzo de adherencia, sellado de bordes y garantía de instalación."
+              "text": "Como referencia, cada lámina EVA de 240 × 90 cm cuesta $800.000 COP y la mano de obra parte de $300.000 COP por lámina. La cantidad se define después de medir las áreas y diseñar las plantillas. La instalación incluye refuerzo de adherencia, sellado de bordes y un año de garantía sobre nuestra instalación."
             }
           },
           {
@@ -850,6 +746,11 @@
             >Sobre Nosotros</a
           >
           <a
+            href="casos-reales.html"
+            class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
+            >Casos Reales</a
+          >
+          <a
             href="blog.html"
             class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all"
             >Blog</a
@@ -929,6 +830,11 @@
         href="about.html"
         class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Sobre Nosotros</a
+      >
+      <a
+        href="casos-reales.html"
+        class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
+        >Casos Reales</a
       >
       <a
         href="blog.html"
@@ -1135,14 +1041,14 @@
         >
           <i class="ph-fill ph-star text-gold-400"></i>
           <span class="text-white/90 text-xs tracking-[0.2em] uppercase"
-            >Únicos en Cartagena con Estándares Internacionales</span
+            >Servicio técnico móvil en Cartagena</span
           >
         </div>
 
         <h1
           class="home-hero-title font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight mb-4 drop-shadow-2xl"
         >
-          Pulido de Yates y Botes
+          Pulido, reparación y pisos para yates
           <span class="italic text-gold-400 font-normal text-gold-shimmer"
             ><br />en Cartagena</span
           >
@@ -1178,8 +1084,9 @@
         <p
           class="home-hero-description text-slate-200 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed tracking-wide"
         >
-          Pulido de gelcoat, pisos sintéticos EVA, reparación, pintura naval y
-          limpieza de cojinería para su embarcación.
+          Evaluamos su embarcación, definimos un alcance claro y ejecutamos
+          pulido de gelcoat, pisos EVA, reparación, pintura naval y limpieza de
+          cojinería.
           <span class="hidden md:inline"
             >El pulido profesional de gelcoat está disponible desde
             <strong class="text-gold-400">$90.000/pie</strong>,
@@ -1196,18 +1103,18 @@
             rel="noopener noreferrer"
             class="group relative px-10 py-4 bg-white text-navy-900 font-bold text-sm tracking-widest uppercase overflow-hidden transition-all hover:bg-gold-400 hover:text-white shadow-xl btn-wake water-ripple"
           >
-            <span class="relative z-10 flex items-center gap-2"
-              >Agendar Inspección
-              <i
-                class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"
-              ></i
-            ></span>
+            <span class="relative z-10 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#25D366] text-white" aria-hidden="true">
+                <i class="ph-fill ph-whatsapp-logo"></i>
+              </span>
+              Cotizar por WhatsApp
+            </span>
           </a>
           <a
-            href="#soluciones"
+            href="#servicios"
             class="text-white text-sm tracking-widest uppercase border-b border-white/30 pb-1 hover:border-gold-400 hover:text-gold-400 transition-all"
           >
-            Explorar Soluciones
+            Ver servicios
           </a>
         </div>
       </div>
@@ -1259,8 +1166,17 @@
       </svg>
     </div>
 
+    <section class="bg-white border-b border-slate-200" aria-label="Compromisos de servicio">
+      <div class="container mx-auto px-6 py-5 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="home-trust-chip"><i class="ph-fill ph-map-pin"></i><span>Atención móvil en Cartagena</span></div>
+        <div class="home-trust-chip"><i class="ph-fill ph-calendar-check"></i><span>Visita técnica antes de cotizar</span></div>
+        <div class="home-trust-chip"><i class="ph-fill ph-check-circle"></i><span>Alcance y materiales por escrito</span></div>
+        <div class="home-trust-chip"><i class="ph-fill ph-shield-check"></i><span>Garantía según el servicio</span></div>
+      </div>
+    </section>
+
     <!-- Servicios Destacados -->
-    <section class="py-20 bg-slate-50 overflow-hidden">
+    <section id="servicios" class="py-20 bg-slate-50 overflow-hidden scroll-mt-24">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
           <span
@@ -1268,7 +1184,7 @@
             >Lo Que Hacemos</span
           >
           <h2 class="font-serif text-4xl md:text-5xl text-navy-900 mt-4">
-            Servicios Destacados
+            Servicios más solicitados
           </h2>
           <p class="text-slate-600 mt-4 max-w-2xl mx-auto font-light">
             Pulido, pisos náuticos, reparación, pintura y limpieza profesional
@@ -1370,7 +1286,7 @@
               >
                 Ver Servicio
                 <i
-                  class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"
+                  class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"
                 ></i>
               </span>
             </div>
@@ -1522,7 +1438,7 @@
             ></div>
             <!-- Badge destacado -->
             <div
-              class="absolute top-3 left-3 bg-gold-400 text-navy-900 text-[10px] font-black uppercase tracking-widest px-2 py-1"
+              class="service-card-badge absolute top-3 left-3 bg-gold-400 text-navy-900 text-[10px] font-black uppercase tracking-widest px-2 py-1"
             >
               Acabado Profesional
             </div>
@@ -1550,1323 +1466,223 @@
           </a>
         </div>
 
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm">
+          <span class="text-slate-500 font-semibold mr-1">También atendemos:</span>
+          <a href="electrical-systems.html" class="home-service-pill">Electricidad y aire acondicionado</a>
+          <a href="mecanica-naval.html" class="home-service-pill">Mecánica naval</a>
+          <a href="calcomanias.html" class="home-service-pill">Calcomanías y gráficos</a>
+        </div>
+
         <div class="text-center mt-12">
           <a
             href="services.html"
             class="inline-flex items-center border-2 border-navy-900 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-navy-900 hover:text-white transition duration-300 btn-wake water-ripple"
           >
-            Ver Todos los Servicios <i class="ph ph-arrow-right ml-2"></i>
+            Ver todos los servicios <i class="ph ph-arrow-right ml-2"></i>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Intro / Value Proposition -->
-    <section class="py-24 bg-white relative overflow-hidden ocean-texture">
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="flex flex-col lg:flex-row items-center gap-20">
-          <div class="lg:w-1/2 text-center lg:text-left">
-            <div
-              class="flex items-end justify-center lg:justify-start gap-4 mb-2"
-            >
-              <span
-                class="text-8xl font-serif font-bold leading-none -mb-4 -ml-2"
-                style="color: rgba(212, 175, 55, 0.35)"
-                >01</span
-              >
-              <span
-                class="text-electric-400 font-bold tracking-widest uppercase text-sm mb-4"
-                >Liderazgo & Tecnología</span
-              >
-            </div>
-            <h2
-              class="font-serif text-4xl md:text-5xl text-navy-900 mb-8 leading-tight"
-            >
-              Especialistas en Yates y Botes<br />
-              <span class="italic text-slate-500"
-                >Servicio Profesional en Cartagena.</span
-              >
-            </h2>
-            <p class="text-slate-600 mb-6 text-lg font-light leading-relaxed">
-              Somos la primera y única empresa en Cartagena dedicada
-              exclusivamente al cuidado, reparación y renovación de
-              embarcaciones. Nuestro trabajo combina pulido, pisos náuticos,
-              gelcoat, fibra, pintura y limpieza especializada.
-            </p>
-            <p class="text-slate-600 mb-8 text-lg font-light leading-relaxed">
-              Ubicados estratégicamente con base en
-              <strong>Cartagena de Indias</strong>, y con capacidad de
-              despliegue móvil a cualquier muelle de la ciudad, traemos
-              estándares de calidad nunca antes vistos en la región.
-            </p>
-
-            <!-- Knot divider -->
-            <div class="knot-divider mx-auto lg:mx-0"><span>⚓</span></div>
-
-            <div class="border-t border-slate-100 pt-8">
-              <div class="depth-counter text-center lg:text-left">
-                <h3 class="font-serif text-3xl text-navy-900 mb-1 stat-glow">
-                  Visita Técnica
-                </h3>
-                <p class="text-xs text-slate-500 uppercase tracking-widest">
-                  Evaluación Antes de Cotizar
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="lg:w-1/2 relative hero-img-hover">
-            <!-- Porthole-style image frame -->
-            <div
-              style="
-                position: absolute;
-                top: -12px;
-                right: -12px;
-                bottom: -12px;
-                left: -12px;
-                border: 1px solid rgba(212, 175, 55, 0.15);
-                pointer-events: none;
-                z-index: 1;
-              "
-            ></div>
-            <div
-              style="
-                position: absolute;
-                top: -6px;
-                right: -6px;
-                bottom: -6px;
-                left: -6px;
-                border: 1px solid rgba(212, 175, 55, 0.08);
-                pointer-events: none;
-                z-index: 1;
-              "
-            ></div>
-            <div class="img-zoom img-shine overflow-hidden">
-              <img
-                src="images/header-2-720.webp"
-                alt="Mantenimiento profesional de yate en Cartagena de Indias"
-                loading="lazy"
-                class="shadow-2xl w-full relative z-0"
-                width="720"
-                height="482"
-              />
-            </div>
-            <!-- Sonar rings decoration -->
-            <div class="sonar-rings" style="bottom: -60px; right: -60px">
-              <div class="sonar-ring" style="width: 80px; height: 80px"></div>
-              <div class="sonar-ring" style="width: 140px; height: 140px"></div>
-              <div class="sonar-ring" style="width: 200px; height: 200px"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Wave divider -->
-    <div class="ocean-divider" style="background: transparent">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#ffffff" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
-
-    <!-- HIGH-END SERVICES GRID (A la Carte) -->
-    <section
-      id="soluciones"
-      class="py-16 bg-navy-900 text-white relative nautical-grid overflow-hidden"
-    >
-      <!-- Aurora orbs -->
-      <div
-        class="aurora-orb aurora-orb-gold"
-        style="
-          width: 700px;
-          height: 700px;
-          top: -30%;
-          right: -10%;
-          opacity: 0.8;
-          animation-delay: 2s;
-        "
-      ></div>
-      <div
-        class="aurora-orb aurora-orb-gold"
-        style="
-          width: 450px;
-          height: 450px;
-          bottom: -10%;
-          left: -5%;
-          opacity: 0.6;
-          animation-delay: 7s;
-        "
-      ></div>
-
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-10">
-          <span
-            class="text-electric-400 tracking-[0.3em] uppercase text-xs font-bold"
-            >Sin Paquetes Genéricos</span
+    <!-- Casos reales destacados -->
+    <section id="resultados" class="py-20 md:py-24 bg-white overflow-hidden scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto mb-12 text-center">
+          <span class="text-gold-600 tracking-[0.3em] uppercase text-xs font-bold"
+            >Casos reales · Cartagena</span
           >
-          <h2 class="font-serif text-4xl md:text-5xl mt-4 text-white">
-            Soluciones Especializadas
+          <h2 class="font-serif text-4xl md:text-5xl text-navy-900 mt-4 leading-tight">
+            Embarcaciones que ya transformamos
           </h2>
-          <p class="text-slate-400 mt-6 max-w-2xl mx-auto font-light">
-            Diseñamos un plan de tratamiento específico tras evaluar la
-            condición de su embarcación. Usted decide qué nivel de perfección
-            desea alcanzar.
+          <p class="text-slate-600 mt-5 text-base md:text-lg leading-relaxed">
+            Proyectos ejecutados y documentados por nuestro equipo. Cada caso
+            muestra la embarcación, el alcance realizado y fotografías reales
+            del resultado final.
           </p>
-          <div class="gold-separator mx-auto mt-8"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6 mb-10">
-          <!-- Service 1: Reparación de Gelcoat y Fibra -->
-          <div
-            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors shadow-2xl relative overflow-hidden text-center"
-          >
-            <div
-              class="absolute top-0 right-0 bg-gold-400 text-navy-900 text-[10px] font-bold px-3 py-1 uppercase tracking-wider"
-            >
-              Alta Demanda
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <figure class="home-case-card">
+            <div class="home-case-media">
+              <picture>
+                <source
+                  media="(max-width: 767px)"
+                  srcset="images/casos-reales/haya-foam-deck/despues-01-560.webp"
+                />
+                <img
+                  src="images/casos-reales/haya-foam-deck/despues-01-960.webp"
+                  alt="Foam deck EVA instalado en el yate HAYA en Cartagena"
+                  loading="lazy"
+                  decoding="async"
+                  width="960"
+                  height="1280"
+                />
+              </picture>
+              <span class="home-case-badge">Caso real</span>
             </div>
-            <div
-              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
-            >
-              <i class="ph ph-wrench text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl mb-3 text-white">
-              Reparación de Gelcoat y Fibra
-            </h3>
-            <p
-              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
-            >
-              Corregimos rayones, grietas, golpes, ósmosis y daños en fibra.
-              Igualamos el color del gelcoat para recuperar el acabado original
-              siempre que el estado de la superficie permita repararlo.
-            </p>
-            <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Retoque de rayones con color igualado</li>
-              <li>Reparación de grietas y golpes</li>
-              <li>Tratamiento de ósmosis</li>
-              <li>Diagnóstico antes de intervenir</li>
-            </ul>
-            <a
-              href="gelcoat.html"
-              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
-            >
-              Conocer más <i class="ph ph-arrow-right ml-2"></i>
-            </a>
-          </div>
+            <figcaption>
+              <span>HAYA · Azimut 46 pies</span>
+              <h3>Foam deck EVA a medida</h3>
+              <p>Instalación de 14 láminas cortadas para las zonas de circulación y cubierta del yate.</p>
+            </figcaption>
+          </figure>
 
-          <!-- Service 2: Pisos Sintéticos EVA -->
-          <div
-            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors text-center"
-          >
-            <div
-              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
-            >
-              <i class="ph ph-waves text-3xl text-gold-400"></i>
+          <figure class="home-case-card">
+            <div class="home-case-media">
+              <picture>
+                <source
+                  media="(max-width: 767px)"
+                  srcset="images/casos-reales/abracchi-ii-pintura-motor/despues-01-560.webp"
+                />
+                <img
+                  src="images/casos-reales/abracchi-ii-pintura-motor/despues-01-960.webp"
+                  alt="Tapa del motor fuera de borda de Abracchi II después de su proceso de pintura"
+                  loading="lazy"
+                  decoding="async"
+                  width="960"
+                  height="1280"
+                />
+              </picture>
+              <span class="home-case-badge">Caso real</span>
             </div>
-            <h3 class="font-serif text-xl mb-3 text-white">
-              Pisos Sintéticos EVA
-            </h3>
-            <p
-              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
-            >
-              Fabricamos plantillas e instalamos pisos EVA y cubiertas
-              sintéticas a la medida. Una solución antideslizante, cómoda y
-              resistente al uso náutico y al sol de Cartagena.
-            </p>
-            <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Diseño y corte personalizado</li>
-              <li>Superficie antideslizante</li>
-              <li>Refuerzo de adherencia y sellado</li>
-              <li>Garantía de instalación por un año</li>
-            </ul>
-            <a
-              href="cubierta-sintetica.html"
-              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
-            >
-              Conocer más <i class="ph ph-arrow-right ml-2"></i>
-            </a>
-          </div>
+            <figcaption>
+              <span>Abracchi II · Motor fuera de borda</span>
+              <h3>Recuperación del acabado exterior</h3>
+              <p>Preparación y pintura de la tapa superior afectada por la exposición continua al sol.</p>
+            </figcaption>
+          </figure>
 
-          <!-- Service 3: Pintura Naval -->
-          <div
-            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors shadow-2xl shadow-black/30 text-center"
-          >
-            <div
-              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
-            >
-              <i class="ph ph-paint-bucket text-3xl text-gold-400"></i>
+          <figure class="home-case-card">
+            <div class="home-case-media">
+              <picture>
+                <source
+                  media="(max-width: 767px)"
+                  srcset="images/casos-reales/satori-pulido-integral/resultado-03-560.webp"
+                />
+                <img
+                  src="images/casos-reales/satori-pulido-integral/resultado-03-960.webp"
+                  alt="Gelcoat del velero Satori después del pulido integral en Cartagena"
+                  loading="lazy"
+                  decoding="async"
+                  width="960"
+                  height="1280"
+                />
+              </picture>
+              <span class="home-case-badge">Caso real</span>
             </div>
-            <h3 class="font-serif text-xl mb-3 text-white">
-              Pintura Naval
-            </h3>
-            <p
-              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
-            >
-              Pintura completa de yates y botes, casco, antifouling y motores.
-              Preparamos cada superficie y aplicamos sistemas marinos según el
-              material y la condición real de la embarcación.
-            </p>
-            <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Pintura completa de casco y cubierta</li>
-              <li>Sistemas antifouling</li>
-              <li>Pintura de motores marinos</li>
-              <li>Preparación e imprimación profesional</li>
-            </ul>
-            <a
-              href="boat-painting.html"
-              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
-            >
-              Conocer más <i class="ph ph-arrow-right ml-2"></i>
-            </a>
-          </div>
-
-          <!-- Service 4: Electrical Systems & Marine A/C -->
-          <div
-            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors text-center"
-          >
-            <div
-              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
-            >
-              <i class="ph ph-lightning text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl mb-3 text-white">
-              Electricidad y Aire Acondicionado Marino
-            </h3>
-            <p
-              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
-            >
-              Instalación de aire acondicionado para yates, bombas, controles,
-              tableros, cableado, luces LED, baterías y paneles solares.
-            </p>
-            <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Aire acondicionado marino</li>
-              <li>Bombas, drenajes y termostatos</li>
-              <li>Tableros, baterías y carga</li>
-              <li>Iluminación y cableado náutico</li>
-            </ul>
-            <a
-              href="electrical-systems.html"
-              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
-            >
-              Conocer más <i class="ph ph-arrow-right ml-2"></i>
-            </a>
-          </div>
-
-          <!-- Service 5: Mecánica Naval -->
-          <div
-            class="service-card stagger-item group mx-auto bg-navy-800 p-6 border border-white/5 hover:border-gold-400/50 transition-colors text-center"
-          >
-            <div
-              class="w-12 h-12 bg-navy-900 flex items-center justify-center mb-5 border border-white/10 mx-auto"
-            >
-              <i class="ph ph-engine text-3xl text-gold-400"></i>
-            </div>
-            <h3 class="font-serif text-xl mb-3 text-white">
-              Mecánica Naval
-            </h3>
-            <p
-              class="text-slate-400 font-light text-sm leading-relaxed mb-4 border-b border-white/5 pb-4"
-            >
-              Diagnóstico, mantenimiento preventivo y reparación de motores
-              marinos, generadores y sistemas auxiliares para yates y botes.
-            </p>
-            <ul class="text-sm text-slate-300 feature-list space-y-2">
-              <li>Diagnóstico de fallas</li>
-              <li>Mantenimiento por horas</li>
-              <li>Refrigeración y combustible</li>
-              <li>Pruebas y reparación mecánica</li>
-            </ul>
-            <a
-              href="mecanica-naval.html"
-              class="inline-flex items-center text-gold-400 hover:text-gold-300 mt-6 text-sm font-semibold"
-            >
-              Conocer más <i class="ph ph-arrow-right ml-2"></i>
-            </a>
-          </div>
+            <figcaption>
+              <span>Satori · First Yacht 53 pies</span>
+              <h3>Pulido integral de gelcoat</h3>
+              <p>Corrección y pulido con sistema 3M Marine en casco, superestructura y cubierta.</p>
+            </figcaption>
+          </figure>
         </div>
 
-        <div class="text-center">
+        <div class="mt-10 text-center">
           <a
-            href="services.html"
-            class="inline-flex items-center bg-gold-400 text-navy-900 px-8 py-3 rounded-sm font-semibold hover:bg-gold-400 transition duration-300"
+            href="casos-reales.html"
+            class="inline-flex items-center justify-center gap-3 bg-navy-900 text-white px-8 py-4 font-bold hover:bg-gold-400 hover:text-navy-900 transition-colors"
           >
-            Ver Todos Los Servicios
-            <i class="ph ph-arrow-right ml-2"></i>
+            Ver casos reales completos
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Wave divider: Soluciones → Zonas -->
-    <div class="ocean-divider" style="background: #001f3f">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#001f3f" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#f8fafc"
-        />
-      </svg>
-    </div>
-
-    <!-- Geolocalized CTA Cluster -->
-    <section class="py-20 bg-slate-50">
+    <!-- Método y confianza -->
+    <section id="proceso" class="py-20 md:py-24 bg-navy-900 text-white overflow-hidden scroll-mt-24">
       <div class="container mx-auto px-6">
-        <div class="w-full mx-auto">
-          <div class="text-center mb-12">
-            <span
-              class="text-electric-400 tracking-[0.3em] uppercase text-xs font-bold"
-              >Cobertura Local</span
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
+              >Un proceso claro</span
             >
-            <h2 class="font-serif text-4xl text-navy-900 mt-4">
-              Limpieza de Casco por Zonas en Cartagena
+            <h2 class="font-serif text-4xl md:text-5xl mt-4 leading-tight">
+              Primero entendemos el bote. Después recomendamos el trabajo.
             </h2>
-            <p class="text-slate-500 mt-4 font-light max-w-3xl mx-auto">
-              Selecciona tu zona para ver detalles locales del servicio y
-              cotizar mas rapido.
+            <p class="text-slate-300 mt-6 text-base md:text-lg leading-relaxed max-w-xl">
+              El precio y el resultado dependen del material, el tamaño y el
+              estado real de la embarcación. Por eso revisamos antes de prometer,
+              explicamos qué sí puede corregirse y dejamos el alcance definido.
             </p>
+
+            <div class="grid sm:grid-cols-2 gap-4 mt-8">
+              <div class="home-confidence-card">
+                <i class="ph ph-check-circle"></i>
+                <div><strong>Diagnóstico honesto</strong><span>Si una superficie requiere pintura completa, lo decimos antes de iniciar.</span></div>
+              </div>
+              <div class="home-confidence-card">
+                <i class="ph ph-shield-check"></i>
+                <div><strong>Garantía definida</strong><span>Se entrega según el servicio, los materiales y el alcance contratado.</span></div>
+              </div>
+              <div class="home-confidence-card">
+                <i class="ph ph-camera"></i>
+                <div><strong>Trabajo documentado</strong><span>Registramos el proceso para revisar avances y entrega.</span></div>
+              </div>
+              <div class="home-confidence-card">
+                <i class="ph ph-map-pin"></i>
+                <div><strong>Atención en marina</strong><span>Coordinamos el servicio en Cartagena y muelles cercanos.</span></div>
+              </div>
+            </div>
+
+            <a
+              href="https://wa.me/573044301112?text=Hola%2C%20quiero%20solicitar%20una%20visita%20t%C3%A9cnica%20para%20mi%20embarcaci%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-3 bg-gold-400 text-navy-900 px-7 py-4 font-bold mt-8 hover:bg-white transition-colors"
+            >
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              Cotizar por WhatsApp
+            </a>
           </div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <a
-              href="limpieza-casco-bocagrande.html"
-              class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm hover:shadow-md hover:border-gold-400 transition"
-            >
-              <i class="ph ph-map-pin text-gold-400 text-2xl mb-3 block"></i>
-              <h3 class="font-serif text-xl text-navy-900 mb-1">Bocagrande</h3>
-              <p class="text-slate-500 text-sm font-light">
-                Yates y veleros en muelles y marinas de Bocagrande.
-              </p>
-            </a>
-            <a
-              href="limpieza-casco-manzanillo.html"
-              class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm hover:shadow-md hover:border-gold-400 transition"
-            >
-              <i class="ph ph-map-pin text-gold-400 text-2xl mb-3 block"></i>
-              <h3 class="font-serif text-xl text-navy-900 mb-1">
-                Cartagena de Indias
-              </h3>
-              <p class="text-slate-500 text-sm font-light">
-                Atencion prioritaria para embarcaciones en marina.
-              </p>
-            </a>
-            <a
-              href="limpieza-casco-baru.html"
-              class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm hover:shadow-md hover:border-gold-400 transition"
-            >
-              <i class="ph ph-map-pin text-gold-400 text-2xl mb-3 block"></i>
-              <h3 class="font-serif text-xl text-navy-900 mb-1">Baru</h3>
-              <p class="text-slate-500 text-sm font-light">
-                Mantenimiento submarino para uso recreativo y charter.
-              </p>
-            </a>
-            <a
-              href="limpieza-casco-islas-del-rosario.html"
-              class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm hover:shadow-md hover:border-gold-400 transition"
-            >
-              <i class="ph ph-map-pin text-gold-400 text-2xl mb-3 block"></i>
-              <h3 class="font-serif text-xl text-navy-900 mb-1">
-                Islas del Rosario
-              </h3>
-              <p class="text-slate-600 text-sm font-light">
-                Cobertura para embarcaciones fondeadas en islas.
-              </p>
-            </a>
-          </div>
+          <ol class="home-process-list">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Visita técnica</h3>
+                <p>Revisamos material, medidas, daño, acceso y expectativas del propietario.</p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Propuesta con alcance</h3>
+                <p>Definimos preparación, materiales, tiempos, valor y condiciones de garantía.</p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Ejecución y control</h3>
+                <p>Protegemos las áreas cercanas, ejecutamos el proceso y hacemos revisión de entrega.</p>
+              </div>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- Wave divider: Zonas → Experiencia -->
-    <div class="ocean-divider" style="background: #f8fafc">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#f8fafc" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
-
-    <!-- EDUCATIONAL SECTION: Why Professional Yacht Maintenance? -->
-    <section id="experiencia" class="py-24 bg-navy-900 overflow-hidden">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row gap-16 items-center">
-          <div class="md:w-1/2">
-            <div class="relative">
-              <div
-                class="absolute -top-4 -left-4 w-24 h-24 bg-gold-400/20 rounded-full z-0"
-              ></div>
-              <img
-                src="images/services/restauracion-gelcoat.webp"
-                sizes="(max-width: 767px) calc(100vw - 24px), 50vw"
-                alt="Reparación y mantenimiento profesional de gelcoat en yate en Cartagena"
-                loading="lazy"
-                class="relative z-10 shadow-xl transition-all duration-500 rounded-sm hover:scale-105"
-                width="720"
-                height="1279"
-              />
-            </div>
-          </div>
-          <div class="md:w-1/2">
-            <span
-              class="text-gold-400 tracking-[0.2em] uppercase text-xs font-bold mb-2 block"
-              >Proteja su Inversión</span
-            >
-            <h2 class="font-serif text-3xl md:text-4xl text-navy-900 mb-8">
-              Por qué elegir Mantenimiento Profesional
-            </h2>
-
-            <div class="space-y-8">
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 mt-1">
-                  <i
-                    class="ph-fill ph-chart-line-up text-gold-400 text-2xl"
-                  ></i>
-                </div>
-                <div>
-                  <h3 class="font-bold text-white mb-2">Valor de Reventa</h3>
-                  <p class="text-slate-300 text-sm font-light leading-relaxed">
-                    Una embarcación bien mantenida no solo se ve mejor, sino que
-                    retiene su valor. La oxidación y el desgaste visible son los
-                    principales factores de depreciación.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="ph-fill ph-shield text-gold-400 text-2xl"></i>
-                </div>
-                <div>
-                  <h3 class="font-bold text-white mb-2">
-                    Longevidad de Materiales
-                  </h3>
-                  <p class="text-slate-300 text-sm font-light leading-relaxed">
-                    El sol y la sal de Cartagena deterioran gelcoat, pintura,
-                    pisos y tapicería. El mantenimiento oportuno evita que un
-                    daño reparable termine exigiendo una intervención completa.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="ph-fill ph-speedometer text-gold-400 text-2xl"></i>
-                </div>
-                <div>
-                  <h3 class="font-bold text-white mb-2">
-                    Mejora del Rendimiento
-                  </h3>
-                  <p class="text-slate-300 text-sm font-light leading-relaxed">
-                    Un casco liso y libre de contaminantes reduce la fricción
-                    (drag) con el agua, mejorando la eficiencia de combustible y
-                    la velocidad.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 mt-1">
-                  <i class="ph-fill ph-money text-gold-400 text-2xl"></i>
-                </div>
-                <div>
-                  <h3 class="font-bold text-white mb-2">
-                    Prevención de Reparaciones
-                  </h3>
-                  <p class="text-slate-300 text-sm font-light leading-relaxed">
-                    El mantenimiento preventivo regular de metales y superficies
-                    minimiza fallos repentinos y reparaciones mayores a futuro.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Cierre comercial -->
+    <section class="py-12 md:py-16 bg-gold-400 text-navy-900">
+      <div class="container mx-auto px-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div>
+          <span class="text-xs font-bold tracking-[0.25em] uppercase">Hable directamente con nosotros</span>
+          <h2 class="font-serif text-3xl md:text-4xl mt-2">Cuéntenos qué necesita su embarcación.</h2>
+          <p class="mt-3 max-w-2xl text-navy-900/80">Con una foto, la eslora y la ubicación podemos orientarle y coordinar la visita técnica.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- Wave divider: Services → Process -->
-    <div class="ocean-divider" style="background: #001f3f">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#001f3f" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="white"
-        />
-      </svg>
-    </div>
-
-    <!-- Process -->
-    <section id="proceso" class="py-24 bg-white overflow-hidden">
-      <div class="container mx-auto px-6 text-center">
-        <span class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
-          >Método de Trabajo</span
+        <a
+          href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-3 bg-navy-900 text-white px-8 py-4 font-bold shrink-0 hover:bg-navy-800 transition-colors"
         >
-        <h2 class="font-serif text-3xl md:text-4xl mt-4 text-navy-900 mb-16">
-          Excelencia en 3 Pasos
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          <!-- Connecting Line -->
-          <div
-            class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-100 -z-10"
-          ></div>
-
-          <div class="relative bg-white/5 border border-white/10 p-6 fade-in">
-            <div
-              class="w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
-            >
-              01
-            </div>
-            <h3 class="text-lg font-bold text-navy-900 mb-3">
-              Inspección & Diagnóstico
-            </h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              Evaluamos el estado del gelcoat, pintura y metales. Identificamos
-              necesidades de corrección vs protección y diseñamos un plan a
-              medida.
-            </p>
-          </div>
-
-          <div class="relative bg-white/5 border border-white/10 p-6 fade-in">
-            <div
-              class="step-pulse w-24 h-24 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
-            >
-              02
-            </div>
-            <h3 class="text-lg font-bold text-navy-900 mb-3">
-              Ejecución Técnica
-            </h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              Aplicamos el proceso técnico definido para cada servicio:
-              preparación, reparación, pulido, instalación, pintura o limpieza
-              con productos de grado marino.
-            </p>
-          </div>
-
-          <div class="relative bg-white/5 border border-white/10 p-6 fade-in">
-            <div
-              class="w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
-            >
-              03
-            </div>
-            <h3 class="text-lg font-bold text-navy-900 mb-3">
-              Control & Entrega
-            </h3>
-            <p class="text-slate-500 text-sm leading-relaxed">
-              Inspección final detallada ("White Glove Check"). No entregamos
-              hasta que cada superficie cumpla con nuestros estándares de
-              excelencia.
-            </p>
-          </div>
-        </div>
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          Cotizar por WhatsApp
+        </a>
       </div>
     </section>
-
-    <!-- Wave divider: Proceso → Reseñas -->
-    <div class="ocean-divider" style="background: #ffffff">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#ffffff" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
-
-    <!-- Reviews Infinite Carousel Section -->
-    <section id="reseñas" class="py-24 bg-navy-900 relative overflow-hidden">
-      <div
-        class="absolute top-0 right-0 w-96 h-96 bg-gold-400 rounded-full blur-[120px] opacity-10 -z-10"
-      ></div>
-      <div class="container mx-auto px-6 relative z-10 mb-12">
-        <div class="text-center">
-          <span
-            class="text-gold-400 tracking-[0.3em] uppercase text-xs font-bold"
-            >Testimonios de Clientes</span
-          >
-          <h2 class="font-serif text-4xl md:text-5xl mt-4 text-white mb-4">
-            Lo Que Dicen Nuestros Clientes
-          </h2>
-          <p class="text-slate-300 max-w-2xl mx-auto font-light">
-            Excelencia reconocida por los propietarios más exigentes de
-            Cartagena.
-          </p>
-          <div class="gold-separator mx-auto mt-8"></div>
-        </div>
-      </div>
-
-      <!-- ── Dual Marquee Reviews ── -->
-      <style>
-        @keyframes marquee-l {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-        @keyframes marquee-r {
-          from {
-            transform: translateX(-50%);
-          }
-          to {
-            transform: translateX(0);
-          }
-        }
-        .rw-outer {
-          overflow: hidden;
-          -webkit-mask-image: linear-gradient(
-            to right,
-            transparent 0%,
-            black 7%,
-            black 93%,
-            transparent 100%
-          );
-          mask-image: linear-gradient(
-            to right,
-            transparent 0%,
-            black 7%,
-            black 93%,
-            transparent 100%
-          );
-        }
-        .rw-track {
-          display: flex;
-          gap: 1rem;
-          width: max-content;
-          will-change: transform;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-        }
-        .rw-left {
-          animation: marquee-l 34s linear infinite;
-          animation-play-state: running;
-        }
-        .rw-right {
-          animation: marquee-r 42s linear infinite;
-          animation-play-state: running;
-        }
-        .rw-card {
-          flex-shrink: 0;
-          width: 272px;
-          background: #fff;
-          border: 1px solid rgba(0, 31, 63, 0.09);
-          border-radius: 3px;
-          padding: 1.1rem 1.2rem 0.9rem;
-          box-shadow: 0 2px 14px rgba(0, 31, 63, 0.07);
-        }
-        .rw-stars {
-          display: flex;
-          gap: 2px;
-          margin-bottom: 0.55rem;
-        }
-        .rw-stars i {
-          color: #d4af37;
-          font-size: 0.8rem;
-        }
-        .rw-quote {
-          font-style: italic;
-          font-size: 0.78rem;
-          line-height: 1.55;
-          color: #475569;
-          margin-bottom: 0.7rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .rw-meta {
-          border-top: 1px solid #f1f5f9;
-          padding-top: 0.55rem;
-        }
-        .rw-name {
-          font-weight: 700;
-          font-size: 0.78rem;
-          color: #001f3f;
-          line-height: 1.2;
-        }
-        .rw-boat {
-          font-size: 0.68rem;
-          color: #64748b;
-        }
-        @media (max-width: 768px) {
-          .rw-outer {
-            -webkit-mask-image: none;
-            mask-image: none;
-          }
-          .rw-left,
-          .rw-right {
-            animation-play-state: running !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .rw-card {
-            width: 236px;
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .rw-left,
-          .rw-right {
-            animation: none;
-          }
-        }
-      </style>
-
-      <div class="space-y-4 px-0">
-        <!-- Row 1 → izquierda -->
-        <div class="rw-outer">
-          <div class="rw-track rw-left">
-            <!-- set A -->
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Transformaron completamente mi yate. El Ceramic Coating ha
-                dejado la fibra impecable, visible incluso bajo el sol mayor de
-                Cartagena."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Carlos Mendoza</p>
-                <p class="rw-boat">Propietario · Grady White 45'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Atención al detalle impecable. Explicaron cada etapa del
-                trabajo y entregaron la embarcación con un acabado excelente."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">María Fernández</p>
-                <p class="rw-boat">Propietaria · Sunseeker 60'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Pintura de motores excepcional. Mis Yamahas se ven como nuevas.
-                Rápidos, profesionales y con garantía real."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Jorge Turbay</p>
-                <p class="rw-boat">Propietario · Boston Whaler 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Increíble trabajo en mi sala de máquinas. Control anticorrosivo
-                total. Ahora no me preocupa la oxidación marina."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Patricia Ruiz</p>
-                <p class="rw-boat">Propietaria · Cigarette 38'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Confiabilidad total. Coordinaron perfectamente en el muelle. Mi
-                yate nunca se vio mejor. Altamente profesionales."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Rafael González</p>
-                <p class="rw-boat">Propietario · Contender 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "El lavado técnico antes del Ceramic es impresionante. Eliminan
-                toda la contaminación marina. Resultados 10/10."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Ana Reyes</p>
-                <p class="rw-boat">Propietaria · Pursuit 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Restauraron el gelcoat de mi embarcación de 15 años. El
-                resultado superó todo. Parece recién salido del astillero."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Andrés Vélez</p>
-                <p class="rw-boat">Propietario · Sea Ray 42'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Excelente comunicación y puntualidad. Vinieron a mi muelle
-                privado en Isla Barú. Servicio VIP de verdad."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Lucía Martínez</p>
-                <p class="rw-boat">Propietaria · Azimut 55'</p>
-              </div>
-            </div>
-            <!-- set B (duplicate para loop) -->
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Transformaron completamente mi yate. El Ceramic Coating ha
-                dejado la fibra impecable, visible incluso bajo el sol mayor de
-                Cartagena."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Carlos Mendoza</p>
-                <p class="rw-boat">Propietario · Grady White 45'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Atención al detalle impecable. Explicaron cada etapa del
-                trabajo y entregaron la embarcación con un acabado excelente."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">María Fernández</p>
-                <p class="rw-boat">Propietaria · Sunseeker 60'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Pintura de motores excepcional. Mis Yamahas se ven como nuevas.
-                Rápidos, profesionales y con garantía real."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Jorge Turbay</p>
-                <p class="rw-boat">Propietario · Boston Whaler 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Increíble trabajo en mi sala de máquinas. Control anticorrosivo
-                total. Ahora no me preocupa la oxidación marina."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Patricia Ruiz</p>
-                <p class="rw-boat">Propietaria · Cigarette 38'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Confiabilidad total. Coordinaron perfectamente en el muelle. Mi
-                yate nunca se vio mejor. Altamente profesionales."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Rafael González</p>
-                <p class="rw-boat">Propietario · Contender 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "El lavado técnico antes del Ceramic es impresionante. Eliminan
-                toda la contaminación marina. Resultados 10/10."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Ana Reyes</p>
-                <p class="rw-boat">Propietaria · Pursuit 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Restauraron el gelcoat de mi embarcación de 15 años. El
-                resultado superó todo. Parece recién salido del astillero."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Andrés Vélez</p>
-                <p class="rw-boat">Propietario · Sea Ray 42'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Excelente comunicación y puntualidad. Vinieron a mi muelle
-                privado en Isla Barú. Servicio VIP de verdad."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Lucía Martínez</p>
-                <p class="rw-boat">Propietaria · Azimut 55'</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 2 → derecha (orden offset) -->
-        <div class="rw-outer">
-          <div class="rw-track rw-right">
-            <!-- set A (empezamos desde la mitad para que no sea igual) -->
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Confiabilidad total. Coordinaron perfectamente en el muelle. Mi
-                yate nunca se vio mejor. Altamente profesionales."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Rafael González</p>
-                <p class="rw-boat">Propietario · Contender 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "El lavado técnico antes del Ceramic es impresionante. Eliminan
-                toda la contaminación marina. Resultados 10/10."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Ana Reyes</p>
-                <p class="rw-boat">Propietaria · Pursuit 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Restauraron el gelcoat de mi embarcación de 15 años. El
-                resultado superó todo. Parece recién salido del astillero."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Andrés Vélez</p>
-                <p class="rw-boat">Propietario · Sea Ray 42'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Excelente comunicación y puntualidad. Vinieron a mi muelle
-                privado en Isla Barú. Servicio VIP de verdad."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Lucía Martínez</p>
-                <p class="rw-boat">Propietaria · Azimut 55'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Transformaron completamente mi yate. El Ceramic Coating ha
-                dejado la fibra impecable, visible incluso bajo el sol mayor de
-                Cartagena."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Carlos Mendoza</p>
-                <p class="rw-boat">Propietario · Grady White 45'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Atención al detalle impecable. Explicaron cada etapa del
-                trabajo y entregaron la embarcación con un acabado excelente."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">María Fernández</p>
-                <p class="rw-boat">Propietaria · Sunseeker 60'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Pintura de motores excepcional. Mis Yamahas se ven como nuevas.
-                Rápidos, profesionales y con garantía real."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Jorge Turbay</p>
-                <p class="rw-boat">Propietario · Boston Whaler 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Increíble trabajo en mi sala de máquinas. Control anticorrosivo
-                total. Ahora no me preocupa la oxidación marina."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Patricia Ruiz</p>
-                <p class="rw-boat">Propietaria · Cigarette 38'</p>
-              </div>
-            </div>
-            <!-- set B (duplicate para loop) -->
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Confiabilidad total. Coordinaron perfectamente en el muelle. Mi
-                yate nunca se vio mejor. Altamente profesionales."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Rafael González</p>
-                <p class="rw-boat">Propietario · Contender 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "El lavado técnico antes del Ceramic es impresionante. Eliminan
-                toda la contaminación marina. Resultados 10/10."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Ana Reyes</p>
-                <p class="rw-boat">Propietaria · Pursuit 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Restauraron el gelcoat de mi embarcación de 15 años. El
-                resultado superó todo. Parece recién salido del astillero."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Andrés Vélez</p>
-                <p class="rw-boat">Propietario · Sea Ray 42'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Excelente comunicación y puntualidad. Vinieron a mi muelle
-                privado en Isla Barú. Servicio VIP de verdad."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Lucía Martínez</p>
-                <p class="rw-boat">Propietaria · Azimut 55'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Transformaron completamente mi yate. El Ceramic Coating ha
-                dejado la fibra impecable, visible incluso bajo el sol mayor de
-                Cartagena."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Carlos Mendoza</p>
-                <p class="rw-boat">Propietario · Grady White 45'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Atención al detalle impecable. Explicaron cada etapa del
-                trabajo y entregaron la embarcación con un acabado excelente."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">María Fernández</p>
-                <p class="rw-boat">Propietaria · Sunseeker 60'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Pintura de motores excepcional. Mis Yamahas se ven como nuevas.
-                Rápidos, profesionales y con garantía real."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Jorge Turbay</p>
-                <p class="rw-boat">Propietario · Boston Whaler 35'</p>
-              </div>
-            </div>
-            <div class="rw-card">
-              <div class="rw-stars">
-                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
-                ><i class="ph-fill ph-star"></i>
-              </div>
-              <p class="rw-quote">
-                "Increíble trabajo en mi sala de máquinas. Control anticorrosivo
-                total. Ahora no me preocupa la oxidación marina."
-              </p>
-              <div class="rw-meta">
-                <p class="rw-name">Patricia Ruiz</p>
-                <p class="rw-boat">Propietaria · Cigarette 38'</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /dual-marquee -->
-    </section>
-    <!-- /#reseñas -->
-    <script>
-      if (window.innerWidth < 768) {
-        document
-          .querySelectorAll(
-            "#reseñas .rw-outer:nth-child(2), #reseñas .rw-card:nth-child(n + 5)",
-          )
-          .forEach(function (node) {
-            node.remove();
-          });
-      }
-    </script>
-
-    <!-- Wave divider: Reseñas → Blog -->
-    <div class="ocean-divider" style="background: #001f3f">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#001f3f" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#f8fafc"
-        />
-      </svg>
-    </div>
 
     <!-- Blog Preview Section -->
     <section
@@ -3129,7 +1945,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cuánto dura el servicio de pintura de motores?</span
+                  >¿Qué define el tiempo y la durabilidad de la pintura de motores?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3140,23 +1956,16 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    Nuestro proceso de pintura de motores incluye:
+                    Primero revisamos corrosión, adherencia de la pintura actual,
+                    acceso a las piezas y nivel de desmontaje necesario. Con esa
+                    información definimos preparación, sistema de imprimación,
+                    acabado y tiempo estimado.
                   </p>
-                  <ul class="list-disc list-inside mb-3 space-y-2">
-                    <li>
-                      Preparación completa (limpieza, eliminación de óxido,
-                      lijado)
-                    </li>
-                    <li>Imprimador epóxico de 2 capas anti-corrosión</li>
-                    <li>Pintura marina de 2-3 capas con acabado brillante</li>
-                    <li>Sellado final con protector marino</li>
-                  </ul>
-                  <p class="mb-3">
-                    El resultado dura <strong>5-7 años</strong> en condiciones
-                    normales de Cartagena. Con mantenimiento anual (limpieza
-                    especializada y retoque de protector), puede extenderse a 10
-                    años. Los motores salinizados duran menos que los de agua
-                    dulce, razón por la cual la cal marina es un factor crítico.
+                  <p>
+                    La durabilidad depende del estado inicial, la exposición a
+                    sal y humedad, la preparación y el mantenimiento posterior.
+                    El alcance y las condiciones de garantía quedan por escrito
+                    en la cotización de cada trabajo.
                   </p>
                 </div>
               </div>
@@ -3170,7 +1979,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cuánto toman los principales servicios para un yate?</span
+                  >¿Hacen pintura naval y limpieza de cojinería?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3181,28 +1990,15 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    Los tiempos varían según el tamaño y condición del yate:
+                    Sí. Realizamos pintura completa de yates y botes, pintura de
+                    casco, antifouling y pintura de motores. El proceso se define
+                    después de revisar el sustrato, la corrosión y el sistema de
+                    pintura existente.
                   </p>
-                  <ul class="list-disc list-inside mb-3 space-y-2">
-                    <li><strong>Lavado Técnico:</strong> 1-2 días (25'-35')</li>
-                    <li>
-                      <strong>Restauración Gelcoat:</strong> 3-5 días según daño
-                    </li>
-                    <li>
-                      <strong>Pisos sintéticos EVA:</strong> depende del diseño,
-                      plantillas y cantidad de láminas
-                    </li>
-                    <li><strong>Pintura de Motores:</strong> 2-3 días</li>
-                    <li>
-                      <strong>Limpieza de cojinería e interiores:</strong>
-                      1-3 días según cantidad y estado
-                    </li>
-                  </ul>
                   <p>
-                    Coordinamos los trabajos con Cartagena de Indias, Club
-                    Náutico y propietarios privados para minimizar
-                    inconvenientes. Algunos servicios pueden realizarse en
-                    paralelo según la complejidad.
+                    También hacemos limpieza profunda de cojinería, tapicería e
+                    interiores náuticos. Cotizamos según cantidad, material,
+                    manchas y acceso a las piezas.
                   </p>
                 </div>
               </div>
@@ -3227,35 +2023,15 @@
               >
                 <div class="px-8 pb-6 text-slate-700 font-light">
                   <p class="mb-3">
-                    Sí. Ofrecemos garantías integrales en todos nuestros
-                    servicios:
+                    La cobertura depende del servicio, los materiales y la
+                    condición inicial de la superficie. En pisos EVA ofrecemos
+                    un año sobre nuestra instalación; en los demás trabajos la
+                    garantía aplicable se define en la cotización.
                   </p>
-                  <ul class="list-disc list-inside mb-3 space-y-2">
-                    <li>
-                      <strong>Pisos EVA:</strong> Un año sobre la instalación
-                    </li>
-                    <li>
-                      <strong>Ceramic Coating:</strong> Garantía de 1-3 años
-                      según producto
-                    </li>
-                    <li>
-                      <strong>Pintura:</strong> Garantía de 2 años contra
-                      decoloración
-                    </li>
-                    <li>
-                      <strong>Pulido y limpieza:</strong> Cobertura sobre la
-                      correcta ejecución del servicio contratado
-                    </li>
-                    <li>
-                      <strong>Reparaciones:</strong> Garantía de 1 año en
-                      restauraciones
-                    </li>
-                  </ul>
                   <p>
-                    Todas las garantías cubren defectos de aplicación. La
-                    cobertura por daños ambientales depende del tipo de
-                    protección contratada. Consulta con nuestro equipo técnico
-                    para detalles específicos.
+                    Antes de aprobar el trabajo indicamos por escrito qué cubre,
+                    durante cuánto tiempo y qué mantenimiento necesita para
+                    conservar esa cobertura.
                   </p>
                 </div>
               </div>
@@ -3269,7 +2045,7 @@
                 class="faq-toggle w-full px-8 py-5 text-left flex items-start justify-between gap-4 hover:bg-slate-100 transition"
               >
                 <span class="font-semibold text-navy-900 text-lg"
-                  >¿Cómo saber si el gelcoat se puede reparar o necesita pintura?</span
+                  >¿Reparan rayones, grietas y golpes en gelcoat?</span
                 >
                 <i
                   class="ph ph-caret-down text-gold-400 text-xl transition-transform flex-shrink-0 mt-1 mr-3"
@@ -3406,13 +2182,14 @@
                 ¡Mensaje recibido!
               </p>
               <p class="text-green-600 text-sm">
-                Te contactamos en menos de 2 horas por WhatsApp al número
-                indicado.
+                Gracias por compartir los datos de su embarcación. Revisaremos
+                la solicitud y nos comunicaremos por WhatsApp.
               </p>
             </div>
 
             <form
               id="contact-form"
+              aria-label="Solicitar evaluación de la embarcación"
               class="space-y-4"
               action="https://formspree.io/f/xdajpzpj"
               method="POST"
@@ -3430,214 +2207,70 @@
                     type="text"
                     name="nombre"
                     required
+                    autocomplete="name"
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
-                    placeholder="Su Nombre"
+                    placeholder="Su nombre"
                   />
                 </div>
                 <div class="space-y-2 w-full">
                   <label
-                    for="form-telefono-num"
+                    for="form-telefono"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
-                    >Teléfono</label
+                    >Teléfono / WhatsApp</label
                   >
-                  <div
-                    class="flex items-center border-b border-slate-300 focus-within:border-gold-400 transition-colors"
-                  >
-                    <select
-                      id="form-country-code"
-                      name="codigo_pais"
-                      aria-label="Código de país"
-                      class="text-slate-500 text-sm py-2 pr-2 bg-transparent focus:outline-none cursor-pointer border-r border-white/10 mr-2 shrink-0"
-                      style="max-width: 100px"
-                    >
-                      <option value="+57" selected>🇨🇴 +57</option>
-                      <option value="+58">🇻🇪 +58</option>
-                      <option value="+507">🇵🇦 +507</option>
-                      <option value="+1">🇺🇸 +1</option>
-                      <option value="+1">🇨🇦 +1</option>
-                      <option value="+52">🇲🇽 +52</option>
-                      <option value="+54">🇦🇷 +54</option>
-                      <option value="+55">🇧🇷 +55</option>
-                      <option value="+56">🇨🇱 +56</option>
-                      <option value="+593">🇪🇨 +593</option>
-                      <option value="+51">🇵🇪 +51</option>
-                      <option value="+598">🇺🇾 +598</option>
-                      <option value="+591">🇧🇴 +591</option>
-                      <option value="+595">🇵🇾 +595</option>
-                      <option value="+506">🇨🇷 +506</option>
-                      <option value="+503">🇸🇻 +503</option>
-                      <option value="+502">🇬🇹 +502</option>
-                      <option value="+504">🇭🇳 +504</option>
-                      <option value="+505">🇳🇮 +505</option>
-                      <option value="+1809">🇩🇴 +1809</option>
-                      <option value="+53">🇨🇺 +53</option>
-                      <option value="+1787">🇵🇷 +1787</option>
-                      <option value="+34">🇪🇸 +34</option>
-                      <option value="+351">🇵🇹 +351</option>
-                      <option value="+44">🇬🇧 +44</option>
-                      <option value="+49">🇩🇪 +49</option>
-                      <option value="+33">🇫🇷 +33</option>
-                      <option value="+39">🇮🇹 +39</option>
-                      <option value="+31">🇳🇱 +31</option>
-                      <option value="+61">🇦🇺 +61</option>
-                    </select>
-                    <input
-                      id="form-telefono-num"
-                      type="tel"
-                      inputmode="numeric"
-                      maxlength="15"
-                      required
-                      class="flex-1 py-2 focus:outline-none bg-transparent placeholder-slate-300"
-                      placeholder="300 000 0000"
-                      autocomplete="tel-national"
-                    />
-                  </div>
-                  <input type="hidden" id="form-telefono" name="telefono" />
+                  <input
+                    id="form-telefono"
+                    type="tel"
+                    name="telefono"
+                    required
+                    inputmode="tel"
+                    autocomplete="tel"
+                    class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
+                    placeholder="+57 300 000 0000"
+                  />
                 </div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="space-y-2 w-full">
                   <label
+                    for="form-servicio"
+                    class="text-xs uppercase tracking-widest text-slate-500 font-bold"
+                    >Servicio prioritario</label
+                  >
+                  <select
+                    id="form-servicio"
+                    name="servicio"
+                    required
+                    class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent text-slate-600"
+                  >
+                    <option value="" selected disabled>Seleccione un servicio</option>
+                    <option>Pulido de Yates y Botes</option>
+                    <option>Pisos Sintéticos EVA</option>
+                    <option>Reparación de Gelcoat o Fibra</option>
+                    <option>Pintura Naval</option>
+                    <option>Limpieza de Cojinería y Tapicería</option>
+                    <option>Electricidad y Aire Acondicionado</option>
+                    <option>Mecánica Naval</option>
+                    <option>Limpieza de Casco</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+                <div class="space-y-2 w-full">
+                  <label
                     for="form-eslora"
                     class="text-xs uppercase tracking-widest text-slate-500 font-bold"
-                    >Eslora (Pies)</label
+                    >Eslora en pies
+                    <span class="font-normal normal-case">(opcional)</span></label
                   >
                   <input
                     id="form-eslora"
                     type="text"
                     name="eslora_pies"
+                    inputmode="decimal"
                     class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent placeholder-slate-300"
-                    placeholder="Ej: 42, 60, 80..."
+                    placeholder="Ej: 42"
                   />
-                </div>
-                <div class="space-y-2 w-full">
-                  <label
-                    for="form-ubicacion"
-                    class="text-xs uppercase tracking-widest text-slate-500 font-bold"
-                    >Ubicación</label
-                  >
-                  <select
-                    id="form-ubicacion"
-                    name="ubicacion"
-                    class="w-full border-b border-slate-300 py-2 focus:outline-none focus:border-gold-400 transition-colors bg-transparent text-slate-600"
-                  >
-                    <option>Cartagena de Indias</option>
-                    <option>Club de Pesca</option>
-                    <option>Club Náutico</option>
-                    <option>Muelle Privado</option>
-                    <option>Otro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="space-y-3">
-                <label
-                  class="text-xs uppercase tracking-widest text-slate-500 font-bold"
-                  >Interés Principal</label
-                >
-                <div
-                  class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-600"
-                >
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Pulido de Yates y Botes"
-                      class="accent-gold-400"
-                    />
-                    Pulido de Yates y Botes
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Pisos Sintéticos EVA"
-                      class="accent-gold-400"
-                    />
-                    Pisos Sintéticos EVA
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Reparación de Gelcoat o Fibra"
-                      class="accent-gold-400"
-                    />
-                    Reparación de Gelcoat o Fibra
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Pintura Naval"
-                      class="accent-gold-400"
-                    />
-                    Pintura Naval
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Limpieza de Cojinería y Tapicería"
-                      class="accent-gold-400"
-                    />
-                    Limpieza de Cojinería y Tapicería
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Electricidad y Aire Acondicionado"
-                      class="accent-gold-400"
-                    />
-                    Electricidad y Aire Acondicionado
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Mecánica Naval"
-                      class="accent-gold-400"
-                    />
-                    Mecánica Naval
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Limpieza de Casco"
-                      class="accent-gold-400"
-                    />
-                    Limpieza de Casco
-                  </label>
-                  <label
-                    class="flex items-center gap-2 cursor-pointer p-2 border border-slate-100 rounded hover:bg-white/10 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      name="servicio[]"
-                      value="Otro"
-                      class="accent-gold-400"
-                    />
-                    Otro
-                  </label>
                 </div>
               </div>
 
@@ -3662,24 +2295,24 @@
                 id="contact-submit-btn"
                 class="w-full bg-navy-900 text-white font-bold text-sm tracking-widest uppercase py-4 hover:bg-gold-400 transition-colors mt-4 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Solicitar Cotización
+                Enviar solicitud
               </button>
+              <a
+                href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20consultar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-2 border border-green-500 text-navy-900 font-bold text-sm tracking-wider uppercase py-3 hover:bg-green-500 hover:text-white transition-colors"
+              >
+                <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+                Hablar directamente por WhatsApp
+              </a>
             </form>
 
             <script>
               (function () {
                 var form = document.getElementById("contact-form");
-                var numInput = document.getElementById("form-telefono-num");
-                var countrySelect =
-                  document.getElementById("form-country-code");
-                var hiddenTel = document.getElementById("form-telefono");
                 var successDiv = document.getElementById("contact-success");
                 var submitBtn = document.getElementById("contact-submit-btn");
-
-                // Solo números en el campo de teléfono
-                numInput.addEventListener("input", function () {
-                  this.value = this.value.replace(/\D/g, "");
-                });
 
                 form.addEventListener("submit", async function (e) {
                   e.preventDefault();
@@ -3689,9 +2322,6 @@
                     form.reportValidity();
                     return;
                   }
-
-                  // Combinar +57 con el número
-                  hiddenTel.value = countrySelect.value + numInput.value;
 
                   submitBtn.disabled = true;
                   submitBtn.textContent = "Enviando...";
@@ -3707,12 +2337,12 @@
                       successDiv.style.display = "block";
                     } else {
                       submitBtn.disabled = false;
-                      submitBtn.textContent = "Solicitar Cotización";
+                      submitBtn.textContent = "Enviar solicitud";
                       alert("Hubo un error. Por favor inténtelo de nuevo.");
                     }
                   } catch (err) {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = "Solicitar Cotización";
+                    submitBtn.textContent = "Enviar solicitud";
                     alert(
                       "Hubo un error de conexión. Por favor inténtelo de nuevo.",
                     );
@@ -3751,7 +2381,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              Estándares Internacionales de Excelencia Marina desde 2024.
+              Cuidado técnico de embarcaciones en Cartagena.
             </p>
           </div>
           <div>
@@ -3773,6 +2403,13 @@
                   href="about.html"
                   class="text-slate-300 hover:text-gold-400 transition-colors"
                   >Sobre Nosotros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="casos-reales.html"
+                  class="text-slate-300 hover:text-gold-400 transition-colors"
+                  >Casos Reales</a
                 >
               </li>
               <li>
@@ -3853,7 +2490,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/home.js?v=20260812-3"></script>
+    <script defer src="js/home.js?v=20260813-2"></script>
     <script>
       window.addEventListener(
         "load",

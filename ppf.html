@@ -1,4 +1,4 @@
-﻿﻿﻿<!doctype html>
+<!doctype html>
 <html lang="es-CO" class="scroll-smooth">
   <head>
     <!-- Google Analytics - lazy loaded for better performance -->
@@ -35,12 +35,12 @@
     <link rel="icon" href="/favicon.svg?v=20260812" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PPF para Yates en Cartagena | Garantía de por Vida</title>
+    <title>PPF para Yates en Cartagena | Película Protectora</title>
 
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="PPF (Paint Protection Film) profesional para yates y botes en Cartagena, Colombia. Protección contra rayos UV, sal marina y abrasiones con garantía de por vida. Servicio en Cartagena de Indias."
+      content="Instalación de PPF para zonas expuestas de yates y botes en Cartagena. Película protectora contra abrasión, roces y contaminantes; cobertura según el producto cotizado."
     />
     <meta
       name="keywords"
@@ -81,7 +81,7 @@
     />
     <meta
       property="og:description"
-      content="Paint Protection Film profesional para yates y embarcaciones en Cartagena. Garantía de por vida."
+      content="Paint Protection Film para zonas expuestas de yates y embarcaciones en Cartagena. Cobertura y condiciones según la película cotizada."
     />
     <meta
       property="og:image"
@@ -95,7 +95,7 @@
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "PPF Paint Protection Film para Botes en Cartagena",
-        "description": "Instalación profesional de PPF (Paint Protection Film) para yates y embarcaciones en Cartagena, Colombia. Protección permanente contra rayos UV, sal marina y abrasiones. Garantía de por vida.",
+        "description": "Instalación de PPF (Paint Protection Film) para zonas expuestas de yates y embarcaciones en Cartagena, Colombia. La película, cobertura y condiciones se definen por escrito según el área y el producto cotizado.",
         "serviceType": "Boat Detailing",
         "url": "https://www.colombiaboatdetailing.com/ppf.html",
         "provider": {
@@ -127,13 +127,6 @@
         "@type": "LocalBusiness",
         "@id": "https://www.colombiaboatdetailing.com/#organization",
         "name": "Colombia Boat Detailing",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "47",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "sameAs": "https://maps.app.goo.gl/HnKWMGY6tKthLGde8"
       }
     </script>
@@ -156,7 +149,7 @@
             "name": "¿Cuánto tiempo dura el PPF en un barco en Cartagena?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Los PPF de grado marino de alta calidad tienen una duración garantizada de 5 a 10 años. La instalación profesional con PPF premium puede garantizarse por 7+ años sin amarillamiento, burbujas ni despegue en el Caribe colombiano."
+              "text": "La vida útil depende de la película seleccionada, la preparación, la zona instalada, la exposición UV, el mantenimiento y las condiciones de uso. Antes de instalar indicamos por escrito la cobertura disponible del fabricante y la que corresponde a nuestra aplicación."
             }
           },
           {
@@ -260,7 +253,7 @@
     />
     <link
       rel="preload"
-      href="fonts/playfair-display-normal-700-latin.woff2"
+      href="fonts/playfair-display-normal-400-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -849,13 +842,14 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="css/tailwind.css?v=20260727-1" />
+    <link rel="stylesheet" href="css/tailwind.css?v=20260813-2" />
     <!-- Google Fonts: Playfair Display (Lujo) & Lato (Legibilidad) -->
     <link
       rel="preload"
-      href="images/services/ppf.webp"
+      href="images/services/ppf-480.webp"
       as="image"
       type="image/webp"
+      media="(max-width: 767px)"
       fetchpriority="high"
     />
     <link
@@ -863,6 +857,7 @@
       href="images/services/ppf.webp"
       as="image"
       type="image/webp"
+      media="(min-width: 768px)"
       fetchpriority="high"
     />
     <!-- Phosphor Icons -->
@@ -880,8 +875,8 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link rel="preload" href="css/styles.css?v=20260813-2" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20260813-2" /></noscript>
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -1148,18 +1143,27 @@
 
     <!-- Hero Section -->
     <section
-      class="pt-32 pb-16 bg-cover bg-center text-white relative overflow-hidden"
-      style="
-        padding-top: 8rem;
-        background-image:
-          linear-gradient(
-            to right,
-            rgba(10, 25, 47, 0.85),
-            rgba(10, 25, 47, 0.7)
-          ),
-          url(&quot;images/services/ppf.webp&quot;);
-      "
+      class="pt-32 pb-16 text-white relative overflow-hidden"
+      style="padding-top: 8rem"
     >
+      <picture class="absolute inset-0" aria-hidden="true">
+        <source media="(max-width: 767px)" srcset="images/services/ppf-480.webp" />
+        <img
+          src="images/services/ppf.webp"
+          alt=""
+          class="w-full h-full object-cover object-center"
+          width="941"
+          height="1672"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div
+        class="absolute inset-0"
+        style="background: linear-gradient(to right, rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.7))"
+        aria-hidden="true"
+      ></div>
       <div class="absolute inset-0 opacity-10">
         <div
           class="absolute top-10 right-10 w-96 h-96 bg-gold-400 rounded-full blur-[100px]"
@@ -1183,10 +1187,9 @@
             Paint Protection Film <span class="text-gold-400">(PPF)</span>
           </h1>
           <p class="text-xl text-slate-300 font-light mb-6 max-w-2xl mx-auto">
-            Película protectora transparente con garantía de por vida. Máxima
-            protección contra rayos UV, sal marina, contaminantes y daños
-            físicos menores. La mejor inversión para preservar la pintura
-            original de tu embarcación.
+            Película protectora transparente para zonas expuestas a roces,
+            abrasión y contaminantes. Evaluamos la superficie y proponemos la
+            cobertura adecuada para preservar el acabado de tu embarcación.
           </p>
           <div class="flex items-center justify-center gap-3 mb-8">
             <span
@@ -1196,7 +1199,7 @@
               según área de cobertura
             </span>
             <span class="text-slate-400 text-sm font-light"
-              >· Garantía de por vida</span
+              >· Cobertura definida por escrito</span
             >
           </div>
           <a
@@ -1256,11 +1259,11 @@
                   ></i>
                   <div>
                     <h4 class="font-semibold text-navy-900 mb-1">
-                      Garantía de Por Vida
+                      Cobertura según película
                     </h4>
                     <p class="text-slate-600 text-sm">
-                      Cobertura completa contra defectos de fabricación y
-                      aplicación
+                      Condiciones del fabricante y de instalación indicadas en
+                      la cotización
                     </p>
                   </div>
                 </li>
@@ -1271,11 +1274,11 @@
               id="ppf-aplicacion"
               class="ppf-application-image bg-cover rounded-sm text-white flex items-center justify-center relative overflow-hidden shadow-2xl"
               style="
-                background-image: url(&quot;images/services/ppf.webp?v=20260727-1&quot;);
+                background-image: url(&quot;images/services/ppf.webp&quot;);
                 background-position: center 70%;
               "
               role="img"
-              aria-label="Instalación profesional de película PPF sobre la pintura de un yate"
+              aria-label="Vista ilustrativa de una superficie exterior de yate"
             >
               <div
                 class="absolute inset-0 bg-gradient-to-t from-navy-900/45 via-transparent to-black/10"
@@ -1284,7 +1287,7 @@
                 class="absolute left-6 bottom-6 right-6 border-l-2 border-gold-400 pl-4"
               >
                 <p class="text-white text-sm font-semibold tracking-wide">
-                  Aplicación real de PPF sobre una embarcación
+                  Vista ilustrativa de una zona exterior protegida
                 </p>
               </div>
             </div>
@@ -1296,17 +1299,18 @@
                 Protección Completa
               </h3>
               <p class="text-slate-700 font-light">
-                Cubre rayos UV, sal marina, contaminantes aéreos, decoloración y
-                daño físico menor. La pintura permanece como nueva.
+                Ayuda a reducir desgaste por roces, abrasión, contaminantes y
+                exposición en las zonas donde se instala.
               </p>
             </div>
             <div class="bg-white/5 border border-white/10 p-8 rounded-sm">
               <h3 class="font-serif text-2xl text-navy-900 mb-4">
-                Durabilidad Extrema
+                Durabilidad condicionada
               </h3>
               <p class="text-slate-700 font-light">
-                10-15 años de protección bajo condiciones normales en Cartagena.
-                Mantenimiento simple: lavado regular y sellos anuales.
+                La vida útil depende de la película, la preparación, la
+                exposición, el uso y el mantenimiento. La cotización identifica
+                el producto y su cobertura aplicable.
               </p>
             </div>
             <div class="bg-white/5 border border-white/10 p-8 rounded-sm">
@@ -1314,7 +1318,8 @@
                 Valor de Reventa
               </h3>
               <p class="text-slate-700 font-light">
-                Aumenta significativamente el valor de transferencia de tu
+                Ayuda a conservar el acabado original y puede aportar confianza
+                durante la inspección de venta de tu
                 embarcación. Los compradores valoran pintura original protegida.
               </p>
             </div>
@@ -1387,7 +1392,8 @@
                 <p class="text-slate-700 font-light mb-3">
                   Descontaminación profunda con tratamientos especializados.
                   Corrección de pintura menor para eliminar defectos. Aplicación
-                  de promotor de adhesión para garantizar pegado perfecto.
+                  de promotor de adhesión solo donde la geometría y el producto
+                  lo requieran para reforzar la adherencia.
                 </p>
                 <p class="text-slate-600 text-sm">
                   <strong>Duración:</strong> 6-8 horas (según tamaño)
@@ -1411,7 +1417,7 @@
                 <p class="text-slate-700 font-light mb-3">
                   Instalación precisa de la película en áreas críticas (proa,
                   rodos, canales, detalles). Uso de herramientas profesionales y
-                  secado controlled. Eliminación de burbujas y ajustes finales.
+                  secado controlado. Eliminación de burbujas y ajustes finales.
                 </p>
                 <p class="text-slate-600 text-sm">
                   <strong>Duración:</strong> 8-12 horas (según cobertura)
@@ -1433,9 +1439,9 @@
                   Sellado y Protección Final
                 </h3>
                 <p class="text-slate-700 font-light mb-3">
-                  Aplicación de top coat de cerámica para aumentar
-                  hidrofobicidad. Curado y burnishing profesional. Inspección
-                  final de calidad y documentación de garantía.
+                  Cuando el sistema elegido lo admite, aplicamos protección
+                  compatible para facilitar el cuidado. Cerramos con inspección
+                  final y registro de la instalación y su cobertura.
                 </p>
                 <p class="text-slate-600 text-sm">
                   <strong>Duración:</strong> 2-4 horas
@@ -1459,7 +1465,7 @@
                 <p class="text-slate-700 font-light mb-3">
                   Asesoramiento sobre mantenimiento, limpieza segura y
                   protectores recomendados. Plan de inspecciones anuales.
-                  Registro de garantía digital.
+                  Registro de instalación, producto y cobertura aplicable.
                 </p>
                 <p class="text-slate-600 text-sm">
                   <strong>Duración:</strong> Consulta 30 minutos
@@ -1500,36 +1506,38 @@
       <div class="container mx-auto px-6">
         <div class="w-full mx-auto">
           <h2 class="font-serif text-4xl text-navy-900 mb-12">
-            Garantía de Por Vida
+            Cobertura y condiciones por escrito
           </h2>
 
           <div
             class="bg-gradient-to-r from-navy-900 to-navy-800 text-white rounded-sm p-12 mb-12"
           >
-            <h3 class="font-serif text-3xl mb-6">Cobertura Completa</h3>
+            <h3 class="font-serif text-3xl mb-6">Qué se confirma antes de instalar</h3>
             <p class="text-lg font-light mb-6">
-              Nuestro PPF está respaldado por garantía de por vida contra:
+              La cobertura depende de la película elegida y del alcance. La
+              cotización identifica el producto, la zona y las condiciones
+              aplicables a materiales e instalación.
             </p>
             <ul class="space-y-3 text-slate-100">
               <li class="flex items-center gap-3">
                 <i class="ph ph-check-circle text-gold-400 text-xl"></i>
-                Defectos de fabricación de la película
+                Cobertura del fabricante, cuando aplique al producto elegido
               </li>
               <li class="flex items-center gap-3">
                 <i class="ph ph-check-circle text-gold-400 text-xl"></i>
-                Errores de aplicación o instalación defectuosa
+                Corrección de fallas atribuibles a nuestra instalación
               </li>
               <li class="flex items-center gap-3">
                 <i class="ph ph-check-circle text-gold-400 text-xl"></i>
-                Despegue, ampollas o separación
+                Condiciones para reportar despegue, ampollas o separación
               </li>
               <li class="flex items-center gap-3">
                 <i class="ph ph-check-circle text-gold-400 text-xl"></i>
-                Decoloración amarillenta de la película
+                Exclusiones por desgaste, químicos o mantenimiento inadecuado
               </li>
               <li class="flex items-center gap-3">
                 <i class="ph ph-check-circle text-gold-400 text-xl"></i>
-                Falta de adhesión o protección deficiente
+                Revisión de la superficie y aceptación antes de instalar
               </li>
             </ul>
           </div>
@@ -1537,14 +1545,14 @@
           <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-white/5 border border-white/10 p-8 rounded-sm">
               <h4 class="font-semibold text-navy-900 text-lg mb-4">
-                ¿Qué cubre?
+                Documento de alcance
               </h4>
               <ul class="space-y-3 text-slate-700 font-light text-sm">
-                <li>✓ Reparaciones de película defectuosa</li>
-                <li>✓ Reemplazo completo si es necesario</li>
-                <li>✓ Mano de obra profesional</li>
-                <li>✓ Materiales de reemplazo premium</li>
-                <li>✓ Transferencia a nuevo propietario</li>
+                <li>✓ Marca y referencia de la película</li>
+                <li>✓ Áreas exactas de instalación</li>
+                <li>✓ Preparación incluida</li>
+                <li>✓ Cobertura de material e instalación</li>
+                <li>✓ Recomendaciones de cuidado</li>
               </ul>
             </div>
 
@@ -1553,8 +1561,8 @@
                 Validez y Limitaciones
               </h4>
               <ul class="space-y-3 text-slate-700 font-light text-sm">
-                <li>• Válida durante la vida útil de la película</li>
-                <li>• Transferible al nuevo propietario</li>
+                <li>• Vigencia según producto y cotización</li>
+                <li>• Transferencia solo si el fabricante la admite</li>
                 <li>• Requiere mantenimiento regular recomendado</li>
                 <li>• No cubre daño físico por choque o impacto</li>
                 <li>• No cubre vandalismo o accidentes</li>
@@ -1668,13 +1676,11 @@
                 ></i>
               </summary>
               <div class="px-6 pb-5 text-slate-600 font-light leading-relaxed">
-                Los PPF de grado marino de alta calidad tienen una duración
-                garantizada de <strong>5 a 10 años</strong> en condiciones
-                normales de uso. En el Caribe colombiano, con alta exposición UV
-                y salitre, recomendamos PPF con protección UV certificada. La
-                instalación profesional con un PPF premium puede garantizarse
-                por 7+ años sin amarillamiento, burbujas ni despegue. El PPF de
-                entrada (sin garantía extendida) puede durar 3–5 años.
+                La vida útil depende de la película seleccionada, la preparación,
+                la zona instalada, la exposición UV, el uso y el mantenimiento.
+                Antes de instalar indicamos por escrito la referencia del
+                producto, la cobertura disponible del fabricante y las
+                condiciones que corresponden a nuestra aplicación.
               </div>
             </details>
 
@@ -1735,14 +1741,12 @@
                 ></i>
               </summary>
               <div class="px-6 pb-5 text-slate-600 font-light leading-relaxed">
-                Un PPF correctamente instalado se retira
-                <strong>sin dañar la pintura ni el gelcoat</strong> subyacente.
-                El proceso consiste en calentar el film con pistola de calor
-                para ablandar el adhesivo y luego retirar la lámina en tiras.
-                Después se elimina el residuo adhesivo con isopropanol. Si el
-                PPF fue instalado hace más de 8–10 años o bajo condiciones de
-                calor extremo, puede ser más difícil y requiere mayor cuidado.
-                Siempre recomendamos que lo retire un instalador certificado.
+                La retirada se hace con calor y técnica controlados después de
+                revisar el estado del film y de la superficie. El adhesivo se
+                retira por secciones y los residuos se limpian con productos
+                compatibles. Una película envejecida, expuesta a calor intenso
+                o instalada sobre pintura débil puede requerir más cuidado; por
+                eso recomendamos una evaluación profesional antes de retirarla.
               </div>
             </details>
 
@@ -1787,8 +1791,9 @@
             ¿Listo para Proteger tu Embarcación?
           </h2>
           <p class="text-lg text-slate-300 font-light mb-8">
-            Agenda una inspección gratuita. Nuestros especialistas evaluarán tu
-            yate y recomendarán la mejor estrategia de protección.
+            Envíanos fotos de la zona y coordinamos una evaluación para definir
+            si el PPF es adecuado, qué superficie conviene cubrir y qué producto
+            se cotizará.
           </p>
           <a
             href="https://wa.me/573044301112?text=Hola%2C%20vi%20la%20p%C3%A1gina%20web%20de%20Colombia%20Boat%20Detailing%20y%20quiero%20cotizar%20la%20protecci%C3%B3n%20con%20PPF%20para%20mi%20embarcaci%C3%B3n"
@@ -1796,7 +1801,7 @@
             rel="noopener noreferrer"
             class="inline-block bg-gold-400 text-navy-900 px-10 py-4 rounded-sm font-semibold hover:bg-gold-400 transition"
           >
-            Agendar Inspección Gratuita
+            Cotizar PPF por WhatsApp
           </a>
         </div>
       </div>
@@ -1828,7 +1833,7 @@
               </div>
             </div>
             <p class="text-xs text-slate-300 font-light">
-              Estándares Internacionales de Excelencia Marina desde 2024.
+              Cuidado técnico de embarcaciones en Cartagena.
             </p>
           </div>
           <div>
@@ -1923,7 +1928,7 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20260727-2"></script>
+    <script defer src="js/main.js?v=20260813-3"></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
