@@ -11,7 +11,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -567,7 +567,7 @@
 
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/costo-mantenimiento-anual-yate-cartagena/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -743,7 +743,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/guia-mantenimiento-yates-cartagena-2027/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
