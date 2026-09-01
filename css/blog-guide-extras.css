@@ -1,0 +1,4 @@
+@font-face{font-family:Inter;src:url('../fonts/inter-normal-400-latin.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Playfair Display";src:url('../fonts/playfair-display-normal-400-latin.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:50;display:block;width:58px;height:58px;border-radius:50%;filter:drop-shadow(0 8px 14px rgba(0,0,0,.25))}
+.whatsapp-float img{display:block;width:100%;height:100%}
