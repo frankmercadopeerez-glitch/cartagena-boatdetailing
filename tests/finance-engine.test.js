@@ -133,24 +133,34 @@ function assertValid(state) {
   assert.equal(state.partnerIncome.frank, 1495000);
 }
 
-// Cierre: libera el capital del proyecto y pasa su utilidad al profit 50/50.
+// Cierre: clasifica la utilidad sin mover el dinero entre socios.
 {
-  const state = calculate([
+  const movements = [
     event("capital_contribution", { id: "aporte-orchid", project: "Orchid", responsible: "Frank", monto: 1500000 }),
     event("income", { project: "Orchid", receptor: "Cristian", monto: 5000000 }),
     event("expense", { project: "Orchid", responsible: "Cristian", monto: 2000000 }),
-    event("project_close", { id: "cierre-orchid", project: "Orchid", split: { frank: 0.5, cristian: 0.5 } }),
+  ];
+  const beforeClose = calculate(movements);
+  const state = calculate([
+    ...movements,
+    event("project_close", { id: "cierre-orchid", project: "Orchid" }),
   ]);
   assertValid(state);
   assert.equal(state.capitalActive, 820000);
   assert.equal(state.capital.frank, 4151068.5);
-  assert.equal(state.profitAvailable.frank, 2250000);
-  assert.equal(state.profitAvailable.cristian, 2250000);
+  assert.equal(state.profitAvailable.frank, 0);
+  assert.equal(state.profitAvailable.cristian, 0);
   assert.equal(state.balanceByPartner.frank, 4151068.5);
   assert.equal(state.balanceByPartner.cristian, 5651068.5);
-  assert.equal(state.profitTotal, 14225551);
+  assert.deepEqual(state.balanceByPartner, beforeClose.balanceByPartner);
+  assert.equal(state.profitTotal, 12725551);
   assert.equal(state.projects.Orchid.closed, true);
-  assert.equal(state.projects.Orchid.profit, 4500000);
+  assert.equal(state.projects.Orchid.profit, 3000000);
+  assert.deepEqual(state.projects.Orchid.closeSnapshot.settlement, {
+    from: "cristian",
+    to: "frank",
+    amount: 750000,
+  });
 }
 
 // El primer pago de Orchid ya pertenece al saldo de apertura. El saldo final
@@ -187,7 +197,7 @@ function assertValid(state) {
   assert.equal(state.projects["Bote ORCHID"].expenses, 1175000);
   assert.equal(state.projects["Bote ORCHID"].profit, 1815000);
   assert.equal(state.totalIncome, engine.OPENING_STATE.totalIncome + 1495000);
-  assert.equal(state.profitTotal, engine.OPENING_STATE.profitTotal + 1815000);
+  assert.equal(state.profitTotal, engine.OPENING_STATE.profitTotal + 995000);
 }
 
 // Un proyecto que cruza el corte conserva sus anticipos y gastos anteriores
@@ -238,7 +248,7 @@ function assertValid(state) {
   assert.equal(state.projects.Orchid.closed, true);
 }
 
-// Si los profits llegan desiguales al cierre, el socio con menos recibe mas.
+// El cierre no intenta igualar bolsas historicas de profit.
 {
   const opening = {
     asOf: "2026-07-16",
@@ -256,8 +266,8 @@ function assertValid(state) {
   ], opening);
   assertValid(state);
   assert.equal(state.capitalActive, 1000);
-  assert.equal(state.profitAvailable.frank, 550);
-  assert.equal(state.profitAvailable.cristian, 550);
+  assert.equal(state.profitAvailable.frank, 100);
+  assert.equal(state.profitAvailable.cristian, 0);
 }
 
 // Los gastos de un proyecto cerrado afectan su profit, pero no el capital de
@@ -444,8 +454,9 @@ function assertValid(state) {
   assertValid(state);
   assert.equal(state.projects["Bote ORCHID"].closed, true);
   assert.equal(state.capitalActive, 0);
-  assert.equal(state.profitAvailable.frank, 410000);
-  assert.equal(state.profitAvailable.cristian, 410000);
+  assert.equal(state.profitAvailable.frank, 0);
+  assert.equal(state.profitAvailable.cristian, 0);
+  assert.equal(state.profitTotal, opening.profitTotal);
 }
 
 // Una compra general puede quedar sin proyecto y solo afecta al socio que paga.
@@ -586,6 +597,8 @@ function assertValid(state) {
   assert.equal(engine.canonicalProjectName("Orchid"), "Bote ORCHID");
   assert.equal(engine.canonicalProjectName("  bote orchid  "), "Bote ORCHID");
   assert.equal(engine.canonicalProjectName("Bote Orchid 2.0"), "Bote Orchid 2.0");
+  assert.equal(engine.projectId("Bote Orchid 2.0"), "bote-orchid-2-0");
+  assert.equal(engine.projectId("Yate Háya"), "yate-haya");
   const state = calculate([
     event("project_close", { project: "Bote ORCHID", hora: "09:00" }),
     event("income", {

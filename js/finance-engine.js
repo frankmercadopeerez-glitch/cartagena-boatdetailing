@@ -43,7 +43,6 @@
   const ENGINE_VERSION = 1;
   const PARTNERS = ["frank", "cristian"];
   const PARTNER_NAMES = { frank: "Frank", cristian: "Cristian" };
-  const DEFAULT_SPLIT = { frank: 0.5, cristian: 0.5 };
   const ORCHID_PROJECT_NAME = "Bote ORCHID";
   const ORCHID_PROJECT_ALIASES = new Set(["orchid", "bote orchid"]);
 
@@ -82,6 +81,15 @@
     return ORCHID_PROJECT_ALIASES.has(name.toLowerCase())
       ? ORCHID_PROJECT_NAME
       : name;
+  }
+
+  function projectId(value) {
+    return canonicalProjectName(value)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   function clonePartners(values, fallback = 0) {
@@ -378,43 +386,37 @@
     const utility = money(
       target.income - target.expenses - money(target.legacyCapital),
     );
-    const split = event.split || DEFAULT_SPLIT;
-    const frankShare = Number(split.frank);
-    const cristianShare = Number(split.cristian);
-    if (
-      !Number.isFinite(frankShare) ||
-      !Number.isFinite(cristianShare) ||
-      frankShare < 0 ||
-      cristianShare < 0 ||
-      Math.abs(frankShare + cristianShare - 1) > 0.000001
-    ) {
-      addError(state, "INVALID_SPLIT", "El reparto del proyecto debe sumar 100%.", event);
-      return;
-    }
     const releasedCapital = clonePartners(target.capital);
     const releasedTotal = releasedCapital.frank + releasedCapital.cristian;
-    const distributable = money(releasedTotal + utility);
-    const targetProfit = money(
-      (state.profitAvailable.frank +
-        state.profitAvailable.cristian +
-        distributable) /
-        2,
-    );
-    // El cierre no vuelve a dividir el capital. Libera el capital del proyecto
-    // y distribuye capital + utilidad para que ambos profits terminen iguales.
-    // Si uno ya tiene mas profit, su asignacion puede ser menor (o negativa)
-    // porque esta operación también corrige el desequilibrio acumulado.
-    const profitByPartner = {
-      frank: money(targetProfit - state.profitAvailable.frank),
-      cristian: money(targetProfit - state.profitAvailable.cristian),
+    const projectProfit = money(target.income - target.expenses);
+    const accountAtClose = {
+      frank: money(
+        state.capital.frank + state.partnerIncome.frank -
+          state.activePartnerExpenses.frank - state.accountWithdrawals.frank,
+      ),
+      cristian: money(
+        state.capital.cristian + state.partnerIncome.cristian -
+          state.activePartnerExpenses.cristian - state.accountWithdrawals.cristian,
+      ),
     };
-    PARTNERS.forEach((partner) => {
-      state.profitAvailable[partner] += profitByPartner[partner];
-    });
+    const settlementAmount = money(
+      Math.abs(accountAtClose.frank - accountAtClose.cristian) / 2,
+    );
+    const settlement = settlementAmount > 0
+      ? {
+          from: accountAtClose.frank > accountAtClose.cristian ? "frank" : "cristian",
+          to: accountAtClose.frank > accountAtClose.cristian ? "cristian" : "frank",
+          amount: settlementAmount,
+        }
+      : null;
+
+    // Cerrar clasifica el resultado del proyecto, pero nunca mueve el dinero
+    // fisico entre socios. Una compensacion requiere su propia transferencia.
     state.capitalActive -= releasedTotal;
     state.releasedProjectCapital += releasedTotal;
-    state.profitTotal += distributable;
-    target.profit = distributable;
+    state.realizedProfitChange += utility;
+    state.profitTotal += utility;
+    target.profit = projectProfit;
     target.closed = true;
     target.closeId = event.id || null;
     target.closeSnapshot = {
@@ -422,11 +424,12 @@
       expenses: target.expenses,
       utility,
       legacyCapital: money(target.legacyCapital),
-      distributable,
+      projectProfit,
       releasedCapital,
       settledIncome: clonePartners(target.incomeByPartner),
       settledExpenses: clonePartners(target.expenseByPartner),
-      profitByPartner,
+      accountAtClose,
+      settlement,
     };
   }
 
@@ -466,6 +469,7 @@
       activePartnerExpenses: clonePartners(opening.activePartnerExpenses),
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
       releasedProjectCapital: 0,
+      realizedProfitChange: 0,
       projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
       validation: { valid: true, errors: [], checks: {} },
@@ -532,9 +536,7 @@
     const expectedCapitalDifference = money(
       openingCapitalDifference + state.releasedProjectCapital,
     );
-    const expectedProfitTotal = money(
-      state.profitAvailableTotal + state.profitWithdrawals,
-    );
+    const expectedProfitTotal = money(opening.profitTotal + state.realizedProfitChange);
 
     state.validation.checks = {
       capital: {
@@ -608,6 +610,7 @@
     OPENING_STATE,
     calculate,
     canonicalProjectName,
+    projectId,
     eventType,
     findBlockingValidationError,
     makeEvent,
