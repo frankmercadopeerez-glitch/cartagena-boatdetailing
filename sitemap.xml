@@ -11,7 +11,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog.html</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -97,7 +97,7 @@
   <!-- Pintura de Botes -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/boat-painting.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -141,7 +141,7 @@
   <!-- Control Anticorrosivo -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/anti-corrosion.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -199,7 +199,7 @@
   <!-- Interiores y Tapicería -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/interior-detailing.html</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -211,7 +211,7 @@
   <!-- Lavado Técnico -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/technical-wash.html</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -358,7 +358,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/cuidado-cojineria/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -840,7 +840,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/index-en.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
@@ -888,7 +888,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/interior-detailing-en.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -1039,4 +1039,5 @@
     <lastmod>2026-08-31</lastmod><changefreq>monthly</changefreq><priority>0.86</priority>
     <image:image><image:loc>https://www.colombiaboatdetailing.com/images/blog/foam-deck-se-despega-reparacion.webp</image:loc><image:title>Reparación de foam deck despegado</image:title><image:caption>Instalador evaluando un borde levantado de piso EVA en un yate</image:caption></image:image>
   </url>
+  <url><loc>https://www.colombiaboatdetailing.com/blog/limpieza-cojineria-yate-cartagena/</loc><lastmod>2026-09-07</lastmod></url>
 </urlset>

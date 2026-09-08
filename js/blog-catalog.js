@@ -1,4 +1,5 @@
 window.BLOG_POSTS = [
+  {"slug": "limpieza-cojineria-yate-cartagena", "url": "blog/limpieza-cojineria-yate-cartagena/", "title": "Limpieza de Cojinería de Yates en Cartagena: Manchas y Secado", "excerpt": "Cómo cuidar cojines de yates y botes en Cartagena: limpieza por material, manchas de humedad, secado de espumas y cuándo conviene renovar la tapicería.", "dateISO": "2026-09-07", "dateLabel": "7 Sep 2026", "readTime": "6 min de lectura", "category": "Interiores", "featured": true, "image": "images/cojineria.webp"},
   {
     slug: "mantenimiento-motor-fuera-borda-cartagena",
     url: "blog/mantenimiento-motor-fuera-borda-cartagena/",
@@ -235,7 +236,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?guia,mantenimiento,yates,cartagena,yacht,boat&sig=24",
+      "images/blog/guia-mantenimiento-yates-cartagena-2027.webp",
   },
   {
     slug: "errores-mantenimiento-yates-cartagena",
@@ -249,7 +250,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?errores,mantenimiento,yates,cartagena,yacht,boat&sig=19",
+      "images/blog/errores-mantenimiento-yates-cartagena.webp",
   },
   {
     slug: "detailing-naval-profesional-vs-diy",
@@ -263,7 +264,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?detailing,naval,profesional,diy,yacht,boat&sig=17",
+      "images/blog/detailing-naval-profesional-vs-diy.webp",
   },
   {
     slug: "tapiceria-marina-cartagena-mantenimiento",
@@ -277,7 +278,7 @@ window.BLOG_POSTS = [
     category: "Interiores",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?tapiceria,marina,cartagena,mantenimiento,yacht,boat&sig=64",
+      "images/blog/tapiceria-marina-cartagena-mantenimiento.webp",
   },
   {
     slug: "mantenimiento-helices-yate-cartagena",
@@ -291,7 +292,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?mantenimiento,helices,yate,cartagena,yacht,boat&sig=39",
+      "images/blog/mantenimiento-helices-yate-cartagena.webp",
   },
   {
     slug: "plan-mantenimiento-anual-yate-charter",
@@ -305,7 +306,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?plan,mantenimiento,anual,yate,yacht,boat&sig=45",
+      "images/blog/plan-mantenimiento-anual-yate-charter.webp",
   },
   {
     slug: "buzos-limpieza-casco-cartagena",
@@ -319,7 +320,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?buzos,limpieza,casco,cartagena,yacht,boat&sig=3",
+      "images/blog/buzos-limpieza-casco-cartagena.webp",
   },
   {
     slug: "limpieza-casco-club-nautico-cartagena",
@@ -333,7 +334,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,club,nautico,yacht,boat&sig=30",
+      "images/blog/limpieza-casco-club-nautico-cartagena.webp",
   },
   {
     slug: "limpieza-casco-club-pesca-cartagena",
@@ -347,7 +348,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,club,pesca,yacht,boat&sig=31",
+      "images/blog/limpieza-casco-club-pesca-cartagena.webp",
   },
   {
     slug: "tratamiento-osmosis-casco-fibra",
@@ -361,7 +362,7 @@ window.BLOG_POSTS = [
     category: "Reparacion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?tratamiento,osmosis,casco,fibra,yacht,boat&sig=166",
+      "images/blog/tratamiento-osmosis-casco-fibra.webp",
   },
   {
     slug: "frecuencia-pulido-gelcoat-yate",
@@ -375,7 +376,7 @@ window.BLOG_POSTS = [
     category: "Pintura",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?frecuencia,pulido,gelcoat,yate,yacht,boat&sig=23",
+      "images/blog/frecuencia-pulido-gelcoat-yate.webp",
   },
   {
     slug: "bololo-arsenal-embarcaciones-cartagena",
@@ -390,7 +391,7 @@ window.BLOG_POSTS = [
     category: "Eventos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?bololo,arsenal,embarcaciones,cartagena,yacht,boat&sig=2",
+      "images/blog/bololo-arsenal-embarcaciones-cartagena.webp",
   },
   {
     slug: "cuidado-yate-despues-bololo-arsenal",
@@ -405,7 +406,7 @@ window.BLOG_POSTS = [
     category: "Eventos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?cuidado,yate,despues,bololo,yacht,boat&sig=15",
+      "images/blog/cuidado-yate-despues-bololo-arsenal.webp",
   },
   {
     slug: "festival-nautico-cartagena-2026",
@@ -420,7 +421,7 @@ window.BLOG_POSTS = [
     category: "Eventos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?festival,nautico,cartagena,2026,yacht,boat&sig=20",
+      "images/blog/festival-nautico-cartagena-2026.webp",
   },
   {
     slug: "limpieza-casco-antes-festival-nautico",
@@ -449,7 +450,7 @@ window.BLOG_POSTS = [
     category: "Eventos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,preparacion,yate,festival,yacht,boat&sig=55",
+      "images/blog/precio-preparacion-yate-festival-nautico.webp",
   },
   {
     slug: "precio-restauracion-gelcoat-cartagena",
@@ -463,7 +464,7 @@ window.BLOG_POSTS = [
     category: "Pintura",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,restauracion,gelcoat,cartagena,yacht,boat&sig=156",
+      "images/blog/precio-restauracion-gelcoat-cartagena.webp",
   },
   {
     slug: "cuando-repintar-casco-yate",
@@ -477,7 +478,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?cuando,repintar,casco,yate,yacht,boat&sig=12",
+      "images/blog/cuando-repintar-casco-yate.webp",
   },
   {
     slug: "precio-pintura-motores-marinos-cartagena",
@@ -491,7 +492,7 @@ window.BLOG_POSTS = [
     category: "Pintura",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,pintura,motores,marinos,yacht,boat&sig=53",
+      "images/blog/precio-pintura-motores-marinos-cartagena.webp",
   },
   {
     slug: "precio-pintura-casco-yate-cartagena",
@@ -505,7 +506,7 @@ window.BLOG_POSTS = [
     category: "Pintura",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,pintura,casco,yate,yacht,boat&sig=52",
+      "images/blog/precio-pintura-casco-yate-cartagena.webp",
   },
   {
     slug: "mantenimiento-ceramic-coating-yate",
@@ -519,7 +520,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?mantenimiento,ceramic,coating,yate,yacht,boat&sig=37",
+      "images/blog/mantenimiento-ceramic-coating-yate.webp",
   },
   {
     slug: "ceramic-coating-vs-cera-marina-yate",
@@ -533,7 +534,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?ceramic,coating,cera,marina,yacht,boat&sig=6",
+      "images/blog/ceramic-coating-vs-cera-marina-yate.webp",
   },
   {
     slug: "precio-ceramic-coating-yate-cartagena",
@@ -547,7 +548,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,ceramic,coating,yate,yacht,boat&sig=150",
+      "images/blog/precio-ceramic-coating-yate-cartagena.webp",
   },
   {
     slug: "duracion-ppf-agua-salada-caribe",
@@ -561,7 +562,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?duracion,ppf,agua,salada,yacht,boat&sig=118",
+      "images/blog/duracion-ppf-agua-salada-caribe.webp",
   },
   {
     slug: "precio-ppf-yate-cartagena",
@@ -575,7 +576,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?precio,ppf,yate,cartagena,yacht,boat&sig=154",
+      "images/blog/precio-ppf-yate-cartagena.webp",
   },
   {
     slug: "ppf-vs-ceramic-coating-yate",
@@ -589,7 +590,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?ppf,ceramic,coating,yate,yacht,boat&sig=149",
+      "images/blog/ppf-vs-ceramic-coating-yate.webp",
   },
   {
     slug: "ceramic-coating-vs-ppf-marino",
@@ -604,7 +605,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?ceramic,coating,ppf,marino,yacht,boat&sig=7",
+      "images/blog/ceramic-coating-vs-ppf-marino.webp",
   },
   {
     slug: "costo-mantenimiento-anual-yate-cartagena",
@@ -619,7 +620,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?costo,mantenimiento,anual,yate,yacht,boat&sig=11",
+      "images/blog/costo-mantenimiento-anual-yate-cartagena.webp",
   },
   {
     slug: "tapiceria-nautica-cartagena",
@@ -634,7 +635,7 @@ window.BLOG_POSTS = [
     category: "Interiores",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?tapiceria,nautica,cartagena,yacht,boat&sig=65",
+      "images/blog/tapiceria-nautica-cartagena.webp",
   },
   {
     slug: "instalacion-electrica-nautica-cartagena",
@@ -649,7 +650,7 @@ window.BLOG_POSTS = [
     category: "Electricidad",
     featured: !1,
     image:
-      "https://images.pexels.com/photos/18442732/pexels-photo-18442732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=630",
+      "images/blog/instalacion-electrica-nautica-cartagena.webp",
   },
   {
     slug: "luces-led-yate-cartagena",
@@ -664,7 +665,7 @@ window.BLOG_POSTS = [
     category: "Electricidad",
     featured: !1,
     image:
-      "https://images.pexels.com/photos/19750390/pexels-photo-19750390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=630",
+      "images/blog/luces-led-yate-cartagena.webp",
   },
   {
     slug: "seguridad-electrica-barco",
@@ -679,7 +680,7 @@ window.BLOG_POSTS = [
     category: "Electricidad",
     featured: !1,
     image:
-      "https://images.pexels.com/photos/8356431/pexels-photo-8356431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=630",
+      "images/blog/seguridad-electrica-barco.webp",
   },
   {
     slug: "antifouling-embarcaciones-mar-cartagena",
@@ -722,7 +723,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?ceramic,coating,botes,cartagena,yacht,boat&sig=5",
+      "images/blog/ceramic-coating-botes-cartagena.webp",
   },
   {
     slug: "cubierta-teca-vs-sintetica-yate",
@@ -806,7 +807,7 @@ window.BLOG_POSTS = [
     category: "Reparacion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?reparacion,fibra,vidrio,casco,yacht,boat&sig=60",
+      "images/blog/reparacion-fibra-vidrio-casco.webp",
   },
   {
     slug: "precio-limpieza-casco-cartagena",
@@ -821,7 +822,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?precio,limpieza,casco,cartagena,yacht,boat&sig=51",
+      "images/blog/precio-limpieza-casco-cartagena.webp",
   },
   {
     slug: "checklist-anual-casco-yate",
@@ -835,7 +836,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?checklist,anual,casco,yate,yacht,boat&sig=9",
+      "images/blog/checklist-anual-casco-yate.webp",
   },
   {
     slug: "costo-casco-sucio-yate",
@@ -849,7 +850,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?costo,casco,sucio,yate,yacht,boat&sig=10",
+      "images/blog/costo-casco-sucio-yate.webp",
   },
   {
     slug: "fouling-yates-senales-alerta",
@@ -863,7 +864,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?fouling,yates,senales,alerta,yacht,boat&sig=21",
+      "images/blog/fouling-yates-senales-alerta.webp",
   },
   {
     slug: "frecuencia-limpieza-casco-charter",
@@ -877,7 +878,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?frecuencia,limpieza,casco,charter,yacht,boat&sig=22",
+      "images/blog/frecuencia-limpieza-casco-charter.webp",
   },
   {
     slug: "incrustaciones-marinas",
@@ -892,7 +893,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?incrustaciones,marinas,yacht,boat&sig=25",
+      "images/blog/incrustaciones-marinas.webp",
   },
   {
     slug: "limpieza-casco-antes-travesia",
@@ -906,7 +907,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,antes,travesia,yacht,boat&sig=28",
+      "images/blog/limpieza-casco-antes-travesia.webp",
   },
   {
     slug: "limpieza-casco-catamaran-cartagena",
@@ -920,7 +921,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,catamaran,cartagena,yacht,boat&sig=29",
+      "images/blog/limpieza-casco-catamaran-cartagena.webp",
   },
   {
     slug: "limpieza-casco-frecuencia",
@@ -935,7 +936,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,frecuencia,yacht,boat&sig=32",
+      "images/blog/limpieza-casco-frecuencia.webp",
   },
   {
     slug: "limpieza-casco-veleros-cartagena-checklist",
@@ -949,7 +950,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,casco,veleros,cartagena,yacht,boat&sig=33",
+      "images/blog/limpieza-casco-veleros-cartagena-checklist.webp",
   },
   {
     slug: "limpieza-helice-casco-consumo",
@@ -963,7 +964,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?limpieza,helice,casco,consumo,yacht,boat&sig=34",
+      "images/blog/limpieza-helice-casco-consumo.webp",
   },
   {
     slug: "mantenimiento-anodos-casco",
@@ -977,7 +978,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?mantenimiento,anodos,casco,yacht,boat&sig=36",
+      "images/blog/mantenimiento-anodos-casco.webp",
   },
   {
     slug: "pulido-casco-vs-limpieza-real",
@@ -991,7 +992,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?pulido,casco,limpieza,real,yacht,boat&sig=58",
+      "images/blog/pulido-casco-vs-limpieza-real.webp",
   },
   {
     slug: "pulido-vs-limpieza-casco",
@@ -1006,7 +1007,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?pulido,limpieza,casco,yacht,boat&sig=59",
+      "images/blog/pulido-vs-limpieza-casco.webp",
   },
   {
     slug: "suscripcion-limpieza-casco",
@@ -1020,7 +1021,7 @@ window.BLOG_POSTS = [
     category: "Cascos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?suscripcion,limpieza,casco,yacht,boat&sig=63",
+      "images/blog/suscripcion-limpieza-casco.webp",
   },
   {
     slug: "cuidado-cojineria",
@@ -1048,7 +1049,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?ppf,cartagena,yacht,boat&sig=48",
+      "images/blog/ppf-cartagena.webp",
   },
   {
     slug: "ceramic-comparativa",
@@ -1063,7 +1064,7 @@ window.BLOG_POSTS = [
     category: "Proteccion",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?ceramic,comparativa,yacht,boat&sig=8",
+      "images/blog/ceramic-comparativa.webp",
   },
   {
     slug: "mantenimiento-tropical",
@@ -1092,7 +1093,7 @@ window.BLOG_POSTS = [
     category: "Pintura",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?restauracion,gelcoat,yacht,boat&sig=61",
+      "images/blog/restauracion-gelcoat.webp",
   },
   {
     slug: "mantenimiento-naval-cartagena",
@@ -1106,7 +1107,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !0,
     image:
-      "https://source.unsplash.com/1600x900/?mantenimiento,naval,cartagena,yacht,boat&sig=40",
+      "images/blog/mantenimiento-naval-cartagena.webp",
   },
   {
     slug: "detailing-naval-cartagena",
@@ -1121,7 +1122,7 @@ window.BLOG_POSTS = [
     category: "Mantenimiento",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?detailing,naval,cartagena,yacht,boat&sig=16",
+      "images/blog/detailing-naval-cartagena.webp",
   },
   {
     slug: "mantenimiento-preventivo-embarcaciones-cartagena",
@@ -1164,7 +1165,7 @@ window.BLOG_POSTS = [
     category: "Eventos",
     featured: !1,
     image:
-      "https://source.unsplash.com/1600x900/?prepara,yate,festival,nautico,yacht,boat&sig=57",
+      "images/blog/prepara-tu-yate-festival-nautico-cartagena.webp",
   },
   {
     slug: "foam-deck-cartagena",

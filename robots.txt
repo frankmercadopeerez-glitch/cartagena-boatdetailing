@@ -1,20 +1,9 @@
-﻿# ==============================================
-# Robots.txt - Colombia Boat Detailing
-# Detailing y Estética Naval en Cartagena, Colombia
-# https://www.colombiaboatdetailing.com
-# ==============================================
-
-# Reglas generales para todos los robots
+# Colombia Boat Detailing — public website
 User-agent: *
 Allow: /
-Allow: /images/
-
-# Archivos de configuración (no indexar herramientas internas)
 Disallow: /package.json
 Disallow: /package-lock.json
 Disallow: /.git/
-
-# Páginas privadas de negocio (cotizaciones, facturas, herramientas internas)
 Disallow: /cotizaciones/
 Disallow: /facturas/
 Disallow: /contratos/
@@ -24,123 +13,10 @@ Disallow: /finanzas.html
 Disallow: /business-card.html
 Disallow: /calendario-seo-2026.html
 
-# Sitemap principal
 Sitemap: https://www.colombiaboatdetailing.com/sitemap.xml
 
-# ==============================================
-# GOOGLE - Configuración optimizada
-# ==============================================
-User-agent: Googlebot
-Allow: /
-Allow: /images/*.webp
-Allow: /images/*.jpg
-Allow: /images/*.png
-
-# Googlebot has its own group, so repeat the private-area exclusions here.
-Disallow: /package.json
-Disallow: /package-lock.json
-Disallow: /.git/
-Disallow: /cotizaciones/
-Disallow: /facturas/
-Disallow: /contratos/
-Disallow: /guias/
-Disallow: /tools/
-Disallow: /finanzas.html
-Disallow: /business-card.html
-Disallow: /calendario-seo-2026.html
-
-# Permitir recursos para renderizado
-User-agent: Googlebot-Image
-Allow: /images/
-
-# ==============================================
-# BING - Configuración optimizada
-# ==============================================
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-Disallow: /cotizaciones/
-Disallow: /facturas/
-Disallow: /contratos/
-Disallow: /guias/
-Disallow: /tools/
-Disallow: /finanzas.html
-Disallow: /business-card.html
-Disallow: /calendario-seo-2026.html
-
-User-agent: msnbot
-Allow: /
-Crawl-delay: 1
-
-# ==============================================
-# OTROS BOTS DE BÚSQUEDA
-# ==============================================
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-Crawl-delay: 1
-
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 2
-
-User-agent: YandexBot
-Allow: /
-Crawl-delay: 2
-
-# ==============================================
-# BOTS DE REDES SOCIALES - Permitir para previews
-# ==============================================
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-# ==============================================
-# BOTS DE IA / RESPUESTAS GENERATIVAS
-# ==============================================
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-# ==============================================
-# BLOQUEAR BOTS MALICIOSOS O NO DESEADOS
-# ==============================================
 User-agent: AhrefsBot
-Disallow: /
-
 User-agent: SemrushBot
-Disallow: /
-
 User-agent: MJ12bot
-Disallow: /
-
 User-agent: DotBot
 Disallow: /
-
-# ==============================================
-# INFORMACIÓN DE CONTACTO
-# Colombia Boat Detailing
-# Marina Manzanillo, Cartagena de Indias, Colombia
-# Tel: +57 304 430 1112
-# ==============================================
