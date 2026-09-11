@@ -857,11 +857,14 @@ function normalizeFloatingWhatsApp() {
       existing.setAttribute("aria-label", "Request a quote on WhatsApp");
     return;
   }
-  const e = document.querySelector('a[aria-label="WhatsApp"][href*="wa.me"]');
-  if (!e) return;
+  const e = document.querySelector(
+    'a.fixed[href*="wa.me"], a[aria-label="WhatsApp"][href*="wa.me"]',
+  );
+  const source = e || document.querySelector('a[href*="wa.me"]');
+  if (!source) return;
   const t =
       (window.location.pathname.match(/\//g) || []).length >= 3 ? "../../" : "",
-    a = e.getAttribute("href") || "https://wa.me/573044301112",
+    a = source.getAttribute("href") || "https://wa.me/573044301112",
     n = document.createElement("a");
   ((n.href = a),
     (n.className = "whatsapp-float"),
@@ -874,7 +877,7 @@ function normalizeFloatingWhatsApp() {
         : "Cotizar por WhatsApp",
     ),
     (n.innerHTML = `<img src="${t}images/whatsapp-96.webp" alt="WhatsApp" class="whatsapp-float__img" width="58" height="58" />`),
-    e.replaceWith(n));
+    e ? e.replaceWith(n) : document.body.appendChild(n));
 }
 function centerBlogArticleHeader() {
   const e = (window.location.pathname || "").toLowerCase();
