@@ -1,10 +1,12 @@
 @font-face{font-family:Inter;src:url('../fonts/inter-normal-400-latin.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:"Playfair Display";src:url('../fonts/playfair-display-normal-400-latin.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-.whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:50;display:block;width:58px;height:58px;border-radius:50%;filter:drop-shadow(0 8px 14px rgba(0,0,0,.25))}
-.whatsapp-float img{display:block;width:100%;height:100%}
+.whatsapp-float{position:fixed;right:max(16px,calc(env(safe-area-inset-right) + 14px));bottom:max(18px,calc(env(safe-area-inset-bottom) + 10px));z-index:50;display:block;width:52px;height:52px;border-radius:50%;opacity:.94;filter:drop-shadow(0 5px 12px rgba(0,0,0,.28));transition:opacity .2s ease,transform .2s ease}
+.whatsapp-float img{display:block;width:52px;height:52px;animation:none!important}
+.whatsapp-float:hover,.whatsapp-float:focus-visible{opacity:1;transform:translateY(-2px)}
+.whatsapp-float:focus-visible{outline:3px solid #f2d46b;outline-offset:4px}
 
 /* Keep article navigation available on small screens. */
-@media(max-width:700px){.article-nav__inner{flex-wrap:wrap;gap:16px}.article-links{display:flex;flex-wrap:wrap;gap:12px 24px;width:100%}.article-links a{padding:10px 0}.article-cta{padding:24px}.article-cta a{max-width:100%;text-align:center}.article-body{overflow-wrap:break-word}}
+@media(max-width:700px){.whatsapp-float{right:max(12px,calc(env(safe-area-inset-right) + 10px));bottom:max(14px,calc(env(safe-area-inset-bottom) + 8px));width:46px;height:46px}.whatsapp-float img{width:46px;height:46px}.article-nav__inner{flex-wrap:wrap;gap:16px}.article-links{display:flex;flex-wrap:wrap;gap:12px 24px;width:100%}.article-links a{padding:10px 0}.article-cta{padding:24px}.article-cta a{max-width:100%;text-align:center}.article-body{overflow-wrap:break-word}}
 .article-image{height:auto}.article-links a:focus-visible,.article-body a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 

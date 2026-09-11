@@ -209,6 +209,46 @@
       "permanent": true
     },
     {
+      "source": "/limpieza-casco-bocagrande.html",
+      "destination": "/hull-cleaning.html",
+      "permanent": true
+    },
+    {
+      "source": "/limpieza-casco-baru.html",
+      "destination": "/hull-cleaning.html",
+      "permanent": true
+    },
+    {
+      "source": "/limpieza-casco-islas-del-rosario.html",
+      "destination": "/hull-cleaning.html",
+      "permanent": true
+    },
+    {
+      "source": "/limpieza-casco-manzanillo.html",
+      "destination": "/hull-cleaning.html",
+      "permanent": true
+    },
+    {
+      "source": "/hull-cleaning-bocagrande-en.html",
+      "destination": "/hull-cleaning-en.html",
+      "permanent": true
+    },
+    {
+      "source": "/hull-cleaning-baru-en.html",
+      "destination": "/hull-cleaning-en.html",
+      "permanent": true
+    },
+    {
+      "source": "/hull-cleaning-rosario-en.html",
+      "destination": "/hull-cleaning-en.html",
+      "permanent": true
+    },
+    {
+      "source": "/hull-cleaning-manzanillo-en.html",
+      "destination": "/hull-cleaning-en.html",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "has": [
         {

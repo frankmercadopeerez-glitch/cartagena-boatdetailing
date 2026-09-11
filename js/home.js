@@ -16,6 +16,82 @@
       window.addEventListener("scroll", updateNavbar, { passive: true });
     }
 
+    var english = (document.documentElement.lang || "").toLowerCase().indexOf("en") === 0;
+    var menu = document.querySelector(".nav-dropdown-content");
+    if (menu) {
+      var services = english
+        ? [
+            ["paint-polishing-en.html", "Polishing & Gelcoat"],
+            ["interior-detailing-en.html", "Upholstery & Interiors"],
+            ["synthetic-decking-en.html", "EVA Decking"],
+            ["boat-painting.html", "Marine Painting"],
+            ["hull-cleaning-en.html", "Hull Cleaning"],
+            ["electrical-systems-en.html", "Electrical, A/C & Mechanics"],
+          ]
+        : [
+            ["paint-polishing.html", "Pulido y Gelcoat"],
+            ["interior-detailing.html", "Cojinería e Interiores"],
+            ["cubierta-sintetica.html", "Pisos EVA y Cubiertas"],
+            ["boat-painting.html", "Pintura Naval"],
+            ["hull-cleaning.html", "Limpieza de Casco"],
+            ["electrical-systems.html", "Electricidad, Aire y Mecánica"],
+          ];
+      menu.innerHTML = services
+        .map(function (service, index) {
+          return (
+            '<a href="' +
+            service[0] +
+            '" class="nav-dropdown-link' +
+            (index === 0 ? " nav-dropdown-link--primary" : "") +
+            '">' +
+            (index === 0
+              ? '<span class="nav-service-badge">★ ' +
+                (english ? "Most requested" : "Más solicitado") +
+                "</span>"
+              : "") +
+            "<span>" +
+            service[1] +
+            "</span></a>"
+          );
+        })
+        .join("");
+      menu.insertAdjacentHTML(
+        "beforeend",
+        '<a href="' +
+          (english ? "services-en.html" : "services.html") +
+          '" class="nav-dropdown-link nav-dropdown-link--all"><span>' +
+          (english ? "View all services" : "Ver todos los servicios") +
+          '</span><span aria-hidden="true">→</span></a>',
+      );
+    }
+
+    if (typeof window.gtag === "function") {
+      document.addEventListener("click", function (event) {
+        var link = event.target.closest && event.target.closest("a[href]");
+        if (!link) return;
+        var href = link.getAttribute("href") || "";
+        var method = "";
+        if (/wa\.me|api\.whatsapp\.com|whatsapp\.com\/send/i.test(href)) {
+          method = "whatsapp";
+        } else if (/^tel:/i.test(href)) {
+          method = "phone";
+        } else if (/^mailto:/i.test(href)) {
+          method = "email";
+        }
+        if (!method) return;
+        window.gtag("event", "contact", {
+          method: method,
+          event_category: "contact",
+          event_label:
+            method === "whatsapp" && link.classList.contains("whatsapp-float")
+              ? "boton_flotante"
+              : document.title.split("|")[0].trim().slice(0, 60),
+          page_path: window.location.pathname,
+        });
+      });
+      document.documentElement.setAttribute("data-cbd-conversion-tracking", "");
+    }
+
     document.querySelectorAll(".faq-item").forEach(function (item, index) {
       var button = item.querySelector(".faq-toggle");
       var answer = item.querySelector(".faq-answer");
