@@ -1,4 +1,5 @@
 window.BLOG_POSTS = [
+  {"slug": "boat-detailing-yates-charter-cartagena", "url": "blog/boat-detailing-yates-charter-cartagena/", "title": "Boat Detailing para Yates Charter en Cartagena: Checklist Entre Salidas", "excerpt": "Cómo revisar, priorizar y preparar un yate charter entre reservas sin confundir limpieza, reparación y mantenimiento técnico.", "dateISO": "2026-09-14", "dateLabel": "14 Sep 2026", "readTime": "8 min de lectura", "category": "Mantenimiento", "featured": true, "image": "images/services/lavado-tecnico.webp"},
   {"slug": "limpieza-cojineria-yate-cartagena", "url": "blog/limpieza-cojineria-yate-cartagena/", "title": "Limpieza de Cojinería de Yates en Cartagena: Manchas y Secado", "excerpt": "Cómo cuidar cojines de yates y botes en Cartagena: limpieza por material, manchas de humedad, secado de espumas y cuándo conviene renovar la tapicería.", "dateISO": "2026-09-07", "dateLabel": "7 Sep 2026", "readTime": "6 min de lectura", "category": "Interiores", "featured": true, "image": "images/cojineria.webp"},
   {
     slug: "mantenimiento-motor-fuera-borda-cartagena",
