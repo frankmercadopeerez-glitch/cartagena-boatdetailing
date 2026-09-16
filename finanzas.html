@@ -41,7 +41,7 @@
     <script>
       try {
         if (localStorage.getItem("cbd_hadSession")) {
-          document.documentElement.classList.add("fz-resume");
+          document.documentElement.classList.add("fz-resume", "finance-loading");
         }
       } catch (e) {}
     </script>
@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=personal-capital-v48"></script>
+    <script src="/js/finance-engine.js?v=finance-loading-v49"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -428,9 +428,11 @@
       }
 
       /* ── Skeleton de carga de datos ─────────────── */
-      #data-loading {
-        display: none;
-      }
+      #data-loading { display: none; }
+      html.finance-loading #data-loading { display: block !important; opacity: 1 !important; }
+      html.finance-loading #main-app,
+      html.finance-loading #bottom-nav,
+      html.finance-loading #lock-screen { display: none !important; }
       @keyframes fzshimmer {
         0% {
           background-position: -450px 0;
@@ -1340,6 +1342,8 @@
       style="z-index: 45; background: var(--bg); transition: opacity 0.35s ease"
     >
       <div class="max-w-2xl mx-auto pt-6">
+        <p id="finance-loading-message" role="status" aria-live="polite" class="text-sm mb-4" style="color:var(--text)">Cargando tus movimientos y cuentas…</p>
+        <button type="button" onclick="location.reload()" class="text-sm p-3 mb-4" style="border:1px solid var(--accent);border-radius:8px;color:var(--accent)">Reintentar carga</button>
         <div class="fz-sk mb-4" style="height: 120px"></div>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
           <div class="fz-sk" style="height: 70px"></div>
@@ -3334,6 +3338,11 @@
       const FINANCE_OPENING = FINANCE_ENGINE.OPENING_STATE;
       let financeState = null;
       let _firstDataLoaded = false;
+      let financeTransactionsLoaded = false;
+      let financeSubscriptions = [];
+      let financeSession = 0;
+      let financeLoadingTimer = null;
+      const financeStreamsOnline = { transactions: false, projects: false };
       let proyectosEstadoLoaded = false;
       const todayStr = new Date().toISOString().split("T")[0];
       const OPENING_PROJECT_EVENT_IDS = new Set([
@@ -3579,14 +3588,35 @@
         return snapshots;
       }
 
-      function hideDataLoading() {
-        const dl = document.getElementById("data-loading");
-        if (!dl) return;
-        dl.style.opacity = "0";
-        setTimeout(() => {
-          dl.style.display = "none";
-        }, 350);
+      function setFinanceSyncStatus() {
+        const online = financeStreamsOnline.transactions && financeStreamsOnline.projects;
+        const status = document.getElementById("sync-status");
+        status.className = "text-xs flex items-center gap-1 " + (online ? "text-green-400" : "text-yellow-400");
+        status.title = online ? "Cuentas actualizadas" : "Reconectando: se conservan los últimos datos recibidos. Pulsa para reintentar.";
+        status.innerHTML = '<i data-lucide="' + (online ? 'cloud' : 'cloud-off') + '" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">' + (online ? 'Sincronizado' : 'Reconectando') + '</span>';
+        status.onclick = online ? null : () => location.reload();
+        lucide.createIcons();
+      }
+      function finishFinanceLoading() {
+        if (!financeTransactionsLoaded || !proyectosEstadoLoaded) return;
+        // Render both complete sources while hidden, then reveal final values.
+        renderAll();
         _firstDataLoaded = true;
+        clearTimeout(financeLoadingTimer);
+        document.documentElement.classList.remove("finance-loading");
+        document.getElementById("data-loading").style.display = "none";
+        document.getElementById("main-app").classList.remove("hidden");
+        document.getElementById("bottom-nav").classList.add("visible");
+        setFinanceSyncStatus();
+      }
+      function financeLoadError(stream, error) {
+        financeStreamsOnline[stream] = false;
+        clearTimeout(financeLoadingTimer);
+        if (!_firstDataLoaded) {
+          document.getElementById("finance-loading-message").textContent = "No pudimos cargar las cuentas. Comprueba tu conexión y pulsa Reintentar carga.";
+        }
+        setFinanceSyncStatus();
+        console.error("Carga de cuentas:", error);
       }
       const nowD = new Date();
 
@@ -3985,37 +4015,41 @@
         auth = firebase.auth();
         db = firebase.firestore();
         auth.onAuthStateChanged((user) => {
+          const session = ++financeSession;
+          financeSubscriptions.forEach(unsubscribe => unsubscribe());
+          financeSubscriptions = [];
+          clearTimeout(financeLoadingTimer);
+          _firstDataLoaded = false;
+          financeTransactionsLoaded = false;
+          proyectosEstadoLoaded = false;
+          financeStreamsOnline.transactions = false;
+          financeStreamsOnline.projects = false;
+          transactions = [];
+          proyectosEstado = {};
+          financeState = null;
+          document.getElementById("main-app").classList.add("hidden");
+          document.getElementById("bottom-nav").classList.remove("visible");
           if (user) {
             try {
               localStorage.setItem("cbd_hadSession", "1");
             } catch (e) {}
-            // Mostrar skeleton hasta que lleguen los datos
-            if (!_firstDataLoaded) {
-              const dl = document.getElementById("data-loading");
-              if (dl) {
-                dl.style.display = "block";
-                dl.style.opacity = "1";
+            document.documentElement.classList.add("finance-loading");
+            document.getElementById("finance-loading-message").textContent = "Cargando tus movimientos y cuentas…";
+            financeLoadingTimer = setTimeout(() => {
+              if (session === financeSession && !_firstDataLoaded) {
+                document.getElementById("finance-loading-message").textContent = "La conexión está tardando. Seguimos esperando tus cuentas; puedes reintentar la carga.";
               }
-              setTimeout(hideDataLoading, 8000); // seguridad: nunca dejar skeleton atascado
-            }
+            }, 8000);
             document.getElementById("lock-screen").classList.add("hidden");
-            document.getElementById("main-app").classList.remove("hidden");
             document.getElementById("tx-fecha").value = todayStr;
             document.getElementById("tx-hora").value = new Date()
               .toTimeString()
               .slice(0, 5);
-            // Show bottom nav
-            const bnav = document.getElementById("bottom-nav");
-            if (bnav) bnav.classList.add("visible");
             actualizarMesLabel();
             setTipo("ingreso");
             setMedio("Efectivo");
             setReceptor("Cristian");
-            const ss = document.getElementById("sync-status");
-            ss.className = "text-xs flex items-center gap-1 text-green-400";
-            ss.innerHTML =
-              '<i data-lucide="cloud" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Sincronizado</span>';
-            lucide.createIcons();
+            setFinanceSyncStatus();
             if (
               /iphone|ipad|ipod/i.test(navigator.userAgent) &&
               !window.navigator.standalone
@@ -4027,30 +4061,39 @@
                 lucide.createIcons();
               }
             }
-            db.collection("transacciones")
+            financeSubscriptions.push(db.collection("transacciones")
               .orderBy("fecha", "desc")
-              .onSnapshot(
+              .onSnapshot({ includeMetadataChanges: true },
                 (snap) => {
+                  if (session !== financeSession) return;
+                  financeStreamsOnline.transactions = !snap.metadata.fromCache;
+                  setFinanceSyncStatus();
+                  if (snap.metadata.fromCache) return;
                   transactions = snap.docs
                     .map((d) => ({ id: d.id, ...d.data() }))
                     .filter((transaction) => transaction.archived !== true);
-                  hideDataLoading();
-                  renderAll();
+                  financeTransactionsLoaded = true;
+                  finishFinanceLoading();
                 },
-                (err) => console.error("Firestore:", err),
-              );
-            db.collection("config")
+                (err) => { if (session === financeSession) financeLoadError("transactions", err); },
+              ));
+            financeSubscriptions.push(db.collection("config")
               .doc("proyectos_estado")
-              .onSnapshot((snap) => {
+              .onSnapshot({ includeMetadataChanges: true }, (snap) => {
+                if (session !== financeSession) return;
+                financeStreamsOnline.projects = !snap.metadata.fromCache;
+                setFinanceSyncStatus();
+                if (snap.metadata.fromCache) return;
                 proyectosEstado = snap.exists ? snap.data() || {} : {};
                 proyectosEstadoLoaded = true;
-                if (_firstDataLoaded) renderAll();
-              });
+                finishFinanceLoading();
+              }, (err) => { if (session === financeSession) financeLoadError("projects", err); }));
           } else {
             try {
               localStorage.removeItem("cbd_hadSession");
             } catch (e) {}
-            document.documentElement.classList.remove("fz-resume");
+            document.documentElement.classList.remove("fz-resume", "finance-loading");
+            document.getElementById("data-loading").style.display = "none";
             document.getElementById("lock-screen").classList.remove("hidden");
             document.getElementById("main-app").classList.add("hidden");
             document.getElementById("login-btn").disabled = false;
@@ -4970,6 +5013,7 @@
       let seedMayoDone = false;
       // ── Render All ────────────────────────────────────────
       function renderAll() {
+        if (!financeTransactionsLoaded || !proyectosEstadoLoaded) return;
         const mes = txDelMes(transactions);
         renderGlobalKPIs();
         renderCuentas();
@@ -7378,7 +7422,7 @@
         const from = Number.isFinite(previous) ? previous : 0;
         element.dataset.value = numericTarget;
         if (element._numberFrame) cancelAnimationFrame(element._numberFrame);
-        if (prefersReducedMotion || from === numericTarget) {
+        if (!_firstDataLoaded || prefersReducedMotion || from === numericTarget) {
           element.textContent = render(numericTarget);
           return;
         }
@@ -7425,7 +7469,13 @@
         }
       } catch (e) {}
 
-      initApp();
+      try {
+        initApp();
+      } catch (error) {
+        document.documentElement.classList.add("finance-loading");
+        document.getElementById("finance-loading-message").textContent = "No pudimos conectar con el servicio. Comprueba tu conexión y pulsa Reintentar carga.";
+        console.error("Inicio del portal:", error);
+      }
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
@@ -7434,11 +7484,11 @@
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "48");
+            refreshedUrl.searchParams.set("_cbd_build", "49");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=personal-capital-v48", { updateViaCache: "none" })
+            .register("/sw.js?build=finance-loading-v49", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

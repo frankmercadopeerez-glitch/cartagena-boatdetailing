@@ -34,7 +34,7 @@ try:
           document.getElementById('lock-screen').classList.add('hidden');
           document.getElementById('main-app').classList.remove('hidden');
           document.getElementById('data-loading').style.display='none';
-          resetTransactionForm(); showTab('nuevo'); setTipo('gasto'); setReceptor('Frank');
+          financeTransactionsLoaded=true;proyectosEstadoLoaded=true;resetTransactionForm(); showTab('nuevo'); setTipo('gasto'); setReceptor('Frank');
         }''')
         assert page.locator('#tx-funding').input_value() == 'personal'
         page.locator('#tx-monto').fill('200000')
@@ -108,7 +108,7 @@ try:
         z.on('pageerror',lambda err:errors.append(str(err)))
         z.on('dialog',lambda dialog:dialog.accept())
         z.goto(origin+'/finanzas.html',wait_until='load')
-        z.evaluate("document.getElementById('lock-screen').classList.add('hidden');document.getElementById('main-app').classList.remove('hidden');document.getElementById('data-loading').style.display='none';resetTransactionForm();showTab('nuevo');setTipo('gasto');setReceptor('Frank')")
+        z.evaluate("financeTransactionsLoaded=true;proyectosEstadoLoaded=true;document.getElementById('lock-screen').classList.add('hidden');document.getElementById('main-app').classList.remove('hidden');document.getElementById('data-loading').style.display='none';resetTransactionForm();showTab('nuevo');setTipo('gasto');setReceptor('Frank')")
         z.locator('#tx-hora').fill('08:00')
         z.locator('#tx-proyecto').fill('Prueba capital')
         z.locator('#tx-monto').fill('200000')
