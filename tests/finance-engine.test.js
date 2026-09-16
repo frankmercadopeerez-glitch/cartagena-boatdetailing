@@ -614,4 +614,100 @@ function assertValid(state) {
   assert.equal(state.projects["Bote Orchid 2.0"].income, 500000);
 }
 
+// Capital personal: gasto una sola vez, deuda al pagador y caja empresarial intacta.
+{
+  const opening = { asOf: "2026-07-12", cash: 0, capital: { frank: 0, cristian: 0 } };
+  const paid = event("expense", { id: "personal", hora: "09:00", project: "Nuevo", responsible: "Frank", monto: 200000, fundingSource: "personal" });
+  const income = event("income", { hora: "10:00", project: "Nuevo", receptor: "Cristian", monto: 1000000 });
+  const close = event("project_close", { hora: "11:00", project: "Nuevo" });
+  const repay = event("personal_repayment", { hora: "12:00", responsible: "Cristian", beneficiary: "Frank", monto: 200000 });
+  const expenseOnly = calculate([paid], opening);
+  assertValid(expenseOnly);
+  assert.equal(expenseOnly.cash, 0);
+  assert.equal(expenseOnly.personalDue.frank, 200000);
+  assert.equal(expenseOnly.balanceByPartner.frank, 0);
+  const pending = calculate([paid, income, close], opening);
+  assertValid(pending);
+  assert.equal(pending.cash, 1000000);
+  assert.equal(pending.profitTotal, 800000);
+  assert.deepEqual(pending.projects.Nuevo.closeSnapshot.settlement, { from: "cristian", to: "frank", amount: 600000 });
+  assert.deepEqual(pending.settlement, { from: "cristian", to: "frank", amount: 600000 });
+  assert.equal(pending.personalDueTotal, 200000);
+  const settled = calculate([paid, income, close, repay], opening);
+  assertValid(settled);
+  assert.equal(settled.personalDueTotal, 0);
+  assert.equal(settled.cash, 800000);
+  assert.equal(settled.cash / 2, 400000);
+  assert.equal(settled.totalExpenses, 200000);
+  assert.equal(settled.profitTotal, 800000);
+  assert.deepEqual(settled.balanceByPartner, { frank: 0, cristian: 800000 });
+  const distributed = calculate([paid, income, close, repay,
+    event("capital_transfer", { hora: "13:00", from: "Cristian", to: "Frank", monto: 400000 }),
+  ], opening);
+  assertValid(distributed);
+  assert.deepEqual(distributed.balanceByPartner, { frank: 400000, cristian: 400000 });
+  const general = calculate([{ ...paid, project: "" }], opening);
+  assertValid(general);
+  assert.equal(general.profitTotal, -200000);
+  assert.equal(general.cash, 0);
+  assert.equal(general.personalDue.frank, 200000);
+  const partial = calculate([paid, income, { ...repay, monto: 50000 }], opening);
+  assertValid(partial);
+  assert.equal(partial.personalDue.frank, 150000);
+  for (const bad of [
+    { ...repay, monto: 200001 },
+    { ...repay, beneficiary: "Cristian" },
+    { ...repay, responsible: "Frank" },
+    { ...repay, beneficiary: "nadie" },
+  ]) {
+    const rejected = calculate([paid, income, bad], opening);
+    assert.equal(rejected.validation.valid, false);
+    assert.equal(rejected.cash, 1000000);
+    assert.equal(rejected.personalDueTotal, 200000);
+  }
+  assert.equal(calculate([paid, repay], opening).validation.valid, false);
+  assert.equal(calculate([income, repay], opening).validation.valid, false);
+  assert.equal(calculate([paid, income, repay, { ...repay, hora: "13:00" }], opening).validation.valid, false);
+  const both = calculate([paid, { ...paid, id: "other", responsible: "Cristian", monto: 70000 }], opening);
+  assertValid(both);
+  assert.deepEqual(both.personalDue, { frank: 200000, cristian: 70000 });
+  const edited = calculate([{ ...paid, fundingSource: "company" }, income], opening);
+  assertValid(edited);
+  assert.equal(edited.personalDueTotal, 0);
+  assert.equal(edited.cash, 800000);
+  const archived = calculate([{ ...paid, archived: true }, income], opening);
+  assertValid(archived);
+  assert.equal(archived.personalDueTotal, 0);
+
+  // One transfer combines the entire refund with half the shared profit.
+  const combinedTransfer = event("capital_transfer", { hora: "12:00", from: "Cristian", to: "Frank", monto: 600000 });
+  const combined = calculate([paid, income, close, combinedTransfer], opening);
+  assertValid(combined);
+  assert.deepEqual(combined.balanceByPartner, { frank: 600000, cristian: 400000 });
+  assert.equal(combined.settlement, null);
+  assert.equal(combined.cash, 1000000);
+  // Replaying stored events cannot repeat the reimbursement.
+  assert.deepEqual(calculate([paid, income, close, combinedTransfer], opening).settlement, null);
+  const withdrawal = event("profit_withdrawal", { hora: "13:00", responsible: "Frank", monto: 600000, settlementVersion: 2 });
+  const withdrawn = calculate([paid, income, close, combinedTransfer, withdrawal], opening);
+  assertValid(withdrawn);
+  assert.equal(withdrawn.personalDue.frank, 0);
+  assert.equal(withdrawn.personalReturned.frank, 200000);
+  assert.equal(withdrawn.profitTaken.frank, 400000);
+  assert.equal(withdrawn.settlement, null);
+  const early = calculate([paid, income, event("profit_withdrawal", { hora: "11:00", responsible: "Cristian", monto: 100000, settlementVersion: 2 })], opening);
+  assertValid(early);
+  assert.deepEqual(early.settlement, { from: "cristian", to: "frank", amount: 600000 });
+  const shortage = calculate([paid, { ...income, monto: 100000 }], opening);
+  assertValid(shortage);
+  assert.deepEqual(shortage.settlement, { from: "cristian", to: "frank", amount: 100000 });
+  assert.equal(expenseOnly.settlement, null);
+  const reversed = calculate([{ ...paid, responsible: "Cristian" }, { ...income, receptor: "Frank" }], opening);
+  assertValid(reversed);
+  assert.deepEqual(reversed.settlement, { from: "frank", to: "cristian", amount: 600000 });
+  const bothFunded = calculate([paid, { ...paid, id: "c", responsible: "Cristian", monto: 100000 }, income], opening);
+  assertValid(bothFunded);
+  assert.deepEqual(bothFunded.settlement, { from: "cristian", to: "frank", amount: 550000 });
+}
+
 console.log("finance-engine: all tests passed");

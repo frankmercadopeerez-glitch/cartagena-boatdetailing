@@ -276,18 +276,54 @@
     const project = projectName(event);
     if (!amount || !partner) return;
     const target = project ? ensureProject(state.projects, project) : null;
+    if (event.fundingSource && !["company", "personal"].includes(event.fundingSource)) {
+      addError(state, "INVALID_FUNDING_SOURCE", "Selecciona dinero de la empresa o capital personal.", event);
+      return;
+    }
     if (target && target.closed) {
       addError(state, "PROJECT_CLOSED", "No se puede registrar un gasto en un proyecto cerrado.", event);
       return;
     }
-    state.cash -= amount;
+    const personal = event.fundingSource === "personal";
+    if (personal) {
+      state.personalDue[partner] += amount;
+      state.personalContributions[partner] += amount;
+      state.personalFunded += amount;
+    } else {
+      state.cash -= amount;
+      state.activePartnerExpenses[partner] += amount;
+    }
     state.totalExpenses += amount;
     state.partnerExpenses[partner] += amount;
-    state.activePartnerExpenses[partner] += amount;
     if (target) {
       target.expenses += amount;
       target.expenseByPartner[partner] += amount;
+    } else if (personal) {
+      state.profitTotal -= amount;
+      state.realizedProfitChange -= amount;
     }
+  }
+
+  function applyPersonalRepayment(state, event) {
+    const amount = requireAmount(state, event);
+    const payer = requirePartner(state, event, "responsible");
+    const beneficiary = requirePartner(state, event, "beneficiary");
+    if (!amount || !payer || !beneficiary) return;
+    const available = money(state.capital[payer] + state.partnerIncome[payer] -
+      state.activePartnerExpenses[payer] - state.accountWithdrawals[payer]);
+    if (amount > money(state.personalDue[beneficiary])) {
+      addError(state, "PERSONAL_REPAYMENT_EXCEEDED", "La devolución supera el capital personal pendiente de ese socio.", event);
+      return;
+    }
+    if (amount > state.cash || amount > available) {
+      addError(state, "ACCOUNT_INSUFFICIENT", "No hay fondos de empresa suficientes en la cuenta de quien paga.", event);
+      return;
+    }
+    state.personalDue[beneficiary] = money(state.personalDue[beneficiary] - amount);
+    state.personalRepaid += amount;
+    state.personalReturned[beneficiary] += amount;
+    state.cash -= amount;
+    state.accountWithdrawals[payer] += amount;
   }
 
   function applyCapitalContribution(state, event) {
@@ -348,7 +384,15 @@
       return;
     }
     state.cash -= amount;
-    const profitPortion = Math.min(state.profitAvailable[partner], amount);
+    // Money withdrawn belongs to the partner: refund their advance first.
+    // Keep distributed profit in the allocation so it is never paid twice.
+    const personalPortion = Math.min(state.personalDue[partner], amount);
+    state.personalDue[partner] = money(state.personalDue[partner] - personalPortion);
+    state.personalReturned[partner] += personalPortion;
+    if (event.settlementVersion === 2 || state.personalFunded > 0) {
+      state.profitTaken[partner] += amount - personalPortion;
+    }
+    const profitPortion = Math.min(state.profitAvailable[partner], amount - personalPortion);
     state.profitAvailable[partner] -= profitPortion;
     state.accountWithdrawals[partner] += amount;
     state.profitWithdrawals += profitPortion;
@@ -364,12 +408,38 @@
       return;
     }
     if (!amount) return;
-    if (state.capital[from] < amount) {
-      addError(state, "CAPITAL_INSUFFICIENT", "La transferencia supera el capital del socio emisor.", event);
+    const available = money(state.capital[from] + state.partnerIncome[from] -
+      state.activePartnerExpenses[from] - state.accountWithdrawals[from]);
+    if (available < amount) {
+      addError(state, "CAPITAL_INSUFFICIENT", "La transferencia supera el dinero de empresa en la cuenta del socio emisor.", event);
       return;
     }
     state.capital[from] -= amount;
     state.capital[to] += amount;
+  }
+
+  // Equalize the shared result, preserving each partner's own reimbursable
+  // money. Transfers change custody, not ownership, so repeating a calculation
+  // after recording the transfer cannot reimburse the same contribution twice.
+  function settlementFor(state) {
+    const balances = {};
+    PARTNERS.forEach((partner) => {
+      balances[partner] = money(state.capital[partner] + state.partnerIncome[partner] -
+        state.activePartnerExpenses[partner] - state.accountWithdrawals[partner]);
+    });
+    const cash = money(balances.frank + balances.cristian);
+    const shared = money((cash - state.personalDue.frank - state.personalDue.cristian +
+      state.profitTaken.frank + state.profitTaken.cristian) / 2);
+    let targetFrank = money(state.personalDue.frank + shared - state.profitTaken.frank);
+    // A shortfall remains in the personal ledger, without proposing a transfer
+    // of money that neither account has or blocking the available distribution.
+    if (cash >= 0) targetFrank = Math.max(0, Math.min(cash, targetFrank));
+    const difference = money(balances.frank - targetFrank);
+    if (Math.abs(difference) < 0.01) return null;
+    const from = difference > 0 ? "frank" : "cristian";
+    const to = from === "frank" ? "cristian" : "frank";
+    const amount = money(Math.min(Math.abs(difference), Math.max(0, balances[from])));
+    return amount > 0 ? { from, to, amount } : null;
   }
 
   function applyProjectClose(state, event) {
@@ -399,16 +469,7 @@
           state.activePartnerExpenses.cristian - state.accountWithdrawals.cristian,
       ),
     };
-    const settlementAmount = money(
-      Math.abs(accountAtClose.frank - accountAtClose.cristian) / 2,
-    );
-    const settlement = settlementAmount > 0
-      ? {
-          from: accountAtClose.frank > accountAtClose.cristian ? "frank" : "cristian",
-          to: accountAtClose.frank > accountAtClose.cristian ? "cristian" : "frank",
-          amount: settlementAmount,
-        }
-      : null;
+    const settlement = settlementFor(state);
 
     // Cerrar clasifica el resultado del proyecto, pero nunca mueve el dinero
     // fisico entre socios. Una compensacion requiere su propia transferencia.
@@ -429,6 +490,7 @@
       settledIncome: clonePartners(target.incomeByPartner),
       settledExpenses: clonePartners(target.expenseByPartner),
       accountAtClose,
+      personalDue: clonePartners(state.personalDue),
       settlement,
     };
   }
@@ -470,6 +532,12 @@
       profitWithdrawals: money(opening.profitTotal - opening.profitAvailable.frank - opening.profitAvailable.cristian),
       releasedProjectCapital: 0,
       realizedProfitChange: 0,
+      personalDue: { frank: 0, cristian: 0 },
+      personalContributions: { frank: 0, cristian: 0 },
+      personalReturned: { frank: 0, cristian: 0 },
+      profitTaken: { frank: 0, cristian: 0 },
+      personalFunded: 0,
+      personalRepaid: 0,
       projects: cloneOpeningProjects(input && input.openingProjects),
       eventCount: events.length,
       validation: { valid: true, errors: [], checks: {} },
@@ -480,6 +548,7 @@
       if (type === "income") applyIncome(state, event);
       else if (type === "legacy_income_allocation") applyLegacyIncomeAllocation(state, event);
       else if (type === "expense") applyExpense(state, event);
+      else if (type === "personal_repayment") applyPersonalRepayment(state, event);
       else if (type === "capital_contribution") applyCapitalContribution(state, event);
       else if (type === "capital_withdrawal") applyCapitalWithdrawal(state, event);
       else if (type === "profit_withdrawal") applyProfitWithdrawal(state, event);
@@ -519,11 +588,13 @@
     state.workingCapitalActive = money(
       state.workingCapital.frank + state.workingCapital.cristian,
     );
+    state.personalDueTotal = money(state.personalDue.frank + state.personalDue.cristian);
+    state.settlement = settlementFor(state);
 
     const expectedCash = money(
       opening.cash +
         (state.totalIncome - opening.totalIncome) -
-        (state.totalExpenses - opening.totalExpenses) +
+        (state.totalExpenses - opening.totalExpenses) + state.personalFunded - state.personalRepaid +
         events.reduce((sum, event) => {
           const type = eventType(event);
           if (type === "capital_contribution") return sum + eventAmount(event);

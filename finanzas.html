@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=project-close-v46"></script>
+    <script src="/js/finance-engine.js?v=personal-capital-v48"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -2247,6 +2247,11 @@
 
         <!-- TAB ESTADÍSTICAS -->
         <div id="panel-estadisticas" class="pt-0 px-3 pb-10 sm:px-5 hidden">
+          <section class="glass-card p-4 mb-5" aria-labelledby="personal-capital-title">
+            <h2 id="personal-capital-title" class="text-sm font-semibold mb-2">Capital personal reembolsable</h2>
+            <div id="personal-capital-summary" class="sv text-xs" style="line-height:1.8;color:var(--text)"></div>
+            <p class="text-xs mt-2" style="color:var(--text2)">Acumulado. La transferencia sugerida incluye este capital y reparte el saldo compartido. Transferir entre cuentas conserva el capital de su dueño; al retirarlo se registra su devolución.</p>
+          </section>
           <!-- REPORTES HEADER -->
           <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-1">
@@ -2521,6 +2526,21 @@
                     </select>
                   </div>
                 </div>
+              </div>
+              <div id="campo-capital-personal" class="hidden">
+                <label for="tx-funding" class="block text-xs font-semibold mb-1.5">Origen del dinero</label>
+                <select id="tx-funding" class="block w-full rounded-xl border p-3 text-sm">
+                  <option value="personal">Capital personal (reembolsable)</option>
+                  <option value="company">Dinero de la empresa</option>
+                </select>
+                <p class="text-xs mt-1" style="color:var(--text2)">El pago de bolsillo queda a favor de quien paga y se incluye automáticamente al dividir cuentas. Si usaste fondos del negocio, selecciona dinero de la empresa.</p>
+              </div>
+              <div id="campo-devolucion-personal" class="hidden">
+                <label for="tx-beneficiary" class="block text-xs font-semibold mb-1.5">Socio que recupera su capital personal</label>
+                <select id="tx-beneficiary" class="block w-full rounded-xl border p-3 text-sm">
+                  <option value="frank">Frank</option><option value="cristian">Cristian</option>
+                </select>
+                <p class="text-xs mt-1" style="color:var(--text2)">En “Quién paga”, selecciona la cuenta que entrega el dinero de la empresa. Registra únicamente devoluciones efectivamente realizadas.</p>
               </div>
               <div id="campo-proyecto">
                 <label
@@ -3216,6 +3236,7 @@
           "Mano de Obra",
           "Retiro de Profit",
           "Retiro de Capital",
+          "Devolución de capital personal",
           "ARL / Seguro",
           "Logistica / Transporte",
           "Arriendo / Local",
@@ -3226,7 +3247,7 @@
 
       const CAPITAL_INGRESO_CAT = "Aporte de Capital";
       const CAPITAL_GASTO_CAT = "Retiro de Profit";
-      const CAPITAL_GASTO_CATS = ["Retiro de Profit", "Retiro de Capital"];
+      const CAPITAL_GASTO_CATS = ["Retiro de Profit", "Retiro de Capital", "Devolución de capital personal"];
       const CUENTAS_DESDE = "2026-06-01"; // inicio del periodo contable actual (ambos socios en $0)
       // Desde esta fecha, los gastos SIN proyecto (operación general) dejan de
       // reducir el profit compartido y bajan SOLO el capital del socio que paga.
@@ -3272,7 +3293,7 @@
       // corte. Se excluye de totalGastos para que no toque el profit; sigue
       // contando en el total (receptor) para bajar el capital de quien pagó.
       function esGastoSoloCapital(t) {
-        if (!t || t.tipo !== "gasto") return false;
+        if (!t || t.tipo !== "gasto" || t.fundingSource === "personal") return false;
         if (t.categoria === TRANSFER_CAT) return false;
         if (CAPITAL_GASTO_CATS.includes(t.categoria)) return false;
         if (esNombreProyectoReal(t.proyecto)) return false;
@@ -3403,6 +3424,7 @@
         if (isInternalFinanceEvent(transaction)) {
           return transaction.reversalOf ? "project_reopen" : "project_close";
         }
+        if (transaction.categoria === "Devolución de capital personal") return "personal_repayment";
         if (transaction.categoria === "Retiro de Profit") return "profit_withdrawal";
         if (transaction.categoria === CAPITAL_INGRESO_CAT) return "capital_contribution";
         if (transaction.categoria === "Retiro de Capital") return "capital_withdrawal";
@@ -3635,7 +3657,7 @@
 
       function getAvailableProfitInAccounts(state) {
         const cash = Number((state && state.cash) || 0);
-        return Math.round((cash - getOpenProjectsBalance(state)) * 100) / 100;
+        return Math.round((cash - getOpenProjectsBalance(state) - (state.personalDueTotal || 0)) * 100) / 100;
       }
 
       function hasSavedProjectClose(name) {
@@ -4040,6 +4062,8 @@
       // ── Tipo / Medio / Receptor ───────────────────────────
       function setTipo(tipo) {
         document.getElementById("tx-tipo").value = tipo;
+        document.getElementById("campo-capital-personal").classList.add("hidden");
+        document.getElementById("campo-devolucion-personal").classList.add("hidden");
         const bi = document.getElementById("btn-ingreso");
         const bg = document.getElementById("btn-gasto");
         const bt = document.getElementById("btn-tipo-transfer");
@@ -4214,6 +4238,8 @@
         document.getElementById("tx-descripcion").value = tx.descripcion || "";
         document.getElementById("tx-categoria").value = tx.categoria || "";
         onCategoriaChange();
+        document.getElementById("tx-funding").value = tx.fundingSource || "company";
+        document.getElementById("tx-beneficiary").value = tx.beneficiary || "frank";
         if (tx.monto) setMontoValue(tx.monto);
         setMedio(tx.medio || "Efectivo");
         setReceptor(tx.receptor || "Cristian");
@@ -4463,6 +4489,8 @@
           "Monto",
           "Medio",
           "Persona",
+          "Origen del dinero",
+          "Beneficiario devolución",
         ];
         const rows = sorted.map((t) => [
           t.fecha || "",
@@ -4474,6 +4502,8 @@
           t.monto || 0,
           t.medio || "",
           t.receptor || "",
+          t.fundingSource === "personal" ? "Capital personal" : "Empresa",
+          t.beneficiary || "",
         ]);
         const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
         const blob = new Blob(["\ufeff" + csv], {
@@ -4533,7 +4563,7 @@
             (t) => t.tipo === "ingreso" && t.categoria === CAPITAL_INGRESO_CAT,
           )
           .reduce((s, t) => s + t.monto, 0);
-        const mProfit = mIng - mGas + mRet;
+        const mProfit = mIng - mGas;
         const mMargen =
           mIng > 0 ? ((mProfit / mIng) * 100).toFixed(1) + "%" : "0%";
 
@@ -4546,14 +4576,11 @@
           if (r === "frank") frank += d;
           else if (r === "cristian") cristian += d;
         });
-        const diff = frank - cristian;
-        const settlement = Math.abs(diff) / 2;
-        const settlementText =
-          Math.abs(diff) < 500
-            ? "Equilibradas"
-            : diff > 0
-              ? "Frank transfiere " + fmt(settlement) + " a Cristian"
-              : "Cristian transfiere " + fmt(settlement) + " a Frank";
+        const reportState = getFinanceState();
+        const transfer = reportState.settlement;
+        const settlementText = transfer
+          ? FINANCE_ENGINE.PARTNER_NAMES[transfer.from] + " transfiere " + fmt(transfer.amount) + " a " + FINANCE_ENGINE.PARTNER_NAMES[transfer.to]
+          : "Equilibradas";
 
         // Publicidad del mes
         const pubMes = mes
@@ -4566,7 +4593,7 @@
         rows.push(["BALANCE GLOBAL ACUMULADO"]);
         rows.push(["Total Ingresos", gIng]);
         rows.push(["Total Gastos (sin retiros)", gGas - gRet]);
-        rows.push(["Retiros de Capital (profit distribuido)", gRet]);
+        rows.push(["Retiros y devoluciones (no son gastos)", gRet]);
         rows.push(["Profit Total", gProfit]);
         rows.push([]);
         rows.push(["RESUMEN DEL MES — " + mesLabel.toUpperCase()]);
@@ -4583,7 +4610,9 @@
         rows.push(["CUENTAS PERSONALES (este mes)"]);
         rows.push(["Cristian", cristian]);
         rows.push(["Frank", frank]);
-        rows.push(["Liquidacion", settlementText]);
+        rows.push(["Liquidacion acumulada", settlementText]);
+        rows.push(["Capital personal pendiente Frank", reportState.personalDue.frank]);
+        rows.push(["Capital personal pendiente Cristian", reportState.personalDue.cristian]);
         rows.push([]);
         rows.push(["MOVIMIENTOS DEL MES — " + mesLabel.toUpperCase()]);
         rows.push([
@@ -4596,6 +4625,8 @@
           "Monto",
           "Medio",
           "Persona",
+          "Origen del dinero",
+          "Beneficiario devolución",
         ]);
         [...mes]
           .sort((a, b) =>
@@ -4614,6 +4645,8 @@
               t.monto || 0,
               t.medio || "",
               t.receptor || "",
+              t.fundingSource === "personal" ? "Capital personal" : "Empresa",
+              t.beneficiary || "",
             ]);
           });
 
@@ -4656,7 +4689,7 @@
         rows.push(["BALANCE GLOBAL ACUMULADO"]);
         rows.push(["Total Ingresos", gIng]);
         rows.push(["Gastos Operativos", gGas - gRet]);
-        rows.push(["Retiro de Profit distribuido", gRet]);
+        rows.push(["Retiros y devoluciones (no son gastos)", gRet]);
         rows.push(["Profit Total", gIng - gGas + gRet]);
         rows.push([]);
         rows.push(["TODOS LOS MOVIMIENTOS"]);
@@ -4670,6 +4703,8 @@
           "Monto",
           "Medio",
           "Persona",
+          "Origen del dinero",
+          "Beneficiario devolución",
         ]);
         [...transactions]
           .sort((a, b) =>
@@ -4688,6 +4723,8 @@
               t.monto || 0,
               t.medio || "",
               t.receptor || "",
+              t.fundingSource === "personal" ? "Capital personal" : "Empresa",
+              t.beneficiary || "",
             ]);
           });
         const csv = rows
@@ -4831,6 +4868,10 @@
         return { desde: toISO(lunes), hasta: toISO(domingo) };
       }
       function onCategoriaChange() {
+        const category = document.getElementById("tx-categoria").value;
+        const expense = document.getElementById("tx-tipo").value === "gasto";
+        document.getElementById("campo-capital-personal").classList.toggle("hidden", !expense || CAPITAL_GASTO_CATS.includes(category));
+        document.getElementById("campo-devolucion-personal").classList.toggle("hidden", !expense || category !== "Devolución de capital personal");
         updateProyectoRequirement();
         const cat = document.getElementById("tx-categoria").value;
         const isRetiro = cat === "Retiro de Profit";
@@ -4962,6 +5003,10 @@
         const state = getFinanceState();
         const workingCapital = getWorkingCapital(state);
         const partnerBalances = getPartnerBalances(state);
+        document.getElementById("personal-capital-summary").innerHTML = ["frank", "cristian"].map(partner =>
+          '<p><strong>' + FINANCE_ENGINE.PARTNER_NAMES[partner] + '</strong> · Aportado: ' + fmt(state.personalContributions[partner]) +
+          ' · Devuelto: ' + fmt(state.personalReturned[partner]) + ' · Capital reembolsable en cuentas: ' + fmt(state.personalDue[partner]) + '</p>'
+        ).join("");
         const setEl = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
@@ -5016,26 +5061,24 @@
           label.textContent = esMesActual
             ? "Acumulado"
             : "Acumulado a " + MESES[mesSel.m] + " " + mesSel.y;
-        const diff = frankCapital - cristianCapital;
-        const amount = Math.abs(diff) / 2;
+        const transfer = state.settlement;
         const settlement = document.getElementById("settlement-text");
         const equalize = document.getElementById("btn-equilibrar");
         if (!settlement) return;
-        if (Math.abs(diff) < 1) {
-          settlement.innerHTML =
-            '<span class="settlement-balanced">Cuentas equilibradas</span>';
+        if (!transfer || transfer.amount < 1) {
+          settlement.innerHTML = '<span class="settlement-balanced">Cuentas equilibradas</span>';
           if (equalize) equalize.style.display = "none";
           return;
         }
-        const from = diff > 0 ? "Frank" : "Cristian";
-        const to = diff > 0 ? "Cristian" : "Frank";
-        settlement.innerHTML =
-          `<div class="settlement-amount">${fmt(amount)}</div><div class="settlement-label">${from} transfiere a ${to}</div>`;
+        const from = FINANCE_ENGINE.PARTNER_NAMES[transfer.from];
+        const to = FINANCE_ENGINE.PARTNER_NAMES[transfer.to];
+        const amount = Math.round(transfer.amount);
+        settlement.innerHTML = '<div class="settlement-amount">' + fmt(amount) + '</div><div class="settlement-label">' + from + ' transfiere a ' + to + '</div>';
         if (equalize) {
           equalize.style.display = "";
           equalize.dataset.from = from;
           equalize.dataset.to = to;
-          equalize.dataset.amount = Math.round(amount);
+          equalize.dataset.amount = amount;
         }
       }
 
@@ -5245,6 +5288,7 @@
             makeFinanceEvent("profit_withdrawal", {
               tipo: "gasto",
               categoria: "Retiro de Profit",
+              settlementVersion: 2,
               monto,
               receptor: _retiroNombre,
               responsible: _retiroNombre,
@@ -5265,9 +5309,11 @@
       async function equilibrarCuentas() {
         const btn = document.getElementById("btn-equilibrar");
         if (!btn) return;
-        const nameFrom = btn.dataset.from;
-        const nameTo = btn.dataset.to;
-        const amount = parseInt(btn.dataset.amount, 10);
+        const currentTransfer = getFinanceState().settlement;
+        if (!currentTransfer) return;
+        const nameFrom = FINANCE_ENGINE.PARTNER_NAMES[currentTransfer.from];
+        const nameTo = FINANCE_ENGINE.PARTNER_NAMES[currentTransfer.to];
+        const amount = Math.round(currentTransfer.amount);
         if (!nameFrom || !nameTo || !amount || amount < 1) return;
         if (
           !confirm(
@@ -5716,7 +5762,7 @@
             (isIn
               ? "border-green-200 bg-green-50"
               : "border-red-100 bg-red-50");
-          div.innerHTML = `<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora ? " · " + tx.hora : ""}</span>${tx.proyecto ? `<span class="text-xs font-semibold text-slate-600 bg-white px-1.5 py-0.5 rounded-md border border-white/10">${tx.proyecto}</span>` : ""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion || tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span>${tx.medio ? `<span class="text-xs text-slate-400">${tx.medio}</span>` : ""}${tx.receptor ? `<span class="text-xs font-semibold text-amber-700">→ ${tx.receptor}</span>` : ""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</span><div class="flex gap-2"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-slate-700 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div></div>`;
+          div.innerHTML = `<div class="flex justify-between items-start gap-2"><div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap mb-0.5"><span class="text-xs text-slate-400">${fmtDate(tx.fecha)}${tx.hora ? " · " + tx.hora : ""}</span>${tx.proyecto ? `<span class="text-xs font-semibold text-slate-600 bg-white px-1.5 py-0.5 rounded-md border border-white/10">${tx.proyecto}</span>` : ""}</div><p class="text-sm font-medium text-slate-800 truncate">${tx.descripcion || tx.categoria}</p><div class="flex items-center gap-2 mt-1 flex-wrap"><span class="text-xs px-1.5 py-0.5 rounded-full font-medium ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span>${tx.fundingSource === "personal" ? `<span class="text-xs" style="color:var(--blue)"> · Capital personal</span>` : ""}${tx.motorType === "personal_repayment" ? `<span class="text-xs"> · Para ${escapeHtml(tx.beneficiary || "")}</span>` : ""}${tx.medio ? `<span class="text-xs text-slate-400">${tx.medio}</span>` : ""}${tx.receptor ? `<span class="text-xs font-semibold text-amber-700">→ ${tx.receptor}</span>` : ""}</div></div><div class="flex flex-col items-end gap-2 flex-shrink-0"><span class="text-base font-bold whitespace-nowrap ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</span><div class="flex gap-2"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-slate-700 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div></div>`;
           tc.appendChild(div);
         });
 
@@ -5730,7 +5776,7 @@
           const isIn = tx.tipo === "ingreso";
           const tr = document.createElement("tr");
           tr.className = "hover:bg-white/10 transition";
-          tr.innerHTML = `<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora || ""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-700">${tx.proyecto || "--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${(tx.descripcion || "").replace(/"/g, "&quot;")}">${tx.descripcion || "--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span></td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-amber-700">${tx.receptor || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><div class="flex items-center justify-center gap-1"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-slate-700 p-1 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td>`;
+          tr.innerHTML = `<td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${fmtDate(tx.fecha)}<br><span class="text-slate-400">${tx.hora || ""}</span></td><td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-slate-700">${tx.proyecto || "--"}</td><td class="px-3 py-3 text-sm text-slate-500 max-w-xs truncate" title="${(tx.descripcion || "").replace(/"/g, "&quot;")}">${tx.descripcion || "--"}</td><td class="px-3 py-3 whitespace-nowrap"><span class="px-2 py-0.5 text-xs font-semibold rounded-full ${isIn ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">${tx.categoria}</span>${tx.fundingSource === "personal" ? `<span class="text-xs" style="color:var(--blue)"> · Capital personal</span>` : ""}${tx.motorType === "personal_repayment" ? `<span class="text-xs"> · Para ${escapeHtml(tx.beneficiary || "")}</span>` : ""}</td><td class="px-3 py-3 whitespace-nowrap text-xs text-slate-500">${tx.medio || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-xs font-semibold text-amber-700">${tx.receptor || "--"}</td><td class="px-3 py-3 whitespace-nowrap text-sm text-right font-bold ${isIn ? "text-green-600" : "text-red-600"}">${isIn ? "+" : "-"}${fmt(tx.monto)}</td><td class="px-3 py-3 text-center"><div class="flex items-center justify-center gap-1"><button onclick="editTransaction('${tx.id}')" class="text-slate-300 hover:text-slate-700 p-1 transition"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTransaction('${tx.id}')" class="text-slate-300 hover:text-red-500 p-1 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></td>`;
           tb.appendChild(tr);
         });
         lucide.createIcons();
@@ -5827,12 +5873,12 @@
           );
           ingsArr.push(
             txM
-              .filter((t) => t.tipo === "ingreso")
+              .filter((t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT && t.categoria !== TRANSFER_CAT)
               .reduce((s, t) => s + t.monto, 0),
           );
           gastArr.push(
             txM
-              .filter((t) => t.tipo === "gasto")
+              .filter((t) => t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== TRANSFER_CAT)
               .reduce((s, t) => s + t.monto, 0),
           );
           lblArr.push(label);
@@ -5894,7 +5940,7 @@
         wrap2.innerHTML = '<canvas id="chart-categorias"></canvas>';
         const gastoCats = {};
         mes
-          .filter((t) => t.tipo === "gasto")
+          .filter((t) => t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== TRANSFER_CAT)
           .forEach((t) => {
             gastoCats[t.categoria] = (gastoCats[t.categoria] || 0) + t.monto;
           });
@@ -5964,10 +6010,10 @@
             );
             return (
               txM
-                .filter((t) => t.tipo === "ingreso")
+                .filter((t) => t.tipo === "ingreso" && t.categoria !== CAPITAL_INGRESO_CAT && t.categoria !== TRANSFER_CAT)
                 .reduce((s, t) => s + t.monto, 0) -
               txM
-                .filter((t) => t.tipo === "gasto")
+                .filter((t) => t.tipo === "gasto" && !CAPITAL_GASTO_CATS.includes(t.categoria) && t.categoria !== TRANSFER_CAT)
                 .reduce((s, t) => s + t.monto, 0)
             );
           });
@@ -6020,6 +6066,7 @@
           const ingSem = [0, 0, 0, 0],
             gastSem = [0, 0, 0, 0];
           mes.forEach((t) => {
+            if (isInternalFinanceEvent(t) || t.categoria === TRANSFER_CAT || t.fundingSource === "personal") return;
             const i = parseInt(getSemana(t.fecha), 10) - 1;
             if (t.tipo === "ingreso") ingSem[i] += t.monto;
             else gastSem[i] += t.monto;
@@ -6248,9 +6295,9 @@
           return;
         }
         const balances = getPartnerBalances(state);
-        const amount = Math.round(Math.abs(balances.frank - balances.cristian) / 2);
-        const from = balances.frank > balances.cristian ? "Frank" : "Cristian";
-        const to = balances.frank > balances.cristian ? "Cristian" : "Frank";
+        const amount = state.settlement ? Math.round(state.settlement.amount) : 0;
+        const from = state.settlement ? FINANCE_ENGINE.PARTNER_NAMES[state.settlement.from] : "";
+        const to = state.settlement ? FINANCE_ENGINE.PARTNER_NAMES[state.settlement.to] : "";
         proyectoPendienteCierre = {
           name: projectName,
           projectId: FINANCE_ENGINE.projectId(projectName),
@@ -6270,7 +6317,7 @@
           `<div style="border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px"><p style="font-size:.68rem;font-weight:800;color:var(--text);margin-bottom:5px">FRANK</p><p style="font-size:.68rem;color:var(--text2)">Recibió ${fmt(project.incomeByPartner.frank)}</p><p style="font-size:.68rem;color:var(--text2)">Pagó ${fmt(project.expenseByPartner.frank)}</p></div>` +
           `<div style="border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px"><p style="font-size:.68rem;font-weight:800;color:var(--text);margin-bottom:5px">CRISTIAN</p><p style="font-size:.68rem;color:var(--text2)">Recibió ${fmt(project.incomeByPartner.cristian)}</p><p style="font-size:.68rem;color:var(--text2)">Pagó ${fmt(project.expenseByPartner.cristian)}</p></div>`;
         document.getElementById("cierre-proyecto-compensacion").innerHTML = amount > 0
-          ? `<p class="text-xs"><strong style="color:var(--blue)">Compensación sugerida:</strong> ${from} transfiere ${fmt(amount)} a ${to} para igualar el dinero en cuenta. No se registrará automáticamente.</p>`
+          ? `<p class="text-xs"><strong style="color:var(--blue)">Compensación sugerida:</strong> ${from} transfiere ${fmt(amount)} a ${to} para dividir cuentas. No se registrará automáticamente.</p>`
           : '<p class="text-xs" style="color:var(--green)">Las cuentas ya están equilibradas. No se sugiere transferencia.</p>';
         const check = document.getElementById("cierre-proyecto-check");
         check.checked = false;
@@ -6721,6 +6768,7 @@
 
           const responsable = document.getElementById("tx-receptor").value;
           const motorType =
+            cat === "Devolución de capital personal" ? "personal_repayment" :
             cat === "Retiro de Profit"
               ? "profit_withdrawal"
               : cat === CAPITAL_INGRESO_CAT
@@ -6730,6 +6778,8 @@
                   : tipo === "ingreso"
                     ? "income"
                     : "expense";
+          const fundingSource = motorType === "expense" ? document.getElementById("tx-funding").value : "company";
+          const beneficiary = motorType === "personal_repayment" ? document.getElementById("tx-beneficiary").value : "";
           const requiresProject =
             motorType === "income" ||
             motorType === "capital_contribution" ||
@@ -6749,6 +6799,9 @@
               if (!original) throw new Error("No se encontro el registro.");
               const edited = {
                 ...original,
+                fundingSource,
+                beneficiary,
+                settlementVersion: 2,
                 tipo,
                 categoria: cat,
                 monto,
@@ -6761,6 +6814,7 @@
                 medio: document.getElementById("tx-medio").value,
                 receptor: responsable,
               };
+              if (fundingSource === "personal" && !isAfterFinanceOpening(edited)) throw new Error("Este pago pertenece al saldo de apertura. Requiere conciliación antes de reclasificarlo.");
               if (original.motorVersion === FINANCE_ENGINE.ENGINE_VERSION) {
                 edited.motorVersion = FINANCE_ENGINE.ENGINE_VERSION;
                 edited.motorType = motorType;
@@ -6782,6 +6836,9 @@
             }
             const saved = await saveFinanceEvents([
               makeFinanceEvent(motorType, {
+                fundingSource,
+                beneficiary,
+                settlementVersion: 2,
                 tipo: tipo,
                 categoria: cat,
                 monto,
@@ -7377,11 +7434,11 @@
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "46");
+            refreshedUrl.searchParams.set("_cbd_build", "48");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=project-close-v46", { updateViaCache: "none" })
+            .register("/sw.js?build=personal-capital-v48", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });
