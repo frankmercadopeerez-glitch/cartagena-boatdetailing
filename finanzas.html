@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=finance-loading-v49"></script>
+    <script src="/js/finance-engine.js?v=personal-report-v50"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -769,6 +769,76 @@
       #panel-notas {
         margin-top: 0 !important;
         padding-top: 0 !important;
+      }
+
+      .personal-capital-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .personal-capital-partner {
+        border: 1px solid var(--glass-b);
+        border-radius: 14px;
+        background: rgba(4, 10, 20, 0.42);
+        overflow: hidden;
+      }
+      .personal-capital-head {
+        padding: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      }
+      .personal-capital-totals {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+        margin-top: 12px;
+      }
+      .personal-capital-total {
+        border-radius: 9px;
+        padding: 9px 7px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+      .personal-capital-total span {
+        display: block;
+        color: var(--text2);
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .personal-capital-total strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 0.82rem;
+        color: var(--text);
+      }
+      .personal-capital-list { padding: 3px 14px 8px; }
+      .personal-capital-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .personal-capital-row:last-child { border-bottom: 0; }
+      .personal-capital-row-title {
+        color: var(--text);
+        font-size: 0.76rem;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+      .personal-capital-row-meta {
+        color: var(--text2);
+        font-size: 0.67rem;
+        line-height: 1.45;
+        margin-top: 3px;
+      }
+      .personal-capital-amount {
+        font-size: 0.78rem;
+        font-weight: 800;
+        white-space: nowrap;
+        text-align: right;
+      }
+      @media (max-width: 639px) {
+        .personal-capital-grid { grid-template-columns: 1fr; }
       }
 
       /* ── Más Drawer ── */
@@ -2252,9 +2322,15 @@
         <!-- TAB ESTADÍSTICAS -->
         <div id="panel-estadisticas" class="pt-0 px-3 pb-10 sm:px-5 hidden">
           <section class="glass-card p-4 mb-5" aria-labelledby="personal-capital-title">
-            <h2 id="personal-capital-title" class="text-sm font-semibold mb-2">Capital personal reembolsable</h2>
-            <div id="personal-capital-summary" class="sv text-xs" style="line-height:1.8;color:var(--text)"></div>
-            <p class="text-xs mt-2" style="color:var(--text2)">Acumulado. La transferencia sugerida incluye este capital y reparte el saldo compartido. Transferir entre cuentas conserva el capital de su dueño; al retirarlo se registra su devolución.</p>
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div>
+                <p class="text-xs uppercase tracking-widest font-semibold" style="color:var(--accent)">Historial acumulado</p>
+                <h2 id="personal-capital-title" class="text-base font-bold mt-1">Capital personal reembolsable</h2>
+              </div>
+              <i data-lucide="wallet-cards" class="w-5 h-5 flex-shrink-0" style="color:var(--blue)"></i>
+            </div>
+            <p class="text-xs mb-4" style="color:var(--text2)">Consulta cuánto puso cada socio y los movimientos que forman ese total. Las devoluciones aparecen por separado y no duplican los gastos.</p>
+            <div id="personal-capital-summary" class="sv"></div>
           </section>
           <!-- REPORTES HEADER -->
           <div class="flex items-center justify-between mb-5">
@@ -5043,14 +5119,120 @@
         showTab("movimientos");
       }
 
+      function personalCapitalLedger() {
+        const events = getEngineTransactions(transactions)
+          .slice()
+          .sort((a, b) => {
+            const byDate = ((a.fecha || "") + "T" + (a.hora || "00:00")).localeCompare(
+              (b.fecha || "") + "T" + (b.hora || "00:00"),
+            );
+            if (byDate) return byDate;
+            const byCreated = Number(a.createdAt || 0) - Number(b.createdAt || 0);
+            return byCreated || String(a.id || "").localeCompare(String(b.id || ""));
+          });
+        const ledger = { frank: [], cristian: [] };
+        let previous = FINANCE_ENGINE.calculate({
+          transactions: [],
+          opening: FINANCE_OPENING,
+          openingProjects: getOpeningProjectSnapshots(transactions),
+        });
+        events.forEach((event, index) => {
+          const current = FINANCE_ENGINE.calculate({
+            transactions: events.slice(0, index + 1),
+            opening: FINANCE_OPENING,
+            openingProjects: getOpeningProjectSnapshots(transactions),
+          });
+          ["frank", "cristian"].forEach((partner) => {
+            const contributed = Math.max(
+              0,
+              (current.personalContributions[partner] || 0) -
+                (previous.personalContributions[partner] || 0),
+            );
+            const returned = Math.max(
+              0,
+              (current.personalReturned[partner] || 0) -
+                (previous.personalReturned[partner] || 0),
+            );
+            if (!contributed && !returned) return;
+            ledger[partner].push({
+              kind: contributed ? "contribution" : "return",
+              amount: contributed || returned,
+              date: event.fecha || "",
+              time: event.hora || "",
+              project: event.project || event.proyecto || "Operación general",
+              description:
+                event.descripcion ||
+                event.categoria ||
+                (contributed ? "Pago con capital personal" : "Devolución de capital personal"),
+            });
+          });
+          previous = current;
+        });
+        return ledger;
+      }
+
+      function renderPersonalCapitalReport(state) {
+        const container = document.getElementById("personal-capital-summary");
+        if (!container) return;
+        const ledger = personalCapitalLedger();
+        container.innerHTML = ["frank", "cristian"]
+          .map((partner) => {
+            const name = FINANCE_ENGINE.PARTNER_NAMES[partner];
+            const entries = ledger[partner].slice().reverse();
+            const movements = entries.length
+              ? entries
+                  .map((entry) => {
+                    const isContribution = entry.kind === "contribution";
+                    const detail = [
+                      entry.date ? fmtDate(entry.date) : "Sin fecha",
+                      entry.time,
+                      entry.project,
+                    ]
+                      .filter(Boolean)
+                      .map(escapeHtml)
+                      .join(" · ");
+                    return (
+                      '<div class="personal-capital-row">' +
+                      '<div><p class="personal-capital-row-title">' +
+                      escapeHtml(entry.description) +
+                      '</p><p class="personal-capital-row-meta">' +
+                      detail +
+                      "</p></div>" +
+                      '<div class="personal-capital-amount" style="color:' +
+                      (isContribution ? "var(--blue)" : "var(--green)") +
+                      '">' +
+                      (isContribution ? "+" : "−") +
+                      fmt(entry.amount) +
+                      '<span style="display:block;font-size:.61rem;color:var(--text2);font-weight:600;margin-top:2px">' +
+                      (isContribution ? "Aporte" : "Devuelto") +
+                      "</span></div></div>"
+                    );
+                  })
+                  .join("")
+              : '<p class="text-xs py-5 text-center" style="color:var(--text2)">Sin movimientos de capital personal</p>';
+            return (
+              '<article class="personal-capital-partner">' +
+              '<div class="personal-capital-head"><div class="flex items-center justify-between gap-2">' +
+              '<h3 class="text-sm font-bold">' + name + "</h3>" +
+              '<span class="text-xs" style="color:var(--text2)">' +
+              entries.length + (entries.length === 1 ? " movimiento" : " movimientos") +
+              "</span></div>" +
+              '<div class="personal-capital-totals">' +
+              '<div class="personal-capital-total"><span>Aportado</span><strong>' + fmt(state.personalContributions[partner]) + "</strong></div>" +
+              '<div class="personal-capital-total"><span>Devuelto</span><strong style="color:var(--green)">' + fmt(state.personalReturned[partner]) + "</strong></div>" +
+              '<div class="personal-capital-total"><span>Pendiente</span><strong style="color:var(--blue)">' + fmt(state.personalDue[partner]) + "</strong></div>" +
+              "</div></div>" +
+              '<div class="personal-capital-list">' + movements + "</div></article>"
+            );
+          })
+          .join("");
+        container.className = "sv personal-capital-grid";
+      }
+
       function renderCuentas() {
         const state = getFinanceState();
         const workingCapital = getWorkingCapital(state);
         const partnerBalances = getPartnerBalances(state);
-        document.getElementById("personal-capital-summary").innerHTML = ["frank", "cristian"].map(partner =>
-          '<p><strong>' + FINANCE_ENGINE.PARTNER_NAMES[partner] + '</strong> · Aportado: ' + fmt(state.personalContributions[partner]) +
-          ' · Devuelto: ' + fmt(state.personalReturned[partner]) + ' · Capital reembolsable en cuentas: ' + fmt(state.personalDue[partner]) + '</p>'
-        ).join("");
         const setEl = (id, value, color) => {
           const element = document.getElementById(id);
           if (!element) return;
@@ -5873,6 +6055,7 @@
       }
 
       function renderCharts() {
+        renderPersonalCapitalReport(getFinanceState());
         const isAnio = reportesVista === "anio";
         const anioPool = transactions.filter((t) =>
           (t.fecha || "").startsWith(String(mesSel.y)),
@@ -7484,11 +7667,11 @@
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "49");
+            refreshedUrl.searchParams.set("_cbd_build", "50");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=finance-loading-v49", { updateViaCache: "none" })
+            .register("/sw.js?build=personal-report-v50", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

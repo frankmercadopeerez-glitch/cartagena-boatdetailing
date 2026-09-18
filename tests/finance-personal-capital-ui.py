@@ -80,6 +80,22 @@ try:
         page.evaluate("showTab('estadisticas')")
         assert page.locator('#personal-capital-summary').is_visible()
         assert '150.000' in page.locator('#personal-capital-summary').inner_text()
+        assert page.locator('.personal-capital-partner').count() == 2
+        assert page.locator('.personal-capital-row').count() == 2
+        report_text=page.locator('#personal-capital-summary').inner_text()
+        report_text=report_text.replace('\xa0',' ')
+        assert 'Pago personal QA' in report_text
+        assert 'Prueba' not in report_text
+        assert 'APORTADO' in report_text and '$ 200.000' in report_text
+        assert 'DEVUELTO' in report_text and '$ 50.000' in report_text
+        assert 'PENDIENTE' in report_text and '$ 150.000' in report_text
+        assert 'Sin movimientos de capital personal' in report_text
+        page.evaluate("closeMasDrawer();document.getElementById('toast').style.display='none'")
+        for width,height in [(390,844),(1366,768),(1920,900)]:
+            page.set_viewport_size({'width':width,'height':height})
+            assert not page.evaluate('document.documentElement.scrollWidth > innerWidth + 1')
+            (root/'artifacts').mkdir(exist_ok=True)
+            page.screenshot(path=str(root/'artifacts'/f'capital-personal-report-{width}.png'),full_page=True)
         assert page.evaluate('__charts["chart-categorias"].data.datasets[0].data.reduce((a,b)=>a+b,0)') == 200000
         page.evaluate("setReportesVista('anio')")
         assert page.evaluate('__charts["chart-semanal"].data.datasets[0].data.reduce((a,b)=>a+b,0)') == -200000
