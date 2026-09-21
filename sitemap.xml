@@ -11,7 +11,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -980,5 +980,10 @@
     <loc>https://www.colombiaboatdetailing.com/blog/boat-detailing-yates-charter-cartagena/</loc>
     <lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
     <image:image><image:loc>https://www.colombiaboatdetailing.com/images/services/lavado-tecnico.webp</image:loc><image:title>Boat detailing para yates charter en Cartagena</image:title><image:caption>Lavado técnico exterior de una embarcación entre salidas charter</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.colombiaboatdetailing.com/blog/preparar-yate-para-venta-cartagena/</loc>
+    <lastmod>2026-09-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <image:image><image:loc>https://www.colombiaboatdetailing.com/images/polichado%20(2).webp</image:loc><image:title>Preparación de un yate para la venta en Cartagena</image:title><image:caption>Comparación antes y después del pulido del costado de una embarcación</image:caption></image:image>
   </url>
 </urlset>
