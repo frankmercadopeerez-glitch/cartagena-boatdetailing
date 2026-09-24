@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=personal-report-v50"></script>
+    <script src="/js/finance-engine.js?v=loading-screen-v51"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -427,30 +427,178 @@
         animation: fzspin 0.8s linear infinite;
       }
 
-      /* ── Skeleton de carga de datos ─────────────── */
-      #data-loading { display: none; }
-      html.finance-loading #data-loading { display: block !important; opacity: 1 !important; }
+      /* ── Pantalla de carga de datos ─────────────── */
+      #data-loading {
+        display: none;
+        background: #020407;
+        color: var(--text);
+        overflow: hidden;
+      }
+      html.finance-loading #data-loading {
+        display: flex !important;
+        opacity: 1 !important;
+      }
       html.finance-loading #main-app,
       html.finance-loading #bottom-nav,
       html.finance-loading #lock-screen { display: none !important; }
-      @keyframes fzshimmer {
-        0% {
-          background-position: -450px 0;
-        }
-        100% {
-          background-position: 450px 0;
-        }
+      .finance-loader {
+        width: min(100%, 34rem);
+        min-height: 100%;
+        margin: 0 auto;
+        padding: max(2rem, var(--sat)) 1.5rem max(2rem, var(--sab));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
-      .fz-sk {
-        background: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.04) 25%,
-          rgba(255, 255, 255, 0.09) 37%,
-          rgba(255, 255, 255, 0.04) 63%
-        );
-        background-size: 900px 100%;
-        animation: fzshimmer 1.4s infinite linear;
-        border-radius: 14px;
+      .finance-loader-mark {
+        position: relative;
+        width: 9.5rem;
+        height: 9.5rem;
+        display: grid;
+        place-items: center;
+        margin-bottom: 2rem;
+      }
+      .finance-loader-ring {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(230, 184, 102, 0.34);
+        border-radius: 50%;
+        animation: financeLoaderPulse 2.4s ease-out infinite;
+      }
+      .finance-loader-ring:nth-child(2) { animation-delay: 0.8s; }
+      .finance-loader-ring:nth-child(3) { animation-delay: 1.6s; }
+      .finance-loader-logo {
+        position: relative;
+        z-index: 2;
+        width: 5.25rem;
+        height: 5.25rem;
+        object-fit: contain;
+        filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.26));
+        animation: financeLogoFloat 2.8s ease-in-out infinite;
+      }
+      .finance-loader-kicker {
+        margin: 0 0 0.45rem;
+        color: var(--accent-bright);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .finance-loader-title {
+        margin: 0;
+        color: #ffffff;
+        font-size: 1.5rem;
+        line-height: 1.25;
+        font-weight: 700;
+      }
+      #finance-loading-message {
+        max-width: 28rem;
+        margin: 0.75rem 0 0;
+        color: var(--text2);
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+      .finance-loader-track {
+        position: relative;
+        width: min(15rem, 72vw);
+        height: 2px;
+        margin-top: 1.65rem;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .finance-loader-track::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 42%;
+        background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+        animation: financeLoaderWake 1.6s ease-in-out infinite;
+      }
+      .finance-loader-dots {
+        display: flex;
+        gap: 0.45rem;
+        margin-top: 0.9rem;
+      }
+      .finance-loader-dots span {
+        width: 0.32rem;
+        height: 0.32rem;
+        border-radius: 50%;
+        background: var(--accent-bright);
+        animation: financeLoaderDot 1.4s ease-in-out infinite;
+      }
+      .finance-loader-dots span:nth-child(2) { animation-delay: 0.18s; }
+      .finance-loader-dots span:nth-child(3) { animation-delay: 0.36s; }
+      #finance-loading-retry {
+        display: none;
+        min-height: 2.75rem;
+        margin-top: 1.5rem;
+        padding: 0.7rem 1rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border: 1px solid rgba(230, 184, 102, 0.72);
+        border-radius: 8px;
+        color: var(--accent-bright);
+        background: rgba(230, 184, 102, 0.08);
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      }
+      #finance-loading-retry:hover {
+        background: rgba(230, 184, 102, 0.15);
+        border-color: var(--accent-bright);
+      }
+      #finance-loading-retry:active { transform: translateY(1px); }
+      #data-loading.is-delayed #finance-loading-retry,
+      #data-loading.is-error #finance-loading-retry { display: inline-flex; }
+      #data-loading.is-error .finance-loader-track::after,
+      #data-loading.is-error .finance-loader-dots {
+        animation-play-state: paused;
+        opacity: 0.45;
+      }
+      @keyframes financeLoaderPulse {
+        0% { opacity: 0; transform: scale(0.45); }
+        28% { opacity: 0.62; }
+        100% { opacity: 0; transform: scale(1); }
+      }
+      @keyframes financeLogoFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+      @keyframes financeLoaderWake {
+        from { transform: translateX(-120%); }
+        to { transform: translateX(340%); }
+      }
+      @keyframes financeLoaderDot {
+        0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+        30% { opacity: 1; transform: translateY(-3px); }
+      }
+      @media (max-width: 640px) {
+        .finance-loader {
+          padding-right: 1.25rem;
+          padding-left: 1.25rem;
+        }
+        .finance-loader-mark {
+          width: 8.5rem;
+          height: 8.5rem;
+          margin-bottom: 1.6rem;
+        }
+        .finance-loader-logo {
+          width: 4.75rem;
+          height: 4.75rem;
+        }
+        .finance-loader-title { font-size: 1.25rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .finance-loader-ring,
+        .finance-loader-logo,
+        .finance-loader-track::after,
+        .finance-loader-dots span {
+          animation-duration: 0.01ms;
+          animation-iteration-count: 1;
+        }
       }
 
       @keyframes panelIn {
@@ -1405,24 +1553,42 @@
       </div>
     </div>
 
-    <!-- SKELETON DE CARGA DE DATOS -->
+    <!-- PANTALLA DE CARGA DE DATOS -->
     <div
       id="data-loading"
-      class="fixed inset-0 p-4 sm:p-6"
-      style="z-index: 45; background: var(--bg); transition: opacity 0.35s ease"
+      class="fixed inset-0"
+      style="z-index: 45; transition: opacity 0.35s ease"
     >
-      <div class="max-w-2xl mx-auto pt-6">
-        <p id="finance-loading-message" role="status" aria-live="polite" class="text-sm mb-4" style="color:var(--text)">Cargando tus movimientos y cuentas…</p>
-        <button type="button" onclick="location.reload()" class="text-sm p-3 mb-4" style="border:1px solid var(--accent);border-radius:8px;color:var(--accent)">Reintentar carga</button>
-        <div class="fz-sk mb-4" style="height: 120px"></div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-          <div class="fz-sk" style="height: 70px"></div>
-          <div class="fz-sk" style="height: 70px"></div>
-          <div class="fz-sk" style="height: 70px"></div>
-          <div class="fz-sk" style="height: 70px"></div>
+      <div class="finance-loader">
+        <div class="finance-loader-mark" aria-hidden="true">
+          <span class="finance-loader-ring"></span>
+          <span class="finance-loader-ring"></span>
+          <span class="finance-loader-ring"></span>
+          <img
+            class="finance-loader-logo"
+            src="/images/cbdlogo-gold.svg"
+            alt=""
+            width="84"
+            height="84"
+          />
         </div>
-        <div class="fz-sk mb-3" style="height: 90px"></div>
-        <div class="fz-sk" style="height: 150px"></div>
+        <p class="finance-loader-kicker">Colombia Boat Detailing</p>
+        <h1 class="finance-loader-title">CBD Finanzas</h1>
+        <p id="finance-loading-message" role="status" aria-live="polite">
+          Preparando tus movimientos y cuentas…
+        </p>
+        <div class="finance-loader-track" aria-hidden="true"></div>
+        <div class="finance-loader-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <button
+          id="finance-loading-retry"
+          type="button"
+          onclick="location.reload()"
+        >
+          <i data-lucide="refresh-cw" class="w-4 h-4" aria-hidden="true"></i>
+          <span>Reintentar carga</span>
+        </button>
       </div>
     </div>
 
@@ -3680,7 +3846,9 @@
         _firstDataLoaded = true;
         clearTimeout(financeLoadingTimer);
         document.documentElement.classList.remove("finance-loading");
-        document.getElementById("data-loading").style.display = "none";
+        const loadingScreen = document.getElementById("data-loading");
+        loadingScreen.classList.remove("is-delayed", "is-error");
+        loadingScreen.style.display = "none";
         document.getElementById("main-app").classList.remove("hidden");
         document.getElementById("bottom-nav").classList.add("visible");
         setFinanceSyncStatus();
@@ -3689,7 +3857,9 @@
         financeStreamsOnline[stream] = false;
         clearTimeout(financeLoadingTimer);
         if (!_firstDataLoaded) {
+          document.getElementById("data-loading").classList.add("is-error");
           document.getElementById("finance-loading-message").textContent = "No pudimos cargar las cuentas. Comprueba tu conexión y pulsa Reintentar carga.";
+          lucide.createIcons();
         }
         setFinanceSyncStatus();
         console.error("Carga de cuentas:", error);
@@ -4110,10 +4280,15 @@
               localStorage.setItem("cbd_hadSession", "1");
             } catch (e) {}
             document.documentElement.classList.add("finance-loading");
-            document.getElementById("finance-loading-message").textContent = "Cargando tus movimientos y cuentas…";
+            const loadingScreen = document.getElementById("data-loading");
+            loadingScreen.classList.remove("is-delayed", "is-error");
+            loadingScreen.style.display = "";
+            document.getElementById("finance-loading-message").textContent = "Preparando tus movimientos y cuentas…";
             financeLoadingTimer = setTimeout(() => {
               if (session === financeSession && !_firstDataLoaded) {
+                loadingScreen.classList.add("is-delayed");
                 document.getElementById("finance-loading-message").textContent = "La conexión está tardando. Seguimos esperando tus cuentas; puedes reintentar la carga.";
+                lucide.createIcons();
               }
             }, 8000);
             document.getElementById("lock-screen").classList.add("hidden");
@@ -4169,7 +4344,9 @@
               localStorage.removeItem("cbd_hadSession");
             } catch (e) {}
             document.documentElement.classList.remove("fz-resume", "finance-loading");
-            document.getElementById("data-loading").style.display = "none";
+            const loadingScreen = document.getElementById("data-loading");
+            loadingScreen.classList.remove("is-delayed", "is-error");
+            loadingScreen.style.display = "none";
             document.getElementById("lock-screen").classList.remove("hidden");
             document.getElementById("main-app").classList.add("hidden");
             document.getElementById("login-btn").disabled = false;
@@ -7656,22 +7833,24 @@
         initApp();
       } catch (error) {
         document.documentElement.classList.add("finance-loading");
+        document.getElementById("data-loading").classList.add("is-error");
         document.getElementById("finance-loading-message").textContent = "No pudimos conectar con el servicio. Comprueba tu conexión y pulsa Reintentar carga.";
+        lucide.createIcons();
         console.error("Inicio del portal:", error);
       }
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-force-refresh-v9";
+          const swReloadKey = "cbd-finanzas-sw-force-refresh-v10";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "50");
+            refreshedUrl.searchParams.set("_cbd_build", "51");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=personal-report-v50", { updateViaCache: "none" })
+            .register("/sw.js?build=loading-screen-v51", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

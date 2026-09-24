@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v6";
 const CACHE_PAGES = "cbd-pages-v3";
-const FINANZAS_CACHE = "cbd-finanzas-v50";
+const FINANZAS_CACHE = "cbd-finanzas-v51";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -51,11 +51,11 @@ self.addEventListener("activate", (e) => {
           const url = new URL(client.url);
           if (
             url.pathname !== "/finanzas.html" ||
-            url.searchParams.get("_cbd_build") === "50"
+            url.searchParams.get("_cbd_build") === "51"
           ) {
             return Promise.resolve();
           }
-          url.searchParams.set("_cbd_build", "50");
+          url.searchParams.set("_cbd_build", "51");
           return client.navigate(url.href).catch(() => undefined);
         }),
       );
