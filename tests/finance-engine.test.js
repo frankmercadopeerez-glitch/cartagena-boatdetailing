@@ -710,4 +710,85 @@ function assertValid(state) {
   assert.deepEqual(bothFunded.settlement, { from: "cristian", to: "frank", amount: 550000 });
 }
 
+// Desde el 20 de septiembre, el capital personal sale del saldo empresarial
+// en cuanto la cuenta del mismo socio tiene fondos para devolverlo.
+{
+  const openingWithFunds = {
+    asOf: "2026-09-19",
+    cash: 1000000,
+    capital: { frank: 1000000, cristian: 0 },
+  };
+  const advertising = event("expense", {
+    fecha: "2026-09-20",
+    project: "",
+    responsible: "Frank",
+    monto: 200000,
+    fundingSource: "personal",
+    categoria: "Publicidad",
+  });
+  const reimbursedImmediately = calculate([advertising], openingWithFunds);
+  assertValid(reimbursedImmediately);
+  assert.equal(reimbursedImmediately.personalDue.frank, 0);
+  assert.equal(reimbursedImmediately.personalReturned.frank, 200000);
+  assert.equal(reimbursedImmediately.cash, 800000);
+  assert.equal(reimbursedImmediately.balanceByPartner.frank, 800000);
+
+  const openingWithoutFunds = {
+    asOf: "2026-09-19",
+    cash: 0,
+    capital: { frank: 0, cristian: 0 },
+  };
+  const pending = calculate([advertising], openingWithoutFunds);
+  assertValid(pending);
+  assert.equal(pending.personalDue.frank, 200000);
+  assert.equal(pending.balanceByPartner.frank, 0);
+
+  const incomeToFrank = event("income", {
+    fecha: "2026-09-21",
+    hora: "10:00",
+    project: "Nuevo",
+    receptor: "Frank",
+    monto: 1000000,
+  });
+  const reimbursedFromIncome = calculate(
+    [advertising, incomeToFrank],
+    openingWithoutFunds,
+  );
+  assertValid(reimbursedFromIncome);
+  assert.equal(reimbursedFromIncome.personalDue.frank, 0);
+  assert.equal(reimbursedFromIncome.cash, 800000);
+  assert.equal(reimbursedFromIncome.balanceByPartner.frank, 800000);
+
+  const incomeToCristian = { ...incomeToFrank, receptor: "Cristian" };
+  const beforeTransfer = calculate(
+    [advertising, incomeToCristian],
+    openingWithoutFunds,
+  );
+  assertValid(beforeTransfer);
+  assert.deepEqual(beforeTransfer.settlement, {
+    from: "cristian",
+    to: "frank",
+    amount: 600000,
+  });
+  const transferred = calculate(
+    [
+      advertising,
+      incomeToCristian,
+      event("capital_transfer", {
+        fecha: "2026-09-21",
+        hora: "11:00",
+        from: "Cristian",
+        to: "Frank",
+        monto: 600000,
+      }),
+    ],
+    openingWithoutFunds,
+  );
+  assertValid(transferred);
+  assert.equal(transferred.personalDue.frank, 0);
+  assert.equal(transferred.cash, 800000);
+  assert.deepEqual(transferred.balanceByPartner, { frank: 400000, cristian: 400000 });
+  assert.equal(transferred.settlement, null);
+}
+
 console.log("finance-engine: all tests passed");

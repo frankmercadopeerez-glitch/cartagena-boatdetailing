@@ -66,7 +66,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/finance-engine.js?v=loading-screen-v51"></script>
+    <script src="/js/finance-engine.js?v=personal-auto-repayment-v52"></script>
     <style>
       :root {
         --sat: env(safe-area-inset-top, 0px);
@@ -7841,16 +7841,16 @@
 
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          const swReloadKey = "cbd-finanzas-sw-force-refresh-v10";
+          const swReloadKey = "cbd-finanzas-sw-force-refresh-v11";
           navigator.serviceWorker.addEventListener("controllerchange", () => {
             if (sessionStorage.getItem(swReloadKey)) return;
             sessionStorage.setItem(swReloadKey, "1");
             const refreshedUrl = new URL(window.location.href);
-            refreshedUrl.searchParams.set("_cbd_build", "51");
+            refreshedUrl.searchParams.set("_cbd_build", "52");
             window.location.replace(refreshedUrl.href);
           });
           navigator.serviceWorker
-            .register("/sw.js?build=loading-screen-v51", { updateViaCache: "none" })
+            .register("/sw.js?build=personal-auto-repayment-v52", { updateViaCache: "none" })
             .then((registration) => registration.update())
             .catch(() => {});
         });

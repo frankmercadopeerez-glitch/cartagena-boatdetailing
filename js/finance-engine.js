@@ -45,6 +45,7 @@
   const PARTNER_NAMES = { frank: "Frank", cristian: "Cristian" };
   const ORCHID_PROJECT_NAME = "Bote ORCHID";
   const ORCHID_PROJECT_ALIASES = new Set(["orchid", "bote orchid"]);
+  const AUTO_PERSONAL_REPAYMENT_FROM = "2026-09-20";
 
   // Estos valores son la apertura oficial del motor. El historial existente
   // queda fuera del libro nuevo y no se vuelve a recalcular.
@@ -228,6 +229,39 @@
     return amount;
   }
 
+  function partnerAccountBalance(state, partner) {
+    return money(
+      state.capital[partner] +
+        state.partnerIncome[partner] -
+        state.activePartnerExpenses[partner] -
+        state.accountWithdrawals[partner],
+    );
+  }
+
+  function usesAutomaticPersonalRepayment(event) {
+    return eventDate(event) >= AUTO_PERSONAL_REPAYMENT_FROM;
+  }
+
+  function repayAutomaticPersonalDue(state, partner) {
+    const automaticDue = Math.min(
+      positiveMoney(state.personalAutoDue[partner]),
+      positiveMoney(state.personalDue[partner]),
+    );
+    const available = Math.min(
+      positiveMoney(state.cash),
+      positiveMoney(partnerAccountBalance(state, partner)),
+    );
+    const amount = money(Math.min(automaticDue, available));
+    if (!amount) return 0;
+    state.personalAutoDue[partner] = money(state.personalAutoDue[partner] - amount);
+    state.personalDue[partner] = money(state.personalDue[partner] - amount);
+    state.personalRepaid += amount;
+    state.personalReturned[partner] += amount;
+    state.cash -= amount;
+    state.accountWithdrawals[partner] += amount;
+    return amount;
+  }
+
   function applyIncome(state, event) {
     const amount = requireAmount(state, event);
     const partner = requirePartner(state, event, "receptor");
@@ -248,6 +282,7 @@
     state.partnerIncome[partner] += amount;
     target.income += amount;
     target.incomeByPartner[partner] += amount;
+    repayAutomaticPersonalDue(state, partner);
   }
 
   function applyLegacyIncomeAllocation(state, event) {
@@ -289,6 +324,9 @@
       state.personalDue[partner] += amount;
       state.personalContributions[partner] += amount;
       state.personalFunded += amount;
+      if (usesAutomaticPersonalRepayment(event)) {
+        state.personalAutoDue[partner] += amount;
+      }
     } else {
       state.cash -= amount;
       state.activePartnerExpenses[partner] += amount;
@@ -302,6 +340,7 @@
       state.profitTotal -= amount;
       state.realizedProfitChange -= amount;
     }
+    if (personal) repayAutomaticPersonalDue(state, partner);
   }
 
   function applyPersonalRepayment(state, event) {
@@ -320,6 +359,9 @@
       return;
     }
     state.personalDue[beneficiary] = money(state.personalDue[beneficiary] - amount);
+    state.personalAutoDue[beneficiary] = money(
+      Math.max(0, state.personalAutoDue[beneficiary] - amount),
+    );
     state.personalRepaid += amount;
     state.personalReturned[beneficiary] += amount;
     state.cash -= amount;
@@ -416,11 +458,12 @@
     }
     state.capital[from] -= amount;
     state.capital[to] += amount;
+    repayAutomaticPersonalDue(state, to);
   }
 
-  // Equalize the shared result, preserving each partner's own reimbursable
-  // money. Transfers change custody, not ownership, so repeating a calculation
-  // after recording the transfer cannot reimburse the same contribution twice.
+  // Equalize shared company cash while reserving each reimbursable advance.
+  // From the automatic-repayment cutoff, funds received by the creditor leave
+  // company cash immediately and clear the corresponding personal debt.
   function settlementFor(state) {
     const balances = {};
     PARTNERS.forEach((partner) => {
@@ -533,6 +576,7 @@
       releasedProjectCapital: 0,
       realizedProfitChange: 0,
       personalDue: { frank: 0, cristian: 0 },
+      personalAutoDue: { frank: 0, cristian: 0 },
       personalContributions: { frank: 0, cristian: 0 },
       personalReturned: { frank: 0, cristian: 0 },
       profitTaken: { frank: 0, cristian: 0 },
@@ -589,6 +633,9 @@
       state.workingCapital.frank + state.workingCapital.cristian,
     );
     state.personalDueTotal = money(state.personalDue.frank + state.personalDue.cristian);
+    state.personalAutoDueTotal = money(
+      state.personalAutoDue.frank + state.personalAutoDue.cristian,
+    );
     state.settlement = settlementFor(state);
 
     const expectedCash = money(
@@ -679,6 +726,7 @@
     PARTNERS,
     PARTNER_NAMES,
     OPENING_STATE,
+    AUTO_PERSONAL_REPAYMENT_FROM,
     calculate,
     canonicalProjectName,
     projectId,
