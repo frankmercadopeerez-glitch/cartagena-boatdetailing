@@ -630,7 +630,7 @@ window.BLOG_POSTS = [
     title:
       "Tapicería Náutica en Cartagena: Vinilo Marino, Cuero y Tela | Colombia\n      Boat Detailing",
     excerpt:
-      "Guía completa de tapicería náutica en Cartagena: diferencias entre vinilo marino, cuero y tela Sunbrella, cómo limpiar y proteger cada material, cuándo restaurar y cuándo reemplazar en el ambiente caribeño.",
+      "Guía de tapicería náutica en Cartagena: cómo cuidar vinilo marino, cuero y telas técnicas, controlar humedad y decidir cuándo limpiar, restaurar o reemplazar.",
     dateISO: "2026-05-28",
     dateLabel: "28 May 2026",
     readTime: "6 min de lectura",
@@ -643,9 +643,9 @@ window.BLOG_POSTS = [
     slug: "instalacion-electrica-nautica-cartagena",
     url: "blog/instalacion-electrica-nautica-cartagena/",
     title:
-      "Instalación Eléctrica Náutica en Cartagena: Guía Completa 2026 | Colombia\n      Boat Detailing",
+      "Instalación Eléctrica Náutica en Cartagena: Guía Práctica",
     excerpt:
-      "Guía completa sobre instalación eléctrica náutica en Cartagena. Estándar ABYC, materiales marinos, sistemas 12V/24V, paneles solares y errores comunes que evitar.",
+      "Guía de instalación eléctrica náutica en Cartagena: cableado marino, protecciones, baterías, sistemas 12V/24V, corrosión y señales de revisión.",
     dateISO: "2026-05-27",
     dateLabel: "27 May 2026",
     readTime: "6 min de lectura",
@@ -673,9 +673,9 @@ window.BLOG_POSTS = [
     slug: "seguridad-electrica-barco",
     url: "blog/seguridad-electrica-barco/",
     title:
-      "Seguridad Eléctrica en Embarcaciones: Por Qué es Crítica y Cómo\n      Garantizarla",
+      "Seguridad Eléctrica en Embarcaciones: Riesgos y Revisión",
     excerpt:
-      "La electricidad mal instalada es la principal causa de incendios en embarcaciones. Aprende los riesgos, el estándar ABYC, checklist de inspección y cuándo llamar a un especialista en Cartagena.",
+      "Reconoce señales de corrosión, sobrecalentamiento y fallas eléctricas. Incluye una revisión visual y criterios para solicitar una inspección en Cartagena.",
     dateISO: "2026-05-27",
     dateLabel: "27 May 2026",
     readTime: "6 min de lectura",
@@ -1086,9 +1086,9 @@ window.BLOG_POSTS = [
     slug: "restauracion-gelcoat",
     url: "blog/restauracion-gelcoat/",
     title:
-      "Restauración de Gelcoat: Proces Profesional | Blog | Colombia Boat\n      Detailing",
+      "Restauración de Gelcoat en Cartagena: Proceso Profesional",
     excerpt:
-      "Guía técnica completa sobre restauración profesional de gelcoat en Cartagena: proceso paso a paso, productos recomendados, costos y resultados esperados.",
+      "Restauración de gelcoat en Cartagena: evaluación de oxidación, corrección, pulido, protección y criterios para reparar o repintar.",
     dateISO: "2026-01-28",
     dateLabel: "28 Jan 2026",
     readTime: "6 min de lectura",
