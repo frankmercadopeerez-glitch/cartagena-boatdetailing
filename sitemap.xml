@@ -11,7 +11,7 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -155,19 +155,19 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/casos-reales.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/haya-foam-deck/despues-01-960.webp</image:loc>
-      <image:title>Trabajos reales en yates y botes de Cartagena</image:title>
-      <image:caption>Instalación de foam deck, pulido integral y pintura naval realizados por Colombia Boat Detailing</image:caption>
+      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/le-meridiem-pulido/proa-960.webp</image:loc>
+      <image:title>Pulido integral del yate Le Meridiem en Cartagena</image:title>
+      <image:caption>Resultado real de corrección, refinado y protección del gelcoat exterior del yate Le Meridiem</image:caption>
       <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
     </image:image>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/case-studies.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -776,7 +776,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/index-en.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>

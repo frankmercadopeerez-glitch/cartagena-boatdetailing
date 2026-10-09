@@ -81,22 +81,25 @@ body > :is(header, section) + section::before {
   z-index: 1;
   top: 0;
   left: 0;
-  width: 200%;
+  width: 100%;
   height: clamp(34px, 4vw, 58px);
   background-color: var(--transition-wave-color);
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='black'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='black'/%3E%3C/svg%3E");
-  -webkit-mask-size: 50% 100%;
-  mask-size: 50% 100%;
+  -webkit-mask-size: 720px 100%;
+  mask-size: 720px 100%;
   -webkit-mask-repeat: repeat-x;
   mask-repeat: repeat-x;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
   pointer-events: none;
   animation: transition-wave-move 10s linear infinite;
 }
 
 @keyframes transition-wave-move {
   to {
-    transform: translateX(-50%);
+    -webkit-mask-position: -720px 0;
+    mask-position: -720px 0;
   }
 }
 
