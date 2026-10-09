@@ -111,7 +111,10 @@ main { padding: 58px 0 80px; }
 .panel.warning h3 { color: var(--red); }
 .panel p { margin: 8px 0 0; }
 
-.schedule-wrap { overflow-x: auto; border: 1px solid var(--line); }
+.schedule-shell { position: relative; }
+.schedule-wrap { overflow-x: auto; border: 1px solid var(--line); overscroll-behavior-inline: contain; }
+.schedule-wrap:focus-visible { outline: 3px solid rgba(199, 151, 68, .55); outline-offset: 3px; }
+.swipe-hint { display: none; }
 .schedule { width: 100%; min-width: 720px; border-collapse: collapse; }
 .schedule th { padding: 14px 16px; background: var(--navy-900); color: #fff; font-size: 12px; letter-spacing: .06em; text-align: left; text-transform: uppercase; }
 .schedule td { padding: 15px 16px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 14px; }
@@ -184,11 +187,30 @@ main { padding: 58px 0 80px; }
   .product-card { padding-top: 44px; }
   .product-card::before { left: 50%; transform: translateX(-50%); }
   .tag { display: table; margin-inline: auto; }
+  .swipe-hint { position: absolute; z-index: 3; right: 10px; top: -34px; display: inline-flex; align-items: center; gap: 7px; margin: 0; padding: 6px 10px; border: 1px solid rgba(199,151,68,.45); background: var(--navy-900); box-shadow: 0 6px 16px rgba(5,18,33,.18); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .02em; opacity: 0; pointer-events: none; }
+  .schedule-shell.is-hinting .swipe-hint { animation: swipe-hint-mobile 1.7s ease both; }
+  .schedule-shell.is-hinting .swipe-hint b { display: inline-block; animation: swipe-arrow-mobile .7s ease-in-out 2; color: var(--gold-light); font-size: 15px; }
+  .schedule-shell.reduced-motion .swipe-hint { opacity: 1; }
   .step:nth-child(odd) { border-right: 0; }
   .step:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
   .step:last-child { border-bottom: 0; }
   .guide-footer .container { display: block; text-align: center; }
   .guide-footer p { margin: 6px 0; }
+}
+
+@keyframes swipe-hint-mobile {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  15%, 75% { opacity: 1; }
+  45% { transform: translateX(-8px); }
+}
+
+@keyframes swipe-arrow-mobile {
+  50% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schedule-shell.is-hinting .swipe-hint,
+  .schedule-shell.is-hinting .swipe-hint b { animation: none; }
 }
 
 @media print {
