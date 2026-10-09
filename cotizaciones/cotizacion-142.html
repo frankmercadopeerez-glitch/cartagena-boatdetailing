@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Cotización #142 - Le Meridiem</title>
+    <style>
+      :root {
+        --navy: #050b14;
+        --navy-2: #112238;
+        --gold: #b8904d;
+        --ink: #263445;
+        --muted: #637083;
+        --line: #dce3eb;
+        --paper: #ffffff;
+        --soft: #f6f8fb;
+        --green: #1f7a4a;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      @page { size: A4; margin: 8mm; }
+      body { padding: 16px; background: #e9edf2; color: var(--ink); }
+      .sheet {
+        width: 100%;
+        max-width: 794px;
+        min-height: 1080px;
+        margin: 0 auto;
+        padding: 24px 28px 18px;
+        border-top: 8px solid var(--navy);
+        background: var(--paper);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--gold);
+      }
+      .brand { display: flex; align-items: center; gap: 11px; }
+      .brand img { width: 68px; height: 48px; object-fit: contain; }
+      .brand h1 {
+        color: var(--navy);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 21px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .brand p {
+        margin-top: 3px;
+        color: var(--gold);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.45px;
+        text-transform: uppercase;
+      }
+      .quote-meta { color: var(--muted); font-size: 11px; line-height: 1.45; text-align: right; }
+      .quote-meta h2 { margin-bottom: 4px; color: var(--navy-2); font-size: 16px; }
+      .client-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-left: 3px solid var(--navy);
+        background: var(--soft);
+      }
+      .eyebrow {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.75px;
+        text-transform: uppercase;
+      }
+      .client-grid p { color: var(--navy); font-size: 11.5px; line-height: 1.4; }
+      .client-grid > div:last-child {
+        justify-self: end;
+        text-align: right;
+      }
+      .intro {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-left: 3px solid var(--gold);
+        background: #fffbf2;
+        font-size: 10.7px;
+        line-height: 1.5;
+      }
+      .intro strong { color: var(--navy); }
+      h3 {
+        margin: 11px 0 7px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--gold);
+        color: var(--navy);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 14px;
+      }
+      .service-card { border: 1px solid var(--line); }
+      .service-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 10px;
+        background: var(--navy);
+        color: white;
+      }
+      .service-head strong { font-size: 12.5px; }
+      .service-head span { color: #f2d79d; font-size: 10px; font-weight: 700; white-space: nowrap; }
+      .service-body { padding: 9px 11px; font-size: 10.2px; line-height: 1.43; }
+      .service-body > p { margin-bottom: 7px; }
+      .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 9px; list-style: none; }
+      .steps li { padding: 6px 8px; border-left: 2px solid var(--gold); background: var(--soft); }
+      .steps strong { display: block; margin-bottom: 2px; color: var(--navy-2); font-size: 10.2px; }
+      .result-note {
+        margin-top: 7px;
+        padding: 7px 9px;
+        border: 1px solid #cbdced;
+        background: #eef6ff;
+        color: #234868;
+      }
+      .pricing { margin-top: 9px; border: 1px solid var(--line); background: var(--soft); }
+      .price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 10px;
+        color: var(--navy);
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .tax-note { padding: 0 10px 7px; color: var(--muted); font-size: 9px; }
+      .details-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 9px; margin-top: 9px; }
+      .box { padding: 8px 10px; font-size: 9.5px; line-height: 1.4; }
+      .box h4 { margin-bottom: 4px; font-size: 10.7px; }
+      .box ul { margin-left: 14px; }
+      .box li { margin-bottom: 2px; }
+      .scope-box { border-left: 3px solid var(--green); background: #f1f9f5; }
+      .scope-box h4 { color: var(--green); }
+      .terms-box { background: var(--navy); color: #e4eaf0; }
+      .terms-box h4 { color: var(--gold); }
+      .warranty {
+        margin-top: 8px;
+        padding: 7px 9px;
+        border: 1px solid rgba(31, 122, 74, 0.28);
+        border-left: 3px solid var(--green);
+        background: #f4fbf7;
+        font-size: 9.4px;
+        line-height: 1.4;
+      }
+      .warranty strong { color: var(--green); }
+      .photo-card {
+        margin-top: 9px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+      .photo-card img { display: block; width: 100%; height: 235px; object-fit: cover; object-position: center; }
+      .photo-caption { padding: 6px 9px; color: var(--muted); font-size: 9.2px; text-align: center; }
+      .page-two { margin-top: 20px; }
+      .photo-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .photo-item {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+      .photo-item img {
+        display: block;
+        width: 100%;
+        height: 225px;
+        object-fit: cover;
+      }
+      .photo-item p {
+        min-height: 30px;
+        padding: 6px 8px;
+        color: var(--muted);
+        font-size: 9px;
+        line-height: 1.3;
+        text-align: center;
+      }
+      footer {
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 9px;
+        line-height: 1.35;
+        text-align: center;
+      }
+      @media (max-width: 650px) {
+        body { padding: 0; background: white; }
+        .sheet { min-height: auto; padding: 18px 14px; box-shadow: none; }
+        header, .client-grid, .details-grid, .steps { display: block; }
+        .quote-meta { margin-top: 12px; text-align: left; }
+        .client-grid > div + div, .details-grid > div + div, .steps li + li { margin-top: 8px; }
+        .client-grid > div:last-child { justify-self: auto; text-align: left; }
+        .photo-card img, .photo-item img { height: auto; }
+      }
+      @media print {
+        body { padding: 0; background: white; }
+        .sheet {
+          max-width: none;
+          min-height: 0;
+          padding: 4mm 5mm 3mm;
+          border-top-width: 5px;
+          box-shadow: none;
+          zoom: 0.86;
+        }
+        .page-one {
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          zoom: 0.90;
+        }
+        .page-one header { padding-bottom: 3.5mm; }
+        .page-one .client-grid { margin-top: 4mm; padding: 3.5mm 4mm; }
+        .page-one .intro { margin-top: 4mm; padding: 3.5mm 4mm; line-height: 1.58; }
+        .page-one h3 { margin: 4mm 0 2.5mm; padding-bottom: 1.5mm; }
+        .page-one .service-head { padding: 3mm 3.5mm; }
+        .page-one .service-body { padding: 3.5mm 4mm; line-height: 1.55; }
+        .page-one .service-body > p { margin-bottom: 3mm; }
+        .page-one .steps { gap: 2.5mm 3mm; }
+        .page-one .steps li { padding: 2.5mm 3mm; }
+        .page-one .result-note { margin-top: 3mm; padding: 3mm 3.5mm; }
+        .page-one .pricing { margin-top: 4mm; }
+        .page-one .price-row { padding: 3.5mm 4mm; }
+        .page-one .tax-note { padding: 0 4mm 3mm; }
+        .page-one .details-grid { margin-top: 4mm; gap: 3mm; }
+        .page-one .box { padding: 3.5mm 4mm; line-height: 1.52; }
+        .page-one .warranty { margin-top: 4mm; padding: 3.5mm 4mm; line-height: 1.52; }
+        .page-one footer { margin-top: 4mm; }
+        header, .client-grid, .intro, .service-card, .pricing, .details-grid,
+        .warranty, .photo-card, .photo-item, footer { break-inside: avoid; page-break-inside: avoid; }
+        .page-two { margin-top: 0; page-break-before: always; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet page-one">
+      <header>
+        <div class="brand">
+          <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" />
+          <div>
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en estética naval</p>
+          </div>
+        </div>
+        <div class="quote-meta">
+          <h2>COTIZACIÓN DE SERVICIOS</h2>
+          <p><strong>Número:</strong> CBD-2026-142</p>
+          <p><strong>Fecha:</strong> 26/09/2026</p>
+          <p><strong>Validez:</strong> 15 días calendario</p>
+        </div>
+      </header>
+
+      <section class="client-grid">
+        <div>
+          <span class="eyebrow">Preparado para</span>
+          <p><strong>Sr. Alexis Visbal</strong></p>
+          <p>Propietario</p>
+        </div>
+        <div>
+          <span class="eyebrow">Embarcación y ubicación</span>
+          <p><strong>Le Meridiem · Princess 65 pies</strong></p>
+          <p>Edurbe, Manga · Cartagena de Indias</p>
+        </div>
+      </section>
+
+      <section class="intro">
+        <strong>Objeto de la propuesta:</strong> ejecutar un pulido integral profesional
+        sobre las superficies exteriores accesibles de gelcoat del yate Le Meridiem,
+        con el propósito de recuperar brillo, uniformidad y profundidad visual, reducir
+        opacidad y micro-rayones y dejar una protección adecuada para el ambiente marino.
+      </section>
+
+      <h3>Alcance del pulido integral</h3>
+      <section class="service-card">
+        <div class="service-head">
+          <strong>Pulido integral y protección profesional · Sistema 3M Marine</strong>
+          <span>MANO DE OBRA + MATERIALES</span>
+        </div>
+        <div class="service-body">
+          <p>
+            El servicio comprende casco sobre la línea de flotación, costados, proa,
+            popa, superestructura, flybridge y demás superficies exteriores de gelcoat
+            que puedan trabajarse con acceso seguro y sin desmontajes especializados.
+          </p>
+          <ol class="steps">
+            <li>
+              <strong>1. Preparación y descontaminación</strong>
+              Lavado técnico, remoción de salitre y residuos adheridos, desengrase y
+              evaluación de cada zona para definir el nivel de corte seguro.
+            </li>
+            <li>
+              <strong>2. Corrección · 3M Heavy Duty Compound</strong>
+              Trabajo a máquina con pad de corte adecuado para reducir oxidación,
+              opacidad, marcas de agua y micro-rayones presentes en el gelcoat.
+            </li>
+            <li>
+              <strong>3. Refinado · 3M Finesse-it / Marine Polish</strong>
+              Pulido de terminación para eliminar velo y marcas de la etapa de corte,
+              mejorar el reflejo y recuperar claridad y profundidad visual.
+            </li>
+            <li>
+              <strong>4. Protección · 3M Ultra Performance Paste Wax</strong>
+              Aplicación uniforme, curado y retiro controlado de cera marina para sellar
+              el acabado y reforzar la resistencia frente a rayos UV, humedad y salinidad.
+            </li>
+            <li>
+              <strong>5. Detalles y zonas de encuentro</strong>
+              Revisión de bordes, remates y superficies alrededor de ventanas, pasillos
+              y accesorios, trabajando únicamente donde exista acceso técnico seguro.
+            </li>
+            <li>
+              <strong>6. Control de calidad y entrega</strong>
+              Inspección desde distintos ángulos de luz, corrección puntual de residuos
+              u hologramas y limpieza final de las superficies intervenidas.
+            </li>
+          </ol>
+          <div class="result-note">
+            <strong>Resultado esperado:</strong> mejora visible del brillo, la uniformidad
+            y la apariencia general del gelcoat. El resultado final dependerá del espesor
+            remanente, el envejecimiento, reparaciones anteriores y la profundidad real de los defectos.
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing">
+        <div class="price-row">
+          <span>Total del servicio (antes de IVA)</span>
+          <span>$&nbsp;6.000.000 COP</span>
+        </div>
+        <p class="tax-note">Si el cliente requiere facturación electrónica, se adicionará el IVA vigente.</p>
+      </section>
+
+      <section class="details-grid">
+        <div class="box scope-box">
+          <h4>Programación y alcance</h4>
+          <ul>
+            <li>Tiempo estimado: <strong>4 a 5 días de trabajo</strong>, sujeto a clima y condiciones de la marina.</li>
+            <li>Incluye productos 3M Marine, insumos y mano de obra especializada descritos.</li>
+            <li>El cliente garantizará acceso, energía, agua y condiciones seguras para el trabajo.</li>
+            <li>No incluye reparaciones de gelcoat, pintura, acrílicos, tapicería, madera ni metales.</li>
+          </ul>
+        </div>
+        <div class="box terms-box">
+          <h4>Condiciones y pagos</h4>
+          <ul>
+            <li>Anticipo del <strong>50%</strong> para programar: <strong>$&nbsp;3.000.000 COP</strong>.</li>
+            <li>Saldo del <strong>50%</strong> contra entrega a satisfacción.</li>
+            <li>Los costos de ingreso o permisos exigidos por la marina serán asumidos por el cliente.</li>
+            <li>La información de pago se enviará por WhatsApp al aprobar la cotización.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="warranty">
+        <strong>✓ Garantía de brillo y guía de cuidado:</strong> se otorga garantía de
+        6 meses sobre el brillo restaurado mediante el proceso aplicado, condicionada al
+        mantenimiento adecuado de la embarcación. Al finalizar se entregará una guía digital
+        de cuidado. No cubre impactos, abrasiones, químicos incompatibles, reparaciones previas
+        defectuosas ni deterioro ocasionado por terceros o falta de mantenimiento.
+      </section>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Gracias por confiar en los especialistas en estética naval.</p>
+      </footer>
+    </main>
+
+    <main class="sheet page-two">
+      <header>
+        <div class="brand">
+          <img src="../images/cbdlogo-gold.svg" alt="Colombia Boat Detailing" />
+          <div>
+            <h1>Colombia Boat Detailing</h1>
+            <p>Los expertos en estética naval</p>
+          </div>
+        </div>
+        <div class="quote-meta">
+          <h2>REGISTRO FOTOGRÁFICO</h2>
+          <p><strong>Embarcación:</strong> Le Meridiem</p>
+          <p><strong>Cotización:</strong> CBD-2026-142</p>
+        </div>
+      </header>
+
+      <h3>Estado actual y áreas incluidas en la inspección visual</h3>
+      <section class="photo-grid-2">
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-1.jpg" alt="Vista general del yate Le Meridiem" />
+          <p>Vista general del Princess 65 Le Meridiem.</p>
+        </div>
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-2.jpg" alt="Popa del yate Le Meridiem" />
+          <p>Popa, escaleras laterales y superficies exteriores de gelcoat.</p>
+        </div>
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-3.jpg" alt="Pasillo lateral y superestructura" />
+          <p>Pasillo lateral y superestructura con zonas de acabado oscuro y blanco.</p>
+        </div>
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-4.jpg" alt="Detalle de superficie exterior" />
+          <p>Detalle de superficie exterior con opacidad y marcas visibles.</p>
+        </div>
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-5.jpg" alt="Superficie superior del flybridge" />
+          <p>Superficies superiores accesibles del flybridge.</p>
+        </div>
+        <div class="photo-item">
+          <img src="images/le-meridiem/le-meridiem-6.jpg" alt="Costado del yate Le Meridiem" />
+          <p>Costado y molduras exteriores incluidas en el alcance accesible.</p>
+        </div>
+      </section>
+
+      <section class="warranty">
+        <strong>Nota de alcance:</strong> el registro fotográfico documenta el estado visible
+        durante la inspección. Cualquier reparación, pintura o corrección profunda que se detecte
+        durante la preparación será informada y cotizada por separado antes de ejecutarse.
+      </section>
+
+      <footer>
+        <p><strong>Colombia Boat Detailing</strong> | colombiaboatdetailing.com</p>
+        <p>Registro fotográfico anexo a la cotización CBD-2026-142.</p>
+      </footer>
+    </main>
+  </body>
+</html>
