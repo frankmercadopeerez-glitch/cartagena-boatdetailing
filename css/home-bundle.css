@@ -30,7 +30,7 @@
 
 /* Lightweight animated transition for adjacent sections without an SVG divider. */
 body > :is(header, section) + section {
-  --transition-wave-color: transparent;
+  --transition-wave-image: none;
   --transition-wave-display: none;
   position: relative;
 }
@@ -40,37 +40,37 @@ body > section.text-white:not(.bg-white):not(.bg-slate-50):not(.bg-slate-100)
   + section:is(.bg-white, .bg-slate-50, .bg-slate-100),
 body > section.bg-navy-900
   + section:is(.bg-white, .bg-slate-50, .bg-slate-100, .bg-gold-400) {
-  --transition-wave-color: #001f3f;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%23001f3f'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
 body > section.bg-navy-800
   + section:is(.bg-white, .bg-slate-50, .bg-slate-100, .bg-gold-400) {
-  --transition-wave-color: #0a2f5e;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%230a2f5e'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
 body > section.bg-white
   + section:is(.bg-navy-800, .bg-navy-900, .bg-gold-400) {
-  --transition-wave-color: #ffffff;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%23ffffff'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
 body > section.bg-slate-50
   + section:is(.bg-navy-800, .bg-navy-900, .bg-gold-400) {
-  --transition-wave-color: #f8fafc;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%23f8fafc'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
 body > section.bg-slate-100
   + section:is(.bg-navy-800, .bg-navy-900, .bg-gold-400) {
-  --transition-wave-color: #f1f5f9;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%23f1f5f9'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
 body > section.bg-gold-400
   + section:is(.bg-white, .bg-slate-50, .bg-slate-100, .bg-navy-800, .bg-navy-900) {
-  --transition-wave-color: #d4af37;
+  --transition-wave-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='%23d4af37'/%3E%3C/svg%3E");
   --transition-wave-display: block;
 }
 
@@ -83,23 +83,19 @@ body > :is(header, section) + section::before {
   left: 0;
   width: 100%;
   height: clamp(34px, 4vw, 58px);
-  background-color: var(--transition-wave-color);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='black'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70'%3E%3Cpath d='M0 0H1440V40C1320 60 1200 60 1080 40C960 20 840 20 720 40C600 60 480 60 360 40C240 20 120 20 0 40Z' fill='black'/%3E%3C/svg%3E");
-  -webkit-mask-size: 720px 100%;
-  mask-size: 720px 100%;
-  -webkit-mask-repeat: repeat-x;
-  mask-repeat: repeat-x;
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
+  background-color: transparent;
+  background-image: var(--transition-wave-image);
+  background-size: 720px 100%;
+  background-repeat: repeat-x;
+  background-position: 0 0;
   pointer-events: none;
+  will-change: background-position;
   animation: transition-wave-move 10s linear infinite;
 }
 
 @keyframes transition-wave-move {
   to {
-    -webkit-mask-position: -720px 0;
-    mask-position: -720px 0;
+    background-position: -720px 0;
   }
 }
 
