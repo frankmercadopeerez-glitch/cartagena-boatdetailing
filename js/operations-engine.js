@@ -11,6 +11,7 @@
     "operacion general",
     "operación general",
     "publicidad",
+    "publicidad semanal",
     "marketing",
     "administracion",
     "administración",
