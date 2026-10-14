@@ -166,14 +166,19 @@
         merged.push({ finance: null, tasks: [], reminders: [], ...document });
       }
     });
-    return merged.filter((project) => project.status !== "completed");
+    return merged.filter((project) => project.status !== "completed" && project.archived !== true);
   }
 
-  function isFrankBusinessTransaction(transaction) {
+  function isBusinessTransaction(transaction) {
     if (!transaction || transaction.archived === true) return false;
     if (!['ingreso', 'gasto'].includes(transaction.tipo)) return false;
     if (['project_close', 'project_reopen', 'capital_transfer'].includes(transaction.motorType)) return false;
     if (EXCLUDED_FINANCE_CATEGORIES.has(normalize(transaction.categoria))) return false;
+    return true;
+  }
+
+  function isFrankBusinessTransaction(transaction) {
+    if (!isBusinessTransaction(transaction)) return false;
     const owner = normalize(
       transaction.tipo === 'ingreso'
         ? transaction.receptor || transaction.responsible || transaction.persona
@@ -198,7 +203,7 @@
       imported: true,
       originalType: type,
       originalAmount: amount,
-      owner: 'Frank',
+      owner: String(transaction.receptor || transaction.responsible || transaction.persona || 'Empresa'),
     };
   }
 
@@ -207,28 +212,42 @@
     return type === 'gasto' ? -value : value;
   }
 
-  function financeTotals(transactions, openingBalance) {
+  function financeTotals(transactions, financeMeta) {
     const active = (transactions || []).filter((transaction) => transaction && transaction.archived !== true);
-    let income = 0;
-    let expenses = 0;
-    let adjustment = 0;
+    const meta = financeMeta && typeof financeMeta === 'object' ? financeMeta : { openingBalance: financeMeta };
+    const hasSourceTotals = Number.isFinite(Number(meta.sourceTotalIncome)) && Number.isFinite(Number(meta.sourceTotalExpenses));
+    let currentIncome = 0;
+    let currentExpenses = 0;
+    let incomeDelta = 0;
+    let expenseDelta = 0;
+    let balanceDelta = 0;
     active.forEach((transaction) => {
       const amount = Math.max(0, Number(transaction.monto) || 0);
-      if (transaction.tipo === 'ingreso') income += amount;
-      if (transaction.tipo === 'gasto') expenses += amount;
+      if (transaction.tipo === 'ingreso') currentIncome += amount;
+      if (transaction.tipo === 'gasto') currentExpenses += amount;
       if (transaction.imported) {
-        adjustment +=
-          signedAmount(transaction.tipo, amount) -
-          signedAmount(transaction.originalType || transaction.tipo, transaction.originalAmount);
+        const originalAmount = Math.max(0, Number(transaction.originalAmount) || 0);
+        const originalType = transaction.originalType || transaction.tipo;
+        incomeDelta += (transaction.tipo === 'ingreso' ? amount : 0) - (originalType === 'ingreso' ? originalAmount : 0);
+        expenseDelta += (transaction.tipo === 'gasto' ? amount : 0) - (originalType === 'gasto' ? originalAmount : 0);
+        balanceDelta += signedAmount(transaction.tipo, amount) - signedAmount(originalType, originalAmount);
       } else {
-        adjustment += signedAmount(transaction.tipo, amount);
+        if (transaction.tipo === 'ingreso') incomeDelta += amount;
+        if (transaction.tipo === 'gasto') expenseDelta += amount;
+        balanceDelta += signedAmount(transaction.tipo, amount);
       }
     });
+    const income = hasSourceTotals ? Number(meta.sourceTotalIncome) + incomeDelta : currentIncome;
+    const expenses = hasSourceTotals ? Number(meta.sourceTotalExpenses) + expenseDelta : currentExpenses;
+    const profit = Number.isFinite(Number(meta.sourceProfitTotal))
+      ? Number(meta.sourceProfitTotal) + incomeDelta - expenseDelta
+      : income - expenses;
     return {
       income,
       expenses,
-      result: income - expenses,
-      available: (Number(openingBalance) || 0) + adjustment,
+      result: profit,
+      profit,
+      available: (Number(meta.openingBalance) || 0) + balanceDelta,
       count: active.length,
       importedCount: active.filter((transaction) => transaction.imported).length,
     };
@@ -239,6 +258,7 @@
     deriveFinanceProjects,
     isRealProjectName,
     isProjectCloseRecord,
+    isBusinessTransaction,
     isFrankBusinessTransaction,
     snapshotTransaction,
     financeTotals,

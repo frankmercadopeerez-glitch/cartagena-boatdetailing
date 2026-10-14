@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v6";
 const CACHE_PAGES = "cbd-pages-v3";
-const FINANZAS_CACHE = "cbd-private-apps-v56";
+const FINANZAS_CACHE = "cbd-private-apps-v57";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -24,6 +24,7 @@ const FINANZAS_PATHS = [
   "/css/operaciones.css",
   "/js/operations-engine.js",
   "/js/operaciones.js",
+  "/images/operations-icon.svg",
 ];
 
 self.addEventListener("install", (e) => {

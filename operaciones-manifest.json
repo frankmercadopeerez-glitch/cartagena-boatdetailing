@@ -3,23 +3,17 @@
   "name": "CBD Operaciones",
   "short_name": "Operaciones",
   "description": "Control privado de trabajos y embarcaciones - Colombia Boat Detailing",
-  "start_url": "/operaciones.html?_cbd_build=3",
+  "start_url": "/operaciones.html?_cbd_build=5",
   "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/images/icon-192.png?v=20260812",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/images/icon-512.png?v=20260812",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "src": "/images/operations-icon.svg?v=1",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

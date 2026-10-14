@@ -30,6 +30,7 @@ assert.equal(merged.find((item) => item.name === "Bote Firulays").scope, "Pulido
 assert.equal(engine.isFrankBusinessTransaction({ tipo: "ingreso", monto: 100, receptor: "Frank" }), true);
 assert.equal(engine.isFrankBusinessTransaction({ tipo: "gasto", monto: 100, responsible: "Cristian" }), false);
 assert.equal(engine.isFrankBusinessTransaction({ tipo: "ingreso", monto: 100, receptor: "Frank", categoria: "Aporte de Capital" }), false);
+assert.equal(engine.isBusinessTransaction({ tipo: "ingreso", monto: 100, receptor: "Cristian" }), true);
 const snapshot = engine.snapshotTransaction({ tipo: "gasto", monto: 50000, responsible: "Frank", descripcion: "Materiales" });
 assert.equal(snapshot.originalAmount, 50000);
 assert.equal(snapshot.owner, "Frank");
@@ -37,8 +38,15 @@ assert.deepEqual(
   engine.financeTotals([
     { tipo: "ingreso", monto: 120000, imported: true, originalType: "ingreso", originalAmount: 100000 },
     { tipo: "gasto", monto: 10000, imported: false },
-  ], 366499),
-  { income: 120000, expenses: 10000, result: 110000, available: 376499, count: 2, importedCount: 1 },
+  ], { openingBalance: 366499 }),
+  { income: 120000, expenses: 10000, result: 110000, profit: 110000, available: 376499, count: 2, importedCount: 1 },
+);
+assert.deepEqual(
+  engine.financeTotals([
+    { tipo: "ingreso", monto: 120000, imported: true, originalType: "ingreso", originalAmount: 100000 },
+    { tipo: "gasto", monto: 10000, imported: false },
+  ], { openingBalance: 366499, sourceTotalIncome: 57289510, sourceTotalExpenses: 40830467, sourceProfitTotal: 17800918 }),
+  { income: 57309510, expenses: 40840467, result: 17810918, profit: 17810918, available: 376499, count: 2, importedCount: 1 },
 );
 
 console.log("operations-engine: ok");

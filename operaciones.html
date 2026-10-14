@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-title" content="CBD Operaciones" />
     <title>CBD Operaciones</title>
     <link rel="icon" href="/favicon.svg?v=20260812" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
+    <link rel="apple-touch-icon" href="/images/operations-icon.svg?v=1" />
     <link rel="manifest" href="/operaciones-manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -131,7 +131,7 @@
           </div>
           <div class="finance-metrics" id="finance-metrics"></div>
           <section class="panel finance-panel">
-            <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de mi cuenta</h2></div><span class="snapshot-badge"><i data-lucide="camera"></i>Sin conexión con Finanzas</span></div>
+            <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de la empresa</h2></div></div>
             <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción, categoría o proyecto" /></div><select id="finance-type-filter" aria-label="Filtrar movimientos"><option value="all">Todos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
             <div class="finance-table" id="finance-table"></div>
           </section>
@@ -154,7 +154,7 @@
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
           </div>
-          <label>Alcance del trabajo<textarea id="project-scope" rows="4" placeholder="Describe exactamente qué incluye este trabajo…"></textarea></label>
+          <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
           <label>Notas de coordinación<textarea id="project-notes" rows="3" placeholder="Accesos, contacto, restricciones, decisiones…"></textarea></label>
         </form>
 
@@ -162,7 +162,7 @@
           <div class="section-title"><div><p class="eyebrow">EJECUCIÓN</p><h3>Checklist del trabajo</h3></div><span class="progress-label" id="drawer-progress">0%</span></div>
           <div class="progress-track"><span id="drawer-progress-bar"></span></div>
           <div class="editable-list" id="task-list"></div>
-          <form class="inline-add" id="task-form"><input id="task-title" placeholder="Nueva tarea o etapa" required /><input id="task-date" type="date" aria-label="Fecha de tarea" /><select id="task-priority" aria-label="Prioridad"><option value="normal">Normal</option><option value="high">Alta</option></select><button class="icon-button is-accent" aria-label="Agregar tarea"><i data-lucide="plus"></i></button></form>
+          <form class="inline-add" id="task-form"><input id="task-title" placeholder="Nuevo frente o entregable" required /><input id="task-date" type="date" aria-label="Fecha del frente" /><select id="task-stage" aria-label="Estado del frente"><option value="pending">Pendiente</option><option value="in_progress">En proceso</option><option value="delivered">Entregado</option><option value="warranty">Garantía</option></select><button class="icon-button is-accent" aria-label="Agregar frente"><i data-lucide="plus"></i></button></form>
         </section>
 
         <section class="drawer-section">
@@ -178,7 +178,7 @@
           </form>
         </section>
       </div>
-      <div class="drawer-footer"><span id="save-status">Los cambios aún no se han guardado</span><button class="btn btn-primary" id="save-project-button"><i data-lucide="save"></i>Guardar cambios</button></div>
+      <div class="drawer-footer"><button class="btn btn-danger" id="delete-project-button"><i data-lucide="trash-2"></i>Borrar proyecto</button><span id="save-status">Los cambios aún no se han guardado</span><button class="btn btn-primary" id="save-project-button"><i data-lucide="save"></i>Guardar cambios</button></div>
     </aside>
 
     <dialog class="modal" id="new-project-modal">
@@ -196,8 +196,9 @@
         <input type="hidden" id="finance-id" />
         <div class="modal-heading"><div><p class="eyebrow">MI CUENTA</p><h2 id="finance-modal-title">Registrar movimiento</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
         <div class="field-grid"><label>Tipo<select id="finance-type" required><option value="ingreso">Ingreso</option><option value="gasto">Gasto</option></select></label><label>Valor<input id="finance-amount" type="number" min="1" step="1" inputmode="numeric" required /></label><label>Fecha<input id="finance-date" type="date" required /></label><label>Hora<input id="finance-time" type="time" /></label></div>
-        <div class="field-grid"><label>Categoría<input id="finance-category" required placeholder="Materiales, anticipo…" /></label><label>Medio<input id="finance-method" placeholder="Transferencia, efectivo…" /></label></div>
-        <label>Proyecto<input id="finance-project" list="finance-projects-list" placeholder="Trabajo relacionado" /><datalist id="finance-projects-list"></datalist></label>
+        <label>Categoría<div class="choice-grid choice-grid-categories" id="finance-category-options"></div><input id="finance-category" type="hidden" required /></label>
+        <label>Medio de pago<div class="choice-grid" id="finance-method-options"><button type="button" class="choice-button" data-finance-method="Efectivo"><i data-lucide="banknote"></i>Efectivo</button><button type="button" class="choice-button" data-finance-method="Transferencia"><i data-lucide="building-2"></i>Cuenta</button></div><input id="finance-method" type="hidden" /></label>
+        <label>Proyecto<input id="finance-project" placeholder="Escribe o selecciona un proyecto" autocomplete="off" /><div class="project-suggestions" id="finance-project-suggestions"></div></label>
         <label>Descripción<textarea id="finance-description" rows="3" required placeholder="Detalle claro del movimiento"></textarea></label>
         <p class="finance-edit-note" id="finance-edit-note">Los cambios actualizan inmediatamente todos los totales de este portal.</p>
         <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
@@ -205,6 +206,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=4"></script>
+    <script src="/js/operaciones.js?v=5"></script>
   </body>
 </html>
