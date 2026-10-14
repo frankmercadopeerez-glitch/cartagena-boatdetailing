@@ -71,6 +71,17 @@
       maximumFractionDigits: 0,
     }).format(Number(value) || 0);
 
+  const parseMoneyInput = (value) => Math.max(0, Number(String(value || "").replace(/\D/g, "")) || 0);
+  const formatMoneyInput = (value) => {
+    const amount = parseMoneyInput(value);
+    return amount ? new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 }).format(amount) : "";
+  };
+
+  function keepMoneyFormatted(input) {
+    const formatted = formatMoneyInput(input.value);
+    if (input.value !== formatted) input.value = formatted;
+  }
+
   const formatDate = (value, options = {}) => {
     if (!value) return "Sin fecha";
     const date = new Date(`${value}T12:00:00`);
@@ -136,6 +147,9 @@
       scope: project.scope || "",
       notes: project.notes || "",
       progress: Number(project.progress) || 0,
+      contractValue: Math.max(0, Number(project.contractValue) || 0),
+      paidOpening: Math.max(0, Number(project.paidOpening) || 0),
+      paidOpeningLedger: Math.max(0, Number(project.paidOpeningLedger) || 0),
       tasks: Array.isArray(project.tasks) ? project.tasks.map((item) => ({ ...item })) : [],
       reminders: Array.isArray(project.reminders) ? project.reminders.map((item) => ({ ...item })) : [],
       docId: project.docId || "",
@@ -171,6 +185,14 @@
     return Engine.taskProgress(project.tasks, project.progress);
   }
 
+  function projectFinancialSummary(project) {
+    return Engine.projectFinancials(project, state.financeTransactions);
+  }
+
+  function displayPending(value) {
+    return value === null ? "Por definir" : formatMoney(value);
+  }
+
   function metricCard(label, value, detail, icon, alert = false) {
     return `<article class="metric-card${alert ? " is-alert" : ""}"><div class="metric-top"><span>${escapeHtml(label)}</span><span class="metric-icon"><i data-lucide="${icon}"></i></span></div><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></article>`;
   }
@@ -196,13 +218,28 @@
     const progress = projectProgress(project);
     const pending = openTasks(project).length;
     const scope = project.scope || "Alcance pendiente de definir. Abre la ficha para organizar entregables y tareas.";
+    const finance = projectFinancialSummary(project);
     const deadlineClass = urgency === "late" ? "is-late" : urgency === "attention" ? "is-attention" : "";
     return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
       <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${urgencyLabel(urgency)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
+      <div class="project-money-grid"><div><span>Pagado</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Saldo en proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
       <div class="progress-row"><span>Avance</span><b>${progress}%</b></div><div class="progress-track"><span style="width:${progress}%"></span></div>
       <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${pending ? `${pending} pendiente${pending === 1 ? "" : "s"}` : "Sin pendientes"}</span><span class="deadline ${deadlineClass}"><i data-lucide="clock-3"></i>${escapeHtml(relativeDate(project.deadline))}</span></div>
     </article>`;
+  }
+
+  function renderProjectFinanceOverview() {
+    if (!state.draft || !els.projectFinanceOverview) return;
+    const finance = projectFinancialSummary(state.draft);
+    els.projectFinanceOverview.innerHTML = [
+      ["Valor contratado", finance.contractValue ? formatMoney(finance.contractValue) : "Por definir", "file-text"],
+      ["Pagado", formatMoney(finance.paid), "check"],
+      ["Por cobrar", displayPending(finance.pending), "clock-3"],
+      ["Gastos registrados", formatMoney(finance.expenses), "receipt-text"],
+      ["Saldo en el proyecto", formatMoney(finance.balance), "wallet"],
+      ["Tu 50% potencial", formatMoney(finance.frankPotential), "chart-no-axes-combined"],
+    ].map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
   }
 
   function filteredProjects() {
@@ -302,35 +339,32 @@
       financeMetric("Disponible en mi cuenta", totals.available, "Saldo de Frank, sin reparto de capital", "wallet", "is-primary"),
       financeMetric("Ingresos totales", totals.income, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-up", "is-income"),
       financeMetric("Gastos totales", totals.expenses, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-down", "is-expense"),
-      financeMetric("Profit total", totals.profit, "Ganancia histórica, ajustada con tus cambios", "chart-no-axes-combined"),
+      financeMetric("Profit de Frank (50%)", totals.frankProfit, "Tu mitad del profit realizado; los retiros no son gasto", "chart-no-axes-combined"),
     ].join("");
     const cutoff = state.financeMeta && state.financeMeta.sourceCutoff;
     els.financeCutoff.textContent = cutoff
-      ? `Copia histórica independiente tomada el ${formatDate(cutoff, { long: true })}. Los cambios hechos aquí no alteran CBD Finanzas.`
-      : "Este libro es independiente y no mantiene sincronización con CBD Finanzas.";
+      ? `Datos históricos cargados el ${formatDate(cutoff, { long: true })}.`
+      : "Datos históricos cargados en este portal.";
     const transactions = filteredFinanceTransactions();
     els.financeTable.innerHTML = transactions.length
       ? transactions.map(financeRow).join("")
       : `<div class="empty-state"><i data-lucide="receipt-text"></i><strong>No hay movimientos para este filtro</strong><span>Registra un ingreso o gasto para comenzar.</span></div>`;
-    renderProjectSuggestions();
   }
 
-  function setFinanceChoice(kind, value) {
-    const input = kind === "category" ? els.financeCategory : els.financeMethod;
-    const container = kind === "category" ? els.financeCategoryOptions : els.financeMethodOptions;
-    input.value = value || "";
-    container.querySelectorAll("[data-choice-value]").forEach((button) => {
-      button.classList.toggle("is-active", button.dataset.choiceValue === input.value);
+  function setFinanceMethod(value) {
+    els.financeMethod.value = value || "";
+    els.financeMethodOptions.querySelectorAll("[data-choice-value]").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.choiceValue === els.financeMethod.value);
     });
   }
 
   function renderFinanceCategories(selected) {
     const values = [...(FINANCE_CATEGORIES[els.financeType.value] || [])];
     if (selected && !values.includes(selected)) values.unshift(selected);
-    els.financeCategoryOptions.innerHTML = values.map((category) =>
-      `<button type="button" class="choice-button" data-choice-value="${escapeHtml(category)}"><i data-lucide="tag"></i>${escapeHtml(category)}</button>`,
+    els.financeCategory.innerHTML = values.map((category) =>
+      `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`,
     ).join("");
-    setFinanceChoice("category", selected || values[0] || "");
+    els.financeCategory.value = selected || values[0] || "";
   }
 
   function renderFinanceMethods(selected) {
@@ -339,24 +373,26 @@
     els.financeMethodOptions.innerHTML = values.map((method) =>
       `<button type="button" class="choice-button" data-choice-value="${escapeHtml(method.value)}"><i data-lucide="${method.icon}"></i>${escapeHtml(method.label)}</button>`,
     ).join("");
-    setFinanceChoice("method", selected || "Efectivo");
+    setFinanceMethod(selected || "Efectivo");
   }
 
-  function renderProjectSuggestions() {
-    if (!els.financeProjectSuggestions) return;
-    els.financeProjectSuggestions.innerHTML = state.projects.slice(0, 8).map((project) =>
-      `<button type="button" class="project-suggestion" data-project-suggestion="${escapeHtml(project.name)}">${escapeHtml(project.name)}</button>`,
-    ).join("");
+  function renderFinanceProjects(selected) {
+    const options = state.projects.map((project) => project.financeProjectName || project.name);
+    if (selected && !options.some((name) => Engine.normalize(name) === Engine.normalize(selected))) options.unshift(selected);
+    els.financeProject.innerHTML = [
+      '<option value="">Sin proyecto</option>',
+      ...options.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`),
+    ].join("");
+    els.financeProject.value = selected || "";
   }
 
   function openFinanceModal(type, transaction) {
     const record = transaction || {};
     els.financeId.value = record.id || "";
     els.financeType.value = record.tipo || type || "gasto";
-    els.financeAmount.value = Number(record.monto) || "";
+    els.financeAmount.value = formatMoneyInput(record.monto);
     els.financeDate.value = record.fecha || new Date().toISOString().slice(0, 10);
     els.financeTime.value = record.hora || new Date().toTimeString().slice(0, 5);
-    els.financeProject.value = record.proyecto || "";
     els.financeDescription.value = record.descripcion || "";
     els.financeModalTitle.textContent = record.id ? "Editar movimiento" : `Registrar ${els.financeType.value}`;
     els.financeEditNote.textContent = record.imported
@@ -364,7 +400,7 @@
       : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
     renderFinanceCategories(record.categoria || "");
     renderFinanceMethods(record.medio || (record.id ? "" : "Efectivo"));
-    renderProjectSuggestions();
+    renderFinanceProjects(record.proyecto || "");
     els.financeModal.showModal();
     refreshIcons();
   }
@@ -379,7 +415,7 @@
     const existing = state.financeTransactions.find((transaction) => transaction.id === id);
     const payload = {
       tipo: els.financeType.value,
-      monto: Math.max(0, Number(els.financeAmount.value) || 0),
+      monto: parseMoneyInput(els.financeAmount.value),
       fecha: els.financeDate.value,
       hora: els.financeTime.value,
       categoria: els.financeCategory.value.trim(),
@@ -390,9 +426,29 @@
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedBy: state.user.email || state.user.uid,
     };
-    if (!payload.monto || !payload.fecha || !payload.descripcion || !payload.categoria || !payload.medio) {
-      toast("Completa valor, fecha, categoría, medio y descripción");
+    if (!payload.monto || !payload.fecha || !payload.categoria || !payload.medio) {
+      toast("Completa valor, fecha, categoría y medio");
       return;
+    }
+    const isProfitWithdrawal = Engine.isProfitWithdrawal(payload);
+    if (isProfitWithdrawal && !payload.proyecto && !existing) {
+      toast("Selecciona el proyecto cuyo saldo pasará a profit");
+      return;
+    }
+    let releasedProjectProfit = 0;
+    if (isProfitWithdrawal && payload.proyecto) {
+      const sameRelease = existing
+        && Engine.isProfitWithdrawal(existing)
+        && Engine.normalize(existing.proyecto) === Engine.normalize(payload.proyecto);
+      if (sameRelease) releasedProjectProfit = Math.max(0, Number(existing.releasedProjectProfit) || 0);
+      else {
+        const project = state.projects.find((item) => Engine.normalize(item.financeProjectName || item.name) === Engine.normalize(payload.proyecto));
+        const transactions = existing ? state.financeTransactions.filter((item) => item.id !== existing.id) : state.financeTransactions;
+        releasedProjectProfit = project ? Math.max(0, Engine.projectFinancials(project, transactions).balance) : 0;
+      }
+      payload.releasedProjectProfit = releasedProjectProfit;
+    } else if (existing && Object.prototype.hasOwnProperty.call(existing, "releasedProjectProfit")) {
+      payload.releasedProjectProfit = firebase.firestore.FieldValue.delete();
     }
     if (!existing) {
       Object.assign(payload, {
@@ -406,36 +462,17 @@
       const collection = state.db.collection("operaciones_finanzas_transacciones");
       if (existing) await collection.doc(id).set(payload, { merge: true });
       else await collection.add(payload);
-      if (payload.proyecto) await ensureOperationsProject(payload.proyecto);
       els.financeModal.close();
       els.financeForm.reset();
-      toast(existing ? "Movimiento actualizado" : "Movimiento registrado");
+      toast(releasedProjectProfit > 0
+        ? `${formatMoney(releasedProjectProfit)} pasaron del proyecto a profit`
+        : existing ? "Movimiento actualizado" : "Movimiento registrado");
     } catch (error) {
       console.error("No se pudo guardar el movimiento", error);
       toast("No se pudo guardar el movimiento");
     } finally {
       els.saveFinanceButton.disabled = false;
     }
-  }
-
-  async function ensureOperationsProject(name) {
-    const cleanName = String(name || "").trim();
-    if (!cleanName) return;
-    const current = state.projects.find((project) => Engine.normalize(project.name) === Engine.normalize(cleanName));
-    if (current) return;
-    const ref = state.db.collection("operaciones_proyectos").doc(`finance-${Engine.slugify(cleanName)}`);
-    await ref.set({
-      name: cleanName,
-      financeProjectName: cleanName,
-      status: "in_process",
-      archived: false,
-      scope: "",
-      tasks: [],
-      reminders: [],
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedBy: state.user.email || state.user.uid,
-    }, { merge: true });
   }
 
   function renderEverything() {
@@ -471,6 +508,7 @@
     els.projectLocation.value = state.draft.location;
     els.projectStart.value = state.draft.startDate;
     els.projectDeadline.value = state.draft.deadline;
+    els.projectContractValue.value = formatMoneyInput(state.draft.contractValue);
     els.projectScope.value = state.draft.scope;
     els.projectNotes.value = state.draft.notes;
     renderDraftLists();
@@ -511,6 +549,7 @@
     els.drawerProgress.textContent = `${progress}%`;
     els.drawerProgressBar.style.width = `${progress}%`;
     els.saveStatus.textContent = "Cambios pendientes de guardar";
+    renderProjectFinanceOverview();
     refreshIcons();
   }
 
@@ -528,6 +567,7 @@
       location: els.projectLocation.value.trim(),
       startDate: els.projectStart.value,
       deadline: els.projectDeadline.value,
+      contractValue: parseMoneyInput(els.projectContractValue.value),
       scope,
       notes: els.projectNotes.value.trim(),
       progress: Engine.taskProgress(state.draft.tasks, state.draft.progress),
@@ -545,6 +585,9 @@
       location: state.draft.location,
       startDate: state.draft.startDate,
       deadline: state.draft.deadline,
+      contractValue: state.draft.contractValue,
+      paidOpening: state.draft.paidOpening,
+      paidOpeningLedger: state.draft.paidOpeningLedger,
       scope: state.draft.scope,
       notes: state.draft.notes,
       progress: state.draft.progress,
@@ -588,6 +631,7 @@
       status: "in_process",
       location: byId("new-location").value.trim(),
       deadline: byId("new-deadline").value,
+      contractValue: parseMoneyInput(els.newContractValue.value),
       startDate: new Date().toISOString().slice(0, 10),
       scope,
       notes: "",
@@ -793,17 +837,18 @@
       renderFinanceCategories("");
       refreshIcons();
     });
-    els.financeCategoryOptions.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-choice-value]");
-      if (button) setFinanceChoice("category", button.dataset.choiceValue);
-    });
     els.financeMethodOptions.addEventListener("click", (event) => {
       const button = event.target.closest("[data-choice-value]");
-      if (button) setFinanceChoice("method", button.dataset.choiceValue);
+      if (button) setFinanceMethod(button.dataset.choiceValue);
     });
-    els.financeProjectSuggestions.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-project-suggestion]");
-      if (button) els.financeProject.value = button.dataset.projectSuggestion;
+    [els.financeAmount, els.projectContractValue, els.newContractValue].forEach((input) => {
+      input.addEventListener("input", () => keepMoneyFormatted(input));
+    });
+    els.projectContractValue.addEventListener("input", () => {
+      if (!state.draft) return;
+      state.draft.contractValue = parseMoneyInput(els.projectContractValue.value);
+      renderProjectFinanceOverview();
+      refreshIcons();
     });
   }
 
@@ -937,15 +982,21 @@
     const metaRef = state.db.collection("operaciones_finanzas_meta").doc("frank");
     const current = await metaRef.get();
     const currentMeta = current.exists ? current.data() : {};
-    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 2) {
+    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 3) {
       state.financeMeta = current.data();
       return;
     }
+    const isUpgrade = currentMeta.snapshotComplete && Number(currentMeta.version) >= 2;
     setSyncStatus(false, "Completando historial financiero");
     const [transactionSnapshot, projectStateSnapshot, financeSummary, existingFinanceSnapshot, existingProjectSnapshot] = await Promise.all([
       state.db.collection("transacciones").get(),
       state.db.collection("config").doc("proyectos_estado").get(),
-      readFinanceSummaryFromFinance(),
+      isUpgrade ? Promise.resolve({
+        openingBalance: Number(currentMeta.openingBalance) || 0,
+        sourceTotalIncome: Number(currentMeta.sourceTotalIncome) || 0,
+        sourceTotalExpenses: Number(currentMeta.sourceTotalExpenses) || 0,
+        sourceProfitTotal: Number(currentMeta.sourceProfitTotal) || 0,
+      }) : readFinanceSummaryFromFinance(),
       state.db.collection("operaciones_finanzas_transacciones").get(),
       state.db.collection("operaciones_proyectos").get(),
     ]);
@@ -953,18 +1004,48 @@
     const projectStates = projectStateSnapshot.exists ? projectStateSnapshot.data() || {} : {};
     const existingFinanceDocs = existingFinanceSnapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
     const existingProjectDocs = existingProjectSnapshot.docs.map((document) => ({ docId: document.id, ...document.data() }));
-    const existingSourceIds = new Set(existingFinanceDocs.map((transaction) => String(transaction.sourceId || "")).filter(Boolean));
+    const existingBySourceId = new Map(existingFinanceDocs.map((transaction) => [String(transaction.sourceId || ""), transaction]).filter(([sourceId]) => sourceId));
+    const existingSourceIds = new Set(existingBySourceId.keys());
     const existingProjectNames = new Set(existingProjectDocs.map((project) => Engine.normalize(project.financeProjectName || project.name)));
     const imported = sourceTransactions.filter(Engine.isBusinessTransaction);
     const activeProjects = Engine.deriveFinanceProjects(sourceTransactions, projectStates);
     const importedAt = firebase.firestore.FieldValue.serverTimestamp();
-    const entries = imported.filter((transaction) => !existingSourceIds.has(String(transaction.id))).map((transaction) => ({
+    const entries = imported.filter((transaction) => !isUpgrade && !existingSourceIds.has(String(transaction.id))).map((transaction) => ({
       ref: state.db.collection("operaciones_finanzas_transacciones").doc(`import_${String(transaction.id).replace(/\//g, "_")}`),
       data: { ...Engine.snapshotTransaction(transaction), sourceId: transaction.id, importedAt },
     }));
+    imported.forEach((transaction) => {
+      const existing = existingBySourceId.get(String(transaction.id));
+      if (!existing || existing.originalCategory) return;
+      entries.push({
+        ref: state.db.collection("operaciones_finanzas_transacciones").doc(existing.id),
+        data: { originalCategory: String(transaction.categoria || (transaction.tipo === "ingreso" ? "Otros Ingresos" : "Otros Gastos")) },
+      });
+    });
+    const projectProfiles = {
+      "bote firulays": { contractValue: 3200000 },
+      "botes zodiac": { contractValue: 30000000 },
+      "yate le merediet": { contractValue: 5400000 },
+      "yate haya": { contractValue: 16160900, paidOpening: 4250000 },
+    };
     activeProjects.forEach((project) => {
       if (Engine.normalize(project.name) === "yate haya") return;
-      if (existingProjectNames.has(Engine.normalize(project.name))) return;
+      const normalizedName = Engine.normalize(project.name);
+      const profile = projectProfiles[normalizedName] || {};
+      const existingProject = existingProjectDocs.find((item) => Engine.normalize(item.financeProjectName || item.name) === normalizedName);
+      if (existingProject) {
+        const missingProfile = {};
+        Object.entries(profile).forEach(([key, value]) => {
+          if (!(Number(existingProject[key]) > 0)) missingProfile[key] = value;
+        });
+        if (Object.keys(missingProfile).length) entries.push({
+          ref: state.db.collection("operaciones_proyectos").doc(existingProject.docId),
+          data: missingProfile,
+        });
+        return;
+      }
+      if (isUpgrade) return;
+      if (existingProjectNames.has(normalizedName)) return;
       entries.push({
         ref: state.db.collection("operaciones_proyectos").doc(`finance-${Engine.slugify(project.name)}`),
         data: {
@@ -975,6 +1056,7 @@
           scope: "",
           tasks: [],
           reminders: [],
+          ...profile,
           financeSnapshot: { income: project.income, expenses: project.expenses, balance: project.balance, lastMovement: project.lastMovement },
           importedFromFinanceAt: importedAt,
         },
@@ -983,6 +1065,7 @@
 
     const haya = existingProjectDocs.find((project) => Engine.normalize(project.financeProjectName || project.name) === "yate haya");
     const hayaFinance = activeProjects.find((project) => Engine.normalize(project.name) === "yate haya");
+    const hayaProfile = projectProfiles["yate haya"];
     const hayaRef = haya
       ? state.db.collection("operaciones_proyectos").doc(haya.docId)
       : state.db.collection("operaciones_proyectos").doc("finance-yate-haya");
@@ -1005,13 +1088,18 @@
         archived: false,
         tasks: hayaTasks,
         reminders: Array.isArray(haya && haya.reminders) ? haya.reminders : [],
+        contractValue: Number(haya && haya.contractValue) > 0 ? Number(haya.contractValue) : hayaProfile.contractValue,
+        paidOpening: Number(haya && haya.paidOpening) > 0 ? Number(haya.paidOpening) : hayaProfile.paidOpening,
+        paidOpeningLedger: Number(haya && haya.paidOpeningLedger) > 0
+          ? Number(haya.paidOpeningLedger)
+          : Math.max(0, Number(hayaFinance && hayaFinance.income) || 0),
         financeSnapshot: hayaFinance ? { income: hayaFinance.income, expenses: hayaFinance.expenses, balance: hayaFinance.balance, lastMovement: hayaFinance.lastMovement } : (haya && haya.financeSnapshot) || null,
         updatedAt: importedAt,
         updatedBy: state.user.email || state.user.uid,
       },
     });
     await commitInChunks(entries);
-    const sourceCutoff = new Date().toISOString().slice(0, 10);
+    const sourceCutoff = currentMeta.sourceCutoff || new Date().toISOString().slice(0, 10);
     const meta = {
       snapshotComplete: true,
       owner: "Frank",
@@ -1020,13 +1108,13 @@
       sourceTotalExpenses: financeSummary.sourceTotalExpenses,
       sourceProfitTotal: financeSummary.sourceProfitTotal,
       sourceCutoff,
-      sourceCount: sourceTransactions.length,
-      importedCount: imported.length,
-      projectCount: activeProjects.length,
-      importedAt,
-      importedBy: state.user.email || state.user.uid,
+      sourceCount: isUpgrade ? Number(currentMeta.sourceCount) || sourceTransactions.length : sourceTransactions.length,
+      importedCount: isUpgrade ? Number(currentMeta.importedCount) || existingFinanceDocs.length : imported.length,
+      projectCount: isUpgrade ? Number(currentMeta.projectCount) || existingProjectDocs.length : activeProjects.length,
+      importedAt: currentMeta.importedAt || importedAt,
+      importedBy: currentMeta.importedBy || state.user.email || state.user.uid,
       mode: "historical-independent",
-      version: 2,
+      version: 3,
     };
     await metaRef.set(meta, { merge: true });
     state.financeMeta = { ...meta, importedAt: new Date() };
@@ -1099,11 +1187,11 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), dashboardProjects: byId("dashboard-projects"), dashboardAgenda: byId("dashboard-agenda"), allProjects: byId("all-projects"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
-      newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), toast: byId("toast"),
+      newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
-      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeCategoryOptions: byId("finance-category-options"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeProjectSuggestions: byId("finance-project-suggestions"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"),
+      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"),
     });
   }
 
@@ -1119,7 +1207,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v7", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v8", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 

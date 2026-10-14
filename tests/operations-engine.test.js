@@ -39,14 +39,51 @@ assert.deepEqual(
     { tipo: "ingreso", monto: 120000, imported: true, originalType: "ingreso", originalAmount: 100000 },
     { tipo: "gasto", monto: 10000, imported: false },
   ], { openingBalance: 366499 }),
-  { income: 120000, expenses: 10000, result: 110000, profit: 110000, available: 376499, count: 2, importedCount: 1 },
+  { income: 120000, expenses: 10000, result: 110000, profit: 110000, frankProfit: 55000, releasedProfit: 0, available: 376499, count: 2, importedCount: 1 },
 );
 assert.deepEqual(
   engine.financeTotals([
     { tipo: "ingreso", monto: 120000, imported: true, originalType: "ingreso", originalAmount: 100000 },
     { tipo: "gasto", monto: 10000, imported: false },
   ], { openingBalance: 366499, sourceTotalIncome: 57289510, sourceTotalExpenses: 40830467, sourceProfitTotal: 17800918 }),
-  { income: 57309510, expenses: 40840467, result: 17810918, profit: 17810918, available: 376499, count: 2, importedCount: 1 },
+  { income: 57309510, expenses: 40840467, result: 17810918, profit: 17810918, frankProfit: 8905459, releasedProfit: 0, available: 376499, count: 2, importedCount: 1 },
+);
+
+assert.deepEqual(
+  engine.financeTotals([
+    { tipo: "gasto", monto: 3800000, categoria: "Retiro de Profit", imported: false },
+    { tipo: "gasto", monto: 200000, categoria: "Materiales / Insumos", imported: false },
+    { tipo: "gasto", monto: 100000, categoria: "Retiro de Profit", imported: false, releasedProjectProfit: 900000 },
+  ], { openingBalance: 4000000, sourceTotalIncome: 57289510, sourceTotalExpenses: 40830467, sourceProfitTotal: 17800918 }),
+  { income: 57289510, expenses: 41030467, result: 18500918, profit: 18500918, frankProfit: 9250459, releasedProfit: 900000, available: -100000, count: 3, importedCount: 0 },
+);
+
+assert.deepEqual(
+  engine.projectFinancials(
+    { name: "Yate Le Merediet", contractValue: 5400000 },
+    [
+      { tipo: "ingreso", monto: 2699985, proyecto: "Yate Le Merediet" },
+      { tipo: "gasto", monto: 106000, categoria: "Materiales / Insumos", proyecto: "Yate Le Merediet" },
+      { tipo: "gasto", monto: 100000, categoria: "Retiro de Profit", proyecto: "Yate Le Merediet", releasedProjectProfit: 500000 },
+    ],
+  ),
+  { contractValue: 5400000, ledgerPaid: 2699985, paid: 2699985, pending: 2700015, expenses: 106000, releasedProfit: 500000, balance: 2093985, frankPotential: 1046992.5 },
+);
+
+assert.deepEqual(
+  engine.projectFinancials(
+    { name: "Yate Haya", contractValue: 16160900, paidOpening: 4250000, paidOpeningLedger: 1025000 },
+    [{ tipo: "ingreso", monto: 1225000, proyecto: "Yate Haya" }],
+  ),
+  { contractValue: 16160900, ledgerPaid: 1225000, paid: 4450000, pending: 11710900, expenses: 0, releasedProfit: 0, balance: 4450000, frankPotential: 2225000 },
+);
+
+assert.deepEqual(
+  engine.financeTotals(
+    [{ tipo: "gasto", monto: 100000, categoria: "Retiro de Profit", imported: true, originalType: "gasto", originalAmount: 100000, originalCategory: "Materiales / Insumos" }],
+    { openingBalance: 4000000, sourceTotalIncome: 57289510, sourceTotalExpenses: 40830467, sourceProfitTotal: 17800918 },
+  ),
+  { income: 57289510, expenses: 40730467, result: 17900918, profit: 17900918, frankProfit: 8950459, releasedProfit: 0, available: 4000000, count: 1, importedCount: 1 },
 );
 
 console.log("operations-engine: ok");

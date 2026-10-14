@@ -203,6 +203,7 @@
       imported: true,
       originalType: type,
       originalAmount: amount,
+      originalCategory: String(transaction.categoria || (type === 'ingreso' ? 'Otros Ingresos' : 'Otros Gastos')),
       owner: String(transaction.receptor || transaction.responsible || transaction.persona || 'Empresa'),
     };
   }
@@ -210,6 +211,43 @@
   function signedAmount(type, amount) {
     const value = Math.max(0, Number(amount) || 0);
     return type === 'gasto' ? -value : value;
+  }
+
+  function isProfitWithdrawal(transaction) {
+    return Boolean(transaction) && normalize(transaction.categoria) === 'retiro de profit';
+  }
+
+  function projectFinancials(project, transactions) {
+    const wanted = normalize(project && (project.financeProjectName || project.name));
+    const rows = (transactions || []).filter(
+      (transaction) => transaction && transaction.archived !== true && normalize(transaction.proyecto || transaction.project) === wanted,
+    );
+    const ledgerPaid = rows
+      .filter((transaction) => transaction.tipo === 'ingreso')
+      .reduce((sum, transaction) => sum + Math.max(0, Number(transaction.monto) || 0), 0);
+    const expenses = rows
+      .filter((transaction) => transaction.tipo === 'gasto' && !isProfitWithdrawal(transaction))
+      .reduce((sum, transaction) => sum + Math.max(0, Number(transaction.monto) || 0), 0);
+    const releasedProfit = rows.reduce(
+      (sum, transaction) => sum + Math.max(0, Number(transaction.releasedProjectProfit) || 0),
+      0,
+    );
+    const openingPaid = Math.max(0, Number(project && project.paidOpening) || 0);
+    const openingLedger = Math.max(0, Number(project && project.paidOpeningLedger) || 0);
+    const paid = openingPaid > 0 ? openingPaid + Math.max(0, ledgerPaid - openingLedger) : ledgerPaid;
+    const contractValue = Math.max(0, Number(project && project.contractValue) || 0);
+    const pending = contractValue > 0 ? Math.max(0, contractValue - paid) : null;
+    const balance = paid - expenses - releasedProfit;
+    return {
+      contractValue,
+      ledgerPaid,
+      paid,
+      pending,
+      expenses,
+      releasedProfit,
+      balance,
+      frankPotential: Math.max(0, balance) / 2,
+    };
   }
 
   function financeTotals(transactions, financeMeta) {
@@ -221,32 +259,38 @@
     let incomeDelta = 0;
     let expenseDelta = 0;
     let balanceDelta = 0;
+    let releasedProfit = 0;
     active.forEach((transaction) => {
       const amount = Math.max(0, Number(transaction.monto) || 0);
+      const currentProfitWithdrawal = isProfitWithdrawal(transaction);
       if (transaction.tipo === 'ingreso') currentIncome += amount;
-      if (transaction.tipo === 'gasto') currentExpenses += amount;
+      if (transaction.tipo === 'gasto' && !currentProfitWithdrawal) currentExpenses += amount;
+      releasedProfit += Math.max(0, Number(transaction.releasedProjectProfit) || 0);
       if (transaction.imported) {
         const originalAmount = Math.max(0, Number(transaction.originalAmount) || 0);
         const originalType = transaction.originalType || transaction.tipo;
+        const originalProfitWithdrawal = normalize(transaction.originalCategory || transaction.categoria) === 'retiro de profit';
         incomeDelta += (transaction.tipo === 'ingreso' ? amount : 0) - (originalType === 'ingreso' ? originalAmount : 0);
-        expenseDelta += (transaction.tipo === 'gasto' ? amount : 0) - (originalType === 'gasto' ? originalAmount : 0);
+        expenseDelta += (transaction.tipo === 'gasto' && !currentProfitWithdrawal ? amount : 0) - (originalType === 'gasto' && !originalProfitWithdrawal ? originalAmount : 0);
         balanceDelta += signedAmount(transaction.tipo, amount) - signedAmount(originalType, originalAmount);
       } else {
         if (transaction.tipo === 'ingreso') incomeDelta += amount;
-        if (transaction.tipo === 'gasto') expenseDelta += amount;
+        if (transaction.tipo === 'gasto' && !currentProfitWithdrawal) expenseDelta += amount;
         balanceDelta += signedAmount(transaction.tipo, amount);
       }
     });
     const income = hasSourceTotals ? Number(meta.sourceTotalIncome) + incomeDelta : currentIncome;
     const expenses = hasSourceTotals ? Number(meta.sourceTotalExpenses) + expenseDelta : currentExpenses;
     const profit = Number.isFinite(Number(meta.sourceProfitTotal))
-      ? Number(meta.sourceProfitTotal) + incomeDelta - expenseDelta
-      : income - expenses;
+      ? Number(meta.sourceProfitTotal) + incomeDelta - expenseDelta + releasedProfit
+      : income - expenses + releasedProfit;
     return {
       income,
       expenses,
       result: profit,
       profit,
+      frankProfit: profit / 2,
+      releasedProfit,
       available: (Number(meta.openingBalance) || 0) + balanceDelta,
       count: active.length,
       importedCount: active.filter((transaction) => transaction.imported).length,
@@ -260,8 +304,10 @@
     isProjectCloseRecord,
     isBusinessTransaction,
     isFrankBusinessTransaction,
+    isProfitWithdrawal,
     snapshotTransaction,
     financeTotals,
+    projectFinancials,
     mergeProjects,
     normalize,
     slugify,

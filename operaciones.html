@@ -146,6 +146,7 @@
         <button class="icon-button" id="close-drawer-button" aria-label="Cerrar"><i data-lucide="x"></i></button>
       </div>
       <div class="drawer-body">
+        <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
         <form id="project-form">
           <input type="hidden" id="project-doc-id" />
           <div class="field-grid">
@@ -153,6 +154,7 @@
             <label>Ubicación<input id="project-location" placeholder="Marina o zona" /></label>
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
+            <label>Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
           </div>
           <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
           <label>Notas de coordinación<textarea id="project-notes" rows="3" placeholder="Accesos, contacto, restricciones, decisiones…"></textarea></label>
@@ -186,6 +188,7 @@
         <div class="modal-heading"><div><p class="eyebrow">NUEVO TRABAJO</p><h2>Registrar embarcación</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
         <label>Nombre de la embarcación<input id="new-name" required placeholder="Ej. Yate Oceana 74 Ft" /></label>
         <div class="field-grid"><label>Ubicación<input id="new-location" placeholder="Marina o zona" /></label><label>Fecha límite<input id="new-deadline" type="date" /></label></div>
+        <label>Valor contratado<input id="new-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
         <label>Alcance inicial<textarea id="new-scope" rows="4" placeholder="Servicio contratado y entregables"></textarea></label>
         <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="create-project-button">Crear trabajo</button></div>
       </form>
@@ -195,17 +198,17 @@
       <form method="dialog" id="finance-form">
         <input type="hidden" id="finance-id" />
         <div class="modal-heading"><div><p class="eyebrow">MI CUENTA</p><h2 id="finance-modal-title">Registrar movimiento</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
-        <div class="field-grid"><label>Tipo<select id="finance-type" required><option value="ingreso">Ingreso</option><option value="gasto">Gasto</option></select></label><label>Valor<input id="finance-amount" type="number" min="1" step="1" inputmode="numeric" required /></label><label>Fecha<input id="finance-date" type="date" required /></label><label>Hora<input id="finance-time" type="time" /></label></div>
-        <label>Categoría<div class="choice-grid choice-grid-categories" id="finance-category-options"></div><input id="finance-category" type="hidden" required /></label>
+        <div class="field-grid"><label>Tipo<select id="finance-type" required><option value="ingreso">Ingreso</option><option value="gasto">Gasto</option></select></label><label>Valor<input id="finance-amount" class="money-input" inputmode="numeric" autocomplete="off" required placeholder="$ 0" /></label><label>Fecha<input id="finance-date" type="date" required /></label><label>Hora<input id="finance-time" type="time" /></label></div>
+        <label>Categoría<select id="finance-category" required></select></label>
         <label>Medio de pago<div class="choice-grid" id="finance-method-options"><button type="button" class="choice-button" data-finance-method="Efectivo"><i data-lucide="banknote"></i>Efectivo</button><button type="button" class="choice-button" data-finance-method="Transferencia"><i data-lucide="building-2"></i>Cuenta</button></div><input id="finance-method" type="hidden" /></label>
-        <label>Proyecto<input id="finance-project" placeholder="Escribe o selecciona un proyecto" autocomplete="off" /><div class="project-suggestions" id="finance-project-suggestions"></div></label>
-        <label>Descripción<textarea id="finance-description" rows="3" required placeholder="Detalle claro del movimiento"></textarea></label>
+        <label>Proyecto<select id="finance-project"><option value="">Sin proyecto</option></select></label>
+        <label>Descripción <span class="optional-label">Opcional</span><textarea id="finance-description" rows="3" placeholder="Detalle adicional del movimiento"></textarea></label>
         <p class="finance-edit-note" id="finance-edit-note">Los cambios actualizan inmediatamente todos los totales de este portal.</p>
         <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
       </form>
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=7"></script>
+    <script src="/js/operaciones.js?v=8"></script>
   </body>
 </html>
