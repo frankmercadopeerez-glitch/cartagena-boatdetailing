@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test:finance": "node tests/finance-engine.test.js",
+    "test:operations": "node tests/operations-engine.test.js",
     "build:css:finanzas": "tailwindcss -c tailwind.finanzas.config.js -i css/finanzas-tailwind-input.css -o css/finanzas-tailwind.css --minify",
     "build:css:tailwind": "tailwindcss -i css/tailwind-input.css -o css/tailwind.css --minify",
     "build:css:home": "node scripts/build-home-css.js",

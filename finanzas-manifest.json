@@ -1,17 +1,25 @@
 {
-    "name":  "CBD Finanzas",
-    "short_name":  "CBD Finanzas",
-    "description":  "Panel financiero privado - Colombia Boat Detailing",
-    "start_url":  "/finanzas.html?_cbd_build=52",
-    "display":  "standalone",
-    "background_color":  "#050B14",
-    "theme_color":  "#050B14",
-    "icons":  [
-                  {
-                      "src":  "favicon.svg",
-                      "sizes":  "any",
-                      "type":  "image/svg+xml",
-                      "purpose":  "any maskable"
-                  }
-              ]
+  "id": "/finanzas.html",
+  "name": "CBD Finanzas",
+  "short_name": "CBD Finanzas",
+  "description": "Panel financiero privado - Colombia Boat Detailing",
+  "start_url": "/finanzas.html?_cbd_build=52",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050B14",
+  "theme_color": "#071428",
+  "icons": [
+    {
+      "src": "/images/icon-192.png?v=20260812",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-512.png?v=20260812",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v6";
 const CACHE_PAGES = "cbd-pages-v3";
-const FINANZAS_CACHE = "cbd-finanzas-v52";
+const FINANZAS_CACHE = "cbd-private-apps-v53";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -19,6 +19,11 @@ const FINANZAS_PATHS = [
   "/finanzas-manifest.json",
   "/css/finanzas-tailwind.css",
   "/js/finance-engine.js",
+  "/operaciones.html",
+  "/operaciones-manifest.json",
+  "/css/operaciones.css",
+  "/js/operations-engine.js",
+  "/js/operaciones.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -118,4 +123,16 @@ self.addEventListener("fetch", (e) => {
       }),
     );
   }
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || "/operaciones.html";
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+      const existing = clients.find((client) => new URL(client.url).pathname === target);
+      if (existing) return existing.focus();
+      return self.clients.openWindow(target);
+    }),
+  );
 });
