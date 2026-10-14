@@ -67,15 +67,23 @@ assert.deepEqual(
       { tipo: "gasto", monto: 100000, categoria: "Retiro de Profit", proyecto: "Yate Le Merediet", releasedProjectProfit: 500000 },
     ],
   ),
-  { contractValue: 5400000, ledgerPaid: 2699985, paid: 2699985, pending: 2700015, expenses: 106000, releasedProfit: 500000, balance: 2093985, frankPotential: 1046992.5 },
+  { contractValue: 5400000, nextPaymentAmount: 0, ledgerPaid: 2699985, paid: 2699985, pending: 2700015, expenses: 106000, releasedProfit: 500000, balance: 2093985, frankPotential: 1046992.5 },
 );
 
 assert.deepEqual(
   engine.projectFinancials(
-    { name: "Yate Haya", contractValue: 16160900, paidOpening: 4250000, paidOpeningLedger: 1025000 },
-    [{ tipo: "ingreso", monto: 1225000, proyecto: "Yate Haya" }],
+    { name: "Yate Haya", contractValue: 1625000 },
+    [{ tipo: "ingreso", monto: 1025000, proyecto: "Yate Haya" }],
   ),
-  { contractValue: 16160900, ledgerPaid: 1225000, paid: 4450000, pending: 11710900, expenses: 0, releasedProfit: 0, balance: 4450000, frankPotential: 2225000 },
+  { contractValue: 1625000, nextPaymentAmount: 0, ledgerPaid: 1025000, paid: 1025000, pending: 600000, expenses: 0, releasedProfit: 0, balance: 1025000, frankPotential: 512500 },
+);
+
+assert.deepEqual(
+  engine.projectFinancials(
+    { name: "Botes Zodiac", contractValue: 33000000, nextPaymentAmount: 8000000 },
+    [{ tipo: "ingreso", monto: 8000000, proyecto: "Botes Zodiac" }],
+  ),
+  { contractValue: 33000000, nextPaymentAmount: 8000000, ledgerPaid: 8000000, paid: 8000000, pending: 25000000, expenses: 0, releasedProfit: 0, balance: 8000000, frankPotential: 4000000 },
 );
 
 assert.deepEqual(

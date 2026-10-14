@@ -155,6 +155,7 @@
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
             <label>Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
+            <label>Próximo cobro / fase<input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
           </div>
           <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
           <label>Notas de coordinación<textarea id="project-notes" rows="3" placeholder="Accesos, contacto, restricciones, decisiones…"></textarea></label>
@@ -209,6 +210,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=9"></script>
+    <script src="/js/operaciones.js?v=10"></script>
   </body>
 </html>

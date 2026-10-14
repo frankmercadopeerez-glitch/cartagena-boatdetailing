@@ -148,6 +148,7 @@
       notes: project.notes || "",
       progress: Number(project.progress) || 0,
       contractValue: Math.max(0, Number(project.contractValue) || 0),
+      nextPaymentAmount: Math.max(0, Number(project.nextPaymentAmount) || 0),
       paidOpening: Math.max(0, Number(project.paidOpening) || 0),
       paidOpeningLedger: Math.max(0, Number(project.paidOpeningLedger) || 0),
       tasks: Array.isArray(project.tasks) ? project.tasks.map((item) => ({ ...item })) : [],
@@ -224,6 +225,7 @@
       <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${urgencyLabel(urgency)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
       <div class="project-money-grid"><div><span>Pagado</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Saldo en proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
+      ${finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Siguiente fase</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>Pago requerido para continuar</small></div>` : ""}
       <div class="progress-row"><span>Avance</span><b>${progress}%</b></div><div class="progress-track"><span style="width:${progress}%"></span></div>
       <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${pending ? `${pending} pendiente${pending === 1 ? "" : "s"}` : "Sin pendientes"}</span><span class="deadline ${deadlineClass}"><i data-lucide="clock-3"></i>${escapeHtml(relativeDate(project.deadline))}</span></div>
     </article>`;
@@ -232,14 +234,16 @@
   function renderProjectFinanceOverview() {
     if (!state.draft || !els.projectFinanceOverview) return;
     const finance = projectFinancialSummary(state.draft);
-    els.projectFinanceOverview.innerHTML = [
+    const items = [
       ["Valor contratado", finance.contractValue ? formatMoney(finance.contractValue) : "Por definir", "file-text"],
       ["Pagado", formatMoney(finance.paid), "check"],
       ["Por cobrar", displayPending(finance.pending), "clock-3"],
       ["Gastos registrados", formatMoney(finance.expenses), "receipt-text"],
       ["Saldo en el proyecto", formatMoney(finance.balance), "wallet"],
       ["Tu 50% potencial", formatMoney(finance.frankPotential), "chart-no-axes-combined"],
-    ].map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+    ];
+    if (finance.nextPaymentAmount) items.splice(3, 0, ["Siguiente fase", formatMoney(finance.nextPaymentAmount), "circle-dollar-sign"]);
+    els.projectFinanceOverview.innerHTML = items.map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
   }
 
   function filteredProjects() {
@@ -509,6 +513,7 @@
     els.projectStart.value = state.draft.startDate;
     els.projectDeadline.value = state.draft.deadline;
     els.projectContractValue.value = formatMoneyInput(state.draft.contractValue);
+    els.projectNextPayment.value = formatMoneyInput(state.draft.nextPaymentAmount);
     els.projectScope.value = state.draft.scope;
     els.projectNotes.value = state.draft.notes;
     renderDraftLists();
@@ -568,6 +573,7 @@
       startDate: els.projectStart.value,
       deadline: els.projectDeadline.value,
       contractValue: parseMoneyInput(els.projectContractValue.value),
+      nextPaymentAmount: parseMoneyInput(els.projectNextPayment.value),
       scope,
       notes: els.projectNotes.value.trim(),
       progress: Engine.taskProgress(state.draft.tasks, state.draft.progress),
@@ -586,6 +592,7 @@
       startDate: state.draft.startDate,
       deadline: state.draft.deadline,
       contractValue: state.draft.contractValue,
+      nextPaymentAmount: state.draft.nextPaymentAmount,
       paidOpening: state.draft.paidOpening,
       paidOpeningLedger: state.draft.paidOpeningLedger,
       scope: state.draft.scope,
@@ -841,12 +848,18 @@
       const button = event.target.closest("[data-choice-value]");
       if (button) setFinanceMethod(button.dataset.choiceValue);
     });
-    [els.financeAmount, els.projectContractValue, els.newContractValue].forEach((input) => {
+    [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue].forEach((input) => {
       input.addEventListener("input", () => keepMoneyFormatted(input));
     });
     els.projectContractValue.addEventListener("input", () => {
       if (!state.draft) return;
       state.draft.contractValue = parseMoneyInput(els.projectContractValue.value);
+      renderProjectFinanceOverview();
+      refreshIcons();
+    });
+    els.projectNextPayment.addEventListener("input", () => {
+      if (!state.draft) return;
+      state.draft.nextPaymentAmount = parseMoneyInput(els.projectNextPayment.value);
       renderProjectFinanceOverview();
       refreshIcons();
     });
@@ -982,11 +995,12 @@
     const metaRef = state.db.collection("operaciones_finanzas_meta").doc("frank");
     const current = await metaRef.get();
     const currentMeta = current.exists ? current.data() : {};
-    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 3) {
+    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 4) {
       state.financeMeta = current.data();
       return;
     }
     const isUpgrade = currentMeta.snapshotComplete && Number(currentMeta.version) >= 2;
+    const isCommercialCorrection = currentMeta.snapshotComplete && Number(currentMeta.version) >= 3;
     setSyncStatus(false, "Completando historial financiero");
     const [transactionSnapshot, projectStateSnapshot, financeSummary, existingFinanceSnapshot, existingProjectSnapshot] = await Promise.all([
       state.db.collection("transacciones").get(),
@@ -1023,10 +1037,10 @@
       });
     });
     const projectProfiles = {
-      "bote firulays": { contractValue: 3200000 },
-      "botes zodiac": { contractValue: 30000000 },
+      "bote firulays": { contractValue: 3600000 },
+      "botes zodiac": { contractValue: 33000000, nextPaymentAmount: 8000000 },
       "yate le merediet": { contractValue: 5400000 },
-      "yate haya": { contractValue: 16160900, paidOpening: 4250000 },
+      "yate haya": { contractValue: 1625000, paidOpening: 0, paidOpeningLedger: 0 },
     };
     activeProjects.forEach((project) => {
       if (Engine.normalize(project.name) === "yate haya") return;
@@ -1036,7 +1050,8 @@
       if (existingProject) {
         const missingProfile = {};
         Object.entries(profile).forEach(([key, value]) => {
-          if (!(Number(existingProject[key]) > 0)) missingProfile[key] = value;
+          const mustCorrect = isCommercialCorrection && ["bote firulays", "botes zodiac"].includes(normalizedName);
+          if (mustCorrect || !(Number(existingProject[key]) > 0)) missingProfile[key] = value;
         });
         if (Object.keys(missingProfile).length) entries.push({
           ref: state.db.collection("operaciones_proyectos").doc(existingProject.docId),
@@ -1063,6 +1078,27 @@
       });
     });
 
+    const firulays = existingProjectDocs.find((project) => Engine.normalize(project.financeProjectName || project.name) === "bote firulays");
+    if (firulays) {
+      const firulaysTasks = Array.isArray(firulays.tasks) ? firulays.tasks.map((task) => ({ ...task })) : [];
+      const taskTitles = new Set(firulaysTasks.map((task) => Engine.normalize(task.title)));
+      [
+        { title: "Pulido integral de gelcoat", dueDate: "", stage: "in_progress", done: false },
+        { title: "Limpieza profesional de cojinería", dueDate: "", stage: "delivered", done: true },
+      ].forEach((task) => {
+        if (!taskTitles.has(Engine.normalize(task.title))) firulaysTasks.push({ id: uuid("task"), ...task });
+      });
+      const scopeLines = String(firulays.scope || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+      const scopeKeys = new Set(scopeLines.map(Engine.normalize));
+      ["Pulido integral de gelcoat", "Limpieza profesional de cojinería"].forEach((line) => {
+        if (!scopeKeys.has(Engine.normalize(line))) scopeLines.push(line);
+      });
+      entries.push({
+        ref: state.db.collection("operaciones_proyectos").doc(firulays.docId),
+        data: { contractValue: 3600000, scope: scopeLines.join("\n"), tasks: firulaysTasks, updatedAt: importedAt, updatedBy: state.user.email || state.user.uid },
+      });
+    }
+
     const haya = existingProjectDocs.find((project) => Engine.normalize(project.financeProjectName || project.name) === "yate haya");
     const hayaFinance = activeProjects.find((project) => Engine.normalize(project.name) === "yate haya");
     const hayaProfile = projectProfiles["yate haya"];
@@ -1088,11 +1124,9 @@
         archived: false,
         tasks: hayaTasks,
         reminders: Array.isArray(haya && haya.reminders) ? haya.reminders : [],
-        contractValue: Number(haya && haya.contractValue) > 0 ? Number(haya.contractValue) : hayaProfile.contractValue,
-        paidOpening: Number(haya && haya.paidOpening) > 0 ? Number(haya.paidOpening) : hayaProfile.paidOpening,
-        paidOpeningLedger: Number(haya && haya.paidOpeningLedger) > 0
-          ? Number(haya.paidOpeningLedger)
-          : Math.max(0, Number(hayaFinance && hayaFinance.income) || 0),
+        contractValue: hayaProfile.contractValue,
+        paidOpening: hayaProfile.paidOpening,
+        paidOpeningLedger: hayaProfile.paidOpeningLedger,
         financeSnapshot: hayaFinance ? { income: hayaFinance.income, expenses: hayaFinance.expenses, balance: hayaFinance.balance, lastMovement: hayaFinance.lastMovement } : (haya && haya.financeSnapshot) || null,
         updatedAt: importedAt,
         updatedBy: state.user.email || state.user.uid,
@@ -1114,7 +1148,7 @@
       importedAt: currentMeta.importedAt || importedAt,
       importedBy: currentMeta.importedBy || state.user.email || state.user.uid,
       mode: "historical-independent",
-      version: 3,
+      version: 4,
     };
     await metaRef.set(meta, { merge: true });
     state.financeMeta = { ...meta, importedAt: new Date() };
@@ -1187,7 +1221,7 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), dashboardProjects: byId("dashboard-projects"), dashboardAgenda: byId("dashboard-agenda"), allProjects: byId("all-projects"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
@@ -1207,7 +1241,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v9", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v10", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 

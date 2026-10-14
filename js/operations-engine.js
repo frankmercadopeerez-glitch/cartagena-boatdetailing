@@ -237,9 +237,11 @@
     const paid = openingPaid > 0 ? openingPaid + Math.max(0, ledgerPaid - openingLedger) : ledgerPaid;
     const contractValue = Math.max(0, Number(project && project.contractValue) || 0);
     const pending = contractValue > 0 ? Math.max(0, contractValue - paid) : null;
+    const nextPaymentAmount = Math.max(0, Number(project && project.nextPaymentAmount) || 0);
     const balance = paid - expenses - releasedProfit;
     return {
       contractValue,
+      nextPaymentAmount,
       ledgerPaid,
       paid,
       pending,
