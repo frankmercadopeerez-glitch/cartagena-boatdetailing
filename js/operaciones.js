@@ -822,7 +822,7 @@
   function updateNotificationButton() {
     if (!("Notification" in window)) return;
     const active = Notification.permission === "granted";
-    els.notificationButton.innerHTML = `<i data-lucide="${active ? "bell-check" : "bell"}"></i><span>${active ? "Alertas activas" : "Activar alertas"}</span>`;
+    els.notificationButton.innerHTML = `<i data-lucide="${active ? "bell-ring" : "bell"}"></i><span>${active ? "Alertas activas" : "Activar alertas"}</span>`;
     refreshIcons();
   }
 
@@ -1119,7 +1119,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v5", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v6", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 
