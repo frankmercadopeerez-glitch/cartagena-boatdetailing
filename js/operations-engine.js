@@ -41,10 +41,33 @@
     );
   }
 
+  function isProjectCloseRecord(transaction) {
+    if (!transaction) return false;
+    if (transaction.motorType === "project_close") return true;
+    const project = transaction.project || transaction.proyecto;
+    const description = normalize(transaction.descripcion);
+    return Boolean(
+      project &&
+        ((!transaction.tipo &&
+          !transaction.categoria &&
+          !transaction.monto &&
+          !transaction.amount &&
+          !transaction.reversalOf) ||
+          description.includes("cierre de proyecto") ||
+          description.includes("cierre de orchid")),
+    );
+  }
+
   function deriveFinanceProjects(transactions, projectStates) {
     const projects = new Map();
+    const closedProjectNames = new Set(
+      (transactions || [])
+        .filter(isProjectCloseRecord)
+        .map((transaction) => normalize(transaction.project || transaction.proyecto)),
+    );
     (transactions || []).forEach((transaction) => {
       if (!transaction || transaction.archived === true) return;
+      if (isProjectCloseRecord(transaction) || transaction.motorType === "project_reopen") return;
       const name = String(transaction.proyecto || transaction.project || "").trim();
       if (!isRealProjectName(name)) return;
       const key = normalize(name);
@@ -66,7 +89,8 @@
       .map((project) => ({
         ...project,
         balance: project.income - project.expenses,
-        financeClosed: isClosed(project.name, projectStates),
+        financeClosed:
+          isClosed(project.name, projectStates) || closedProjectNames.has(normalize(project.name)),
       }))
       .filter((project) => !project.financeClosed)
       .sort((a, b) => a.name.localeCompare(b.name, "es"));
@@ -139,6 +163,7 @@
     daysUntil,
     deriveFinanceProjects,
     isRealProjectName,
+    isProjectCloseRecord,
     mergeProjects,
     normalize,
     slugify,

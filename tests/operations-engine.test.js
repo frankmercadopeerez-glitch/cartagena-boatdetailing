@@ -7,6 +7,8 @@ const transactions = [
   { proyecto: "Yate Haya", tipo: "ingreso", monto: 1025000, fecha: "2026-10-03" },
   { proyecto: "Publicidad", tipo: "gasto", monto: 120000, fecha: "2026-10-04" },
   { proyecto: "Botes Zodiac", tipo: "ingreso", monto: 6000000, fecha: "2026-10-05", archived: true },
+  { proyecto: "Bote Cerrado", tipo: "ingreso", monto: 2000000, fecha: "2026-09-01" },
+  { project: "Bote Cerrado", proyecto: "Bote Cerrado", motorType: "project_close", descripcion: "Cierre definitivo de proyecto", fecha: "2026-09-02" },
 ];
 
 const projects = engine.deriveFinanceProjects(transactions, {});
