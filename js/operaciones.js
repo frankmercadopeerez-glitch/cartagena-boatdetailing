@@ -916,7 +916,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v3", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v4", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 
