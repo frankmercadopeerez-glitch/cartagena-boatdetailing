@@ -233,7 +233,7 @@
     const reminders = allReminders(false).slice(0, 6);
     els.dashboardAgenda.innerHTML = reminders.length
       ? reminders.map(agendaItem).join("")
-      : `<div class="empty-state"><i data-lucide="bell-check"></i><strong>Sin alertas pendientes</strong><span>Agrega compras, pagos o avisos desde la ficha de cada trabajo.</span></div>`;
+      : `<div class="empty-state"><i data-lucide="bell-ring"></i><strong>Sin alertas pendientes</strong><span>Agrega compras, pagos o avisos desde la ficha de cada trabajo.</span></div>`;
   }
 
   function agendaRow(reminder) {
@@ -1119,7 +1119,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v6", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v7", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 
