@@ -336,7 +336,7 @@
     if (!els.financeMetrics) return;
     const totals = Engine.financeTotals(state.financeTransactions, state.financeMeta || {});
     els.financeMetrics.innerHTML = [
-      financeMetric("Disponible en mi cuenta", totals.available, "Saldo de Frank, sin reparto de capital", "wallet", "is-primary"),
+      financeMetric("Disponible en mi cuenta", totals.available, "Saldo disponible de Frank", "wallet", "is-primary"),
       financeMetric("Ingresos totales", totals.income, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-up", "is-income"),
       financeMetric("Gastos totales", totals.expenses, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-down", "is-expense"),
       financeMetric("Profit de Frank (50%)", totals.frankProfit, "Tu mitad del profit realizado; los retiros no son gasto", "chart-no-axes-combined"),
@@ -1207,7 +1207,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v8", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v9", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 
