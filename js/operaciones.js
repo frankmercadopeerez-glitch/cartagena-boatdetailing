@@ -728,7 +728,7 @@
     els.loadingScreen.classList.add("is-hidden");
     els.authScreen.classList.add("is-hidden");
     els.appShell.classList.remove("is-hidden");
-    setSyncStatus(true, "Sincronizado");
+    setSyncStatus(true, "Portal al día");
   }
 
   function clearSubscriptions() {
