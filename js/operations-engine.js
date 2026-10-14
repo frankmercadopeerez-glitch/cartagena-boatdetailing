@@ -17,6 +17,15 @@
     "administración",
   ]);
 
+  const EXCLUDED_FINANCE_CATEGORIES = new Set([
+    "aporte de capital",
+    "retiro de capital",
+    "retiro de profit",
+    "devolucion de capital personal",
+    "devolución de capital personal",
+    "transferencia interna",
+  ]);
+
   const normalize = (value) =>
     String(value || "")
       .trim()
@@ -160,11 +169,79 @@
     return merged.filter((project) => project.status !== "completed");
   }
 
+  function isFrankBusinessTransaction(transaction) {
+    if (!transaction || transaction.archived === true) return false;
+    if (!['ingreso', 'gasto'].includes(transaction.tipo)) return false;
+    if (['project_close', 'project_reopen', 'capital_transfer'].includes(transaction.motorType)) return false;
+    if (EXCLUDED_FINANCE_CATEGORIES.has(normalize(transaction.categoria))) return false;
+    const owner = normalize(
+      transaction.tipo === 'ingreso'
+        ? transaction.receptor || transaction.responsible || transaction.persona
+        : transaction.responsible || transaction.receptor || transaction.persona,
+    );
+    return owner === 'frank';
+  }
+
+  function snapshotTransaction(transaction) {
+    const amount = Math.max(0, Number(transaction.monto != null ? transaction.monto : transaction.amount) || 0);
+    const type = transaction.tipo === 'gasto' ? 'gasto' : 'ingreso';
+    return {
+      tipo: type,
+      monto: amount,
+      fecha: String(transaction.fecha || ''),
+      hora: String(transaction.hora || ''),
+      categoria: String(transaction.categoria || (type === 'ingreso' ? 'Otros Ingresos' : 'Otros Gastos')),
+      descripcion: String(transaction.descripcion || ''),
+      proyecto: String(transaction.proyecto || transaction.project || ''),
+      medio: String(transaction.medio || ''),
+      fundingSource: String(transaction.fundingSource || ''),
+      imported: true,
+      originalType: type,
+      originalAmount: amount,
+      owner: 'Frank',
+    };
+  }
+
+  function signedAmount(type, amount) {
+    const value = Math.max(0, Number(amount) || 0);
+    return type === 'gasto' ? -value : value;
+  }
+
+  function financeTotals(transactions, openingBalance) {
+    const active = (transactions || []).filter((transaction) => transaction && transaction.archived !== true);
+    let income = 0;
+    let expenses = 0;
+    let adjustment = 0;
+    active.forEach((transaction) => {
+      const amount = Math.max(0, Number(transaction.monto) || 0);
+      if (transaction.tipo === 'ingreso') income += amount;
+      if (transaction.tipo === 'gasto') expenses += amount;
+      if (transaction.imported) {
+        adjustment +=
+          signedAmount(transaction.tipo, amount) -
+          signedAmount(transaction.originalType || transaction.tipo, transaction.originalAmount);
+      } else {
+        adjustment += signedAmount(transaction.tipo, amount);
+      }
+    });
+    return {
+      income,
+      expenses,
+      result: income - expenses,
+      available: (Number(openingBalance) || 0) + adjustment,
+      count: active.length,
+      importedCount: active.filter((transaction) => transaction.imported).length,
+    };
+  }
+
   return {
     daysUntil,
     deriveFinanceProjects,
     isRealProjectName,
     isProjectCloseRecord,
+    isFrankBusinessTransaction,
+    snapshotTransaction,
+    financeTotals,
     mergeProjects,
     normalize,
     slugify,

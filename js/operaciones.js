@@ -16,18 +16,19 @@
     auth: null,
     db: null,
     user: null,
-    transactions: [],
-    projectStates: {},
+    financeTransactions: [],
+    financeMeta: null,
     operationDocs: [],
     projects: [],
     financeReady: false,
-    statusReady: false,
     operationsReady: false,
     currentView: "dashboard",
     selectedProject: null,
     draft: null,
     filter: "all",
     search: "",
+    financeSearch: "",
+    financeTypeFilter: "all",
     subscriptions: [],
     toastTimer: null,
   };
@@ -121,8 +122,7 @@
   }
 
   function syncProjects() {
-    const financeProjects = Engine.deriveFinanceProjects(state.transactions, state.projectStates);
-    state.projects = Engine.mergeProjects(financeProjects, state.operationDocs).map(defaultProject);
+    state.projects = Engine.mergeProjects([], state.operationDocs).map(defaultProject);
     renderEverything();
     if ("Notification" in window && Notification.permission === "granted") sendDueNotifications();
   }
@@ -244,11 +244,125 @@
     els.navAlertCount.textContent = pending.length;
   }
 
+  function filteredFinanceTransactions() {
+    const query = Engine.normalize(state.financeSearch);
+    return state.financeTransactions
+      .filter((transaction) => {
+        const typeMatches = state.financeTypeFilter === "all" || transaction.tipo === state.financeTypeFilter;
+        const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.medio}`);
+        return typeMatches && (!query || haystack.includes(query));
+      })
+      .slice()
+      .sort((a, b) => `${b.fecha || ""}T${b.hora || ""}`.localeCompare(`${a.fecha || ""}T${a.hora || ""}`));
+  }
+
+  function financeMetric(label, value, detail, icon, className = "") {
+    return `<article class="finance-metric ${className}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(formatMoney(value))}</strong><small>${escapeHtml(detail)}</small></article>`;
+  }
+
+  function financeRow(transaction) {
+    const description = transaction.descripcion || transaction.categoria || "Movimiento sin descripción";
+    const sign = transaction.tipo === "gasto" ? "−" : "+";
+    return `<article class="finance-row" data-finance-id="${escapeHtml(transaction.id)}">
+      <div class="finance-row-date">${escapeHtml(formatDate(transaction.fecha))}${transaction.hora ? `<br>${escapeHtml(transaction.hora)}` : ""}${transaction.imported ? "<br>Histórico importado" : "<br>Registrado aquí"}</div>
+      <div class="finance-row-main"><strong>${escapeHtml(description)}</strong><span>${escapeHtml(transaction.categoria || "Sin categoría")}</span></div>
+      <div class="finance-row-project">${escapeHtml(transaction.proyecto || "Sin proyecto")}</div>
+      <span class="finance-type" data-type="${escapeHtml(transaction.tipo)}">${transaction.tipo === "gasto" ? "Gasto" : "Ingreso"}</span>
+      <span class="finance-amount" data-type="${escapeHtml(transaction.tipo)}">${sign}${escapeHtml(formatMoney(transaction.monto))}</span>
+      <button class="icon-button" data-action="edit-finance" aria-label="Editar movimiento"><i data-lucide="pencil"></i></button>
+    </article>`;
+  }
+
+  function renderFinance() {
+    if (!els.financeMetrics) return;
+    const totals = Engine.financeTotals(state.financeTransactions, state.financeMeta && state.financeMeta.openingBalance);
+    els.financeMetrics.innerHTML = [
+      financeMetric("Disponible en mi cuenta", totals.available, "Saldo de Frank, sin reparto de capital", "wallet", "is-primary"),
+      financeMetric("Ingresos registrados", totals.income, `${state.financeTransactions.filter((item) => item.tipo === "ingreso").length} movimientos`, "trending-up", "is-income"),
+      financeMetric("Gastos registrados", totals.expenses, `${state.financeTransactions.filter((item) => item.tipo === "gasto").length} movimientos`, "trending-down", "is-expense"),
+      financeMetric("Resultado del historial", totals.result, `${totals.importedCount} movimientos importados`, "chart-no-axes-combined"),
+    ].join("");
+    const cutoff = state.financeMeta && state.financeMeta.sourceCutoff;
+    els.financeCutoff.textContent = cutoff
+      ? `Copia histórica independiente tomada el ${formatDate(cutoff, { long: true })}. Los cambios hechos aquí no alteran CBD Finanzas.`
+      : "Este libro es independiente y no mantiene sincronización con CBD Finanzas.";
+    const transactions = filteredFinanceTransactions();
+    els.financeTable.innerHTML = transactions.length
+      ? transactions.map(financeRow).join("")
+      : `<div class="empty-state"><i data-lucide="receipt-text"></i><strong>No hay movimientos para este filtro</strong><span>Registra un ingreso o gasto para comenzar.</span></div>`;
+    els.financeProjectsList.innerHTML = state.projects.map((project) => `<option value="${escapeHtml(project.name)}"></option>`).join("");
+  }
+
+  function openFinanceModal(type, transaction) {
+    const record = transaction || {};
+    els.financeId.value = record.id || "";
+    els.financeType.value = record.tipo || type || "gasto";
+    els.financeAmount.value = Number(record.monto) || "";
+    els.financeDate.value = record.fecha || new Date().toISOString().slice(0, 10);
+    els.financeTime.value = record.hora || new Date().toTimeString().slice(0, 5);
+    els.financeCategory.value = record.categoria || "";
+    els.financeMethod.value = record.medio || "";
+    els.financeProject.value = record.proyecto || "";
+    els.financeDescription.value = record.descripcion || "";
+    els.financeModalTitle.textContent = record.id ? "Editar movimiento" : `Registrar ${els.financeType.value}`;
+    els.financeEditNote.textContent = record.imported
+      ? "Este movimiento pertenece al corte histórico. Cambiar su tipo o valor ajustará el saldo disponible desde el corte."
+      : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
+    els.financeModal.showModal();
+    refreshIcons();
+  }
+
+  async function saveFinanceMovement(event) {
+    event.preventDefault();
+    if (event.submitter && event.submitter.value === "cancel") {
+      els.financeModal.close();
+      return;
+    }
+    const id = els.financeId.value;
+    const existing = state.financeTransactions.find((transaction) => transaction.id === id);
+    const payload = {
+      tipo: els.financeType.value,
+      monto: Math.max(0, Number(els.financeAmount.value) || 0),
+      fecha: els.financeDate.value,
+      hora: els.financeTime.value,
+      categoria: els.financeCategory.value.trim(),
+      medio: els.financeMethod.value.trim(),
+      proyecto: els.financeProject.value.trim(),
+      descripcion: els.financeDescription.value.trim(),
+      owner: "Frank",
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedBy: state.user.email || state.user.uid,
+    };
+    if (!payload.monto || !payload.fecha || !payload.descripcion || !payload.categoria) return;
+    if (!existing) {
+      Object.assign(payload, {
+        imported: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdBy: state.user.email || state.user.uid,
+      });
+    }
+    els.saveFinanceButton.disabled = true;
+    try {
+      const collection = state.db.collection("operaciones_finanzas_transacciones");
+      if (existing) await collection.doc(id).set(payload, { merge: true });
+      else await collection.add(payload);
+      els.financeModal.close();
+      els.financeForm.reset();
+      toast(existing ? "Movimiento actualizado" : "Movimiento registrado");
+    } catch (error) {
+      console.error("No se pudo guardar el movimiento", error);
+      toast("No se pudo guardar el movimiento");
+    } finally {
+      els.saveFinanceButton.disabled = false;
+    }
+  }
+
   function renderEverything() {
     renderMetrics();
     renderProjects();
     renderDashboardAgenda();
     renderAgenda();
+    renderFinance();
     refreshIcons();
   }
 
@@ -256,7 +370,7 @@
     state.currentView = view;
     document.querySelectorAll(".view").forEach((node) => node.classList.toggle("is-active", node.id === `view-${view}`));
     document.querySelectorAll("[data-view]").forEach((node) => node.classList.toggle("is-active", node.dataset.view === view));
-    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Embarcaciones en proceso" : "Agenda operativa";
+    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Embarcaciones en proceso" : view === "finance" ? "Mis finanzas" : "Agenda operativa";
     window.scrollTo({ top: 0, behavior: "smooth" });
     refreshIcons();
   }
@@ -421,6 +535,9 @@
       const card = event.target.closest(".project-card");
       if (card) openProject(findProject(card.dataset.projectKey));
 
+      const newMovement = event.target.closest("[data-new-movement]");
+      if (newMovement) openFinanceModal(newMovement.dataset.newMovement);
+
       const action = event.target.closest("[data-action]");
       if (!action) return;
       const taskNode = action.closest("[data-task-id]");
@@ -448,6 +565,10 @@
       }
       if (action.dataset.action === "open-agenda-project" && reminderNode) {
         openProject(findProject(reminderNode.dataset.projectKey));
+      }
+      if (action.dataset.action === "edit-finance") {
+        const row = action.closest("[data-finance-id]");
+        openFinanceModal("", state.financeTransactions.find((transaction) => transaction.id === row.dataset.financeId));
       }
     });
 
@@ -480,6 +601,7 @@
     els.saveProjectButton.addEventListener("click", saveProject);
     els.newProjectButton.addEventListener("click", () => els.newProjectModal.showModal());
     els.newProjectForm.addEventListener("submit", createProject);
+    els.financeForm.addEventListener("submit", saveFinanceMovement);
     els.quickReminderButton.addEventListener("click", () => {
       if (!state.projects.length) return toast("Crea un trabajo antes de agregar alertas");
       openProject(state.projects[0]);
@@ -527,6 +649,16 @@
       refreshIcons();
     });
     els.notificationButton.addEventListener("click", enableNotifications);
+    els.financeSearch.addEventListener("input", () => {
+      state.financeSearch = els.financeSearch.value;
+      renderFinance();
+      refreshIcons();
+    });
+    els.financeTypeFilter.addEventListener("change", () => {
+      state.financeTypeFilter = els.financeTypeFilter.value;
+      renderFinance();
+      refreshIcons();
+    });
   }
 
   async function enableNotifications() {
@@ -591,7 +723,7 @@
   }
 
   function maybeRevealApp() {
-    if (!state.financeReady || !state.statusReady || !state.operationsReady) return;
+    if (!state.financeReady || !state.operationsReady) return;
     syncProjects();
     els.loadingScreen.classList.add("is-hidden");
     els.authScreen.classList.add("is-hidden");
@@ -604,31 +736,111 @@
     state.subscriptions = [];
   }
 
-  function subscribeData() {
-    clearSubscriptions();
-    state.financeReady = state.statusReady = state.operationsReady = false;
-    setSyncStatus(false, "Sincronizando");
+  function readFrankBalanceFromFinance() {
+    return new Promise((resolve, reject) => {
+      const iframe = document.createElement("iframe");
+      iframe.hidden = true;
+      iframe.setAttribute("aria-hidden", "true");
+      iframe.src = `/finanzas.html?historical-import=${Date.now()}`;
+      document.body.appendChild(iframe);
+      const startedAt = Date.now();
+      const finish = (value, error) => {
+        clearInterval(timer);
+        iframe.remove();
+        if (error) reject(error);
+        else resolve(value);
+      };
+      const timer = setInterval(() => {
+        try {
+          const documentFrame = iframe.contentDocument;
+          const loading = documentFrame && documentFrame.getElementById("data-loading");
+          const app = documentFrame && documentFrame.getElementById("main-app");
+          const balance = documentFrame && documentFrame.getElementById("cuenta-frank-val");
+          const isReady = app && !app.classList.contains("hidden") && (!loading || loading.style.display === "none");
+          if (isReady && balance) {
+            const value = Number(balance.textContent.replace(/[^0-9-]/g, ""));
+            if (Number.isFinite(value)) finish(value);
+          } else if (Date.now() - startedAt > 25000) {
+            finish(null, new Error("No fue posible leer el saldo de Frank para el corte histórico."));
+          }
+        } catch (error) {
+          if (Date.now() - startedAt > 25000) finish(null, error);
+        }
+      }, 350);
+    });
+  }
 
-    state.subscriptions.push(
-      state.db.collection("transacciones").orderBy("fecha", "desc").onSnapshot(
-        (snapshot) => {
-          state.transactions = snapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
-          state.financeReady = true;
-          maybeRevealApp();
-        },
-        (error) => dataError("movimientos financieros", error),
-      ),
-    );
-    state.subscriptions.push(
-      state.db.collection("config").doc("proyectos_estado").onSnapshot(
-        (snapshot) => {
-          state.projectStates = snapshot.exists ? snapshot.data() || {} : {};
-          state.statusReady = true;
-          maybeRevealApp();
-        },
-        (error) => dataError("estado de proyectos", error),
-      ),
-    );
+  async function commitInChunks(entries, size = 350) {
+    for (let index = 0; index < entries.length; index += size) {
+      const batch = state.db.batch();
+      entries.slice(index, index + size).forEach(({ ref, data, merge = true }) => batch.set(ref, data, { merge }));
+      await batch.commit();
+    }
+  }
+
+  async function ensureHistoricalSnapshot() {
+    const metaRef = state.db.collection("operaciones_finanzas_meta").doc("frank");
+    const current = await metaRef.get();
+    if (current.exists && current.data().snapshotComplete) {
+      state.financeMeta = current.data();
+      return;
+    }
+    setSyncStatus(false, "Creando corte histórico");
+    const [transactionSnapshot, projectStateSnapshot, openingBalance] = await Promise.all([
+      state.db.collection("transacciones").get(),
+      state.db.collection("config").doc("proyectos_estado").get(),
+      readFrankBalanceFromFinance(),
+    ]);
+    const sourceTransactions = transactionSnapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
+    const projectStates = projectStateSnapshot.exists ? projectStateSnapshot.data() || {} : {};
+    const imported = sourceTransactions.filter(Engine.isFrankBusinessTransaction);
+    const activeProjects = Engine.deriveFinanceProjects(sourceTransactions, projectStates);
+    const importedAt = firebase.firestore.FieldValue.serverTimestamp();
+    const entries = imported.map((transaction) => ({
+      ref: state.db.collection("operaciones_finanzas_transacciones").doc(`import_${String(transaction.id).replace(/\//g, "_")}`),
+      data: { ...Engine.snapshotTransaction(transaction), sourceId: transaction.id, importedAt },
+    }));
+    activeProjects.forEach((project) => entries.push({
+      ref: state.db.collection("operaciones_proyectos").doc(`finance-${Engine.slugify(project.name)}`),
+      data: {
+        name: project.name,
+        financeProjectName: project.name,
+        status: "in_process",
+        financeSnapshot: { income: project.income, expenses: project.expenses, balance: project.balance, lastMovement: project.lastMovement },
+        importedFromFinanceAt: importedAt,
+      },
+    }));
+    await commitInChunks(entries);
+    const sourceCutoff = new Date().toISOString().slice(0, 10);
+    const meta = {
+      snapshotComplete: true,
+      owner: "Frank",
+      openingBalance,
+      sourceCutoff,
+      sourceCount: sourceTransactions.length,
+      importedCount: imported.length,
+      projectCount: activeProjects.length,
+      importedAt,
+      importedBy: state.user.email || state.user.uid,
+      mode: "historical-independent",
+      version: 1,
+    };
+    await metaRef.set(meta);
+    state.financeMeta = { ...meta, importedAt: new Date() };
+  }
+
+  async function subscribeData() {
+    clearSubscriptions();
+    state.financeReady = state.operationsReady = false;
+    setSyncStatus(false, "Preparando datos");
+    try {
+      await ensureHistoricalSnapshot();
+    } catch (error) {
+      console.error("No se pudo crear la copia histórica", error);
+      setSyncStatus(false, "Importación pendiente");
+      els.loadingScreen.querySelector("p").textContent = "No se pudo completar la copia histórica. Recarga para intentarlo de nuevo.";
+      return;
+    }
     state.subscriptions.push(
       state.db.collection("operaciones_proyectos").onSnapshot(
         (snapshot) => {
@@ -639,14 +851,23 @@
         (error) => dataError("datos operativos", error),
       ),
     );
+    state.subscriptions.push(
+      state.db.collection("operaciones_finanzas_transacciones").onSnapshot(
+        (snapshot) => {
+          state.financeTransactions = snapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
+          state.financeReady = true;
+          maybeRevealApp();
+        },
+        (error) => dataError("mi historial financiero", error),
+      ),
+    );
   }
 
   function dataError(source, error) {
     console.error(`No se pudieron cargar ${source}`, error);
     setSyncStatus(false, "Conexión pendiente");
     if (source === "datos operativos") state.operationsReady = true;
-    if (source === "movimientos financieros") state.financeReady = true;
-    if (source === "estado de proyectos") state.statusReady = true;
+    if (source === "mi historial financiero") state.financeReady = true;
     maybeRevealApp();
     toast(`No se pudieron sincronizar ${source}`);
   }
@@ -678,6 +899,8 @@
       drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskPriority: byId("task-priority"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), toast: byId("toast"),
+      financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
+      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeProject: byId("finance-project"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), financeProjectsList: byId("finance-projects-list"),
     });
   }
 
@@ -693,7 +916,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v2", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v3", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 

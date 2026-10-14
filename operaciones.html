@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <meta name="theme-color" content="#071428" />
+    <meta name="theme-color" content="#000000" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,12 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=2" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=3" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-    <script src="/js/operations-engine.js?v=2"></script>
+    <script src="/js/operations-engine.js?v=3"></script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -57,6 +57,7 @@
         <nav class="side-nav" aria-label="Navegación principal">
           <button class="nav-item is-active" data-view="dashboard"><i data-lucide="layout-dashboard"></i><span>Resumen</span></button>
           <button class="nav-item" data-view="projects"><i data-lucide="ship"></i><span>Embarcaciones</span><b id="nav-project-count">0</b></button>
+          <button class="nav-item" data-view="finance"><i data-lucide="wallet-cards"></i><span>Mis finanzas</span></button>
           <button class="nav-item" data-view="agenda"><i data-lucide="calendar-clock"></i><span>Agenda</span><b id="nav-alert-count">0</b></button>
         </nav>
         <div class="sidebar-bottom">
@@ -81,6 +82,7 @@
         <div class="mobile-tabs" aria-label="Vistas">
           <button class="is-active" data-view="dashboard"><i data-lucide="layout-dashboard"></i>Resumen</button>
           <button data-view="projects"><i data-lucide="ship"></i>Trabajos</button>
+          <button data-view="finance"><i data-lucide="wallet-cards"></i>Finanzas</button>
           <button data-view="agenda"><i data-lucide="calendar-clock"></i>Agenda</button>
         </div>
 
@@ -119,6 +121,19 @@
           <section class="panel">
             <div class="panel-heading"><div><p class="eyebrow">PENDIENTES OPERATIVOS</p><h2>Agenda consolidada</h2></div><button class="btn btn-secondary" id="quick-reminder-button"><i data-lucide="plus"></i>Nuevo recordatorio</button></div>
             <div class="agenda-table" id="agenda-table"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-finance">
+          <div class="finance-hero">
+            <div><p class="eyebrow">LIBRO PERSONAL DE FRANK</p><h2>Finanzas de la operación</h2><p id="finance-cutoff">Preparando la copia histórica independiente…</p></div>
+            <div class="finance-actions"><button class="btn btn-secondary" data-new-movement="gasto"><i data-lucide="arrow-down"></i>Registrar gasto</button><button class="btn btn-primary" data-new-movement="ingreso"><i data-lucide="arrow-up"></i>Registrar ingreso</button></div>
+          </div>
+          <div class="finance-metrics" id="finance-metrics"></div>
+          <section class="panel finance-panel">
+            <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de mi cuenta</h2></div><span class="snapshot-badge"><i data-lucide="camera"></i>Sin conexión con Finanzas</span></div>
+            <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción, categoría o proyecto" /></div><select id="finance-type-filter" aria-label="Filtrar movimientos"><option value="all">Todos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
+            <div class="finance-table" id="finance-table"></div>
           </section>
         </section>
       </div>
@@ -176,7 +191,20 @@
       </form>
     </dialog>
 
+    <dialog class="modal finance-modal" id="finance-modal">
+      <form method="dialog" id="finance-form">
+        <input type="hidden" id="finance-id" />
+        <div class="modal-heading"><div><p class="eyebrow">MI CUENTA</p><h2 id="finance-modal-title">Registrar movimiento</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
+        <div class="field-grid"><label>Tipo<select id="finance-type" required><option value="ingreso">Ingreso</option><option value="gasto">Gasto</option></select></label><label>Valor<input id="finance-amount" type="number" min="1" step="1" inputmode="numeric" required /></label><label>Fecha<input id="finance-date" type="date" required /></label><label>Hora<input id="finance-time" type="time" /></label></div>
+        <div class="field-grid"><label>Categoría<input id="finance-category" required placeholder="Materiales, anticipo…" /></label><label>Medio<input id="finance-method" placeholder="Transferencia, efectivo…" /></label></div>
+        <label>Proyecto<input id="finance-project" list="finance-projects-list" placeholder="Trabajo relacionado" /><datalist id="finance-projects-list"></datalist></label>
+        <label>Descripción<textarea id="finance-description" rows="3" required placeholder="Detalle claro del movimiento"></textarea></label>
+        <p class="finance-edit-note" id="finance-edit-note">Los cambios actualizan inmediatamente todos los totales de este portal.</p>
+        <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
+      </form>
+    </dialog>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=2"></script>
+    <script src="/js/operaciones.js?v=3"></script>
   </body>
 </html>

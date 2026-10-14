@@ -301,3 +301,89 @@ textarea { resize: vertical; line-height: 1.5; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* Refinamiento de contraste: negro real, superficies nítidas y jerarquía más fuerte. */
+:root {
+  --navy-950: #000;
+  --navy-900: #040506;
+  --navy-850: #080a0d;
+  --navy-800: #0d1014;
+  --line: #303640;
+  --line-soft: rgba(255, 255, 255, .13);
+  --text: #fff;
+  --muted: #bdc5d0;
+  --muted-2: #8994a2;
+  --shadow: 0 28px 90px rgba(0, 0, 0, .62);
+}
+html, body, .workspace, .loading-screen { background: #000; }
+.workspace { background-image: radial-gradient(circle at 76% -12%, rgba(216,173,82,.08), transparent 28%); }
+.sidebar { background: #030405; border-right-color: rgba(255,255,255,.15); }
+.nav-item:hover, .nav-item.is-active, .mobile-tabs button.is-active { background: #13161a; }
+.panel, .metric-card, .agenda-stat, .project-card, .auth-card, .modal { background: #080a0d; border-color: rgba(255,255,255,.15); }
+.project-card:hover { background: #0d1014; border-color: rgba(240,205,122,.5); }
+input, textarea, select, .btn-secondary, .icon-button, .filter-chip, .editable-item { background: #0b0e12; border-color: #343b45; }
+input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:focus { background: #10141a; border-color: var(--gold); }
+.project-scope, .agenda-row .amount { color: #d3d8df; }
+
+.finance-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 20px; padding: 24px; border: 1px solid rgba(240,205,122,.24); border-radius: 18px; background: #070808; }
+.finance-hero h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 32px); letter-spacing: -.035em; }
+.finance-hero p:last-child { margin: 0; color: var(--muted); font-size: 12px; }
+.finance-actions { display: flex; gap: 9px; flex: 0 0 auto; }
+.finance-metrics { display: grid; grid-template-columns: 1.35fr repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.finance-metric { min-height: 132px; padding: 20px; border: 1px solid var(--line-soft); border-radius: 16px; background: #080a0d; }
+.finance-metric.is-primary { border-color: rgba(240,205,122,.38); background: #0b0b09; }
+.finance-metric span { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.finance-metric span svg { width: 16px; color: var(--gold); }
+.finance-metric strong { display: block; margin: 22px 0 5px; font-family: Manrope, sans-serif; font-size: clamp(23px, 2.4vw, 32px); letter-spacing: -.045em; }
+.finance-metric small { color: var(--muted-2); font-size: 10px; }
+.finance-metric.is-income strong { color: var(--green); }
+.finance-metric.is-expense strong { color: var(--red); }
+.finance-heading { gap: 12px; }
+.snapshot-badge { display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid rgba(57,216,155,.25); border-radius: 8px; color: var(--green); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.snapshot-badge svg { width: 13px; }
+.finance-toolbar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line-soft); }
+.finance-toolbar .search-box { flex: 1; width: auto; }
+.finance-toolbar select { width: 150px; }
+.finance-table { padding: 0 18px 12px; }
+.finance-row { display: grid; grid-template-columns: 104px minmax(170px, 1.15fr) minmax(140px, .85fr) 120px 112px 38px; align-items: center; gap: 14px; min-height: 70px; border-bottom: 1px solid var(--line-soft); }
+.finance-row:last-child { border-bottom: 0; }
+.finance-row-date, .finance-row-meta { color: var(--muted-2); font-size: 9px; }
+.finance-row-main { min-width: 0; }
+.finance-row-main strong { display: block; overflow: hidden; margin-bottom: 4px; color: #f7f9fc; font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }
+.finance-row-main span, .finance-row-project { color: var(--muted); font-size: 9px; }
+.finance-row-project { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.finance-type { width: max-content; padding: 4px 7px; border-radius: 6px; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.finance-type[data-type="ingreso"] { background: rgba(57,216,155,.11); color: var(--green); }
+.finance-type[data-type="gasto"] { background: rgba(255,111,127,.11); color: var(--red); }
+.finance-amount { text-align: right; font-family: Manrope, sans-serif; font-size: 12px; font-weight: 800; }
+.finance-amount[data-type="ingreso"] { color: var(--green); }
+.finance-amount[data-type="gasto"] { color: var(--red); }
+.finance-edit-note { margin: -3px 0 0; color: var(--muted-2); font-size: 10px; line-height: 1.5; }
+
+@media (max-width: 1040px) {
+  .finance-metrics { grid-template-columns: repeat(2, 1fr); }
+  .finance-row { grid-template-columns: 92px minmax(160px, 1fr) 105px 38px; }
+  .finance-row-project, .finance-row-meta { display: none; }
+}
+
+@media (max-width: 900px) {
+  .mobile-tabs { grid-template-columns: repeat(4, 1fr); background: #050607; }
+}
+
+@media (max-width: 650px) {
+  .finance-hero { align-items: stretch; flex-direction: column; padding: 17px; }
+  .finance-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .finance-actions .btn { padding-inline: 9px; font-size: 10px; }
+  .finance-metrics { gap: 8px; }
+  .finance-metric { min-height: 112px; padding: 14px; }
+  .finance-metric strong { margin-top: 16px; font-size: 21px; }
+  .finance-toolbar { align-items: stretch; flex-direction: column; padding: 12px; }
+  .finance-toolbar select { width: 100%; }
+  .finance-table { padding-inline: 12px; }
+  .finance-row { grid-template-columns: minmax(0, 1fr) auto 34px; gap: 8px; padding: 12px 0; }
+  .finance-row-date { grid-column: 1 / -1; }
+  .finance-row .finance-type { display: none; }
+  .snapshot-badge { max-width: 130px; text-align: center; }
+  .finance-modal .field-grid { grid-template-columns: 1fr 1fr; }
+  .mobile-tabs button { gap: 4px; padding-inline: 4px; font-size: 9px; }
+}
