@@ -16,12 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=3" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=4" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-    <script src="/js/operations-engine.js?v=4"></script>
+    <script src="/js/operations-engine.js?v=5"></script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -101,6 +101,13 @@
               <div class="agenda-list" id="dashboard-agenda"></div>
             </aside>
           </div>
+          <section class="panel completed-panel" id="dashboard-completed-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">TRABAJOS TERMINADOS</p><h2>Completados y cobros pendientes</h2></div>
+              <button class="text-button" data-view="projects">Ver historial <i data-lucide="arrow-right"></i></button>
+            </div>
+            <div class="project-grid completed-grid" id="dashboard-completed"></div>
+          </section>
         </section>
 
         <section class="view" id="view-projects">
@@ -108,12 +115,20 @@
             <div class="search-box"><i data-lucide="search"></i><input id="project-search" type="search" placeholder="Buscar embarcación, alcance o ubicación" /></div>
             <div class="filter-group" id="status-filters">
               <button class="filter-chip is-active" data-filter="all">Todos</button>
-              <button class="filter-chip" data-filter="late">Atrasados</button>
-              <button class="filter-chip" data-filter="attention">Por vencer</button>
-              <button class="filter-chip" data-filter="on-track">Al día</button>
+              <button class="filter-chip" data-filter="active">En curso</button>
+              <button class="filter-chip" data-filter="completed">Completados</button>
+              <button class="filter-chip" data-filter="receivable">Por cobrar</button>
+              <button class="filter-chip" data-filter="attention">Atención</button>
             </div>
           </div>
-          <div class="project-grid project-grid-wide" id="all-projects"></div>
+          <section class="project-section" id="active-project-section">
+            <div class="project-section-heading"><div><p class="eyebrow">OPERACIÓN ACTIVA</p><h2>Trabajos en curso</h2></div><span id="active-project-count">0</span></div>
+            <div class="project-grid project-grid-wide" id="active-projects"></div>
+          </section>
+          <section class="project-section is-completed" id="completed-project-section">
+            <div class="project-section-heading"><div><p class="eyebrow">HISTORIAL OPERATIVO</p><h2>Trabajos completados</h2></div><span id="completed-project-count">0</span></div>
+            <div class="project-grid project-grid-wide" id="completed-projects"></div>
+          </section>
         </section>
 
         <section class="view" id="view-agenda">
@@ -155,7 +170,7 @@
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
             <label>Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
-            <label>Próximo cobro / fase<input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
+            <label>Próximo cobro<div class="field-with-action"><input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /><button type="button" class="field-action" id="use-pending-payment">Usar saldo pendiente</button></div><small class="field-help">Puedes registrar el cobro aunque el trabajo ya esté completado.</small></label>
           </div>
           <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
           <label>Notas de coordinación<textarea id="project-notes" rows="3" placeholder="Accesos, contacto, restricciones, decisiones…"></textarea></label>
@@ -210,6 +225,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=11"></script>
+    <script src="/js/operaciones.js?v=12"></script>
   </body>
 </html>

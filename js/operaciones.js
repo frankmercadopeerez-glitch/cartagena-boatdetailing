@@ -183,6 +183,7 @@
   }
 
   function projectProgress(project) {
+    if (project.status === "completed") return 100;
     return Engine.taskProgress(project.tasks, project.progress);
   }
 
@@ -199,35 +200,46 @@
   }
 
   function renderMetrics() {
-    const projects = state.projects;
-    const attention = projects.filter((project) => Engine.urgencyFor(project) !== "on-track").length;
-    const dated = projects.filter((project) => project.deadline).sort((a, b) => a.deadline.localeCompare(b.deadline));
-    const next = dated[0];
-    const average = projects.length
-      ? Math.round(projects.reduce((total, project) => total + projectProgress(project), 0) / projects.length)
-      : 0;
+    const active = state.projects.filter((project) => project.status !== "completed");
+    const completed = state.projects.filter((project) => project.status === "completed");
+    const attention = active.filter((project) => Engine.urgencyFor(project) !== "on-track").length;
+    const receivable = state.projects.reduce((total, project) => {
+      const pending = projectFinancialSummary(project).pending;
+      return total + (pending === null ? 0 : pending);
+    }, 0);
     els.metricsGrid.innerHTML = [
-      metricCard("Trabajos activos", projects.length, `${openTasks({ tasks: projects.flatMap((item) => item.tasks || []) }).length} tareas por completar`, "ship"),
+      metricCard("Trabajos activos", active.length, `${openTasks({ tasks: active.flatMap((item) => item.tasks || []) }).length} tareas por completar`, "ship"),
+      metricCard("Por cobrar", formatMoney(receivable), "Saldo pendiente entre todos los trabajos", "circle-dollar-sign", receivable > 0),
       metricCard("Requieren atención", attention, attention ? "Fechas o pendientes vencidos" : "La operación está al día", "triangle-alert", attention > 0),
-      metricCard("Próxima entrega", next ? formatDate(next.deadline, { long: true }) : "Por definir", next ? next.name : "Asigna fechas límite", "calendar-check"),
-      metricCard("Avance global", `${average}%`, projects.length ? "Promedio de trabajos activos" : "Sin trabajos activos", "gauge"),
+      metricCard("Completados", completed.length, completed.length ? "Siguen visibles para cobros y garantías" : "Aún no hay trabajos cerrados", "badge-check"),
     ].join("");
   }
 
   function projectCard(project) {
-    const urgency = Engine.urgencyFor(project);
+    const isCompleted = project.status === "completed";
+    const urgency = isCompleted ? "completed" : Engine.urgencyFor(project);
     const progress = projectProgress(project);
     const pending = openTasks(project).length;
     const scope = project.scope || "Alcance pendiente de definir. Abre la ficha para organizar entregables y tareas.";
     const finance = projectFinancialSummary(project);
     const deadlineClass = urgency === "late" ? "is-late" : urgency === "attention" ? "is-attention" : "";
-    return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
-      <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${urgencyLabel(urgency)}</span></div>
+    const statusLabel = isCompleted ? "Completado" : project.status === "paused" ? "Pausado" : urgencyLabel(urgency);
+    const collectionBanner = isCompleted && finance.pending > 0
+      ? `<div class="collection-banner"><span><i data-lucide="circle-dollar-sign"></i>Trabajo terminado · falta cobrar</span><strong>${escapeHtml(formatMoney(finance.pending))}</strong></div>`
+      : isCompleted
+        ? `<div class="collection-banner is-paid"><span><i data-lucide="badge-check"></i>Trabajo terminado y pagado</span><strong>Cerrado</strong></div>`
+        : "";
+    const footerStatus = isCompleted
+      ? (finance.pending > 0 ? "Cobro pendiente" : "Cuenta cerrada")
+      : relativeDate(project.deadline);
+    return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" data-status="${escapeHtml(project.status)}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
+      <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${escapeHtml(statusLabel)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
+      ${collectionBanner}
       <div class="project-money-grid"><div><span>Pagado</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Saldo en proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
-      ${finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Siguiente fase</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>Pago requerido para continuar</small></div>` : ""}
+      ${finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Próximo cobro</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>${isCompleted ? "Cobro pendiente del trabajo terminado" : "Pago registrado para la siguiente fase"}</small></div>` : ""}
       <div class="progress-row"><span>Avance</span><b>${progress}%</b></div><div class="progress-track"><span style="width:${progress}%"></span></div>
-      <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${pending ? `${pending} pendiente${pending === 1 ? "" : "s"}` : "Sin pendientes"}</span><span class="deadline ${deadlineClass}"><i data-lucide="clock-3"></i>${escapeHtml(relativeDate(project.deadline))}</span></div>
+      <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${pending ? `${pending} frente${pending === 1 ? "" : "s"} pendiente${pending === 1 ? "" : "s"}` : "Checklist cerrado"}</span><span class="deadline ${deadlineClass}"><i data-lucide="${isCompleted ? "wallet-cards" : "clock-3"}"></i>${escapeHtml(footerStatus)}</span></div>
     </article>`;
   }
 
@@ -242,14 +254,25 @@
       ["Saldo en el proyecto", formatMoney(finance.balance), "wallet"],
       ["Tu 50% potencial", formatMoney(finance.frankPotential), "chart-no-axes-combined"],
     ];
-    if (finance.nextPaymentAmount) items.splice(3, 0, ["Siguiente fase", formatMoney(finance.nextPaymentAmount), "circle-dollar-sign"]);
+    if (finance.nextPaymentAmount) items.splice(3, 0, ["Próximo cobro", formatMoney(finance.nextPaymentAmount), "circle-dollar-sign"]);
     els.projectFinanceOverview.innerHTML = items.map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+    if (els.usePendingPayment) {
+      els.usePendingPayment.disabled = !(finance.pending > 0);
+      els.usePendingPayment.textContent = finance.pending > 0 ? `Usar ${formatMoney(finance.pending)}` : "Sin saldo pendiente";
+    }
   }
 
   function filteredProjects() {
     const query = Engine.normalize(state.search);
     return state.projects.filter((project) => {
-      const matchesFilter = state.filter === "all" || Engine.urgencyFor(project) === state.filter;
+      const isCompleted = project.status === "completed";
+      const urgency = Engine.urgencyFor(project);
+      const finance = projectFinancialSummary(project);
+      const matchesFilter = state.filter === "all"
+        || (state.filter === "active" && !isCompleted)
+        || (state.filter === "completed" && isCompleted)
+        || (state.filter === "receivable" && finance.pending > 0)
+        || (state.filter === "attention" && !isCompleted && urgency !== "on-track");
       const haystack = Engine.normalize(`${project.name} ${project.scope} ${project.location}`);
       return matchesFilter && (!query || haystack.includes(query));
     });
@@ -257,10 +280,25 @@
 
   function renderProjects() {
     const empty = `<div class="empty-state"><i data-lucide="ship-wheel"></i><strong>No hay trabajos en esta vista</strong><span>Prueba otro filtro o crea un trabajo nuevo.</span></div>`;
-    els.dashboardProjects.innerHTML = state.projects.length ? state.projects.slice(0, 4).map(projectCard).join("") : empty;
+    const active = state.projects.filter((project) => project.status !== "completed");
+    const completed = state.projects.filter((project) => project.status === "completed").sort((a, b) => {
+      const pendingA = projectFinancialSummary(a).pending || 0;
+      const pendingB = projectFinancialSummary(b).pending || 0;
+      return pendingB - pendingA;
+    });
+    els.dashboardProjects.innerHTML = active.length ? active.slice(0, 4).map(projectCard).join("") : empty;
+    els.dashboardCompleted.innerHTML = completed.length ? completed.slice(0, 3).map(projectCard).join("") : empty;
+    els.dashboardCompletedPanel.hidden = !completed.length;
     const filtered = filteredProjects();
-    els.allProjects.innerHTML = filtered.length ? filtered.map(projectCard).join("") : empty;
-    els.navProjectCount.textContent = state.projects.length;
+    const filteredActive = filtered.filter((project) => project.status !== "completed");
+    const filteredCompleted = filtered.filter((project) => project.status === "completed");
+    els.activeProjects.innerHTML = filteredActive.length ? filteredActive.map(projectCard).join("") : empty;
+    els.completedProjects.innerHTML = filteredCompleted.length ? filteredCompleted.map(projectCard).join("") : empty;
+    els.activeProjectSection.hidden = state.filter === "completed" || (state.filter !== "all" && !filteredActive.length);
+    els.completedProjectSection.hidden = state.filter === "active" || state.filter === "attention" || (state.filter !== "all" && !filteredCompleted.length);
+    els.activeProjectCount.textContent = filteredActive.length;
+    els.completedProjectCount.textContent = filteredCompleted.length;
+    els.navProjectCount.textContent = active.length;
   }
 
   function agendaItem(reminder) {
@@ -492,7 +530,7 @@
     state.currentView = view;
     document.querySelectorAll(".view").forEach((node) => node.classList.toggle("is-active", node.id === `view-${view}`));
     document.querySelectorAll("[data-view]").forEach((node) => node.classList.toggle("is-active", node.dataset.view === view));
-    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Embarcaciones en proceso" : view === "finance" ? "Mis finanzas" : "Agenda operativa";
+    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Trabajos y cobros" : view === "finance" ? "Mis finanzas" : "Agenda operativa";
     window.scrollTo({ top: 0, behavior: "smooth" });
     refreshIcons();
   }
@@ -505,8 +543,11 @@
     if (!project) return;
     state.selectedProject = project;
     state.draft = defaultProject(project);
+    const finance = projectFinancialSummary(project);
     els.drawerTitle.textContent = project.name;
-    els.drawerSubtitle.textContent = "Control operativo del trabajo";
+    els.drawerSubtitle.textContent = project.status === "completed"
+      ? (finance.pending > 0 ? `Trabajo completado · falta cobrar ${formatMoney(finance.pending)}` : "Trabajo completado y pagado")
+      : "Control operativo del trabajo";
     els.projectDocId.value = project.docId || "";
     els.projectStatus.value = state.draft.status;
     els.projectLocation.value = state.draft.location;
@@ -548,7 +589,7 @@
     if (!state.draft) return;
     const tasks = state.draft.tasks || [];
     const reminders = state.draft.reminders || [];
-    const progress = Engine.taskProgress(tasks, state.draft.progress);
+    const progress = projectProgress(state.draft);
     els.taskList.innerHTML = tasks.length ? tasks.map(taskItem).join("") : `<div class="empty-state"><strong>Sin tareas todavía</strong><span>Divide el alcance en etapas claras para medir el avance.</span></div>`;
     els.reminderList.innerHTML = reminders.length ? reminders.map(reminderItem).join("") : `<div class="empty-state"><strong>Sin alertas todavía</strong><span>Registra aquí compras, pagos o decisiones con fecha.</span></div>`;
     els.drawerProgress.textContent = `${progress}%`;
@@ -863,6 +904,21 @@
       renderProjectFinanceOverview();
       refreshIcons();
     });
+    els.projectStatus.addEventListener("change", () => {
+      if (!state.draft) return;
+      state.draft.status = els.projectStatus.value;
+      renderDraftLists();
+    });
+    els.usePendingPayment.addEventListener("click", () => {
+      if (!state.draft) return;
+      const finance = projectFinancialSummary(state.draft);
+      if (!(finance.pending > 0)) return;
+      state.draft.nextPaymentAmount = finance.pending;
+      els.projectNextPayment.value = formatMoneyInput(finance.pending);
+      renderProjectFinanceOverview();
+      els.saveStatus.textContent = "Cobro pendiente listo para guardar";
+      refreshIcons();
+    });
   }
 
   async function enableNotifications() {
@@ -995,7 +1051,7 @@
     const metaRef = state.db.collection("operaciones_finanzas_meta").doc("frank");
     const current = await metaRef.get();
     const currentMeta = current.exists ? current.data() : {};
-    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 4) {
+    if (currentMeta.snapshotComplete && Number(currentMeta.version) >= 5) {
       state.financeMeta = current.data();
       return;
     }
@@ -1037,7 +1093,7 @@
       });
     });
     const projectProfiles = {
-      "bote firulays": { contractValue: 3600000 },
+      "bote firulays": { contractValue: 3600000, nextPaymentAmount: 1800000 },
       "botes zodiac": { contractValue: 33000000, nextPaymentAmount: 8000000 },
       "yate le merediet": { contractValue: 5400000 },
       "yate haya": { contractValue: 1625000, paidOpening: 0, paidOpeningLedger: 0 },
@@ -1081,12 +1137,13 @@
     const firulays = existingProjectDocs.find((project) => Engine.normalize(project.financeProjectName || project.name) === "bote firulays");
     if (firulays) {
       const firulaysTasks = Array.isArray(firulays.tasks) ? firulays.tasks.map((task) => ({ ...task })) : [];
-      const taskTitles = new Set(firulaysTasks.map((task) => Engine.normalize(task.title)));
       [
-        { title: "Pulido integral de gelcoat", dueDate: "", stage: "in_progress", done: false },
+        { title: "Pulido integral de gelcoat", dueDate: "", stage: "delivered", done: true },
         { title: "Limpieza profesional de cojinería", dueDate: "", stage: "delivered", done: true },
       ].forEach((task) => {
-        if (!taskTitles.has(Engine.normalize(task.title))) firulaysTasks.push({ id: uuid("task"), ...task });
+        const existingTask = firulaysTasks.find((item) => Engine.normalize(item.title) === Engine.normalize(task.title));
+        if (existingTask) Object.assign(existingTask, { stage: "delivered", done: true });
+        else firulaysTasks.push({ id: uuid("task"), ...task });
       });
       const scopeLines = String(firulays.scope || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
       const scopeKeys = new Set(scopeLines.map(Engine.normalize));
@@ -1095,7 +1152,7 @@
       });
       entries.push({
         ref: state.db.collection("operaciones_proyectos").doc(firulays.docId),
-        data: { contractValue: 3600000, scope: scopeLines.join("\n"), tasks: firulaysTasks, updatedAt: importedAt, updatedBy: state.user.email || state.user.uid },
+        data: { contractValue: 3600000, nextPaymentAmount: 1800000, status: "completed", archived: false, scope: scopeLines.join("\n"), tasks: firulaysTasks, updatedAt: importedAt, updatedBy: state.user.email || state.user.uid },
       });
     }
 
@@ -1148,7 +1205,7 @@
       importedAt: currentMeta.importedAt || importedAt,
       importedBy: currentMeta.importedBy || state.user.email || state.user.uid,
       mode: "historical-independent",
-      version: 4,
+      version: 5,
     };
     await metaRef.set(meta, { merge: true });
     state.financeMeta = { ...meta, importedAt: new Date() };
@@ -1219,9 +1276,9 @@
       loadingScreen: byId("loading-screen"), authScreen: byId("auth-screen"), appShell: byId("app-shell"),
       loginForm: byId("login-form"), authEmail: byId("auth-email"), authPassword: byId("auth-password"), authError: byId("auth-error"), loginButton: byId("login-button"),
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
-      metricsGrid: byId("metrics-grid"), dashboardProjects: byId("dashboard-projects"), dashboardAgenda: byId("dashboard-agenda"), allProjects: byId("all-projects"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
+      metricsGrid: byId("metrics-grid"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
@@ -1241,7 +1298,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v11", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v12", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 

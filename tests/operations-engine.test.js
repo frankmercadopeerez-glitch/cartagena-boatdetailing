@@ -23,9 +23,13 @@ assert.equal(engine.urgencyFor({ deadline: "2026-10-16", tasks: [], reminders: [
 const merged = engine.mergeProjects(projects, [
   { name: "Bote Firulays", financeProjectName: "Bote Firulays", scope: "Pulido integral" },
   { name: "Trabajo independiente", status: "in_process" },
+  { name: "Trabajo terminado", status: "completed" },
+  { name: "Trabajo archivado", status: "completed", archived: true },
 ]);
-assert.equal(merged.length, 3);
+assert.equal(merged.length, 4);
 assert.equal(merged.find((item) => item.name === "Bote Firulays").scope, "Pulido integral");
+assert.equal(merged.find((item) => item.name === "Trabajo terminado").status, "completed");
+assert.equal(merged.some((item) => item.name === "Trabajo archivado"), false);
 
 assert.equal(engine.isFrankBusinessTransaction({ tipo: "ingreso", monto: 100, receptor: "Frank" }), true);
 assert.equal(engine.isFrankBusinessTransaction({ tipo: "gasto", monto: 100, responsible: "Cristian" }), false);

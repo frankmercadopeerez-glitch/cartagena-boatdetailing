@@ -166,7 +166,7 @@
         merged.push({ finance: null, tasks: [], reminders: [], ...document });
       }
     });
-    return merged.filter((project) => project.status !== "completed" && project.archived !== true);
+    return merged.filter((project) => project.archived !== true);
   }
 
   function isBusinessTransaction(transaction) {
