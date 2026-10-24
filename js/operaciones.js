@@ -52,6 +52,7 @@
     financeSearch: "",
     financeTypeFilter: "all",
     subscriptions: [],
+    pushServerConfig: null,
     toastTimer: null,
   };
 
@@ -161,7 +162,6 @@
   function syncProjects() {
     state.projects = Engine.mergeProjects([], state.operationDocs).map(defaultProject);
     renderEverything();
-    if ("Notification" in window && Notification.permission === "granted") sendDueNotifications();
   }
 
   function allReminders(includeDone = true) {
@@ -687,6 +687,7 @@
       await state.db.collection("operaciones_proyectos").doc(id).set(payload, { merge: true });
       els.saveStatus.textContent = "Guardado y sincronizado";
       toast("Trabajo actualizado");
+      syncPushSchedules([{ ...state.draft, docId: id }], false).catch((error) => console.warn("No se actualizó la agenda push", error));
     } catch (error) {
       console.error("No se pudo guardar el trabajo", error);
       els.saveStatus.textContent = "No se pudo guardar. Revisa la conexión.";
@@ -967,59 +968,123 @@
     });
   }
 
+  function supportsPushNotifications() {
+    return "Notification" in window && "serviceWorker" in navigator && "PushManager" in window;
+  }
+
+  function base64UrlToUint8Array(value) {
+    const padded = value + "=".repeat((4 - (value.length % 4)) % 4);
+    const base64 = padded.replace(/-/g, "+").replace(/_/g, "/");
+    const raw = atob(base64);
+    return Uint8Array.from(raw, (char) => char.charCodeAt(0));
+  }
+
+  async function authorizedFetch(url, options = {}) {
+    if (!state.user) throw new Error("Inicia sesión para administrar las alertas.");
+    const token = await state.user.getIdToken();
+    return fetch(url, {
+      ...options,
+      headers: { ...(options.headers || {}), Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async function loadPushConfig() {
+    if (state.pushServerConfig) return state.pushServerConfig;
+    const response = await fetch("/api/operaciones/notificaciones/config", { cache: "no-store" });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.enabled || !result.publicKey) {
+      throw new Error(result.error || "El servidor de alertas no está disponible.");
+    }
+    state.pushServerConfig = result;
+    return result;
+  }
+
+  function pushProject(project) {
+    return {
+      projectKey: getProjectKey(project),
+      projectName: project.name,
+      reminders: (project.reminders || []).map((reminder) => ({
+        id: reminder.id,
+        type: reminder.type,
+        title: reminder.title,
+        dueDate: reminder.dueDate,
+        amount: Number(reminder.amount) || 0,
+        alertDays: Number(reminder.alertDays) || 0,
+        done: reminder.done === true,
+      })),
+    };
+  }
+
+  async function syncPushSchedules(projects = state.projects, replace = true) {
+    if (!state.user || !projects.length) return;
+    const response = await authorizedFetch("/api/operaciones/notificaciones/sync", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ replace, projects: projects.map(pushProject) }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "No se pudo sincronizar la agenda de alertas.");
+  }
+
+  async function savePushSubscription(subscription) {
+    const response = await authorizedFetch("/api/operaciones/notificaciones/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subscription: subscription.toJSON(), platform: navigator.userAgent }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "No se pudo registrar este teléfono.");
+  }
+
+  async function sendPushTest() {
+    const response = await authorizedFetch("/api/operaciones/notificaciones/test", { method: "POST" });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "No se pudo enviar la prueba.");
+  }
+
   async function enableNotifications() {
-    if (!("Notification" in window)) return toast("Este navegador no admite notificaciones");
-    const permission = await Notification.requestPermission();
-    updateNotificationButton();
-    if (permission === "granted") {
-      toast("Alertas activadas en este dispositivo");
-      sendDueNotifications(true);
-    } else {
-      toast("Las alertas siguen desactivadas");
+    if (!supportsPushNotifications()) return toast("Este navegador no admite notificaciones push");
+    els.notificationButton.disabled = true;
+    try {
+      const config = await loadPushConfig();
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") throw new Error("Debes permitir las notificaciones en este dispositivo.");
+      const registration = await navigator.serviceWorker.ready;
+      let subscription = await registration.pushManager.getSubscription();
+      if (!subscription) {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: base64UrlToUint8Array(config.publicKey),
+        });
+      }
+      await savePushSubscription(subscription);
+      await syncPushSchedules(state.projects, true);
+      await sendPushTest();
+      toast("Alertas activadas: funcionan con la app cerrada");
+    } catch (error) {
+      console.error("No se pudieron activar las alertas push", error);
+      toast(error.message || "No se pudieron activar las alertas");
+    } finally {
+      els.notificationButton.disabled = false;
+      updateNotificationButton();
     }
   }
 
-  function updateNotificationButton() {
-    if (!("Notification" in window)) return;
-    const active = Notification.permission === "granted";
-    els.notificationButton.innerHTML = `<i data-lucide="${active ? "bell-ring" : "bell"}"></i><span>${active ? "Alertas activas" : "Activar alertas"}</span>`;
-    refreshIcons();
-  }
-
-  async function showSystemNotification(title, body, tag) {
+  async function updateNotificationButton() {
+    if (!els.notificationButton) return;
+    if (!supportsPushNotifications()) {
+      els.notificationButton.innerHTML = '<i data-lucide="bell-off"></i><span>Alertas no compatibles</span>';
+      return refreshIcons();
+    }
+    let active = false;
     try {
       const registration = await navigator.serviceWorker.ready;
-      await registration.showNotification(title, {
-        body,
-        icon: "/images/operations-icon.svg?v=1",
-        badge: "/images/operations-icon.svg?v=1",
-        tag,
-        data: { url: "/operaciones.html" },
-      });
+      active = Notification.permission === "granted" && Boolean(await registration.pushManager.getSubscription());
     } catch (error) {
-      new Notification(title, { body, icon: "/images/operations-icon.svg?v=1", tag });
+      active = false;
     }
-  }
-
-  function sendDueNotifications(force = false) {
-    if (!("Notification" in window) || Notification.permission !== "granted") return;
-    const sent = JSON.parse(localStorage.getItem("cbd_operations_notifications") || "{}");
-    const today = new Date().toISOString().slice(0, 10);
-    allReminders(false).forEach((reminder) => {
-      const days = Engine.daysUntil(reminder.dueDate);
-      const alertDays = Number(reminder.alertDays) || 0;
-      if (days === null || days > alertDays) return;
-      const key = `${reminder.projectKey}:${reminder.id}:${today}`;
-      if (!force && sent[key]) return;
-      showSystemNotification(
-        `${reminderTypeLabel(reminder.type)} · ${reminder.projectName}`,
-        `${reminder.title} — ${relativeDate(reminder.dueDate)}`,
-        `cbd-${reminder.projectKey}-${reminder.id}`,
-      );
-      sent[key] = Date.now();
-    });
-    const entries = Object.entries(sent).sort((a, b) => b[1] - a[1]).slice(0, 120);
-    localStorage.setItem("cbd_operations_notifications", JSON.stringify(Object.fromEntries(entries)));
+    els.notificationButton.innerHTML = `<i data-lucide="${active ? "bell-ring" : "bell"}"></i><span>${active ? "Alertas en segundo plano" : "Activar alertas"}</span>`;
+    refreshIcons();
   }
 
   function setSyncStatus(online, message) {
@@ -1344,7 +1409,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v13", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v14", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 

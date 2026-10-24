@@ -1,7 +1,13 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "",
-  "installCommand": "",
   "outputDirectory": ".",
+  "crons": [
+    {
+      "path": "/api/cron/operaciones",
+      "schedule": "0 13 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/css/(.*)",

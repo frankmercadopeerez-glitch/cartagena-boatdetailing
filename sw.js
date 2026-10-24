@@ -1,6 +1,6 @@
 const CACHE_STATIC = "cbd-static-v6";
 const CACHE_PAGES = "cbd-pages-v3";
-const FINANZAS_CACHE = "cbd-private-apps-v65";
+const FINANZAS_CACHE = "cbd-private-apps-v66";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
@@ -131,9 +131,29 @@ self.addEventListener("notificationclick", (event) => {
   const target = (event.notification.data && event.notification.data.url) || "/operaciones.html";
   event.waitUntil(
     self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
-      const existing = clients.find((client) => new URL(client.url).pathname === target);
+      const targetUrl = new URL(target, self.location.origin);
+      const existing = clients.find((client) => new URL(client.url).pathname === targetUrl.pathname);
       if (existing) return existing.focus();
-      return self.clients.openWindow(target);
+      return self.clients.openWindow(targetUrl.href);
     }),
   );
+});
+
+// El servidor envía estas notificaciones mediante Web Push. Este listener se
+// ejecuta incluso cuando la PWA y el navegador están cerrados.
+self.addEventListener("push", (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (error) {
+    payload = { body: event.data ? event.data.text() : "Tienes una tarea pendiente." };
+  }
+  event.waitUntil(self.registration.showNotification(payload.title || "CBD Operaciones", {
+    body: payload.body || "Tienes una tarea pendiente.",
+    icon: "/images/operations-icon.svg?v=1",
+    badge: "/images/operations-icon.svg?v=1",
+    tag: payload.tag || "cbd-operaciones",
+    renotify: true,
+    data: { url: payload.url || "/operaciones.html" },
+  }));
 });
