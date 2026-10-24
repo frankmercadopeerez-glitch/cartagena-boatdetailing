@@ -127,6 +127,30 @@
     return Math.round((completed / list.length) * 100);
   }
 
+  function projectIssues(project, now) {
+    if (!project || project.archived === true) return [];
+    const issues = [];
+    const tasks = Array.isArray(project.tasks) ? project.tasks : [];
+    const reminders = Array.isArray(project.reminders) ? project.reminders : [];
+    const completed = project.status === "completed";
+    const push = (code, severity, label) => issues.push({ code, severity, label });
+    const deadlineDays = daysUntil(project.deadline, now);
+    const overdueTasks = tasks.filter((item) => !item.done && daysUntil(item.dueDate, now) < 0).length;
+    const overdueReminders = reminders.filter((item) => !item.done && daysUntil(item.dueDate, now) < 0).length;
+
+    if (!completed && !String(project.location || "").trim()) push("missing_location", "warning", "Falta definir la ubicación");
+    if (!completed && !project.deadline) push("missing_deadline", "warning", "Falta definir la fecha límite");
+    if (!completed && !(Number(project.contractValue) > 0)) push("missing_contract", "warning", "Falta definir el valor contratado");
+    if (!completed && !String(project.scope || "").trim()) push("missing_scope", "warning", "Falta definir el alcance");
+    if (!completed && !tasks.length) push("missing_checklist", "warning", "Falta crear el checklist");
+    if (!completed && tasks.length && tasks.every((item) => item.done)) push("ready_to_close", "action", "Checklist terminado: confirma el cierre");
+    if (completed && tasks.some((item) => !item.done)) push("completed_open_tasks", "critical", "Está completado pero conserva tareas abiertas");
+    if (deadlineDays !== null && deadlineDays < 0) push("late_deadline", "critical", "La fecha límite está vencida");
+    if (overdueTasks) push("overdue_tasks", "critical", `${overdueTasks} tarea${overdueTasks === 1 ? "" : "s"} vencida${overdueTasks === 1 ? "" : "s"}`);
+    if (overdueReminders) push("overdue_reminders", "critical", `${overdueReminders} alerta${overdueReminders === 1 ? "" : "s"} vencida${overdueReminders === 1 ? "" : "s"}`);
+    return issues;
+  }
+
   function urgencyFor(project, now) {
     const deadlineDays = daysUntil(project.deadline, now);
     const overdueReminder = (project.reminders || []).some(
@@ -138,6 +162,7 @@
     if (deadlineDays !== null && deadlineDays < 0) return "late";
     if (overdueReminder || overdueTask) return "late";
     if (deadlineDays !== null && deadlineDays <= 3) return "attention";
+    if (projectIssues(project, now).length) return "attention";
     return "on-track";
   }
 
@@ -312,6 +337,7 @@
     projectFinancials,
     mergeProjects,
     normalize,
+    projectIssues,
     slugify,
     taskProgress,
     urgencyFor,

@@ -19,6 +19,15 @@ assert.equal(engine.slugify("Yate Le Merediet"), "yate-le-merediet");
 assert.equal(engine.taskProgress([{ done: true }, { done: false }], 0), 50);
 assert.equal(engine.urgencyFor({ deadline: "2026-10-13", tasks: [], reminders: [] }, "2026-10-14"), "late");
 assert.equal(engine.urgencyFor({ deadline: "2026-10-16", tasks: [], reminders: [] }, "2026-10-14"), "attention");
+assert.equal(engine.urgencyFor({ status: "in_process", deadline: "", location: "", contractValue: 0, scope: "", tasks: [], reminders: [] }, "2026-10-14"), "attention");
+assert.deepEqual(
+  engine.projectIssues({ status: "in_process", deadline: "", location: "", contractValue: 0, scope: "", tasks: [], reminders: [] }, "2026-10-14").map((issue) => issue.code),
+  ["missing_location", "missing_deadline", "missing_contract", "missing_scope", "missing_checklist"],
+);
+assert.equal(
+  engine.projectIssues({ status: "completed", deadline: "", location: "", contractValue: 1, scope: "Listo", tasks: [{ done: false }], reminders: [] }, "2026-10-14")[0].code,
+  "completed_open_tasks",
+);
 
 const merged = engine.mergeProjects(projects, [
   { name: "Bote Firulays", financeProjectName: "Bote Firulays", scope: "Pulido integral" },

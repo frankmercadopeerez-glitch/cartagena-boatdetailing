@@ -16,12 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=6" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=7" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-    <script src="/js/operations-engine.js?v=5"></script>
+    <script src="/js/operations-engine.js?v=6"></script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -89,6 +89,26 @@
 
         <section class="view is-active" id="view-dashboard">
           <div class="metrics-grid" id="metrics-grid"></div>
+          <div class="control-total-grid">
+            <section class="panel today-panel">
+              <div class="panel-heading">
+                <div><p class="eyebrow">CONTROL DE HOY</p><h2>Lo que necesita tu atención</h2></div>
+                <span class="today-count" id="today-count">0</span>
+              </div>
+              <div class="today-grid" id="today-control"></div>
+            </section>
+            <section class="panel quick-capture-panel">
+              <div class="quick-capture-copy"><p class="eyebrow">REGISTRO RÁPIDO</p><h2>Dilo como ocurrió</h2><p>Escribe o dicta un gasto, ingreso, tarea o recordatorio. Siempre podrás revisarlo antes de guardar.</p></div>
+              <form class="quick-capture-form" id="quick-capture-form">
+                <textarea id="quick-capture-input" rows="3" placeholder="Ej. Gasté 180 mil en pintura para Antigone"></textarea>
+                <div class="quick-capture-actions">
+                  <button class="icon-button" type="button" id="quick-capture-mic" aria-label="Dictar registro"><i data-lucide="mic"></i></button>
+                  <button class="btn btn-primary" type="submit"><i data-lucide="sparkles"></i>Preparar registro</button>
+                </div>
+              </form>
+              <p class="quick-capture-status" id="quick-capture-status" aria-live="polite">No se guardará nada sin tu confirmación.</p>
+            </section>
+          </div>
           <div class="dashboard-grid">
             <section class="panel projects-panel">
               <div class="panel-heading">
@@ -150,6 +170,7 @@
             <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de la empresa</h2></div></div>
             <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción, categoría o proyecto" /></div><select id="finance-type-filter" aria-label="Filtrar movimientos"><option value="all">Todos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
             <div class="finance-table" id="finance-table"></div>
+            <button class="btn btn-secondary finance-show-more" id="finance-show-more" type="button">Mostrar más movimientos</button>
           </section>
         </section>
       </div>
@@ -163,6 +184,7 @@
       </div>
       <div class="drawer-body">
         <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
+        <section class="project-health" id="project-health" aria-label="Estado de control del proyecto"></section>
         <section class="project-account" aria-label="Cuenta del proyecto">
           <div class="project-account-head">
             <div><p class="eyebrow">CUENTA DEL PROYECTO</p><h3>Ingresos y gastos registrados</h3><p id="project-ledger-caption">Todos los movimientos asociados a esta embarcación.</p></div>
@@ -178,12 +200,17 @@
           <div class="field-grid">
             <label>Estado<select id="project-status"><option value="in_process">En proceso</option><option value="paused">Pausado</option><option value="completed">Completado</option></select></label>
             <label>Ubicación<input id="project-location" placeholder="Marina o zona" /></label>
+            <label>Cliente<input id="project-client" placeholder="Nombre del cliente" /></label>
+            <label>Teléfono del cliente<input id="project-client-phone" type="tel" inputmode="tel" placeholder="Número de contacto" /></label>
+            <label>Responsable<input id="project-responsible" placeholder="Quién coordina el trabajo" /></label>
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
+            <label>Garantía hasta<input id="project-warranty-until" type="date" /></label>
             <label>Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
             <label>Próximo cobro<div class="field-with-action"><input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /><button type="button" class="field-action" id="use-pending-payment">Usar saldo pendiente</button></div><small class="field-help">Puedes registrar el cobro aunque el trabajo ya esté completado.</small></label>
           </div>
           <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
+          <label>Bloqueo actual <span class="optional-label">Opcional</span><textarea id="project-blocker" rows="2" placeholder="Qué está impidiendo avanzar y de quién depende"></textarea></label>
           <label>Notas de coordinación<textarea id="project-notes" rows="3" placeholder="Accesos, contacto, restricciones, decisiones…"></textarea></label>
         </form>
 
@@ -205,6 +232,18 @@
             <select id="reminder-alert-days" aria-label="Avisar con anticipación"><option value="0">El mismo día</option><option value="1">1 día antes</option><option value="3" selected>3 días antes</option><option value="7">7 días antes</option></select>
             <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar alerta</button>
           </form>
+        </section>
+
+        <section class="drawer-section">
+          <div class="section-title"><div><p class="eyebrow">EVIDENCIAS</p><h3>Fotos, recibos y documentos</h3></div></div>
+          <div class="editable-list evidence-list" id="evidence-list"></div>
+          <form class="evidence-form" id="evidence-form">
+            <select id="evidence-type" aria-label="Tipo de evidencia"><option value="photo">Foto</option><option value="receipt">Recibo</option><option value="document">Documento</option><option value="approval">Aprobación</option></select>
+            <input id="evidence-title" placeholder="Nombre de la evidencia" required />
+            <input id="evidence-url" type="url" inputmode="url" placeholder="Enlace https://…" required />
+            <button class="btn btn-secondary" type="submit"><i data-lucide="paperclip"></i>Agregar enlace</button>
+          </form>
+          <p class="field-help">Puedes pegar enlaces de Google Drive, fotos o documentos. El archivo original no se modifica.</p>
         </section>
       </div>
       <div class="drawer-footer"><button class="btn btn-danger" id="delete-project-button"><i data-lucide="trash-2"></i>Borrar proyecto</button><span id="save-status">Los cambios aún no se han guardado</span><button class="btn btn-primary" id="save-project-button"><i data-lucide="save"></i>Guardar cambios</button></div>
@@ -236,6 +275,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=15"></script>
+    <script src="/js/operaciones.js?v=16"></script>
   </body>
 </html>
