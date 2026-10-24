@@ -7,8 +7,6 @@ tools/
 *.ps1
 
 # Source / build tooling not needed at runtime
-package.json
-package-lock.json
 tailwind.config.js
 css/tailwind-input.css
 
