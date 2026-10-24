@@ -566,6 +566,28 @@ body { background: #020202; }
 .field-action { min-height: 44px; padding: 0 13px; border: 1px solid rgba(217, 178, 86, .36); border-radius: 9px; background: rgba(217, 178, 86, .08); color: var(--gold-bright); font-size: 9px; font-weight: 800; cursor: pointer; }
 .field-action:hover { background: rgba(217, 178, 86, .14); }
 .field-action:disabled { border-color: #2c2f33; background: #0d0f11; color: #666d76; cursor: default; }
+.project-account { margin: 0 0 24px; padding: 18px; border: 1px solid #292c31; border-radius: 12px; background: #0a0b0c; }
+.project-account-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 15px; }
+.project-account-head h3 { margin: 0 0 5px; font-size: 16px; letter-spacing: -.025em; }
+.project-account-head p:last-child { margin: 0; color: var(--muted-2); font-size: 10px; line-height: 1.45; }
+.project-account-actions { display: flex; gap: 7px; flex: 0 0 auto; }
+.btn-compact { min-height: 36px; padding-inline: 12px; font-size: 10px; }
+.project-ledger { max-height: 340px; overflow-y: auto; border-top: 1px solid #25282c; scrollbar-width: thin; }
+.project-ledger-row { display: grid; grid-template-columns: 80px minmax(0, 1fr) auto 98px 34px; align-items: center; gap: 10px; min-height: 64px; padding: 10px 0; border-bottom: 1px solid #22252a; }
+.project-ledger-row:last-child { border-bottom: 0; }
+.project-ledger-date strong, .project-ledger-date span, .project-ledger-main strong, .project-ledger-main span { display: block; }
+.project-ledger-date strong { margin-bottom: 3px; color: #d9dde3; font-size: 9px; }
+.project-ledger-date span { color: var(--muted-2); font-size: 8px; }
+.project-ledger-main { min-width: 0; }
+.project-ledger-main strong { overflow: hidden; margin-bottom: 4px; color: #f5f7fa; font-size: 11px; white-space: nowrap; text-overflow: ellipsis; }
+.project-ledger-main span { overflow: hidden; color: var(--muted-2); font-size: 8px; white-space: nowrap; text-overflow: ellipsis; }
+.project-ledger-row .finance-amount { font-size: 10px; }
+.project-ledger-edit { width: 32px; height: 32px; }
+.project-ledger-empty { display: flex; align-items: center; gap: 12px; padding: 22px 2px 6px; }
+.project-ledger-empty > svg { width: 22px; color: var(--gold); }
+.project-ledger-empty strong, .project-ledger-empty span { display: block; }
+.project-ledger-empty strong { margin-bottom: 4px; font-size: 11px; }
+.project-ledger-empty span { color: var(--muted-2); font-size: 9px; }
 
 @media (max-width: 1180px) {
   .completed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -601,4 +623,14 @@ body { background: #020202; }
   .project-finance-overview article { min-height: 76px; padding: 12px; }
   .field-with-action { grid-template-columns: 1fr; }
   .field-action { min-height: 39px; }
+  .project-account { padding: 15px 13px; }
+  .project-account-head { flex-direction: column; }
+  .project-account-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .project-account-actions .btn { width: 100%; }
+  .project-ledger { max-height: 420px; }
+  .project-ledger-row { grid-template-columns: minmax(0, 1fr) auto 32px; gap: 8px; padding-block: 12px; }
+  .project-ledger-date { grid-column: 1 / -1; display: flex; align-items: center; gap: 7px; }
+  .project-ledger-date strong { margin: 0; }
+  .project-ledger-row .finance-type { display: none; }
+  .project-ledger-row .finance-amount { text-align: right; }
 }

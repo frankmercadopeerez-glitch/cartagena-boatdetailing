@@ -374,6 +374,41 @@
     </article>`;
   }
 
+  function projectTransactions(project) {
+    if (!project) return [];
+    const wanted = Engine.normalize(project.financeProjectName || project.name);
+    return state.financeTransactions
+      .filter((transaction) => transaction.archived !== true && Engine.normalize(transaction.proyecto || transaction.project) === wanted)
+      .slice()
+      .sort((a, b) => `${b.fecha || ""}T${b.hora || ""}`.localeCompare(`${a.fecha || ""}T${a.hora || ""}`));
+  }
+
+  function projectLedgerRow(transaction) {
+    const description = transaction.descripcion || transaction.categoria || "Movimiento sin descripción";
+    const sign = transaction.tipo === "gasto" ? "−" : "+";
+    const source = transaction.imported ? "Histórico" : "Registrado aquí";
+    return `<article class="project-ledger-row" data-finance-id="${escapeHtml(transaction.id)}">
+      <div class="project-ledger-date"><strong>${escapeHtml(formatDate(transaction.fecha))}</strong><span>${escapeHtml(transaction.hora || source)}</span></div>
+      <div class="project-ledger-main"><strong>${escapeHtml(description)}</strong><span>${escapeHtml(transaction.categoria || "Sin categoría")} · ${escapeHtml(transaction.medio || "Sin medio")} · ${source}</span></div>
+      <span class="finance-type" data-type="${escapeHtml(transaction.tipo)}">${transaction.tipo === "gasto" ? "Gasto" : "Ingreso"}</span>
+      <strong class="finance-amount" data-type="${escapeHtml(transaction.tipo)}">${sign}${escapeHtml(formatMoney(transaction.monto))}</strong>
+      <button type="button" class="icon-button project-ledger-edit" data-action="edit-finance" aria-label="Editar movimiento"><i data-lucide="pencil"></i></button>
+    </article>`;
+  }
+
+  function renderProjectLedger() {
+    if (!els.projectLedger || !state.draft) return;
+    const transactions = projectTransactions(state.draft);
+    const expenses = transactions.filter((item) => item.tipo === "gasto" && !Engine.isProfitWithdrawal(item)).reduce((sum, item) => sum + (Number(item.monto) || 0), 0);
+    const income = transactions.filter((item) => item.tipo === "ingreso").reduce((sum, item) => sum + (Number(item.monto) || 0), 0);
+    els.projectLedgerCaption.textContent = transactions.length
+      ? `${transactions.length} movimiento${transactions.length === 1 ? "" : "s"} · ${formatMoney(income)} ingresados · ${formatMoney(expenses)} gastados`
+      : "Todavía no hay ingresos ni gastos asociados a esta embarcación.";
+    els.projectLedger.innerHTML = transactions.length
+      ? transactions.map(projectLedgerRow).join("")
+      : `<div class="project-ledger-empty"><i data-lucide="receipt-text"></i><div><strong>Cuenta sin movimientos</strong><span>Registra el primer gasto o ingreso con los botones de arriba.</span></div></div>`;
+  }
+
   function renderFinance() {
     if (!els.financeMetrics) return;
     const totals = Engine.financeTotals(state.financeTransactions, state.financeMeta || {});
@@ -428,7 +463,7 @@
     els.financeProject.value = selected || "";
   }
 
-  function openFinanceModal(type, transaction) {
+  function openFinanceModal(type, transaction, projectName = "") {
     const record = transaction || {};
     els.financeId.value = record.id || "";
     els.financeType.value = record.tipo || type || "gasto";
@@ -442,7 +477,7 @@
       : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
     renderFinanceCategories(record.categoria || "");
     renderFinanceMethods(record.medio || (record.id ? "" : "Efectivo"));
-    renderFinanceProjects(record.proyecto || "");
+    renderFinanceProjects(record.proyecto || projectName || "");
     els.financeModal.showModal();
     refreshIcons();
   }
@@ -523,6 +558,7 @@
     renderDashboardAgenda();
     renderAgenda();
     renderFinance();
+    renderProjectLedger();
     refreshIcons();
   }
 
@@ -596,6 +632,7 @@
     els.drawerProgressBar.style.width = `${progress}%`;
     els.saveStatus.textContent = "Cambios pendientes de guardar";
     renderProjectFinanceOverview();
+    renderProjectLedger();
     refreshIcons();
   }
 
@@ -745,6 +782,15 @@
 
       const newMovement = event.target.closest("[data-new-movement]");
       if (newMovement) openFinanceModal(newMovement.dataset.newMovement);
+
+      const projectMovement = event.target.closest("[data-project-movement]");
+      if (projectMovement && state.draft) {
+        openFinanceModal(
+          projectMovement.dataset.projectMovement,
+          null,
+          state.draft.financeProjectName || state.draft.name,
+        );
+      }
 
       const action = event.target.closest("[data-action]");
       if (!action) return;
@@ -1278,7 +1324,7 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), projectScope: byId("project-scope"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
@@ -1298,7 +1344,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v12", { updateViaCache: "none" }).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v13", { updateViaCache: "none" }).catch(() => {}));
     }
   }
 

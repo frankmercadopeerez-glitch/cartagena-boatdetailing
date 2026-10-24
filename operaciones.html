@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=4" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=5" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -162,6 +162,16 @@
       </div>
       <div class="drawer-body">
         <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
+        <section class="project-account" aria-label="Cuenta del proyecto">
+          <div class="project-account-head">
+            <div><p class="eyebrow">CUENTA DEL PROYECTO</p><h3>Ingresos y gastos registrados</h3><p id="project-ledger-caption">Todos los movimientos asociados a esta embarcación.</p></div>
+            <div class="project-account-actions">
+              <button type="button" class="btn btn-secondary btn-compact" data-project-movement="gasto"><i data-lucide="minus"></i>Gasto</button>
+              <button type="button" class="btn btn-primary btn-compact" data-project-movement="ingreso"><i data-lucide="plus"></i>Ingreso</button>
+            </div>
+          </div>
+          <div class="project-ledger" id="project-ledger"></div>
+        </section>
         <form id="project-form">
           <input type="hidden" id="project-doc-id" />
           <div class="field-grid">
@@ -225,6 +235,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=12"></script>
+    <script src="/js/operaciones.js?v=13"></script>
   </body>
 </html>
