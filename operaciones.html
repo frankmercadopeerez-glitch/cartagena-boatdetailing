@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=7" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=8" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -57,7 +57,7 @@
         <nav class="side-nav" aria-label="Navegación principal">
           <button class="nav-item is-active" data-view="dashboard"><i data-lucide="layout-dashboard"></i><span>Resumen</span></button>
           <button class="nav-item" data-view="projects"><i data-lucide="ship"></i><span>Embarcaciones</span><b id="nav-project-count">0</b></button>
-          <button class="nav-item" data-view="finance"><i data-lucide="wallet-cards"></i><span>Mis finanzas</span></button>
+          <button class="nav-item" data-view="finance"><i data-lucide="receipt-text"></i><span>Transacciones</span></button>
           <button class="nav-item" data-view="agenda"><i data-lucide="calendar-clock"></i><span>Agenda</span><b id="nav-alert-count">0</b></button>
         </nav>
         <div class="sidebar-bottom">
@@ -83,7 +83,7 @@
           <button class="is-active" data-view="dashboard"><i data-lucide="house"></i><span>Inicio</span></button>
           <button data-view="projects"><i data-lucide="ship"></i><span>Trabajos</span></button>
           <button class="mobile-nav-new" id="mobile-new-project-button" aria-label="Crear nuevo trabajo"><i data-lucide="plus"></i><span>Nuevo</span></button>
-          <button data-view="finance"><i data-lucide="wallet-cards"></i><span>Finanzas</span></button>
+          <button data-view="finance"><i data-lucide="receipt-text"></i><span>Movimientos</span></button>
           <button data-view="agenda"><i data-lucide="calendar-clock"></i><span>Agenda</span></button>
         </nav>
 
@@ -98,7 +98,7 @@
               <div class="today-grid" id="today-control"></div>
             </section>
             <section class="panel quick-capture-panel">
-              <div class="quick-capture-copy"><p class="eyebrow">REGISTRO RÁPIDO</p><h2>Dilo como ocurrió</h2><p>Escribe o dicta un gasto, ingreso, tarea o recordatorio. Siempre podrás revisarlo antes de guardar.</p></div>
+              <div class="quick-capture-copy"><p class="eyebrow">REGISTRO RÁPIDO</p><h2>Dilo como ocurrió</h2><p>Escribe o dicta un gasto, ingreso, tarea o recordatorio. Siempre podrás revisarlo antes de guardar.</p><small>Funciona con reglas del portal: no envía texto a OpenAI ni consume créditos de API.</small></div>
               <form class="quick-capture-form" id="quick-capture-form">
                 <textarea id="quick-capture-input" rows="3" placeholder="Ej. Gasté 180 mil en pintura para Antigone"></textarea>
                 <div class="quick-capture-actions">
@@ -162,13 +162,14 @@
 
         <section class="view" id="view-finance">
           <div class="finance-hero">
-            <div><p class="eyebrow">LIBRO PERSONAL DE FRANK</p><h2>Finanzas de la operación</h2><p id="finance-cutoff">Preparando la copia histórica independiente…</p></div>
+            <div><p class="eyebrow">LIBRO PERSONAL DE FRANK</p><h2>Todas las transacciones</h2><p>Consulta cada ingreso y gasto, filtra por proyecto y corrige cualquier movimiento.</p><p id="finance-cutoff">Preparando la copia histórica independiente…</p></div>
             <div class="finance-actions"><button class="btn btn-secondary" data-new-movement="gasto"><i data-lucide="arrow-down"></i>Registrar gasto</button><button class="btn btn-primary" data-new-movement="ingreso"><i data-lucide="arrow-up"></i>Registrar ingreso</button></div>
           </div>
           <div class="finance-metrics" id="finance-metrics"></div>
           <section class="panel finance-panel">
             <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de la empresa</h2></div></div>
-            <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción, categoría o proyecto" /></div><select id="finance-type-filter" aria-label="Filtrar movimientos"><option value="all">Todos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
+            <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción o categoría" /></div><select id="finance-project-filter" aria-label="Filtrar por proyecto"><option value="all">Todos los proyectos</option><option value="__none__">Sin proyecto</option></select><select id="finance-type-filter" aria-label="Filtrar por tipo"><option value="all">Todos los tipos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
+            <div class="finance-filter-summary" id="finance-filter-summary" aria-live="polite"></div>
             <div class="finance-table" id="finance-table"></div>
             <button class="btn btn-secondary finance-show-more" id="finance-show-more" type="button">Mostrar más movimientos</button>
           </section>
@@ -189,6 +190,7 @@
           <div class="project-account-head">
             <div><p class="eyebrow">CUENTA DEL PROYECTO</p><h3>Ingresos y gastos registrados</h3><p id="project-ledger-caption">Todos los movimientos asociados a esta embarcación.</p></div>
             <div class="project-account-actions">
+              <button type="button" class="btn btn-secondary btn-compact" id="view-project-transactions"><i data-lucide="receipt-text"></i>Ver todas</button>
               <button type="button" class="btn btn-secondary btn-compact" data-project-movement="gasto"><i data-lucide="minus"></i>Gasto</button>
               <button type="button" class="btn btn-primary btn-compact" data-project-movement="ingreso"><i data-lucide="plus"></i>Ingreso</button>
             </div>
@@ -270,11 +272,11 @@
         <label>Proyecto<select id="finance-project"><option value="">Sin proyecto</option></select></label>
         <label>Descripción <span class="optional-label">Opcional</span><textarea id="finance-description" rows="3" placeholder="Detalle adicional del movimiento"></textarea></label>
         <p class="finance-edit-note" id="finance-edit-note">Los cambios actualizan inmediatamente todos los totales de este portal.</p>
-        <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
+        <div class="modal-actions"><button class="btn btn-danger is-hidden" type="button" id="delete-finance-button"><i data-lucide="trash-2"></i>Eliminar</button><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
       </form>
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=16"></script>
+    <script src="/js/operaciones.js?v=17"></script>
   </body>
 </html>

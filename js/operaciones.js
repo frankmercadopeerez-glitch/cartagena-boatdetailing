@@ -51,6 +51,7 @@
     search: "",
     financeSearch: "",
     financeTypeFilter: "all",
+    financeProjectFilter: "all",
     financeLimit: 60,
     subscriptions: [],
     pushServerConfig: null,
@@ -458,8 +459,11 @@
     return state.financeTransactions
       .filter((transaction) => {
         const typeMatches = state.financeTypeFilter === "all" || transaction.tipo === state.financeTypeFilter;
+        const transactionProject = Engine.normalize(transaction.proyecto || transaction.project || "");
+        const projectMatches = state.financeProjectFilter === "all"
+          || (state.financeProjectFilter === "__none__" ? !transactionProject : transactionProject === Engine.normalize(state.financeProjectFilter));
         const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.medio}`);
-        return typeMatches && (!query || haystack.includes(query));
+        return typeMatches && projectMatches && (!query || haystack.includes(query));
       })
       .slice()
       .sort((a, b) => `${b.fecha || ""}T${b.hora || ""}`.localeCompare(`${a.fecha || ""}T${a.hora || ""}`));
@@ -530,7 +534,21 @@
     els.financeCutoff.textContent = cutoff
       ? `Datos históricos cargados el ${formatDate(cutoff, { long: true })}.`
       : "Datos históricos cargados en este portal.";
+    const projectNames = [...new Set(state.financeTransactions.map((transaction) => (transaction.proyecto || transaction.project || "").trim()).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, "es"));
+    const selectedProject = state.financeProjectFilter;
+    els.financeProjectFilter.innerHTML = [
+      '<option value="all">Todos los proyectos</option>',
+      '<option value="__none__">Sin proyecto</option>',
+      ...projectNames.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`),
+    ].join("");
+    els.financeProjectFilter.value = projectNames.some((name) => Engine.normalize(name) === Engine.normalize(selectedProject))
+      ? projectNames.find((name) => Engine.normalize(name) === Engine.normalize(selectedProject))
+      : selectedProject === "__none__" ? "__none__" : "all";
     const transactions = filteredFinanceTransactions();
+    const filteredIncome = transactions.filter((item) => item.tipo === "ingreso").reduce((sum, item) => sum + (Number(item.monto) || 0), 0);
+    const filteredExpenses = transactions.filter((item) => item.tipo === "gasto" && !Engine.isProfitWithdrawal(item)).reduce((sum, item) => sum + (Number(item.monto) || 0), 0);
+    els.financeFilterSummary.innerHTML = `<article><span>Movimientos</span><strong>${transactions.length}</strong></article><article class="is-income"><span>Ingresos filtrados</span><strong>${escapeHtml(formatMoney(filteredIncome))}</strong></article><article class="is-expense"><span>Gastos filtrados</span><strong>${escapeHtml(formatMoney(filteredExpenses))}</strong></article><article><span>Balance filtrado</span><strong>${escapeHtml(formatMoney(filteredIncome - filteredExpenses))}</strong></article>`;
     const visibleTransactions = transactions.slice(0, state.financeLimit);
     els.financeTable.innerHTML = visibleTransactions.length
       ? visibleTransactions.map(financeRow).join("")
@@ -586,6 +604,7 @@
     els.financeEditNote.textContent = record.imported
       ? "Este movimiento pertenece al corte histórico. Cambiar su tipo o valor ajustará el saldo disponible desde el corte."
       : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
+    els.deleteFinanceButton.classList.toggle("is-hidden", !record.id);
     renderFinanceCategories(record.categoria || "");
     renderFinanceMethods(record.medio || (record.id ? "" : "Efectivo"));
     renderFinanceProjects(record.proyecto || projectName || "");
@@ -663,6 +682,40 @@
     }
   }
 
+  async function deleteFinanceMovement() {
+    const id = els.financeId.value;
+    const existing = state.financeTransactions.find((transaction) => transaction.id === id);
+    if (!existing) return;
+    const description = existing.descripcion || existing.categoria || "este movimiento";
+    if (!window.confirm(`¿Eliminar “${description}” por ${formatMoney(existing.monto)}? Esta acción ajustará los totales.`)) return;
+    els.deleteFinanceButton.disabled = true;
+    try {
+      await state.db.collection("operaciones_finanzas_transacciones").doc(id).delete();
+      els.financeModal.close();
+      els.financeForm.reset();
+      toast("Movimiento eliminado y totales actualizados");
+    } catch (error) {
+      console.error("No se pudo eliminar el movimiento", error);
+      toast("No se pudo eliminar el movimiento");
+    } finally {
+      els.deleteFinanceButton.disabled = false;
+    }
+  }
+
+  function showProjectTransactions() {
+    if (!state.draft) return;
+    state.financeProjectFilter = state.draft.financeProjectName || state.draft.name;
+    state.financeSearch = "";
+    state.financeTypeFilter = "all";
+    state.financeLimit = 60;
+    els.financeSearch.value = "";
+    els.financeTypeFilter.value = "all";
+    closeProject();
+    showView("finance");
+    renderFinance();
+    refreshIcons();
+  }
+
   function renderEverything() {
     renderMetrics();
     renderTodayControl();
@@ -682,7 +735,7 @@
     state.currentView = view;
     document.querySelectorAll(".view").forEach((node) => node.classList.toggle("is-active", node.id === `view-${view}`));
     document.querySelectorAll("[data-view]").forEach((node) => node.classList.toggle("is-active", node.dataset.view === view));
-    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Trabajos y cobros" : view === "finance" ? "Mis finanzas" : "Agenda operativa";
+    els.viewTitle.textContent = view === "dashboard" ? "Centro de operaciones" : view === "projects" ? "Trabajos y cobros" : view === "finance" ? "Transacciones" : "Agenda operativa";
     window.scrollTo({ top: 0, behavior: "smooth" });
     refreshIcons();
   }
@@ -1236,6 +1289,12 @@
       renderFinance();
       refreshIcons();
     });
+    els.financeProjectFilter.addEventListener("change", () => {
+      state.financeProjectFilter = els.financeProjectFilter.value;
+      state.financeLimit = 60;
+      renderFinance();
+      refreshIcons();
+    });
     els.financeType.addEventListener("change", () => {
       renderFinanceCategories("");
       refreshIcons();
@@ -1245,6 +1304,8 @@
       renderFinance();
       refreshIcons();
     });
+    els.viewProjectTransactions.addEventListener("click", showProjectTransactions);
+    els.deleteFinanceButton.addEventListener("click", deleteFinanceMovement);
     els.financeMethodOptions.addEventListener("click", (event) => {
       const button = event.target.closest("[data-choice-value]");
       if (button) setFinanceMethod(button.dataset.choiceValue);
@@ -1702,11 +1763,11 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectClient: byId("project-client"), projectClientPhone: byId("project-client-phone"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectClient: byId("project-client"), projectClientPhone: byId("project-client-phone"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
-      financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeShowMore: byId("finance-show-more"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"),
-      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"),
+      financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeShowMore: byId("finance-show-more"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"), financeProjectFilter: byId("finance-project-filter"), financeFilterSummary: byId("finance-filter-summary"),
+      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
     });
   }
 
@@ -1722,7 +1783,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v16", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v17", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
