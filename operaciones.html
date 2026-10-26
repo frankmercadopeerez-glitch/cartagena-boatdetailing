@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=8" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=9" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -185,6 +185,17 @@
       </div>
       <div class="drawer-body">
         <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
+        <section class="work-accounts" id="work-accounts" aria-label="Cuentas separadas por trabajo">
+          <div class="work-accounts-head">
+            <div><p class="eyebrow">CUENTAS SEPARADAS</p><h3>Control por trabajo</h3><p>Cada servicio conserva sus propios ingresos, gastos y saldo pendiente.</p></div>
+          </div>
+          <div class="work-account-list" id="work-account-list"></div>
+          <form class="work-account-add" id="work-account-form">
+            <input id="work-account-title" placeholder="Nuevo trabajo o cuenta" required />
+            <input id="work-account-pending" class="money-input" inputmode="numeric" placeholder="Saldo pendiente" />
+            <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar cuenta</button>
+          </form>
+        </section>
         <section class="project-health" id="project-health" aria-label="Estado de control del proyecto"></section>
         <section class="project-account" aria-label="Cuenta del proyecto">
           <div class="project-account-head">
@@ -208,8 +219,8 @@
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
             <label>Garantía hasta<input id="project-warranty-until" type="date" /></label>
-            <label>Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
-            <label>Próximo cobro<div class="field-with-action"><input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /><button type="button" class="field-action" id="use-pending-payment">Usar saldo pendiente</button></div><small class="field-help">Puedes registrar el cobro aunque el trabajo ya esté completado.</small></label>
+            <label class="global-finance-field">Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
+            <label class="global-finance-field">Próximo cobro<div class="field-with-action"><input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /><button type="button" class="field-action" id="use-pending-payment">Usar saldo pendiente</button></div><small class="field-help">Puedes registrar el cobro aunque el trabajo ya esté completado.</small></label>
           </div>
           <label>Frentes del trabajo<textarea id="project-scope" rows="4" placeholder="Escribe cada trabajo en una línea. Al guardar, cada línea se convierte en un checkbox."></textarea><small class="field-help">Ejemplo: Pasacabos de popa ↵ Piso de foam — revisar desprendimiento</small></label>
           <label>Bloqueo actual <span class="optional-label">Opcional</span><textarea id="project-blocker" rows="2" placeholder="Qué está impidiendo avanzar y de quién depende"></textarea></label>
@@ -270,6 +281,7 @@
         <label>Categoría<select id="finance-category" required></select></label>
         <label>Medio de pago<div class="choice-grid" id="finance-method-options"><button type="button" class="choice-button" data-finance-method="Efectivo"><i data-lucide="banknote"></i>Efectivo</button><button type="button" class="choice-button" data-finance-method="Transferencia"><i data-lucide="building-2"></i>Cuenta</button></div><input id="finance-method" type="hidden" /></label>
         <label>Proyecto<select id="finance-project"><option value="">Sin proyecto</option></select></label>
+        <label id="finance-account-wrap" hidden>Cuenta del trabajo<select id="finance-account"><option value="">Cuenta general</option></select></label>
         <label>Descripción <span class="optional-label">Opcional</span><textarea id="finance-description" rows="3" placeholder="Detalle adicional del movimiento"></textarea></label>
         <p class="finance-edit-note" id="finance-edit-note">Los cambios actualizan inmediatamente todos los totales de este portal.</p>
         <div class="modal-actions"><button class="btn btn-danger is-hidden" type="button" id="delete-finance-button"><i data-lucide="trash-2"></i>Eliminar</button><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="save-finance-button">Guardar movimiento</button></div>
@@ -277,6 +289,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=17"></script>
+    <script src="/js/operaciones.js?v=18"></script>
   </body>
 </html>

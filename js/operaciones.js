@@ -32,6 +32,13 @@
     delivered: "Entregado",
     warranty: "Garantía",
   };
+  const WORK_ACCOUNT_STATUSES = ["in_process", "delivered", "warranty", "closed"];
+  const WORK_ACCOUNT_LABELS = {
+    in_process: "En proceso",
+    delivered: "Entregado",
+    warranty: "Garantía",
+    closed: "Cerrado",
+  };
 
   const els = {};
   const state = {
@@ -160,6 +167,13 @@
       paidOpening: Math.max(0, Number(project.paidOpening) || 0),
       paidOpeningLedger: Math.max(0, Number(project.paidOpeningLedger) || 0),
       tasks: Array.isArray(project.tasks) ? project.tasks.map((item) => ({ ...item })) : [],
+      workAccounts: Array.isArray(project.workAccounts) ? project.workAccounts.map((item) => ({
+        id: item.id || uuid("account"),
+        title: String(item.title || "Cuenta sin nombre"),
+        status: WORK_ACCOUNT_STATUSES.includes(item.status) ? item.status : "in_process",
+        pendingAmount: Math.max(0, Number(item.pendingAmount) || 0),
+        notes: String(item.notes || ""),
+      })) : [],
       reminders: Array.isArray(project.reminders) ? project.reminders.map((item) => ({ ...item })) : [],
       evidence: Array.isArray(project.evidence) ? project.evidence.map((item) => ({ ...item })) : [],
       changeLog: Array.isArray(project.changeLog) ? project.changeLog.map((item) => ({ ...item })) : [],
@@ -200,16 +214,63 @@
     return Engine.projectFinancials(project, state.financeTransactions);
   }
 
+  function hasWorkAccounts(project) {
+    return Array.isArray(project && project.workAccounts) && project.workAccounts.length > 0;
+  }
+
+  function workAccountTransactions(project, account) {
+    const accountId = String(account && account.id || "");
+    const accountName = Engine.normalize(account && account.title || "");
+    return projectTransactions(project).filter((transaction) => {
+      if (accountId && String(transaction.projectAccountId || "") === accountId) return true;
+      return accountName && Engine.normalize(transaction.projectAccountName || "") === accountName;
+    });
+  }
+
+  function workAccountSummary(project, account) {
+    const transactions = workAccountTransactions(project, account);
+    const income = transactions
+      .filter((item) => item.tipo === "ingreso")
+      .reduce((sum, item) => sum + Math.max(0, Number(item.monto) || 0), 0);
+    const expenses = transactions
+      .filter((item) => item.tipo === "gasto" && !Engine.isProfitWithdrawal(item))
+      .reduce((sum, item) => sum + Math.max(0, Number(item.monto) || 0), 0);
+    return {
+      income,
+      expenses,
+      balance: income - expenses,
+      pending: Math.max(0, Number(account && account.pendingAmount) || 0),
+      count: transactions.length,
+    };
+  }
+
+  function openWorkAccounts(project) {
+    return (project && project.workAccounts || []).filter((account) => Math.max(0, Number(account.pendingAmount) || 0) > 0);
+  }
+
+  function projectReceivableValue(project) {
+    if (hasWorkAccounts(project)) {
+      return (project.workAccounts || []).reduce((sum, account) => sum + Math.max(0, Number(account.pendingAmount) || 0), 0);
+    }
+    const pending = projectFinancialSummary(project).pending;
+    return pending === null ? 0 : pending;
+  }
+
   function projectIssues(project) {
-    const issues = Engine.projectIssues(project);
+    const accountMode = hasWorkAccounts(project);
+    const issues = Engine.projectIssues(project).filter((issue) => !(accountMode && issue.code === "missing_contract"));
     const finance = projectFinancialSummary(project);
     if (project.blocker && project.status !== "completed") {
       issues.unshift({ code: "blocker", severity: "critical", label: `Bloqueo: ${project.blocker}` });
     }
-    if (project.status === "completed" && finance.pending > 0) {
+    if (accountMode) {
+      openWorkAccounts(project).forEach((account) => {
+        issues.push({ code: `account_collection_${account.id}`, severity: "collection", label: `${account.title}: cobrar ${formatMoney(account.pendingAmount)}` });
+      });
+    } else if (project.status === "completed" && finance.pending > 0) {
       issues.push({ code: "collection", severity: "collection", label: `Cobrar ${formatMoney(finance.pending)}` });
     }
-    if (finance.pending !== null && finance.nextPaymentAmount > finance.pending) {
+    if (!accountMode && finance.pending !== null && finance.nextPaymentAmount > finance.pending) {
       issues.push({ code: "payment_mismatch", severity: "warning", label: "El próximo cobro supera el saldo pendiente" });
     }
     return issues;
@@ -236,10 +297,7 @@
     const active = state.projects.filter((project) => project.status !== "completed");
     const completed = state.projects.filter((project) => project.status === "completed");
     const attention = active.filter((project) => projectIssues(project).length > 0).length;
-    const receivable = state.projects.reduce((total, project) => {
-      const pending = projectFinancialSummary(project).pending;
-      return total + (pending === null ? 0 : pending);
-    }, 0);
+    const receivable = state.projects.reduce((total, project) => total + projectReceivableValue(project), 0);
     els.metricsGrid.innerHTML = [
       metricCard("Trabajos activos", active.length, `${openTasks({ tasks: active.flatMap((item) => item.tasks || []) }).length} tareas por completar`, "ship"),
       metricCard("Por cobrar", formatMoney(receivable), "Saldo pendiente entre todos los trabajos", "circle-dollar-sign", receivable > 0),
@@ -255,25 +313,34 @@
     const pending = openTasks(project).length;
     const scope = project.scope || "Alcance pendiente de definir. Abre la ficha para organizar entregables y tareas.";
     const finance = projectFinancialSummary(project);
+    const accountMode = hasWorkAccounts(project);
+    const accounts = project.workAccounts || [];
+    const openAccounts = openWorkAccounts(project);
+    const accountMovementCount = accountMode ? accounts.reduce((sum, account) => sum + workAccountSummary(project, account).count, 0) : 0;
     const deadlineClass = urgency === "late" ? "is-late" : urgency === "attention" ? "is-attention" : "";
     const statusLabel = isCompleted ? "Completado" : project.status === "paused" ? "Pausado" : urgencyLabel(urgency);
     const issues = projectIssues(project);
     const firstIssue = issues.find((issue) => issue.severity === "critical") || issues[0];
-    const collectionBanner = isCompleted && finance.pending > 0
+    const collectionBanner = isCompleted && accountMode && openAccounts.length
+      ? `<div class="collection-banner"><span><i data-lucide="circle-dollar-sign"></i>Trabajo terminado · cuentas pendientes</span><strong>${openAccounts.length}</strong></div>`
+      : isCompleted && !accountMode && finance.pending > 0
       ? `<div class="collection-banner"><span><i data-lucide="circle-dollar-sign"></i>Trabajo terminado · falta cobrar</span><strong>${escapeHtml(formatMoney(finance.pending))}</strong></div>`
       : isCompleted
         ? `<div class="collection-banner is-paid"><span><i data-lucide="badge-check"></i>Trabajo terminado y pagado</span><strong>Cerrado</strong></div>`
         : "";
     const footerStatus = isCompleted
-      ? (finance.pending > 0 ? "Cobro pendiente" : "Cuenta cerrada")
+      ? (accountMode ? (openAccounts.length ? `${openAccounts.length} cuenta${openAccounts.length === 1 ? "" : "s"} pendiente${openAccounts.length === 1 ? "" : "s"}` : "Cuentas cerradas") : finance.pending > 0 ? "Cobro pendiente" : "Cuenta cerrada")
       : relativeDate(project.deadline);
+    const moneyGrid = accountMode
+      ? `<div class="project-money-grid is-account-mode"><div><span>Cuentas</span><strong>${accounts.length}</strong></div><div><span>Con saldo</span><strong class="${openAccounts.length ? "is-pending" : ""}">${openAccounts.length}</strong></div><div><span>Movimientos</span><strong>${accountMovementCount}</strong></div></div>`
+      : `<div class="project-money-grid"><div><span>Recibido</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Caja del proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>`;
     return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" data-status="${escapeHtml(project.status)}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
       <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${escapeHtml(statusLabel)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
       ${firstIssue && firstIssue.code !== "collection" ? `<div class="project-alert-line" data-severity="${escapeHtml(firstIssue.severity)}"><i data-lucide="triangle-alert"></i><span>${escapeHtml(firstIssue.label)}</span></div>` : ""}
       ${collectionBanner}
-      <div class="project-money-grid"><div><span>Recibido</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Caja del proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
-      ${finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Próximo cobro</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>${isCompleted ? "Cobro pendiente del trabajo terminado" : "Pago registrado para la siguiente fase"}</small></div>` : ""}
+      ${moneyGrid}
+      ${!accountMode && finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Próximo cobro</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>${isCompleted ? "Cobro pendiente del trabajo terminado" : "Pago registrado para la siguiente fase"}</small></div>` : ""}
       <div class="progress-row"><span>Avance</span><b>${progress}%</b></div><div class="progress-track"><span style="width:${progress}%"></span></div>
       <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${!project.tasks.length ? "Checklist sin crear" : pending ? `${pending} frente${pending === 1 ? "" : "s"} pendiente${pending === 1 ? "" : "s"}` : "Checklist cerrado"}</span><span class="deadline ${deadlineClass}"><i data-lucide="${isCompleted ? "wallet-cards" : "clock-3"}"></i>${escapeHtml(footerStatus)}</span></div>
     </article>`;
@@ -282,6 +349,22 @@
   function renderProjectFinanceOverview() {
     if (!state.draft || !els.projectFinanceOverview) return;
     const finance = projectFinancialSummary(state.draft);
+    if (hasWorkAccounts(state.draft)) {
+      const accounts = state.draft.workAccounts || [];
+      const openAccounts = openWorkAccounts(state.draft);
+      const movements = projectTransactions(state.draft).length;
+      els.projectFinanceOverview.innerHTML = [
+        ["Cuentas por trabajo", accounts.length, "layers-3"],
+        ["Con saldo pendiente", openAccounts.length, "circle-dollar-sign"],
+        ["Movimientos registrados", movements, "receipt-text"],
+        ["Caja registrada", formatMoney(finance.balance), "wallet"],
+      ].map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+      if (els.usePendingPayment) {
+        els.usePendingPayment.disabled = true;
+        els.usePendingPayment.textContent = "Usa cada cuenta";
+      }
+      return;
+    }
     const items = [
       ["Valor contratado", finance.contractValue ? formatMoney(finance.contractValue) : "Por definir", "file-text"],
       ["Pagado", formatMoney(finance.paid), "check"],
@@ -296,6 +379,51 @@
       els.usePendingPayment.disabled = !(finance.pending > 0);
       els.usePendingPayment.textContent = finance.pending > 0 ? `Usar ${formatMoney(finance.pending)}` : "Sin saldo pendiente";
     }
+  }
+
+  function workAccountCard(account) {
+    const summary = workAccountSummary(state.draft, account);
+    const status = WORK_ACCOUNT_STATUSES.includes(account.status) ? account.status : "in_process";
+    const statusOptions = WORK_ACCOUNT_STATUSES.map((value) =>
+      `<option value="${value}"${value === status ? " selected" : ""}>${escapeHtml(WORK_ACCOUNT_LABELS[value])}</option>`,
+    ).join("");
+    return `<details class="work-account-card" data-work-account-id="${escapeHtml(account.id)}">
+      <summary>
+        <span class="work-account-summary-main"><strong>${escapeHtml(account.title)}</strong><small>${escapeHtml(WORK_ACCOUNT_LABELS[status])} · ${summary.count} movimiento${summary.count === 1 ? "" : "s"}</small></span>
+        <span class="work-account-summary-money"><small>Saldo pendiente</small><strong class="${summary.pending ? "is-pending" : ""}">${escapeHtml(formatMoney(summary.pending))}</strong></span>
+        <i data-lucide="chevron-down"></i>
+      </summary>
+      <div class="work-account-body">
+        <div class="work-account-stats">
+          <div><span>Ingresos</span><strong>${escapeHtml(formatMoney(summary.income))}</strong></div>
+          <div><span>Gastos</span><strong>${escapeHtml(formatMoney(summary.expenses))}</strong></div>
+          <div><span>Caja</span><strong>${escapeHtml(formatMoney(summary.balance))}</strong></div>
+        </div>
+        <div class="work-account-edit-grid">
+          <label>Nombre<input data-account-field="title" value="${escapeHtml(account.title)}" /></label>
+          <label>Estado<select data-account-field="status">${statusOptions}</select></label>
+          <label>Saldo pendiente<input class="money-input" inputmode="numeric" data-account-field="pendingAmount" value="${escapeHtml(formatMoneyInput(account.pendingAmount))}" /></label>
+          <label class="work-account-notes">Nota<textarea rows="2" data-account-field="notes" placeholder="Origen del saldo, acuerdo o próxima acción">${escapeHtml(account.notes || "")}</textarea></label>
+        </div>
+        <div class="work-account-actions">
+          <button type="button" class="btn btn-secondary btn-compact" data-account-movement="gasto" data-account-id="${escapeHtml(account.id)}"><i data-lucide="minus"></i>Gasto</button>
+          <button type="button" class="btn btn-primary btn-compact" data-account-movement="ingreso" data-account-id="${escapeHtml(account.id)}"><i data-lucide="plus"></i>Ingreso</button>
+          <button type="button" class="btn btn-danger btn-compact" data-action="delete-work-account" data-account-id="${escapeHtml(account.id)}"><i data-lucide="trash-2"></i>Eliminar</button>
+        </div>
+      </div>
+    </details>`;
+  }
+
+  function renderWorkAccounts() {
+    if (!state.draft || !els.workAccounts || !els.workAccountList) return;
+    const accounts = state.draft.workAccounts || [];
+    els.workAccounts.classList.toggle("has-accounts", accounts.length > 0);
+    document.querySelectorAll(".global-finance-field").forEach((field) => {
+      field.hidden = accounts.length > 0;
+    });
+    els.workAccountList.innerHTML = accounts.length
+      ? accounts.map(workAccountCard).join("")
+      : `<div class="work-account-empty"><i data-lucide="layers-3"></i><div><strong>Sin cuentas separadas</strong><span>Úsalas cuando una embarcación tenga varios trabajos, cobros o garantías independientes.</span></div></div>`;
   }
 
   function renderProjectHealth() {
@@ -320,7 +448,7 @@
       const matchesFilter = state.filter === "all"
         || (state.filter === "active" && !isCompleted)
         || (state.filter === "completed" && isCompleted)
-        || (state.filter === "receivable" && finance.pending > 0)
+        || (state.filter === "receivable" && projectReceivableValue(project) > 0)
         || (state.filter === "attention" && !isCompleted && projectIssues(project).length > 0);
       const haystack = Engine.normalize(`${project.name} ${project.scope} ${project.location} ${project.clientName} ${project.responsible} ${project.blocker}`);
       return matchesFilter && (!query || haystack.includes(query));
@@ -331,8 +459,8 @@
     const empty = `<div class="empty-state"><i data-lucide="ship-wheel"></i><strong>No hay trabajos en esta vista</strong><span>Prueba otro filtro o crea un trabajo nuevo.</span></div>`;
     const active = state.projects.filter((project) => project.status !== "completed");
     const completed = state.projects.filter((project) => project.status === "completed").sort((a, b) => {
-      const pendingA = projectFinancialSummary(a).pending || 0;
-      const pendingB = projectFinancialSummary(b).pending || 0;
+      const pendingA = projectReceivableValue(a);
+      const pendingB = projectReceivableValue(b);
       return pendingB - pendingA;
     });
     els.dashboardProjects.innerHTML = active.length ? active.slice(0, 4).map(projectCard).join("") : empty;
@@ -462,7 +590,7 @@
         const transactionProject = Engine.normalize(transaction.proyecto || transaction.project || "");
         const projectMatches = state.financeProjectFilter === "all"
           || (state.financeProjectFilter === "__none__" ? !transactionProject : transactionProject === Engine.normalize(state.financeProjectFilter));
-        const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.medio}`);
+        const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.projectAccountName} ${transaction.medio}`);
         return typeMatches && projectMatches && (!query || haystack.includes(query));
       })
       .slice()
@@ -479,7 +607,7 @@
     return `<article class="finance-row" data-finance-id="${escapeHtml(transaction.id)}">
       <div class="finance-row-date">${escapeHtml(formatDate(transaction.fecha))}${transaction.hora ? `<br>${escapeHtml(transaction.hora)}` : ""}${transaction.imported ? "<br>Histórico importado" : "<br>Registrado aquí"}</div>
       <div class="finance-row-main"><strong>${escapeHtml(description)}</strong><span>${escapeHtml(transaction.categoria || "Sin categoría")}</span></div>
-      <div class="finance-row-project">${escapeHtml(transaction.proyecto || "Sin proyecto")}</div>
+      <div class="finance-row-project">${escapeHtml(transaction.proyecto || "Sin proyecto")}${transaction.projectAccountName ? `<br><span>${escapeHtml(transaction.projectAccountName)}</span>` : ""}</div>
       <span class="finance-type" data-type="${escapeHtml(transaction.tipo)}">${transaction.tipo === "gasto" ? "Gasto" : "Ingreso"}</span>
       <span class="finance-amount" data-type="${escapeHtml(transaction.tipo)}">${sign}${escapeHtml(formatMoney(transaction.monto))}</span>
       <button class="icon-button" data-action="edit-finance" aria-label="Editar movimiento"><i data-lucide="pencil"></i></button>
@@ -501,7 +629,7 @@
     const source = transaction.imported ? "Histórico" : "Registrado aquí";
     return `<article class="project-ledger-row" data-finance-id="${escapeHtml(transaction.id)}">
       <div class="project-ledger-date"><strong>${escapeHtml(formatDate(transaction.fecha))}</strong><span>${escapeHtml(transaction.hora || source)}</span></div>
-      <div class="project-ledger-main"><strong>${escapeHtml(description)}</strong><span>${escapeHtml(transaction.categoria || "Sin categoría")} · ${escapeHtml(transaction.medio || "Sin medio")} · ${source}</span></div>
+      <div class="project-ledger-main"><strong>${escapeHtml(description)}</strong><span>${transaction.projectAccountName ? `${escapeHtml(transaction.projectAccountName)} · ` : ""}${escapeHtml(transaction.categoria || "Sin categoría")} · ${escapeHtml(transaction.medio || "Sin medio")} · ${source}</span></div>
       <span class="finance-type" data-type="${escapeHtml(transaction.tipo)}">${transaction.tipo === "gasto" ? "Gasto" : "Ingreso"}</span>
       <strong class="finance-amount" data-type="${escapeHtml(transaction.tipo)}">${sign}${escapeHtml(formatMoney(transaction.monto))}</strong>
       <button type="button" class="icon-button project-ledger-edit" data-action="edit-finance" aria-label="Editar movimiento"><i data-lucide="pencil"></i></button>
@@ -592,7 +720,23 @@
     els.financeProject.value = selected || "";
   }
 
-  function openFinanceModal(type, transaction, projectName = "") {
+  function renderFinanceAccounts(projectName, selectedId = "", selectedName = "") {
+    const draftMatches = state.draft && Engine.normalize(state.draft.financeProjectName || state.draft.name) === Engine.normalize(projectName);
+    const project = draftMatches
+      ? state.draft
+      : state.projects.find((item) => Engine.normalize(item.financeProjectName || item.name) === Engine.normalize(projectName));
+    const accounts = project && Array.isArray(project.workAccounts) ? project.workAccounts : [];
+    els.financeAccountWrap.hidden = !accounts.length;
+    els.financeAccount.innerHTML = [
+      '<option value="">Cuenta general</option>',
+      ...accounts.map((account) => `<option value="${escapeHtml(account.id)}">${escapeHtml(account.title)}</option>`),
+    ].join("");
+    const matched = accounts.find((account) => String(account.id) === String(selectedId))
+      || accounts.find((account) => Engine.normalize(account.title) === Engine.normalize(selectedName));
+    els.financeAccount.value = matched ? matched.id : "";
+  }
+
+  function openFinanceModal(type, transaction, projectName = "", projectAccountId = "", projectAccountName = "") {
     const record = transaction || {};
     els.financeId.value = record.id || "";
     els.financeType.value = record.tipo || type || "gasto";
@@ -608,6 +752,11 @@
     renderFinanceCategories(record.categoria || "");
     renderFinanceMethods(record.medio || (record.id ? "" : "Efectivo"));
     renderFinanceProjects(record.proyecto || projectName || "");
+    renderFinanceAccounts(
+      record.proyecto || projectName || "",
+      record.projectAccountId || projectAccountId || "",
+      record.projectAccountName || projectAccountName || "",
+    );
     els.financeModal.showModal();
     refreshIcons();
   }
@@ -628,11 +777,21 @@
       categoria: els.financeCategory.value.trim(),
       medio: els.financeMethod.value.trim(),
       proyecto: els.financeProject.value.trim(),
+      projectAccountId: els.financeAccountWrap.hidden ? "" : els.financeAccount.value,
+      projectAccountName: "",
       descripcion: els.financeDescription.value.trim(),
       owner: existing ? existing.owner || "Empresa" : "Frank",
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedBy: state.user.email || state.user.uid,
     };
+    if (payload.projectAccountId) {
+      const draftMatches = state.draft && Engine.normalize(state.draft.financeProjectName || state.draft.name) === Engine.normalize(payload.proyecto);
+      const project = draftMatches
+        ? state.draft
+        : state.projects.find((item) => Engine.normalize(item.financeProjectName || item.name) === Engine.normalize(payload.proyecto));
+      const account = project && (project.workAccounts || []).find((item) => String(item.id) === String(payload.projectAccountId));
+      payload.projectAccountName = account ? account.title : "";
+    }
     if (!payload.monto || !payload.fecha || !payload.categoria || !payload.medio) {
       toast("Completa valor, fecha, categoría y medio");
       return;
@@ -726,6 +885,7 @@
     renderProjectLedger();
     if (state.draft) {
       renderProjectHealth();
+      renderWorkAccounts();
       renderEvidence();
     }
     refreshIcons();
@@ -749,8 +909,12 @@
     state.selectedProject = project;
     state.draft = defaultProject(project);
     const finance = projectFinancialSummary(project);
+    const accountMode = hasWorkAccounts(project);
+    const pendingAccounts = openWorkAccounts(project);
     els.drawerTitle.textContent = project.name;
-    els.drawerSubtitle.textContent = project.status === "completed"
+    els.drawerSubtitle.textContent = accountMode
+      ? `${project.workAccounts.length} cuentas separadas · ${pendingAccounts.length} con saldo pendiente`
+      : project.status === "completed"
       ? (finance.pending > 0 ? `Trabajo completado · falta cobrar ${formatMoney(finance.pending)}` : "Trabajo completado y pagado")
       : "Control operativo del trabajo";
     els.projectDocId.value = project.docId || "";
@@ -821,6 +985,7 @@
     els.drawerProgressBar.style.width = `${progress}%`;
     els.saveStatus.textContent = "Cambios pendientes de guardar";
     renderProjectFinanceOverview();
+    renderWorkAccounts();
     renderProjectHealth();
     renderProjectLedger();
     renderEvidence();
@@ -878,6 +1043,7 @@
       notes: state.draft.notes,
       progress: state.draft.progress,
       tasks: state.draft.tasks,
+      workAccounts: state.draft.workAccounts,
       reminders: state.draft.reminders,
       evidence: state.draft.evidence,
       changeLog: [...(state.draft.changeLog || []), { at: new Date().toISOString(), by: state.user.email || state.user.uid, action: "Ficha actualizada" }].slice(-20),
@@ -931,6 +1097,7 @@
       blocker: "",
       progress: 0,
       tasks,
+      workAccounts: [],
       reminders: [],
       evidence: [],
       changeLog: [{ at: new Date().toISOString(), by: state.user.email || state.user.uid, action: "Trabajo creado" }],
@@ -1122,6 +1289,20 @@
         );
       }
 
+      const accountMovement = event.target.closest("[data-account-movement]");
+      if (accountMovement && state.draft) {
+        const account = (state.draft.workAccounts || []).find((item) => item.id === accountMovement.dataset.accountId);
+        if (account) {
+          openFinanceModal(
+            accountMovement.dataset.accountMovement,
+            null,
+            state.draft.financeProjectName || state.draft.name,
+            account.id,
+            account.title,
+          );
+        }
+      }
+
       const action = event.target.closest("[data-action]");
       if (!action) return;
       const taskNode = action.closest("[data-task-id]");
@@ -1162,6 +1343,13 @@
       }
       if (action.dataset.action === "delete-evidence" && evidenceNode) {
         state.draft.evidence = state.draft.evidence.filter((item) => item.id !== evidenceNode.dataset.evidenceId);
+        renderDraftLists();
+      }
+      if (action.dataset.action === "delete-work-account" && state.draft) {
+        const account = (state.draft.workAccounts || []).find((item) => item.id === action.dataset.accountId);
+        if (!account) return;
+        if (!window.confirm(`¿Eliminar la cuenta “${account.title}”? Los movimientos no se borrarán, pero quedarán en la cuenta general.`)) return;
+        state.draft.workAccounts = state.draft.workAccounts.filter((item) => item.id !== account.id);
         renderDraftLists();
       }
       if (action.dataset.action === "toggle-agenda" && reminderNode) {
@@ -1208,6 +1396,40 @@
     els.mobileNewProjectButton.addEventListener("click", () => els.newProjectModal.showModal());
     els.newProjectForm.addEventListener("submit", createProject);
     els.financeForm.addEventListener("submit", saveFinanceMovement);
+    els.workAccountForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!state.draft) return;
+      const title = els.workAccountTitle.value.trim();
+      if (!title) return;
+      state.draft.workAccounts.push({
+        id: uuid("account"),
+        title,
+        status: "in_process",
+        pendingAmount: parseMoneyInput(els.workAccountPending.value),
+        notes: "",
+      });
+      els.workAccountForm.reset();
+      renderDraftLists();
+    });
+    els.workAccountList.addEventListener("input", (event) => {
+      const field = event.target.closest("[data-account-field]");
+      const card = event.target.closest("[data-work-account-id]");
+      if (!field || !card || !state.draft) return;
+      const account = state.draft.workAccounts.find((item) => item.id === card.dataset.workAccountId);
+      if (!account) return;
+      const key = field.dataset.accountField;
+      account[key] = key === "pendingAmount" ? parseMoneyInput(field.value) : field.value;
+      els.saveStatus.textContent = "Cambios pendientes de guardar";
+      renderProjectFinanceOverview();
+      renderProjectHealth();
+    });
+    els.workAccountList.addEventListener("change", (event) => {
+      const field = event.target.closest("[data-account-field]");
+      if (!field) return;
+      if (field.dataset.accountField === "pendingAmount") field.value = formatMoneyInput(field.value);
+      renderWorkAccounts();
+      refreshIcons();
+    });
     els.quickCaptureForm.addEventListener("submit", (event) => {
       event.preventDefault();
       prepareQuickCapture(els.quickCaptureInput.value);
@@ -1299,6 +1521,10 @@
       renderFinanceCategories("");
       refreshIcons();
     });
+    els.financeProject.addEventListener("change", () => {
+      renderFinanceAccounts(els.financeProject.value);
+      refreshIcons();
+    });
     els.financeShowMore.addEventListener("click", () => {
       state.financeLimit += 60;
       renderFinance();
@@ -1310,7 +1536,7 @@
       const button = event.target.closest("[data-choice-value]");
       if (button) setFinanceMethod(button.dataset.choiceValue);
     });
-    [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue].forEach((input) => {
+    [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue, els.workAccountPending].forEach((input) => {
       input.addEventListener("input", () => keepMoneyFormatted(input));
     });
     els.projectContractValue.addEventListener("input", () => {
@@ -1764,10 +1990,11 @@
       metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
       drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectClient: byId("project-client"), projectClientPhone: byId("project-client-phone"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
+      workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeShowMore: byId("finance-show-more"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"), financeProjectFilter: byId("finance-project-filter"), financeFilterSummary: byId("finance-filter-summary"),
-      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
+      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeAccountWrap: byId("finance-account-wrap"), financeAccount: byId("finance-account"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
     });
   }
 
@@ -1783,7 +2010,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v17", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v18", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
