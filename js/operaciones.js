@@ -2022,7 +2022,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v19", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v20", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
