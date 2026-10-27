@@ -510,7 +510,7 @@
     state.projects.forEach((project) => {
       const projectKey = getProjectKey(project);
       projectIssues(project)
-        .filter((issue) => issue.code !== "collection")
+        .filter((issue) => issue.code !== "collection" && !String(issue.code).startsWith("account_collection_"))
         .slice(0, 2)
         .forEach((issue) => urgent.push({
           title: issue.label,
@@ -519,16 +519,28 @@
           severity: issue.severity,
           icon: issue.severity === "critical" ? "octagon-alert" : "triangle-alert",
         }));
-      const finance = projectFinancialSummary(project);
-      if (finance.pending > 0) collections.push({
-        title: `Cobrar ${formatMoney(finance.pending)}`,
-        meta: project.name,
-        projectKey,
-        severity: project.status === "completed" ? "critical" : "collection",
-        icon: "circle-dollar-sign",
-        amount: finance.pending,
-        completed: project.status === "completed",
-      });
+      if (hasWorkAccounts(project)) {
+        openWorkAccounts(project).forEach((account) => collections.push({
+          title: `Cobrar ${formatMoney(account.pendingAmount)}`,
+          meta: `${project.name} · ${account.title}`,
+          projectKey,
+          severity: project.status === "completed" ? "critical" : "collection",
+          icon: "circle-dollar-sign",
+          amount: Number(account.pendingAmount) || 0,
+          completed: project.status === "completed",
+        }));
+      } else {
+        const finance = projectFinancialSummary(project);
+        if (finance.pending > 0) collections.push({
+          title: `Cobrar ${formatMoney(finance.pending)}`,
+          meta: project.name,
+          projectKey,
+          severity: project.status === "completed" ? "critical" : "collection",
+          icon: "circle-dollar-sign",
+          amount: finance.pending,
+          completed: project.status === "completed",
+        });
+      }
       (project.tasks || []).filter((task) => !task.done && task.dueDate).forEach((task) => {
         const days = Engine.daysUntil(task.dueDate);
         if (days === null || days > 7) return;
@@ -2010,7 +2022,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v18", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v19", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
