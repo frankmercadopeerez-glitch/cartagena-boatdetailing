@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=10" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=11" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -185,15 +185,15 @@
       </div>
       <div class="drawer-body">
         <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
-        <section class="work-accounts" id="work-accounts" aria-label="Cuentas separadas por trabajo">
+        <section class="work-accounts" id="work-accounts" aria-label="Ingresos y gastos separados por servicio" hidden>
           <div class="work-accounts-head">
-            <div><p class="eyebrow">CUENTAS SEPARADAS</p><h3>Control por trabajo</h3><p>Cada servicio conserva sus propios ingresos, gastos y saldo pendiente.</p></div>
+            <div><p class="eyebrow">DINERO POR SERVICIO</p><h3>Ingresos y gastos separados</h3><p>Úsalo solo cuando una embarcación tenga varios trabajos que deban llevar cuentas independientes.</p></div>
           </div>
           <div class="work-account-list" id="work-account-list"></div>
           <form class="work-account-add" id="work-account-form">
-            <input id="work-account-title" placeholder="Nuevo trabajo o cuenta" required />
-            <input id="work-account-pending" class="money-input" inputmode="numeric" placeholder="Saldo pendiente" />
-            <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar cuenta</button>
+            <input id="work-account-title" placeholder="Nombre del servicio" required />
+            <input id="work-account-pending" class="money-input" inputmode="numeric" placeholder="Saldo pendiente del servicio" />
+            <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar servicio</button>
           </form>
         </section>
         <section class="project-health" id="project-health" aria-label="Estado de control del proyecto"></section>
@@ -201,6 +201,7 @@
           <div class="project-account-head">
             <div><p class="eyebrow">CUENTA DEL PROYECTO</p><h3>Ingresos y gastos registrados</h3><p id="project-ledger-caption">Todos los movimientos asociados a esta embarcación.</p></div>
             <div class="project-account-actions">
+              <button type="button" class="btn btn-secondary btn-compact" id="enable-work-accounts"><i data-lucide="layers-3"></i>Separar por servicio</button>
               <button type="button" class="btn btn-secondary btn-compact" id="view-project-transactions"><i data-lucide="receipt-text"></i>Ver todas</button>
               <button type="button" class="btn btn-secondary btn-compact" data-project-movement="gasto"><i data-lucide="minus"></i>Gasto</button>
               <button type="button" class="btn btn-primary btn-compact" data-project-movement="ingreso"><i data-lucide="plus"></i>Ingreso</button>
@@ -288,7 +289,23 @@
       </form>
     </dialog>
 
+    <dialog class="modal reschedule-modal" id="reschedule-modal">
+      <form id="reschedule-form">
+        <input type="hidden" id="reschedule-project-key" />
+        <input type="hidden" id="reschedule-reminder-id" />
+        <div class="modal-heading"><div><p class="eyebrow">REPROGRAMAR AVISO</p><h2 id="reschedule-title">Elegir nueva fecha</h2></div><button class="icon-button" type="button" id="close-reschedule-modal" aria-label="Cerrar"><i data-lucide="x"></i></button></div>
+        <p class="reschedule-copy">El aviso seguirá en el historial y volverá a aparecer en tu agenda en la nueva fecha.</p>
+        <label>Nueva fecha<input id="reschedule-date" type="date" required /></label>
+        <div class="reschedule-presets" aria-label="Fechas rápidas">
+          <button class="choice-button" type="button" data-reschedule-days="1">Mañana</button>
+          <button class="choice-button" type="button" data-reschedule-days="3">En 3 días</button>
+          <button class="choice-button" type="button" data-reschedule-days="7">En 7 días</button>
+        </div>
+        <div class="modal-actions"><button class="btn btn-secondary" type="button" id="cancel-reschedule-modal">Cancelar</button><button class="btn btn-primary" type="submit"><i data-lucide="calendar-check"></i>Guardar nueva fecha</button></div>
+      </form>
+    </dialog>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=20"></script>
+    <script src="/js/operaciones.js?v=21"></script>
   </body>
 </html>

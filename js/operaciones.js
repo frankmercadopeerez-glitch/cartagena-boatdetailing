@@ -63,6 +63,7 @@
     subscriptions: [],
     pushServerConfig: null,
     toastTimer: null,
+    showWorkAccountsSetup: false,
   };
 
   const byId = (id) => document.getElementById(id);
@@ -417,13 +418,16 @@
   function renderWorkAccounts() {
     if (!state.draft || !els.workAccounts || !els.workAccountList) return;
     const accounts = state.draft.workAccounts || [];
+    const showSetup = accounts.length > 0 || state.showWorkAccountsSetup;
+    els.workAccounts.hidden = !showSetup;
+    if (els.enableWorkAccounts) els.enableWorkAccounts.hidden = showSetup;
     els.workAccounts.classList.toggle("has-accounts", accounts.length > 0);
     document.querySelectorAll(".global-finance-field").forEach((field) => {
       field.hidden = accounts.length > 0;
     });
     els.workAccountList.innerHTML = accounts.length
       ? accounts.map(workAccountCard).join("")
-      : `<div class="work-account-empty"><i data-lucide="layers-3"></i><div><strong>Sin cuentas separadas</strong><span>Úsalas cuando una embarcación tenga varios trabajos, cobros o garantías independientes.</span></div></div>`;
+      : `<div class="work-account-empty"><i data-lucide="layers-3"></i><div><strong>Aún no has separado este proyecto</strong><span>Escribe el primer servicio para comenzar. La cuenta general seguirá disponible hasta que lo agregues.</span></div></div>`;
   }
 
   function renderProjectHealth() {
@@ -436,7 +440,7 @@
     }
     const critical = issues.some((issue) => issue.severity === "critical");
     els.projectHealth.className = `project-health ${critical ? "is-critical" : "is-warning"}`;
-    els.projectHealth.innerHTML = `<div class="project-health-head"><i data-lucide="${critical ? "octagon-alert" : "triangle-alert"}"></i><div><strong>${issues.length} punto${issues.length === 1 ? "" : "s"} por resolver</strong><span>Completa la ficha para mantener el control.</span></div></div><ul>${issues.map((issue) => `<li>${escapeHtml(issue.label)}</li>`).join("")}</ul>`;
+    els.projectHealth.innerHTML = `<div class="project-health-head"><i data-lucide="${critical ? "octagon-alert" : "triangle-alert"}"></i><div><strong>${issues.length} punto${issues.length === 1 ? "" : "s"} por revisar</strong><span>Toca cualquiera para ir directamente a donde se corrige.</span></div></div><ul>${issues.map((issue) => `<li><button type="button" data-action="focus-project-issue" data-issue-code="${escapeHtml(issue.code)}"><span>${escapeHtml(issue.label)}</span><i data-lucide="arrow-down"></i></button></li>`).join("")}</ul>`;
   }
 
   function filteredProjects() {
@@ -494,7 +498,7 @@
 
   function todayItem(item) {
     const meta = item.meta ? `<span>${escapeHtml(item.meta)}</span>` : "";
-    return `<button class="today-item" type="button" data-action="open-today-project" data-project-key="${escapeHtml(item.projectKey)}" data-severity="${escapeHtml(item.severity || "normal")}"><i data-lucide="${escapeHtml(item.icon || "circle")}"></i><span><strong>${escapeHtml(item.title)}</strong>${meta}</span><i data-lucide="chevron-right"></i></button>`;
+    return `<button class="today-item" type="button" data-action="open-today-project" data-project-key="${escapeHtml(item.projectKey)}" data-issue-code="${escapeHtml(item.issueCode || "")}" data-severity="${escapeHtml(item.severity || "normal")}"><i data-lucide="${escapeHtml(item.icon || "circle")}"></i><span><strong>${escapeHtml(item.title)}</strong>${meta}</span><i data-lucide="chevron-right"></i></button>`;
   }
 
   function todayColumn(title, eyebrow, icon, items, emptyText) {
@@ -516,6 +520,7 @@
           title: issue.label,
           meta: project.name,
           projectKey,
+          issueCode: issue.code,
           severity: issue.severity,
           icon: issue.severity === "critical" ? "octagon-alert" : "triangle-alert",
         }));
@@ -567,11 +572,14 @@
   function agendaRow(reminder) {
     const days = Engine.daysUntil(reminder.dueDate);
     const dateClass = days !== null && days < 0 ? "is-late" : "";
+    const dateControl = days !== null && days < 0 && !reminder.done
+      ? `<button type="button" class="agenda-date agenda-date-button ${dateClass}" data-action="reschedule-reminder"><span>${escapeHtml(formatDate(reminder.dueDate))}</span><small>Reprogramar</small></button>`
+      : `<span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span>`;
     return `<article class="agenda-row${reminder.done ? " is-done" : ""}" data-project-key="${escapeHtml(reminder.projectKey)}" data-reminder-id="${escapeHtml(reminder.id)}">
       <button class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-agenda" aria-label="${reminder.done ? "Reabrir" : "Completar"} recordatorio"><i data-lucide="check"></i></button>
       <div><h3>${escapeHtml(reminder.title)}</h3><p>${escapeHtml(reminderTypeLabel(reminder.type))}</p></div>
       <div class="agenda-owner"><h3>${escapeHtml(reminder.projectName)}</h3><p>Trabajo asociado</p></div>
-      <span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span>
+      ${dateControl}
       <span class="amount">${reminder.amount ? escapeHtml(formatMoney(reminder.amount)) : "—"}</span>
       <button class="icon-button" data-action="open-agenda-project" aria-label="Abrir trabajo"><i data-lucide="arrow-up-right"></i></button>
     </article>`;
@@ -920,6 +928,7 @@
     if (!project) return;
     state.selectedProject = project;
     state.draft = defaultProject(project);
+    state.showWorkAccountsSetup = false;
     const finance = projectFinancialSummary(project);
     const accountMode = hasWorkAccounts(project);
     const pendingAccounts = openWorkAccounts(project);
@@ -958,6 +967,7 @@
     document.body.style.overflow = "";
     state.selectedProject = null;
     state.draft = null;
+    state.showWorkAccountsSetup = false;
   }
 
   function taskItem(task) {
@@ -968,7 +978,9 @@
 
   function reminderItem(reminder) {
     const meta = `${formatDate(reminder.dueDate)}${reminder.amount ? ` · ${formatMoney(reminder.amount)}` : ""} · aviso ${Number(reminder.alertDays) || 0} día(s) antes`;
-    return `<article class="editable-item${reminder.done ? " is-done" : ""}" data-reminder-id="${escapeHtml(reminder.id)}"><button type="button" class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-reminder" aria-label="${reminder.done ? "Reabrir" : "Completar"} alerta"><i data-lucide="check"></i></button><div><p class="item-title">${escapeHtml(reminder.title)}</p><p class="item-meta">${escapeHtml(meta)}</p></div><span class="mini-badge" data-type="${escapeHtml(reminder.type)}">${reminderTypeLabel(reminder.type)}</span><button type="button" class="delete-button" data-action="delete-reminder" aria-label="Eliminar alerta"><i data-lucide="trash-2"></i></button></article>`;
+    const isOverdue = !reminder.done && Engine.daysUntil(reminder.dueDate) < 0;
+    const reschedule = isOverdue ? `<button type="button" class="mini-action" data-action="reschedule-reminder"><i data-lucide="calendar-clock"></i>Reprogramar</button>` : "";
+    return `<article class="editable-item${reminder.done ? " is-done" : ""}" data-reminder-id="${escapeHtml(reminder.id)}"><button type="button" class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-reminder" aria-label="${reminder.done ? "Reabrir" : "Completar"} alerta"><i data-lucide="check"></i></button><div><p class="item-title">${escapeHtml(reminder.title)}</p><p class="item-meta">${escapeHtml(meta)}</p></div><span class="mini-badge" data-type="${escapeHtml(reminder.type)}">${reminderTypeLabel(reminder.type)}</span>${reschedule}<button type="button" class="delete-button" data-action="delete-reminder" aria-label="Eliminar alerta"><i data-lucide="trash-2"></i></button></article>`;
   }
 
   function evidenceItem(item) {
@@ -1162,6 +1174,108 @@
     closeProject();
   }
 
+  function dateFromToday(days) {
+    const date = new Date();
+    date.setHours(12, 0, 0, 0);
+    date.setDate(date.getDate() + Number(days || 0));
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function openRescheduleModal(projectKey, reminderId) {
+    const project = findProject(projectKey) || (state.draft && getProjectKey(state.draft) === projectKey ? state.draft : null);
+    const reminder = project && (project.reminders || []).find((item) => item.id === reminderId);
+    if (!project || !reminder) return toast("No encontré ese recordatorio");
+    els.rescheduleProjectKey.value = projectKey;
+    els.rescheduleReminderId.value = reminderId;
+    els.rescheduleTitle.textContent = reminder.title;
+    els.rescheduleDate.value = dateFromToday(1);
+    els.rescheduleModal.showModal();
+    refreshIcons();
+  }
+
+  async function saveRescheduledReminder(event) {
+    event.preventDefault();
+    const projectKey = els.rescheduleProjectKey.value;
+    const reminderId = els.rescheduleReminderId.value;
+    const dueDate = els.rescheduleDate.value;
+    const project = findProject(projectKey);
+    if (!project || !dueDate) return;
+    const reminders = (project.reminders || []).map((item) => item.id === reminderId
+      ? { ...item, dueDate, done: false, rescheduledAt: new Date().toISOString() }
+      : item);
+    const docId = project.docId || `finance-${Engine.slugify(project.financeProjectName || project.name)}`;
+    const submit = els.rescheduleForm.querySelector('[type="submit"]');
+    submit.disabled = true;
+    try {
+      await state.db.collection("operaciones_proyectos").doc(docId).set({
+        reminders,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedBy: state.user.email || state.user.uid,
+      }, { merge: true });
+      if (state.draft && getProjectKey(state.draft) === projectKey) {
+        state.draft.reminders = reminders.map((item) => ({ ...item }));
+        renderDraftLists();
+      }
+      els.rescheduleModal.close();
+      toast(`Recordatorio reprogramado para ${formatDate(dueDate)}`);
+    } catch (error) {
+      console.error("No se pudo reprogramar el recordatorio", error);
+      toast("No se pudo guardar la nueva fecha");
+    } finally {
+      submit.disabled = false;
+    }
+  }
+
+  function focusProjectIssue(code) {
+    if (!state.draft || !code) return;
+    let target = null;
+    const firstMatchingItem = (container, items, predicate, attribute) => {
+      const item = (items || []).find(predicate);
+      if (!item || !container) return null;
+      return Array.from(container.querySelectorAll(`[${attribute}]`)).find((node) => node.dataset[attribute.replace("data-", "").replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())] === item.id) || null;
+    };
+    const targets = {
+      blocker: els.projectBlocker,
+      missing_location: els.projectLocation,
+      missing_deadline: els.projectDeadline,
+      missing_contract: els.projectContractValue,
+      missing_scope: els.projectScope,
+      missing_checklist: els.taskTitle,
+      ready_to_close: els.projectStatus,
+      late_deadline: els.projectDeadline,
+      collection: els.projectNextPayment,
+      payment_mismatch: els.projectNextPayment,
+    };
+    target = targets[code] || null;
+    if (code === "completed_open_tasks") {
+      target = firstMatchingItem(els.taskList, state.draft.tasks, (item) => !item.done, "data-task-id") || els.taskTitle;
+    }
+    if (code === "overdue_tasks") {
+      target = firstMatchingItem(els.taskList, state.draft.tasks, (item) => !item.done && Engine.daysUntil(item.dueDate) < 0, "data-task-id") || els.taskTitle;
+    }
+    if (code === "overdue_reminders") {
+      target = firstMatchingItem(els.reminderList, state.draft.reminders, (item) => !item.done && Engine.daysUntil(item.dueDate) < 0, "data-reminder-id") || els.reminderTitle;
+    }
+    if (String(code).startsWith("account_collection_")) {
+      const accountId = String(code).replace("account_collection_", "");
+      target = Array.from(els.workAccountList.querySelectorAll("[data-work-account-id]")).find((node) => node.dataset.workAccountId === accountId) || els.workAccounts;
+      if (target.tagName === "DETAILS") target.open = true;
+    }
+    if (!target) return;
+    const highlight = target.closest(".editable-item, .work-account-card, label, .drawer-section") || target;
+    highlight.classList.remove("is-focus-target");
+    void highlight.offsetWidth;
+    highlight.classList.add("is-focus-target");
+    highlight.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(target.tagName)) {
+      setTimeout(() => target.focus({ preventScroll: true }), 350);
+    }
+    setTimeout(() => highlight.classList.remove("is-focus-target"), 2200);
+  }
+
   function parseQuickAmount(text) {
     const match = Engine.normalize(text).match(/(\d[\d.,]*)\s*(millones?|millon|millón|mil|k)?/i);
     if (!match) return 0;
@@ -1322,6 +1436,14 @@
       const evidenceNode = action.closest("[data-evidence-id]");
       if (action.dataset.action === "open-today-project") {
         openProject(findProject(action.dataset.projectKey));
+        if (action.dataset.issueCode) setTimeout(() => focusProjectIssue(action.dataset.issueCode), 180);
+      }
+      if (action.dataset.action === "focus-project-issue") {
+        focusProjectIssue(action.dataset.issueCode);
+      }
+      if (action.dataset.action === "reschedule-reminder" && reminderNode) {
+        const projectKey = reminderNode.dataset.projectKey || (state.draft ? getProjectKey(state.draft) : "");
+        openRescheduleModal(projectKey, reminderNode.dataset.reminderId);
       }
       if (action.dataset.action === "toggle-task" && taskNode) {
         const task = state.draft.tasks.find((item) => item.id === taskNode.dataset.taskId);
@@ -1408,6 +1530,15 @@
     els.mobileNewProjectButton.addEventListener("click", () => els.newProjectModal.showModal());
     els.newProjectForm.addEventListener("submit", createProject);
     els.financeForm.addEventListener("submit", saveFinanceMovement);
+    els.enableWorkAccounts.addEventListener("click", () => {
+      state.showWorkAccountsSetup = true;
+      renderWorkAccounts();
+      refreshIcons();
+      setTimeout(() => {
+        els.workAccounts.scrollIntoView({ behavior: "smooth", block: "center" });
+        els.workAccountTitle.focus({ preventScroll: true });
+      }, 120);
+    });
     els.workAccountForm.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!state.draft) return;
@@ -1422,6 +1553,18 @@
       });
       els.workAccountForm.reset();
       renderDraftLists();
+    });
+    els.rescheduleForm.addEventListener("submit", saveRescheduledReminder);
+    els.closeRescheduleModal.addEventListener("click", () => els.rescheduleModal.close());
+    els.cancelRescheduleModal.addEventListener("click", () => els.rescheduleModal.close());
+    els.rescheduleModal.addEventListener("click", (event) => {
+      if (event.target === els.rescheduleModal) els.rescheduleModal.close();
+    });
+    els.rescheduleModal.querySelector(".reschedule-presets").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-reschedule-days]");
+      if (!button) return;
+      els.rescheduleDate.value = dateFromToday(button.dataset.rescheduleDays);
+      els.rescheduleDate.focus();
     });
     els.workAccountList.addEventListener("input", (event) => {
       const field = event.target.closest("[data-account-field]");
@@ -2002,11 +2145,12 @@
       metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
       drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectClient: byId("project-client"), projectClientPhone: byId("project-client-phone"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
-      workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"),
+      workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"), enableWorkAccounts: byId("enable-work-accounts"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeShowMore: byId("finance-show-more"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"), financeProjectFilter: byId("finance-project-filter"), financeFilterSummary: byId("finance-filter-summary"),
       financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeAccountWrap: byId("finance-account-wrap"), financeAccount: byId("finance-account"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
+      rescheduleModal: byId("reschedule-modal"), rescheduleForm: byId("reschedule-form"), rescheduleProjectKey: byId("reschedule-project-key"), rescheduleReminderId: byId("reschedule-reminder-id"), rescheduleTitle: byId("reschedule-title"), rescheduleDate: byId("reschedule-date"), closeRescheduleModal: byId("close-reschedule-modal"), cancelRescheduleModal: byId("cancel-reschedule-modal"),
     });
   }
 
@@ -2022,7 +2166,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v20", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v21", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
