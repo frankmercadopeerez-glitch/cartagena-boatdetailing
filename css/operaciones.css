@@ -1032,3 +1032,35 @@ label { font-size: 14px; }
   .reschedule-presets { grid-template-columns: 1fr; }
   .reschedule-presets .choice-button { min-height: 48px; }
 }
+
+/* Tarjetas de proyecto compactas: solo datos operativos clave */
+.project-card { padding: 18px; }
+.project-card::before { left: 18px; right: 18px; }
+.project-card .location { min-height: 0; }
+.project-scope {
+  min-height: 0; margin: 12px 0 14px; overflow: hidden; white-space: nowrap;
+  text-overflow: ellipsis; -webkit-line-clamp: 1;
+}
+.project-card-summary {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 12px 0; border-top: 1px solid #23262a; border-bottom: 1px solid #23262a;
+}
+.project-card-summary > div { min-width: 0; padding: 0 13px; border-right: 1px solid #25282c; }
+.project-card-summary > div:first-child { padding-left: 0; }
+.project-card-summary > div:last-child { padding-right: 0; border-right: 0; }
+.project-card-summary span { display: block; margin-bottom: 5px; color: var(--muted-2); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.project-card-summary strong { display: block; overflow: hidden; color: #eef3f8; font-size: 15px; white-space: nowrap; text-overflow: ellipsis; }
+.project-card-summary strong.is-pending { color: var(--orange); }
+.project-card-foot { margin: 12px 0 8px; }
+.project-card-foot span:last-child { justify-content: flex-end; color: #b6bdc6; }
+.project-card-foot b { color: #f0f2f5; }
+
+@media (max-width: 650px) {
+  #dashboard-projects .project-card, #dashboard-completed .project-card { flex-basis: min(74vw, 282px); }
+  .project-card { padding: 14px; }
+  .project-card::before { left: 14px; right: 14px; }
+  .project-scope { margin: 9px 0 11px; }
+  .project-card-summary { padding: 10px 0; }
+  .project-card-summary strong { font-size: 13px; }
+  .project-card-foot { margin: 10px 0 7px; font-size: 11px; }
+}

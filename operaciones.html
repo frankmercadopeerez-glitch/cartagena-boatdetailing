@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=11" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=12" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -214,8 +214,6 @@
           <div class="field-grid">
             <label>Estado<select id="project-status"><option value="in_process">En proceso</option><option value="paused">Pausado</option><option value="completed">Completado</option></select></label>
             <label>Ubicación<input id="project-location" placeholder="Marina o zona" /></label>
-            <label>Cliente<input id="project-client" placeholder="Nombre del cliente" /></label>
-            <label>Teléfono del cliente<input id="project-client-phone" type="tel" inputmode="tel" placeholder="Número de contacto" /></label>
             <label>Responsable<input id="project-responsible" placeholder="Quién coordina el trabajo" /></label>
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
             <label>Fecha límite<input id="project-deadline" type="date" /></label>
@@ -306,6 +304,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=21"></script>
+    <script src="/js/operaciones.js?v=22"></script>
   </body>
 </html>

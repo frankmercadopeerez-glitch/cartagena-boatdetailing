@@ -311,39 +311,20 @@
     const isCompleted = project.status === "completed";
     const urgency = isCompleted ? "completed" : Engine.urgencyFor(project);
     const progress = projectProgress(project);
-    const pending = openTasks(project).length;
-    const scope = project.scope || "Alcance pendiente de definir. Abre la ficha para organizar entregables y tareas.";
+    const scope = String(project.scope || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean)[0] || "Sin resumen operativo";
     const finance = projectFinancialSummary(project);
-    const accountMode = hasWorkAccounts(project);
-    const accounts = project.workAccounts || [];
-    const openAccounts = openWorkAccounts(project);
-    const accountMovementCount = accountMode ? accounts.reduce((sum, account) => sum + workAccountSummary(project, account).count, 0) : 0;
     const deadlineClass = urgency === "late" ? "is-late" : urgency === "attention" ? "is-attention" : "";
     const statusLabel = isCompleted ? "Completado" : project.status === "paused" ? "Pausado" : urgencyLabel(urgency);
-    const issues = projectIssues(project);
-    const firstIssue = issues.find((issue) => issue.severity === "critical") || issues[0];
-    const collectionBanner = isCompleted && accountMode && openAccounts.length
-      ? `<div class="collection-banner"><span><i data-lucide="circle-dollar-sign"></i>Trabajo terminado · cuentas pendientes</span><strong>${openAccounts.length}</strong></div>`
-      : isCompleted && !accountMode && finance.pending > 0
-      ? `<div class="collection-banner"><span><i data-lucide="circle-dollar-sign"></i>Trabajo terminado · falta cobrar</span><strong>${escapeHtml(formatMoney(finance.pending))}</strong></div>`
-      : isCompleted
-        ? `<div class="collection-banner is-paid"><span><i data-lucide="badge-check"></i>Trabajo terminado y pagado</span><strong>Cerrado</strong></div>`
-        : "";
+    const receivable = projectReceivableValue(project);
     const footerStatus = isCompleted
-      ? (accountMode ? (openAccounts.length ? `${openAccounts.length} cuenta${openAccounts.length === 1 ? "" : "s"} pendiente${openAccounts.length === 1 ? "" : "s"}` : "Cuentas cerradas") : finance.pending > 0 ? "Cobro pendiente" : "Cuenta cerrada")
+      ? (receivable > 0 ? "Cobro pendiente" : "Cuenta cerrada")
       : relativeDate(project.deadline);
-    const moneyGrid = accountMode
-      ? `<div class="project-money-grid is-account-mode"><div><span>Cuentas</span><strong>${accounts.length}</strong></div><div><span>Con saldo</span><strong class="${openAccounts.length ? "is-pending" : ""}">${openAccounts.length}</strong></div><div><span>Movimientos</span><strong>${accountMovementCount}</strong></div></div>`
-      : `<div class="project-money-grid"><div><span>Recibido</span><strong>${escapeHtml(formatMoney(finance.paid))}</strong></div><div><span>Por cobrar</span><strong class="${finance.pending > 0 ? "is-pending" : ""}">${escapeHtml(displayPending(finance.pending))}</strong></div><div><span>Caja del proyecto</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>`;
     return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" data-status="${escapeHtml(project.status)}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
-      <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3><p class="location">${escapeHtml(project.location || "Ubicación por definir")}</p></div><span class="status-badge">${escapeHtml(statusLabel)}</span></div>
+      <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3>${project.location ? `<p class="location">${escapeHtml(project.location)}</p>` : ""}</div><span class="status-badge">${escapeHtml(statusLabel)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
-      ${firstIssue && firstIssue.code !== "collection" ? `<div class="project-alert-line" data-severity="${escapeHtml(firstIssue.severity)}"><i data-lucide="triangle-alert"></i><span>${escapeHtml(firstIssue.label)}</span></div>` : ""}
-      ${collectionBanner}
-      ${moneyGrid}
-      ${!accountMode && finance.nextPaymentAmount ? `<div class="project-next-payment"><span>Próximo cobro</span><strong>${escapeHtml(formatMoney(finance.nextPaymentAmount))}</strong><small>${isCompleted ? "Cobro pendiente del trabajo terminado" : "Pago registrado para la siguiente fase"}</small></div>` : ""}
-      <div class="progress-row"><span>Avance</span><b>${progress}%</b></div><div class="progress-track"><span style="width:${progress}%"></span></div>
-      <div class="project-card-foot"><span><i data-lucide="list-checks"></i>${!project.tasks.length ? "Checklist sin crear" : pending ? `${pending} frente${pending === 1 ? "" : "s"} pendiente${pending === 1 ? "" : "s"}` : "Checklist cerrado"}</span><span class="deadline ${deadlineClass}"><i data-lucide="${isCompleted ? "wallet-cards" : "clock-3"}"></i>${escapeHtml(footerStatus)}</span></div>
+      <div class="project-card-summary"><div><span>Por cobrar</span><strong class="${receivable > 0 ? "is-pending" : ""}">${escapeHtml(formatMoney(receivable))}</strong></div><div><span>Caja</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
+      <div class="project-card-foot"><span class="deadline ${deadlineClass}"><i data-lucide="${isCompleted ? "wallet-cards" : "clock-3"}"></i>${escapeHtml(footerStatus)}</span><span><b>${progress}%</b> de avance</span></div>
+      <div class="progress-track"><span style="width:${progress}%"></span></div>
     </article>`;
   }
 
@@ -941,8 +922,6 @@
     els.projectDocId.value = project.docId || "";
     els.projectStatus.value = state.draft.status;
     els.projectLocation.value = state.draft.location;
-    els.projectClient.value = state.draft.clientName;
-    els.projectClientPhone.value = state.draft.clientPhone;
     els.projectResponsible.value = state.draft.responsible;
     els.projectStart.value = state.draft.startDate;
     els.projectDeadline.value = state.draft.deadline;
@@ -1028,8 +1007,6 @@
     Object.assign(state.draft, {
       status: els.projectStatus.value,
       location: els.projectLocation.value.trim(),
-      clientName: els.projectClient.value.trim(),
-      clientPhone: els.projectClientPhone.value.trim(),
       responsible: els.projectResponsible.value.trim(),
       startDate: els.projectStart.value,
       deadline: els.projectDeadline.value,
@@ -2144,7 +2121,7 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectClient: byId("project-client"), projectClientPhone: byId("project-client-phone"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
       workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"), enableWorkAccounts: byId("enable-work-accounts"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
@@ -2166,7 +2143,7 @@
     refreshIcons();
 
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v21", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js?build=operations-v22", { updateViaCache: "none" }).then(updateNotificationButton).catch(() => {}));
     }
   }
 
