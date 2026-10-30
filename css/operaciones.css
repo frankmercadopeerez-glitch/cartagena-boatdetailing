@@ -1121,6 +1121,8 @@ label { font-size: 14px; }
 .filter-group::-webkit-scrollbar { display: none; }
 
 @media (max-width: 650px) {
+  .project-drawer { left: 0; width: 100%; transform: translate(0, -46%) scale(.98); }
+  .project-drawer.is-open { transform: translate(0, -50%) scale(1); }
   .mobile-tabs button { font-size: 10px; }
   .finance-actions .btn { font-size: 12px; }
   .finance-metric { min-height: 126px; }
