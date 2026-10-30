@@ -22,8 +22,13 @@ assert.equal(engine.urgencyFor({ deadline: "2026-10-16", tasks: [], reminders: [
 assert.equal(engine.urgencyFor({ status: "in_process", deadline: "", location: "", contractValue: 0, scope: "", tasks: [], reminders: [] }, "2026-10-14"), "attention");
 assert.deepEqual(
   engine.projectIssues({ status: "in_process", deadline: "", location: "", contractValue: 0, scope: "", tasks: [], reminders: [] }, "2026-10-14").map((issue) => issue.code),
-  ["missing_location", "missing_deadline", "missing_contract", "missing_scope", "missing_checklist"],
+  ["missing_deadline", "missing_contract", "missing_scope", "missing_checklist"],
 );
+assert.deepEqual(engine.projectDeadlineReminder({ status: "in_process", deadline: "2026-10-27" }), {
+  id: "project-deadline", type: "deadline", title: "Fecha límite del trabajo", dueDate: "2026-10-27", amount: 0, alertDays: 2, done: false,
+});
+assert.equal(engine.projectDeadlineReminder({ status: "completed", deadline: "2026-10-27" }), null);
+assert.equal(engine.projectIssues({ status: "completed", deadline: "2026-10-01", tasks: [], reminders: [] }, "2026-10-14").some((issue) => issue.code === "late_deadline"), false);
 assert.equal(
   engine.projectIssues({ status: "completed", deadline: "", location: "", contractValue: 1, scope: "Listo", tasks: [{ done: false }], reminders: [] }, "2026-10-14")[0].code,
   "completed_open_tasks",

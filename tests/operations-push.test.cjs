@@ -15,6 +15,7 @@ const collections = {
     doc("antigone", { uid: "frank", projectKey: "velero-antigone", projectName: "Velero Antigone", reminders: [
       { id: "nevera", type: "general", title: "Revisar nevera", dueDate: "2026-10-25", alertDays: 0, done: false },
       { id: "estufa", type: "general", title: "Revisar estufa", dueDate: "2026-10-25", alertDays: 0, done: false },
+      { id: "project-deadline", type: "deadline", title: "Fecha límite del trabajo", dueDate: "2026-10-27", alertDays: 2, done: false },
       { id: "terminado", type: "general", title: "No enviar", dueDate: "2026-10-25", alertDays: 0, done: true },
     ] }),
   ],
@@ -64,11 +65,12 @@ const response = {
 
 moduleUnderTest.exports({ headers: { authorization: "Bearer secret" } }, response).then(() => {
   assert.equal(response.statusCode, 200);
-  assert.equal(response.body.remindersSent, 2);
-  assert.equal(notifications.length, 2, "envía nevera y estufa aunque la PWA esté cerrada");
+  assert.equal(response.body.remindersSent, 3);
+  assert.equal(notifications.length, 3, "envía avisos y fecha límite aunque la PWA esté cerrada");
   assert.match(notifications.map((item) => item[1].body).join("\n"), /Revisar nevera/);
   assert.match(notifications.map((item) => item[1].body).join("\n"), /Revisar estufa/);
-  assert.equal(writes.length, 2, "deduplica cada recordatorio enviado");
+  assert.match(notifications.map((item) => item[1].title).join("\n"), /Fecha límite/);
+  assert.equal(writes.length, 3, "deduplica cada recordatorio enviado");
   assert.equal(deleted.length, 0);
   console.log("operations push scheduling: ok");
 });

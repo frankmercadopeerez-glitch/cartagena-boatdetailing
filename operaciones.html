@@ -16,12 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=16" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=17" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-    <script src="/js/operations-engine.js?v=6"></script>
+    <script src="/js/operations-engine.js?v=7"></script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -216,7 +216,7 @@
             <label>Ubicación<input id="project-location" placeholder="Marina o zona" /></label>
             <label>Responsable<input id="project-responsible" placeholder="Quién coordina el trabajo" /></label>
             <label>Fecha de inicio<input id="project-start" type="date" /></label>
-            <label>Fecha límite<input id="project-deadline" type="date" /></label>
+            <label>Fecha límite<input id="project-deadline" type="date" /><span class="field-help">Avisos 2 días antes, 1 día antes y el mismo día a las 8:00 a. m. Activa las alertas en tu teléfono para recibirlos.</span></label>
             <label>Garantía hasta<input id="project-warranty-until" type="date" /></label>
             <label class="global-finance-field">Valor contratado<input id="project-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
             <label class="global-finance-field">Próximo cobro<div class="field-with-action"><input id="project-next-payment" class="money-input" inputmode="numeric" placeholder="$ 0" /><button type="button" class="field-action" id="use-pending-payment">Usar saldo pendiente</button></div><small class="field-help">Puedes registrar el cobro aunque el trabajo ya esté completado.</small></label>
@@ -265,7 +265,7 @@
       <form method="dialog" id="new-project-form">
         <div class="modal-heading"><div><p class="eyebrow">NUEVO TRABAJO</p><h2>Registrar embarcación</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
         <label>Nombre de la embarcación<input id="new-name" required placeholder="Ej. Yate Oceana 74 Ft" /></label>
-        <div class="field-grid"><label>Ubicación<input id="new-location" placeholder="Marina o zona" /></label><label>Fecha límite<input id="new-deadline" type="date" /></label></div>
+        <label><span>Fecha límite <em class="required-mark">Obligatoria</em></span><input id="new-deadline" type="date" required /><span class="field-help">La app programa avisos 2 días antes, 1 día antes y el mismo día a las 8:00 a. m. Activa las alertas en tu teléfono para recibirlos.</span></label>
         <label>Valor contratado<input id="new-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
         <label>Alcance inicial<textarea id="new-scope" rows="4" placeholder="Servicio contratado y entregables"></textarea></label>
         <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default" id="create-project-button">Crear trabajo</button></div>
@@ -304,6 +304,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=22"></script>
+    <script src="/js/operaciones.js?v=23"></script>
   </body>
 </html>

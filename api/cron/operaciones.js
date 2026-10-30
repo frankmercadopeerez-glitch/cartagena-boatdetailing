@@ -27,7 +27,7 @@ function daysBetween(from, to) {
 }
 
 function reminderTypeLabel(type) {
-  return type === "purchase" ? "Compra" : type === "payment" ? "Pago" : "Aviso";
+  return type === "purchase" ? "Compra" : type === "payment" ? "Pago" : type === "deadline" ? "Fecha límite" : "Aviso";
 }
 
 function money(value) {

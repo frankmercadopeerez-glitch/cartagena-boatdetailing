@@ -4,7 +4,7 @@ const { getFirestore, requireOperationsUser } = require("../../_lib/firebase-adm
 function cleanReminder(reminder = {}) {
   return {
     id: String(reminder.id || "").slice(0, 160),
-    type: ["purchase", "payment", "general"].includes(reminder.type) ? reminder.type : "general",
+    type: ["purchase", "payment", "general", "deadline"].includes(reminder.type) ? reminder.type : "general",
     title: String(reminder.title || "").trim().slice(0, 240),
     dueDate: /^\d{4}-\d{2}-\d{2}$/.test(reminder.dueDate || "") ? reminder.dueDate : "",
     amount: Math.max(0, Number(reminder.amount) || 0),

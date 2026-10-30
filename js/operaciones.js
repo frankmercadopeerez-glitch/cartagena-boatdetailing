@@ -62,6 +62,7 @@
     financeLimit: 60,
     subscriptions: [],
     pushServerConfig: null,
+    lastPushDigest: "",
     toastTimer: null,
     showWorkAccountsSetup: false,
   };
@@ -290,8 +291,8 @@
     return value === null ? "Por definir" : formatMoney(value);
   }
 
-  function metricCard(label, value, detail, icon, alert = false) {
-    return `<article class="metric-card${alert ? " is-alert" : ""}"><div class="metric-top"><span>${escapeHtml(label)}</span><span class="metric-icon"><i data-lucide="${icon}"></i></span></div><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></article>`;
+  function metricCard(label, value, detail, icon, tone) {
+    return `<article class="metric-card" data-tone="${tone}"><div class="metric-top"><span>${escapeHtml(label)}</span><span class="metric-icon"><i data-lucide="${icon}"></i></span></div><strong>${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></article>`;
   }
 
   function renderMetrics() {
@@ -300,10 +301,10 @@
     const attention = active.filter((project) => projectIssues(project).length > 0).length;
     const receivable = state.projects.reduce((total, project) => total + projectReceivableValue(project), 0);
     els.metricsGrid.innerHTML = [
-      metricCard("Trabajos activos", active.length, `${openTasks({ tasks: active.flatMap((item) => item.tasks || []) }).length} tareas por completar`, "ship"),
-      metricCard("Por cobrar", formatMoney(receivable), "Saldo pendiente entre todos los trabajos", "circle-dollar-sign", receivable > 0),
-      metricCard("Requieren atención", attention, attention ? "Datos, bloqueos o fechas por resolver" : "La operación está al día", "triangle-alert", attention > 0),
-      metricCard("Completados", completed.length, completed.length ? "Siguen visibles para cobros y garantías" : "Aún no hay trabajos cerrados", "badge-check"),
+      metricCard("Trabajos activos", active.length, `${openTasks({ tasks: active.flatMap((item) => item.tasks || []) }).length} tareas por completar`, "ship", "work"),
+      metricCard("Por cobrar", formatMoney(receivable), "Saldo pendiente entre todos los trabajos", "circle-dollar-sign", "receivable"),
+      metricCard("Requieren atención", attention, attention ? "Datos, bloqueos o fechas por resolver" : "La operación está al día", "triangle-alert", attention > 0 ? "attention" : "complete"),
+      metricCard("Completados", completed.length, completed.length ? "Siguen visibles para cobros y garantías" : "Aún no hay trabajos cerrados", "badge-check", "complete"),
     ].join("");
   }
 
@@ -322,7 +323,7 @@
     return `<article class="project-card" data-project-key="${escapeHtml(getProjectKey(project))}" data-urgency="${urgency}" data-status="${escapeHtml(project.status)}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(project.name)}">
       <div class="project-card-head"><div><h3>${escapeHtml(project.name)}</h3>${project.location ? `<p class="location">${escapeHtml(project.location)}</p>` : ""}</div><span class="status-badge">${escapeHtml(statusLabel)}</span></div>
       <p class="project-scope">${escapeHtml(scope)}</p>
-      <div class="project-card-summary"><div><span>Por cobrar</span><strong class="${receivable > 0 ? "is-pending" : ""}">${escapeHtml(formatMoney(receivable))}</strong></div><div><span>Caja</span><strong>${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
+      <div class="project-card-summary"><div><span>Por cobrar</span><strong class="${receivable > 0 ? "is-pending" : ""}">${escapeHtml(formatMoney(receivable))}</strong></div><div><span>Caja</span><strong class="${finance.balance < 0 ? "is-negative" : "is-positive"}">${escapeHtml(formatMoney(finance.balance))}</strong></div></div>
       <div class="project-card-foot"><span class="deadline ${deadlineClass}"><i data-lucide="${isCompleted ? "wallet-cards" : "clock-3"}"></i>${escapeHtml(footerStatus)}</span><span><b>${progress}%</b> de avance</span></div>
       <div class="progress-track"><span style="width:${progress}%"></span></div>
     </article>`;
@@ -336,11 +337,11 @@
       const openAccounts = openWorkAccounts(state.draft);
       const movements = projectTransactions(state.draft).length;
       els.projectFinanceOverview.innerHTML = [
-        ["Cuentas por trabajo", accounts.length, "layers-3"],
-        ["Con saldo pendiente", openAccounts.length, "circle-dollar-sign"],
-        ["Movimientos registrados", movements, "receipt-text"],
-        ["Caja registrada", formatMoney(finance.balance), "wallet"],
-      ].map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+        ["Cuentas por trabajo", accounts.length, "layers-3", "work"],
+        ["Con saldo pendiente", openAccounts.length, "circle-dollar-sign", "receivable"],
+        ["Movimientos registrados", movements, "receipt-text", "neutral"],
+        ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income"],
+      ].map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
       if (els.usePendingPayment) {
         els.usePendingPayment.disabled = true;
         els.usePendingPayment.textContent = "Usa cada cuenta";
@@ -348,15 +349,15 @@
       return;
     }
     const items = [
-      ["Valor contratado", finance.contractValue ? formatMoney(finance.contractValue) : "Por definir", "file-text"],
-      ["Pagado", formatMoney(finance.paid), "check"],
-      ["Por cobrar", displayPending(finance.pending), "clock-3"],
-      ["Gastos registrados", formatMoney(finance.expenses), "receipt-text"],
-      ["Caja del proyecto", formatMoney(finance.balance), "wallet"],
-      ["50% sobre caja actual", formatMoney(finance.frankPotential), "chart-no-axes-combined"],
+      ["Valor contratado", finance.contractValue ? formatMoney(finance.contractValue) : "Por definir", "file-text", "work"],
+      ["Pagado", formatMoney(finance.paid), "check", "income"],
+      ["Por cobrar", displayPending(finance.pending), "clock-3", "receivable"],
+      ["Gastos registrados", formatMoney(finance.expenses), "receipt-text", "expense"],
+      ["Caja del proyecto", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income"],
+      ["50% sobre caja actual", formatMoney(finance.frankPotential), "chart-no-axes-combined", "neutral"],
     ];
-    if (finance.nextPaymentAmount) items.splice(3, 0, ["Próximo cobro", formatMoney(finance.nextPaymentAmount), "circle-dollar-sign"]);
-    els.projectFinanceOverview.innerHTML = items.map(([label, value, icon]) => `<article><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+    if (finance.nextPaymentAmount) items.splice(3, 0, ["Próximo cobro", formatMoney(finance.nextPaymentAmount), "circle-dollar-sign", "receivable"]);
+    els.projectFinanceOverview.innerHTML = items.map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
     if (els.usePendingPayment) {
       els.usePendingPayment.disabled = !(finance.pending > 0);
       els.usePendingPayment.textContent = finance.pending > 0 ? `Usar ${formatMoney(finance.pending)}` : "Sin saldo pendiente";
@@ -479,11 +480,12 @@
 
   function todayItem(item) {
     const meta = item.meta ? `<span>${escapeHtml(item.meta)}</span>` : "";
-    return `<button class="today-item" type="button" data-action="open-today-project" data-project-key="${escapeHtml(item.projectKey)}" data-issue-code="${escapeHtml(item.issueCode || "")}" data-severity="${escapeHtml(item.severity || "normal")}"><i data-lucide="${escapeHtml(item.icon || "circle")}"></i><span><strong>${escapeHtml(item.title)}</strong>${meta}</span><i data-lucide="chevron-right"></i></button>`;
+    const amount = Number(item.amount) > 0 ? `<small class="today-amount">Por cobrar ${escapeHtml(formatMoney(item.amount))}</small>` : "";
+    return `<button class="today-item" type="button" data-action="open-today-project" data-project-key="${escapeHtml(item.projectKey)}" data-issue-code="${escapeHtml(item.issueCode || "")}" data-severity="${escapeHtml(item.severity || "normal")}"><i data-lucide="${escapeHtml(item.icon || "circle")}"></i><span><strong>${escapeHtml(item.title)}</strong>${meta}${amount}</span><i data-lucide="chevron-right"></i></button>`;
   }
 
   function todayColumn(title, eyebrow, icon, items, emptyText) {
-    return `<section class="today-column"><div class="today-column-head"><span><i data-lucide="${icon}"></i></span><div><p>${escapeHtml(eyebrow)}</p><h3>${escapeHtml(title)}</h3></div></div><div class="today-list">${items.length ? items.map(todayItem).join("") : `<div class="today-empty"><i data-lucide="check"></i><span>${escapeHtml(emptyText)}</span></div>`}</div></section>`;
+    return `<section class="today-column" data-tone="${escapeHtml(eyebrow.toLowerCase())}"><div class="today-column-head"><span><i data-lucide="${icon}"></i></span><div><p>${escapeHtml(eyebrow)}</p><h3>${escapeHtml(title)}</h3></div></div><div class="today-list">${items.length ? items.map(todayItem).join("") : `<div class="today-empty"><i data-lucide="check"></i><span>${escapeHtml(emptyText)}</span></div>`}</div></section>`;
   }
 
   function renderTodayControl() {
@@ -507,8 +509,8 @@
         }));
       if (hasWorkAccounts(project)) {
         openWorkAccounts(project).forEach((account) => collections.push({
-          title: `Cobrar ${formatMoney(account.pendingAmount)}`,
-          meta: `${project.name} · ${account.title}`,
+          title: project.name,
+          meta: account.title,
           projectKey,
           severity: project.status === "completed" ? "critical" : "collection",
           icon: "circle-dollar-sign",
@@ -518,8 +520,8 @@
       } else {
         const finance = projectFinancialSummary(project);
         if (finance.pending > 0) collections.push({
-          title: `Cobrar ${formatMoney(finance.pending)}`,
-          meta: project.name,
+          title: project.name,
+          meta: "Saldo pendiente",
           projectKey,
           severity: project.status === "completed" ? "critical" : "collection",
           icon: "circle-dollar-sign",
@@ -532,6 +534,11 @@
         if (days === null || days > 7) return;
         schedule.push({ title: task.title, meta: `${project.name} · ${relativeDate(task.dueDate)}`, projectKey, severity: days < 0 ? "critical" : "normal", icon: "list-checks", dueDate: task.dueDate });
       });
+      const deadlineReminder = Engine.projectDeadlineReminder(project);
+      if (deadlineReminder) {
+        const days = Engine.daysUntil(deadlineReminder.dueDate);
+        if (days !== null && days >= 0 && days <= 7) schedule.push({ title: project.name, meta: `Fecha límite · ${relativeDate(deadlineReminder.dueDate)}`, projectKey, severity: days <= 1 ? "warning" : "normal", icon: "calendar-clock", dueDate: deadlineReminder.dueDate });
+      }
     });
     allReminders(false).forEach((reminder) => {
       const days = Engine.daysUntil(reminder.dueDate);
@@ -1076,6 +1083,11 @@
     }
     const name = byId("new-name").value.trim();
     if (!name) return;
+    const deadline = byId("new-deadline").value;
+    if (!deadline) {
+      byId("new-deadline").reportValidity();
+      return;
+    }
     const id = `custom-${Engine.slugify(name)}-${Date.now().toString(36)}`;
     const scope = byId("new-scope").value.trim();
     const tasks = scope.split(/\r?\n/).map((line) => line.trim()).filter(Boolean).map((title) => ({
@@ -1085,8 +1097,8 @@
       name,
       financeProjectName: "",
       status: "in_process",
-      location: byId("new-location").value.trim(),
-      deadline: byId("new-deadline").value,
+      location: "",
+      deadline,
       contractValue: parseMoneyInput(els.newContractValue.value),
       startDate: new Date().toISOString().slice(0, 10),
       scope,
@@ -1111,6 +1123,10 @@
       els.newProjectModal.close();
       els.newProjectForm.reset();
       toast("Trabajo creado");
+      syncPushSchedules([{ ...payload, docId: id }], false).catch((error) => {
+        console.warn("No se programaron los avisos del nuevo trabajo", error);
+        toast("Trabajo creado; no se pudieron programar los avisos. Reintenta desde Alertas.");
+      });
     } catch (error) {
       console.error("No se pudo crear el trabajo", error);
       toast("No se pudo crear el trabajo");
@@ -1732,10 +1748,11 @@
   }
 
   function pushProject(project) {
+    const deadlineReminder = Engine.projectDeadlineReminder(project);
     return {
       projectKey: getProjectKey(project),
       projectName: project.name,
-      reminders: (project.reminders || []).map((reminder) => ({
+      reminders: [...(project.reminders || []), ...(deadlineReminder ? [deadlineReminder] : [])].map((reminder) => ({
         id: reminder.id,
         type: reminder.type,
         title: reminder.title,
@@ -1748,7 +1765,7 @@
   }
 
   async function syncPushSchedules(projects = state.projects, replace = true) {
-    if (!state.user || !projects.length) return;
+    if (!state.user) return;
     const response = await authorizedFetch("/api/operaciones/notificaciones/sync", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1828,6 +1845,14 @@
   function maybeRevealApp() {
     if (!state.financeReady || !state.operationsReady) return;
     syncProjects();
+    const pushDigest = JSON.stringify(state.projects.map(pushProject));
+    if (pushDigest !== state.lastPushDigest) {
+      state.lastPushDigest = pushDigest;
+      syncPushSchedules(state.projects, true).catch((error) => {
+        state.lastPushDigest = "";
+        console.warn("No se actualizó la agenda de notificaciones", error);
+      });
+    }
     els.loadingScreen.classList.add("is-hidden");
     els.authScreen.classList.add("is-hidden");
     els.appShell.classList.remove("is-hidden");
@@ -2100,6 +2125,7 @@
   function handleAuth(user) {
     clearSubscriptions();
     state.user = user;
+    state.lastPushDigest = "";
     if (!user) {
       els.loadingScreen.classList.add("is-hidden");
       els.appShell.classList.add("is-hidden");

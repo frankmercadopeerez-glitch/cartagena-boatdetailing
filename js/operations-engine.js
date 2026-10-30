@@ -138,14 +138,13 @@
     const overdueTasks = tasks.filter((item) => !item.done && daysUntil(item.dueDate, now) < 0).length;
     const overdueReminders = reminders.filter((item) => !item.done && daysUntil(item.dueDate, now) < 0).length;
 
-    if (!completed && !String(project.location || "").trim()) push("missing_location", "warning", "Falta definir la ubicación");
     if (!completed && !project.deadline) push("missing_deadline", "warning", "Falta definir la fecha límite");
     if (!completed && !(Number(project.contractValue) > 0)) push("missing_contract", "warning", "Falta definir el valor contratado");
     if (!completed && !String(project.scope || "").trim()) push("missing_scope", "warning", "Falta definir el alcance");
     if (!completed && !tasks.length) push("missing_checklist", "warning", "Falta crear el checklist");
     if (!completed && tasks.length && tasks.every((item) => item.done)) push("ready_to_close", "action", "Checklist terminado: confirma el cierre");
     if (completed && tasks.some((item) => !item.done)) push("completed_open_tasks", "critical", "Está completado pero conserva tareas abiertas");
-    if (deadlineDays !== null && deadlineDays < 0) push("late_deadline", "critical", "La fecha límite está vencida");
+    if (!completed && deadlineDays !== null && deadlineDays < 0) push("late_deadline", "critical", "La fecha límite está vencida");
     if (overdueTasks) push("overdue_tasks", "critical", `${overdueTasks} tarea${overdueTasks === 1 ? "" : "s"} vencida${overdueTasks === 1 ? "" : "s"}`);
     if (overdueReminders) push("overdue_reminders", "critical", `${overdueReminders} alerta${overdueReminders === 1 ? "" : "s"} vencida${overdueReminders === 1 ? "" : "s"}`);
     return issues;
@@ -164,6 +163,21 @@
     if (deadlineDays !== null && deadlineDays <= 3) return "attention";
     if (projectIssues(project, now).length) return "attention";
     return "on-track";
+  }
+
+  function projectDeadlineReminder(project) {
+    if (!project || project.archived === true || project.status === "completed") return null;
+    const deadline = String(project.deadline || "");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return null;
+    return {
+      id: "project-deadline",
+      type: "deadline",
+      title: "Fecha límite del trabajo",
+      dueDate: deadline,
+      amount: 0,
+      alertDays: 2,
+      done: false,
+    };
   }
 
   function mergeProjects(financeProjects, operationDocuments) {
@@ -338,6 +352,7 @@
     mergeProjects,
     normalize,
     projectIssues,
+    projectDeadlineReminder,
     slugify,
     taskProgress,
     urgencyFor,
