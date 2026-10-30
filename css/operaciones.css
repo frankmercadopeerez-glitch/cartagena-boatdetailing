@@ -1079,7 +1079,7 @@ label { font-size: 14px; }
 .drawer-body { min-width: 0; min-height: 0; overflow-x: hidden; overscroll-behavior: contain; }
 .drawer-body > *, .project-account, .project-account-head, .project-account-head > div:first-child { min-width: 0; }
 .project-account-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
-.project-account-actions { min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.project-account-actions { min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 8px; }
 .project-account-actions .btn { width: 100%; min-width: 0; min-height: 44px; padding: 8px 10px; white-space: normal; line-height: 1.25; }
 .project-account-head p:last-child { overflow-wrap: anywhere; }
 .project-ledger-row { grid-template-columns: 80px minmax(0, 1fr) auto 100px 34px; }
@@ -1123,6 +1123,7 @@ label { font-size: 14px; }
 @media (max-width: 650px) {
   .project-drawer { left: 0; width: 100%; transform: translate(0, -46%) scale(.98); }
   .project-drawer.is-open { transform: translate(0, -50%) scale(1); }
+  .project-account-actions #enable-work-accounts[hidden] ~ [data-project-movement="ingreso"] { grid-column: 1 / -1; }
   .mobile-tabs button { font-size: 10px; }
   .finance-actions .btn { font-size: 12px; }
   .finance-metric { min-height: 126px; }
