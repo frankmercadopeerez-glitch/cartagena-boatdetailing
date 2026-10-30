@@ -562,9 +562,9 @@
     const dateControl = (days === null || days < 0) && !reminder.done
       ? `<button type="button" class="agenda-date agenda-date-button ${dateClass}" data-action="reschedule-reminder"><span>${escapeHtml(formatDate(reminder.dueDate))}</span><small>${days === null ? "Poner fecha" : "Reprogramar"}</small></button>`
       : `<span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span>`;
-    return `<article class="agenda-row${reminder.done ? " is-done" : ""}" data-project-key="${escapeHtml(reminder.projectKey)}" data-reminder-id="${escapeHtml(reminder.id)}">
+    return `<article class="agenda-row${reminder.done ? " is-done" : ""}" data-type="${escapeHtml(reminder.type)}" data-project-key="${escapeHtml(reminder.projectKey)}" data-reminder-id="${escapeHtml(reminder.id)}">
       ${isDeadline ? '<span class="check-button agenda-deadline-icon" aria-hidden="true"><i data-lucide="calendar-days"></i></span>' : `<button class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-agenda" aria-label="${reminder.done ? "Reabrir" : "Completar"} recordatorio"><i data-lucide="check"></i></button>`}
-      <div><h3>${escapeHtml(isDeadline ? `Fecha límite · ${reminder.projectName}` : reminder.title)}</h3><p>${escapeHtml(reminderTypeLabel(reminder.type))}</p></div>
+      <div><h3>${escapeHtml(isDeadline ? `Fecha límite · ${reminder.projectName}` : reminder.title)}</h3><p>${escapeHtml(reminderTypeLabel(reminder.type))}</p>${reminder.amount ? `<strong class="agenda-inline-amount">${escapeHtml(formatMoney(reminder.amount))}</strong>` : ""}</div>
       <div class="agenda-owner"><h3>${escapeHtml(reminder.projectName)}</h3><p>Trabajo asociado</p></div>
       ${dateControl}
       <span class="amount">${reminder.amount ? escapeHtml(formatMoney(reminder.amount)) : "—"}</span>
@@ -585,7 +585,7 @@
     els.agendaSummary.innerHTML = `<article class="agenda-stat"><span>Pendientes</span><strong>${pending.length}</strong></article><article class="agenda-stat"><span>Vencidos</span><strong>${overdue.length}</strong></article><article class="agenda-stat"><span>Compromisos registrados</span><strong>${escapeHtml(formatMoney(amount))}</strong></article>`;
     els.agendaTable.innerHTML = reminders.length
       ? reminders.map(agendaRow).join("")
-      : `<div class="empty-state"><i data-lucide="calendar-plus"></i><strong>La agenda está limpia</strong><span>Crea recordatorios desde cualquier trabajo para verlos aquí.</span></div>`;
+      : `<div class="empty-state"><i data-lucide="calendar-plus"></i><strong>La agenda está limpia</strong><span>Crea recordatorios o pagos pendientes desde cualquier trabajo para verlos aquí.</span></div>`;
     els.navAlertCount.textContent = pending.length;
   }
 
@@ -990,7 +990,7 @@
     const reminders = state.draft.reminders || [];
     const progress = projectProgress(state.draft);
     els.taskList.innerHTML = tasks.length ? tasks.map(taskItem).join("") : `<div class="empty-state"><strong>Sin tareas todavía</strong><span>Divide el alcance en etapas claras para medir el avance.</span></div>`;
-    els.reminderList.innerHTML = reminders.length ? reminders.map(reminderItem).join("") : `<div class="empty-state"><strong>Sin alertas todavía</strong><span>Registra aquí compras, pagos o decisiones con fecha.</span></div>`;
+    els.reminderList.innerHTML = reminders.length ? reminders.map(reminderItem).join("") : `<div class="empty-state"><strong>Sin compromisos todavía</strong><span>Registra aquí compras, pagos o avisos. Puedes añadir la fecha después.</span></div>`;
     els.drawerProgress.textContent = `${progress}%`;
     els.drawerProgressBar.style.width = `${progress}%`;
     els.saveStatus.textContent = "Cambios pendientes de guardar";
