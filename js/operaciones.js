@@ -1183,9 +1183,17 @@
       ? Engine.projectDeadlineReminder(project)
       : (project.reminders || []).find((item) => item.id === reminderId));
     if (!project || !reminder) return toast("No encontré ese recordatorio");
+    const isDeadline = reminderId === "project-deadline";
+    const needsDate = !reminder.dueDate;
     els.rescheduleProjectKey.value = projectKey;
     els.rescheduleReminderId.value = reminderId;
-    els.rescheduleTitle.textContent = reminder.title;
+    els.rescheduleTitle.textContent = isDeadline ? `${reminder.title} · ${project.name}` : reminder.title;
+    els.rescheduleModal.querySelector(".modal-heading .eyebrow").textContent = isDeadline ? "REPROGRAMAR FECHA LÍMITE" : needsDate ? "PONER FECHA" : "REPROGRAMAR AVISO";
+    els.rescheduleModal.querySelector(".reschedule-copy").textContent = isDeadline
+      ? "Se actualizará la fecha límite del trabajo y sus avisos programados."
+      : needsDate
+      ? "El pago seguirá pendiente hasta que lo marques como completado. Con alertas activas, recibirás avisos antes de la fecha elegida."
+      : "El compromiso seguirá pendiente y sus avisos pasarán a la nueva fecha.";
     els.rescheduleDate.value = dateFromToday(1);
     els.rescheduleModal.showModal();
     refreshIcons();
