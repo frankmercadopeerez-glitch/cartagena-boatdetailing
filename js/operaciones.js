@@ -141,11 +141,11 @@
   }
 
   function reminderTypeLabel(type) {
-    return type === "purchase" ? "Compra" : type === "payment" ? "Pago" : "Aviso";
+    return type === "purchase" ? "Compra" : type === "payment" ? "Pago" : type === "deadline" ? "Fecha límite" : "Aviso";
   }
 
   function reminderIcon(type) {
-    return type === "purchase" ? "shopping-bag" : type === "payment" ? "credit-card" : "bell-ring";
+    return type === "purchase" ? "shopping-bag" : type === "payment" ? "credit-card" : type === "deadline" ? "calendar-clock" : "bell-ring";
   }
 
   function defaultProject(project) {
@@ -191,14 +191,15 @@
 
   function allReminders(includeDone = true) {
     return state.projects
-      .flatMap((project) =>
-        (project.reminders || []).map((reminder) => ({
+      .flatMap((project) => {
+        const deadlineReminder = Engine.projectDeadlineReminder(project);
+        return [...(project.reminders || []), ...(deadlineReminder ? [deadlineReminder] : [])].map((reminder) => ({
           ...reminder,
           projectName: project.name,
           projectKey: getProjectKey(project),
           project,
-        })),
-      )
+        }));
+      })
       .filter((reminder) => includeDone || !reminder.done)
       .sort((a, b) => String(a.dueDate || "9999").localeCompare(String(b.dueDate || "9999")));
   }
@@ -315,7 +316,7 @@
     const scope = String(project.scope || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean)[0] || "Sin resumen operativo";
     const finance = projectFinancialSummary(project);
     const deadlineClass = urgency === "late" ? "is-late" : urgency === "attention" ? "is-attention" : "";
-    const statusLabel = isCompleted ? "Completado" : project.status === "paused" ? "Pausado" : urgencyLabel(urgency);
+    const statusLabel = isCompleted ? "Completado" : project.status === "paused" ? "Pausado" : !project.deadline ? "Falta fecha" : urgencyLabel(urgency);
     const receivable = projectReceivableValue(project);
     const footerStatus = isCompleted
       ? (receivable > 0 ? "Cobro pendiente" : "Cuenta cerrada")
@@ -468,14 +469,15 @@
     const days = Engine.daysUntil(reminder.dueDate);
     const dateClass = days !== null && days < 0 ? "is-late" : "";
     const amount = reminder.amount ? ` · ${formatMoney(reminder.amount)}` : "";
-    return `<article class="agenda-item"><span class="agenda-symbol" data-type="${escapeHtml(reminder.type)}"><i data-lucide="${reminderIcon(reminder.type)}"></i></span><div><h3>${escapeHtml(reminder.title)}</h3><p>${escapeHtml(reminder.projectName)}${escapeHtml(amount)}</p></div><span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span></article>`;
+    const isDeadline = reminder.type === "deadline";
+    return `<article class="agenda-item"><span class="agenda-symbol" data-type="${escapeHtml(reminder.type)}"><i data-lucide="${reminderIcon(reminder.type)}"></i></span><div><h3>${escapeHtml(isDeadline ? reminder.projectName : reminder.title)}</h3><p>${escapeHtml(isDeadline ? "Fecha límite del trabajo" : reminder.projectName)}${escapeHtml(amount)}</p></div><span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span></article>`;
   }
 
   function renderDashboardAgenda() {
     const reminders = allReminders(false).slice(0, 6);
     els.dashboardAgenda.innerHTML = reminders.length
       ? reminders.map(agendaItem).join("")
-      : `<div class="empty-state"><i data-lucide="bell-ring"></i><strong>Sin alertas pendientes</strong><span>Agrega compras, pagos o avisos desde la ficha de cada trabajo.</span></div>`;
+      : `<div class="empty-state"><i data-lucide="bell-ring"></i><strong>Sin fechas próximas</strong><span>Las fechas límite y los recordatorios aparecerán aquí.</span></div>`;
   }
 
   function todayItem(item) {
@@ -534,16 +536,12 @@
         if (days === null || days > 7) return;
         schedule.push({ title: task.title, meta: `${project.name} · ${relativeDate(task.dueDate)}`, projectKey, severity: days < 0 ? "critical" : "normal", icon: "list-checks", dueDate: task.dueDate });
       });
-      const deadlineReminder = Engine.projectDeadlineReminder(project);
-      if (deadlineReminder) {
-        const days = Engine.daysUntil(deadlineReminder.dueDate);
-        if (days !== null && days >= 0 && days <= 7) schedule.push({ title: project.name, meta: `Fecha límite · ${relativeDate(deadlineReminder.dueDate)}`, projectKey, severity: days <= 1 ? "warning" : "normal", icon: "calendar-clock", dueDate: deadlineReminder.dueDate });
-      }
     });
     allReminders(false).forEach((reminder) => {
       const days = Engine.daysUntil(reminder.dueDate);
       if (days === null || days > 7) return;
-      schedule.push({ title: reminder.title, meta: `${reminder.projectName} · ${relativeDate(reminder.dueDate)}`, projectKey: reminder.projectKey, severity: days < 0 ? "critical" : "normal", icon: reminderIcon(reminder.type), dueDate: reminder.dueDate });
+      const isDeadline = reminder.type === "deadline";
+      schedule.push({ title: isDeadline ? reminder.projectName : reminder.title, meta: `${isDeadline ? "Fecha límite" : reminder.projectName} · ${relativeDate(reminder.dueDate)}`, projectKey: reminder.projectKey, severity: days < 0 ? "critical" : isDeadline && days <= 1 ? "warning" : "normal", icon: reminderIcon(reminder.type), dueDate: reminder.dueDate });
     });
 
     const urgentItems = urgent.slice(0, 5);
@@ -559,13 +557,14 @@
 
   function agendaRow(reminder) {
     const days = Engine.daysUntil(reminder.dueDate);
+    const isDeadline = reminder.type === "deadline";
     const dateClass = days !== null && days < 0 ? "is-late" : "";
     const dateControl = days !== null && days < 0 && !reminder.done
       ? `<button type="button" class="agenda-date agenda-date-button ${dateClass}" data-action="reschedule-reminder"><span>${escapeHtml(formatDate(reminder.dueDate))}</span><small>Reprogramar</small></button>`
       : `<span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span>`;
     return `<article class="agenda-row${reminder.done ? " is-done" : ""}" data-project-key="${escapeHtml(reminder.projectKey)}" data-reminder-id="${escapeHtml(reminder.id)}">
-      <button class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-agenda" aria-label="${reminder.done ? "Reabrir" : "Completar"} recordatorio"><i data-lucide="check"></i></button>
-      <div><h3>${escapeHtml(reminder.title)}</h3><p>${escapeHtml(reminderTypeLabel(reminder.type))}</p></div>
+      ${isDeadline ? '<span class="check-button agenda-deadline-icon" aria-hidden="true"><i data-lucide="calendar-days"></i></span>' : `<button class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-agenda" aria-label="${reminder.done ? "Reabrir" : "Completar"} recordatorio"><i data-lucide="check"></i></button>`}
+      <div><h3>${escapeHtml(isDeadline ? `Fecha límite · ${reminder.projectName}` : reminder.title)}</h3><p>${escapeHtml(reminderTypeLabel(reminder.type))}</p></div>
       <div class="agenda-owner"><h3>${escapeHtml(reminder.projectName)}</h3><p>Trabajo asociado</p></div>
       ${dateControl}
       <span class="amount">${reminder.amount ? escapeHtml(formatMoney(reminder.amount)) : "—"}</span>
@@ -664,7 +663,7 @@
       financeMetric("Disponible en mi cuenta", totals.available, "Saldo disponible de Frank", "wallet", "is-primary"),
       financeMetric("Ingresos totales", totals.income, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-up", "is-income"),
       financeMetric("Gastos totales", totals.expenses, "Mismo total base de CBD Finanzas, ajustado aquí", "trending-down", "is-expense"),
-      financeMetric("Profit de Frank (50%)", totals.frankProfit, "Tu mitad del profit realizado; los retiros no son gasto", "chart-no-axes-combined"),
+      financeMetric("Profit de Frank (50%)", totals.frankProfit, "Tu mitad del profit realizado; los retiros no son gasto", "chart-no-axes-combined", "is-profit"),
     ].join("");
     const cutoff = state.financeMeta && state.financeMeta.sourceCutoff;
     els.financeCutoff.textContent = cutoff
@@ -1179,7 +1178,9 @@
 
   function openRescheduleModal(projectKey, reminderId) {
     const project = findProject(projectKey) || (state.draft && getProjectKey(state.draft) === projectKey ? state.draft : null);
-    const reminder = project && (project.reminders || []).find((item) => item.id === reminderId);
+    const reminder = project && (reminderId === "project-deadline"
+      ? Engine.projectDeadlineReminder(project)
+      : (project.reminders || []).find((item) => item.id === reminderId));
     if (!project || !reminder) return toast("No encontré ese recordatorio");
     els.rescheduleProjectKey.value = projectKey;
     els.rescheduleReminderId.value = reminderId;
@@ -1196,6 +1197,7 @@
     const dueDate = els.rescheduleDate.value;
     const project = findProject(projectKey);
     if (!project || !dueDate) return;
+    const isDeadline = reminderId === "project-deadline";
     const reminders = (project.reminders || []).map((item) => item.id === reminderId
       ? { ...item, dueDate, done: false, rescheduledAt: new Date().toISOString() }
       : item);
@@ -1204,16 +1206,21 @@
     submit.disabled = true;
     try {
       await state.db.collection("operaciones_proyectos").doc(docId).set({
-        reminders,
+        ...(isDeadline ? { deadline: dueDate } : { reminders }),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedBy: state.user.email || state.user.uid,
       }, { merge: true });
       if (state.draft && getProjectKey(state.draft) === projectKey) {
-        state.draft.reminders = reminders.map((item) => ({ ...item }));
-        renderDraftLists();
+        if (isDeadline) {
+          state.draft.deadline = dueDate;
+          els.projectDeadline.value = dueDate;
+        } else {
+          state.draft.reminders = reminders.map((item) => ({ ...item }));
+          renderDraftLists();
+        }
       }
       els.rescheduleModal.close();
-      toast(`Recordatorio reprogramado para ${formatDate(dueDate)}`);
+      toast(`${isDeadline ? "Fecha límite" : "Recordatorio"} reprogramado para ${formatDate(dueDate)}`);
     } catch (error) {
       console.error("No se pudo reprogramar el recordatorio", error);
       toast("No se pudo guardar la nueva fecha");

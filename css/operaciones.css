@@ -358,6 +358,8 @@ input:hover, textarea:hover, select:hover, input:focus, textarea:focus, select:f
 .finance-metric small { color: var(--muted-2); font-size: 10px; }
 .finance-metric.is-income strong { color: var(--green); }
 .finance-metric.is-expense strong { color: var(--red); }
+.finance-metric.is-primary strong { color: #91cbff; }
+.finance-metric.is-profit strong { color: #ffc278; }
 .finance-heading { gap: 12px; }
 .snapshot-badge { display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid rgba(57,216,155,.25); border-radius: 8px; color: var(--green); font-size: 9px; font-weight: 800; text-transform: uppercase; }
 .snapshot-badge svg { width: 13px; }
@@ -1170,6 +1172,11 @@ label { font-size: 14px; }
 .today-item[data-severity="warning"] { border-color: rgba(255, 194, 120, .25); }
 .today-item[data-severity="collection"] { border-color: rgba(96, 228, 174, .24); }
 .required-mark { margin-left: 5px; color: #ffc278; font-size: 12px; font-style: normal; font-weight: 800; }
+.agenda-stat:nth-child(1) strong { color: #91cbff; }
+.agenda-stat:nth-child(2) strong { color: #ff8c98; }
+.agenda-stat:nth-child(3) strong { color: #ffc278; }
+.agenda-deadline-icon { border-color: rgba(255, 194, 120, .5); background: rgba(255, 194, 120, .09); color: #ffc278; cursor: default; }
+.agenda-row h3 { line-height: 1.35; overflow-wrap: anywhere; }
 
 @media (max-width: 1700px) and (min-width: 761px) {
   .today-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
