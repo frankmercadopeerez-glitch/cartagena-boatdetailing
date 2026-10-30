@@ -1177,6 +1177,7 @@ label { font-size: 14px; }
 .agenda-stat:nth-child(3) strong { color: #ffc278; }
 .agenda-deadline-icon { border-color: rgba(255, 194, 120, .5); background: rgba(255, 194, 120, .09); color: #ffc278; cursor: default; }
 .agenda-row h3 { line-height: 1.35; overflow-wrap: anywhere; }
+.reminder-help { grid-column: 1 / -1; color: #aeb8c4; font-size: 11px; line-height: 1.45; }
 
 @media (max-width: 1700px) and (min-width: 761px) {
   .today-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

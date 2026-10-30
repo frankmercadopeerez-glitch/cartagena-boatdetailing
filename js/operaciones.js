@@ -559,8 +559,8 @@
     const days = Engine.daysUntil(reminder.dueDate);
     const isDeadline = reminder.type === "deadline";
     const dateClass = days !== null && days < 0 ? "is-late" : "";
-    const dateControl = days !== null && days < 0 && !reminder.done
-      ? `<button type="button" class="agenda-date agenda-date-button ${dateClass}" data-action="reschedule-reminder"><span>${escapeHtml(formatDate(reminder.dueDate))}</span><small>Reprogramar</small></button>`
+    const dateControl = (days === null || days < 0) && !reminder.done
+      ? `<button type="button" class="agenda-date agenda-date-button ${dateClass}" data-action="reschedule-reminder"><span>${escapeHtml(formatDate(reminder.dueDate))}</span><small>${days === null ? "Poner fecha" : "Reprogramar"}</small></button>`
       : `<span class="agenda-date ${dateClass}">${escapeHtml(formatDate(reminder.dueDate))}</span>`;
     return `<article class="agenda-row${reminder.done ? " is-done" : ""}" data-project-key="${escapeHtml(reminder.projectKey)}" data-reminder-id="${escapeHtml(reminder.id)}">
       ${isDeadline ? '<span class="check-button agenda-deadline-icon" aria-hidden="true"><i data-lucide="calendar-days"></i></span>' : `<button class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-agenda" aria-label="${reminder.done ? "Reabrir" : "Completar"} recordatorio"><i data-lucide="check"></i></button>`}
@@ -962,9 +962,10 @@
   }
 
   function reminderItem(reminder) {
-    const meta = `${formatDate(reminder.dueDate)}${reminder.amount ? ` · ${formatMoney(reminder.amount)}` : ""} · aviso ${Number(reminder.alertDays) || 0} día(s) antes`;
-    const isOverdue = !reminder.done && Engine.daysUntil(reminder.dueDate) < 0;
-    const reschedule = isOverdue ? `<button type="button" class="mini-action" data-action="reschedule-reminder"><i data-lucide="calendar-clock"></i>Reprogramar</button>` : "";
+    const meta = `${formatDate(reminder.dueDate)}${reminder.amount ? ` · ${formatMoney(reminder.amount)}` : ""} · ${reminder.dueDate ? `aviso ${Number(reminder.alertDays) || 0} día(s) antes` : "sin aviso programado"}`;
+    const days = Engine.daysUntil(reminder.dueDate);
+    const needsDate = !reminder.done && (days === null || days < 0);
+    const reschedule = needsDate ? `<button type="button" class="mini-action" data-action="reschedule-reminder"><i data-lucide="calendar-clock"></i>${days === null ? "Poner fecha" : "Reprogramar"}</button>` : "";
     return `<article class="editable-item${reminder.done ? " is-done" : ""}" data-reminder-id="${escapeHtml(reminder.id)}"><button type="button" class="check-button${reminder.done ? " is-done" : ""}" data-action="toggle-reminder" aria-label="${reminder.done ? "Reabrir" : "Completar"} alerta"><i data-lucide="check"></i></button><div><p class="item-title">${escapeHtml(reminder.title)}</p><p class="item-meta">${escapeHtml(meta)}</p></div><span class="mini-badge" data-type="${escapeHtml(reminder.type)}">${reminderTypeLabel(reminder.type)}</span>${reschedule}<button type="button" class="delete-button" data-action="delete-reminder" aria-label="Eliminar alerta"><i data-lucide="trash-2"></i></button></article>`;
   }
 
@@ -1609,7 +1610,7 @@
     els.reminderForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const title = els.reminderTitle.value.trim();
-      if (!title || !els.reminderDate.value || !state.draft) return;
+      if (!title || !state.draft) return;
       state.draft.reminders.push({
         id: uuid("reminder"),
         type: els.reminderType.value,

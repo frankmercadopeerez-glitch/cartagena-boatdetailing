@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=18" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=19" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -239,10 +239,11 @@
           <form class="reminder-form" id="reminder-form">
             <select id="reminder-type" aria-label="Tipo"><option value="purchase">Compra</option><option value="payment">Pago</option><option value="general">Aviso</option></select>
             <input id="reminder-title" placeholder="Qué hay que resolver" required />
-            <input id="reminder-date" type="date" required aria-label="Fecha del recordatorio" />
+            <input id="reminder-date" type="date" aria-label="Fecha del compromiso; opcional" />
             <input id="reminder-amount" type="number" min="0" step="1000" placeholder="Valor COP" aria-label="Valor" />
             <select id="reminder-alert-days" aria-label="Avisar con anticipación"><option value="0">El mismo día</option><option value="1">1 día antes</option><option value="3" selected>3 días antes</option><option value="7">7 días antes</option></select>
             <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar alerta</button>
+            <small class="reminder-help">Si todavía no sabes la fecha, deja el campo vacío. El pago quedará pendiente y podrás poner la fecha después.</small>
           </form>
         </section>
 
@@ -304,6 +305,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=24"></script>
+    <script src="/js/operaciones.js?v=25"></script>
   </body>
 </html>
