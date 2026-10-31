@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=23" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=24" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -189,6 +189,7 @@
           <div class="work-accounts-head">
             <div><p class="eyebrow">DINERO POR SERVICIO</p><h3>Frentes y trabajos por aparte</h3><p>Consulta cada frente del trabajo principal. Marca por aparte solo los trabajos que se cobrarán como cuenta independiente.</p></div>
           </div>
+          <label class="work-account-scenario">Próximo cobro a calcular<input id="work-account-scenario" class="money-input" inputmode="numeric" placeholder="$ 0" /><small>Calcula cuánto quedaría de ese cobro tras los costos pendientes del trabajo principal, sin sumar la caja actual.</small></label>
           <div class="work-account-list" id="work-account-list"></div>
           <form class="work-account-add" id="work-account-form">
             <input id="work-account-title" placeholder="Nombre del servicio" required />
@@ -304,6 +305,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=32"></script>
+    <script src="/js/operaciones.js?v=33"></script>
   </body>
 </html>

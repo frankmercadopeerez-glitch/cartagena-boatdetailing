@@ -345,6 +345,10 @@
       const expectedIncome = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.expectedIncome) || 0), 0);
       const estimatedProfit = finance.paid + pendingReceipts + expectedIncome - finance.expenses - pendingToWilington - otherEstimatedCosts;
       const hasForecast = pendingToWilington > 0 || otherEstimatedCosts > 0 || expectedIncome > 0;
+      const nextCollection = Math.max(0, Number(state.draft.nextPaymentAmount) || 0);
+      const mainCostsPending = accounts.filter((account) => !account.separateWork).reduce((sum, account) =>
+        sum + Math.max(0, Number(account.payableWilington) || 0) + Math.max(0, Number(account.otherEstimatedCost) || 0), 0);
+      const nextCollectionProfit = nextCollection - mainCostsPending;
       els.projectFinanceOverview.innerHTML = [
         ["Por cobrar", formatMoney(pendingReceipts), "circle-dollar-sign", "receivable"],
         ...(expectedIncome > 0 ? [["Cobros previstos", formatMoney(expectedIncome), "calendar-clock", "work"]] : []),
@@ -353,9 +357,10 @@
           ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense"],
           ["Profit estimado", formatMoney(estimatedProfit), "chart-no-axes-combined", estimatedProfit < 0 ? "expense" : "income"],
         ] : []),
+        ...(hasForecast && nextCollection > 0 ? [["Queda del próximo cobro", formatMoney(nextCollectionProfit), "calculator", nextCollectionProfit < 0 ? "expense" : "income", `De ${formatMoney(nextCollection)}; sin caja actual ni trabajos por aparte`]] : []),
         ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income"],
         ["Movimientos · cuentas", `${movements} · ${accounts.length}`, "layers-3", "neutral"],
-      ].map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("")
+      ].map(([label, value, icon, tone, detail]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong>${detail ? `<small>${escapeHtml(detail)}</small>` : ""}</article>`).join("")
         + (hasForecast ? `<p class="forecast-explain">Profit estimado = ingresos recibidos + cobros pendientes y previstos − gastos registrados − pagos y costos previstos. No es dinero disponible en cuenta.</p>` : "");
       if (els.usePendingPayment) {
         els.usePendingPayment.disabled = true;
@@ -939,6 +944,7 @@
     els.projectWarrantyUntil.value = state.draft.warrantyUntil;
     els.projectContractValue.value = formatMoneyInput(state.draft.contractValue);
     els.projectNextPayment.value = formatMoneyInput(state.draft.nextPaymentAmount);
+    els.workAccountScenario.value = formatMoneyInput(state.draft.nextPaymentAmount);
     els.projectScope.value = state.draft.scope;
     els.projectBlocker.value = state.draft.blocker;
     els.projectNotes.value = state.draft.notes;
@@ -1721,6 +1727,15 @@
       renderProjectFinanceOverview();
       refreshIcons();
     });
+    els.workAccountScenario.addEventListener("input", () => {
+      if (!state.draft) return;
+      keepMoneyFormatted(els.workAccountScenario);
+      state.draft.nextPaymentAmount = parseMoneyInput(els.workAccountScenario.value);
+      els.projectNextPayment.value = formatMoneyInput(state.draft.nextPaymentAmount);
+      els.saveStatus.textContent = "Cambios pendientes de guardar";
+      renderProjectFinanceOverview();
+      refreshIcons();
+    });
     els.projectStatus.addEventListener("change", () => {
       if (!state.draft) return;
       state.draft.status = els.projectStatus.value;
@@ -2169,7 +2184,7 @@
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
       metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
-      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
+      drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), workAccountScenario: byId("work-account-scenario"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
       workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"), enableWorkAccounts: byId("enable-work-accounts"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
