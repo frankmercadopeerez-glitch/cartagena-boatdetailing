@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=23" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=24" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -185,6 +185,10 @@
       </div>
       <div class="drawer-body">
         <section class="project-finance-overview" id="project-finance-overview" aria-label="Resumen financiero del proyecto"></section>
+        <section class="project-finance-detail" id="project-finance-detail" aria-label="Desglose de la cifra seleccionada" hidden>
+          <div class="project-finance-detail-head"><div><p class="eyebrow">DETALLE DE LA CIFRA</p><h3 id="project-finance-detail-title">Desglose</h3><p id="project-finance-detail-help"></p></div><button type="button" class="icon-button" id="close-finance-detail" aria-label="Cerrar desglose"><i data-lucide="x"></i></button></div>
+          <div class="project-finance-detail-list" id="project-finance-detail-list"></div>
+        </section>
         <section class="work-accounts" id="work-accounts" aria-label="Ingresos y gastos separados por servicio" hidden>
           <div class="work-accounts-head">
             <div><p class="eyebrow">DINERO POR SERVICIO</p><h3>Frentes y trabajos por aparte</h3><p>Consulta cada frente del trabajo principal. Marca por aparte solo los trabajos que se cobrarán como cuenta independiente.</p></div>
@@ -304,6 +308,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=32"></script>
+    <script src="/js/operaciones.js?v=33"></script>
   </body>
 </html>
