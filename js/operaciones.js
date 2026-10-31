@@ -174,8 +174,10 @@
         title: String(item.title || "Cuenta sin nombre"),
         status: WORK_ACCOUNT_STATUSES.includes(item.status) ? item.status : "in_process",
         pendingAmount: Math.max(0, Number(item.pendingAmount) || 0),
+        expectedIncome: Math.max(0, Number(item.expectedIncome) || 0),
         payableWilington: Math.max(0, Number(item.payableWilington) || 0),
         otherEstimatedCost: Math.max(0, Number(item.otherEstimatedCost) || 0),
+        separateWork: Boolean(item.separateWork),
         notes: String(item.notes || ""),
       })) : [],
       reminders: Array.isArray(project.reminders) ? project.reminders.map((item) => ({ ...item })) : [],
@@ -245,6 +247,7 @@
       expenses,
       balance: income - expenses,
       pending: Math.max(0, Number(account && account.pendingAmount) || 0),
+      expectedIncome: Math.max(0, Number(account && account.expectedIncome) || 0),
       payableWilington: Math.max(0, Number(account && account.payableWilington) || 0),
       otherEstimatedCost: Math.max(0, Number(account && account.otherEstimatedCost) || 0),
       count: transactions.length,
@@ -343,15 +346,18 @@
       const pendingToWilington = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.payableWilington) || 0), 0);
       const otherEstimatedCosts = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.otherEstimatedCost) || 0), 0);
       const pendingReceipts = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.pendingAmount) || 0), 0);
-      const estimatedProfit = finance.paid + pendingReceipts - finance.expenses - pendingToWilington - otherEstimatedCosts;
+      const expectedIncome = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.expectedIncome) || 0), 0);
+      const estimatedProfit = finance.paid + pendingReceipts + expectedIncome - finance.expenses - pendingToWilington - otherEstimatedCosts;
       els.projectFinanceOverview.innerHTML = [
         ["Por cobrar", formatMoney(pendingReceipts), "circle-dollar-sign", "receivable"],
+        ["Cobros previstos", formatMoney(expectedIncome), "calendar-clock", "work"],
         ["Debo a Wilington", formatMoney(pendingToWilington), "credit-card", "expense"],
         ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense"],
         ["Profit estimado", formatMoney(estimatedProfit), "chart-no-axes-combined", estimatedProfit < 0 ? "expense" : "income"],
         ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income"],
         ["Movimientos · cuentas", `${movements} · ${accounts.length}`, "layers-3", "neutral"],
-      ].map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("");
+      ].map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("")
+        + `<p class="forecast-explain">Profit estimado = ingresos recibidos + cobros pendientes y previstos − gastos registrados − pagos y costos previstos. No es dinero disponible en cuenta.</p>`;
       if (els.usePendingPayment) {
         els.usePendingPayment.disabled = true;
         els.usePendingPayment.textContent = "Usa cada cuenta";
@@ -391,16 +397,19 @@
           <div><span>Ingresos</span><strong>${escapeHtml(formatMoney(summary.income))}</strong></div>
           <div><span>Gastos</span><strong>${escapeHtml(formatMoney(summary.expenses))}</strong></div>
           <div><span>Caja</span><strong>${escapeHtml(formatMoney(summary.balance))}</strong></div>
+          <div><span>Cobro previsto</span><strong>${escapeHtml(formatMoney(summary.expectedIncome))}</strong></div>
           <div><span>Debo a Wilington</span><strong class="is-expense">${escapeHtml(formatMoney(summary.payableWilington))}</strong></div>
           <div><span>Otros costos previstos</span><strong class="is-expense">${escapeHtml(formatMoney(summary.otherEstimatedCost))}</strong></div>
-          <div><span>Profit estimado</span><strong class="${summary.income + summary.pending - summary.expenses - summary.payableWilington - summary.otherEstimatedCost < 0 ? "is-expense" : "is-income"}">${escapeHtml(formatMoney(summary.income + summary.pending - summary.expenses - summary.payableWilington - summary.otherEstimatedCost))}</strong></div>
+          <div><span>Profit estimado</span><strong class="${summary.income + summary.pending + summary.expectedIncome - summary.expenses - summary.payableWilington - summary.otherEstimatedCost < 0 ? "is-expense" : "is-income"}">${escapeHtml(formatMoney(summary.income + summary.pending + summary.expectedIncome - summary.expenses - summary.payableWilington - summary.otherEstimatedCost))}</strong></div>
         </div>
         <div class="work-account-edit-grid">
           <label>Nombre<input data-account-field="title" value="${escapeHtml(account.title)}" /></label>
           <label>Estado<select data-account-field="status">${statusOptions}</select></label>
           <label>Saldo pendiente<input class="money-input" inputmode="numeric" data-account-field="pendingAmount" value="${escapeHtml(formatMoneyInput(account.pendingAmount))}" /></label>
+          <label>Cobro previsto<input class="money-input" inputmode="numeric" data-account-field="expectedIncome" value="${escapeHtml(formatMoneyInput(account.expectedIncome))}" /></label>
           <label>Debo a Wilington<input class="money-input" inputmode="numeric" data-account-field="payableWilington" value="${escapeHtml(formatMoneyInput(account.payableWilington))}" /></label>
           <label>Otros costos previstos<input class="money-input" inputmode="numeric" data-account-field="otherEstimatedCost" value="${escapeHtml(formatMoneyInput(account.otherEstimatedCost))}" /></label>
+          <label class="work-account-separate"><input type="checkbox" data-account-field="separateWork"${account.separateWork ? " checked" : ""} /> Trabajo por aparte</label>
           <label class="work-account-notes">Nota<textarea rows="2" data-account-field="notes" placeholder="Origen del saldo, acuerdo o próxima acción">${escapeHtml(account.notes || "")}</textarea></label>
         </div>
         <div class="work-account-actions">
@@ -422,8 +431,10 @@
     document.querySelectorAll(".global-finance-field").forEach((field) => {
       field.hidden = accounts.length > 0;
     });
+    const mainAccounts = accounts.filter((account) => !account.separateWork);
+    const separateAccounts = accounts.filter((account) => account.separateWork);
     els.workAccountList.innerHTML = accounts.length
-      ? accounts.map(workAccountCard).join("")
+      ? `${mainAccounts.length ? `<h4 class="work-account-group-heading">Trabajo principal <span>${mainAccounts.length} frentes</span></h4>${mainAccounts.map(workAccountCard).join("")}` : ""}${separateAccounts.length ? `<h4 class="work-account-group-heading is-separate">Trabajos por aparte <span>${separateAccounts.length}</span></h4>${separateAccounts.map(workAccountCard).join("")}` : ""}`
       : `<div class="work-account-empty"><i data-lucide="layers-3"></i><div><strong>Aún no has separado este proyecto</strong><span>Escribe el primer servicio para comenzar. La cuenta general seguirá disponible hasta que lo agregues.</span></div></div>`;
   }
 
@@ -932,10 +943,9 @@
     state.showWorkAccountsSetup = false;
     const finance = projectFinancialSummary(project);
     const accountMode = hasWorkAccounts(project);
-    const pendingAccounts = openWorkAccounts(project);
     els.drawerTitle.textContent = project.name;
     els.drawerSubtitle.textContent = accountMode
-      ? `${project.workAccounts.length} cuentas separadas · ${pendingAccounts.length} con saldo pendiente`
+      ? `${project.workAccounts.filter((account) => !account.separateWork).length} frentes del trabajo principal · ${project.workAccounts.filter((account) => account.separateWork).length} por aparte`
       : project.status === "completed"
       ? (finance.pending > 0 ? `Trabajo completado · falta cobrar ${formatMoney(finance.pending)}` : "Trabajo completado y pagado")
       : "Control operativo del trabajo";
@@ -1572,8 +1582,10 @@
         title,
         status: "in_process",
         pendingAmount: parseMoneyInput(els.workAccountPending.value),
+        expectedIncome: 0,
         payableWilington: 0,
         otherEstimatedCost: 0,
+        separateWork: false,
         notes: "",
       });
       els.workAccountForm.reset();
@@ -1598,7 +1610,7 @@
       const account = state.draft.workAccounts.find((item) => item.id === card.dataset.workAccountId);
       if (!account) return;
       const key = field.dataset.accountField;
-      account[key] = ["pendingAmount", "payableWilington", "otherEstimatedCost"].includes(key) ? parseMoneyInput(field.value) : field.value;
+      account[key] = key === "separateWork" ? field.checked : ["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(key) ? parseMoneyInput(field.value) : field.value;
       els.saveStatus.textContent = "Cambios pendientes de guardar";
       renderProjectFinanceOverview();
       renderProjectHealth();
@@ -1606,7 +1618,7 @@
     els.workAccountList.addEventListener("change", (event) => {
       const field = event.target.closest("[data-account-field]");
       if (!field) return;
-      if (["pendingAmount", "payableWilington", "otherEstimatedCost"].includes(field.dataset.accountField)) field.value = formatMoneyInput(field.value);
+      if (["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(field.dataset.accountField)) field.value = formatMoneyInput(field.value);
       renderWorkAccounts();
       refreshIcons();
     });
