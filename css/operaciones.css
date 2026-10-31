@@ -607,8 +607,10 @@ body { background: #020202; }
 .work-account-stats > div { min-width: 0; padding: 10px 14px; background: #0a0c0e; }
 .work-account-stats span, .work-account-stats strong { display: block; }
 .work-account-stats span { margin-bottom: 4px; color: var(--muted-2); font-size: 7px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.work-account-stats strong { overflow: hidden; color: #ecf0f4; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
-.work-account-edit-grid { display: grid; grid-template-columns: minmax(0, 1fr) 130px 150px; gap: 8px; }
+.work-account-stats strong { color: #ecf0f4; font-size: 14px; overflow-wrap: anywhere; }
+.work-account-stats strong.is-expense { color: #ff8c98; }
+.work-account-stats strong.is-income { color: #60e4ae; }
+.work-account-edit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .work-account-edit-grid label { margin: 0; }
 .work-account-notes { grid-column: 1 / -1; }
 .work-account-actions { display: flex; gap: 7px; margin-top: 11px; }
