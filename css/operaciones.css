@@ -589,9 +589,6 @@ body { background: #020202; }
 .work-accounts-head { margin-bottom: 14px; }
 .work-accounts-head h3 { margin: 0 0 5px; font-size: 16px; letter-spacing: -.025em; }
 .work-accounts-head p:last-child { margin: 0; color: var(--muted-2); font-size: 9px; line-height: 1.45; }
-.work-account-scenario { display: grid; grid-template-columns: minmax(0, 1fr) 175px; align-items: center; gap: 6px 12px; margin-bottom: 14px; padding: 12px; border: 1px solid #34302a; border-radius: 10px; background: #14110c; color: #ffe1a8; font-size: 12px; font-weight: 750; }
-.work-account-scenario input { width: 100%; }
-.work-account-scenario small { grid-column: 1 / -1; color: #b5ad9c; font-size: 11px; font-weight: 500; line-height: 1.45; }
 .work-account-list { display: grid; gap: 8px; }
 .work-account-group-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 0 2px; color: #91cbff; font-size: 13px; }
 .work-account-group-heading.is-separate { margin-top: 18px; padding-top: 15px; border-top: 1px solid #2a2e33; color: #ffc278; }
@@ -806,8 +803,6 @@ body { background: #020202; }
   .project-next-payment { margin: 8px 0 10px; padding: 8px 10px; }
   .project-card-foot { margin-top: 10px; }
   .work-accounts { padding: 15px 13px; }
-  .work-account-scenario { grid-template-columns: 1fr; }
-  .work-account-scenario small { grid-column: auto; }
   .work-account-card > summary { grid-template-columns: minmax(0, 1fr) auto 16px; gap: 8px; padding: 11px; }
   .work-account-summary-money { min-width: 92px; }
   .work-account-edit-grid { grid-template-columns: 1fr; }
