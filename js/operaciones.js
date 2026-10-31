@@ -344,16 +344,19 @@
       const pendingReceipts = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.pendingAmount) || 0), 0);
       const expectedIncome = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.expectedIncome) || 0), 0);
       const estimatedProfit = finance.paid + pendingReceipts + expectedIncome - finance.expenses - pendingToWilington - otherEstimatedCosts;
+      const hasForecast = pendingToWilington > 0 || otherEstimatedCosts > 0 || expectedIncome > 0;
       els.projectFinanceOverview.innerHTML = [
         ["Por cobrar", formatMoney(pendingReceipts), "circle-dollar-sign", "receivable"],
-        ["Cobros previstos", formatMoney(expectedIncome), "calendar-clock", "work"],
-        ["Debo a Wilington", formatMoney(pendingToWilington), "credit-card", "expense"],
-        ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense"],
-        ["Profit estimado", formatMoney(estimatedProfit), "chart-no-axes-combined", estimatedProfit < 0 ? "expense" : "income"],
+        ...(expectedIncome > 0 ? [["Cobros previstos", formatMoney(expectedIncome), "calendar-clock", "work"]] : []),
+        ...(hasForecast ? [
+          ["Debo a Wilington", formatMoney(pendingToWilington), "credit-card", "expense"],
+          ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense"],
+          ["Profit estimado", formatMoney(estimatedProfit), "chart-no-axes-combined", estimatedProfit < 0 ? "expense" : "income"],
+        ] : []),
         ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income"],
         ["Movimientos · cuentas", `${movements} · ${accounts.length}`, "layers-3", "neutral"],
       ].map(([label, value, icon, tone]) => `<article data-tone="${tone}"><span>${escapeHtml(label)}<i data-lucide="${icon}"></i></span><strong>${escapeHtml(value)}</strong></article>`).join("")
-        + `<p class="forecast-explain">Profit estimado = ingresos recibidos + cobros pendientes y previstos − gastos registrados − pagos y costos previstos. No es dinero disponible en cuenta.</p>`;
+        + (hasForecast ? `<p class="forecast-explain">Profit estimado = ingresos recibidos + cobros pendientes y previstos − gastos registrados − pagos y costos previstos. No es dinero disponible en cuenta.</p>` : "");
       if (els.usePendingPayment) {
         els.usePendingPayment.disabled = true;
         els.usePendingPayment.textContent = "Usa cada cuenta";
@@ -940,6 +943,7 @@
     els.projectBlocker.value = state.draft.blocker;
     els.projectNotes.value = state.draft.notes;
     renderDraftLists();
+    els.saveStatus.textContent = "Guardado y sincronizado";
     els.projectDrawer.classList.add("is-open");
     els.drawerBackdrop.classList.add("is-open");
     els.projectDrawer.setAttribute("aria-hidden", "false");
