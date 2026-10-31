@@ -279,7 +279,6 @@
         <div class="modal-heading"><div><p class="eyebrow">MI CUENTA</p><h2 id="finance-modal-title">Registrar movimiento</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
         <div class="field-grid"><label>Tipo<select id="finance-type" required><option value="ingreso">Ingreso</option><option value="gasto">Gasto</option></select></label><label>Valor<input id="finance-amount" class="money-input" inputmode="numeric" autocomplete="off" required placeholder="$ 0" /></label><label>Fecha<input id="finance-date" type="date" required /></label><label>Hora<input id="finance-time" type="time" /></label></div>
         <label>Categoría<select id="finance-category" required></select></label>
-        <label>Medio de pago<div class="choice-grid" id="finance-method-options"><button type="button" class="choice-button" data-finance-method="Efectivo"><i data-lucide="banknote"></i>Efectivo</button><button type="button" class="choice-button" data-finance-method="Transferencia"><i data-lucide="building-2"></i>Cuenta</button></div><input id="finance-method" type="hidden" /></label>
         <label>Proyecto<select id="finance-project"><option value="">Sin proyecto</option></select></label>
         <label id="finance-account-wrap" hidden>Cuenta del trabajo<select id="finance-account"><option value="">Cuenta general</option></select></label>
         <label>Descripción <span class="optional-label">Opcional</span><textarea id="finance-description" rows="3" placeholder="Detalle adicional del movimiento"></textarea></label>
@@ -305,6 +304,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=30"></script>
+    <script src="/js/operaciones.js?v=31"></script>
   </body>
 </html>

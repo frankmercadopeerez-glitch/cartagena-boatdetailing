@@ -21,10 +21,6 @@
       "Logistica / Transporte", "Arriendo / Local", "Publicidad", "Otros Gastos",
     ],
   };
-  const FINANCE_METHODS = [
-    { value: "Efectivo", label: "Efectivo", icon: "banknote" },
-    { value: "Transferencia", label: "Cuenta", icon: "building-2" },
-  ];
   const TASK_STAGES = ["pending", "in_progress", "delivered", "warranty"];
   const TASK_STAGE_LABELS = {
     pending: "Pendiente",
@@ -622,7 +618,7 @@
         const transactionProject = Engine.normalize(transaction.proyecto || transaction.project || "");
         const projectMatches = state.financeProjectFilter === "all"
           || (state.financeProjectFilter === "__none__" ? !transactionProject : transactionProject === Engine.normalize(state.financeProjectFilter));
-        const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.projectAccountName} ${transaction.medio}`);
+        const haystack = Engine.normalize(`${transaction.descripcion} ${transaction.categoria} ${transaction.proyecto} ${transaction.projectAccountName}`);
         return typeMatches && projectMatches && (!query || haystack.includes(query));
       })
       .slice()
@@ -661,7 +657,7 @@
     const source = transaction.imported ? "Histórico" : "Registrado aquí";
     return `<article class="project-ledger-row" data-finance-id="${escapeHtml(transaction.id)}">
       <div class="project-ledger-date"><strong>${escapeHtml(formatDate(transaction.fecha))}</strong><span>${escapeHtml(transaction.hora || source)}</span></div>
-      <div class="project-ledger-main"><strong>${escapeHtml(description)}</strong><span>${transaction.projectAccountName ? `${escapeHtml(transaction.projectAccountName)} · ` : ""}${escapeHtml(transaction.categoria || "Sin categoría")} · ${escapeHtml(transaction.medio || "Sin medio")} · ${source}</span></div>
+      <div class="project-ledger-main"><strong>${escapeHtml(description)}</strong><span>${transaction.projectAccountName ? `${escapeHtml(transaction.projectAccountName)} · ` : ""}${escapeHtml(transaction.categoria || "Sin categoría")} · ${source}</span></div>
       <span class="finance-type" data-type="${escapeHtml(transaction.tipo)}">${transaction.tipo === "gasto" ? "Gasto" : "Ingreso"}</span>
       <strong class="finance-amount" data-type="${escapeHtml(transaction.tipo)}">${sign}${escapeHtml(formatMoney(transaction.monto))}</strong>
       <button type="button" class="icon-button project-ledger-edit" data-action="edit-finance" aria-label="Editar movimiento"><i data-lucide="pencil"></i></button>
@@ -717,13 +713,6 @@
     if (!els.financeShowMore.hidden) els.financeShowMore.textContent = `Mostrar ${Math.min(60, transactions.length - state.financeLimit)} movimientos más`;
   }
 
-  function setFinanceMethod(value) {
-    els.financeMethod.value = value || "";
-    els.financeMethodOptions.querySelectorAll("[data-choice-value]").forEach((button) => {
-      button.classList.toggle("is-active", button.dataset.choiceValue === els.financeMethod.value);
-    });
-  }
-
   function renderFinanceCategories(selected) {
     const values = [...(FINANCE_CATEGORIES[els.financeType.value] || [])];
     if (selected && !values.includes(selected)) values.unshift(selected);
@@ -731,15 +720,6 @@
       `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`,
     ).join("");
     els.financeCategory.value = selected || values[0] || "";
-  }
-
-  function renderFinanceMethods(selected) {
-    const values = FINANCE_METHODS.slice();
-    if (selected && !values.some((method) => method.value === selected)) values.unshift({ value: selected, label: selected, icon: "circle-dollar-sign" });
-    els.financeMethodOptions.innerHTML = values.map((method) =>
-      `<button type="button" class="choice-button" data-choice-value="${escapeHtml(method.value)}"><i data-lucide="${method.icon}"></i>${escapeHtml(method.label)}</button>`,
-    ).join("");
-    setFinanceMethod(selected || "Efectivo");
   }
 
   function renderFinanceProjects(selected) {
@@ -782,7 +762,6 @@
       : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
     els.deleteFinanceButton.classList.toggle("is-hidden", !record.id);
     renderFinanceCategories(record.categoria || "");
-    renderFinanceMethods(record.medio || (record.id ? "" : "Efectivo"));
     renderFinanceProjects(record.proyecto || projectName || "");
     renderFinanceAccounts(
       record.proyecto || projectName || "",
@@ -807,7 +786,6 @@
       fecha: els.financeDate.value,
       hora: els.financeTime.value,
       categoria: els.financeCategory.value.trim(),
-      medio: els.financeMethod.value.trim(),
       proyecto: els.financeProject.value.trim(),
       projectAccountId: els.financeAccountWrap.hidden ? "" : els.financeAccount.value,
       projectAccountName: "",
@@ -824,8 +802,8 @@
       const account = project && (project.workAccounts || []).find((item) => String(item.id) === String(payload.projectAccountId));
       payload.projectAccountName = account ? account.title : "";
     }
-    if (!payload.monto || !payload.fecha || !payload.categoria || !payload.medio) {
-      toast("Completa valor, fecha, categoría y medio");
+    if (!payload.monto || !payload.fecha || !payload.categoria) {
+      toast("Completa valor, fecha y categoría");
       return;
     }
     const isProfitWithdrawal = Engine.isProfitWithdrawal(payload);
@@ -1724,10 +1702,6 @@
     });
     els.viewProjectTransactions.addEventListener("click", showProjectTransactions);
     els.deleteFinanceButton.addEventListener("click", deleteFinanceMovement);
-    els.financeMethodOptions.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-choice-value]");
-      if (button) setFinanceMethod(button.dataset.choiceValue);
-    });
     [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue, els.workAccountPending].forEach((input) => {
       input.addEventListener("input", () => keepMoneyFormatted(input));
     });
@@ -2196,7 +2170,7 @@
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
       newProjectModal: byId("new-project-modal"), newProjectForm: byId("new-project-form"), newContractValue: byId("new-contract-value"), mobileNewProjectButton: byId("mobile-new-project-button"), toast: byId("toast"),
       financeMetrics: byId("finance-metrics"), financeCutoff: byId("finance-cutoff"), financeTable: byId("finance-table"), financeShowMore: byId("finance-show-more"), financeSearch: byId("finance-search"), financeTypeFilter: byId("finance-type-filter"), financeProjectFilter: byId("finance-project-filter"), financeFilterSummary: byId("finance-filter-summary"),
-      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeMethod: byId("finance-method"), financeMethodOptions: byId("finance-method-options"), financeProject: byId("finance-project"), financeAccountWrap: byId("finance-account-wrap"), financeAccount: byId("finance-account"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
+      financeModal: byId("finance-modal"), financeForm: byId("finance-form"), financeId: byId("finance-id"), financeType: byId("finance-type"), financeAmount: byId("finance-amount"), financeDate: byId("finance-date"), financeTime: byId("finance-time"), financeCategory: byId("finance-category"), financeProject: byId("finance-project"), financeAccountWrap: byId("finance-account-wrap"), financeAccount: byId("finance-account"), financeDescription: byId("finance-description"), financeModalTitle: byId("finance-modal-title"), financeEditNote: byId("finance-edit-note"), saveFinanceButton: byId("save-finance-button"), deleteFinanceButton: byId("delete-finance-button"),
       rescheduleModal: byId("reschedule-modal"), rescheduleForm: byId("reschedule-form"), rescheduleProjectKey: byId("reschedule-project-key"), rescheduleReminderId: byId("reschedule-reminder-id"), rescheduleTitle: byId("reschedule-title"), rescheduleDate: byId("reschedule-date"), closeRescheduleModal: byId("close-reschedule-modal"), cancelRescheduleModal: byId("cancel-reschedule-modal"),
     });
   }
