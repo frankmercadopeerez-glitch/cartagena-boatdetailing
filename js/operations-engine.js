@@ -273,7 +273,9 @@
     );
     const openingPaid = Math.max(0, Number(project && project.paidOpening) || 0);
     const openingLedger = Math.max(0, Number(project && project.paidOpeningLedger) || 0);
-    const paid = openingPaid > 0 ? openingPaid + Math.max(0, ledgerPaid - openingLedger) : ledgerPaid;
+    // El ajuste conciliado permanece fijo; cualquier edición del libro debe
+    // aumentar o disminuir lo pagado, no solo sumar ingresos posteriores.
+    const paid = openingPaid > 0 ? Math.max(0, openingPaid + ledgerPaid - openingLedger) : ledgerPaid;
     const contractValue = Math.max(0, Number(project && project.contractValue) || 0);
     const pending = contractValue > 0 ? Math.max(0, contractValue - paid) : null;
     const nextPaymentAmount = Math.max(0, Number(project && project.nextPaymentAmount) || 0);
@@ -293,6 +295,9 @@
 
   function financeTotals(transactions, financeMeta) {
     const active = (transactions || []).filter((transaction) => transaction && transaction.archived !== true);
+    // El corte histórico ya incluye los importados. Conservar su original al
+    // archivarlos permite descontarlo del corte sin volver a mostrar la fila.
+    const accountingRows = (transactions || []).filter((transaction) => transaction && (transaction.archived !== true || transaction.imported));
     const meta = financeMeta && typeof financeMeta === 'object' ? financeMeta : { openingBalance: financeMeta };
     const hasSourceTotals = Number.isFinite(Number(meta.sourceTotalIncome)) && Number.isFinite(Number(meta.sourceTotalExpenses));
     let currentIncome = 0;
@@ -301,12 +306,12 @@
     let expenseDelta = 0;
     let balanceDelta = 0;
     let releasedProfit = 0;
-    active.forEach((transaction) => {
-      const amount = Math.max(0, Number(transaction.monto) || 0);
+    accountingRows.forEach((transaction) => {
+      const amount = transaction.archived === true ? 0 : Math.max(0, Number(transaction.monto) || 0);
       const currentProfitWithdrawal = isProfitWithdrawal(transaction);
       if (transaction.tipo === 'ingreso') currentIncome += amount;
       if (transaction.tipo === 'gasto' && !currentProfitWithdrawal) currentExpenses += amount;
-      releasedProfit += Math.max(0, Number(transaction.releasedProjectProfit) || 0);
+      if (transaction.archived !== true) releasedProfit += Math.max(0, Number(transaction.releasedProjectProfit) || 0);
       if (transaction.imported) {
         const originalAmount = Math.max(0, Number(transaction.originalAmount) || 0);
         const originalType = transaction.originalType || transaction.tipo;

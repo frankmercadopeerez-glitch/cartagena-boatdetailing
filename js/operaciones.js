@@ -62,6 +62,13 @@
     toastTimer: null,
     showWorkAccountsSetup: false,
     financeBreakdown: "",
+    savedDraftSnapshot: "",
+    projectReturnFocus: null,
+    savingProject: false,
+    creatingProject: false,
+    savingMovement: false,
+    dataErrors: new Set(),
+    snapshotMeta: {},
   };
 
   const byId = (id) => document.getElementById(id);
@@ -87,8 +94,20 @@
   };
 
   function keepMoneyFormatted(input) {
+    const caret = input.selectionStart;
+    const digitsBeforeCaret = caret === null ? null : input.value.slice(0, caret).replace(/\D/g, "").length;
     const formatted = formatMoneyInput(input.value);
-    if (input.value !== formatted) input.value = formatted;
+    if (input.value === formatted) return;
+    input.value = formatted;
+    if (digitsBeforeCaret !== null && document.activeElement === input) {
+      let position = 0;
+      let digits = 0;
+      while (position < formatted.length && digits < digitsBeforeCaret) {
+        if (/\d/.test(formatted[position])) digits += 1;
+        position += 1;
+      }
+      input.setSelectionRange(position, position);
+    }
   }
 
   const formatDate = (value, options = {}) => {
@@ -227,7 +246,7 @@
     const accountId = String(account && account.id || "");
     const accountName = Engine.normalize(account && account.title || "");
     return projectTransactions(project).filter((transaction) => {
-      if (accountId && String(transaction.projectAccountId || "") === accountId) return true;
+      if (transaction.projectAccountId) return accountId && String(transaction.projectAccountId) === accountId;
       return accountName && Engine.normalize(transaction.projectAccountName || "") === accountName;
     });
   }
@@ -548,9 +567,32 @@
     });
     const mainAccounts = accounts.filter((account) => !account.separateWork);
     const separateAccounts = accounts.filter((account) => account.separateWork);
+    const openAccounts = new Set(Array.from(els.workAccountList.querySelectorAll("details[open]")).map((card) => card.dataset.workAccountId));
+    const focused = document.activeElement;
+    const focusedCard = focused && focused.closest("[data-work-account-id]");
+    const focusedField = focused && focused.dataset.accountField;
+    const selection = focusedField && typeof focused.selectionStart === "number" ? [focused.selectionStart, focused.selectionEnd] : null;
     els.workAccountList.innerHTML = accounts.length
       ? `${mainAccounts.length ? `<h4 class="work-account-group-heading">Trabajo principal <span>${mainAccounts.length} frentes</span></h4>${mainAccounts.map(workAccountCard).join("")}` : ""}${separateAccounts.length ? `<h4 class="work-account-group-heading is-separate">Trabajos por aparte <span>${separateAccounts.length}</span></h4>${separateAccounts.map(workAccountCard).join("")}` : ""}`
       : `<div class="work-account-empty"><i data-lucide="layers-3"></i><div><strong>Aún no has separado este proyecto</strong><span>Escribe el primer servicio para comenzar. La cuenta general seguirá disponible hasta que lo agregues.</span></div></div>`;
+    els.workAccountList.querySelectorAll("[data-work-account-id]").forEach((card) => {
+      card.open = openAccounts.has(card.dataset.workAccountId);
+      if (focusedCard && focusedField && card.dataset.workAccountId === focusedCard.dataset.workAccountId) {
+        const field = Array.from(card.querySelectorAll("[data-account-field]")).find((item) => item.dataset.accountField === focusedField);
+        if (field) {
+          field.focus({ preventScroll: true });
+          if (selection) field.setSelectionRange(...selection);
+        }
+      }
+    });
+  }
+
+  function refreshWorkAccountSummary(account, card) {
+    const template = document.createElement("template");
+    template.innerHTML = workAccountCard(account);
+    ["summary", ".work-account-stats"].forEach((selector) => {
+      card.querySelector(selector).replaceChildren(...template.content.querySelector(selector).childNodes);
+    });
   }
 
   function renderProjectHealth() {
@@ -733,6 +775,7 @@
     const query = Engine.normalize(state.financeSearch);
     return state.financeTransactions
       .filter((transaction) => {
+        if (transaction.archived === true) return false;
         const typeMatches = state.financeTypeFilter === "all" || transaction.tipo === state.financeTypeFilter;
         const transactionProject = Engine.normalize(transaction.proyecto || transaction.project || "");
         const projectMatches = state.financeProjectFilter === "all"
@@ -865,20 +908,36 @@
     const matched = accounts.find((account) => String(account.id) === String(selectedId))
       || accounts.find((account) => Engine.normalize(account.title) === Engine.normalize(selectedName));
     els.financeAccount.value = matched ? matched.id : "";
+    updateFinanceEntryNote();
+  }
+
+  function updateFinanceEntryNote() {
+    const existing = state.financeTransactions.find((transaction) => transaction.id === els.financeId.value);
+    const note = existing && existing.imported
+      ? "Movimiento histórico: los cambios ajustan el saldo disponible desde el corte."
+      : "El movimiento actualiza los ingresos, gastos y caja de este portal.";
+    els.financeEditNote.textContent = note + (!els.financeAccountWrap.hidden && els.financeAccount.value
+      ? " Los saldos por cobrar y costos previstos se revisan por separado dentro del servicio."
+      : "");
   }
 
   function openFinanceModal(type, transaction, projectName = "", projectAccountId = "", projectAccountName = "") {
+    if (!transaction && projectAccountId) {
+      const savedProject = state.projects.find((project) => Engine.normalize(project.financeProjectName || project.name) === Engine.normalize(projectName));
+      if (!savedProject || !(savedProject.workAccounts || []).some((account) => account.id === projectAccountId)) {
+        toast("Guarda el nuevo servicio antes de registrar su primer movimiento");
+        els.saveProjectButton.focus();
+        return;
+      }
+    }
     const record = transaction || {};
     els.financeId.value = record.id || "";
     els.financeType.value = record.tipo || type || "gasto";
     els.financeAmount.value = formatMoneyInput(record.monto);
-    els.financeDate.value = record.fecha || new Date().toISOString().slice(0, 10);
+    els.financeDate.value = record.fecha || dateFromToday(0);
     els.financeTime.value = record.hora || new Date().toTimeString().slice(0, 5);
     els.financeDescription.value = record.descripcion || "";
     els.financeModalTitle.textContent = record.id ? "Editar movimiento" : `Registrar ${els.financeType.value}`;
-    els.financeEditNote.textContent = record.imported
-      ? "Este movimiento pertenece al corte histórico. Cambiar su tipo o valor ajustará el saldo disponible desde el corte."
-      : "El movimiento se guardará únicamente en este portal y actualizará inmediatamente los totales.";
     els.deleteFinanceButton.classList.toggle("is-hidden", !record.id);
     renderFinanceCategories(record.categoria || "");
     renderFinanceProjects(record.proyecto || projectName || "");
@@ -893,6 +952,7 @@
 
   async function saveFinanceMovement(event) {
     event.preventDefault();
+    if (state.savingMovement) return;
     if (event.submitter && event.submitter.value === "cancel") {
       els.financeModal.close();
       return;
@@ -914,6 +974,13 @@
       updatedBy: state.user.email || state.user.uid,
     };
     if (payload.projectAccountId) {
+      const savedProject = state.projects.find((item) => Engine.normalize(item.financeProjectName || item.name) === Engine.normalize(payload.proyecto));
+      const savedAccount = savedProject && (savedProject.workAccounts || []).find((item) => String(item.id) === String(payload.projectAccountId));
+      if (!savedAccount) {
+        toast("Primero guarda el servicio en la ficha del proyecto o elige una cuenta ya guardada");
+        els.financeAccount.focus();
+        return;
+      }
       const draftMatches = state.draft && Engine.normalize(state.draft.financeProjectName || state.draft.name) === Engine.normalize(payload.proyecto);
       const project = draftMatches
         ? state.draft
@@ -952,6 +1019,7 @@
         createdBy: state.user.email || state.user.uid,
       });
     }
+    state.savingMovement = true;
     els.saveFinanceButton.disabled = true;
     try {
       const collection = state.db.collection("operaciones_finanzas_transacciones");
@@ -966,19 +1034,30 @@
       console.error("No se pudo guardar el movimiento", error);
       toast("No se pudo guardar el movimiento");
     } finally {
+      state.savingMovement = false;
       els.saveFinanceButton.disabled = false;
     }
   }
 
   async function deleteFinanceMovement() {
+    if (state.savingMovement) return;
     const id = els.financeId.value;
     const existing = state.financeTransactions.find((transaction) => transaction.id === id);
     if (!existing) return;
     const description = existing.descripcion || existing.categoria || "este movimiento";
     if (!window.confirm(`¿Eliminar “${description}” por ${formatMoney(existing.monto)}? Esta acción ajustará los totales.`)) return;
     els.deleteFinanceButton.disabled = true;
+    state.savingMovement = true;
+    els.saveFinanceButton.disabled = true;
     try {
-      await state.db.collection("operaciones_finanzas_transacciones").doc(id).delete();
+      const ref = state.db.collection("operaciones_finanzas_transacciones").doc(id);
+      if (existing.imported) {
+        await ref.set({
+          archived: true,
+          archivedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          archivedBy: state.user.email || state.user.uid,
+        }, { merge: true });
+      } else await ref.delete();
       els.financeModal.close();
       els.financeForm.reset();
       toast("Movimiento eliminado y totales actualizados");
@@ -986,19 +1065,22 @@
       console.error("No se pudo eliminar el movimiento", error);
       toast("No se pudo eliminar el movimiento");
     } finally {
+      state.savingMovement = false;
       els.deleteFinanceButton.disabled = false;
+      els.saveFinanceButton.disabled = false;
     }
   }
 
   function showProjectTransactions() {
     if (!state.draft) return;
-    state.financeProjectFilter = state.draft.financeProjectName || state.draft.name;
+    const projectName = state.draft.financeProjectName || state.draft.name;
+    if (!closeProject()) return;
+    state.financeProjectFilter = projectName;
     state.financeSearch = "";
     state.financeTypeFilter = "all";
     state.financeLimit = 60;
     els.financeSearch.value = "";
     els.financeTypeFilter.value = "all";
-    closeProject();
     showView("finance");
     renderFinance();
     refreshIcons();
@@ -1035,6 +1117,8 @@
 
   function openProject(project) {
     if (!project) return;
+    if (state.draft && !closeProject()) return;
+    state.projectReturnFocus = document.activeElement;
     state.selectedProject = project;
     state.draft = defaultProject(project);
     state.showWorkAccountsSetup = false;
@@ -1059,24 +1143,60 @@
     els.projectScope.value = state.draft.scope;
     els.projectBlocker.value = state.draft.blocker;
     els.projectNotes.value = state.draft.notes;
+    [els.taskForm, els.reminderForm, els.evidenceForm, els.workAccountForm].forEach((form) => form.reset());
     renderDraftLists();
+    state.savedDraftSnapshot = projectDraftSnapshot();
     els.saveStatus.textContent = "Guardado y sincronizado";
     els.projectDrawer.classList.add("is-open");
     els.drawerBackdrop.classList.add("is-open");
     els.projectDrawer.setAttribute("aria-hidden", "false");
+    els.projectDrawer.inert = false;
+    els.projectDrawer.setAttribute("role", "dialog");
+    els.projectDrawer.setAttribute("aria-modal", "true");
+    els.appShell.inert = true;
     document.body.style.overflow = "hidden";
+    els.projectDrawer.querySelector(".drawer-body").scrollTop = 0;
+    els.closeDrawerButton.focus({ preventScroll: true });
     refreshIcons();
+    return true;
   }
 
-  function closeProject() {
+  function projectDraftSnapshot() {
+    if (!state.draft) return "";
+    const fields = Array.from(byId("project-form").elements).map((field) => [field.id, field.value]);
+    return JSON.stringify([state.draft, fields]);
+  }
+
+  function hasProjectChanges() {
+    return Boolean(state.draft && (projectDraftSnapshot() !== state.savedDraftSnapshot || hasPendingProjectEntry()));
+  }
+
+  function hasPendingProjectEntry() {
+    return [els.taskTitle, els.taskDate, els.reminderTitle, els.reminderDate, els.reminderAmount,
+      els.evidenceTitle, els.evidenceUrl, els.workAccountTitle, els.workAccountPending]
+      .some((field) => field && String(field.value || "").trim());
+  }
+
+  function closeProject(force = false) {
+    if (force !== true && state.savingProject) {
+      toast("Espera a que termine de guardar");
+      return false;
+    }
+    if (force !== true && hasProjectChanges() && !window.confirm("Hay cambios sin guardar. ¿Cerrar la ficha y descartarlos?")) return false;
     els.projectDrawer.classList.remove("is-open");
     els.drawerBackdrop.classList.remove("is-open");
     els.projectDrawer.setAttribute("aria-hidden", "true");
+    els.projectDrawer.inert = true;
     document.body.style.overflow = "";
+    els.appShell.inert = false;
     state.selectedProject = null;
     state.draft = null;
     state.showWorkAccountsSetup = false;
     state.financeBreakdown = "";
+    state.savedDraftSnapshot = "";
+    if (state.projectReturnFocus && state.projectReturnFocus.isConnected) state.projectReturnFocus.focus({ preventScroll: true });
+    state.projectReturnFocus = null;
+    return true;
   }
 
   function taskItem(task) {
@@ -1152,8 +1272,19 @@
   }
 
   async function saveProject() {
-    if (!state.draft || !state.user) return;
+    if (!state.draft || !state.user || state.savingProject) return false;
+    if (!byId("project-form").reportValidity()) return false;
+    const unnamedAccount = (state.draft.workAccounts || []).find((account) => !account.title.trim());
+    if (unnamedAccount) {
+      toast("Pon un nombre a cada servicio antes de guardar");
+      const card = Array.from(els.workAccountList.querySelectorAll("[data-work-account-id]")).find((item) => item.dataset.workAccountId === unnamedAccount.id);
+      if (card) { card.open = true; card.querySelector('[data-account-field="title"]').focus(); }
+      return false;
+    }
     collectDraftForm();
+    renderDraftLists();
+    const savedSnapshot = projectDraftSnapshot();
+    const savedProject = JSON.parse(JSON.stringify(state.draft));
     const id = state.draft.docId || `finance-${Engine.slugify(state.draft.financeProjectName || state.draft.name)}`;
     const payload = {
       name: state.draft.name,
@@ -1182,31 +1313,45 @@
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedBy: state.user.email || state.user.uid,
     };
+    state.savingProject = true;
     els.saveProjectButton.disabled = true;
-    els.saveStatus.textContent = "Guardando en Firebase…";
+    els.saveStatus.textContent = "Guardando cambios…";
     try {
       await state.db.collection("operaciones_proyectos").doc(id).set(payload, { merge: true });
-      els.saveStatus.textContent = "Guardado y sincronizado";
+      state.savedDraftSnapshot = savedSnapshot;
+      els.saveStatus.textContent = hasPendingProjectEntry() ? "Datos guardados; hay registros por agregar" : hasProjectChanges() ? "Hay nuevos cambios pendientes de guardar" : "Guardado y sincronizado";
       toast("Trabajo actualizado");
-      syncPushSchedules([{ ...state.draft, docId: id }], false).catch((error) => console.warn("No se actualizó la agenda push", error));
+      syncPushSchedules([{ ...savedProject, docId: id }], false).catch((error) => {
+        console.warn("No se actualizó la agenda push", error);
+        toast("Datos guardados; falta actualizar los avisos. Reintenta desde Alertas.");
+      });
+      return true;
     } catch (error) {
       console.error("No se pudo guardar el trabajo", error);
       els.saveStatus.textContent = "No se pudo guardar. Revisa la conexión.";
       toast("Error al guardar el trabajo");
+      return false;
     } finally {
+      state.savingProject = false;
       els.saveProjectButton.disabled = false;
     }
   }
 
   async function createProject(event) {
     event.preventDefault();
+    if (state.creatingProject) return;
     if (event.submitter && event.submitter.value === "cancel") {
       els.newProjectModal.close();
       els.newProjectForm.reset();
       return;
     }
     const name = byId("new-name").value.trim();
-    if (!name) return;
+    if (!name) return toast("Escribe el nombre del trabajo");
+    if (state.projects.some((project) => Engine.normalize(project.name) === Engine.normalize(name))) {
+      toast("Ya existe un proyecto con ese nombre");
+      byId("new-name").focus();
+      return;
+    }
     const deadline = byId("new-deadline").value;
     if (!deadline) {
       byId("new-deadline").reportValidity();
@@ -1224,7 +1369,7 @@
       location: "",
       deadline,
       contractValue: parseMoneyInput(els.newContractValue.value),
-      startDate: new Date().toISOString().slice(0, 10),
+      startDate: dateFromToday(0),
       scope,
       notes: "",
       clientName: "",
@@ -1242,6 +1387,8 @@
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedBy: state.user.email || state.user.uid,
     };
+    state.creatingProject = true;
+    byId("create-project-button").disabled = true;
     try {
       await state.db.collection("operaciones_proyectos").doc(id).set(payload);
       els.newProjectModal.close();
@@ -1254,6 +1401,9 @@
     } catch (error) {
       console.error("No se pudo crear el trabajo", error);
       toast("No se pudo crear el trabajo");
+    } finally {
+      state.creatingProject = false;
+      byId("create-project-button").disabled = false;
     }
   }
 
@@ -1270,7 +1420,7 @@
         archivedAt: firebase.firestore.FieldValue.serverTimestamp(),
         archivedBy: state.user.email || state.user.uid,
       }, { merge: true });
-      closeProject();
+      closeProject(true);
       toast("Proyecto borrado de Operaciones");
     } catch (error) {
       console.error("No se pudo borrar el proyecto", error);
@@ -1283,12 +1433,11 @@
   async function toggleAgendaReminder(projectKey, reminderId) {
     const project = findProject(projectKey);
     if (!project) return;
-    openProject(project);
+    if (!openProject(project)) return;
     const reminder = state.draft.reminders.find((item) => item.id === reminderId);
     if (!reminder) return;
     reminder.done = !reminder.done;
-    await saveProject();
-    closeProject();
+    if (await saveProject()) closeProject();
   }
 
   function dateFromToday(days) {
@@ -1302,7 +1451,7 @@
   }
 
   function openRescheduleModal(projectKey, reminderId) {
-    const project = findProject(projectKey) || (state.draft && getProjectKey(state.draft) === projectKey ? state.draft : null);
+    const project = state.draft && getProjectKey(state.draft) === projectKey ? state.draft : findProject(projectKey);
     const reminder = project && (reminderId === "project-deadline"
       ? Engine.projectDeadlineReminder(project)
       : (project.reminders || []).find((item) => item.id === reminderId));
@@ -1328,14 +1477,26 @@
     const projectKey = els.rescheduleProjectKey.value;
     const reminderId = els.rescheduleReminderId.value;
     const dueDate = els.rescheduleDate.value;
-    const project = findProject(projectKey);
+    const editingDraft = state.draft && getProjectKey(state.draft) === projectKey;
+    const project = editingDraft ? state.draft : findProject(projectKey);
     if (!project || !dueDate) return;
+    const submit = els.rescheduleForm.querySelector('[type="submit"]');
+    if (submit.disabled) return;
     const isDeadline = reminderId === "project-deadline";
     const reminders = (project.reminders || []).map((item) => item.id === reminderId
       ? { ...item, dueDate, done: false, rescheduledAt: new Date().toISOString() }
       : item);
+    if (editingDraft && hasProjectChanges()) {
+      if (isDeadline) {
+        state.draft.deadline = dueDate;
+        els.projectDeadline.value = dueDate;
+      } else state.draft.reminders = reminders;
+      renderDraftLists();
+      els.rescheduleModal.close();
+      toast("Nueva fecha preparada. Guarda los cambios de la ficha.");
+      return;
+    }
     const docId = project.docId || `finance-${Engine.slugify(project.financeProjectName || project.name)}`;
-    const submit = els.rescheduleForm.querySelector('[type="submit"]');
     submit.disabled = true;
     try {
       await state.db.collection("operaciones_proyectos").doc(docId).set({
@@ -1351,6 +1512,8 @@
           state.draft.reminders = reminders.map((item) => ({ ...item }));
           renderDraftLists();
         }
+        state.savedDraftSnapshot = projectDraftSnapshot();
+        els.saveStatus.textContent = "Guardado y sincronizado";
       }
       els.rescheduleModal.close();
       toast(`${isDeadline ? "Fecha límite" : "Recordatorio"} reprogramado para ${formatDate(dueDate)}`);
@@ -1407,125 +1570,6 @@
       setTimeout(() => target.focus({ preventScroll: true }), 350);
     }
     setTimeout(() => highlight.classList.remove("is-focus-target"), 2200);
-  }
-
-  function parseQuickAmount(text) {
-    const match = Engine.normalize(text).match(/(\d[\d.,]*)\s*(millones?|millon|millón|mil|k)?/i);
-    if (!match) return 0;
-    const unit = Engine.normalize(match[2]);
-    const decimalValue = Number(match[1].replace(",", "."));
-    let value = unit ? decimalValue : Number(match[1].replace(/[.,]/g, ""));
-    if (unit.startsWith("millon") || unit.startsWith("millón")) value *= 1000000;
-    else if (unit === "mil" || unit === "k") value *= 1000;
-    else if (value < 1000) return 0;
-    return Math.round(value) || 0;
-  }
-
-  function matchQuickProject(text) {
-    const normalized = Engine.normalize(text);
-    return state.projects
-      .map((project) => {
-        const full = Engine.normalize(project.name);
-        const short = full.replace(/^(yate|bote|botes|velero|lancha)\s+/, "");
-        const score = normalized.includes(full) ? full.length + 100 : short.length > 2 && normalized.includes(short) ? short.length : 0;
-        return { project, score };
-      })
-      .sort((a, b) => b.score - a.score)
-      .find((item) => item.score > 0)?.project || null;
-  }
-
-  function quickDate(text) {
-    const date = new Date();
-    const normalized = Engine.normalize(text);
-    if (normalized.includes("manana") || normalized.includes("mañana")) date.setDate(date.getDate() + 1);
-    return date.toISOString().slice(0, 10);
-  }
-
-  function inferFinanceCategory(type, text) {
-    const normalized = Engine.normalize(text);
-    if (type === "ingreso") {
-      if (normalized.includes("anticipo")) return "Anticipo";
-      if (normalized.includes("saldo")) return "Saldo Final";
-      if (/(pintura|gelcoat)/.test(normalized)) return "Pintura General / Gelcoat";
-      if (/(pulid|encerad)/.test(normalized)) return "Detailing - Pulida y Encerado";
-      return "Otros Ingresos";
-    }
-    if (/(arl|seguro)/.test(normalized)) return "ARL / Seguro";
-    if (/(patio|arriendo|local)/.test(normalized)) return "Arriendo / Local";
-    if (/(trabajador|ayudante|fibrero|mano de obra|anticipo a)/.test(normalized)) return "Mano de Obra";
-    if (/(transporte|domicilio|grua|grúa)/.test(normalized)) return "Logistica / Transporte";
-    if (/(herramienta|equipo|alquiler)/.test(normalized)) return "Herramientas / Equipos";
-    if (/(publicidad|anuncio)/.test(normalized)) return "Publicidad";
-    if (/(pintura|lija|gelcoat|pasta|insumo|material)/.test(normalized)) return "Materiales / Insumos";
-    return "Otros Gastos";
-  }
-
-  function prepareQuickCapture(text) {
-    const value = String(text || "").trim();
-    if (!value) return toast("Escribe lo que ocurrió");
-    const normalized = Engine.normalize(value);
-    const project = matchQuickProject(value);
-    const amount = parseQuickAmount(value);
-    const expense = /(gaste|gasté|gastaron|gastamos|gasto|pague|pagué|pagaron|pago a|pago de|compre|compré|compramos)/.test(normalized);
-    const income = /(recibi|recibí|ingreso|abonaron|abono del cliente|me pagaron|pago recibido)/.test(normalized);
-    const hasDateCue = /(hoy|manana|mañana|recordar|recuerd)/.test(normalized);
-
-    if (expense || income) {
-      const type = income ? "ingreso" : "gasto";
-      openFinanceModal(type, null, project ? project.financeProjectName || project.name : "");
-      if (amount) els.financeAmount.value = formatMoneyInput(amount);
-      els.financeDescription.value = value;
-      renderFinanceCategories(inferFinanceCategory(type, value));
-      els.quickCaptureStatus.textContent = `Movimiento preparado${project ? ` para ${project.name}` : ""}. Revisa y confirma.`;
-      toast("Movimiento preparado para revisar");
-      return;
-    }
-
-    if (hasDateCue || /(comprar|pagar|llamar|revisar)/.test(normalized)) {
-      if (!project) {
-        els.quickCaptureStatus.textContent = "No identifiqué el proyecto. Incluye el nombre de la embarcación.";
-        return toast("Indica para qué proyecto es el recordatorio");
-      }
-      openProject(project);
-      els.reminderType.value = /comprar|compra/.test(normalized) ? "purchase" : /pagar|pago/.test(normalized) ? "payment" : "general";
-      els.reminderTitle.value = value;
-      els.reminderDate.value = quickDate(value);
-      if (amount) els.reminderAmount.value = amount;
-      setTimeout(() => els.reminderTitle.focus(), 150);
-      els.quickCaptureStatus.textContent = `Recordatorio preparado para ${project.name}.`;
-      toast("Revisa el recordatorio y agrégalo");
-      return;
-    }
-
-    if (project) {
-      openProject(project);
-      els.taskTitle.value = value;
-      setTimeout(() => els.taskTitle.focus(), 150);
-      els.quickCaptureStatus.textContent = `Tarea preparada para ${project.name}.`;
-      toast("Revisa la tarea y agrégala");
-      return;
-    }
-
-    els.quickCaptureStatus.textContent = "No pude identificar el tipo ni el proyecto. Prueba: “Gasté 180 mil en pintura para Antigone”.";
-    toast("Incluye el proyecto y lo que ocurrió");
-  }
-
-  function startQuickDictation() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) return toast("El dictado no está disponible en este navegador");
-    const recognition = new SpeechRecognition();
-    recognition.lang = "es-CO";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-    els.quickCaptureMic.classList.add("is-listening");
-    els.quickCaptureStatus.textContent = "Escuchando…";
-    recognition.onresult = (event) => {
-      els.quickCaptureInput.value = event.results[0][0].transcript;
-      els.quickCaptureStatus.textContent = "Dictado listo. Pulsa “Preparar registro”.";
-    };
-    recognition.onerror = () => { els.quickCaptureStatus.textContent = "No se pudo completar el dictado."; };
-    recognition.onend = () => els.quickCaptureMic.classList.remove("is-listening");
-    recognition.start();
   }
 
   function installEventHandlers() {
@@ -1626,7 +1670,13 @@
         renderDraftLists();
       }
       if (action.dataset.action === "delete-task" && taskNode) {
+        const removed = state.draft.tasks.find((item) => item.id === taskNode.dataset.taskId);
         state.draft.tasks = state.draft.tasks.filter((item) => item.id !== taskNode.dataset.taskId);
+        if (removed) {
+          els.projectScope.value = els.projectScope.value.split(/\r?\n/)
+            .filter((line) => Engine.normalize(line.trim()) !== Engine.normalize(removed.title)).join("\n");
+          state.draft.scope = els.projectScope.value.trim();
+        }
         renderDraftLists();
       }
       if (action.dataset.action === "toggle-reminder" && reminderNode) {
@@ -1662,7 +1712,22 @@
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && els.projectDrawer.classList.contains("is-open")) closeProject();
+      const modalOpen = Boolean(document.querySelector("dialog[open]"));
+      if (event.key === "Escape" && !modalOpen && els.projectDrawer.classList.contains("is-open")) {
+        event.preventDefault();
+        closeProject();
+      }
+      if (event.key === "Tab" && !modalOpen && state.draft) {
+        const controls = Array.from(els.projectDrawer.querySelectorAll('button, input, select, textarea, a[href], summary, [tabindex="0"]'))
+          .filter((element) => !element.disabled && element.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (first && event.shiftKey && (event.target === first || !els.projectDrawer.contains(event.target))) {
+          event.preventDefault(); last.focus();
+        } else if (first && !event.shiftKey && (event.target === last || !els.projectDrawer.contains(event.target))) {
+          event.preventDefault(); first.focus();
+        }
+      }
       if ((event.key === "Enter" || event.key === " ") && event.target.classList.contains("project-card")) {
         event.preventDefault();
         openProject(findProject(event.target.dataset.projectKey));
@@ -1684,7 +1749,26 @@
       }
     });
 
-    els.logoutButton.addEventListener("click", () => state.auth.signOut());
+    window.addEventListener("beforeunload", (event) => {
+      if (!hasProjectChanges() && !state.savingProject && !state.savingMovement && !state.creatingProject) return;
+      event.preventDefault();
+      event.returnValue = "";
+    });
+    byId("project-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      saveProject();
+    });
+    byId("project-form").addEventListener("input", () => {
+      if (state.draft) els.saveStatus.textContent = "Cambios pendientes de guardar";
+    });
+    [els.financeModal, els.newProjectModal].forEach((modal) => {
+      modal.addEventListener("cancel", (event) => {
+        if (state.savingMovement || state.creatingProject) event.preventDefault();
+      });
+    });
+    els.logoutButton.addEventListener("click", () => {
+      if (!state.draft || closeProject()) state.auth.signOut();
+    });
     els.closeDrawerButton.addEventListener("click", closeProject);
     els.drawerBackdrop.addEventListener("click", closeProject);
     els.saveProjectButton.addEventListener("click", saveProject);
@@ -1741,6 +1825,7 @@
       const account = state.draft.workAccounts.find((item) => item.id === card.dataset.workAccountId);
       if (!account) return;
       const key = field.dataset.accountField;
+      if (field.classList.contains("money-input")) keepMoneyFormatted(field);
       account[key] = key === "separateWork" ? field.checked : ["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(key) ? parseMoneyInput(field.value) : field.value;
       els.saveStatus.textContent = "Cambios pendientes de guardar";
       renderProjectFinanceOverview();
@@ -1748,20 +1833,36 @@
     });
     els.workAccountList.addEventListener("change", (event) => {
       const field = event.target.closest("[data-account-field]");
-      if (!field) return;
+      const card = event.target.closest("[data-work-account-id]");
+      if (!field || !card || !state.draft) return;
       if (["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(field.dataset.accountField)) field.value = formatMoneyInput(field.value);
-      renderWorkAccounts();
+      const account = state.draft.workAccounts.find((item) => item.id === card.dataset.workAccountId);
+      if (!account) return;
+      if (field.dataset.accountField === "separateWork") renderWorkAccounts();
+      else refreshWorkAccountSummary(account, card);
       refreshIcons();
     });
-    els.quickCaptureForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      prepareQuickCapture(els.quickCaptureInput.value);
-    });
-    els.quickCaptureMic.addEventListener("click", startQuickDictation);
     els.quickReminderButton.addEventListener("click", () => {
       if (!state.projects.length) return toast("Crea un trabajo antes de agregar alertas");
-      openProject(state.projects[0]);
-      setTimeout(() => els.reminderTitle.focus(), 200);
+      els.reminderProjectSelect.innerHTML = '<option value="">Selecciona un proyecto</option>' + [...state.projects]
+        .sort((a, b) => a.name.localeCompare(b.name, "es"))
+        .map((project) => `<option value="${escapeHtml(getProjectKey(project))}">${escapeHtml(project.name)}${project.status === "completed" ? " · Completado" : ""}</option>`).join("");
+      els.reminderProjectModal.showModal();
+    });
+    els.closeReminderProject.addEventListener("click", () => els.reminderProjectModal.close());
+    els.reminderProjectForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (event.submitter && event.submitter.value === "cancel") {
+        els.reminderProjectModal.close();
+        return;
+      }
+      const project = findProject(els.reminderProjectSelect.value);
+      if (!project) return;
+      els.reminderProjectModal.close();
+      if (openProject(project)) {
+        els.reminderForm.scrollIntoView({ behavior: "smooth", block: "center" });
+        els.reminderTitle.focus({ preventScroll: true });
+      }
     });
 
     els.taskForm.addEventListener("submit", (event) => {
@@ -1783,7 +1884,7 @@
         type: els.reminderType.value,
         title,
         dueDate: els.reminderDate.value,
-        amount: Number(els.reminderAmount.value) || 0,
+        amount: parseMoneyInput(els.reminderAmount.value),
         alertDays: Number(els.reminderAlertDays.value) || 0,
         done: false,
       });
@@ -1848,6 +1949,7 @@
       renderFinanceAccounts(els.financeProject.value);
       refreshIcons();
     });
+    els.financeAccount.addEventListener("change", updateFinanceEntryNote);
     els.financeShowMore.addEventListener("click", () => {
       state.financeLimit += 60;
       renderFinance();
@@ -1860,7 +1962,7 @@
       refreshIcons();
     });
     els.deleteFinanceButton.addEventListener("click", deleteFinanceMovement);
-    [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue, els.workAccountPending].forEach((input) => {
+    [els.financeAmount, els.projectContractValue, els.projectNextPayment, els.newContractValue, els.workAccountPending, els.reminderAmount].forEach((input) => {
       input.addEventListener("input", () => keepMoneyFormatted(input));
     });
     els.projectContractValue.addEventListener("input", () => {
@@ -2018,11 +2120,22 @@
     refreshIcons();
   }
 
+  function updateDataSyncStatus() {
+    if (navigator.onLine === false) return setSyncStatus(false, "Sin conexión");
+    if (state.dataErrors.size) return setSyncStatus(false, "No se pudo sincronizar");
+    if (!state.financeReady || !state.operationsReady) return setSyncStatus(false, "Cargando datos");
+    const metadata = Object.values(state.snapshotMeta);
+    if (metadata.some((item) => item.hasPendingWrites)) return setSyncStatus(false, "Cambios por sincronizar");
+    if (metadata.some((item) => item.fromCache)) return setSyncStatus(false, "Verificando conexión");
+    setSyncStatus(true, "Portal al día");
+  }
+
   function maybeRevealApp() {
     if (!state.financeReady || !state.operationsReady) return;
     syncProjects();
     const pushDigest = JSON.stringify(state.projects.map(pushProject));
-    if (pushDigest !== state.lastPushDigest) {
+    const snapshotsCurrent = !state.dataErrors.size && Object.values(state.snapshotMeta).every((metadata) => !metadata.fromCache && !metadata.hasPendingWrites);
+    if (snapshotsCurrent && pushDigest !== state.lastPushDigest) {
       state.lastPushDigest = pushDigest;
       syncPushSchedules(state.projects, true).catch((error) => {
         state.lastPushDigest = "";
@@ -2032,7 +2145,7 @@
     els.loadingScreen.classList.add("is-hidden");
     els.authScreen.classList.add("is-hidden");
     els.appShell.classList.remove("is-hidden");
-    setSyncStatus(true, "Portal al día");
+    updateDataSyncStatus();
   }
 
   function clearSubscriptions() {
@@ -2258,6 +2371,8 @@
   async function subscribeData() {
     clearSubscriptions();
     state.financeReady = state.operationsReady = false;
+    state.dataErrors.clear();
+    state.snapshotMeta = {};
     setSyncStatus(false, "Preparando datos");
     try {
       await ensureHistoricalSnapshot();
@@ -2269,7 +2384,10 @@
     }
     state.subscriptions.push(
       state.db.collection("operaciones_proyectos").onSnapshot(
+        { includeMetadataChanges: true },
         (snapshot) => {
+          state.dataErrors.delete("datos operativos");
+          state.snapshotMeta.operations = snapshot.metadata;
           state.operationDocs = snapshot.docs.map((document) => ({ docId: document.id, ...document.data() }));
           state.operationsReady = true;
           maybeRevealApp();
@@ -2279,7 +2397,10 @@
     );
     state.subscriptions.push(
       state.db.collection("operaciones_finanzas_transacciones").onSnapshot(
+        { includeMetadataChanges: true },
         (snapshot) => {
+          state.dataErrors.delete("mi historial financiero");
+          state.snapshotMeta.finance = snapshot.metadata;
           state.financeTransactions = snapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
           state.financeReady = true;
           maybeRevealApp();
@@ -2291,6 +2412,7 @@
 
   function dataError(source, error) {
     console.error(`No se pudieron cargar ${source}`, error);
+    state.dataErrors.add(source);
     setSyncStatus(false, "Conexión pendiente");
     if (source === "datos operativos") state.operationsReady = true;
     if (source === "mi historial financiero") state.financeReady = true;
@@ -2321,8 +2443,9 @@
       loadingScreen: byId("loading-screen"), authScreen: byId("auth-screen"), appShell: byId("app-shell"),
       loginForm: byId("login-form"), authEmail: byId("auth-email"), authPassword: byId("auth-password"), authError: byId("auth-error"), loginButton: byId("login-button"),
       logoutButton: byId("logout-button"), userName: byId("user-name"), userAvatar: byId("user-avatar"), syncPill: byId("sync-pill"), notificationButton: byId("notification-button"), newProjectButton: byId("new-project-button"), viewTitle: byId("view-title"), todayLabel: byId("today-label"),
-      metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), quickCaptureForm: byId("quick-capture-form"), quickCaptureInput: byId("quick-capture-input"), quickCaptureMic: byId("quick-capture-mic"), quickCaptureStatus: byId("quick-capture-status"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
+      metricsGrid: byId("metrics-grid"), todayControl: byId("today-control"), todayCount: byId("today-count"), dashboardProjects: byId("dashboard-projects"), dashboardCompleted: byId("dashboard-completed"), dashboardCompletedPanel: byId("dashboard-completed-panel"), dashboardAgenda: byId("dashboard-agenda"), activeProjects: byId("active-projects"), completedProjects: byId("completed-projects"), activeProjectSection: byId("active-project-section"), completedProjectSection: byId("completed-project-section"), activeProjectCount: byId("active-project-count"), completedProjectCount: byId("completed-project-count"), navProjectCount: byId("nav-project-count"), navAlertCount: byId("nav-alert-count"),
       projectSearch: byId("project-search"), statusFilters: byId("status-filters"), agendaSummary: byId("agenda-summary"), agendaTable: byId("agenda-table"), quickReminderButton: byId("quick-reminder-button"),
+      reminderProjectModal: byId("reminder-project-modal"), reminderProjectForm: byId("reminder-project-form"), reminderProjectSelect: byId("reminder-project-select"), closeReminderProject: byId("close-reminder-project"),
       drawerBackdrop: byId("drawer-backdrop"), projectDrawer: byId("project-drawer"), closeDrawerButton: byId("close-drawer-button"), drawerTitle: byId("drawer-title"), drawerSubtitle: byId("drawer-subtitle"), projectDocId: byId("project-doc-id"), projectStatus: byId("project-status"), projectLocation: byId("project-location"), projectResponsible: byId("project-responsible"), projectStart: byId("project-start"), projectDeadline: byId("project-deadline"), projectWarrantyUntil: byId("project-warranty-until"), projectContractValue: byId("project-contract-value"), projectNextPayment: byId("project-next-payment"), usePendingPayment: byId("use-pending-payment"), projectFinanceOverview: byId("project-finance-overview"), projectFinanceDetail: byId("project-finance-detail"), projectFinanceDetailTitle: byId("project-finance-detail-title"), projectFinanceDetailHelp: byId("project-finance-detail-help"), projectFinanceDetailList: byId("project-finance-detail-list"), closeFinanceDetail: byId("close-finance-detail"), projectHealth: byId("project-health"), projectLedger: byId("project-ledger"), projectLedgerCaption: byId("project-ledger-caption"), viewProjectTransactions: byId("view-project-transactions"), projectScope: byId("project-scope"), projectBlocker: byId("project-blocker"), projectNotes: byId("project-notes"),
       workAccounts: byId("work-accounts"), workAccountList: byId("work-account-list"), workAccountForm: byId("work-account-form"), workAccountTitle: byId("work-account-title"), workAccountPending: byId("work-account-pending"), enableWorkAccounts: byId("enable-work-accounts"),
       drawerProgress: byId("drawer-progress"), drawerProgressBar: byId("drawer-progress-bar"), taskList: byId("task-list"), taskForm: byId("task-form"), taskTitle: byId("task-title"), taskDate: byId("task-date"), taskStage: byId("task-stage"), reminderList: byId("reminder-list"), reminderForm: byId("reminder-form"), reminderType: byId("reminder-type"), reminderTitle: byId("reminder-title"), reminderDate: byId("reminder-date"), reminderAmount: byId("reminder-amount"), reminderAlertDays: byId("reminder-alert-days"), evidenceList: byId("evidence-list"), evidenceForm: byId("evidence-form"), evidenceType: byId("evidence-type"), evidenceTitle: byId("evidence-title"), evidenceUrl: byId("evidence-url"), saveStatus: byId("save-status"), saveProjectButton: byId("save-project-button"), deleteProjectButton: byId("delete-project-button"),
@@ -2336,6 +2459,8 @@
   function init() {
     cacheElements();
     installEventHandlers();
+    window.addEventListener("online", updateDataSyncStatus);
+    window.addEventListener("offline", updateDataSyncStatus);
     els.todayLabel.textContent = new Intl.DateTimeFormat("es-CO", { weekday: "long", day: "numeric", month: "long" }).format(new Date()).toUpperCase();
     firebase.initializeApp(FIREBASE_CONFIG);
     state.auth = firebase.auth();

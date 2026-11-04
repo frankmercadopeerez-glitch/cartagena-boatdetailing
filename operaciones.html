@@ -16,12 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/operaciones.css?v=24" />
+    <link rel="stylesheet" href="/css/operaciones.css?v=25" />
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-    <script src="/js/operations-engine.js?v=7"></script>
+    <script src="/js/operations-engine.js?v=8"></script>
   </head>
   <body>
     <div class="loading-screen" id="loading-screen" aria-live="polite">
@@ -97,17 +97,6 @@
               </div>
               <div class="today-grid" id="today-control"></div>
             </section>
-            <section class="panel quick-capture-panel">
-              <div class="quick-capture-copy"><p class="eyebrow">REGISTRO RÁPIDO</p><h2>Dilo como ocurrió</h2><p>Escribe o dicta un gasto, ingreso, tarea o recordatorio. Siempre podrás revisarlo antes de guardar.</p><small>Funciona con reglas del portal: no envía texto a OpenAI ni consume créditos de API.</small></div>
-              <form class="quick-capture-form" id="quick-capture-form">
-                <textarea id="quick-capture-input" rows="3" placeholder="Ej. Gasté 180 mil en pintura para Antigone"></textarea>
-                <div class="quick-capture-actions">
-                  <button class="icon-button" type="button" id="quick-capture-mic" aria-label="Dictar registro"><i data-lucide="mic"></i></button>
-                  <button class="btn btn-primary" type="submit"><i data-lucide="sparkles"></i>Preparar registro</button>
-                </div>
-              </form>
-              <p class="quick-capture-status" id="quick-capture-status" aria-live="polite">No se guardará nada sin tu confirmación.</p>
-            </section>
           </div>
           <div class="dashboard-grid">
             <section class="panel projects-panel">
@@ -133,7 +122,7 @@
 
         <section class="view" id="view-projects">
           <div class="section-toolbar">
-            <div class="search-box"><i data-lucide="search"></i><input id="project-search" type="search" placeholder="Buscar embarcación, alcance o ubicación" /></div>
+            <div class="search-box"><i data-lucide="search"></i><input id="project-search" type="search" aria-label="Buscar proyectos" placeholder="Buscar embarcación, alcance o ubicación" /></div>
             <div class="filter-group" id="status-filters">
               <button class="filter-chip is-active" data-filter="all">Todos</button>
               <button class="filter-chip" data-filter="active">En curso</button>
@@ -168,7 +157,7 @@
           <div class="finance-metrics" id="finance-metrics"></div>
           <section class="panel finance-panel">
             <div class="panel-heading finance-heading"><div><p class="eyebrow">HISTORIAL EDITABLE</p><h2>Movimientos de la empresa</h2></div></div>
-            <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" placeholder="Buscar descripción o categoría" /></div><select id="finance-project-filter" aria-label="Filtrar por proyecto"><option value="all">Todos los proyectos</option><option value="__none__">Sin proyecto</option></select><select id="finance-type-filter" aria-label="Filtrar por tipo"><option value="all">Todos los tipos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
+            <div class="finance-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="finance-search" type="search" aria-label="Buscar transacciones" placeholder="Buscar descripción o categoría" /></div><select id="finance-project-filter" aria-label="Filtrar por proyecto"><option value="all">Todos los proyectos</option><option value="__none__">Sin proyecto</option></select><select id="finance-type-filter" aria-label="Filtrar por tipo"><option value="all">Todos los tipos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select></div>
             <div class="finance-filter-summary" id="finance-filter-summary" aria-live="polite"></div>
             <div class="finance-table" id="finance-table"></div>
             <button class="btn btn-secondary finance-show-more" id="finance-show-more" type="button">Mostrar más movimientos</button>
@@ -178,9 +167,9 @@
     </div>
 
     <div class="drawer-backdrop" id="drawer-backdrop"></div>
-    <aside class="project-drawer" id="project-drawer" aria-hidden="true" aria-label="Detalle del trabajo">
+    <aside class="project-drawer" id="project-drawer" inert aria-hidden="true" aria-label="Detalle del trabajo">
       <div class="drawer-header">
-        <div><p class="eyebrow">FICHA OPERATIVA</p><h2 id="drawer-title">Trabajo</h2><p id="drawer-subtitle">Sincronizado con Finanzas</p></div>
+        <div><p class="eyebrow">FICHA OPERATIVA</p><h2 id="drawer-title">Trabajo</h2><p id="drawer-subtitle">Control operativo del trabajo</p></div>
         <button class="icon-button" id="close-drawer-button" aria-label="Cerrar"><i data-lucide="x"></i></button>
       </div>
       <div class="drawer-body">
@@ -195,8 +184,8 @@
           </div>
           <div class="work-account-list" id="work-account-list"></div>
           <form class="work-account-add" id="work-account-form">
-            <input id="work-account-title" placeholder="Nombre del servicio" required />
-            <input id="work-account-pending" class="money-input" inputmode="numeric" placeholder="Saldo pendiente" />
+            <input id="work-account-title" aria-label="Nombre del servicio" placeholder="Nombre del servicio" required />
+            <input id="work-account-pending" aria-label="Saldo pendiente del servicio" class="money-input" inputmode="numeric" placeholder="Saldo pendiente" />
             <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar servicio</button>
           </form>
         </section>
@@ -234,7 +223,7 @@
           <div class="section-title"><div><p class="eyebrow">EJECUCIÓN</p><h3>Checklist del trabajo</h3></div><span class="progress-label" id="drawer-progress">0%</span></div>
           <div class="progress-track"><span id="drawer-progress-bar"></span></div>
           <div class="editable-list" id="task-list"></div>
-          <form class="inline-add" id="task-form"><input id="task-title" placeholder="Nuevo frente o entregable" required /><input id="task-date" type="date" aria-label="Fecha del frente" /><select id="task-stage" aria-label="Estado del frente"><option value="pending">Pendiente</option><option value="in_progress">En proceso</option><option value="delivered">Entregado</option><option value="warranty">Garantía</option></select><button class="icon-button is-accent" aria-label="Agregar frente"><i data-lucide="plus"></i></button></form>
+          <form class="inline-add" id="task-form"><input id="task-title" aria-label="Nuevo frente o entregable" placeholder="Nuevo frente o entregable" required /><input id="task-date" type="date" aria-label="Fecha del frente" /><select id="task-stage" aria-label="Estado del frente"><option value="pending">Pendiente</option><option value="in_progress">En proceso</option><option value="delivered">Entregado</option><option value="warranty">Garantía</option></select><button class="icon-button is-accent" aria-label="Agregar frente"><i data-lucide="plus"></i></button></form>
         </section>
 
         <section class="drawer-section">
@@ -242,9 +231,9 @@
           <div class="editable-list" id="reminder-list"></div>
           <form class="reminder-form" id="reminder-form">
             <select id="reminder-type" aria-label="Tipo"><option value="purchase">Compra</option><option value="payment">Pago</option><option value="general">Aviso</option></select>
-            <input id="reminder-title" placeholder="Qué hay que resolver" required />
+            <input id="reminder-title" aria-label="Descripción del recordatorio" placeholder="Qué hay que resolver" required />
             <input id="reminder-date" type="date" aria-label="Fecha del compromiso; opcional" />
-            <input id="reminder-amount" type="number" min="0" step="1000" placeholder="Valor COP" aria-label="Valor" />
+            <input id="reminder-amount" class="money-input" inputmode="numeric" autocomplete="off" placeholder="Valor COP" aria-label="Valor" />
             <select id="reminder-alert-days" aria-label="Avisar con anticipación"><option value="0">El mismo día</option><option value="1">1 día antes</option><option value="3" selected>3 días antes</option><option value="7">7 días antes</option></select>
             <button class="btn btn-secondary" type="submit"><i data-lucide="plus"></i>Agregar alerta</button>
             <small class="reminder-help">Si todavía no sabes la fecha, deja el campo vacío. El pago quedará pendiente y podrás poner la fecha después.</small>
@@ -256,20 +245,20 @@
           <div class="editable-list evidence-list" id="evidence-list"></div>
           <form class="evidence-form" id="evidence-form">
             <select id="evidence-type" aria-label="Tipo de evidencia"><option value="photo">Foto</option><option value="receipt">Recibo</option><option value="document">Documento</option><option value="approval">Aprobación</option></select>
-            <input id="evidence-title" placeholder="Nombre de la evidencia" required />
-            <input id="evidence-url" type="url" inputmode="url" placeholder="Enlace https://…" required />
+            <input id="evidence-title" aria-label="Nombre de la evidencia" placeholder="Nombre de la evidencia" required />
+            <input id="evidence-url" aria-label="Enlace de la evidencia" type="url" inputmode="url" placeholder="Enlace https://…" required />
             <button class="btn btn-secondary" type="submit"><i data-lucide="paperclip"></i>Agregar enlace</button>
           </form>
           <p class="field-help">Puedes pegar enlaces de Google Drive, fotos o documentos. El archivo original no se modifica.</p>
         </section>
       </div>
-      <div class="drawer-footer"><button class="btn btn-danger" id="delete-project-button"><i data-lucide="trash-2"></i>Borrar proyecto</button><span id="save-status">Los cambios aún no se han guardado</span><button class="btn btn-primary" id="save-project-button"><i data-lucide="save"></i>Guardar cambios</button></div>
+      <div class="drawer-footer"><button class="btn btn-danger" id="delete-project-button"><i data-lucide="trash-2"></i>Borrar proyecto</button><span id="save-status" role="status" aria-live="polite">Sin cambios pendientes</span><button class="btn btn-primary" id="save-project-button"><i data-lucide="save"></i>Guardar cambios</button></div>
     </aside>
 
     <dialog class="modal" id="new-project-modal">
       <form method="dialog" id="new-project-form">
-        <div class="modal-heading"><div><p class="eyebrow">NUEVO TRABAJO</p><h2>Registrar embarcación</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
-        <label>Nombre de la embarcación<input id="new-name" required placeholder="Ej. Yate Oceana 74 Ft" /></label>
+        <div class="modal-heading"><div><p class="eyebrow">NUEVO TRABAJO</p><h2>Registrar trabajo</h2></div><button class="icon-button" value="cancel" formnovalidate aria-label="Cerrar"><i data-lucide="x"></i></button></div>
+        <label>Nombre del proyecto<input id="new-name" required placeholder="Ej. Yate Oceana 74 Ft" /></label>
         <label><span>Fecha límite <em class="required-mark">Obligatoria</em></span><input id="new-deadline" type="date" required /><span class="field-help">La app programa avisos 2 días antes, 1 día antes y el mismo día a las 8:00 a. m. Activa las alertas en tu teléfono para recibirlos.</span></label>
         <label>Valor contratado<input id="new-contract-value" class="money-input" inputmode="numeric" placeholder="$ 0" /></label>
         <label>Alcance inicial<textarea id="new-scope" rows="4" placeholder="Servicio contratado y entregables"></textarea></label>
@@ -291,6 +280,15 @@
       </form>
     </dialog>
 
+    <dialog class="modal" id="reminder-project-modal" aria-labelledby="reminder-project-title">
+      <form method="dialog" id="reminder-project-form">
+        <div class="modal-heading"><div><p class="eyebrow">NUEVO RECORDATORIO</p><h2 id="reminder-project-title">Elige el proyecto</h2></div><button class="icon-button" value="cancel" formnovalidate id="close-reminder-project" aria-label="Cerrar"><i data-lucide="x"></i></button></div>
+        <label>Proyecto<select id="reminder-project-select" required><option value="">Selecciona un proyecto</option></select></label>
+        <p class="field-help">Después podrás escribir el aviso, su fecha y el valor, si corresponde.</p>
+        <div class="modal-actions"><button class="btn btn-secondary" value="cancel" formnovalidate>Cancelar</button><button class="btn btn-primary" value="default">Continuar</button></div>
+      </form>
+    </dialog>
+
     <dialog class="modal reschedule-modal" id="reschedule-modal">
       <form id="reschedule-form">
         <input type="hidden" id="reschedule-project-key" />
@@ -308,6 +306,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/js/operaciones.js?v=33"></script>
+    <script src="/js/operaciones.js?v=34"></script>
   </body>
 </html>

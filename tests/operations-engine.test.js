@@ -112,4 +112,39 @@ assert.deepEqual(
   { income: 57289510, expenses: 40730467, result: 17900918, profit: 17900918, frankProfit: 8950459, releasedProfit: 0, available: 4000000, count: 1, importedCount: 1 },
 );
 
+// Archivar una fila importada revierte el valor original incluido en el corte,
+// incluso si después fue editada, cambió de tipo o liberó profit.
+const importedDeletionMeta = { openingBalance: 80000, sourceTotalIncome: 100000, sourceTotalExpenses: 20000, sourceProfitTotal: 80000 };
+const deletedIncome = { tipo: "gasto", monto: 60000, categoria: "Retiro de Profit", imported: true, originalType: "ingreso", originalAmount: 100000, originalCategory: "Otros Ingresos", releasedProjectProfit: 30000, archived: true };
+const remainingExpense = { tipo: "gasto", monto: 20000, categoria: "Materiales", imported: true, originalType: "gasto", originalAmount: 20000, originalCategory: "Materiales" };
+assert.deepEqual(engine.financeTotals([deletedIncome, remainingExpense], importedDeletionMeta), {
+  income: 0, expenses: 20000, result: -20000, profit: -20000, frankProfit: -10000,
+  releasedProfit: 0, available: -20000, count: 1, importedCount: 1,
+});
+assert.deepEqual(engine.financeTotals([
+  { tipo: "ingreso", monto: 100000, imported: true, originalType: "ingreso", originalAmount: 100000 },
+  { ...remainingExpense, monto: 50000, archived: true },
+  { tipo: "gasto", monto: 9000, archived: true },
+], importedDeletionMeta), {
+  income: 100000, expenses: 0, result: 100000, profit: 100000, frankProfit: 50000,
+  releasedProfit: 0, available: 100000, count: 1, importedCount: 1,
+});
+assert.equal(engine.projectFinancials({ name: "Prueba", contractValue: 100000 }, [
+  { ...deletedIncome, proyecto: "Prueba" },
+]).ledgerPaid, 0);
+
+// El pago conciliado incluye un ajuste de 20k sobre los 80k del libro al corte.
+// Ese ajuste permanece al corregir/borrar el ingreso y al añadir pagos nuevos.
+const reconciledProject = { name: "Conciliado", contractValue: 200000, paidOpening: 100000, paidOpeningLedger: 80000 };
+const reconciledIncome = { tipo: "ingreso", monto: 80000, proyecto: "Conciliado" };
+assert.equal(engine.projectFinancials(reconciledProject, [reconciledIncome]).paid, 100000);
+const correctedPayment = engine.projectFinancials(reconciledProject, [{ ...reconciledIncome, monto: 50000 }]);
+assert.equal(correctedPayment.paid, 70000);
+assert.equal(correctedPayment.pending, 130000);
+assert.equal(engine.projectFinancials(reconciledProject, [{ ...reconciledIncome, archived: true }]).paid, 20000);
+const additionalPayment = engine.projectFinancials(reconciledProject, [reconciledIncome, { ...reconciledIncome, monto: 30000 }]);
+assert.equal(additionalPayment.paid, 130000);
+assert.equal(additionalPayment.pending, 70000);
+assert.equal(engine.projectFinancials({ ...reconciledProject, paidOpening: 50000 }, []).paid, 0);
+
 console.log("operations-engine: ok");
