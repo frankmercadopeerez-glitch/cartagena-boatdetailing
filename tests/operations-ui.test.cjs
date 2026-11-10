@@ -10,17 +10,21 @@ const nodes = new Map();
 const node = (id) => {
   if (!nodes.has(id)) nodes.set(id, {
     id, value: "", disabled: false, textContent: "", elements: [],
-    classList: { add() {}, remove() {}, toggle() {} },
+    classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
     focus() {}, reset() {}, close() {}, setAttribute() {},
     reportValidity: () => true,
+    listeners: {},
+    addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); },
+    querySelector(selector) { return node(`${this.id}:${selector}`); },
+    querySelectorAll() { return []; },
   });
   return nodes.get(id);
 };
-const document = { getElementById: node, activeElement: null, body: { style: {} } };
+const document = { getElementById: node, activeElement: null, body: { style: {} }, addEventListener() {} };
 let confirmed = false;
 let confirmations = 0;
 const context = {
-  window: { CBDOperationsEngine: engine, confirm: () => { confirmations += 1; return confirmed; } },
+  window: { CBDOperationsEngine: engine, confirm: () => { confirmations += 1; return confirmed; }, addEventListener() {} },
   document, console, Intl, Date, URL,
   navigator: { onLine: true },
   setTimeout: () => 1, clearTimeout() {},
@@ -32,6 +36,8 @@ vm.runInContext(source.replace(/  init\(\);\s*\}\)\(\);\s*$/, `
     state, els, keepMoneyFormatted, projectDraftSnapshot, hasProjectChanges,
     closeProject, createProject, deleteFinanceMovement, filteredFinanceTransactions,
     workAccountTransactions, updateDataSyncStatus, saveFinanceMovement,
+    cacheElements, installEventHandlers, defaultProject, workAccountSummary,
+    renderProjectFinanceOverview, renderProjectFinanceDetail, workAccountCard,
   };
 })();`), context);
 const ui = context.testUi;
@@ -158,6 +164,105 @@ async function run() {
   context.navigator.onLine = false;
   ui.updateDataSyncStatus();
   assert.match(ui.els.syncPill.innerHTML, /Sin conexión/);
+
+  // Exercise the real renderers and input listener. Keep general movements
+  // outside the main account so the profit breakdown must reconcile its rows.
+  ui.cacheElements();
+  ui.installEventHandlers();
+  const rawProject = {
+    name: "Antigone", status: "in_process", tasks: [],
+    workAccounts: [
+      { id: "main", title: "Trabajo principal", pendingAmount: 3050000, payableWilington: 400000, otherEstimatedCost: 630000 },
+      { id: "fridge", title: "Reparar nevera", expectedIncome: 500000, otherEstimatedCost: 400000, separateWork: true, profitDeferred: true },
+      { id: "stove", title: "Reparar estufa", expectedIncome: 200000, otherEstimatedCost: 150000, separateWork: true, profitDeferred: true },
+    ],
+  };
+  ui.state.draft = ui.defaultProject(rawProject);
+  const draft = ui.state.draft;
+  assert.equal(draft.workAccounts[0].profitDeferred, false, "legacy accounts must remain included");
+  assert.equal(draft.workAccounts[1].profitDeferred, true, "normalization preserves the pending-profit flag");
+  assert.equal(JSON.parse(ui.projectDraftSnapshot())[0].workAccounts[1].profitDeferred, true, "draft snapshots retain the flag for save/discard detection");
+  assert.equal(ui.defaultProject(JSON.parse(JSON.stringify(draft))).workAccounts[1].profitDeferred, true, "saved project data retains the flag on reload");
+  ui.state.financeTransactions = [
+    { id: "paid-main", proyecto: "Antigone", tipo: "ingreso", monto: 9500000, projectAccountId: "main" },
+    { id: "spent-main", proyecto: "Antigone", tipo: "gasto", monto: 8900000, projectAccountId: "main" },
+    { id: "paid-general", proyecto: "Antigone", tipo: "ingreso", monto: 100000 },
+    { id: "spent-general", proyecto: "Antigone", tipo: "gasto", monto: 50000 },
+  ];
+  const ledgerBefore = JSON.stringify(ui.state.financeTransactions);
+  const financeBefore = engine.projectFinancials(draft, ui.state.financeTransactions);
+  const amountFromText = (text) => Number(text.replace(/[^0-9-]/g, ""));
+  const overviewAmount = (view) => {
+    const match = ui.els.projectFinanceOverview.innerHTML.match(new RegExp(`data-finance-view="${view}"[^>]*>[\\s\\S]*?<strong>([^<]+)</strong>`));
+    assert.ok(match, `overview contains ${view}`);
+    return amountFromText(match[1]);
+  };
+  const detailAmounts = () => Array.from(ui.els.projectFinanceDetailList.innerHTML.matchAll(/<b[^>]*>([^<]+)<\/b>/g), (match) => amountFromText(match[1]));
+  ui.state.financeBreakdown = "";
+  ui.renderProjectFinanceOverview();
+  assert.equal(overviewAmount("profit"), 2670000);
+  assert.equal(overviewAmount("deferredProfit"), 150000);
+  assert.equal(overviewAmount("income"), 9600000);
+  assert.equal(overviewAmount("expenses"), 8950000);
+  assert.equal(overviewAmount("cash"), 650000);
+  assert.equal(overviewAmount("receivable"), 3050000);
+  assert.equal(overviewAmount("expected"), 700000);
+  assert.equal(overviewAmount("wilington"), 400000);
+  assert.equal(overviewAmount("other"), 1180000);
+
+  ui.state.financeBreakdown = "profit";
+  ui.renderProjectFinanceDetail();
+  assert.match(ui.els.projectFinanceDetailList.innerHTML, /data-finance-account-id="main"/);
+  assert.doesNotMatch(ui.els.projectFinanceDetailList.innerHTML, /data-finance-account-id="(?:fridge|stove)"/);
+  assert.match(ui.els.projectFinanceDetailList.innerHTML, /Cuenta general y ajustes/);
+  assert.deepEqual(detailAmounts(), [2620000, 50000]);
+  assert.equal(detailAmounts().reduce((sum, amount) => sum + amount, 0), overviewAmount("profit"), "main profit breakdown reconciles unassigned movements");
+  ui.state.financeBreakdown = "deferredProfit";
+  ui.renderProjectFinanceDetail();
+  assert.match(ui.els.projectFinanceDetailList.innerHTML, /Reparar nevera/);
+  assert.match(ui.els.projectFinanceDetailList.innerHTML, /Reparar estufa/);
+  assert.doesNotMatch(ui.els.projectFinanceDetailList.innerHTML, /Cuenta general y ajustes|data-finance-account-id="main"/);
+  assert.deepEqual(detailAmounts(), [100000, 50000]);
+  assert.equal(detailAmounts().reduce((sum, amount) => sum + amount, 0), overviewAmount("deferredProfit"));
+  assert.match(ui.workAccountCard(draft.workAccounts[1]), /Profit pendiente de realizar/);
+  assert.match(ui.workAccountCard(draft.workAccounts[1]), /data-account-field="profitDeferred" checked/);
+
+  const inputHandler = ui.els.workAccountList.listeners.input[0];
+  const deferredCheckbox = { checked: true };
+  const accountCard = { dataset: { workAccountId: "fridge" }, querySelector: () => deferredCheckbox };
+  const field = {
+    dataset: { accountField: "profitDeferred" }, checked: false, value: "on",
+    classList: { contains: () => false },
+    closest(selector) { return selector === "[data-account-field]" ? this : accountCard; },
+  };
+  ui.state.savedDraftSnapshot = ui.projectDraftSnapshot();
+  inputHandler({ target: field });
+  assert.equal(draft.workAccounts[1].profitDeferred, false, "checkbox uses its checked boolean, not its 'on' value");
+  assert.equal(ui.hasProjectChanges(), true);
+  assert.equal(overviewAmount("profit"), 2770000);
+  assert.equal(overviewAmount("deferredProfit"), 50000);
+  field.checked = true;
+  inputHandler({ target: field });
+  assert.equal(overviewAmount("profit"), 2670000);
+
+  for (const status of ["delivered", "warranty", "closed"]) {
+    draft.workAccounts[1].profitDeferred = true;
+    deferredCheckbox.checked = true;
+    field.dataset.accountField = "status";
+    field.value = status;
+    inputHandler({ target: field });
+    assert.equal(draft.workAccounts[1].profitDeferred, false, `${status} integrates the service profit`);
+    assert.equal(deferredCheckbox.checked, false);
+    assert.match(ui.els.toast.textContent, /profit se integra/);
+    assert.equal(overviewAmount("profit"), 2770000);
+    assert.equal(overviewAmount("deferredProfit"), 50000);
+  }
+  draft.workAccounts[2].profitDeferred = false;
+  ui.renderProjectFinanceOverview();
+  assert.equal(overviewAmount("profit"), 2820000);
+  assert.doesNotMatch(ui.els.projectFinanceOverview.innerHTML, /data-finance-view="deferredProfit"/);
+  assert.deepEqual(engine.projectFinancials(draft, ui.state.financeTransactions), financeBefore, "profit classification must not alter the ledger or cash");
+  assert.equal(JSON.stringify(ui.state.financeTransactions), ledgerBefore);
   console.log("Operations UI regression checks passed");
 }
 

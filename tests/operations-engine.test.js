@@ -147,4 +147,34 @@ assert.equal(additionalPayment.paid, 130000);
 assert.equal(additionalPayment.pending, 70000);
 assert.equal(engine.projectFinancials({ ...reconciledProject, paidOpening: 50000 }, []).paid, 0);
 
+// El profit de servicios aún pendientes se separa sin cambiar caja ni el total.
+const antigoneFinance = Object.freeze({ paid: 9600000, expenses: 8950000, balance: 650000 });
+const antigoneAccounts = [
+  Object.freeze({ income: 9600000, expenses: 8950000, pending: 3050000, payableWilington: 400000, otherEstimatedCost: 630000 }),
+  Object.freeze({ expectedIncome: 500000, otherEstimatedCost: 400000, profitDeferred: true }),
+  Object.freeze({ expectedIncome: 200000, otherEstimatedCost: 150000, profitDeferred: true }),
+];
+assert.deepEqual(engine.splitWorkProfit(antigoneFinance, antigoneAccounts), {
+  total: 2820000, current: 2670000, deferred: 150000, deferredCount: 2,
+});
+assert.deepEqual(engine.splitWorkProfit(antigoneFinance, antigoneAccounts.map((account) => ({ ...account, profitDeferred: false }))), {
+  total: 2820000, current: 2820000, deferred: 0, deferredCount: 0,
+}, "realizar los trabajos incorpora el margen, sin inventar nuevos ingresos ni gastos");
+assert.deepEqual(engine.splitWorkProfit(antigoneFinance, antigoneAccounts.map(({ profitDeferred, ...legacy }) => legacy)), {
+  total: 2820000, current: 2820000, deferred: 0, deferredCount: 0,
+}, "los servicios anteriores sin marca conservan su comportamiento");
+
+// Un anticipo o gasto real de un servicio diferido sigue formando parte de su
+// margen completo; los movimientos generales permanecen en el profit principal.
+assert.deepEqual(engine.splitWorkProfit({ paid: 1000000, expenses: 450000 }, [
+  { income: 300000, expenses: 250000, pending: 200000, otherEstimatedCost: 100000, profitDeferred: true },
+]), { total: 650000, current: 500000, deferred: 150000, deferredCount: 1 });
+assert.deepEqual(engine.splitWorkProfit({ paid: 100000, expenses: 300000 }, [
+  { income: 100000, expenses: 300000, pending: 50000, otherEstimatedCost: 100000, profitDeferred: true },
+]), { total: -250000, current: 0, deferred: -250000, deferredCount: 1 }, "una pérdida prevista no se oculta ni se recorta a cero");
+assert.deepEqual(engine.splitWorkProfit({ paid: 100000, expenses: 300000 }, []), {
+  total: -200000, current: -200000, deferred: 0, deferredCount: 0,
+});
+assert.deepEqual(antigoneFinance, { paid: 9600000, expenses: 8950000, balance: 650000 }, "el desglose no altera los datos de caja");
+
 console.log("operations-engine: ok");

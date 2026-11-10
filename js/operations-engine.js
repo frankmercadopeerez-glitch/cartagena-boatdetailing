@@ -293,6 +293,26 @@
     };
   }
 
+  function splitWorkProfit(finance, summaries) {
+    const amount = (value) => Math.max(0, Number(value) || 0);
+    let total = amount(finance && finance.paid) - amount(finance && finance.expenses);
+    let deferred = 0;
+    let deferredCount = 0;
+    (summaries || []).forEach((summary) => {
+      if (!summary) return;
+      const forecast = amount(summary.pending) + amount(summary.expectedIncome)
+        - amount(summary.payableWilington) - amount(summary.otherEstimatedCost);
+      total += forecast;
+      if (summary.profitDeferred === true) {
+        // Separar el margen del servicio conserva sus cobros y gastos reales
+        // en la caja del proyecto y evita contar dos veces sus previsiones.
+        deferred += amount(summary.income) - amount(summary.expenses) + forecast;
+        deferredCount += 1;
+      }
+    });
+    return { total, current: total - deferred, deferred, deferredCount };
+  }
+
   function financeTotals(transactions, financeMeta) {
     const active = (transactions || []).filter((transaction) => transaction && transaction.archived !== true);
     // El corte histórico ya incluye los importados. Conservar su original al
@@ -354,6 +374,7 @@
     snapshotTransaction,
     financeTotals,
     projectFinancials,
+    splitWorkProfit,
     mergeProjects,
     normalize,
     projectIssues,

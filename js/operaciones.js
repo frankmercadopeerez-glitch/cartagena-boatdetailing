@@ -195,6 +195,7 @@
         otherEstimatedCost: Math.max(0, Number(item.otherEstimatedCost) || 0),
         otherCostDetails: String(item.otherCostDetails || ""),
         separateWork: Boolean(item.separateWork),
+        profitDeferred: Boolean(item.profitDeferred),
         notes: String(item.notes || ""),
       })) : [],
       reminders: Array.isArray(project.reminders) ? project.reminders.map((item) => ({ ...item })) : [],
@@ -267,6 +268,7 @@
       expectedIncome: Math.max(0, Number(account && account.expectedIncome) || 0),
       payableWilington: Math.max(0, Number(account && account.payableWilington) || 0),
       otherEstimatedCost: Math.max(0, Number(account && account.otherEstimatedCost) || 0),
+      profitDeferred: Boolean(account && account.profitDeferred),
       count: transactions.length,
     };
   }
@@ -368,22 +370,23 @@
       const otherEstimatedCosts = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.otherEstimatedCost) || 0), 0);
       const pendingReceipts = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.pendingAmount) || 0), 0);
       const expectedIncome = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.expectedIncome) || 0), 0);
-      const estimatedProfit = finance.paid + pendingReceipts + expectedIncome - finance.expenses - pendingToWilington - otherEstimatedCosts;
-      const hasForecast = pendingToWilington > 0 || otherEstimatedCosts > 0 || expectedIncome > 0;
+      const profit = Engine.splitWorkProfit(finance, accounts.map((account) => workAccountSummary(state.draft, account)));
+      const hasForecast = pendingToWilington > 0 || otherEstimatedCosts > 0 || expectedIncome > 0 || profit.deferredCount > 0;
       els.projectFinanceOverview.innerHTML = [
         ["Por cobrar", formatMoney(pendingReceipts), "circle-dollar-sign", "receivable", "receivable"],
         ...(expectedIncome > 0 ? [["Cobros previstos", formatMoney(expectedIncome), "calendar-clock", "work", "expected"]] : []),
         ...(hasForecast ? [
           ["Debo a Wilington", formatMoney(pendingToWilington), "credit-card", "expense", "wilington"],
           ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense", "other"],
-          ["Profit estimado", formatMoney(estimatedProfit), "chart-no-axes-combined", estimatedProfit < 0 ? "expense" : "income", "profit"],
+          ["Profit estimado", formatMoney(profit.current), "chart-no-axes-combined", profit.current < 0 ? "expense" : "income", "profit"],
+          ...(profit.deferredCount ? [["Profit trabajos pendientes", formatMoney(profit.deferred), "calendar-clock", profit.deferred < 0 ? "expense" : "work", "deferredProfit"]] : []),
         ] : []),
         ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income", "cash"],
         ["Ingresos registrados", formatMoney(finance.paid), "trending-up", "income", "income"],
         ["Gastos registrados", formatMoney(finance.expenses), "trending-down", "expense", "expenses"],
         ["Movimientos", movements, "receipt-text", "neutral", "movements"],
       ].map(financeOverviewCard).join("")
-        + (hasForecast ? `<p class="forecast-explain">Profit estimado = ingresos recibidos + cobros pendientes y previstos − gastos registrados − pagos y costos previstos. No es dinero disponible en cuenta.</p>` : "");
+        + (hasForecast ? `<p class="forecast-explain">${profit.deferredCount ? "El profit de los trabajos pendientes de realizar se muestra aparte. Se integra al profit principal al marcarlos como entregados. " : "Profit estimado = ingresos y cobros − gastos y costos previstos. "}Incluye saldos por cobrar; no es dinero disponible en cuenta.</p>` : "");
       renderProjectFinanceDetail();
       if (els.usePendingPayment) {
         els.usePendingPayment.disabled = true;
@@ -436,7 +439,8 @@
       expected: ["Cobros previstos", "Ingresos esperados que aún no están registrados como recibidos."],
       wilington: ["Debo a Wilington", "Pagos pendientes. No se descuentan de la caja hasta registrar el gasto."],
       other: ["Otros costos previstos", "Costos aún no pagados. Toca un frente para ver su nota y los conceptos."],
-      profit: ["Profit estimado", "Estimación por frente, incluidos los costos pendientes. No equivale a caja disponible."],
+      profit: ["Profit estimado", "Estimación por frente, excluidos los trabajos con profit separado. Incluye saldos por cobrar y costos pendientes; no es caja disponible."],
+      deferredProfit: ["Profit de trabajos pendientes", "Ganancia prevista de trabajos aún por realizar. No se suma al profit principal hasta marcarlos como entregados."],
       income: ["Ingresos registrados", "Cobros que ya entraron y constan como movimientos."],
       expenses: ["Gastos registrados", "Pagos que ya salieron y constan como movimientos."],
       cash: ["Caja registrada", "Ingresos recibidos menos gastos pagados y retiros de profit."],
@@ -454,13 +458,14 @@
       if (view === "expected") return summary.expectedIncome;
       if (view === "wilington") return summary.payableWilington;
       if (view === "other") return summary.otherEstimatedCost;
-      return summary.income + summary.pending + summary.expectedIncome - summary.expenses - summary.payableWilington - summary.otherEstimatedCost;
+      return Engine.splitWorkProfit({ paid: summary.income, expenses: summary.expenses }, [summary]).total;
     };
-    if (["receivable", "expected", "wilington", "other", "profit"].includes(view) && accounts.length) {
-      accounts.forEach((account) => {
+    if (["receivable", "expected", "wilington", "other", "profit", "deferredProfit"].includes(view) && accounts.length) {
+      const shownAccounts = accounts.filter((account) => view === "profit" ? !account.profitDeferred : view === "deferredProfit" ? account.profitDeferred : true);
+      shownAccounts.forEach((account) => {
         const amount = accountAmount(account);
-        if (!amount && view !== "profit") return;
-        const detail = view === "profit" ? "Ingresos y cobros − gastos y costos previstos" : view === "other" ? "Ver conceptos y nota del frente" : view === "wilington" ? "Saldo pendiente de pago" : "Saldo pendiente del cliente";
+        if (!amount && !["profit", "deferredProfit"].includes(view)) return;
+        const detail = view === "deferredProfit" ? "Pendiente de realizar · no incluido en el profit principal" : view === "profit" ? "Ingresos y cobros − gastos y costos previstos" : view === "other" ? "Ver conceptos y nota del frente" : view === "wilington" ? "Saldo pendiente de pago" : view === "expected" ? "Cobro futuro; no es deuda actual del cliente" : "Saldo pendiente del cliente";
         const tone = ["wilington", "other"].includes(view) ? "expense" : ["receivable", "expected"].includes(view) ? "receivable" : "income";
         if (view === "other" && account.otherCostDetails) {
           const concepts = account.otherCostDetails.split(/\r?\n/).map((line) => {
@@ -480,11 +485,9 @@
         lines.push(financeDetailAccountRow(account, amount, detail, tone));
       });
       if (view === "profit") {
-        const accountProfit = accounts.reduce((sum, account) => sum + accountAmount(account), 0);
-        const receivable = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.pendingAmount) || 0), 0);
-        const expected = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.expectedIncome) || 0), 0);
-        const costs = accounts.reduce((sum, account) => sum + Math.max(0, Number(account.payableWilington) || 0) + Math.max(0, Number(account.otherEstimatedCost) || 0), 0);
-        const difference = finance.paid + receivable + expected - finance.expenses - costs - accountProfit;
+        const accountProfit = shownAccounts.reduce((sum, account) => sum + accountAmount(account), 0);
+        const profit = Engine.splitWorkProfit(finance, accounts.map((account) => workAccountSummary(state.draft, account)));
+        const difference = profit.current - accountProfit;
         if (difference) lines.push(financeDetailTotalRow("Cuenta general y ajustes", difference, "Movimientos sin frente o saldos iniciales"));
       }
     } else if (view === "receivable" && finance.pending !== null) {
@@ -515,6 +518,7 @@
 
   function workAccountCard(account) {
     const summary = workAccountSummary(state.draft, account);
+    const profit = Engine.splitWorkProfit({ paid: summary.income, expenses: summary.expenses }, [summary]).total;
     const status = WORK_ACCOUNT_STATUSES.includes(account.status) ? account.status : "in_process";
     const statusOptions = WORK_ACCOUNT_STATUSES.map((value) =>
       `<option value="${value}"${value === status ? " selected" : ""}>${escapeHtml(WORK_ACCOUNT_LABELS[value])}</option>`,
@@ -533,7 +537,7 @@
           <div><span>Cobro previsto</span><strong>${escapeHtml(formatMoney(summary.expectedIncome))}</strong></div>
           <div><span>Debo a Wilington</span><strong class="is-expense">${escapeHtml(formatMoney(summary.payableWilington))}</strong></div>
           <div><span>Otros costos previstos</span><strong class="is-expense">${escapeHtml(formatMoney(summary.otherEstimatedCost))}</strong></div>
-          <div><span>Profit estimado</span><strong class="${summary.income + summary.pending + summary.expectedIncome - summary.expenses - summary.payableWilington - summary.otherEstimatedCost < 0 ? "is-expense" : "is-income"}">${escapeHtml(formatMoney(summary.income + summary.pending + summary.expectedIncome - summary.expenses - summary.payableWilington - summary.otherEstimatedCost))}</strong></div>
+          <div><span>${account.profitDeferred ? "Profit pendiente de realizar" : "Profit estimado"}</span><strong class="${profit < 0 ? "is-expense" : "is-income"}">${escapeHtml(formatMoney(profit))}</strong></div>
         </div>
         <div class="work-account-edit-grid">
           <label>Nombre<input data-account-field="title" value="${escapeHtml(account.title)}" /></label>
@@ -544,6 +548,7 @@
           <label>Otros costos previstos<input class="money-input" inputmode="numeric" data-account-field="otherEstimatedCost" value="${escapeHtml(formatMoneyInput(account.otherEstimatedCost))}" /></label>
           <label class="work-account-cost-lines">Conceptos de otros costos<textarea rows="2" data-account-field="otherCostDetails" placeholder="Uno por línea: Parra | 150000">${escapeHtml(account.otherCostDetails || "")}</textarea></label>
           <label class="work-account-separate"><input type="checkbox" data-account-field="separateWork"${account.separateWork ? " checked" : ""} /> Trabajo por aparte</label>
+          <label class="work-account-separate"><input type="checkbox" data-account-field="profitDeferred"${account.profitDeferred ? " checked" : ""} /> Separar profit hasta realizar este trabajo</label>
           <label class="work-account-notes">Nota<textarea rows="2" data-account-field="notes" placeholder="Origen del saldo, acuerdo o próxima acción">${escapeHtml(account.notes || "")}</textarea></label>
         </div>
         <div class="work-account-actions">
@@ -1801,6 +1806,7 @@
         otherEstimatedCost: 0,
         otherCostDetails: "",
         separateWork: false,
+        profitDeferred: false,
         notes: "",
       });
       els.workAccountForm.reset();
@@ -1826,7 +1832,12 @@
       if (!account) return;
       const key = field.dataset.accountField;
       if (field.classList.contains("money-input")) keepMoneyFormatted(field);
-      account[key] = key === "separateWork" ? field.checked : ["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(key) ? parseMoneyInput(field.value) : field.value;
+      account[key] = ["separateWork", "profitDeferred"].includes(key) ? field.checked : ["pendingAmount", "expectedIncome", "payableWilington", "otherEstimatedCost"].includes(key) ? parseMoneyInput(field.value) : field.value;
+      if (key === "status" && ["delivered", "warranty", "closed"].includes(account.status) && account.profitDeferred) {
+        account.profitDeferred = false;
+        card.querySelector('[data-account-field="profitDeferred"]').checked = false;
+        toast("Trabajo realizado: su profit se integra al total principal");
+      }
       els.saveStatus.textContent = "Cambios pendientes de guardar";
       renderProjectFinanceOverview();
       renderProjectHealth();
