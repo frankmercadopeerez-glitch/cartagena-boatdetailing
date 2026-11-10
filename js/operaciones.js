@@ -378,9 +378,9 @@
         ...(hasForecast ? [
           ["Debo a Wilington", formatMoney(pendingToWilington), "credit-card", "expense", "wilington"],
           ["Otros costos previstos", formatMoney(otherEstimatedCosts), "receipt-text", "expense", "other"],
-          ["Profit estimado", formatMoney(profit.current), "chart-no-axes-combined", profit.current < 0 ? "expense" : "income", "profit"],
-          ...(profit.deferredCount ? [["Profit trabajos pendientes", formatMoney(profit.deferred), "calendar-clock", profit.deferred < 0 ? "expense" : "work", "deferredProfit"]] : []),
         ] : []),
+        ["Profit estimado", formatMoney(profit.current), "chart-no-axes-combined", profit.current < 0 ? "expense" : "income", "profit"],
+        ...(profit.deferredCount ? [["Profit trabajos pendientes", formatMoney(profit.deferred), "calendar-clock", profit.deferred < 0 ? "expense" : "work", "deferredProfit"]] : []),
         ["Caja registrada", formatMoney(finance.balance), "wallet", finance.balance < 0 ? "expense" : "income", "cash"],
         ["Ingresos registrados", formatMoney(finance.paid), "trending-up", "income", "income"],
         ["Gastos registrados", formatMoney(finance.expenses), "trending-down", "expense", "expenses"],

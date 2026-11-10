@@ -263,6 +263,28 @@ async function run() {
   assert.doesNotMatch(ui.els.projectFinanceOverview.innerHTML, /data-finance-view="deferredProfit"/);
   assert.deepEqual(engine.projectFinancials(draft, ui.state.financeTransactions), financeBefore, "profit classification must not alter the ledger or cash");
   assert.equal(JSON.stringify(ui.state.financeTransactions), ledgerBefore);
+
+  // Completing the last deferred service must retain the principal profit
+  // card even when no pending receipts, estimated costs or other forecasts remain.
+  ui.state.draft = ui.defaultProject({ name: "Terminado", workAccounts: [
+    { id: "last-service", title: "Último servicio", profitDeferred: true, status: "in_process" },
+  ] });
+  ui.state.financeTransactions = [
+    { id: "last-income", proyecto: "Terminado", tipo: "ingreso", monto: 500000, projectAccountId: "last-service" },
+    { id: "last-expense", proyecto: "Terminado", tipo: "gasto", monto: 400000, projectAccountId: "last-service" },
+  ];
+  ui.state.financeBreakdown = "";
+  ui.renderProjectFinanceOverview();
+  assert.equal(overviewAmount("deferredProfit"), 100000);
+  accountCard.dataset.workAccountId = "last-service";
+  deferredCheckbox.checked = true;
+  field.dataset.accountField = "status";
+  field.value = "delivered";
+  inputHandler({ target: field });
+  assert.equal(ui.state.draft.workAccounts[0].profitDeferred, false);
+  assert.equal(overviewAmount("profit"), 100000, "principal profit remains visible after the final delivery with no forecasts");
+  assert.equal(overviewAmount("cash"), 100000);
+  assert.doesNotMatch(ui.els.projectFinanceOverview.innerHTML, /data-finance-view="deferredProfit"/);
   console.log("Operations UI regression checks passed");
 }
 
