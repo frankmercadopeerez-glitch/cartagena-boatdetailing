@@ -1,4 +1,5 @@
 window.BLOG_POSTS = [
+  {"slug": "medir-plataforma-popa-piso-eva", "url": "blog/medir-plataforma-popa-piso-eva/", "title": "Cómo medir la plataforma de popa para instalar piso EVA", "excerpt": "Qué medidas, fotos y detalles de escotillas enviar para cotizar foam deck en Cartagena. Incluye un croquis de ejemplo y fotos reales del yate HAYA.", "dateISO": "2026-11-22", "dateLabel": "22 Nov 2026", "readTime": "4 min de lectura", "category": "Pisos EVA", "featured": true, "image": "images/casos-reales/haya-foam-deck/despues-01-560.webp"},
   {"slug": "lavar-yate-despues-agua-salada-cartagena", "url": "blog/lavar-yate-despues-agua-salada-cartagena/", "title": "Cómo Lavar un Yate Después de Navegar en Agua Salada", "excerpt": "Orden de lavado, errores frecuentes y checklist para retirar sal de gelcoat, metales, cristales y cubierta después de navegar en Cartagena.", "dateISO": "2026-10-09", "dateLabel": "9 Oct 2026", "readTime": "8 min de lectura", "category": "Lavado técnico", "featured": true, "image": "images/casos-reales/le-meridiem-pulido/proa-960.webp"},
   {"slug": "preparar-yate-para-venta-cartagena", "url": "blog/preparar-yate-para-venta-cartagena/", "title": "Cómo Preparar un Yate para la Venta en Cartagena: Checklist", "excerpt": "Qué revisar, limpiar y documentar antes de fotografiar, mostrar o entregar un yate para una inspección de compra.", "dateISO": "2026-09-21", "dateLabel": "21 Sep 2026", "readTime": "9 min de lectura", "category": "Venta y presentación", "featured": true, "image": "images/polichado (2).webp"},
   {"slug": "boat-detailing-yates-charter-cartagena", "url": "blog/boat-detailing-yates-charter-cartagena/", "title": "Boat Detailing para Yates Charter en Cartagena: Checklist Entre Salidas", "excerpt": "Cómo revisar, priorizar y preparar un yate charter entre reservas sin confundir limpieza, reparación y mantenimiento técnico.", "dateISO": "2026-09-14", "dateLabel": "14 Sep 2026", "readTime": "8 min de lectura", "category": "Mantenimiento", "featured": true, "image": "images/services/lavado-tecnico.webp"},
@@ -683,7 +684,7 @@ window.BLOG_POSTS = [
     category: "Electricidad",
     featured: !1,
     image:
-      "images/blog/seguridad-electrica-barco.webp",
+      "images/blog/instalacion-electrica-nautica-cartagena.webp",
   },
   {
     slug: "antifouling-embarcaciones-mar-cartagena",
