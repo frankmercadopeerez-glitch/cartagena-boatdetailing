@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon" href="/images/icon-192.png?v=20260812" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boat Detailing en Cartagena para Yates y Botes</title>
-    <link rel="stylesheet" href="css/home-bundle.css?v=20261009-2" />
+    <link rel="stylesheet" href="css/home-bundle.css?v=20261123-marca" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -309,21 +309,10 @@
       }
       .feature-list li::before {
         content: "✦";
-        color: #d4af37;
+        color:var(--cbd-accent-text);
         position: absolute;
         left: 0;
         font-size: 0.8rem;
-      }
-
-      /* Contraste legible para acentos de marca sobre superficies claras. */
-      section.bg-white .text-gold-400,
-      section.bg-slate-50 .text-gold-400,
-      section.bg-white .text-gold-600,
-      section.bg-slate-50 .text-gold-600 {
-        color: #795b00 !important;
-      }
-      #contacto .bg-navy-800 .text-gold-400 {
-        color: #f2d46b !important;
       }
       #proceso a.bg-gold-400 {
         color: #071428 !important;
@@ -562,10 +551,10 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-servicios">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-marca">
 </head>
   <body
-    class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
+    class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-navy-900"
   >
     <!-- Navigation -->
     <!-- Navigation -->
@@ -934,7 +923,7 @@
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style="width: 100%; height: 100%; color: #d4af37"
+          style="width: 100%; height: 100%; color:var(--cbd-accent-text)"
         >
           <circle
             cx="100"

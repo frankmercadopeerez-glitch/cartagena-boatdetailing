@@ -821,34 +821,20 @@ function simplifyServicesNavigation() {
   });
 }
 function initFooterConsistency() {
-  ((document.documentElement.style.backgroundColor = "#001f3f"),
-    document.body.classList.contains("bg-navy-900")
-      ? (document.body.style.backgroundColor = "#001f3f")
-      : document.body.style.removeProperty("background-color"),
-    document.querySelectorAll("footer").forEach((e) => {
-      (e.querySelectorAll("h4, .text-navy-900, .text-navy-800").forEach((e) => {
-        e.style.setProperty("color", "#e2e8f0", "important");
-      }),
-        e
-          .querySelectorAll(".text-slate-500, .text-slate-600, .text-slate-700")
-          .forEach((e) => {
-            e.style.setProperty("color", "#cbd5e1", "important");
-          }),
-        e
-          .querySelectorAll(
-            "a[href*='wa.me'], a[href*='api.whatsapp.com'], a[href*='whatsapp.com/send']",
-          )
-          .forEach((link) => {
-            if (!isEnglishDocument()) return link.remove();
-            link.style.setProperty(
-              "display",
-              link.classList.contains("inline-flex") || link.querySelector("svg")
-                ? "inline-flex"
-                : "inline",
-              "important",
-            );
-          }));
-    }));
+  document.documentElement.style.backgroundColor = "#001f3f";
+  if (document.body.classList.contains("bg-navy-900")) {
+    document.body.style.backgroundColor = "#001f3f";
+  } else {
+    document.body.style.removeProperty("background-color");
+  }
+  const english = isEnglishDocument();
+  document.querySelectorAll(
+    "footer a[href*='wa.me'], footer a[href*='api.whatsapp.com'], footer a[href*='whatsapp.com/send']",
+  ).forEach((link) => {
+    if (!english) return link.remove();
+    const inlineFlex = link.classList.contains("inline-flex") || link.querySelector("svg");
+    link.style.setProperty("display", inlineFlex ? "inline-flex" : "inline", "important");
+  });
 }
 function normalizeFloatingWhatsApp() {
   const existing = document.querySelector("a.whatsapp-float");

@@ -82,7 +82,7 @@ textarea:focus-visible,
 }
 
 .home-trust-chip i {
-  color: #b08d1e;
+  color: var(--cbd-accent-text);
   font-size: 1.35rem;
   flex: 0 0 auto;
 }
@@ -101,7 +101,7 @@ textarea:focus-visible,
 
 .home-service-pill:hover {
   border-color: var(--cbd-gold);
-  background: #fffbeb;
+  background: #f1f5f9;
 }
 
 .home-service-pill:focus-visible,
@@ -257,7 +257,7 @@ textarea:focus-visible,
 }
 
 .home-case-card figcaption > span {
-  color: #795b00;
+  color: var(--cbd-accent-text);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -289,7 +289,7 @@ textarea:focus-visible,
 }
 
 .home-confidence-card i {
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-size: 1.5rem;
   flex: 0 0 auto;
 }
@@ -373,7 +373,7 @@ textarea:focus-visible,
 }
 
 .catalog-proof-row i {
-  color: #b08d1e;
+  color: var(--cbd-accent-text);
   font-size: 1.15rem;
 }
 
@@ -440,7 +440,7 @@ textarea:focus-visible,
 }
 
 .service-catalog-kicker {
-  color: #8a6a0a;
+  color: var(--cbd-accent-text);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -468,7 +468,7 @@ textarea:focus-visible,
   gap: 0.5rem;
   margin-top: auto;
   padding-top: 1.15rem;
-  color: #8a6a0a;
+  color: var(--cbd-accent-text);
   font-size: 0.9rem;
   font-weight: 700;
 }
@@ -491,7 +491,7 @@ textarea:focus-visible,
 
 .secondary-service-grid a:hover {
   border-color: var(--cbd-gold);
-  background: #fffbeb;
+  background: #f1f5f9;
 }
 
 .secondary-service-grid strong {
@@ -517,7 +517,7 @@ textarea:focus-visible,
 }
 
 .service-guidance-box > div > span {
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -579,7 +579,7 @@ textarea:focus-visible,
 }
 
 .about-principle-card i {
-  color: #b08d1e;
+  color: var(--cbd-accent-text);
   font-size: 1.55rem;
   flex: 0 0 auto;
 }
@@ -605,7 +605,7 @@ textarea:focus-visible,
 }
 
 .about-trust-card > span {
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-family: "Playfair Display", serif;
   font-size: 1.7rem;
 }
@@ -643,7 +643,7 @@ textarea:focus-visible,
 
 .about-founder-brand span {
   margin-top: 1.5rem;
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -668,9 +668,9 @@ textarea:focus-visible,
 .about-skill-tag {
   display: inline-flex;
   padding: 0.55rem 0.75rem;
-  border: 1px solid #d6bd67;
-  background: #fffbeb;
-  color: #715608;
+  border: 1px solid #d4af37;
+  background: #f1f5f9;
+  color: var(--cbd-accent-text);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -690,7 +690,7 @@ textarea:focus-visible,
 }
 
 .about-specialty-list i {
-  color: #b08d1e;
+  color: var(--cbd-accent-text);
   font-size: 1.25rem;
   flex: 0 0 auto;
 }
@@ -765,7 +765,7 @@ textarea:focus-visible,
 }
 
 .whatsapp-float:focus-visible {
-  outline: 3px solid #f2d46b;
+  outline: 3px solid #d4af37;
   outline-offset: 4px;
 }
 
@@ -798,7 +798,7 @@ textarea:focus-visible,
   justify-content: space-between;
   margin-top: 4px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  color: #f2d46b;
+  color: var(--cbd-accent-text);
   font-weight: 700;
 }
 
@@ -957,7 +957,7 @@ textarea:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -983,7 +983,7 @@ textarea:focus-visible,
 }
 
 .cases-hero h1 em {
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   font-weight: 400;
 }
 
@@ -1070,7 +1070,7 @@ textarea:focus-visible,
 }
 
 .cases-proof-note i {
-  color: #a77f08;
+  color: var(--cbd-accent-text);
   font-size: 1.35rem;
   flex: 0 0 auto;
 }
@@ -1099,7 +1099,7 @@ textarea:focus-visible,
 
 .cases-index a:hover {
   border-color: var(--cbd-gold);
-  background: #fffbeb;
+  background: #f1f5f9;
 }
 
 .case-studies {
@@ -1117,7 +1117,7 @@ textarea:focus-visible,
 }
 
 .case-study__number {
-  color: #b08d1e;
+  color: var(--cbd-accent-text);
   font-family: "Playfair Display", serif;
   font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
@@ -1211,7 +1211,7 @@ textarea:focus-visible,
 }
 
 .case-photo figcaption span:last-child {
-  color: var(--cbd-gold);
+  color: var(--cbd-accent-text);
   text-align: right;
 }
 

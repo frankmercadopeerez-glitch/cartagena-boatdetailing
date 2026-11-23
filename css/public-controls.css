@@ -1,15 +1,60 @@
 /* Action controls on public pages share the same type, geometry and focus ring. */
-:root { --cbd-corner-radius: 9px; }
+:root {
+  --cbd-corner-radius: 9px;
+  --cbd-gold: #d4af37;
+  --cbd-ink: #001f3f;
+  --cbd-accent-text: var(--cbd-ink);
+  --cbd-soft-surface: #f1f5f9;
+}
+
+/* The nearest surface determines the readable foreground, including nested cards. */
+:where(.bg-navy-800, .bg-navy-900, .bg-slate-800, .bg-slate-900, .bg-black,
+  #navbar, #mobile-menu, footer, header.text-white, header:has(picture),
+  .article-nav, .article-hero, .answer, .cases-hero, .case-cta, .case-photo figcaption,
+  .about-founder-brand, .service-guidance-box, .about-trust-card, .quote-form-panel,
+  .blog-card, .shine-on-hover:has(> img), .cbd-on-dark) {
+  --cbd-accent-text: var(--cbd-gold);
+  --cbd-soft-surface: #173853;
+}
+:where(.bg-white, .bg-slate-50, .bg-slate-100, .bg-gray-50, .bg-gold-400,
+  .bg-amber-50, .case-study, .note, .warning, .info-box, .warning-box, .cbd-on-light) {
+  --cbd-accent-text: var(--cbd-ink);
+  --cbd-soft-surface: #f1f5f9;
+}
+body :is(.bg-gold-400\/5, .bg-gold-400\/10, .bg-gold-400\/15, .bg-gold-400\/20, .bg-gold-400\/40),
+body .hover\:bg-gold-400\/10:hover,
+body .hover\:bg-gold-400\/20:hover {
+  background-color: var(--cbd-soft-surface);
+}
+body :is(.text-gold-300, .text-gold-400, .text-gold-500, .text-gold-600),
+body :is(.hover\:text-gold-400, .hover\:text-gold-500, .hover\:text-gold-600):hover,
+body .group:hover :is(.group-hover\:text-gold-400, .group-hover\:text-gold-500, .group-hover\:text-gold-600) {
+  color: var(--cbd-accent-text) !important;
+}
+body :is(.bg-gold-400, .bg-gold-500),
+body .hover\:bg-gold-400:hover:not(.cbd-button) {
+  color: var(--cbd-ink);
+}
+/* Gold labels and actions can sit inside sections that force light text. */
+body :is(.bg-gold-400, .bg-gold-500):is(.text-navy-800, .text-navy-900, .cbd-button--gold),
+body :is(.bg-gold-400, .bg-gold-500) :is(.text-navy-800, .text-navy-900),
+body :is(button, a).cbd-button.cbd-button--gold {
+  color: var(--cbd-ink) !important;
+}
+body ::selection { color: var(--cbd-ink); background-color: var(--cbd-gold); }
 
 /* The same corner radius applies to static cards and cards rendered by the blog. */
 body :is(
   .about-principle-card,
   .about-trust-card,
+  .about-founder-brand,
+  .about-founder-copy,
   .answer,
   .article-cta,
   .blog-card,
   .blog-preview-card,
   .case-photo,
+  .case-study,
   .cases-proof-note,
   .cbd-card,
   .contact-card,
@@ -20,10 +65,17 @@ body :is(
   .home-case-card,
   .home-confidence-card,
   .home-trust-chip,
+  .home-service-pill,
+  .hero-badge,
+  .trust-badge,
+  .nav-service-badge,
+  .nav-dropdown-link,
   .info-box,
   .mechanic-card,
   .note,
   .price-card,
+  .price-reference,
+  .quote-form-panel label:has(input[type="checkbox"]),
   .pricing-card,
   .quote-form-panel,
   .review-card,
@@ -36,7 +88,10 @@ body :is(
   .warning,
   .warning-box,
   .secondary-service-grid > a,
-  .related > a
+  .related > a,
+  .cases-button,
+  .article-cta a,
+  :is(div, section, aside, article, li, a, span).rounded-sm
 ) {
   /* Some legacy cards set their radius inline or override it on phones. */
   border-radius: var(--cbd-corner-radius) !important;
@@ -47,10 +102,10 @@ body .cbd-card:has(> picture, > img, > .blog-img-zoom) {
 }
 
 .cbd-button--gold {
-  --button-fill: #e1bc46;
-  --button-ink: #071d36;
-  --button-edge: #b58e22;
-  --button-hover: #f3d374;
+  --button-fill: var(--cbd-gold);
+  --button-ink: var(--cbd-ink);
+  --button-edge: var(--cbd-ink);
+  --button-hover: #fff;
 }
 .cbd-button--ink {
   --button-fill: #092440;
@@ -114,6 +169,16 @@ body a.rounded-sm.text-center[href].border {
 .blog-filter-btn, .blog-pagination-btn {
   min-height: 44px;
   min-width: 44px;
+}
+body :is(.blog-filter-btn, .blog-pagination-btn).active {
+  color: var(--cbd-ink);
+  background: var(--cbd-gold);
+  border-color: var(--cbd-gold);
+}
+body :is(.blog-filter-btn, .blog-pagination-btn):hover:not(.active) {
+  color: white;
+  background: #173853;
+  border-color: var(--cbd-gold);
 }
 .case-service-link { margin-top: 1rem; }
 .case-service-link a {
@@ -199,7 +264,7 @@ html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
   border-radius: var(--cbd-corner-radius);
 }
 .featured-star-card {
-  --feature-accent: #e1bc46;
+  --feature-accent: var(--cbd-gold);
   --feature-ink: #071d36;
 }
 .featured-star-card .featured-service-badge {

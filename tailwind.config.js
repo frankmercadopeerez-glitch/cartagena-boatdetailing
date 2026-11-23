@@ -1,3 +1,5 @@
+const brandGold = "#d4af37";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -18,9 +20,10 @@ module.exports = {
           800: "#0a2f5e",
         },
         gold: {
-          400: "#d4af37",
-          500: "#c5a028",
-          600: "#b08d1e",
+          300: brandGold,
+          400: brandGold,
+          500: brandGold,
+          600: brandGold,
         },
         electric: {
           400: "#4d8bff",
