@@ -1,4 +1,6 @@
 /* Action controls on public pages share the same type, geometry and focus ring. */
+:root { --cbd-button-radius: 9px; }
+
 .cbd-button--gold {
   --button-fill: #e1bc46;
   --button-ink: #071d36;
@@ -33,7 +35,7 @@ body :is(a, button).cbd-button {
   min-height: 44px;
   padding: .72rem 1.25rem;
   border: 1px solid var(--button-edge);
-  border-radius: .375rem;
+  border-radius: var(--cbd-button-radius);
   background: var(--button-fill);
   color: var(--button-ink);
   font: 700 .94rem/1.3 Inter, system-ui, sans-serif;
@@ -56,10 +58,18 @@ body :is(a, button).cbd-button:focus-visible {
   box-shadow: 0 0 0 7px #1a517c;
 }
 .cbd-button > i { margin-inline: 0; }
+body button:not(.home-case-gallery-dot, .rounded-full),
+body input:is([type="submit"], [type="button"], [type="reset"]),
+body [role="button"]:not(.rounded-full),
+body .cases-index a,
+body .cbd-lang-btn,
+body .faq-item:has(> .faq-toggle),
+body a.rounded-sm.text-center[href].border {
+  border-radius: var(--cbd-button-radius);
+}
 .blog-filter-btn, .blog-pagination-btn {
   min-height: 44px;
   min-width: 44px;
-  border-radius: .375rem;
 }
 .case-service-link { margin-top: 1rem; }
 .case-service-link a {
@@ -118,7 +128,7 @@ html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
     min-height: 48px;
     padding: .6rem .8rem;
     border: 1px solid #71879d;
-    border-radius: .375rem;
+    border-radius: var(--cbd-button-radius);
     background: #102b46;
     color: white;
     font: inherit;
