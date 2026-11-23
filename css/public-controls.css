@@ -1,0 +1,73 @@
+/* Action controls on public pages share the same type, geometry and focus ring. */
+.cbd-button--gold {
+  --button-fill: #e1bc46;
+  --button-ink: #071d36;
+  --button-edge: #b58e22;
+  --button-hover: #f3d374;
+}
+.cbd-button--ink {
+  --button-fill: #092440;
+  --button-ink: #fff;
+  --button-edge: #092440;
+  --button-hover: #183c5c;
+}
+.cbd-button--light {
+  --button-fill: rgba(8, 27, 47, .75);
+  --button-ink: #fff;
+  --button-edge: #b9c6d2;
+  --button-hover: #173953;
+}
+.cbd-button--outline {
+  --button-fill: #fff;
+  --button-ink: #0a2947;
+  --button-edge: #72869a;
+  --button-hover: #eef3f6;
+}
+body :is(a, button).cbd-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  max-width: 100%;
+  min-height: 44px;
+  padding: .72rem 1.25rem;
+  border: 1px solid var(--button-edge);
+  border-radius: .375rem;
+  background: var(--button-fill);
+  color: var(--button-ink);
+  font: 700 .94rem/1.3 Inter, system-ui, sans-serif;
+  letter-spacing: .015em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+  box-shadow: none;
+  transition: background-color .16s ease, border-color .16s ease;
+}
+body :is(a, button).cbd-button:hover {
+  background: var(--button-hover);
+  color: var(--button-ink);
+  transform: none;
+}
+body :is(a, button).cbd-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 7px #1a517c;
+}
+.cbd-button > i { margin-inline: 0; }
+.blog-filter-btn, .blog-pagination-btn {
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: .375rem;
+}
+.case-service-link { margin-top: 1rem; }
+.case-service-link a {
+  color: #113d5e;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+@media (prefers-reduced-motion: reduce) {
+  body :is(a, button).cbd-button { transition: none; }
+}
