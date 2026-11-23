@@ -11,13 +11,13 @@
   <!-- Página Principal -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/header.webp</image:loc>
-      <image:title>Pulido y mantenimiento de yates en Cartagena</image:title>
-      <image:caption>Pulido de gelcoat, reparación, pisos y servicios para yates y botes en Cartagena</image:caption>
+      <image:loc>https://www.colombiaboatdetailing.com/images/portada-le-meridiem.webp</image:loc>
+      <image:title>Casco del yate Le Meridiem después del pulido en Cartagena</image:title>
+      <image:caption>Casco del yate Le Meridiem después del pulido en Cartagena</image:caption>
       <image:geo_location>Cartagena de Indias, Colombia</image:geo_location>
     </image:image>
   </url>
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog.html</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -840,17 +840,17 @@
        ======================================== -->
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/foam-deck-cartagena/</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
-      <image:title>Foam Deck instalado en yate en Cartagena Colombia</image:title>
+      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/haya-foam-deck/antes-960.webp</image:loc>
+      <image:title>Vista de la plataforma de popa del HAYA antes de instalar el piso EVA</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/precio-foam-deck-yate-cartagena/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -860,27 +860,27 @@
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/foam-deck-vs-cubierta-teca-yate/</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.83</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
-      <image:title>Foam deck vs cubierta de teca yate Cartagena</image:title>
+      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/haya-foam-deck/despues-01-960.webp</image:loc>
+      <image:title>Piso EVA con líneas oscuras instalado en la plataforma de popa del HAYA</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/cubierta-espuma-marina-cartagena/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.83</priority>
     <image:image>
-      <image:loc>https://www.colombiaboatdetailing.com/images/cubierta.webp</image:loc>
-      <image:title>Cubierta de espuma marina EVA para yates en Cartagena</image:title>
+      <image:loc>https://www.colombiaboatdetailing.com/images/casos-reales/haya-foam-deck/despues-960.webp</image:loc>
+      <image:title>Líneas oscuras del diseño del piso EVA en la popa del yate HAYA</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://www.colombiaboatdetailing.com/blog/cubierta-eva-foamdeck-cartagena/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
     <image:image>

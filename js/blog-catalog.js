@@ -1174,44 +1174,38 @@ window.BLOG_POSTS = [
   {
     slug: "foam-deck-cartagena",
     url: "blog/foam-deck-cartagena/",
-    title:
-      "Foam Deck en Cartagena: Guía Completa 2026 para Yates y Botes | Colombia Boat Detailing",
-    excerpt:
-      "Todo lo que necesitas saber sobre foam deck para botes y yates en Cartagena: qué es, tipos EVA, ventajas en el Caribe, precios y proceso de instalación. Guía completa 2026.",
+    title: "¿Está lista la cubierta de mi bote para instalar foam deck?",
+    excerpt: "Qué revisar en la base, los drenajes y las escotillas antes de instalar piso EVA en Cartagena, y qué hallazgos debe resolver el instalador antes del corte.",
     dateISO: "2026-06-25",
     dateLabel: "25 Jun 2026",
-    readTime: "9 min de lectura",
+    readTime: "3 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/casos-reales/haya-foam-deck/antes-560.webp",
   },
   {
     slug: "foam-deck-vs-cubierta-teca-yate",
     url: "blog/foam-deck-vs-cubierta-teca-yate/",
-    title:
-      "Foam Deck vs Cubierta de Teca: ¿Cuál Elegir para tu Yate en el Caribe?",
-    excerpt:
-      "Comparativa definitiva: foam deck EVA vs cubierta de teca natural para yates en el Caribe colombiano. Costos, durabilidad, mantenimiento y cuál es mejor para Cartagena.",
+    title: "¿Conservar la teca de la plataforma de popa o cambiarla por EVA?",
+    excerpt: "Cómo decidir si vale la pena conservar la teca de tu plataforma, reparar una zona o pedir una cotización para cambiar el revestimiento por piso EVA.",
     dateISO: "2026-06-25",
     dateLabel: "25 Jun 2026",
-    readTime: "8 min de lectura",
+    readTime: "3 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/casos-reales/haya-foam-deck/despues-01-560.webp",
   },
   {
     slug: "cubierta-espuma-marina-cartagena",
     url: "blog/cubierta-espuma-marina-cartagena/",
-    title:
-      "Cubierta de Espuma Marina en Cartagena: EVA Foam para Yates | Colombia Boat Detailing",
-    excerpt:
-      "Instalación de cubierta de espuma marina (EVA foam deck) para botes y yates en Cartagena. Antideslizante, resistente al agua salada, cero mantenimiento.",
+    title: "¿Cómo limpiar las ranuras de un piso EVA marino?",
+    excerpt: "Una rutina para quitar arena, huellas y residuos de las ranuras del piso EVA de tu bote, elegir el limpiador y reconocer cuándo un borde necesita revisión.",
     dateISO: "2026-06-25",
     dateLabel: "25 Jun 2026",
-    readTime: "7 min de lectura",
+    readTime: "3 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/casos-reales/haya-foam-deck/despues-560.webp",
   },
   {
     slug: "precio-foam-deck-yate-cartagena",
