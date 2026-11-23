@@ -1,5 +1,50 @@
 /* Action controls on public pages share the same type, geometry and focus ring. */
-:root { --cbd-button-radius: 9px; }
+:root { --cbd-corner-radius: 9px; }
+
+/* The same corner radius applies to static cards and cards rendered by the blog. */
+body :is(
+  .about-principle-card,
+  .about-trust-card,
+  .answer,
+  .article-cta,
+  .blog-card,
+  .blog-preview-card,
+  .case-photo,
+  .cases-proof-note,
+  .cbd-card,
+  .contact-card,
+  .electrical-card,
+  .faq-item,
+  .featured-star-card,
+  .highlight-box,
+  .home-case-card,
+  .home-confidence-card,
+  .home-trust-chip,
+  .info-box,
+  .mechanic-card,
+  .note,
+  .price-card,
+  .pricing-card,
+  .quote-form-panel,
+  .review-card,
+  .service-card,
+  .service-catalog-card,
+  .service-guidance-box,
+  .stat-card,
+  .step-box,
+  .type-card,
+  .warning,
+  .warning-box,
+  .secondary-service-grid > a,
+  .related > a
+) {
+  /* Some legacy cards set their radius inline or override it on phones. */
+  border-radius: var(--cbd-corner-radius) !important;
+}
+body :is(.blog-card, .blog-preview-card, .home-case-card, .case-photo, .service-catalog-card),
+body .cbd-card:has(> picture, > img, > .blog-img-zoom) {
+  overflow: clip;
+}
 
 .cbd-button--gold {
   --button-fill: #e1bc46;
@@ -35,7 +80,7 @@ body :is(a, button).cbd-button {
   min-height: 44px;
   padding: .72rem 1.25rem;
   border: 1px solid var(--button-edge);
-  border-radius: var(--cbd-button-radius);
+  border-radius: var(--cbd-corner-radius);
   background: var(--button-fill);
   color: var(--button-ink);
   font: 700 .94rem/1.3 Inter, system-ui, sans-serif;
@@ -63,9 +108,8 @@ body input:is([type="submit"], [type="button"], [type="reset"]),
 body [role="button"]:not(.rounded-full),
 body .cases-index a,
 body .cbd-lang-btn,
-body .faq-item:has(> .faq-toggle),
 body a.rounded-sm.text-center[href].border {
-  border-radius: var(--cbd-button-radius);
+  border-radius: var(--cbd-corner-radius);
 }
 .blog-filter-btn, .blog-pagination-btn {
   min-height: 44px;
@@ -128,7 +172,7 @@ html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
     min-height: 48px;
     padding: .6rem .8rem;
     border: 1px solid #71879d;
-    border-radius: var(--cbd-button-radius);
+    border-radius: var(--cbd-corner-radius);
     background: #102b46;
     color: white;
     font: inherit;
