@@ -193,3 +193,30 @@ html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   body :is(a, button).cbd-button { transition: none; }
 }
+
+/* Price panels and photo badges follow the same curve as the action controls. */
+:is(.featured-service-badge, .service-card-badge, .home-case-badge, .featured-service-price, .featured-service-action) {
+  border-radius: var(--cbd-corner-radius);
+}
+.featured-star-card {
+  --feature-accent: #e1bc46;
+  --feature-ink: #071d36;
+}
+.featured-star-card .featured-service-badge {
+  color: var(--feature-ink);
+  background: var(--feature-accent);
+}
+.featured-star-card .featured-service-price {
+  color: #fff;
+  background: #163957;
+  border: 1px solid #7994a9;
+}
+.featured-service-price > i { color: var(--feature-accent); }
+.featured-service-price .featured-price-unit { color: #e8f1f7; }
+.featured-star-card .featured-service-action {
+  min-height: 44px;
+  background: white;
+  color: var(--feature-ink);
+}
+.featured-star-card:is(:hover, :focus-visible) .featured-service-action { background: #e8f1f7; }
+.featured-star-card :is(.text-gold-400, .ph-check-circle) { color: var(--feature-accent) !important; }

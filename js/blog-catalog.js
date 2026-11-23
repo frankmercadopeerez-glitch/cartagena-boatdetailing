@@ -14,7 +14,7 @@ window.BLOG_POSTS = [
     readTime: "9 min de lectura",
     category: "Mecánica Naval",
     featured: true,
-    image: "images/blog/mantenimiento-motor-fuera-borda-cartagena.webp",
+    image: "images/casos-reales/musiquit-pintura-motor/despues-01-560.webp",
   },
   {
     slug: "bateria-bote-se-descarga",
@@ -62,7 +62,7 @@ window.BLOG_POSTS = [
     readTime: "7 min de lectura",
     category: "Pisos EVA",
     featured: true,
-    image: "images/blog/foam-deck-se-despega-reparacion.webp",
+    image: "images/editorial/borde-eva-levantado-560.webp",
   },
   {
     slug: "precio-tapiceria-botes-cartagena",
@@ -160,7 +160,7 @@ window.BLOG_POSTS = [
     readTime: "10 min de lectura",
     category: "Cubiertas",
     featured: !0,
-    image: "images/cubierta.webp",
+    image: "images/casos-reales/haya-foam-deck/despues-01-560.webp",
   },
   {
     slug: "preguntas-frecuentes-limpieza-casco-cartagena",
@@ -740,7 +740,7 @@ window.BLOG_POSTS = [
     readTime: "6 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/editorial/muestras-eva-560.webp",
   },
   {
     slug: "mantenimiento-cubierta-teca-yate",
@@ -754,7 +754,7 @@ window.BLOG_POSTS = [
     readTime: "6 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/editorial/veta-teca-natural-560.webp",
   },
   {
     slug: "osmosis-casco-yate-cartagena",
@@ -1219,6 +1219,6 @@ window.BLOG_POSTS = [
     readTime: "6 min de lectura",
     category: "Cubiertas",
     featured: !1,
-    image: "images/cubierta.webp",
+    image: "images/casos-reales/haya-foam-deck/plataforma-eva-560.webp",
   },
 ];
