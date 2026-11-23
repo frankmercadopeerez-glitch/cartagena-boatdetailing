@@ -562,7 +562,7 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-mobile">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
@@ -843,11 +843,13 @@
         class="mobile-link text-2xl font-serif text-white hover:text-gold-400"
         >Blog</a
       >
+      <a href="contacto.html" class="mobile-link">Contacto</a>
+      <a href="index-en.html" lang="en" hreflang="en" class="mobile-link">English</a>
       <a
         href="https://wa.me/573044301112?text=Hola%2C%20quiero%20cotizar%20un%20servicio%20para%20mi%20embarcaci%C3%B3n"
         target="_blank"
         rel="noopener noreferrer"
-        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1"
+        class="mobile-link cbd-button cbd-button--gold"
         >Agendar Cita</a
       >
     </div>
@@ -2223,7 +2225,7 @@
 
             <!-- Mensaje de éxito -->
             <div
-              id="contact-success"
+              id="contact-success" role="status" tabindex="-1"
               style="display: none"
               class="bg-green-50 border border-green-200 rounded p-6 text-center"
             >
@@ -2384,6 +2386,8 @@
                     if (res.ok) {
                       form.style.display = "none";
                       successDiv.style.display = "block";
+                      successDiv.focus({ preventScroll: true });
+                      successDiv.scrollIntoView({ block: "center", behavior: "instant" });
                     } else {
                       submitBtn.disabled = false;
                       submitBtn.textContent = "Enviar solicitud";
@@ -2539,7 +2543,8 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/home.js?v=20260911-1"></script>
+    <script defer src="/js/mobile-ui.js?v=20261123"></script>
+    <script defer src="js/home.js?v=20261123-mobile"></script>
     <script defer src="js/case-gallery.js?v=20260820-1"></script>
     <script>
       window.addEventListener(

@@ -795,6 +795,10 @@
         justify-content: center;
         flex-shrink: 0;
       }
+      @media (max-width: 480px) {
+        .quote-form-panel { padding: 1.1rem; }
+        .quote-form-panel #success-msg { padding: 1.25rem .85rem; }
+      }
       /* Success message */
       #success-msg {
         display: none;
@@ -810,7 +814,8 @@
       }
     </style>
       <link rel="stylesheet" href="css/site-polish.css?v=20260911-1" />
-  <link rel="stylesheet" href="/css/public-controls.css?v=20261123">
+  <link rel="stylesheet" href="/css/public-controls.css?v=20261123-mobile">
+  <script defer src="/js/mobile-ui.js?v=20261123"></script>
 </head>
 
   <body>
@@ -877,7 +882,7 @@
               <p
                 class="text-gold-400 text-xs tracking-[0.2em] uppercase font-bold mb-4"
               >
-                Cartagena de Indias · Cartagena de Indias
+                Cartagena de Indias
               </p>
               <h1
                 class="font-serif text-white text-4xl md:text-5xl font-bold leading-tight mb-6"
@@ -891,6 +896,7 @@
                 propuesta.
               </p>
 
+              <div class="lg:hidden mb-8"><a href="#cotizar-form" class="cbd-button cbd-button--gold">Ir al formulario</a></div>
               <!-- How it works -->
               <div class="space-y-5 mb-10">
                 <div class="flex items-start gap-4">
@@ -968,7 +974,7 @@
 
             <!-- RIGHT: form -->
             <div
-              class="bg-white/[0.03] border border-white/10 rounded-lg p-8 md:p-10 backdrop-blur-sm"
+              class="quote-form-panel bg-white/[0.03] border border-white/10 rounded-lg p-8 md:p-10 backdrop-blur-sm"
             >
               <h2 class="text-white font-serif text-xl font-bold mb-1">
                 Solicitar Cotización
@@ -978,12 +984,12 @@
               </p>
 
               <!-- Success message (shown after submit) -->
-              <div id="success-msg">
+              <div id="success-msg" role="status" tabindex="-1">
                 <i
                   class="ph-fill ph-check-circle text-4xl text-green-400 mb-4 block"
                   aria-hidden="true"
                 ></i>
-                <h3 class="text-navy-900 font-bold text-lg mb-2">
+                <h3 class="text-white font-bold text-lg mb-2">
                   ¡Mensaje recibido!
                 </h3>
                 <p class="text-white/60 text-sm">
@@ -1443,10 +1449,6 @@
         width="58"
         height="58"
       />
-      <i
-        class="ph-fill ph-whatsapp-logo whatsapp-float__icon"
-        aria-hidden="true"
-      ></i>
     </a>
 
     <script>
@@ -1487,7 +1489,8 @@
             if (res.ok) {
               form.style.display = "none";
               successMsg.style.display = "block";
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              successMsg.focus({ preventScroll: true });
+              successMsg.scrollIntoView({ block: "center", behavior: "instant" });
             } else {
               submitBtn.disabled = false;
               submitBtn.textContent = "Solicitar Cotización Gratis";

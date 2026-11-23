@@ -382,7 +382,7 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-mobile">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
@@ -642,6 +642,10 @@
             </a>
           </nav>
 
+          <label class="mobile-blog-filter" hidden>
+            Filtrar por categoría
+            <select id="blog-category-mobile"></select>
+          </label>
           <div
             id="blog-filters"
             class="flex flex-wrap gap-2 mb-10 justify-center"
@@ -1012,7 +1016,17 @@
           });
         }
 
+        const categorySelect = document.getElementById("blog-category-mobile");
+        for (const filter of filters) categorySelect.add(new Option(filter, filter));
+        categorySelect.parentElement.hidden = false;
+        categorySelect.addEventListener("change", () => {
+          currentFilter = categorySelect.value;
+          currentPage = 1;
+          renderCards();
+        });
+
         function renderFilters() {
+          categorySelect.value = currentFilter;
           filtersWrap.innerHTML = filters
             .map(
               (filter) =>
@@ -1089,7 +1103,8 @@
         renderCards();
       });
     </script>
-    <script defer src="js/main.js?v=20261123-controls"></script>
+    <script defer src="/js/mobile-ui.js?v=20261123"></script>
+    <script defer src="js/main.js?v=20261123-mobile"></script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/js/meta-pixel.js?v=20260824-1"></script>
   </body>

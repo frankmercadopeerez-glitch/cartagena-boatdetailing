@@ -1059,7 +1059,7 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-mobile">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-white"
@@ -2296,7 +2296,7 @@
 
             <!-- Mensaje de éxito -->
             <div
-              id="contact-success"
+              id="contact-success" role="status" tabindex="-1"
               style="display: none"
               class="bg-green-50 border border-green-200 rounded p-6 text-center"
             >
@@ -2345,7 +2345,7 @@
                     <select
                       id="form-country-code"
                       name="codigo_pais"
-                      aria-label="Código de país"
+                      aria-label="Country calling code"
                       class="text-slate-500 text-sm py-2 pr-2 bg-transparent focus:outline-none cursor-pointer border-r border-white/10 mr-2 shrink-0"
                       style="max-width: 100px"
                     >
@@ -2593,16 +2593,18 @@
                     if (res.ok) {
                       form.style.display = "none";
                       successDiv.style.display = "block";
+                      successDiv.focus({ preventScroll: true });
+                      successDiv.scrollIntoView({ block: "center", behavior: "instant" });
                     } else {
                       submitBtn.disabled = false;
                       submitBtn.textContent = "Request Quote";
-                      alert("Hubo un error. Por favor inténtelo de nuevo.");
+                      alert("Your request could not be sent. Please try again.");
                     }
                   } catch (err) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = "Request Quote";
                     alert(
-                      "Hubo un error de conexión. Por favor inténtelo de nuevo.",
+                      "Connection error. Please try again.",
                     );
                   }
                 });
@@ -2747,7 +2749,8 @@
     </a>
 
     <!-- Main Scripts -->
-    <script defer src="js/main.js?v=20261123-controls"></script>
+    <script defer src="/js/mobile-ui.js?v=20261123"></script>
+    <script defer src="js/main.js?v=20261123-mobile"></script>
     <script defer src="js/case-gallery.js?v=20260820-1"></script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/js/meta-pixel.js?v=20260824-1"></script>

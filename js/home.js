@@ -101,16 +101,7 @@
       button.setAttribute("aria-expanded", String(item.classList.contains("open")));
     });
 
-  function toggleMobileMenu() {
-    var button = document.getElementById("mobile-menu-btn");
-    var menu = document.getElementById("mobile-menu");
-    if (!button || !menu) return;
-    var opening = menu.classList.contains("translate-x-full");
-    menu.classList.toggle("translate-x-full", !opening);
-    menu.classList.toggle("pointer-events-none", !opening);
-    button.setAttribute("aria-expanded", String(opening));
-    menu.setAttribute("aria-hidden", String(!opening));
-  }
+  initPublicMobileMenu();
 
   function closeDropdowns() {
     document
@@ -125,10 +116,6 @@
 
   document.addEventListener("click", function (event) {
     var target = event.target;
-    if (target.closest("#mobile-menu-btn, #close-menu-btn, #mobile-menu .mobile-link")) {
-      toggleMobileMenu();
-      return;
-    }
 
     var dropdownButton = target.closest("[data-dropdown-toggle]");
     if (dropdownButton) {

@@ -1051,6 +1051,7 @@ function initNavbarScroll() {
     );
 }
 function initMobileMenu() {
+  if (typeof initPublicMobileMenu === "function") return initPublicMobileMenu();
   const e = document.getElementById("mobile-menu-btn"),
     t = document.getElementById("close-menu-btn"),
     a = document.getElementById("mobile-menu"),
