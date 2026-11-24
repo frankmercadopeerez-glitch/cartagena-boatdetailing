@@ -102,38 +102,10 @@
     });
 
   initPublicMobileMenu();
-
-  function closeDropdowns() {
-    document
-      .querySelectorAll(".nav-dropdown-content.nav-open")
-      .forEach(function (menu) {
-        menu.classList.remove("nav-open");
-      });
-    document.querySelectorAll("[data-dropdown-toggle]").forEach(function (button) {
-      button.setAttribute("aria-expanded", "false");
-    });
-  }
+  initPublicServiceMenu();
 
   document.addEventListener("click", function (event) {
     var target = event.target;
-
-    var dropdownButton = target.closest("[data-dropdown-toggle]");
-    if (dropdownButton) {
-      event.preventDefault();
-      event.stopPropagation();
-      var menu = document.getElementById(
-        dropdownButton.getAttribute("data-dropdown-toggle"),
-      );
-      if (!menu) return;
-      var opening = !menu.classList.contains("nav-open");
-      closeDropdowns();
-      if (opening) {
-        menu.classList.add("nav-open");
-        dropdownButton.setAttribute("aria-expanded", "true");
-      }
-      return;
-    }
-    if (!target.closest(".nav-dropdown")) closeDropdowns();
 
     var faqToggle = target.closest(".faq-toggle");
     if (faqToggle) {

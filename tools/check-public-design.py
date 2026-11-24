@@ -1,11 +1,13 @@
 """Check the public components that have previously regressed on phones and desktops."""
 import argparse
 import io
+import math
 import mimetypes
 import os
 import shutil
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from xml.etree import ElementTree
 
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -42,6 +44,26 @@ def check_corners(page, selector):
     assert all(v == [RADIUS] * 4 for v in values), (selector, values)
 
 
+def check_article_surfaces(page, url):
+    """Check the painted outer corners across all public article templates."""
+    entries = ElementTree.parse(ROOT / "sitemap.xml").findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
+    paths = [urlsplit(e.text).path for e in entries if urlsplit(e.text).path.startswith("/blog/")]
+    assert paths, "No blog articles found in the public sitemap"
+    for path in paths:
+        response = page.goto(url + path, wait_until="load")
+        assert response and response.ok, path
+        defects = page.locator("""
+          body.cbd-article img:not(.absolute, .absolute img, nav img, footer img, .rounded-full, [src*=".svg"], .whatsapp-float img),
+          .border-l-4, .border-l-2, .quick-check > li, .compare-row,
+          .overflow-x-auto:has(> table), .answer, .article-cta, .cbd-card:not(.rounded-full)
+        """).evaluate_all("""(es,radius) => es.filter(e => e.getClientRects().length).filter(e => {
+          const s = getComputedStyle(e);
+          return [s.borderTopLeftRadius,s.borderTopRightRadius,s.borderBottomLeftRadius,s.borderBottomRightRadius].some(r=>r!==radius)
+        }).map(e=>[e.tagName,e.className])""", RADIUS)
+        assert not defects, (path, defects)
+    print(f"{len(paths)} blog articles verified at {page.viewport_size['width']}px", flush=True)
+
+
 def check_wave(page, selector):
     # Count dark pixels in each column of the actual separator. A rectangular gap
     # introduces either a full-height column or a vertical jump in the silhouette.
@@ -58,6 +80,20 @@ def check_wave(page, selector):
         assert max(heights) - min(heights) >= size * .32, ("flat wave", size, phase)
         assert min(heights) > 0 and max(heights) < size, ("gap or block", min(heights), max(heights), size, phase)
         assert max(abs(a-b) for a,b in zip(heights, heights[1:])) <= 2, ("vertical seam", phase)
+        # A curve can be seamless and still flatten halfway up each flank.
+        # Compare one rendered cycle with its best-fitting sine, at any phase.
+        mask_size = style(band, "mask-size", "::before").split()[0]
+        period = round(float(mask_size.removesuffix("px")))
+        assert 0 < period <= len(heights), (selector, mask_size)
+        cycle = heights[:period]
+        center = sum(cycle) / period
+        angles = [math.tau * x / period for x in range(period)]
+        sine = 2 * sum((v-center)*math.sin(t) for v,t in zip(cycle, angles)) / period
+        cosine = 2 * sum((v-center)*math.cos(t) for v,t in zip(cycle, angles)) / period
+        amplitude = math.hypot(sine, cosine)
+        residual = [v-center-sine*math.sin(t)-cosine*math.cos(t) for v,t in zip(cycle, angles)]
+        error = math.sqrt(sum(r*r for r in residual) / period)
+        assert error <= .4 + .025 * amplitude, ("irregular wave", selector, phase, round(error, 2), period)
         rule.evaluate("e=>e.remove()")
 
 
@@ -93,9 +129,13 @@ def run(page, url, width):
     open_page(CHARTER)
     check_corners(page, ".answer, .article-image")
     assert style(page.locator(".cbd-article-hero"), "mask-image", "::after") != "none"
+    open_page("/blog/humedad-moho-interior-yate-cartagena/")
+    check_corners(page, "article .border-l-4")
+    check_corners(page, "header + div > img")
     open_page("/cubierta-sintetica.html")
     check_corners(page, ".deck-warranty,.photo-service")
     check_wave(page, ".bg-slate-50 + section.bg-navy-900")
+    check_wave(page, "#ventajas + section")
     page.emulate_media(reduced_motion="reduce")
     assert style(page.locator("footer"), "animation-name", "::before") == "none"
     page.emulate_media(reduced_motion="no-preference")
@@ -107,6 +147,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default=LOCAL)
     parser.add_argument("--browser")
+    parser.add_argument("--all-articles", action="store_true")
     args = parser.parse_args()
     chrome = Path(os.getenv("PROGRAMFILES", "")) / "Google/Chrome/Application/chrome.exe"
     binary = args.browser or (str(chrome) if chrome.is_file() else shutil.which("chromium"))
@@ -117,5 +158,7 @@ if __name__ == "__main__":
             if args.base_url == LOCAL:
                 page.route("**/*", local_route)
             run(page,args.base_url.rstrip("/"),width)
+            if args.all_articles and width in (390, 1366):
+                check_article_surfaces(page, args.base_url.rstrip("/"))
             page.close()
         browser.close()

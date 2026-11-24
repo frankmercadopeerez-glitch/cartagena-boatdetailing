@@ -1,4 +1,44 @@
 /* Shared by the static home menu and the navigation rendered by main.js. */
+function initPublicServiceMenu() {
+  const trigger = document.querySelector("[data-dropdown-toggle]");
+  const menu = trigger && document.getElementById(trigger.dataset.dropdownToggle);
+  const group = trigger?.closest(".nav-dropdown");
+  if (!menu || !group) return;
+
+  let pinned = false;
+  function display(open) {
+    menu.classList.toggle("nav-open", open);
+    // Keep CSS hover, keyboard focus and the announced disclosure state in sync.
+    menu.style.visibility = open ? "visible" : "hidden";
+    menu.inert = !open;
+    trigger.setAttribute("aria-expanded", String(open));
+    if (!open) pinned = false;
+  }
+
+  display(false);
+  trigger.addEventListener("click", () => {
+    pinned = !pinned;
+    display(pinned);
+  });
+  group.addEventListener("pointerenter", event => {
+    if (event.pointerType === "mouse") display(true);
+  });
+  group.addEventListener("pointerleave", event => {
+    if (event.pointerType === "mouse" && !pinned && !menu.contains(document.activeElement)) display(false);
+  });
+  group.addEventListener("focusout", event => {
+    if (!group.contains(event.relatedTarget)) display(false);
+  });
+  document.addEventListener("click", event => {
+    if (!group.contains(event.target)) display(false);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || menu.inert) return;
+    if (group.contains(document.activeElement)) trigger.focus({ preventScroll: true });
+    display(false);
+  });
+}
+
 function initPublicMobileMenu() {
   const menu = document.getElementById("mobile-menu");
   const opener = document.getElementById("mobile-menu-btn");

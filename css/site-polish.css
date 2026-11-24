@@ -772,6 +772,7 @@ textarea:focus-visible,
 
 .nav-dropdown-content {
   width: min(620px, calc(100vw - 32px));
+  transition-property: opacity, transform;
 }
 
 .nav-dropdown-link--primary {

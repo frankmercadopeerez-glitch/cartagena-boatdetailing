@@ -93,53 +93,25 @@ function buildEnglishWhatsAppUrl(service) {
     getEnglishWhatsAppMessage(service),
   )}`;
 }
-var I18N_PAIRS = {
-    "index.html": "index-en.html",
-    "services.html": "services-en.html",
-    "ceramic-coating.html": "ceramic-coating-en.html",
-    "ppf.html": "ppf-en.html",
-    "paint-polishing.html": "paint-polishing-en.html",
-    "contacto.html": "contact-en.html",
-    "hull-cleaning.html": "hull-cleaning-en.html",
-    "limpieza-casco-bocagrande.html": "hull-cleaning-bocagrande-en.html",
-    "limpieza-casco-baru.html": "hull-cleaning-baru-en.html",
-    "limpieza-casco-islas-del-rosario.html": "hull-cleaning-rosario-en.html",
-    "limpieza-casco-manzanillo.html": "hull-cleaning-manzanillo-en.html",
-    "about.html": "about-en.html",
-    "interior-detailing.html": "interior-detailing-en.html",
-    "gelcoat.html": "gelcoat-en.html",
-    "anti-corrosion.html": "anti-corrosion-en.html",
-    "cubierta-sintetica.html": "synthetic-decking-en.html",
-    "electrical-systems.html": "electrical-systems-en.html",
-    "mecanica-naval.html": "marine-mechanics-en.html",
-    "casos-reales.html": "case-studies.html",
-  },
-  I18N_PAIRS_REV = {};
-function i18nCurrentFile() {
-  var e = (window.location.pathname || "/").toLowerCase().split("/").pop();
-  return e || "index.html";
-}
-function i18nInfo(e) {
-  e = e || "";
-  var t,
-    a,
-    n = i18nCurrentFile(),
-    o = isEnglishDocument();
-  if (o) {
-    a = e + n;
-    var i = I18N_PAIRS_REV[n];
-    t = i ? e + i : null;
-  } else {
-    t = "index.html" === n ? e || "/" : e + n;
-    var r = I18N_PAIRS[n];
-    a = r ? e + r : null;
-  }
-  return { current: o ? "en" : "es", esUrl: t, enUrl: a };
+function i18nInfo() {
+  const english = isEnglishDocument();
+  const currentPath = window.location.pathname;
+  const alternateLanguage = english ? "es-CO" : "en";
+  const alternate = document.head.querySelector(
+    `link[rel~="alternate"][hreflang="${alternateLanguage}"]`,
+  );
+  const translatedPath = alternate ? new URL(alternate.href).pathname : null;
+  return {
+    current: english ? "en" : "es",
+    esUrl: english ? translatedPath : currentPath,
+    enUrl: english ? currentPath : translatedPath,
+  };
 }
 function buildLangSwitcher(e) {
-  var t = i18nInfo(e),
+  var t = i18nInfo(),
     a = "es" === t.current,
     n = "en" === t.current;
+  if (!t.enUrl && window.location.pathname.startsWith("/blog/")) return "";
   return (
     '<div class="lang-switch" role="group" aria-label="' +
     (n ? "Language" : "Idioma / Language") +
@@ -210,7 +182,7 @@ function i18nTranslateHelp() {
   );
 }
 function i18nAutoDetect() {
-  var e = i18nInfo(getLayoutContext().prefix);
+  var e = i18nInfo();
   if ("en" !== e.current && !i18nGetPref()) {
     var t = (
       (navigator.languages && navigator.languages.length
@@ -1089,6 +1061,7 @@ function initScrollAnimations() {
     }));
 }
 function initDropdownMenu() {
+  if (typeof initPublicServiceMenu === "function") return initPublicServiceMenu();
   function e() {
     (document
       .querySelectorAll(".nav-dropdown-content.nav-open")
@@ -1206,10 +1179,7 @@ function initDeferredEnhancements() {
       initClickableBlogPreviewCards());
   }, 1800);
 }
-(Object.keys(I18N_PAIRS).forEach(function (e) {
-  I18N_PAIRS_REV[I18N_PAIRS[e]] = e;
-}),
-  document.addEventListener("DOMContentLoaded", function () {
+(document.addEventListener("DOMContentLoaded", function () {
     if (isHomePage()) {
       (simplifyServicesNavigation(),
         initNavbarScroll(),

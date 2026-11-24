@@ -1,12 +1,12 @@
-const CACHE_STATIC = "cbd-static-v6";
+const CACHE_STATIC = "cbd-static-v7";
 const CACHE_PAGES = "cbd-pages-v3";
 const FINANZAS_CACHE = "cbd-private-apps-v92";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
-  "/css/public-controls.css?v=20261123-esquinas2",
-  "/css/home-bundle.css?v=20261123-esquinas",
-  "/js/main.js?v=20261123-marca",
+  "/css/public-controls.css?v=20261124-olas-blog",
+  "/css/home-bundle.css?v=20261124-olas-blog",
+  "/js/main.js?v=20261124-olas-blog",
   "/fonts/inter-normal-400-latin.woff2",
   "/fonts/playfair-display-normal-400-latin.woff2",
   "/images/cbdlogo-gold.svg",

@@ -61,16 +61,7 @@ body > :is(header, section) + section::before {
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(34px, 4vw, 58px);
   background: var(--transition-wave-color);
-  mask: var(--cbd-wave-top) repeat-x 0 0 / var(--cbd-wave-period) 100%;
+  transform: scaleY(-1);
   pointer-events: none;
-  animation: cbd-wave-flow 9s linear infinite;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  body > :is(header, section) + section::before {
-    animation: none;
-  }
 }
