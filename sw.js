@@ -4,7 +4,7 @@ const FINANZAS_CACHE = "cbd-private-apps-v92";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
-  "/css/public-controls.css?v=20261123-esquinas",
+  "/css/public-controls.css?v=20261123-esquinas2",
   "/css/home-bundle.css?v=20261123-esquinas",
   "/js/main.js?v=20261123-marca",
   "/fonts/inter-normal-400-latin.woff2",

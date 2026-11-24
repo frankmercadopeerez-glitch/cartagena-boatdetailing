@@ -427,8 +427,7 @@ body .hero-wave-container:not(.wave-2)::after {
 }
 body footer::before {
   inset: auto 0 100%;
-  background: inherit;
-  background-color: var(--cbd-ink);
+  background-color: inherit;
   margin-bottom: -1px;
 }
 /* A fine crest also identifies the footer when the previous section is navy. */
@@ -455,6 +454,7 @@ body .ocean-divider { position: relative; background: var(--cbd-wave-from, trans
 body .hero-wave-container { --cbd-wave-to: var(--cbd-ink); }
 body .hero-wave-container :is(svg), body .hero-wave-container.wave-2 { display: none; }
 body > :is(header, section) + section::before { height: var(--cbd-wave-height); }
+body > :is(header, section) + section.border-y { border-top-width: 0; }
 @keyframes cbd-wave-flow {
   to { mask-position: calc(-1 * var(--cbd-wave-period)) 0; background-position: calc(-1 * var(--cbd-wave-period)) 0; }
 }
