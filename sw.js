@@ -4,9 +4,9 @@ const FINANZAS_CACHE = "cbd-private-apps-v92";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
-  "/css/tailwind.css?v=20260813-2",
-  "/css/styles.css?v=20260813-2",
-  "/js/main.js?v=20260813-3",
+  "/css/public-controls.css?v=20261123-esquinas",
+  "/css/home-bundle.css?v=20261123-esquinas",
+  "/js/main.js?v=20261123-marca",
   "/fonts/inter-normal-400-latin.woff2",
   "/fonts/playfair-display-normal-400-latin.woff2",
   "/images/cbdlogo-gold.svg",
@@ -108,19 +108,20 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // Páginas HTML: stale-while-revalidate
+  // Consultar el HTML vigente para que apunte a los estilos de la última publicación.
   if (path.endsWith(".html") || path === "/" || path.endsWith("/")) {
     e.respondWith(
-      caches.open(CACHE_PAGES).then((cache) => {
-        return cache.match(e.request).then((cached) => {
-          const networkFetch = fetch(e.request)
-            .then((res) => {
-              if (res.ok) cache.put(e.request, res.clone());
-              return res;
-            })
-            .catch(() => cached);
-          return cached || networkFetch;
-        });
+      fetch(e.request, { cache: "no-cache" }).then((response) => {
+        if (response.ok) {
+          const copy = response.clone();
+          e.waitUntil(caches.open(CACHE_PAGES).then((cache) => cache.put(e.request, copy)).catch(() => {}));
+        }
+        return response;
+      }).catch(async (error) => {
+        const cache = await caches.open(CACHE_PAGES);
+        const saved = await cache.match(e.request);
+        if (saved) return saved;
+        throw error;
       }),
     );
   }
