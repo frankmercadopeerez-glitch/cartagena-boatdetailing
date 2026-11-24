@@ -163,6 +163,7 @@ textarea:focus-visible,
 }
 
 .home-case-gallery-controls {
+  border-radius: var(--cbd-corner-radius);
   position: absolute;
   right: 0.75rem;
   bottom: 0.75rem;
@@ -318,6 +319,7 @@ textarea:focus-visible,
 }
 
 .home-process-list li {
+  border-radius: var(--cbd-corner-radius);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1.1rem;
@@ -328,6 +330,7 @@ textarea:focus-visible,
 }
 
 .home-process-list li > span {
+  border-radius: var(--cbd-corner-radius);
   display: grid;
   place-items: center;
   width: 3.25rem;
@@ -353,7 +356,49 @@ textarea:focus-visible,
   line-height: 1.6;
 }
 
+.home-guide-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #8b9caf;
+  border-radius: var(--cbd-corner-radius);
+  background: #fff;
+  color: var(--cbd-navy);
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.home-guide-links a::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(45deg);
+}
+
+.home-guide-links a:is(:hover, :focus-visible, :active) {
+  border-color: var(--cbd-navy);
+  background: var(--cbd-navy);
+  color: #fff;
+}
+
+.home-guide-links a:is(:hover, :focus-visible, :active)::after {
+  color: var(--cbd-gold);
+}
+
+.home-guide-links a:focus-visible {
+  outline: 2px solid var(--cbd-navy);
+  outline-offset: 3px;
+}
+
 .catalog-proof-row {
+  border-radius: var(--cbd-corner-radius);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
@@ -380,11 +425,13 @@ textarea:focus-visible,
 .service-catalog-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1.25rem;
 }
 
 .service-catalog-card {
   display: flex;
+  container-type: inline-size;
   flex-direction: column;
   min-height: 100%;
   overflow: hidden;
@@ -403,6 +450,7 @@ textarea:focus-visible,
 
 .service-catalog-media {
   position: relative;
+  flex: none;
   height: 220px;
   overflow: hidden;
   background: #e2e8f0;
@@ -420,6 +468,7 @@ textarea:focus-visible,
 }
 
 .service-catalog-tag {
+  border-radius: var(--cbd-corner-radius);
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -436,6 +485,7 @@ textarea:focus-visible,
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: clamp(13rem, calc(27rem - 46cqw), 17rem);
   padding: 1.35rem 1.4rem 1.45rem;
 }
 
@@ -471,39 +521,6 @@ textarea:focus-visible,
   color: var(--cbd-accent-text);
   font-size: 0.9rem;
   font-weight: 700;
-}
-
-.secondary-service-grid {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.secondary-service-grid a {
-  display: flex;
-  flex-direction: column;
-  min-height: 100px;
-  padding: 1.1rem 1.2rem;
-  border: 1px solid #cbd5e1;
-  background: #fff;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.secondary-service-grid a:hover {
-  border-color: var(--cbd-gold);
-  background: #f1f5f9;
-}
-
-.secondary-service-grid strong {
-  color: var(--cbd-navy);
-  font-size: 0.98rem;
-}
-
-.secondary-service-grid span {
-  margin-top: 0.4rem;
-  color: #64748b;
-  font-size: 0.82rem;
-  line-height: 1.45;
 }
 
 .service-guidance-box {
@@ -666,6 +683,7 @@ textarea:focus-visible,
 }
 
 .about-skill-tag {
+  border-radius: var(--cbd-corner-radius);
   display: inline-flex;
   padding: 0.55rem 0.75rem;
   border: 1px solid #d4af37;
@@ -695,12 +713,6 @@ textarea:focus-visible,
   flex: 0 0 auto;
 }
 
-@media (min-width: 640px) {
-  .secondary-service-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (min-width: 768px) {
   .catalog-proof-row {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -708,14 +720,6 @@ textarea:focus-visible,
 
   .service-catalog-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .service-catalog-card--featured {
-    grid-column: span 2;
-  }
-
-  .service-catalog-card--featured .service-catalog-media {
-    height: 300px;
   }
 
   .service-guidance-box {
@@ -730,9 +734,6 @@ textarea:focus-visible,
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .secondary-service-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
 }
 
 .whatsapp-float {
@@ -1144,6 +1145,7 @@ textarea:focus-visible,
 }
 
 .case-study__meta span {
+  border-radius: var(--cbd-corner-radius);
   display: inline-flex;
   align-items: center;
   min-height: 30px;
@@ -1194,6 +1196,7 @@ textarea:focus-visible,
 }
 
 .case-photo figcaption {
+  border-radius: var(--cbd-corner-radius);
   position: absolute;
   right: 0.8rem;
   bottom: 0.8rem;

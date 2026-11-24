@@ -816,9 +816,9 @@
     /></noscript>
 
     <!-- Custom Styles -->
-    <link rel="preload" href="css/styles.css?v=20261123-marca" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-marca" /></noscript>
-    <link rel="stylesheet" href="css/site-polish.css?v=20261123-marca" />
+    <link rel="preload" href="css/styles.css?v=20261123-esquinas" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-esquinas" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20261123-esquinas" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -858,7 +858,7 @@
         font-size: 0.8rem;
       }
     </style>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-marca">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-esquinas">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-navy-900"
@@ -1144,7 +1144,7 @@
             <p class="text-slate-700 font-light text-lg mb-4">Estos valores ayudan a definir un presupuesto inicial. La cotización final se entrega después de revisar la embarcación, contar las piezas y confirmar el material, los colores y el diseño.</p>
             <p class="text-slate-600 font-light">Los impuestos aplicables, el alcance definitivo y las condiciones de garantía quedan discriminados en la cotización escrita.</p>
           </div>
-          <figure class="bg-white border border-slate-200 p-3 rounded-sm shadow-sm">
+          <figure class="service-photo">
             <img src="images/blog/precio-tapiceria-botes-cartagena-720.webp" alt="Tapicería blanca y gris en la cabina de un bote deportivo" width="720" height="782" loading="lazy" class="w-full object-cover rounded-sm" style="max-height:430px" />
             <figcaption class="text-xs text-slate-500 px-2 pt-3">La cantidad de asientos, curvas, costuras y combinaciones de color cambia el valor final.</figcaption>
           </figure>
@@ -1153,14 +1153,14 @@
           <article class="cbd-card bg-navy-900 text-white border border-gold-400 p-8 rounded-sm">
             <p class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">Ejemplo de referencia</p>
             <h3 class="font-serif text-3xl mb-3">Tapicería · Bote de 40 pies</h3>
-            <p class="text-4xl font-serif text-gold-400 mb-4">$12.000.000 COP</p>
+            <p class="cbd-number text-4xl font-serif text-gold-400 mb-4">$12.000.000 COP</p>
             <p class="text-slate-300 font-light mb-5">Referencia para renovar la tapicería de un bote de 40 pies. El valor cambia según el número y tamaño de cojines, estado de espumas, patrón de costura, vinilo o tela elegida y complejidad del desmontaje.</p>
             <a href="blog/precio-tapiceria-botes-cartagena/" class="text-gold-400 font-bold text-sm uppercase tracking-wider">Ver guía de precios →</a>
           </article>
           <article class="cbd-card bg-white text-navy-900 border border-slate-300 p-8 rounded-sm shadow-sm">
             <p class="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">Precio desde</p>
             <h3 class="font-serif text-3xl mb-3">Forro · Bote de 32 pies</h3>
-            <p class="text-4xl font-serif text-gold-500 mb-4">$7.000.000 COP</p>
+            <p class="cbd-number text-4xl font-serif text-gold-500 mb-4">$7.000.000 COP</p>
             <p class="text-slate-700 font-light mb-5">Referencia para un forro náutico hecho a medida para un bote de 32 pies. Depende de la lona, cobertura total o por secciones, refuerzos, cremalleras, ventilación, herrajes y puntos de amarre.</p>
             <a href="blog/precio-forros-botes-cartagena/" class="text-gold-500 font-bold text-sm uppercase tracking-wider">Ver guía de forros →</a>
           </article>
@@ -1171,18 +1171,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: transparent">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#ffffff"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#f8fafc;--cbd-wave-to:#ffffff"></div>
     <section id="servicios" class="py-24 bg-white">
       <div class="container mx-auto px-6">
         <div class="w-full mx-auto">
@@ -1201,19 +1190,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: #ffffff">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#ffffff" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#fff;--cbd-wave-to:#001f3f"></div>
 
     <!-- Tapicería y vinilo marino -->
     <section class="py-20 bg-navy-900">
@@ -1235,15 +1212,8 @@
         </p>
 
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
-            <div
-              class="w-14 h-14 bg-gold-400/10 rounded-sm flex items-center justify-center mb-5"
-            >
-              <i
-                class="ph ph-couch text-3xl text-gold-500"
-                aria-hidden="true"
-              ></i>
-            </div>
+          <div class="photo-service cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
+            <figure><img src="images/catalogo/vinilo.webp" width="640" height="360" alt="Costura y textura del vinilo náutico color marfil" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-white mb-4">Vinilo Marino</h3>
             <p class="text-slate-400 font-light text-sm mb-4">El vinilo náutico necesita retirar sal y suciedad sin deteriorar su acabado. El producto y la técnica se seleccionan según las instrucciones del fabricante y se prueban primero en una zona discreta.</p>
             <ul class="text-slate-400 font-light text-sm space-y-2">
@@ -1253,17 +1223,10 @@
               <li>✓ Resultado evaluado según el estado del material</li>
             </ul>
           </div>
-          <div class="cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
-            <div
-              class="w-14 h-14 bg-gold-400/10 rounded-sm flex items-center justify-center mb-5"
-            >
-              <i
-                class="ph ph-armchair text-3xl text-gold-500"
-                aria-hidden="true"
-              ></i>
-            </div>
+          <div class="photo-service cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
+            <figure><img src="images/catalogo/cuero.webp" width="640" height="360" alt="Grano y costura de un asiento de cuero" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-white mb-4">
-              Cuero y Cuero Marino
+              Cuero y recubrimientos sintéticos
             </h3>
             <p class="text-slate-400 font-light text-sm mb-4">El cuero natural y los recubrimientos sintéticos de PVC o poliuretano requieren cuidados distintos. Antes de aplicar limpiadores o acondicionadores identificamos el material y su acabado.</p>
             <ul class="text-slate-400 font-light text-sm space-y-2">
@@ -1273,15 +1236,8 @@
               <li>✓ Color touch-up en zonas desgastadas</li>
             </ul>
           </div>
-          <div class="cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
-            <div
-              class="w-14 h-14 bg-gold-400/10 rounded-sm flex items-center justify-center mb-5"
-            >
-              <i
-                class="ph ph-rug text-3xl text-gold-500"
-                aria-hidden="true"
-              ></i>
-            </div>
+          <div class="photo-service cbd-card bg-white/5 p-8 rounded-sm border border-white/10">
+            <figure><img src="images/catalogo/tela.webp" width="640" height="360" alt="Tejido de un cojín junto a una alfombra de cabina" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-white mb-4">
               Tela y Alfombra Marina
             </h3>
@@ -1301,19 +1257,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: #001f3f">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#001f3f" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#ffffff"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#001f3f;--cbd-wave-to:#ffffff"></div>
 
     <!-- Otros servicios de interior -->
     <section class="py-24 bg-white">
@@ -1327,11 +1271,8 @@
           Todos los Servicios de Interior
         </h2>
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-house text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <img src="images/catalogo/cabina.webp" width="640" height="360" alt="Limpieza de los asientos en el salón de un yate" loading="lazy" decoding="async">
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Limpieza Profunda de Cabina
@@ -1344,11 +1285,8 @@
               </p>
             </div>
           </div>
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-tree-evergreen text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <img src="images/catalogo/madera.webp" width="560" height="315" alt="Veta de teca y juntas entre tablas" loading="lazy" decoding="async">
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Tratamiento de Maderas
@@ -1361,11 +1299,8 @@
               </p>
             </div>
           </div>
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-wind text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <figure><img src="images/catalogo/ventilacion.webp" width="640" height="360" alt="Portillo abierto y rejilla de ventilación de la cabina" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Eliminación de Olores Marinos
@@ -1373,11 +1308,8 @@
               <p class="text-slate-600 font-light text-sm">Primero revisamos la fuente del olor, la humedad y la ventilación. La limpieza física y la corrección de la causa se priorizan; cualquier tratamiento complementario se define después de evaluar el espacio y los materiales.</p>
             </div>
           </div>
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-sparkle text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <img src="images/catalogo/ventanas.webp" width="640" height="360" alt="Detalle de la ventana lateral y su marco en Le Meridiem" loading="lazy" decoding="async">
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Cristales y Ventanas
@@ -1391,11 +1323,8 @@
               </p>
             </div>
           </div>
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-shield-check text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <img src="images/catalogo/contacto-interior.webp" width="608" height="342" alt="Detalle de asiento y superficies de contacto de un bote" loading="lazy" decoding="async">
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Desinfección y Control Antimicrobiano
@@ -1403,11 +1332,8 @@
               <p class="text-slate-600 font-light text-sm">Limpieza de superficies interiores de alto contacto. Cuando procede una desinfección, seleccionamos un producto compatible y seguimos su etiqueta, dilución y tiempo de contacto.</p>
             </div>
           </div>
-          <div class="cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
-            <i
-              class="ph ph-package text-3xl text-gold-400 flex-shrink-0 mt-1"
-              aria-hidden="true"
-            ></i>
+          <div class="photo-service cbd-card flex gap-5 p-6 border border-white/10 rounded-sm">
+            <img src="images/catalogo/metales.webp" width="640" height="360" alt="Limpieza de acero inoxidable con un paño" loading="lazy" decoding="async">
             <div>
               <h3 class="font-serif text-lg text-navy-900 mb-2">
                 Metales Interiores
@@ -1425,19 +1351,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: #ffffff">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#ffffff" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#fff;--cbd-wave-to:#001f3f"></div>
 
     <!-- Proceso y frecuencia -->
     <section class="py-24 bg-navy-900">
@@ -1644,19 +1558,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: #001f3f">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#001f3f" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#f8fafc"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#001f3f;--cbd-wave-to:#f8fafc"></div>
 
     <!-- FAQ -->
     <section class="py-24 bg-slate-50">
@@ -1805,19 +1707,7 @@
       </div>
     </section>
 
-    <div class="ocean-divider" style="background: #f8fafc">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <rect width="1440" height="70" fill="#f8fafc" />
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#f8fafc;--cbd-wave-to:#001f3f"></div>
 
     <!-- CTA -->
     <section class="py-24 bg-navy-900 text-white relative overflow-hidden">

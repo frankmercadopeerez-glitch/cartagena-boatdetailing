@@ -772,15 +772,15 @@
     <!-- Custom Styles -->
     <link
       rel="preload"
-      href="css/styles.css?v=20261123-marca"
+      href="css/styles.css?v=20261123-esquinas"
       as="style"
       onload="
         this.onload = null;
         this.rel = 'stylesheet';
       "
     />
-    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-marca" /></noscript>
-    <link rel="stylesheet" href="css/site-polish.css?v=20261123-marca" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-esquinas" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20261123-esquinas" />
     <style>
       /* Custom Styles for that premium feel */
       .glass-nav {
@@ -894,7 +894,7 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-marca">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-esquinas">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-navy-900"
@@ -1209,18 +1209,7 @@
     </section>
 
     <!-- Wave: hero navy to services -->
-    <div class="ocean-divider" style="background: #0a2f5e" aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#f8fafc"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:transparent;--cbd-wave-to:#f8fafc"></div>
 
     <!-- Services catalog -->
     <section id="services" class="py-20 md:py-24 bg-slate-50 scroll-mt-24">
@@ -1245,9 +1234,9 @@
         </div>
 
         <div class="service-catalog-grid">
-          <a href="paint-polishing-en.html" class="service-catalog-card service-catalog-card--featured group">
+          <a href="paint-polishing-en.html" class="service-catalog-card group">
             <div class="service-catalog-media">
-              <img sizes="(max-width: 767px) 100vw, 720px" srcset="images/casos-reales/le-meridiem-pulido/costado-560.webp 560w, images/casos-reales/le-meridiem-pulido/costado-960.webp 960w" src="images/casos-reales/le-meridiem-pulido/costado-560.webp" alt="Dockside reflections along the polished hull of Le Meridiem" loading="lazy" width="560" height="747" />
+              <img sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" srcset="images/casos-reales/le-meridiem-pulido/costado-560.webp 560w, images/casos-reales/le-meridiem-pulido/costado-960.webp 960w" src="images/casos-reales/le-meridiem-pulido/costado-560.webp" alt="Dockside reflections along the polished hull of Le Meridiem" loading="lazy" width="560" height="747" />
               <span class="service-catalog-tag">Featured service</span>
             </div>
             <div class="service-catalog-body">
@@ -1260,7 +1249,7 @@
 
           <a href="synthetic-decking-en.html" class="service-catalog-card group">
             <div class="service-catalog-media">
-              <img sizes="(max-width: 767px) 100vw, 720px" srcset="images/casos-reales/haya-foam-deck/plataforma-eva-560.webp 560w, images/casos-reales/haya-foam-deck/plataforma-eva-960.webp 960w" src="images/casos-reales/haya-foam-deck/plataforma-eva-560.webp" alt="Installed EVA decking on the stern platform of HAYA" loading="lazy" width="560" height="315" />
+              <img sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" srcset="images/casos-reales/haya-foam-deck/plataforma-eva-560.webp 560w, images/casos-reales/haya-foam-deck/plataforma-eva-960.webp 960w" src="images/casos-reales/haya-foam-deck/plataforma-eva-560.webp" alt="Installed EVA decking on the stern platform of HAYA" loading="lazy" width="560" height="315" />
             </div>
             <div class="service-catalog-body">
               <span class="service-catalog-kicker">Design and installation</span>
@@ -1320,7 +1309,7 @@
 
           <a href="marine-mechanics-en.html" class="service-catalog-card group">
             <div class="service-catalog-media">
-              <img sizes="(max-width: 767px) 100vw, 720px" srcset="images/casos-reales/musiquit-pintura-motor/despues-01-560.webp 560w, images/casos-reales/musiquit-pintura-motor/despues-01-960.webp 960w" src="images/casos-reales/musiquit-pintura-motor/despues-01-560.webp" alt="Outboard motor on Musiquit" loading="lazy" width="560" height="747" />
+              <img sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" srcset="images/casos-reales/musiquit-pintura-motor/despues-01-560.webp 560w, images/casos-reales/musiquit-pintura-motor/despues-01-960.webp 960w" src="images/casos-reales/musiquit-pintura-motor/despues-01-560.webp" alt="Outboard motor on Musiquit" loading="lazy" width="560" height="747" />
             </div>
             <div class="service-catalog-body">
               <span class="service-catalog-kicker">Diagnosis and maintenance</span>
@@ -1340,18 +1329,95 @@
             <p class="text-slate-600 max-w-xl">We can combine several jobs during the same visit and organize the work in clearly defined stages.</p>
           </div>
 
-          <div class="secondary-service-grid">
-            <a href="fibra.html"><strong>Fiberglass repair</strong><span>Hull and deck repairs · service details in Spanish</span></a>
-            <a href="calcomanias.html"><strong>Yacht decals and graphics</strong><span>Name, registration and waterline</span></a>
-            <a href="ceramic-coating-en.html"><strong>Ceramic coating</strong><span>Protection for selected surfaces</span></a>
-            <a href="cubierta-teka.html"><strong>Teak decking</strong><span>Installation and restoration</span></a>
-            <a href="bottom-paint.html"><strong>Antifouling</strong><span>Underwater hull preparation and coating</span></a>
-            <a href="engine-painting.html"><strong>Engine painting</strong><span>Preparation and anti-corrosion finish</span></a>
-            <a href="anti-corrosion-en.html"><strong>Anti-corrosion protection</strong><span>Metals and engine rooms</span></a>
-            <a href="technical-wash.html"><strong>Technical wash</strong><span>Salt, mineral deposits and marine contaminants</span></a>
-            <a href="polarizado.html"><strong>Nano-ceramic window film</strong><span>Thermal comfort and UV protection</span></a>
-            <a href="hull-cleaning-en.html"><strong>In-water hull cleaning</strong><span>Scheduled underwater service</span></a>
-            <a href="ppf-en.html"><strong>PPF</strong><span>Localized protection quoted by area</span></a>
+          <div class="service-catalog-grid secondary-service-grid">
+            <a href="fibra.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/fibra.webp" alt="Two finishes on a fiberglass hull" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Fiberglass repair</h3>
+                <p>Hull and deck repairs · service details in Spanish</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="calcomanias.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/calcomanias.webp" alt="Blue waterline stripe on a white hull" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Yacht decals and graphics</h3>
+                <p>Name, registration and waterline</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="ceramic-coating-en.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/ceramic.webp" alt="Reflections on two gelcoat surfaces" width="480" height="270" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Ceramic coating</h3>
+                <p>Protection for selected surfaces</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="cubierta-teka.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/teca.webp" alt="Grain and seams on a natural teak deck" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Teak decking</h3>
+                <p>Installation and restoration</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="bottom-paint.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/antifouling.webp" alt="Detail of blue underwater hull paint" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Antifouling</h3>
+                <p>Underwater hull preparation and coating</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="engine-painting.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/pintura-motor.webp" alt="Black outboard cowling on Abracchi II" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Engine painting</h3>
+                <p>Preparation and anti-corrosion finish</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="anti-corrosion-en.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/anticorrosion.webp" alt="Inspecting components in an engine room" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Anti-corrosion protection</h3>
+                <p>Metals and engine rooms</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="technical-wash.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/lavado.webp" alt="Finish of a white boat surface" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Technical wash</h3>
+                <p>Salt, mineral deposits and marine contaminants</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="polarizado.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/polarizado.webp" alt="Applying window film to a cabin window" width="560" height="315" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>Nano-ceramic window film</h3>
+                <p>Thermal comfort and UV protection</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="hull-cleaning-en.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/limpieza-casco.webp" alt="Diver cleaning the submerged surface of a hull" width="480" height="270" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>In-water hull cleaning</h3>
+                <p>Scheduled underwater service</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+            <a href="ppf-en.html" class="service-catalog-card group">
+              <div class="service-catalog-media"><img src="images/catalogo/ppf.webp" alt="Applying clear protective film to a yacht" width="480" height="270" loading="lazy" decoding="async"></div>
+              <div class="service-catalog-body">
+                <h3>PPF</h3>
+                <p>Localized protection quoted by area</p>
+                <span class="service-catalog-link">View service <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -1369,18 +1435,7 @@
     </section>
 
     <!-- Wave: services to CTA navy -->
-    <div class="ocean-divider" style="background: #f8fafc" aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,40 C120,20 240,20 360,40 C480,60 600,60 720,40 C840,20 960,20 1080,40 C1200,60 1320,60 1440,40 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#f8fafc;--cbd-wave-to:#001f3f"></div>
 
     <!-- CTA Section -->
     <section class="py-24 bg-navy-900 text-white relative overflow-hidden">

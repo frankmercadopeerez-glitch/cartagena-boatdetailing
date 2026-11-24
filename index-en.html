@@ -798,9 +798,9 @@
     </style>
     <link rel="preload" href="css/tailwind.css?v=20261123-marca" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/tailwind.css?v=20261123-marca" /></noscript>
-    <link rel="preload" href="css/styles.css?v=20261123-marca" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-marca" /></noscript>
-    <link rel="stylesheet" href="css/site-polish.css?v=20261123-marca" />
+    <link rel="preload" href="css/styles.css?v=20261123-esquinas" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-esquinas" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20261123-esquinas" />
 
     <!-- Google Fonts async -->
     <!-- Phosphor Icons (defer) -->
@@ -1059,7 +1059,7 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-marca">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-esquinas">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-navy-900"
@@ -1524,30 +1524,7 @@
       </div>
 
       <!-- Wave SVG overlays at bottom -->
-      <div class="hero-wave-container wave-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 80"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"
-            fill="rgba(4,4,6,0.5)"
-          />
-        </svg>
-      </div>
-      <div class="hero-wave-container">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 90"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,45 C180,15 360,75 540,45 C720,15 900,75 1080,45 C1260,15 1350,65 1440,45 L1440,90 L0,90 Z"
-            fill="#001f3f"
-          />
-        </svg>
-      </div>
+      <div class="hero-wave-container" aria-hidden="true"></div>
 
       <!-- Scroll Down Indicator -->
       <div
@@ -1932,18 +1909,7 @@
     </section>
 
     <!-- Wave divider -->
-    <div class="ocean-divider" style="background: #071428">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,35 C360,70 720,0 1080,35 C1260,52 1360,28 1440,35 L1440,70 L0,70 Z"
-          fill="#071428"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#f8fafc;--cbd-wave-to:#071428"></div>
 
     <!-- Intro / Value Proposition -->
     <section class="py-24 bg-white relative overflow-hidden ocean-texture">
@@ -1954,7 +1920,7 @@
               class="flex items-end justify-center lg:justify-start gap-4 mb-2"
             >
               <span
-                class="text-8xl font-serif font-bold leading-none -mb-4 -ml-2"
+                class="cbd-number text-8xl font-serif font-bold leading-none -mb-4 -ml-2"
                 style="color:var(--cbd-accent-text)"
                 >01</span
               >
@@ -2042,18 +2008,7 @@
     </section>
 
     <!-- Wave divider -->
-    <div class="ocean-divider" style="background: transparent">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,20 C240,60 480,0 720,30 C960,60 1200,10 1440,30 L1440,70 L0,70 Z"
-          fill="#001f3f"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#fff;--cbd-wave-to:#001f3f"></div>
 
     <!-- Process -->
     <section
@@ -2076,7 +2031,7 @@
 
           <div class="cbd-card relative bg-white/5 border border-white/10 p-6 fade-in">
             <div
-              class="w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
+              class="cbd-number w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
             >
               01
             </div>
@@ -2091,7 +2046,7 @@
 
           <div class="cbd-card relative bg-white/5 border border-white/10 p-6 fade-in">
             <div
-              class="step-pulse w-24 h-24 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
+              class="cbd-number step-pulse w-24 h-24 bg-gold-400 rounded-full flex items-center justify-center text-navy-900 text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
             >
               02
             </div>
@@ -2106,7 +2061,7 @@
 
           <div class="cbd-card relative bg-white/5 border border-white/10 p-6 fade-in">
             <div
-              class="w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
+              class="cbd-number w-24 h-24 bg-navy-900 rounded-full flex items-center justify-center text-white text-3xl font-serif font-bold mx-auto mb-6 border-4 border-white shadow-xl"
             >
               03
             </div>
@@ -2198,18 +2153,7 @@
     </section>
 
     <!-- Wave divider: FAQ → Contact -->
-    <div class="ocean-divider" style="background: transparent">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 70"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,50 C200,10 400,70 600,40 C800,10 1000,60 1200,30 C1300,15 1380,50 1440,40 L1440,70 L0,70 Z"
-          fill="#f1f5f9"
-        />
-      </svg>
-    </div>
+    <div class="ocean-divider" aria-hidden="true" style="--cbd-wave-from:#f8fafc;--cbd-wave-to:#f1f5f9"></div>
 
     <section
       id="contacto"
@@ -2246,7 +2190,7 @@
                       href="https://wa.me/573044301112?text=Hello%2C%20I%20visited%20the%20Colombia%20Boat%20Detailing%20website%20and%20would%20like%20to%20request%20a%20quote%20for%20my%20vessel"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-lg font-serif hover:text-gold-400 transition-colors"
+                      class="cbd-number text-lg font-serif hover:text-gold-400 transition-colors"
                       >+57 304 430 1112</a
                     >
                   </div>

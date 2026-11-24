@@ -175,9 +175,9 @@
     />
     <link rel="preload" href="vendor/phosphor/icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="vendor/phosphor/icons.css" /></noscript>
-    <link rel="preload" href="css/styles.css?v=20261123-marca" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-marca" /></noscript>
-    <link rel="stylesheet" href="css/site-polish.css?v=20261123-marca" />
+    <link rel="preload" href="css/styles.css?v=20261123-esquinas" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/styles.css?v=20261123-esquinas" /></noscript>
+    <link rel="stylesheet" href="css/site-polish.css?v=20261123-esquinas" />
     <style>
       .glass-nav {
         background: rgba(10, 25, 47, 0.95);
@@ -212,7 +212,7 @@
         font-size: 0.8rem;
       }
     </style>
-    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-marca">
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261123-esquinas">
 </head>
   <body
     class="bg-navy-900 text-slate-800 antialiased selection:bg-gold-400 selection:text-navy-900"
@@ -476,18 +476,18 @@
           </div>
 
           <div class="grid md:grid-cols-3 gap-6">
-            <div class="cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
-              <i class="ph ph-eye text-3xl text-gold-500" aria-hidden="true"></i>
+            <div class="photo-service photo-service--process cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
+              <img src="images/catalogo/diagnostico.webp" width="640" height="360" alt="Técnico revisando conexiones en un compartimento eléctrico" loading="lazy" decoding="async">
               <h3 class="font-serif text-xl text-navy-900 mt-3">Diagnóstico primero</h3>
               <p class="text-slate-600 text-sm mt-2">Medimos y revisamos antes de recomendar reemplazos.</p>
             </div>
-            <div class="cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
-              <i class="ph ph-pencil-simple text-3xl text-gold-500" aria-hidden="true"></i>
+            <div class="photo-service photo-service--process cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
+              <img src="images/catalogo/alcance.webp" width="640" height="360" alt="Consulta de una tableta durante la visita al muelle" loading="lazy" decoding="async">
               <h3 class="font-serif text-xl text-navy-900 mt-3">Alcance documentado</h3>
               <p class="text-slate-600 text-sm mt-2">Circuitos, equipos, protecciones y pruebas quedan definidos.</p>
             </div>
-            <div class="cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
-              <i class="ph ph-check-circle text-3xl text-gold-500"></i>
+            <div class="photo-service photo-service--process cbd-card text-center p-6 bg-white border border-slate-200 rounded-sm shadow-sm">
+              <img src="images/catalogo/entrega.webp" width="496" height="279" alt="Mandos y panel de interruptores junto al timón" loading="lazy" decoding="async">
               <h3 class="font-serif text-xl text-navy-900 mt-3">Prueba de entrega</h3>
               <p class="text-slate-600 text-sm mt-2">Verificamos funcionamiento y explicamos el uso al propietario.</p>
             </div>
@@ -517,12 +517,9 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Luces subacuáticas -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-lighthouse text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <figure><img src="images/catalogo/subacuaticas.webp" width="640" height="360" alt="Luces subacuáticas azules bajo la popa" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Luces Subacuáticas LED
             </h3>
@@ -549,12 +546,9 @@
 
           <!-- Luces de navegación -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-compass text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <figure><img src="images/catalogo/navegacion.webp" width="640" height="360" alt="Luz de navegación roja de babor" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Luces de Navegación COLREGS
             </h3>
@@ -581,12 +575,9 @@
 
           <!-- Iluminación de cabina -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-sun-dim text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <figure><img src="images/catalogo/cabina-led.webp" width="640" height="360" alt="Luces LED cálidas en el techo del cockpit" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Iluminación de Cabina y Cockpit
             </h3>
@@ -614,12 +605,9 @@
 
           <!-- Tablero eléctrico -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-faders text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <img src="images/catalogo/tablero.webp" width="608" height="342" alt="Paneles e instrumentos instalados en la consola" loading="lazy" decoding="async">
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Organización del Tablero Eléctrico
             </h3>
@@ -647,12 +635,9 @@
 
           <!-- Banco de baterías -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-battery-charging-vertical text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <figure><img src="images/catalogo/baterias.webp" width="640" height="360" alt="Banco de baterías sujeto dentro de un cofre" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Banco de Baterías y Carga
             </h3>
@@ -679,12 +664,9 @@
 
           <!-- Panel solar -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-solar-panel text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <figure><img src="images/catalogo/solar.webp" width="640" height="360" alt="Panel solar sobre el techo rígido de un bote" loading="lazy" decoding="async"><figcaption class="image-reference">Ilustración</figcaption></figure>
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Panel Solar Náutico
             </h3>
@@ -711,12 +693,9 @@
 
           <!-- Aire acondicionado marino -->
           <div
-            class="service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
+            class="photo-service service-card bg-white border border-slate-200 p-6 rounded-sm shadow-sm"
           >
-            <i
-              class="ph ph-wind text-3xl text-gold-400 mb-4 block"
-              aria-hidden="true"
-            ></i>
+            <img src="images/catalogo/aire.webp" width="640" height="360" alt="Revisión de la unidad de aire acondicionado de a bordo" loading="lazy" decoding="async">
             <h3 class="font-serif text-xl text-navy-900 mb-3">
               Instalación de Aire Acondicionado Marino
             </h3>
