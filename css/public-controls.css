@@ -201,8 +201,14 @@ body :is(.blog-filter-btn, .blog-pagination-btn):hover:not(.active) {
 .case-service-link a {
   color: #113d5e;
   font-weight: 650;
-  text-decoration: underline;
-  text-underline-offset: .2em;
+}
+body :is(a.cbd-action-link, .case-service-link a) {
+  border-radius: var(--cbd-corner-radius);
+  text-decoration: none;
+}
+body :is(a.cbd-action-link, .case-service-link a):hover {
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+  text-decoration: none;
 }
 .mobile-blog-filter { display: none; }
 html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
@@ -227,7 +233,7 @@ html.mobile-nav-open, html.mobile-nav-open body { overflow: hidden; }
     height: 100dvh;
     overflow-y: auto;
   }
-  #mobile-menu:has(> #close-menu-btn) > .mobile-link {
+  #mobile-menu:has(> #close-menu-btn) > .mobile-link:not(.cbd-button, .cbd-action-link) {
     display: flex;
     align-items: center;
     min-height: 46px;

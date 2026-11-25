@@ -59,6 +59,7 @@ CRITICAL_CSS = """    <style>
     <noscript><link rel="stylesheet" href="vendor/phosphor/icons.css" /></noscript>
     <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/styles.css" /></noscript>
+    <link rel="stylesheet" href="/css/public-controls.css?v=20261124-acciones" />
     <style>
       .feature-list li{position:relative;padding-left:1.5rem;margin-bottom:.75rem}
       .feature-list li::before{content:"✦";color:#d4af37;position:absolute;left:0;font-size:.8rem}
@@ -78,7 +79,7 @@ NAV_EN = """    <nav id="navbar" class="fixed w-full z-50 transition-all duratio
         <div class="hidden md:flex items-center gap-10">
           <div class="nav-dropdown">
             <button data-dropdown-toggle="servicesDropdown" aria-haspopup="true" aria-expanded="false" aria-controls="servicesDropdown"
-              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all flex items-center gap-1">
+              class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase transition-colors flex items-center gap-1">
               Services <svg class="w-3 h-3 ml-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="nav-dropdown-content" id="servicesDropdown">
@@ -95,8 +96,8 @@ NAV_EN = """    <nav id="navbar" class="fixed w-full z-50 transition-all duratio
               <a href="anti-corrosion-en.html" class="nav-dropdown-link">Anti-Corrosion</a>
             </div>
           </div>
-          <a href="about-en.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">About Us</a>
-          <a href="blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase hover:border-b hover:border-gold-400 transition-all">Blog</a>
+          <a href="about-en.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase transition-colors">About Us</a>
+          <a href="blog.html" class="text-white/90 hover:text-gold-400 text-sm tracking-widest uppercase transition-colors">Blog</a>
           <a href="https://wa.me/573044301112?text=Hi%2C%20I%20need%20hull%20cleaning%20service" target="_blank" rel="noopener noreferrer"
             class="bg-gold-400 hover:bg-gold-500 text-navy-900 px-8 py-3 rounded-sm font-bold text-xs tracking-widest uppercase transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
             Book Now
@@ -117,7 +118,7 @@ NAV_EN = """    <nav id="navbar" class="fixed w-full z-50 transition-all duratio
       <a href="about-en.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">About Us</a>
       <a href="blog.html" class="mobile-link text-2xl font-serif text-white hover:text-gold-400">Blog</a>
       <a href="https://wa.me/573044301112?text=Hi%2C%20I%20need%20hull%20cleaning%20service" target="_blank" rel="noopener noreferrer"
-        class="mobile-link text-2xl font-serif text-gold-400 border-b border-gold-400 pb-1">Book Now</a>
+        class="mobile-link cbd-button cbd-button--gold">Book Now</a>
     </div>"""
 
 FOOTER_EN = """    <footer class="bg-navy-900 text-slate-300 py-6 md:py-10">

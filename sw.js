@@ -4,9 +4,9 @@ const FINANZAS_CACHE = "cbd-private-apps-v92";
 
 // Archivos del shell estático (CSS, JS, fuentes, imágenes críticas)
 const STATIC_SHELL = [
-  "/css/public-controls.css?v=20261124-olas-blog",
+  "/css/public-controls.css?v=20261124-acciones",
   "/css/home-bundle.css?v=20261124-olas-blog",
-  "/js/main.js?v=20261124-olas-blog",
+  "/js/main.js?v=20261124-acciones",
   "/fonts/inter-normal-400-latin.woff2",
   "/fonts/playfair-display-normal-400-latin.woff2",
   "/images/cbdlogo-gold.svg",

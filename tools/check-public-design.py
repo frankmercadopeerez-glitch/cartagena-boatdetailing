@@ -44,6 +44,20 @@ def check_corners(page, selector):
     assert all(v == [RADIUS] * 4 for v in values), (selector, values)
 
 
+def check_action_link(page, selector):
+    link = page.locator(selector).first
+    for state in ("normal", "hover", "keyboard"):
+        if state == "hover":
+            link.hover()
+        if state == "keyboard":
+            page.mouse.move(0, 0)
+            page.keyboard.press("Tab")
+            link.focus()
+            assert link.evaluate("e => e.matches(':focus-visible')"), selector
+        assert style(link, "border-bottom-width") == "0px", (selector, state)
+        assert style(link, "text-decoration-line") == "none", (selector, state)
+
+
 def check_article_surfaces(page, url):
     """Check the painted outer corners across all public article templates."""
     entries = ElementTree.parse(ROOT / "sitemap.xml").findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
@@ -105,6 +119,7 @@ def run(page, url, width):
         assert style(page.locator("footer"), "mask-image", "::before") != "none", path
 
     open_page("/")
+    check_action_link(page, "header a[href='#servicios']")
     check_corners(page, ".featured-service-badge, .featured-service-price, .home-case-gallery-controls, .home-process-list li, .home-process-list li > span, .home-guide-links a, #form-descripcion")
     controls = page.locator(".home-case-gallery-controls").first
     previous = controls.locator('[aria-current="true"]').get_attribute("aria-label")
@@ -113,6 +128,7 @@ def run(page, url, width):
     assert len(set(page.locator(".home-guide-links a").evaluate_all("xs=>xs.map(x=>x.href)"))) == 7
     assert style(page.locator("#contact-form a[href*='wa.me']"), "background-color") == "rgb(217, 239, 248)"
     open_page("/services.html")
+    check_action_link(page, "section a[href='#servicios']")
     cards = page.locator(".service-catalog-grid .service-catalog-card")
     sizes = cards.evaluate_all("es=>es.map(e=>[e.offsetWidth,e.offsetHeight])")
     for axis in range(2):
@@ -126,6 +142,10 @@ def run(page, url, width):
     assert portrait.evaluate("async e=>{await e.decode();return e.height<=innerHeight-100 && Math.abs(e.width/e.height-e.naturalWidth/e.naturalHeight)<.015}")
     open_page("/blog.html")
     check_corners(page, ".blog-service-routes a, .blog-filter-btn, .blog-category-tag")
+    open_page("/blog/cubierta-eva-foamdeck-cartagena/")
+    check_action_link(page, "header .cbd-action-link")
+    open_page("/case-studies.html")
+    check_action_link(page, ".case-service-link a")
     open_page(CHARTER)
     check_corners(page, ".answer, .article-image")
     assert style(page.locator(".cbd-article-hero"), "mask-image", "::after") != "none"
